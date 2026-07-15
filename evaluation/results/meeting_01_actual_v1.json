@@ -1,0 +1,24 @@
+{
+  "meeting_title": "Weekly Project Sync",
+  "summary": "Cuộc họp tập trung vào việc chuẩn bị hồ sơ dự án. Phương cam kết tạo hồ sơ dự án trước thứ Sáu, Linh sẽ chuẩn bị flow chart. Phần ngân sách sẽ được bàn trong cuộc họp sau.",
+  "tasks": [
+    {
+      "task_name": "Tạo hồ sơ dự án",
+      "assignee": "Phương",
+      "start_date": "",
+      "due_date": "",
+      "due_date_text": "trước thứ Sáu",
+      "evidence": "Phương: Em sẽ tạo hồ sơ dự án trước thứ Sáu.",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Chuẩn bị flow chart",
+      "assignee": "Linh",
+      "start_date": "",
+      "due_date": "",
+      "due_date_text": "",
+      "evidence": "Linh: Em sẽ chuẩn bị flow chart.",
+      "status": "Proposed"
+    }
+  ]
+}

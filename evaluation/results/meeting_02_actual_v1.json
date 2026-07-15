@@ -1,0 +1,15 @@
+{
+  "meeting_title": "Access Review",
+  "summary": "Cuộc họp thảo luận về việc kiểm tra quyền truy cập trước khi release. Linh cam kết sẽ kiểm tra phần phân quyền. Deadline chưa được xác định và cần xác nhận thêm với PO.",
+  "tasks": [
+    {
+      "task_name": "Kiểm tra phần phân quyền",
+      "assignee": "Linh",
+      "start_date": "",
+      "due_date": "",
+      "due_date_text": "",
+      "evidence": "Linh: Em sẽ kiểm tra phần phân quyền.",
+      "status": "Proposed"
+    }
+  ]
+}
