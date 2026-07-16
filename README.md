@@ -2,50 +2,47 @@
 
 ## Mục tiêu
 
-Kiểm chứng ba khả năng:
+Kiểm chứng hai khả năng:
 
-1. AI chuyển transcript thành bản tóm tắt và danh sách task có cấu trúc.
-2. Power Automate xử lý được JSON do AI trả về.
-3. Microsoft Lists lưu và hiển thị được meeting cùng task đề xuất.
+1. AI Builder chuyển transcript thành `summary` và danh sách `tasks` có cấu trúc.
+2. Power Automate lưu meeting và task proposal vào Microsoft Lists.
 
-## Phạm vi hiện tại
-
-- Transcript mẫu đã ẩn danh.
-- Prompt AI Builder và bộ test feasibility.
-- JSON output có cấu trúc cố định.
-- Manual flow trên Power Automate.
-- Hai Microsoft Lists dùng làm data store thử nghiệm.
-
-## Ngoài phạm vi
-
-- Ghi âm cuộc họp và speech-to-text.
-- Production deployment.
-- Tích hợp SP365 API chính thức.
-- Quy trình duyệt task tự động.
-- Phân quyền, retention và chống tạo dữ liệu trùng.
-
-## Trạng thái
-
-- Prompt feasibility: đạt 3/3 test case cơ bản.
-- Microsoft Lists data model: đang hoàn thiện.
-- Power Automate prototype: chưa chạy end-to-end.
-- Python API: phương án fallback, chưa đưa vào luồng chính.
-
-## Luồng mục tiêu
+## Luồng prototype
 
 ```text
 Transcript
-  → AI Builder prompt
-  → Structured JSON
-  → Power Automate
-  → MI Meetings
-  → MI Task Proposals
+  -> AI Builder prompt
+  -> meeting_title + summary + tasks
+  -> Power Automate
+  -> MI Meetings + MI Task Proposals
 ```
 
-## Cấu trúc chính
+## Kết quả
 
-- `backend/`: AI core và API fallback.
-- `evaluation/`: transcript test và kết quả đánh giá prompt.
-- `power-automate/`: flow design, schema và solution export.
-- `sp365/`: data model, field mapping và payload mẫu.
-- `docs/`: kiến trúc, bảo mật, kế hoạch và demo script.
+- Prompt test: 3/3 case pass, 3/3 task được trích xuất đúng, không có task bịa.
+- End-to-end test: 3/3 flow run thành công, tạo đúng 3 meeting và 3 task.
+- Task được liên kết với meeting bằng `MeetingItemId`.
+
+Chi tiết:
+
+- [Bảng đánh giá prompt](docs/prompt-test-result.md)
+- [Kết quả end-to-end](evaluation/results.csv)
+- [Thiết kế prototype](docs/prototype-design.md)
+
+## Cấu trúc repository
+
+```text
+.
+|-- docs/
+|   |-- assets/                 # Ảnh flow và kết quả Microsoft Lists
+|   |-- prompt-test-result.md   # Bảng đánh giá prompt
+|   `-- prototype-design.md     # Flow, Lists và field mapping
+|-- evaluation/
+|   |-- transcripts/            # Ba transcript kiểm thử
+|   `-- results.csv             # Kết quả end-to-end
+|-- power-automate/
+|   |-- prompts/                # Prompt AI Builder
+|   |-- schemas/                # JSON schema và sample output
+|   `-- solution-export/        # Power Automate solution export
+`-- README.md
+```
