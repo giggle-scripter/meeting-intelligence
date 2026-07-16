@@ -1,0 +1,174 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "crc31_sharedcommondataserviceforapps_ad22b"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_sharepointonline": {
+        "api": {
+          "name": "shared_sharepointonline"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "crc31_sharedsharepointonline_303f6"
+        },
+        "runtimeSource": "invoker"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "TestcaseId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": " ",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_1": {
+                  "title": "MeetingTitle",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": " ",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_2": {
+                  "title": "Transcript",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": " ",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text",
+                "text_1",
+                "text_2"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "90d10589-95d4-471c-b78f-b73c3eedd96f"
+          }
+        }
+      },
+      "actions": {
+        "Run_a_prompt": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "recordId": "78e5b06e-bc94-4461-b022-53301d831f98",
+              "item/requestv2/MeetingTitle": "@triggerBody()['text_1']",
+              "item/requestv2/Transcript": "@triggerBody()['text_2']",
+              "item/source": {
+                "consumptionSource": "PowerAutomate",
+                "partnerSource": "AIBuilder",
+                "consumptionSourceVersion": "Flow",
+                "partnerSourceVersion": "58a70643-2a44-78d6-e941-c7360c773b53"
+              }
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "aibuilderpredict_customprompt",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "25ac03b7-b5e1-4853-87e6-3bdb99b81552",
+            "flowSystemMetadata": {
+              "portalOperationId": "aibuilderpredict_customprompt",
+              "portalOperationGroup": "aibuilder",
+              "portalOperationApiDisplayNameOverride": "AI Builder",
+              "portalOperationIconOverride": "https://content.powerapps.com/resource/makerx/static/pauto/images/designeroperations/aibuilderIcon2026.8e878397.png",
+              "portalOperationBrandColorOverride": "#0A76C4",
+              "portalOperationApiTierOverride": "Standard"
+            }
+          }
+        },
+        "Create_item": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://spsvn-my.sharepoint.com/personal/phuongptb_spsvn_com",
+              "table": "d94d4ddd-0e30-476d-a2e3-73bfb48a5c55",
+              "item/Title": "@outputs('Run_a_prompt')?['body/responsev2/predictionOutput/structuredOutput/meeting_title']",
+              "item/TestCaseId": "@triggerBody()?['text']",
+              "item/Summary": "@outputs('Run_a_prompt')?['body/responsev2/predictionOutput/structuredOutput/summary']",
+              "item/ProcessingStatus/Value": "Success",
+              "item/ProcessedAt": "@utcNow()"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "operationId": "PostItem",
+              "connectionName": "shared_sharepointonline"
+            }
+          },
+          "runAfter": {
+            "Run_a_prompt": [
+              "SUCCEEDED"
+            ]
+          }
+        },
+        "Apply_to_each": {
+          "type": "Foreach",
+          "foreach": "@outputs('Run_a_prompt')?['body/responsev2/predictionOutput/structuredOutput/tasks']",
+          "actions": {
+            "Create_item_1": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://spsvn-my.sharepoint.com/personal/phuongptb_spsvn_com",
+                  "table": "65b88f5e-3ad7-47ab-8971-a7cfdaa6cab6",
+                  "item/Title": "@items('Apply_to_each')?['task_name']",
+                  "item/MeetingItemId": "@outputs('Create_item')?['body/ID']",
+                  "item/AssigneeText": "@items('Apply_to_each')?['assignee']",
+                  "item/StartDate": "@if(empty(item()?['start_date']), null, item()?['start_date'])",
+                  "item/DueDate": "@if(empty(item()?['due_date']), null, item()?['due_date'])",
+                  "item/DueDateText": "@items('Apply_to_each')?['due_date_text']",
+                  "item/Evidence": "@items('Apply_to_each')?['evidence']",
+                  "item/Status/Value": "Proposed"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "PostItem",
+                  "connectionName": "shared_sharepointonline"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Create_item": [
+              "SUCCEEDED"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}
