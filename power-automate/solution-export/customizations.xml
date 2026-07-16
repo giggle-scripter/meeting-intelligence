@@ -1,0 +1,109 @@
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26064.160" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26064.00160">
+  <Entities></Entities>
+  <Roles></Roles>
+  <Workflows>
+    <Workflow WorkflowId="{4d268c6d-c480-f111-a35d-000d3aa04a3c}" Name="MI - Analyze Transcript - Prototype">
+      <JsonFileName>/Workflows/MI-AnalyzeTranscript-Prototype-4D268C6D-C480-F111-A35D-000D3AA04A3C.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0.0</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <BusinessProcessType>0</BusinessProcessType>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <ModernFlowType>0</ModernFlowType>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1066" description="MI - Analyze Transcript - Prototype" />
+      </LocalizedNames>
+    </Workflow>
+  </Workflows>
+  <FieldSecurityProfiles></FieldSecurityProfiles>
+  <Templates />
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <CustomControls />
+  <EntityDataProviders />
+  <AIModels>
+    <AIModel>
+      <msdyn_aimodelid>{78e5b06e-bc94-4461-b022-53301d831f98}</msdyn_aimodelid>
+      <msdyn_name>MI Extract Meeting Summary And Tasks v1Custom prompt 7/15/2026, 5:04:04 PM</msdyn_name>
+      <msdyn_templateid>{edfdb190-3791-45d8-9a6c-8f90a37c278a}</msdyn_templateid>
+      <statecode>1</statecode>
+      <statuscode>1</statuscode>
+      <IsCustomizable>1</IsCustomizable>
+      <msdyn_activerunconfigurationid>{028f7c4c-a917-4b9f-90f8-9fd56521b52f}</msdyn_activerunconfigurationid>
+      <AIConfigurations>
+        <AIConfiguration>
+          <msdyn_aiconfigurationid>{028f7c4c-a917-4b9f-90f8-9fd56521b52f}</msdyn_aiconfigurationid>
+          <msdyn_customconfiguration>{"version":"GptDynamicPrompt-2","prompt":[{"type":"literal","text":"Bạn là hệ thống phân tích biên bản cuộc họp tiếng Việt.\r\n\r\nMục tiêu:\r\n- Tóm tắt ngắn gọn nội dung cuộc họp.\r\n- Trích xuất các action item được nói rõ trong transcript.\r\n- Không tự suy đoán thông tin không xuất hiện trong transcript.\r\n\r\nQuy tắc trích xuất task:\r\n1. Chỉ tạo task khi có hành động hoặc cam kết cụ thể.\r\n2. Không biến câu thảo luận, đề xuất chung hoặc ý tưởng chưa thống nhất thành task.\r\n3. Nếu người nói tự cam kết làm việc, dùng tên người nói làm assignee.\r\n4. Nếu một người giao việc rõ ràng cho người khác, dùng tên người được giao.\r\n5. Nếu assignee không rõ, trả chuỗi rỗng.\r\n6. Nếu không có start date hoặc due date rõ ràng, trả chuỗi rỗng.\r\n7. Không tự chuyển \"thứ Sáu\" thành ngày cụ thể nếu không có ngày họp.\r\n8. Giữ nguyên cách nói deadline trong due_date_text.\r\n9. Mỗi task phải có evidence lấy nguyên văn từ transcript.\r\n10. Nếu không có task hợp lệ, trả tasks là mảng rỗng.\r\n11. Status của task mới luôn là \"Proposed\".\r\n12. Không thêm giải thích ngoài output đã cấu hình.\r\n\r\nMeeting title:\r\n "},{"type":"inputVariable","id":"MeetingTitle"},{"type":"literal","text":" \r\n\r\nTranscript:\r\n "},{"type":"inputVariable","id":"Transcript"},{"type":"literal","text":" "}],"definitions":{"inputs":[{"id":"MeetingTitle","text":"MeetingTitle","type":"text","quickTestValue":"Weekly Project Sync"},{"id":"Transcript","text":"Transcript","type":"text","quickTestValue":"Transcript:\nNam: Hôm nay chúng ta chuẩn bị hồ sơ dự án.\nPhương: Em sẽ tạo hồ sơ dự án trước thứ Sáu.\nLinh: Em sẽ chuẩn bị flow chart.\nNam: Phần ngân sách để họp sau."}],"formulas":[],"data":[],"output":{"formats":["json"],"jsonSchema":{"type":"object","properties":{"meeting_title":{"type":"string"},"summary":{"type":"string"},"tasks":{"type":"array","items":{"type":"object","properties":{"task_name":{"type":"string"},"assignee":{"type":"string"},"start_date":{"type":"string"},"due_date":{"type":"string"},"due_date_text":{"type":"string"},"evidence":{"type":"string"},"status":{"type":"string"}},"required":["task_name","assignee","start_date","due_date","due_date_text","evidence","status"]}}}},"jsonExamples":[{"meeting_title":"Weekly Project Sync","summary":"Cuộc họp thống nhất các đầu việc chuẩn bị hồ sơ dự án và flow chart.","tasks":[{"task_name":"Tạo hồ sơ dự án","assignee":"Phương","start_date":"","due_date":"","due_date_text":"trước thứ Sáu","evidence":"Phương: Em sẽ tạo hồ sơ dự án trước thứ Sáu.","status":"Proposed"}]}],"isCustomUserFormat":true}},"modelParameters":{"modelType":"gpt-5-chat","gptParameters":{"temperature":0}},"settings":{"recordRetrievalLimit":30,"shouldPreserveRecordLinks":null,"runtime":null},"code":""}</msdyn_customconfiguration>
+          <msdyn_majoriterationnumber>2</msdyn_majoriterationnumber>
+          <msdyn_minoriterationnumber>0</msdyn_minoriterationnumber>
+          <msdyn_name>78e5b06e-bc94-4461-b022-53301d831f98_7/15/2026 10:44:07 AM</msdyn_name>
+          <msdyn_modelrundataspecification>H4sIAAAAAAAACpWSy07DMBBFfwXNOhskxCK78KjEAiK1EdtoGk+LS+JE9hhRVf134qRNm2ZAxUufe+887B0sGipmta2Q38k6XRuIbyN4MY3neV3zs2HNW4h38KRdU+L2DSuCGCCChNnqpWdyAb8SsTbrTHNJU/mIRpA23FbCEuIVlo4iyLZNkC3aRLOGfXth0bjC6oanYWfsmihUSveax9owfQuJyURyHszWn3If0NH93TF93+annv+7LLmLrC88GWCljXYfc0IXXufSNevozQELdtf2X7C3pPpOQ8RBlC43VISaV3de9Q+Zs/zOYyw146sKrVDpCAQPo/vsih9IYi0G4fXrbgNy08FL7QlJP8c5vTYk2AYi7hst5wpZ8J0xwak8/eIbyB+uXP5VYyz46UsrMoVQdSDylOy77U4mDPcTx3B+AFAuA0hzBAAA</msdyn_modelrundataspecification>
+          <msdyn_type>190690001</msdyn_type>
+          <msdyn_aimodelid>{78e5b06e-bc94-4461-b022-53301d831f98}</msdyn_aimodelid>
+          <msdyn_trainedmodelaiconfigurationpareid>{f18817f9-3580-f111-a35d-000d3aa04a3c}</msdyn_trainedmodelaiconfigurationpareid>
+          <statecode>2</statecode>
+          <statuscode>7</statuscode>
+          <IsCustomizable>1</IsCustomizable>
+          <msdyn_templateversion>1</msdyn_templateversion>
+        </AIConfiguration>
+        <AIConfiguration>
+          <msdyn_aiconfigurationid>{f18817f9-3580-f111-a35d-000d3aa04a3c}</msdyn_aiconfigurationid>
+          <msdyn_majoriterationnumber>1</msdyn_majoriterationnumber>
+          <msdyn_minoriterationnumber>0</msdyn_minoriterationnumber>
+          <msdyn_modeldata>4a015c3d-de45-48fc-8964-a76e22868bf4</msdyn_modeldata>
+          <msdyn_name>78e5b06e-bc94-4461-b022-53301d831f98_Training_7/15/2026 10:14:37 AM</msdyn_name>
+          <msdyn_modelrundataspecification>
+        {
+          "schemaVersion": 2,
+          "input": {},
+          "output": {}
+        }
+      </msdyn_modelrundataspecification>
+          <msdyn_type>190690000</msdyn_type>
+          <msdyn_aimodelid>{78e5b06e-bc94-4461-b022-53301d831f98}</msdyn_aimodelid>
+          <statecode>2</statecode>
+          <statuscode>6</statuscode>
+          <IsCustomizable>1</IsCustomizable>
+          <msdyn_templateversion>1</msdyn_templateversion>
+        </AIConfiguration>
+      </AIConfigurations>
+    </AIModel>
+  </AIModels>
+  <connectionreferences>
+    <connectionreference connectionreferencelogicalname="crc31_sharedcommondataserviceforapps_ad22b">
+      <connectionreferencedisplayname>Microsoft Dataverse MeetingIntelligenceFeasibility-ad22b</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="crc31_sharedsharepointonline_303f6">
+      <connectionreferencedisplayname>SharePoint MeetingIntelligenceFeasibility-303f6</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_sharepointonline</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+  </connectionreferences>
+  <Languages>
+    <Language>1066</Language>
+  </Languages>
+</ImportExportXml>
