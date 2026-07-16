@@ -20,7 +20,7 @@ Quy tắc trích xuất task:
 12. Không thêm giải thích ngoài output đã cấu hình.
 
 Meeting title:
- MeetingTitle 
+ MeetingTitle
 
 Transcript:
- Transcript 
+ Transcript
