@@ -4,10 +4,15 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from functools import lru_cache
+from pathlib import Path
 from threading import RLock
 from typing import TYPE_CHECKING
 
 from backend.app.ml.contracts import EmbeddingModel
+from backend.app.ml.action_classifier import (
+    ActionClassifierArtifact,
+    LinearActionClassifier,
+)
 from backend.app.ml.embeddings import (
     HASHING_FALLBACK_MODEL,
     EmbeddingModelLoadError,
@@ -32,6 +37,7 @@ class ModelRegistry:
     def __init__(self, embedding_loader: EmbeddingLoader | None = None) -> None:
         self._embedding_loader = embedding_loader or _default_embedding_loader
         self._embedding_models: dict[tuple[str, str, int, bool], EmbeddingModel] = {}
+        self._action_classifiers: dict[str, LinearActionClassifier] = {}
         self._lock = RLock()
 
     def get_embedding_model(
@@ -93,11 +99,35 @@ class ModelRegistry:
                 load_error_code=error_code,
             )
 
+    def get_action_classifier(self, model_path: str | Path) -> LinearActionClassifier:
+        """Load and cache one portable action classifier artifact."""
+
+        resolved_path = str(Path(model_path).expanduser().resolve())
+        with self._lock:
+            cached = self._action_classifiers.get(resolved_path)
+            if cached is not None:
+                return cached
+            artifact = ActionClassifierArtifact.from_path(resolved_path)
+            manifest = artifact.manifest
+            dimension = artifact.linear_model.embedding_dimension
+            if manifest.embedding_model == HASHING_FALLBACK_MODEL:
+                embedding_model: EmbeddingModel = HashingEmbeddingModel(dimension)
+            else:
+                embedding_model = self.get_embedding_model(
+                    manifest.embedding_model,
+                    fallback_dimension=dimension,
+                    allow_fallback=False,
+                )
+            classifier = LinearActionClassifier(artifact, embedding_model)
+            self._action_classifiers[resolved_path] = classifier
+            return classifier
+
     def clear(self) -> None:
         """Clear cached models, primarily for controlled tests and reloads."""
 
         with self._lock:
             self._embedding_models.clear()
+            self._action_classifiers.clear()
 
 
 @lru_cache(maxsize=1)
@@ -120,3 +150,19 @@ def get_embedding_model(settings: Settings | None = None) -> EmbeddingModel:
         fallback_dimension=settings.embedding_fallback_dimension,
         allow_fallback=settings.embedding_fallback_enabled,
     )
+
+
+def get_action_classifier(
+    model_path: str | Path | None = None,
+    settings: Settings | None = None,
+) -> LinearActionClassifier:
+    """Resolve the configured action classifier, failing if no path is set."""
+
+    if settings is None and model_path is None:
+        from backend.app.config import get_settings
+
+        settings = get_settings()
+    resolved = model_path or (settings.action_classifier_model_path if settings else None)
+    if not resolved:
+        raise ValueError("ACTION_CLASSIFIER_MODEL_PATH is required")
+    return get_model_registry().get_action_classifier(resolved)

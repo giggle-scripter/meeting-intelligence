@@ -13,6 +13,7 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
         "EMBEDDING_DEVICE",
         "EMBEDDING_FALLBACK_ENABLED",
         "EMBEDDING_FALLBACK_DIMENSION",
+        "ACTION_CLASSIFIER_MODE",
         "ACTION_CLASSIFIER_MODEL_PATH",
     ):
         monkeypatch.delenv(name, raising=False)
@@ -22,6 +23,7 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
     assert settings.embedding_device == "cpu"
     assert settings.embedding_fallback_enabled is True
     assert settings.embedding_fallback_dimension == 384
+    assert settings.action_classifier_mode == "off"
     assert settings.action_classifier_model_path is None
 
 
@@ -31,6 +33,7 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     monkeypatch.setenv("EMBEDDING_FALLBACK_ENABLED", "false")
     monkeypatch.setenv("EMBEDDING_FALLBACK_DIMENSION", "128")
     monkeypatch.setenv("ACTION_CLASSIFIER_MODEL_PATH", "artifacts/models/action.joblib")
+    monkeypatch.setenv("ACTION_CLASSIFIER_MODE", "shadow")
 
     settings = Settings.from_env()
 
@@ -38,6 +41,7 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     assert settings.embedding_device == "cuda:0"
     assert settings.embedding_fallback_enabled is False
     assert settings.embedding_fallback_dimension == 128
+    assert settings.action_classifier_mode == "shadow"
     assert settings.action_classifier_model_path == "artifacts/models/action.joblib"
 
 
@@ -53,4 +57,11 @@ def test_ml_settings_reject_ambiguous_boolean(monkeypatch) -> None:
     monkeypatch.setenv("EMBEDDING_FALLBACK_ENABLED", "sometimes")
 
     with pytest.raises(RuntimeError, match="must be true or false"):
+        Settings.from_env()
+
+
+def test_ml_settings_reject_active_classifier_routing(monkeypatch) -> None:
+    monkeypatch.setenv("ACTION_CLASSIFIER_MODE", "assist")
+
+    with pytest.raises(RuntimeError, match="must be off or shadow"):
         Settings.from_env()

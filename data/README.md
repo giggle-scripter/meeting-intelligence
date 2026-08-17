@@ -38,3 +38,9 @@ Dataset classifier được regenerate, không sửa tay:
 `train.jsonl` chứa cả record train được và record chờ review. Chỉ record có
 `eligible_for_training=true` mới được đưa vào model. `folds.json` group theo
 `meeting_id`, không split clause cùng meeting qua train/validation.
+
+`model/action-clf-v1.json` là artifact Logistic Regression portable sinh bởi
+`scripts/train_action_classifier.py`; `model/training-report.json` lưu metric
+grouped 5-fold và limitation. Không sửa tay hai file này. Model hiện dùng
+multilingual MiniLM embedding, chỉ hợp lệ cho shadow evaluation và chưa được tune
+production threshold.

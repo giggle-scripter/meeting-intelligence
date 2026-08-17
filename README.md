@@ -343,3 +343,24 @@ Tạo lại clause-level action-classifier dataset từ reviewed corpus:
 Builder khai thác task mapping chắc chắn, false-create và semantic hard
 negatives; các mapping mơ hồ có `manual_review_required=true` và không đủ điều
 kiện train. Fold luôn group theo `meeting_id` để tránh leakage giữa các clause.
+
+Train model shadow nhẹ (scikit-learn chỉ cần ở môi trường train):
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -e ".[ml-train]"
+.\.venv\Scripts\python.exe scripts\train_action_classifier.py
+```
+
+Linear head trong artifact JSON chạy thuần Python, nên API runtime không cần
+sklearn; shadow mode vẫn cần optional `sentence-transformers` để tạo MiniLM
+embedding. Model `action-clf-v1` chỉ được phép chạy `shadow`: nó ghi
+prediction/version vào diagnostics nhưng không tham gia routing hay thay đổi
+task output.
+
+```powershell
+.\.venv\Scripts\python.exe scripts\evaluate_dataset.py data\validation `
+  --reviewed-only `
+  --action-classifier-mode shadow `
+  --action-classifier-model-path data\ml\action-classifier\model\action-clf-v1.json `
+  --report evaluation\action-classifier-shadow.json
+```

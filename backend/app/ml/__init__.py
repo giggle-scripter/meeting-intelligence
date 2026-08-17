@@ -7,15 +7,24 @@ or heavyweight initialization during normal API startup.
 
 from backend.app.ml.contracts import (
     ActionLabel,
+    ActionPrediction,
+    ActionProbabilities,
     EmbeddingModel,
     EmbeddingModelMetadata,
 )
-from backend.app.ml.model_registry import ModelRegistry, get_embedding_model
+from backend.app.ml.model_registry import (
+    ModelRegistry,
+    get_action_classifier,
+    get_embedding_model,
+)
 
 __all__ = [
     "ActionLabel",
+    "ActionPrediction",
+    "ActionProbabilities",
     "EmbeddingModel",
     "EmbeddingModelMetadata",
     "ModelRegistry",
+    "get_action_classifier",
     "get_embedding_model",
 ]

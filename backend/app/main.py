@@ -325,6 +325,8 @@ def _submit_job(
             f"timeout={settings.ai_timeout_seconds}",
             f"job_timeout={settings.job_timeout_seconds}",
             f"context={settings.meeting_context_mode}",
+            f"action_classifier={settings.action_classifier_mode}",
+            f"action_model={settings.action_classifier_model_path or 'none'}",
         )),
     )
     job, created = job_store.submit(
@@ -345,6 +347,8 @@ def _submit_job(
                 max_meeting_topics=settings.max_meeting_topics,
                 max_topic_keywords=settings.max_topic_keywords,
                 topic_likely_threshold=settings.topic_likely_threshold,
+                action_classifier_mode=settings.action_classifier_mode,
+                action_classifier_model_path=settings.action_classifier_model_path,
             )
         ),
         pipeline_version=settings.pipeline_version,
@@ -423,6 +427,8 @@ def process_endpoint(
         max_meeting_topics=settings.max_meeting_topics,
         max_topic_keywords=settings.max_topic_keywords,
         topic_likely_threshold=settings.topic_likely_threshold,
+        action_classifier_mode=settings.action_classifier_mode,
+        action_classifier_model_path=settings.action_classifier_model_path,
     )
     return asdict(result)
 
@@ -537,6 +543,8 @@ async def process_file_endpoint(
         max_meeting_topics=settings.max_meeting_topics,
         max_topic_keywords=settings.max_topic_keywords,
         topic_likely_threshold=settings.topic_likely_threshold,
+        action_classifier_mode=settings.action_classifier_mode,
+        action_classifier_model_path=settings.action_classifier_model_path,
     )
     return asdict(result)
 

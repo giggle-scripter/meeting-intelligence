@@ -698,6 +698,8 @@ def process_meeting(
     max_meeting_topics: int = 12,
     max_topic_keywords: int = 8,
     topic_likely_threshold: float = 0.45,
+    action_classifier_mode: str = "off",
+    action_classifier_model_path: str | None = None,
 ) -> PipelineResult:
     ai_client = ai_client or DisabledAiClient()
     stages = preprocess_meeting(meeting, speaker_aliases)
@@ -713,6 +715,8 @@ def process_meeting(
     )
     if meeting_context_mode not in {"off", "assist", "shadow"}:
         raise ValueError("meeting_context_mode must be off, assist, or shadow")
+    if action_classifier_mode not in {"off", "shadow"}:
+        raise ValueError("action_classifier_mode must be off or shadow")
     meeting_context = None
     note_cues_by_clause = {}
     if meeting_context_mode != "off":
@@ -738,6 +742,26 @@ def process_meeting(
                 annotations,
                 note_cues_by_clause,
             )
+    action_classifier_shadow = None
+    action_classifier_error_count = 0
+    if action_classifier_mode == "shadow":
+        try:
+            from .ml.action_classifier import evaluate_shadow_predictions
+            from .ml.model_registry import get_action_classifier
+
+            classifier = get_action_classifier(action_classifier_model_path)
+            action_classifier_shadow = evaluate_shadow_predictions(
+                classifier,
+                clauses,
+                annotations,
+                speaker_names={
+                    clause.speaker_name for clause in clauses if clause.speaker_name
+                },
+                note_supported_clause_ids=set(note_cues_by_clause),
+            )
+        except (OSError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Action classifier shadow inference failed: %s", exc)
+            action_classifier_error_count = 1
     windows = merge_windows(build_candidate_windows(clauses, annotations))
     clauses_by_id = {clause.clause_id: clause for clause in clauses}
     events = []
@@ -1045,6 +1069,56 @@ def process_meeting(
         recap_scope=recap_scope,
         meeting_date_source=meeting.meeting_date_source,
         effective_meeting_date=meeting.meeting_date,
+        action_classifier_mode=action_classifier_mode,
+        action_classifier_version=(
+            action_classifier_shadow.classifier_version
+            if action_classifier_shadow
+            else ("unavailable" if action_classifier_mode == "shadow" else "disabled")
+        ),
+        embedding_model_version=(
+            action_classifier_shadow.embedding_model_version
+            if action_classifier_shadow
+            else ("unavailable" if action_classifier_mode == "shadow" else "disabled")
+        ),
+        action_classifier_clause_count=(
+            action_classifier_shadow.clause_count if action_classifier_shadow else 0
+        ),
+        action_classifier_prediction_counts=(
+            action_classifier_shadow.prediction_counts
+            if action_classifier_shadow
+            else {}
+        ),
+        action_classifier_would_create_count=(
+            action_classifier_shadow.would_create_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_would_review_count=(
+            action_classifier_shadow.would_review_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_would_update_count=(
+            action_classifier_shadow.would_update_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_rule_action_clause_count=(
+            action_classifier_shadow.rule_action_clause_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_rule_agreement_count=(
+            action_classifier_shadow.rule_agreement_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_rule_disagreement_count=(
+            action_classifier_shadow.rule_disagreement_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_error_count=action_classifier_error_count,
     )
     result = build_pipeline_result(
         meeting.meeting_title,
@@ -1079,6 +1153,9 @@ def process_meeting(
                 clause_id: [asdict(cue) for cue in cues]
                 for clause_id, cues in note_cues_by_clause.items()
             },
+            "action_classifier_shadow": (
+                asdict(action_classifier_shadow) if action_classifier_shadow else None
+            ),
             "context_compaction": {
                 "before_clause_count": ai_context_clause_count_before_pruning,
                 "after_unique_clause_count": len(ai_context_clause_ids),
@@ -1118,6 +1195,8 @@ def process_meeting_by_version(
     max_meeting_topics: int = 12,
     max_topic_keywords: int = 8,
     topic_likely_threshold: float = 0.45,
+    action_classifier_mode: str = "off",
+    action_classifier_model_path: str | None = None,
 ) -> PipelineResult:
     """Select V1/V2 or run V2 in shadow while returning V1's public result."""
 
@@ -1134,6 +1213,8 @@ def process_meeting_by_version(
             max_meeting_topics=max_meeting_topics,
             max_topic_keywords=max_topic_keywords,
             topic_likely_threshold=topic_likely_threshold,
+            action_classifier_mode=action_classifier_mode,
+            action_classifier_model_path=action_classifier_model_path,
         )
     if pipeline_version == "v1":
         assert v1_result is not None
