@@ -1,0 +1,105 @@
+MEETING_ID: W5-XL-C5-N3-SW-STRESS-001
+PART: P02/10
+
+T000078 [09:53:40] Hoàng: Vậy chúng ta tiếp tục part 2. Tôi muốn chuyển sang chủ đề tích hợp dữ liệu giữa module thanh toán mới và hệ thống CRM hiện tại. Đây là yêu cầu từ phía Sales để đồng bộ lịch sử giao dịch.
+
+T000079 [09:54:25] Linh: Em có một báo cáo về integration này. Bên CRM đang dùng API cũ, cần nâng cấp giao thức. Nếu không, dữ liệu thanh toán sẽ không được ghi nhận real-time.
+
+T000080 [09:55:12] Minh: Bên Dev đã có mock API để test, nhưng chưa được approval từ đội CRM. Họ cần bản thiết kế chi tiết.
+
+T000081 [09:55:58] Trang: QA cũng cần test case cho integration testing, nhưng hiện chưa có tài liệu.
+
+T000082 [09:56:41] Hoàng: Ai sẽ chịu trách nhiệm viết tài liệu thiết kế? Linh, bên Product có thể làm không?
+
+T000083 [09:57:20] Linh: Thực ra tài liệu này nên do Dev lead viết, vì nó liên quan đến technical specification. Minh, em có thể nhờ bạn nào viết không?
+
+T000084 [09:58:03] Minh: Em nghĩ Thắng có khả năng, nhưng Thắng đang bận với issue CI/CD. Có thể đẩy sang tuần sau. Deadline dự kiến cho spec: thứ Hai tuần sau.
+
+T000085 [09:58:44] Hoàng: Vậy assignment chưa rõ. An, bên Business có yêu cầu gì thêm cho integration này? Có thể giúp xác định scope.
+
+T000086 [09:59:28] An: Bên em cần các field: order_id, amount, currency, status, timestamp, và customer_id. Ngoài ra cần mapping giữa hệ thống thanh toán và CRM. Em có thể cung cấp mapping data mẫu.
+
+T000087 [10:00:15] Minh: Vậy spec sẽ bao gồm mapping data và API endpoint. Em sẽ assign Thắng viết spec vào thứ Hai. Nhưng có thể cần thêm thời gian nếu Thắng bận.
+
+T000088 [10:01:00] Hòa: Bên Ops cũng lo ngại về bảo mật khi đồng bộ dữ liệu. Cần có encryption plan.
+
+T000089 [10:01:42] Hoàng: Điều đó cần đưa vào spec. Chúng ta có một unresolved item ở đây: ai sẽ review bảo mật? Hòa, em có thể làm việc đó sau khi có spec không?
+
+T000090 [10:02:28] Hòa: Được, em sẽ review phần bảo mật sau khi nhận được spec. Nhưng cần có timeline.
+
+T000091 [10:03:12] Linh: Em đề xuất deadline cho spec là thứ Hai tuần sau, và review bảo mật hoàn thành trong hai ngày sau đó.
+
+T000092 [10:03:57] Minh: Một vấn đề khác: integration này có liên quan đến module báo cáo. Nếu đồng bộ dữ liệu, CRM có thể query báo cáo giao dịch. Nhưng như đã nói, báo cáo có issue indexing. Có thể ảnh hưởng.
+
+T000093 [10:04:45] Hoàng: Tức là có long-distance dependency tới task của module báo cáo. Cần lưu ý.
+
+T000094 [10:05:30] Trang: Em có một đề xuất: tạm thời integration testing có thể thực hiện với dữ liệu giả, không cần phụ thuộc vào module báo cáo hoàn chỉnh. Giảm rủi ro.
+
+T000095 [10:06:18] Linh: Hợp lý. QA có thể bắt đầu viết test case dựa trên mock data. Trang, em cần bao lâu?
+
+T000096 [10:07:02] Trang: Nếu có spec tối thứ Hai, em có thể viết test case trong ngày thứ Ba, sẵn sàng test thứ Tư.
+
+T000097 [10:07:48] Hoàng: Vậy một task mới: Viết spec integration (Thắng, deadline thứ Hai), review bảo mật (Hòa, deadline thứ Tư), viết test case (Trang, deadline thứ Ba), integration test bắt đầu thứ Tư.
+
+T000098 [10:08:36] Minh: Anh Hoàng, em muốn nói về task phân tích traffic cho caching. An đã gửi data chưa? Có thể có overlap với integration.
+
+T000099 [10:09:18] An: Em chưa gửi, vì em đang chờ dữ liệu từ monitoring team. Họ sẽ gửi trưa nay.
+
+T000100 [10:10:00] Hoàng: Vậy hãy đẩy deadline phân tích traffic lên thứ Sáu tuần này, để Dũng có material cho design vào thứ Hai.
+
+T000101 [10:10:46] An: Em sẽ cố gắng, nhưng có thể trễ. Tôi có một xung đột: em cũng phải chuẩn bị test data chargeback cho Trang. Cả hai task đều cần dữ liệu từ bên ngoài.
+
+T000102 [10:11:35] Hoàng: Đây là negative block: hai task cạnh tranh nguồn lực. Ai có thể hỗ trợ An? Linh, Product có thể giúp thu thập data chargeback từ Finance?
+
+T000103 [10:12:20] Linh: Em có thể liên hệ Finance, nhưng họ thường cần approval từ manager. Em sẽ gửi email và cc An. Tuy nhiên, không thể hứa thời gian.
+
+T000104 [10:13:05] An: Vậy em vẫn sẽ phụ trách chargeback data, còn phân tích traffic em có thể nhờ support từ một dev mới? Dũng có thể tự phân tích dựa trên dashboard không?
+
+T000105 [10:13:55] Minh: Dũng có thể access dashboard, nhưng cần guidance. Em sẽ hướng dẫn bạn lấy metrics trong buổi standup mai. Không cần chờ data từ An.
+
+T000106 [10:14:40] Hoàng: Tốt, vậy task phân tích traffic được tách ra: Dũng tự làm với sự hướng dẫn của Minh, không phụ thuộc vào An. An tập trung vào chargeback data.
+
+T000107 [10:15:28] Trang: Như vậy test data chargeback vẫn theo deadline thứ Năm? Nếu Finance chậm, kế hoạch phase 2 sẽ ảnh hưởng.
+
+T000108 [10:16:12] An: Em sẽ cố gắng có kết quả trước thứ Sáu. Nếu thứ Sáu chưa xong, tôi sẽ báo ngay.
+
+T000109 [10:16:58] Hoàng: Mọi người lưu ý, deadline chargeback data vẫn là thứ Năm, nhưng có thể linh động đến thứ Sáu. Cần tracking.
+
+T000110 [10:17:40] Hòa: Em có một unresolved item: ai là owner của việc cập nhật token cho script deploy? Bên admin sẽ fix, nhưng cần dev verify. Minh, đã assign Thắng chưa?
+
+T000111 [10:18:26] Minh: Chưa chính thức, nhưng em sẽ assign trong Jira ngay sau meeting. Thắng sẽ verify sau khi Hòa báo fix.
+
+T000112 [10:19:12] Hoàng: Tốt, vậy owner là Thắng, nhưng chưa có deadline rõ ràng. Hòa, em có thể ước tính khi nào admin fix xong?
+
+T000113 [10:19:58] Hòa: Admin nói trước trưa mai, tức thứ Năm. Thắng có thể verify sau đó, deadline verification là trước cuối ngày thứ Năm.
+
+T000114 [10:20:45] Minh: OK, Thắng sẽ verify trước 5h chiều thứ Năm.
+
+T000115 [10:21:28] Linh: Quay lại module thanh toán, em có một concern: việc sử dụng canary deployment có thể tạo thêm complexity cho integration. Liệu có nên giữ nguyên full release?
+
+T000116 [10:22:14] Hoàng: Đó là một negative block. Có thể chúng ta sẽ bàn kỹ ở part sau, nhưng hãy ghi nhận ý kiến. Hiện tại, chưa có consensus.
+
+T000117 [10:23:00] Minh: Em vẫn ủng hộ canary, nhưng cần Hòa confirm infra support.
+
+T000118 [10:23:45] Hòa: Infra của staging có thể support, nhưng production cần load balancer config thêm. Không vấn đề, nhưng cần thời gian.
+
+T000119 [10:24:30] Hoàng: Unresolved: canary deployment có được áp dụng không? Chờ quyết định sau. Chuyển sang vấn đề khác.
+
+T000120 [10:25:12] An: Em có một topic nhỏ: dữ liệu log từ server test đang bị thiếu do rotation. Hòa, bên em có thể cấu hình log retention lâu hơn cho module thanh toán?
+
+T000121 [10:26:00] Hòa: Được, em sẽ set retention 30 ngày cho log thanh toán. Làm ngay trong chiều nay.
+
+T000122 [10:26:38] Hoàng: Task đó assign Hòa, deadline hôm nay. Vậy chúng ta gần kết thúc part 2. Tôi muốn nhắc lại vài unresolved items:
+
+- Owner cho viết integration spec chưa rõ? Minh vừa assign Thắng, nhưng chưa confirm.
+- Canary deployment chưa quyết định.
+- Deadline chargeback data có thể bị trượt.
+- Bảo mật review chưa có deadline cụ thể.
+
+T000123 [10:27:30] Linh: Em cũng muốn nói thêm về task phân tích traffic: Dũng sẽ tự làm, nhưng vẫn cần output từ dashboard. Minh sẽ hướng dẫn.
+
+T000124 [10:28:15] Minh: Em confirm trong standup mai.
+
+T000125 [10:28:55] Hoàng: Cảm ơn mọi người. Part 2 kết thúc, chúng ta sẽ tiếp tục ở part 3 với các chủ đề còn lại.
+
+--- END OF PART P02 ---

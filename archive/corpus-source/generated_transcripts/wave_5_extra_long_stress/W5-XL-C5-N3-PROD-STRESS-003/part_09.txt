@@ -1,0 +1,166 @@
+MEETING_ID: W5-XL-C5-N3-PROD-STRESS-003
+PART: P09/10
+
+T000639 [01:35:05] Thảo: Chúng ta bắt đầu part 9. Hôm nay là 02/03, chúng ta có họp về tool test script, nhưng trước đó em muốn cập nhật vài state transition.
+
+T000640 [01:35:15] Hùng: Em sẵn sàng.
+
+T000641 [01:35:19] Minh: Có mặt.
+
+T000642 [01:35:23] Linh: Em đây.
+
+T000643 [01:35:27] Anh: Vâng.
+
+T000644 [01:35:31] Thảo: Trước hết, về task “endpoint documentation” mà Minh được giao ở part 7. Em thấy chưa có tiến triển. Có cần tiếp tục không?
+
+T000645 [01:35:40] Minh: Em chưa làm vì bận mock. Em nghĩ không cần thiết cho demo. Có thể hủy.
+
+T000646 [01:35:48] Hùng: Đồng ý. Documentation có thể làm sau.
+
+T000647 [01:35:54] Anh: Nhưng nếu hủy, sau này sẽ thiếu tài liệu.
+
+T000648 [01:36:00] Thảo: Ta hủy task này, nhưng thay bằng ghi chú trong meeting notes. Sau demo sẽ làm lại.
+
+T000649 [01:36:07] Minh: Vậy task cũ bị hủy, không có thay thế.
+
+T000650 [01:36:13] Thảo: Đúng. Tiếp theo, về correction chain cho mock core. Lần đầu deadline 28/02, sửa thành 02/03, rồi 03/03. Hôm nay là 02/03, Minh đã xong chưa?
+
+T000651 [01:36:24] Minh: Em đã hoàn thành core mock và priority. Còn filter của Linh chưa tích hợp.
+
+T000652 [01:36:32] Linh: Em vừa fix xong bug pagination. Sẽ deploy lên staging chiều nay.
+
+T000653 [01:36:39] Thảo: Vậy state của mock core đã hoàn thành, nhưng chưa tích hợp filter. Đây là transition.
+
+T000654 [01:36:47] Hùng: Vậy thứ tự: core mock xong 02/03, filter xong 03/03, tích hợp 03/03 chiều.
+
+T000655 [01:36:55] Thảo: Chính xác. Về UI prototype, deadline 04/03 vẫn giữ. Linh, em có cần hỗ trợ gì không?
+
+T000656 [01:37:03] Linh: Em cần spec priority đã có, nhưng thiết kế UI mất thời gian. Em lo không kịp.
+
+T000657 [01:37:11] Thảo: Vậy em có thể postpone sang 04/03 tối? Nhưng demo sáng 05/03. Có thể chấp nhận trễ vài giờ.
+
+T000658 [01:37:20] Linh: Em sẽ cố gắng xong trước 05/03 8h sáng.
+
+T000659 [01:37:26] Thảo: Được, đó là correction không chính thức, nhưng vẫn ghi nhận.
+
+T000660 [01:37:33] Anh: Vậy chúng ta có cancellation muộn cho task mock documentation.
+
+T000661 [01:37:39] Thảo: Đúng.
+
+T000662 [01:37:43] Hùng: Bây giờ về họp tool test script. Chúng ta cần quyết định.
+
+T000663 [01:37:50] Thảo: Vâng, em mở topic. Mọi người propose tool.
+
+T000664 [01:37:55] Minh: Em vẫn đề xuất Jest.
+
+T000665 [01:37:59] Hùng: Em thích Mocha vì team QA quen.
+
+T000666 [01:38:04] Anh: Có thể dùng cả hai? Nhưng sẽ phức tạp.
+
+T000667 [01:38:10] Thảo: Không, chọn một. Em nghiêng về Jest vì tích hợp sẵn với React. Nhưng Hùng, team QA có thể học nhanh không?
+
+T000668 [01:38:20] Hùng: Có thể, nhưng cần thời gian. Demo gần, nếu dùng Mocha thì không cần training.
+
+T000669 [01:38:28] Linh: Em thấy Jest đơn giản hơn cho test API.
+
+T000670 [01:38:34] Thảo: Vậy vote: ai chọn Jest? Minh, Linh, Thảo. Ai chọn Mocha? Hùng. Anh chưa quyết.
+
+T000671 [01:38:42] Anh: Em nghiêng Jest vì future proof.
+
+T000672 [01:38:47] Thảo: Đa số chọn Jest. Vậy quyết định: dùng Jest cho test script. Hùng, em có thể làm quen nhanh?
+
+T000673 [01:38:56] Hùng: Em sẽ xem tutorial, ok.
+
+T000674 [01:38:59] Thảo: Vậy unresolved item từ part 2 đã giải quyết.
+
+T000675 [01:39:05] Minh: Tốt.
+
+T000676 [01:39:09] Hùng: Em có một ambiguity về việc ai viết test script bây giờ? Task cũ đã hủy.
+
+T000677 [01:39:17] Thảo: Task mới: Hùng viết integration test script dùng Jest, deadline 04/03. Có hỗ trợ từ Minh.
+
+T000678 [01:39:25] Minh: Em giúp setup Jest.
+
+T000679 [01:39:29] Hùng: Vâng.
+
+T000680 [01:39:33] Linh: Về firewall rules, em đã verify cùng Hùng. OK.
+
+T000681 [01:39:39] Thảo: Tốt. Vậy state transition cho firewall là done.
+
+T000682 [01:39:44] Anh: Còn vụ data mẫu? Huy đã adjust chưa?
+
+T000683 [01:39:49] Minh: Huy gửi bản mới sáng nay, em đã review, thêm rejected rồi. OK.
+
+T000684 [01:39:56] Thảo: Vậy hoàn thành.
+
+T000685 [01:40:00] Hùng: Em có noise – hình như ai đó mở mic.
+
+T000686 [01:40:05] Linh: Xin lỗi, em vô tình bật.
+
+T000687 [01:40:10] Thảo: Không sao. Tiếp tục.
+
+T000688 [01:40:14] Anh: Chúng ta cần bàn về risk log. Có một risk mới: nếu filter chưa kịp test, demo có thể lỗi.
+
+T000689 [01:40:23] Thảo: Đã có plan B: dùng manual script. Minh, em đã chuẩn bị script tay chưa?
+
+T000690 [01:40:30] Minh: Em có script demo từ tuần trước, chỉ cần update.
+
+T000691 [01:40:36] Thảo: Vậy risk đã giảm.
+
+T000692 [01:40:40] Hùng: Em muốn hỏi: tool test script vừa quyết, nhưng thời gian đào tạo có ảnh hưởng deadline không?
+
+T000693 [01:40:49] Thảo: Hùng tự đánh giá.
+
+T000694 [01:40:53] Hùng: Em nghĩ không, vì em có thể viết test đơn giản trước.
+
+T000695 [01:40:58] Thảo: Vậy ổn.
+
+T000696 [01:41:02] Linh: Em muốn báo: UI prototype đã có filter, chờ priority. Em sẽ cập nhật priority chiều nay.
+
+T000697 [01:41:10] Minh: Em gửi mock endpoint priority rồi.
+
+T000698 [01:41:14] Linh: Cảm ơn.
+
+T000699 [01:41:18] Thảo: Vậy state transition cho UI prototype là đang progress.
+
+T000700 [01:41:24] Anh: Còn unresolved cũ từ part 1 về owner deploy? Đã assign Minh, vẫn ổn.
+
+T000701 [01:41:32] Thảo: Đúng.
+
+T000702 [01:41:36] Hùng: Em có một phát hiện: trên staging, container memory vẫn cao dù đã restart. Có thể cần tăng limit.
+
+T000703 [01:41:45] Linh: Em sẽ điều chỉnh cấu hình container.
+
+T000704 [01:41:50] Thảo: Giao Linh, deadline 03/03.
+
+T000705 [01:41:55] Linh: Vâng.
+
+T000706 [01:41:59] Minh: Em xin phép báo: task mock core đã hoàn thành, có thể deploy thử.
+
+T000707 [01:42:06] Thảo: Tốt. Vậy chúng ta có thể bắt đầu integration sớm.
+
+T000708 [01:42:11] Hùng: Em sẽ chuẩn bị test suite ngay.
+
+T000709 [01:42:15] Thảo: Recap lại các state transition:
+- Mock core: từ 28/02 lên 02/03, nay hoàn thành.
+- Filter: đang progress, deadline 03/03.
+- UI prototype: deadline 04/03, Linh sẽ cố 05/03 sáng.
+- Firewall: done.
+- Data mẫu: done after adjust.
+- Tool test script: resolved, chọn Jest.
+- Task documentation: cancelled, không thay thế.
+- Container memory: task mới cho Linh.
+
+T000710 [01:42:38] Hùng: Rõ.
+
+T000711 [01:42:41] Anh: Vậy còn vụ performance review? Chưa có.
+
+T000712 [01:42:46] Thảo: Để sau demo.
+
+T000713 [01:42:50] Linh: Em xin phép out để cấu hình container.
+
+T000714 [01:42:55] Hùng: Em cũng đi viết test.
+
+T000715 [01:42:59] Thảo: Kết thúc part 9. Part 10 sẽ là tổng kết và closing.
+
+--- END OF PART P09 ---

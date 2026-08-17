@@ -1,0 +1,32 @@
+=== MEETING METADATA ===
+meeting_id: W2-SHORT-C2-N1-IT-NOOWN-022
+meeting_title: Trao đổi kế hoạch tích hợp
+meeting_date: 2026-02-16
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:00] Tuấn: Chào mọi người, hôm nay chúng ta cùng trao đổi về kế hoạch tích hợp module báo cáo mới vào hệ thống. Trước tiên, việc quan trọng nhất là xây dựng connector đồng bộ giữa cơ sở dữ liệu cũ và mới. Ai có thể đảm nhận phần này?
+[09:00:15] Hương: Em thấy connector này cực kỳ quan trọng, vì nhiều bảng dữ liệu cũ chưa được mapping. Nếu không có sớm, báo cáo sẽ không có dữ liệu để chạy.
+[09:00:30] Mai: Em có thể hỗ trợ các API phía module mới, nhưng connector thì em chưa làm bao giờ. Hệ thống cũ dùng DB thủ tục rất phức tạp, em không tự tin.
+[09:00:50] Tuấn: Anh cũng đang tập trung dẫn dắt nhóm front-end, không có thời gian đào sâu vào mảng này. Hương, em có thể tham gia được không?
+[09:01:05] Hương: Dạ không, em là QA, test thì em làm được chứ code connector không đúng chuyên môn của em ạ. Với lại em đang phải viết test plan cho cả hệ thống mới.
+[09:01:20] Tuấn: Vậy thì mình vẫn cần tìm người. Connector mà chậm là kéo theo mọi thứ. Không lẽ lại phải chờ đến khi có thêm nhân sự backend?
+[09:01:40] Mai: Hay anh hỏi anh Bình bên System admin? Anh ấy rành cả hai DB mà.
+[09:01:55] Tuấn: Ừ, anh cũng nghĩ đến Bình, nhưng Bình đang gánh phần vận hành máy chủ, cũng đã full task rồi. Có hỏi cũng chưa chắc nhận.
+[09:02:10] Hương: Nếu chưa có ai, thì mình ghi nhận task này là tồn tại, ai phụ trách sẽ tính sau. Quan trọng là không để sót nó khỏi danh sách công việc.
+[09:02:30] Tuấn: Ok, vậy Hương ghi vào action item giúp anh: “Xây dựng connector đồng bộ dữ liệu cũ - mới” – hiện chưa có người phụ trách. Sau đó anh sẽ trao đổi thêm với quản lý cấp trên để phân bổ nguồn lực.
+[09:02:50] Hương: Dạ, em note lại ngay. Còn việc nào nữa cần làm song song không anh?
+[09:03:05] Tuấn: Tiếp theo, Mai sẽ phụ trách cập nhật lại bộ tài liệu API cho các endpoint mới của module báo cáo. Em làm được chứ?
+[09:03:20] Mai: Vâng, em nhận. Em sẽ hoàn thành trước thứ Sáu tuần này và gửi cho Hương review.
+[09:03:35] Hương: Ok, chị sẽ review vào cuối tuần. Nhưng mà còn việc test tích hợp sau khi có connector, em nghĩ cần chuẩn bị trước tài liệu test case không?
+[09:03:55] Tuấn: Đúng rồi, Hương nên lên danh sách các test case cho luồng dữ liệu qua connector luôn, để khi connector sẵn sàng là test được ngay.
+[09:04:15] Hương: Dạ, em sẽ làm. Nhưng mình còn phải có dữ liệu mẫu để test chứ ạ. Hiện DB mới trống, cần migrate một ít dữ liệu từ DB cũ sang để chạy thử.
+[09:04:30] Tuấn: Ừ, vậy thì cần thêm việc migrate dữ liệu mẫu phục vụ test. Ai có thể làm việc này nhỉ? Cũng cần người hiểu cả hai hệ thống.
+[09:04:50] Mai: Việc này em không làm được, em chỉ mới quen DB mới thôi.
+[09:05:05] Hương: Anh Bình có lẽ là người phù hợp nhất, nhưng lại quay về bài toán anh ấy đang bận.
+[09:05:20] Tuấn: Vậy chốt lại, việc migrate dữ liệu mẫu cũng chưa có người nhận. Hương note thêm task “Migrate dữ liệu mẫu từ DB cũ sang DB mới – chưa assignee”. Anh sẽ cố gắng sắp xếp, nhưng tình hình nhân sự đang căng, có thể phải chờ đến cuộc họp mở rộng vào thứ Tư tuần sau.
+[09:05:45] Hương: Dạ, vậy là hiện tại chúng ta có hai task quan trọng nhưng chưa có owner: connector và migrate dữ liệu.
+[09:06:00] Mai: Em hơi lo là nếu cứ để treo không người làm, thì đến lúc cận deadline mình sẽ bị động.
+[09:06:15] Tuấn: Anh hiểu, nhưng ép ai cũng không được nếu họ không có năng lực hoặc thời gian. Trước mắt, Mai làm tài liệu API, Hương làm test case, còn lại anh sẽ đẩy lên trên để tìm người sớm nhất có thể. Các em cứ yên tâm tập trung phần mình đi.
+[09:06:35] Hương: Dạ, em không còn ý kiến gì thêm.
+[09:06:50] Mai: Em cũng vậy ạ.
+[09:07:05] Tuấn: Vậy kết thúc họp tại đây. Cảm ơn mọi người, mình sẽ cập nhật sau khi có thông tin mới.

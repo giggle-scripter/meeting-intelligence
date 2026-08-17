@@ -1,0 +1,113 @@
+[09:00:00] Linh: Chào mọi người, hôm nay chúng ta họp về chuẩn bị release phiên bản 2.3. Mình muốn bắt đầu với tình trạng bugs đang mở.
+[09:00:15] Minh: Hi Linh, tôi vừa kiểm tra, có bug #234 về lỗi không load được dữ liệu trên module báo cáo. Priority cao.
+[09:00:30] Huy: Tôi đã test thử, bug này xuất hiện khi dùng dữ liệu lớn. Cần sửa trước release.
+[09:00:45] Linh: Vậy Minh, bạn phụ trách bug này nhé. Cần fix xong trước 22/02.
+[09:01:00] Minh: Tôi sẽ làm. Nhưng cần thêm thông tin từ phía BA về luồng dữ liệu.
+[09:01:15] Anh: Tôi có tài liệu use case, sẽ gửi cho Minh sau cuộc họp.
+[09:01:30] Linh: Tốt. Tiếp theo, vấn đề về monitoring. Huy, dashboard hiện tại đã cập nhật chưa?
+[09:01:45] Huy: Chưa, tôi đang chờ dữ liệu từ DevOps. Cần cập nhật các metric mới.
+[09:02:00] Trang: Bên tôi đã deploy metric collector mới, có thể dùng được rồi. Huy, bạn cập nhật dashboard nhé, deadline 21/02 được không?
+[09:02:15] Huy: Được, tôi sẽ làm. Nhưng nếu có vấn đề thì tôi cần hỗ trợ.
+[09:02:30] Linh: OK. Phần tài liệu release notes, Trang, bạn viết nhé? Không có deadline cụ thể, nhưng cần hoàn thành trước khi deploy.
+[09:02:45] Trang: Tôi ghi nhận. Tôi sẽ viết sau khi sửa xong các bug.
+[09:03:00] Minh: Tôi thấy cần cả tài liệu hướng dẫn sử dụng cho tính năng mới. Ai làm việc đó?
+[09:03:15] Anh: Để tôi viết tài liệu hướng dẫn sử dụng, nhưng tôi cần thời gian. deadline 25/02?
+[09:03:30] Linh: Anh, bạn viết tài liệu hướng dẫn sử dụng, deadline 25/02. Và Trang viết release notes, không deadline nhưng cố gắng sớm.
+[09:03:45] Huy: Tôi cũng muốn đề xuất viết thêm test tự động cho module mới. Nhưng chưa chắc có thời gian.
+[09:04:00] Linh: Để xem xét sau. Bây giờ tập trung vào các việc chính. Tiếp theo, chuẩn bị môi trường staging. Minh, bạn phụ trách việc này?
+[09:04:15] Minh: Tôi không thể, tuần sau tôi bận. Có thể giao cho Trang.
+[09:04:30] Linh: Trang, bạn làm staging được không? Deadline 23/02.
+[09:04:45] Trang: Tôi chưa rõ yêu cầu, cần issue cụ thể. Nhưng tôi có thể nhận, cần clar từ Minh.
+[09:05:00] Minh: Tôi sẽ gửi issue sau.
+[09:05:15] Huy: Còn test load thì sao? Tôi nghĩ cần làm trước release.
+[09:05:30] Linh: Huy, bạn làm test load nhé, deadline 24/02.
+[09:05:45] Huy: OK, tôi sẽ lên kế hoạch. Nhưng cần dữ liệu mẫu từ Minh.
+[09:06:00] Minh: Tôi sẽ cung cấp.
+[09:06:15] Linh: Bây giờ chúng ta bàn về vấn đề API cũ. Anh, bạn thấy sao?
+[09:06:30] Anh: API cũ có thể không tương thích với module mới. Nhưng chưa có quyết định xử lý.
+[09:06:45] Linh: Đây là vấn đề cần giải quyết sau, tôi chưa có hướng. Chúng ta sẽ để lại và bàn riêng sau.
+[09:07:00] Trang: Tôi thấy có rủi ro nếu không fix API trước release.
+[09:07:15] Linh: Tôi hiểu, nhưng hiện tại chưa có ai rõ. Chúng ta giữ lại như unresolved item.
+[09:07:30] Minh: Vậy tôi sẽ fix bug #234 trước.
+[09:07:45] Huy: Tôi vẫn lo về monitoring, tôi muốn hỏi lại: dashboard cập nhật xong thì ai test?
+[09:08:00] Linh: Bạn tự test là fine. Nhưng cần có sign-off từ DevOps.
+[09:08:15] Trang: Tôi sẽ xác nhận.
+[09:08:30] Linh: Quay lại việc tài liệu release notes, Trang, bạn đã thấy tôi giao cho bạn. Nhưng tôi nhắc lại, cần có bản nháp trước 27/02.
+[09:08:45] Trang: Vâng, tôi sẽ cập nhật.
+[09:09:00] Anh: Tôi có ý: có thể viết chung một tài liệu release với hướng dẫn sử dụng không? Để tránh trùng lặp.
+[09:09:15] Linh: Ý hay, nhưng hai task khác nhau. Trang làm release notes, Anh làm hướng dẫn sử dụng. Đừng lẫn.
+[09:09:30] Minh: Tôi thấy task "viết tài liệu hướng dẫn sử dụng" và "viết release notes" na ná nhau, nhưng khác mục đích.
+[09:09:45] Linh: Đúng, nên giữ riêng. Chú ý không duplicate nội dung.
+[09:10:00] Huy: Tôi nghĩ chúng ta nên recap lại các task đã giao: Minh fix bug #234 deadline 22/02, Huy cập nhật dashboard deadline 21/02, Trang viết release notes không deadline, Anh viết hướng dẫn sử dụng deadline 25/02, Trang chuẩn bị staging deadline 23/02, Huy test load deadline 24/02.
+[09:10:15] Linh: Chính xác. Và còn unresolved item về API cũ. Chưa có ai nhận.
+[09:10:30] Anh: Tôi có thể khảo sát thêm, nhưng chưa cam kết.
+[09:10:45] Linh: Tốt, Anh, bạn nghiên cứu và báo lại sau. Nhưng không set deadline.
+[09:11:00] Minh: Tôi xin phép bắt đầu làm bug #234 ngay.
+[09:11:15] Huy: Tôi cũng bắt đầu dashboard.
+[09:11:30] Trang: Tôi sẽ đợi issue từ Minh để làm staging.
+[09:11:45] Linh: OK, vậy mọi người tiến hành. Nếu có vấn đề gì ping tôi.
+[09:12:00] Huy: Khoan, tôi vừa kiểm tra, dashboard có phần metric cần thêm từ team khác. Có thể không kịp deadline 21/02.
+[09:12:15] Linh: Vậy bạn ước tính lại? Cần chuyển deadline hay có thể nhờ ai?
+[09:12:30] Huy: Tôi cần thêm 2 ngày. Nhưng nếu Anh hỗ trợ thì có thể kịp.
+[09:12:45] Linh: Anh, bạn giúp Huy về phần metric nhé? Nội dung đó có liên quan đến tài liệu bạn đang viết.
+[09:13:00] Anh: Tôi có thể hỗ trợ, nhưng việc tài liệu hướng dẫn sử dụng của tôi có deadline 25/02, tôi sợ bị chồng chéo.
+[09:13:15] Linh: Vậy Huy, bạn điều chỉnh deadline dashboard lên 23/02 và phối hợp với Anh. Anh, bạn vẫn giữ deadline 25/02 cho tài liệu, nhưng ưu tiên hỗ trợ Huy trước.
+[09:13:30] Anh: Được, tôi sẽ hỗ trợ metric cho Huy.
+[09:13:45] Huy: Cảm ơn. Vậy tôi cập nhật deadline dashboard thành 23/02, acceptance từ Anh.
+[09:14:00] Linh: Như vậy là correction deadline cho dashboard. Tiếp theo, còn gì không?
+[09:14:15] Minh: Tôi có câu hỏi về việc test load – Huy, bạn cần tôi chuẩn bị dữ liệu mẫu, tôi sẽ gửi trước 22/02.
+[09:14:30] Huy: OK, mong nhận dữ liệu sớm.
+[09:14:45] Trang: Tôi thấy có vấn đề với môi trường staging: cần cấu hình lại proxy. Tôi sẽ tự xử lý.
+[09:15:00] Linh: Tốt, nếu có gì khó khăn thì báo.
+[09:15:15] Anh: Như tôi đã nói, API cũ là vấn đề. Tôi sẽ tìm hiểu thêm và báo trong meeting sau.
+[09:15:30] Linh: Như vậy unresolved item được ghi nhận.
+[09:15:45] Huy: Tôi có suggestion: có thể dùng tool kiểm thử tự động cho API, nhưng chưa chốt.
+[09:16:00] Linh: Suggestion đó để sau, không phải task.
+[09:16:15] Minh: Tôi đã sẵn sàng fix bug #234. Cần truy cập repo.
+[09:16:30] Trang: Tôi sẽ deploy metric collector mới cho dashboard.
+[09:16:45] Linh: Mọi người tập trung làm việc. Cuối buổi, tôi recap lại: - Minh: fix bug #234, deadline 22/02. - Huy: cập nhật dashboard, deadline 23/02 (đã điều chỉnh), kết hợp với Anh. - Trang: viết release notes, không deadline, cần hoàn thành trước deploy. - Anh: viết tài liệu hướng dẫn sử dụng, deadline 25/02. - Trang: chuẩn bị staging, deadline 23/02. - Huy: test load, deadline 24/02. - Anh: nghiên cứu API cũ (unresolved, không deadline). Ai có thắc mắc gì thêm không?
+[09:17:00] Huy: Tôi thấy task "test load" và "dashboard" có thể liên quan đến nhau, cần đồng bộ.
+[09:17:15] Linh: Các bạn tự phối hợp. Vậy kết thúc họp? Một chút, tôi vừa nhận email về security review yêu cầu audit module mới. Anh, bạn có thông tin gì không?
+[09:17:30] Anh: Có, security team muốn review code trước release, nhưng họ chưa assign ai.
+[09:17:45] Linh: Vậy chúng ta có cần tạo task không? Hiện tại không có ai rảnh.
+[09:18:00] Trang: Tôi nghĩ nên đưa vào backlog.
+[09:18:15] Linh: Đồng ý, topic này không tạo task trong cuộc họp này.
+[09:18:30] Minh: Tôi có thể review một phần, nhưng không cam kết.
+[09:18:45] Linh: Để sau, chưa chốt.
+[09:19:00] Huy: Về monitoring, tôi muốn hỏi: sau khi cập nhật dashboard, có cần viết document hướng dẫn không?
+[09:19:15] Linh: Đó là việc sau, chưa giao.
+[09:19:30] Trang: Cần quyền SSH cho staging, ai sẽ cấp?
+[09:19:45] Linh: Tôi sẽ cấp sau họp.
+[09:20:00] Huy: Tôi sẽ viết script test load sau khi nhận dữ liệu.
+[09:20:15] Minh: Tôi sẽ gửi dữ liệu trước 22/02.
+[09:20:30] Anh: Tôi đã note.
+[09:20:45] Trang: Tôi muốn hỏi về tài liệu release notes, có mẫu không?
+[09:21:00] Linh: Tôi sẽ gửi mẫu sau.
+[09:21:15] Minh: Bug #234 dự kiến fix xong ngày 21/02.
+[09:21:30] Linh: Tốt.
+[09:21:45] Anh: Tôi thấy deadline 25/02 cho tài liệu hướng dẫn sử dụng hơi ngắn, vì tôi còn support Huy.
+[09:22:00] Linh: Bạn thương lượng với Huy, có thể kéo dài 1 ngày.
+[09:22:15] Huy: Tôi có thể kéo dài dashboard lên 24/02 để giúp Anh.
+[09:22:30] Linh: Được, vậy correction: dashboard deadline lên 24/02, tài liệu hướng dẫn sử dụng deadline 26/02. Nhưng test load vẫn 24/02, có ổn không?
+[09:22:45] Huy: Test load có thể dời sang 25/02.
+[09:23:00] Linh: Vậy test load 25/02. Còn staging, Trang, 23/02 được chứ?
+[09:23:15] Trang: Tôi có thể làm xong 23/02, không vấn đề.
+[09:23:30] Linh: Giữ nguyên.
+[09:23:45] Minh: Tôi xác nhận lại bug #234 vẫn deadline 22/02.
+[09:24:00] Linh: OK.
+[09:24:15] Huy: Tôi vẫn có negative: deadline dashboard 24/02 cũng gấp, nhưng cố.
+[09:24:30] Linh: Cố gắng.
+[09:24:45] Anh: Tôi sẽ hỗ trợ metric, nhưng tài liệu hướng dẫn sử dụng có thể bị trễ.
+[09:25:00] Linh: Đã điều chỉnh lên 26/02, vậy kịp không?
+[09:25:15] Anh: Kịp.
+[09:25:30] Trang: Tôi sẽ gửi mẫu release notes trước 22/02 cho Anh tham khảo.
+[09:25:45] Linh: Tốt.
+[09:26:00] Minh: Tôi nhắc lại: bug #234, tôi sẽ fix, không thay đổi.
+[09:26:15] Huy: Dashboard, tôi sẽ update và nhờ Anh verify.
+[09:26:30] Linh: Recap lần cuối: - Minh: fix bug #234, dl 22/02. - Huy: cập nhật dashboard, dl 24/02 (đã correction), hỗ trợ Anh. - Trang: release notes, k dl. - Anh: hướng dẫn sử dụng, dl 26/02 (đã correction). - Trang: staging, dl 23/02. - Huy: test load, dl 25/02 (đã correction). - Anh: nghiên cứu API cũ (unresolved, k dl). - Security review: backlog, chưa giao. Có vấn đề gì không?
+[09:27:00] Huy: Tôi thấy task test load và dashboard có thể merge, nhưng thôi.
+[09:27:15] Linh: Giữ riêng.
+[09:27:30] Anh: Tôi sẽ báo kết quả API cũ vào meeting tuần sau.
+[09:27:45] Linh: Được.
+[09:28:00] Minh: Vậy kết thúc, tôi đi làm luôn.
+[09:28:15] Linh: Cảm ơn mọi người, hẹn gặp lại.

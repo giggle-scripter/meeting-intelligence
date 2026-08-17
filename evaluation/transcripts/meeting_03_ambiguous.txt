@@ -1,4 +1,0 @@
-Nam: Có lẽ sau này chúng ta nên cải thiện giao diện đăng nhập.
-Linh: Ý tưởng đó cũng hợp lý.
-Minh: Phần phân quyền có thể để phase sau.
-Nam: Chúng ta sẽ trao đổi thêm trong cuộc họp tiếp theo.

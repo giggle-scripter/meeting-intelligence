@@ -1,0 +1,11 @@
+minutes nháp
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: bao cao / trien khai / nhe / kip / sp365 / display / binh
+- An với Bình gửi giúp em log giờ làm nhé, dl nội bộ của em là 25/02 để kịp trình giám đốc
+* Em hiểu, em sẽ gom chung với task SP365 display
+- Chị ơi, thực tế phía vận hành cần chạy trước ngày 01/03 để kịp đối soát
+1) lùi sang 01/03 thì hơn
+- correction lại, SP365 display dl là 01/03
+* Nhưng mà lúc nãy em có task parser transcript không dl, giờ thêm phần này vẫn là một việc chứ không tạo task mới
+- Tổng kết một chút: Hiện tại có task meeting summary flow của An dl 20/02, báo cáo chi phí của em dl 25/02, SP365 display của An dl 01/03, + parser transcript của Bình không dl
+1) À Dũng, báo cáo chi phí cho phase này đến đâu rồi? ? chưa chốt

@@ -1,0 +1,88 @@
+MEETING_ID: W4-LONG-C5-N3-PROD-STATE-011
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-25
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:00:00] PM: Chào mọi người, chúng ta bắt đầu buổi họp điều phối triển khai hệ thống hôm nay nhé. Mục tiêu chính là thống nhất kế hoạch triển khai cho đợt này.
+T000002 [09:00:12] DevLead: Vâng, tôi đã chuẩn bị sơ bộ danh sách công việc. Hy vọng hôm nay có thể chốt được timeline.
+T000003 [09:00:23] QA: Em cũng có vài vấn đề về môi trường test cần làm rõ.
+T000004 [09:00:30] PM: Ok, chúng ta sẽ bắt đầu bằng việc rà soát môi trường test trước, sau đó đến tài liệu triển khai.
+T000005 [09:00:45] Doc: Tôi có bản nháp các tài liệu hướng dẫn triển khai, nhưng cần xác nhận nội dung từ bên phát triển.
+T000006 [09:00:58] PM: Tốt, vậy chúng ta đi vào vấn đề. Anh DevLead, tình hình môi trường test hiện tại thế nào?
+T000007 [09:01:10] DevLead: Môi trường test staging đã được chuẩn bị xong từ tuần trước, nhưng có một số thay đổi về cấu hình database cần cập nhật.
+T000008 [09:01:25] PM: Cụ thể là thay đổi gì? Có ảnh hưởng đến lịch triển khai không?
+T000009 [09:01:33] DevLead: Chúng tôi chuyển từ PostgreSQL sang MySQL cho module báo cáo, nên cần kiểm tra lại kết nối. Dự kiến xong trong 2 ngày.
+T000010 [09:01:48] QA: Như vậy môi trường test sẽ chưa sẵn sàng để QA vào test cho đến khi anh làm xong?
+T000011 [09:01:56] DevLead: Đúng vậy, tôi sẽ ưu tiên hoàn thành việc này trước. Có thể đến thứ Năm tuần này.
+T000012 [09:02:07] PM: Được, anh cứ làm. Còn vấn đề gì khác về môi trường không?
+T000013 [09:02:14] QA: Em thấy môi trường dev vẫn chạy ổn, nhưng staging hiện không có bản sao dữ liệu sản phẩm, chỉ có dữ liệu mẫu.
+T000014 [09:02:30] DevLead: Chúng ta đã bàn việc này, tôi sẽ tạo bản sao dữ liệu từ producstion sau khi cập nhật xong. Cần thêm 1 ngày nữa.
+T000015 [09:02:42] PM: Vậy thời gian staging sẵn sàng có thể bị trễ đến cuối tuần. Anh chị lưu ý để điều phối công việc.
+T000016 [09:02:55] Arch: Tôi muốn bổ sung: cần kiểm tra bảo mật cho môi trường staging trước khi đưa dữ liệu thật vào. Điều này tôi đã đề cập trong tuần trước.
+T000017 [09:03:10] PM: Đúng, vậy chúng ta phải có task riêng cho việc kiểm tra bảo mật. Ai sẽ phụ trách?
+T000018 [09:03:18] Arch: Tôi sẽ làm phần đó, nhưng cần sự hỗ trợ từ team Dev để thiết lập firewall rules.
+T000019 [09:03:30] DevLead: Ok, tôi sẽ assign một người hỗ trợ anh. Nhưng cần lưu ý deadline cho việc này là khi nào?
+T000020 [09:03:40] PM: Trước khi staging đưa vào sử dụng, tức là cuối tuần này. Vậy task kiểm tra bảo mật có deadline cuối ngày thứ Sáu.
+T000021 [09:03:55] Arch: Đã rõ. Tôi sẽ ghi nhận.
+T000022 [09:04:02] PM: Chúng ta chuyển sang tài liệu triển khai. Chị Doc, chị đã làm đến đâu rồi?
+T000023 [09:04:12] Doc: Tôi đã soạn thảo bản nháp cho hai tài liệu: "Tài liệu triển khai hệ thống" và "Tài liệu hướng dẫn triển khai". Cả hai đều có cấu trúc tương tự nhau nhưng nội dung khác biệt.
+T000024 [09:04:30] PM: Ồ, hai tài liệu gần giống tên nhau nhỉ? Cần phân biệt rõ để tránh nhầm lẫn.
+T000025 [09:04:38] Doc: Vâng, "Tài liệu triển khai hệ thống" là bản tổng quan quy trình, còn "Tài liệu hướng dẫn triển khai" là từng bước chi tiết. Tôi muốn xin review từ team trước.
+T000026 [09:04:55] DevLead: Tôi có thể review phần kỹ thuật trong cả hai. Nhưng lịch review dự kiến thế nào?
+T000027 [09:05:03] PM: Chúng ta cần đặt deadline cho bản hoàn chỉnh. Tôi nghĩ nên giao "Tài liệu triển khai hệ thống" hoàn thành trước, vì nó là cơ sở.
+T000028 [09:05:18] Doc: Tôi có thể hoàn thiện bản đó trong 3 ngày, tức là cuối tuần này. Còn tài liệu hướng dẫn cần thêm thời gian vì phải chờ các bước thực tế.
+T000029 [09:05:32] PM: Ok, vậy giao deadline cho "Tài liệu triển khai hệ thống" là thứ Sáu tuần này. Còn "Tài liệu hướng dẫn triển khai" chưa cần deadline ngay, sẽ xác định sau khi staging ổn định.
+T000030 [09:05:50] QA: Vậy tài liệu nào sẽ dùng cho team QA? Tôi cần tham khảo để viết test case.
+T000031 [09:05:58] Doc: Cả hai đều liên quan, nhưng trước mắt chị có thể dùng bản nháp của "Tài liệu triển khai hệ thống" để nắm quy trình.
+T000032 [09:06:10] PM: Tôi assign task viết tài liệu cho chị Doc, deadline thứ Sáu cho bản chính, và bản hướng dẫn không deadline cứng. Mọi người đồng ý không?
+T000033 [09:06:22] Arch: Tôi có ý kiến: bản hướng dẫn cần có checklist cụ thể để tránh sai sót khi triển khai. Tôi đề nghị chị Doc thêm phần đó.
+T000034 [09:06:35] Doc: Tôi sẽ ghi nhận và bổ sung sau khi có phản hồi từ anh.
+T000035 [09:06:42] DevLead: Ngoài ra, tôi thấy tài liệu triển khai cần đề cập đến quy trình rollback. Có thể mất thêm thời gian.
+T000036 [09:06:55] PM: Đúng, đó là phần quan trọng. Nhưng chúng ta chưa thống nhất hết yêu cầu, có thể để part sau bàn kỹ hơn.
+T000037 [09:07:05] QA: Em muốn hỏi thêm về việc ai sẽ là người review chính thức? Hay là mọi người đều review?
+T000038 [09:07:15] PM: Anh DevLead review phần kỹ thuật, tôi review phần quy trình. Chị Doc sau đó tổng hợp. Được không?
+T000039 [09:07:25] Doc: Vâng, tôi sẽ gửi bản nháp cho mọi người trong hôm nay để họ review sớm.
+T000040 [09:07:35] PM: Tốt. Giờ chúng ta quay lại vấn đề môi trường test một chút. Tôi thấy có nhiều việc phải làm song song.
+T000041 [09:07:48] DevLead: Tôi muốn làm rõ: task cập nhật database và tạo bản sao dữ liệu có thể tiến hành đồng thời không? Hay cần tuần tự?
+T000042 [09:08:00] Arch: Nên tuần tự vì bản sao dữ liệu sẽ lấy từ production, mà production đang chạy ổn, không muốn ảnh hưởng. Tôi đề nghị làm cập nhật xong rồi mới copy.
+T000043 [09:08:18] DevLead: Ok, vậy tôi sẽ làm cập nhật database trước, ước tính 2 ngày, sau đó copy dữ liệu mất 1 ngày.
+T000044 [09:08:28] PM: Như vậy thứ Năm có thể có bản sao dữ liệu, còn kiểm tra bảo mật của anh Arch làm song song? Hay sau?
+T000045 [09:08:40] Arch: Tôi có thể bắt đầu kiểm tra bảo mật ngay trên môi trường hiện tại, không cần dữ liệu thật. Nhưng kết quả cuối cùng cần có dữ liệu thật để validate.
+T000046 [09:08:55] PM: Vậy ta có thể chạy song song. Thứ Sáu là hạn chót cho tất cả.
+T000047 [09:09:05] QA: Đối với QA, chúng em cần môi trường staging ổn định để chạy test. Nếu thứ Sáu mới xong thì tuần sau mới test được.
+T000048 [09:09:17] PM: Đúng vậy, đó là kế hoạch. Tuần sau chúng ta sẽ có part họp khác để bàn chi tiết test.
+T000049 [09:09:28] DevLead: Tôi muốn nhấn mạnh: các task về môi trường test có deadline rõ ràng, nhưng cần sự phối hợp chặt chẽ.
+T000050 [09:09:40] PM: Đã rõ. Bây giờ tôi tổng kết lại các task chính trong part này:
+T000051 [09:09:48] PM: Thứ nhất, DevLead phụ trách cập nhật database staging, deadline thứ Tư. Thứ hai, copy dữ liệu production sang staging, deadline thứ Năm. Thứ ba, Arch kiểm tra bảo mật, deadline thứ Sáu. Thứ tư, Doc viết "Tài liệu triển khai hệ thống", deadline thứ Sáu. Còn "Tài liệu hướng dẫn triển khai" để sau.
+T000052 [09:10:10] QA: Em có thắc mắc nhỏ: hai tài liệu có tên gần giống nhau, trong quá trình làm việc dễ nhầm. Có nên đặt tên khác không?
+T000053 [09:10:20] Doc: Tôi nghĩ nên để nguyên vì đó là tên chính thức từ yêu cầu dự án. Chỉ cần phân biệt rõ nội dung.
+T000054 [09:10:30] PM: Tôi đồng ý với chị Doc. Nhưng mọi người khi trao đổi cần ghi rõ "tài liệu triển khai" hay "hướng dẫn triển khai" để tránh hiểu nhầm.
+T000055 [09:10:45] Arch: Tôi thấy vậy ổn. Thực ra còn nhiều việc khác, chúng ta nên tập trung.
+T000056 [09:10:55] DevLead: Tôi có một ý kiến về việc phân công hỗ trợ cho Arch. Tôi sẽ cử anh Nam (Dev) làm đầu mối.
+T000057 [09:11:08] PM: Ok, ghi nhận. Vậy chúng ta đã có các task và người phụ trách.
+T000058 [09:11:18] QA: Em muốn hỏi về timeline cho việc viết test case? Em cần dựa vào tài liệu để viết.
+T000059 [09:11:27] PM: Việc đó sẽ bàn sau khi tài liệu được review xong, có thể trong part sau. Tạm thời chưa có deadline.
+T000060 [09:11:38] Arch: Một vấn đề nữa: nếu staging chưa sẵn sàng, tôi có thể test bảo mật trên môi trường dev không? Vì dev có dữ liệu giả.
+T000061 [09:11:50] DevLead: Dev đang dùng cho phát triển, tôi không muốn can thiệp quá nhiều. Nhưng nếu anh cần, tôi sẽ check lại.
+T000062 [09:12:00] PM: Tốt nhất anh Arch nên làm trên staging dù chưa có dữ liệu thật, vì dev có thể bị thay đổi liên tục.
+T000063 [09:12:12] Arch: Vậy tôi sẽ chờ staging có dữ liệu vào thứ Năm để test bảo mật toàn diện. Còn trước đó tôi xem xét cấu hình mạng.
+T000064 [09:12:25] PM: Hợp lý. Anh chị nào có thêm câu hỏi gì không?
+T000065 [09:12:33] Doc: Tôi muốn xác nhận: bản nháp tài liệu triển khai tôi gửi hôm nay, mọi người review trong mấy ngày? Cần deadline cho review.
+T000066 [09:12:45] PM: Review trong vòng 2 ngày, tức là đến thứ Năm sẽ góp ý. Sau đó chị Doc chỉnh sửa và hoàn thiện vào thứ Sáu.
+T000067 [09:12:55] DevLead: Tôi có thể review nhanh trong thứ Tư. Không vấn đề.
+T000068 [09:13:03] QA: Em sẽ cố gắng review trước thứ Năm.
+T000069 [09:13:10] PM: Tốt. Như vậy mọi người đã nắm được công việc của mình. Tôi sẽ ghi biên bản và gửi email sau họp.
+T000070 [09:13:22] DevLead: Một điểm nhỏ: task copy dữ liệu từ production, tôi cần quyền truy cập từ bên vận hành. Ai sẽ liên hệ?
+T000071 [09:13:33] PM: Tôi sẽ liên hệ với anh Quản trị hệ thống, xin access. Anh cứ chuẩn bị script trước.
+T000072 [09:13:42] Arch: Lưu ý: dữ liệu production có thông tin nhạy cảm, cần tuân thủ quy định bảo mật. Tôi đã có process.
+T000073 [09:13:55] PM: Đã rõ. Chúng ta cần cẩn trọng. Còn gì nữa không?
+T000074 [09:14:02] QA: Em thấy lịch trình khá chặt, nếu có vấn đề bất ngờ thì sao?
+T000075 [09:14:10] PM: Sẽ có các part họp tiếp theo để điều chỉnh. Hôm nay chúng ta mới khởi động, còn nhiều việc phải bàn sâu hơn.
+T000076 [09:14:22] Doc: Tôi có thể gửi tài liệu vào đầu giờ chiều nay được không? Vì còn vài phần cần chỉnh.
+T000077 [09:14:30] PM: Càng sớm càng tốt. Trước 14h nhé.
+T000078 [09:14:38] Doc: Vâng.
+T000079 [09:14:42] PM: Vậy tôi xin tạm dừng part 1 ở đây. Chúng ta sẽ gặp lại trong part 2 để tiếp tục bàn về kế hoạch test và tài liệu hướng dẫn.
+T000080 [09:14:55] Arch: Tôi mong đợi part sau có thời gian bàn về rollback.
+T000081 [09:15:02] PM: Sẽ được đưa vào agenda. Cảm ơn mọi người.
+--- END OF PART P01 ---

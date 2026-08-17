@@ -1,0 +1,52 @@
+MEETING_ID: W4-LONG-C5-N3-PROD-STATE-011
+PART: P03/5
+
+T000145 [09:25:38] PM: Chúng ta tiếp tục part 3. Hôm nay tôi muốn quay lại vấn đề tài liệu triển khai đã bàn từ đầu buổi. Chị Doc, tình hình tiến độ thế nào?
+T000146 [09:25:52] Doc: Tôi đã gửi bản nháp "Tài liệu triển khai hệ thống" cho mọi người review sáng nay. Nhưng tôi nhận thấy có một vấn đề: nội dung phần quy trình rollback còn thiếu, và tôi không có đủ thông tin kỹ thuật để hoàn thiện.
+T000147 [09:26:10] PM: Vậy chị cần ai hỗ trợ? Anh DevLead có thể cung cấp thông tin đó không?
+T000148 [09:26:18] DevLead: Tôi có thể viết phần rollback, nhưng hiện đang xử lý lỗi đăng nhập và database staging. Không biết có kịp không.
+T000149 [09:26:30] Doc: Tôi đề nghị chuyển ownership của "Tài liệu triển khai hệ thống" sang cho anh DevLead, vì anh có chuyên môn về kỹ thuật. Tôi chỉ hỗ trợ phần biên tập.
+T000150 [09:26:45] PM: Handoff owner? Điều đó có nghĩa là anh DevLead sẽ chịu trách nhiệm chính về tài liệu này? Còn deadline thì sao?
+T000151 [09:26:55] DevLead: Tôi không phản đối, nhưng nếu nhận thêm việc này, tôi cần điều chỉnh deadline. Deadline thứ Sáu có vẻ quá gấp vì tôi còn nhiều việc khác.
+T000152 [09:27:08] PM: Vậy chị Doc, chị có đồng ý handoff không? Chị sẽ chuyển giao toàn bộ nội dung hiện có cho anh DevLead.
+T000153 [09:27:18] Doc: Tôi đồng ý. Tôi sẽ gửi bản nháp và các ghi chú cho anh DevLead ngay sau họp.
+T000154 [09:27:28] PM: Ok, vậy task "Tài liệu triển khai hệ thống" chính thức được chuyển owner từ Doc sang DevLead. Còn deadline? Chúng ta có thể thay đổi không?
+T000155 [09:27:40] DevLead: Tôi đề nghị dời deadline sang thứ Hai tuần sau, vì cuối tuần này tôi phải tập trung cho staging.
+T000156 [09:27:50] PM: Mọi người có ý kiến gì không? Việc dời deadline có ảnh hưởng đến kế hoạch tổng thể không?
+T000157 [09:28:00] Arch: Nếu tài liệu chậm, việc triển khai thực tế cũng bị ảnh hưởng. Nhưng tôi nghĩ chất lượng quan trọng hơn. Đồng ý dời.
+T000158 [09:28:10] QA: Em cũng ok, nhưng cần tài liệu trước khi em viết test case. Nếu thứ Hai, em có thể chờ.
+T000159 [09:28:20] PM: Vậy deadline mới cho "Tài liệu triển khai hệ thống" là thứ Hai tuần sau. Ghi nhận.
+T000160 [09:28:30] Doc: Còn "Tài liệu hướng dẫn triển khai" thì sao? Task đó vẫn chưa có deadline.
+T000161 [09:28:38] PM: Đúng, chúng ta đã để task đó không deadline. Nhưng bây giờ tôi thấy cần ấn định để tránh trễ. Anh DevLead nghĩ sao?
+T000162 [09:28:48] DevLead: Tôi nghĩ nên giao cho chị Doc tiếp tục, với deadline sau khi tài liệu triển khai hoàn thành, ví dụ thứ Tư tuần sau.
+T000163 [09:28:58] PM: Nhưng chị Doc vừa handoff, liệu chị có đủ thời gian không? Chị Doc, chị có nhận không?
+T000164 [09:29:06] Doc: Tôi có thể nhận, nhưng cần hỗ trợ từ anh DevLead về nội dung kỹ thuật. Deadline thứ Tư tuần sau tôi làm được.
+T000165 [09:29:16] PM: Vậy task "Tài liệu hướng dẫn triển khai" sẽ có deadline thứ Tư tuần sau, owner là Doc, với sự hỗ trợ từ DevLead. Như vậy chúng ta đã điều chỉnh cả hai task tài liệu.
+T000166 [09:29:32] DevLead: Một điểm cần lưu ý: tôi đã nhận thêm task tài liệu triển khai, nên cần xem lại khối lượng công việc. Task fix lỗi đăng nhập vẫn đang tiến hành.
+T000167 [09:29:45] PM: Tôi hiểu. Chúng ta có thể bàn về ưu tiên sau. Bây giờ, hãy quay lại nội dung tài liệu triển khai. Anh DevLead, anh dự định sẽ bổ sung phần rollback như thế nào?
+T000168 [09:29:58] DevLead: Tôi sẽ dựa trên quy trình đã từng làm ở dự án trước, nhưng cần điều chỉnh cho phù hợp với hệ thống hiện tại. Có thể mất 2 ngày để viết.
+T000169 [09:30:10] Arch: Tôi muốn góp ý: phần rollback cần liệt kê các bước cụ thể, kèm script mẫu. Nếu không, khi xảy ra sự cố sẽ lúng túng.
+T000170 [09:30:22] DevLead: Vâng, tôi sẽ làm chi tiết. Nhưng cần sự phối hợp từ Arch để đảm bảo an toàn dữ liệu.
+T000171 [09:30:32] PM: Tốt. Như vậy task mới cho DevLead là viết phần rollback trong tài liệu triển khai. Không cần tạo task riêng, vì nó nằm trong tài liệu.
+T000172 [09:30:45] QA: Em muốn hỏi: sau khi tài liệu triển khai hoàn thành, em có thể dùng nó để viết test case ngay không? Hay cần chờ tài liệu hướng dẫn?
+T000173 [09:30:55] PM: Em có thể bắt đầu ngay sau khi tài liệu triển khai được review xong. Tài liệu hướng dẫn sẽ bổ sung chi tiết hơn.
+T000174 [09:31:05] Doc: Tôi sẽ cố gắng hoàn thiện phần hướng dẫn nhanh để QA không bị chậm.
+T000175 [09:31:12] DevLead: Tôi thấy có một vấn đề: deadline thứ Hai cho tài liệu triển khai và thứ Tư cho hướng dẫn, nhưng giữa đó có thể có xung đột lịch. Tôi cần biết ai sẽ review chính thức cho tài liệu triển khai?
+T000176 [09:31:28] PM: Trước đây tôi và anh DevLead review. Nhưng bây giờ anh DevLead là owner, vậy ai review? Tôi nghĩ tôi và Arch sẽ review.
+T000177 [09:31:38] Arch: Tôi đồng ý. Tôi có thể review phần kỹ thuật, PM review phần quy trình.
+T000178 [09:31:45] PM: Vậy reviewer cho tài liệu triển khai là PM và Arch. Còn tài liệu hướng dẫn, ai review?
+T000179 [09:31:52] Doc: Tôi đề nghị DevLead review phần kỹ thuật, QA review phần usability.
+T000180 [09:32:00] DevLead: Tôi ok, nhưng cần lưu ý thời gian. Nếu tôi bận, có thể chậm review.
+T000181 [09:32:08] PM: Chúng ta sẽ linh hoạt. Bây giờ, tôi muốn nhắc lại một task cũ từ part 1: task kiểm tra bảo mật của Arch. Tình hình sao rồi?
+T000182 [09:32:22] Arch: Tôi đã bắt đầu rà soát cấu hình mạng, nhưng chưa có dữ liệu thật để test. Dự kiến thứ Năm mới có.
+T000183 [09:32:32] PM: Vậy vẫn đúng tiến độ. Nhưng lưu ý deadline thứ Sáu.
+T000184 [09:32:38] Arch: Vâng.
+T000185 [09:32:42] DevLead: Về task copy dữ liệu, tôi vẫn chờ quyền truy cập từ bên vận hành. PM đã liên hệ chưa?
+T000186 [09:32:52] PM: Tôi đã gửi email, nhưng chưa có phản hồi. Tôi sẽ đôn đốc lại.
+T000187 [09:33:00] DevLead: Nếu không có quyền, task copy sẽ bị trễ. Đây là rủi ro.
+T000188 [09:33:08] PM: Tôi hiểu. Sẽ cố gắng xử lý trong hôm nay.
+T000189 [09:33:15] QA: Em thấy nhiều task phụ thuộc lẫn nhau, nếu một task trễ sẽ ảnh hưởng dây chuyền.
+T000190 [09:33:25] PM: Đúng vậy. Chúng ta cần có kế hoạch dự phòng. Nhưng hôm nay chưa bàn sâu.
+T000191 [09:33:35] Arch: Tôi đề nghị part sau chúng ta nên dành thời gian xây dựng lộ trình tổng thể, gắn các task lại với nhau.
+T000192 [09:33:45] PM: Ghi nhận. Vậy tôi xin tạm kết thúc part 3 tại đây. Chúng ta đã handoff tài liệu triển khai, thay đổi deadline, và thảo luận về nội dung. Cảm ơn mọi người.
+--- END OF PART P03 ---

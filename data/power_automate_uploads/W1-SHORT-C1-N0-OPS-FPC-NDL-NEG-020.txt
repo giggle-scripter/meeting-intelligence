@@ -1,0 +1,32 @@
+=== MEETING METADATA ===
+meeting_id: W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020
+meeting_title: Chuẩn bị bản demo
+meeting_date: 2026-02-04
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[00:00:00] Lan: Chào mọi người, hôm nay chúng ta sẽ trao đổi nhanh về bản demo cho khách hàng vào tuần sau.
+[00:00:05] Minh: Chào chị, em vừa xem lại các tính năng cần demo thì thấy phần báo cáo tự động vẫn còn lỗi dữ liệu mẫu.
+[00:00:12] Lan: Vâng, chị cũng vừa nghe bên QA phản hồi. Có vẻ dữ liệu giả chưa được tạo nhất quán, khó mà trình diễn được.
+[00:00:19] An: Mình có thể dùng dữ liệu thật từ môi trường staging không chị?
+[00:00:23] Lan: Staging cũng chưa có dataset phù hợp, với lại dữ liệu thật lại liên quan đến bảo mật. Mình phải dùng mock data thôi.
+[00:00:30] Minh: Vậy thì em sẽ cần thêm thời gian để chuẩn bị lại mock data, chứ hiện tại nó sai logic nghiệp vụ, khách hàng nhìn vào sẽ thấy ngay.
+[00:00:38] An: Mình có nên thêm một slide giới thiệu tổng quan trước khi vào demo không? Như thế có thể giảm bớt áp lực phần tính năng.
+[00:00:45] Lan: Ý tưởng hay đó, nhưng chưa chốt nhé, vì phía marketing muốn tập trung vào tính năng chính. Mình cân nhắc sau.
+[00:00:52] Minh: Em muốn biết ai sẽ phụ trách phần mock data, vì em thấy nó ảnh hưởng trực tiếp đến phần backend.
+[00:00:59] Lan: Minh sẽ chịu trách nhiệm chính phần đó nhé, em có thể phối hợp với bạn Huy bên data để tạo dataset.
+[00:01:06] Minh: Ok chị, vậy em sẽ làm việc với Huy. Nhưng liệu có cần hoàn thành trước một mốc cụ thể không ạ?
+[00:01:12] Lan: Hiện tại mình chưa đưa ra deadline, chỉ cần đảm bảo xong trước buổi demo thôi. Chị tin em sẽ sắp xếp được.
+[00:01:18] An: Còn phần giao diện thì em sẽ kiểm tra lại responsive trên tablet, vì khách hàng có thể dùng iPad để xem.
+[00:01:25] Lan: Tốt, An cứ rà soát nhé. Nếu có gì bất thường thì báo lại.
+[00:01:30] Minh: Em vẫn lo nhất là hiệu năng lúc demo, nhất là khâu tải báo cáo. Trên môi trường dev nó bị chậm khi dữ liệu lớn.
+[00:01:38] Lan: Mình sẽ kiểm tra lại với team infrastructure, xem có nâng cấp tạm thời tài nguyên không. An thấy thế nào?
+[00:01:44] An: Em cũng đồng ý, nhưng cũng phải tính đến kinh phí, nếu vượt ngân sách thì khó được duyệt.
+[00:01:49] Lan: Chị sẽ trao đổi với sếp về vấn đề này, không hứa trước được.
+[00:01:54] Minh: Vậy ngoài phần mock data, em có cần hỗ trợ gì cho slide không ạ?
+[00:01:59] Lan: Cảm ơn em, nhưng phần slide chị vẫn để marketing lo, mình chỉ tập trung vào demo thôi.
+[00:02:04] An: Em đề xuất mình có một buổi chạy thử nội bộ trước khi gặp khách. Như thế sẽ bắt lỗi tốt hơn.
+[00:02:11] Lan: Đồng ý. Nhưng cũng chưa ấn định ngày giờ. Để xem tiến độ của Minh và An thế nào đã rồi mình lên lịch.
+[00:02:18] Minh: OK, vậy em sẽ ưu tiên làm mock data trước. Có gì khó khăn em sẽ ping chị.
+[00:02:24] Lan: Cảm ơn mọi người. Vậy kết thúc ở đây nhé. Mình sẽ tiếp tục cập nhật qua group chat.
+[00:02:30] An: Dạ, chào chị.
+[00:02:31] Minh: Chào mọi người.

@@ -1,0 +1,187 @@
+MEETING_ID: W4-LONG-C4-N2-IT-STATE-010
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-24
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:00:00] Anh Minh: Chào mọi người, cảm ơn đã đến họp đúng giờ. Hôm nay chúng ta bàn về kế hoạch triển khai hệ thống, tập trung vào môi trường test và tài liệu.
+
+T000002 [09:00:20] Chị Lan: Em có chuẩn bị một số yêu cầu cho môi trường test, nhưng cần xác nhận rõ phạm vi.
+
+T000003 [09:00:38] Anh Tuấn: Bên em đang gấp, mong sớm có tài liệu để chạy thử.
+
+T000004 [09:01:00] Chị Hà: Tài liệu triển khai đã có bản nháp, nhưng cần review từ QA trước.
+
+T000005 [09:01:15] Anh Minh: Được, vậy bắt đầu từ môi trường test. Lan, em nói rõ hơn về các yêu cầu đó?
+
+T000006 [09:01:35] Chị Lan: Dạ, bọn em cần một môi trường riêng, có đầy đủ database và service giả lập. Phiên bản phần mềm phải khớp với production.
+
+T000007 [09:02:00] Anh Tuấn: Môi trường dev hiện tại đang dùng chung, không ổn định. Nếu có môi trường test riêng sẽ tốt hơn.
+
+T000008 [09:02:20] Chị Hà: Em nghĩ chúng ta cần viết tài liệu hướng dẫn thiết lập môi trường test, để ai cũng làm được.
+
+T000009 [09:02:40] Anh Minh: Ý hay. Tôi sẽ giao cho Tuấn việc chuẩn bị môi trường test. Còn Hà, em phụ trách tài liệu hướng dẫn môi trường test.
+
+T000010 [09:03:05] Anh Tuấn: Task chuẩn bị môi trường test có deadline là bao lâu ạ?
+
+T000011 [09:03:20] Anh Minh: Em cố gắng xong trong tuần này, tức là trước thứ Sáu. Còn Hà, tài liệu thì em không cần deadline gấp, cứ làm dần.
+
+T000012 [09:03:45] Chị Hà: Vâng. Nhưng tài liệu cần dựa trên môi trường thực tế, nên em chờ Tuấn setup xong mới viết chính xác được.
+
+T000013 [09:04:10] Anh Tuấn: Ừ, mình sẽ làm song song. Tôi có thể viết sơ bộ các bước, rồi Hà bổ sung.
+
+T000014 [09:04:30] Chị Lan: Em muốn góp ý: tài liệu nên có phần kiểm tra, validation. Vì nếu môi trường sai, tài liệu cũng vô dụng.
+
+T000015 [09:04:55] Anh Minh: Đúng. Vậy mình thống nhất: task “Chuẩn bị môi trường test” do Tuấn, deadline thứ Sáu. Task “Chuẩn bị tài liệu môi trường test” do Hà, không deadline cứng.
+
+T000016 [09:05:20] Chị Hà: Em sẽ bắt đầu ngay sau khi có thông tin từ Tuấn.
+
+T000017 [09:05:40] Anh Tuấn: Tôi sẽ gửi email cập nhật tiến độ hàng ngày.
+
+T000018 [09:06:00] Anh Minh: Tốt. Lan, em có yêu cầu gì thêm về môi trường test không?
+
+T000019 [09:06:20] Chị Lan: Có ạ. Em cần quyền truy cập database, và cũng muốn test thử load nhẹ.
+
+T000020 [09:06:45] Anh Tuấn: Quyền truy cập thì tôi sẽ cấp trong tuần. Load test cần công cụ, tôi chưa rõ ai lo.
+
+T000021 [09:07:10] Anh Minh: Khoản đó để sau, khi môi trường ổn định rồi tính. Bây giờ ưu tiên setup và tài liệu.
+
+T000022 [09:07:35] Chị Hà: Em thấy tên hai task hơi giống nhau, dễ nhầm. Có cần đặt tên khác không?
+
+T000023 [09:07:55] Anh Minh: Cũng được. Nhưng để đơn giản, cứ giữ nguyên. Khi nhắc đến “môi trường test” là biết ngay.
+
+T000024 [09:08:20] Anh Tuấn: Vậy tôi sẽ bắt đầu ngay. Còn tài liệu, Hà có cần mẫu không?
+
+T000025 [09:08:40] Chị Hà: Có, em sẽ dùng mẫu cũ của dự án trước, chỉnh sửa lại.
+
+T000026 [09:09:00] Anh Minh: Mọi người lưu ý: hai task này liên quan, nhưng không làm chậm nhau. Tuấn cứ làm trước.
+
+T000027 [09:09:25] Chị Lan: Em muốn biết thêm về tài liệu triển khai tổng thể. Hà đã có bản nháp chưa?
+
+T000028 [09:09:50] Chị Hà: Có, em gửi hôm qua rồi, nhưng thiếu phần môi trường test. Dự kiến cuối tuần này em update.
+
+T000029 [09:10:15] Anh Tuấn: Tài liệu triển khai tổng thể có cần gấp không? Vì bên em đang chờ để chạy thử.
+
+T000030 [09:10:40] Anh Minh: Tài liệu triển khai tổng thể chưa cần deadline, vì còn phụ thuộc nhiều thứ. Cứ tiến hành bình thường.
+
+T000031 [09:11:05] Chị Hà: Em sẽ hoàn thành trong vòng hai tuần tới.
+
+T000032 [09:11:25] Anh Tuấn: Hai tuần có vẻ lâu, nhưng nếu không gấp thì okay.
+
+T000033 [09:11:50] Anh Minh: Có vẻ mọi người đã rõ. Giờ sang phần khác: ai sẽ review tài liệu?
+
+T000034 [09:12:15] Chị Lan: Em có thể review phần liên quan đến test. Phần kỹ thuật thì Tuấn review.
+
+T000035 [09:12:40] Anh Tuấn: Đồng ý. Sau khi Hà có bản đầu, tôi sẽ review một lần.
+
+T000036 [09:13:00] Chị Hà: Em sẽ gửi bản nháp sớm nhất có thể.
+
+T000037 [09:13:20] Anh Minh: Vậy mình thống nhất: task review được phân bổ tự nhiên, không cần ghi rõ.
+
+T000038 [09:13:45] Anh Tuấn: Em thấy task “Chuẩn bị tài liệu môi trường test” thiếu deadline, nếu không có thì dễ bị trễ.
+
+T000039 [09:14:10] Anh Minh: Tôi đã nói là không deadline cứng, nhưng mong Hà làm nhanh vì liên quan đến môi trường.
+
+T000040 [09:14:30] Chị Hà: Em sẽ cố gắng hoàn thành trong vòng một tuần sau khi Tuấn setup xong.
+
+T000041 [09:14:55] Anh Tuấn: Vậy tôi cũng đẩy nhanh môi trường test, dự kiến xong thứ Năm.
+
+T000042 [09:15:20] Anh Minh: Tốt, vậy deadline cho môi trường test là thứ Năm, rồi Hà follow up.
+
+T000043 [09:15:45] Chị Lan: Em muốn hỏi: tài liệu môi trường test có cần bao gồm hướng dẫn deploy không?
+
+T000044 [09:16:05] Chị Hà: Có, em sẽ viết cả phần hướng dẫn deploy lên môi trường test.
+
+T000045 [09:16:25] Anh Tuấn: Hướng dẫn deploy thì tôi cũng có thể hỗ trợ.
+
+T000046 [09:16:50] Anh Minh: Vậy Hà viết, Tuấn review. Cứ làm bình thường.
+
+T000047 [09:17:10] Chị Hà: Vâng.
+
+T000048 [09:17:30] Anh Tuấn: Tôi có một vấn đề: môi trường test hiện tại chưa có dữ liệu mẫu, có cần chuẩn bị không?
+
+T000049 [09:17:55] Anh Minh: Cần. Lan, em có thể lo dữ liệu mẫu không?
+
+T000050 [09:18:15] Chị Lan: Để em tạo một bộ dữ liệu nhỏ, dùng cho test chức năng.
+
+T000051 [09:18:35] Anh Tuấn: Vậy task dữ liệu mẫu thuộc Lan, deadline cùng với môi trường test?
+
+T000052 [09:18:55] Anh Minh: Ừ, vậy thêm task “Chuẩn bị dữ liệu mẫu test” do Lan, deadline thứ Năm.
+
+T000053 [09:19:20] Chị Lan: Em sẽ cố gắng.
+
+T000054 [09:19:40] Chị Hà: Như vậy tổng cộng ba task liên quan đến môi trường test. Em thấy nếu gộp lại thì tốt hơn.
+
+T000055 [09:20:05] Anh Minh: Không, mỗi task riêng để dễ theo dõi. Nhưng nhớ liên lạc với nhau.
+
+T000056 [09:20:25] Anh Tuấn: Em đồng ý. Mọi người trao đổi qua email là được.
+
+T000057 [09:20:45] Chị Lan: Em sẽ tạo một thread email riêng cho vụ test này.
+
+T000058 [09:21:05] Anh Minh: OK. Có ai thắc mắc gì về môi trường test và tài liệu không?
+
+T000059 [09:21:25] Chị Hà: Em chỉ muốn chắc rằng tài liệu môi trường test và tài liệu triển khai tổng thể là hai việc khác nhau.
+
+T000060 [09:21:50] Anh Minh: Đúng. Tài liệu môi trường test là chi tiết cách setup. Tài liệu triển khai tổng thể là hướng dẫn cho toàn bộ hệ thống.
+
+T000061 [09:22:15] Chị Hà: Vậy em sẽ làm riêng.
+
+T000062 [09:22:35] Anh Tuấn: Tôi có một ý: liệu môi trường test có cần tích hợp CI/CD không?
+
+T000063 [09:23:00] Anh Minh: Có thể, nhưng chưa phải lúc. Cứ setup cơ bản trước.
+
+T000064 [09:23:20] Chị Lan: Em nghĩ nên có CI/CD ngay từ đầu để tránh việc manual.
+
+T000065 [09:23:45] Anh Tuấn: Cũng đúng, nhưng sẽ mất thêm thời gian.
+
+T000066 [09:24:05] Anh Minh: Vậy mình để sau, khi môi trường test chạy ổn rồi tích hợp CI/CD. Đó là task cho giai đoạn sau.
+
+T000067 [09:24:30] Chị Hà: Em ghi nhận.
+
+T000068 [09:24:50] Anh Tuấn: Vậy task của em là setup môi trường test cơ bản, không CI/CD.
+
+T000069 [09:25:10] Anh Minh: Đúng. Bây giờ em muốn kiểm tra lại danh sách task: Task A – Chuẩn bị môi trường test – Tuấn – deadline thứ Năm. Task B – Chuẩn bị tài liệu môi trường test – Hà – không deadline cứng. Task C – Chuẩn bị dữ liệu mẫu test – Lan – deadline thứ Năm.
+
+T000070 [09:25:45] Chị Lan: Em xác nhận.
+
+T000071 [09:26:00] Anh Tuấn: Xác nhận.
+
+T000072 [09:26:15] Chị Hà: Xác nhận.
+
+T000073 [09:26:30] Anh Minh: Vậy chúng ta chuyển sang topic khác? Hay còn vấn đề gì về môi trường test chưa?
+
+T000074 [09:26:55] Anh Tuấn: Em muốn hỏi: server test có được cấp riêng không, hay dùng chung với staging?
+
+T000075 [09:27:20] Chị Lan: Theo em nên dùng riêng, vì staging còn phục vụ demo.
+
+T000076 [09:27:40] Anh Minh: Được. Tuấn, em liên hệ bên infra để xin riêng một server.
+
+T000077 [09:28:00] Anh Tuấn: Vâng. Tôi sẽ mail cho anh Đức.
+
+T000078 [09:28:20] Chị Hà: Vậy tài liệu môi trường test phải cập nhật theo server cụ thể.
+
+T000079 [09:28:40] Anh Minh: Đúng. Vậy là mọi người đã nắm được. Tôi nghĩ đủ cho phần đầu.
+
+T000080 [09:29:00] Chị Lan: Em thấy mọi việc rõ ràng. Có thể chuyển sang bàn về tài liệu triển khai tổng thể?
+
+T000081 [09:29:25] Anh Minh: Ừ, nhưng tôi muốn dành phần đó cho part sau. Hôm nay chỉ tập trung môi trường test và tài liệu liên quan.
+
+T000082 [09:29:50] Anh Tuấn: Vậy tôi sẽ bắt tay vào việc.
+
+T000083 [09:30:10] Chị Hà: Em cũng chuẩn bị draft.
+
+T000084 [09:30:30] Anh Minh: Tốt. Mọi người nhớ cập nhật tiến độ qua email. Có gì khó khăn thì báo sớm.
+
+T000085 [09:30:55] Chị Lan: Em sẽ gửi dữ liệu mẫu trước thứ Năm.
+
+T000086 [09:31:15] Anh Tuấn: Tôi hy vọng không có trục trặc về hạ tầng.
+
+T000087 [09:31:35] Anh Minh: Nếu có, anh Đức sẽ hỗ trợ. Chúng ta kết thúc phần này. Cảm ơn mọi người.
+
+T000088 [09:31:55] Chị Hà: Vâng, em chờ tin.
+
+T000089 [09:32:10] Anh Tuấn: Tôi sẽ gửi mail tổng kết sau.
+
+T000090 [09:32:30] Anh Minh: OK. Part sau chúng ta sẽ bàn về tài liệu triển khai tổng thể và các vấn đề khác.
+
+--- END OF PART P01 ---

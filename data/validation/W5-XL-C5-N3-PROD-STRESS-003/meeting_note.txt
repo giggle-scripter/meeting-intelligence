@@ -1,0 +1,16 @@
+chốt sơ bộ
+chủ đề: Họp tổng hợp phát triển và vận hành sản phẩm
+kw: api / cac / giao / huy / filter / test / mock
+- chốt lại các task đã assign
+* Task đó giao cho anh Huy, nhưng Huy chưa vào
+- Em sẽ update task board
+1) Em sẽ cập nhật task board
+- Vậy task mới: Minh implement filter search, dl 02/03
+* Chúng ta vừa tạo thêm các task: filter search (Minh 02/03), UI prototype (Linh 03/03), review data (Minh 28/02), approval từ business (Thảo hôm nay)
+- Vậy quyết định hủy task "test script API" của Minh
+1) Đã hủy task test script API và chuyển integration test cho Hùng
+- Lúc đó mình giao Minh mock, nhưng không có task monitor riêng
+* Trước hết, về task “endpoint documentation” mà Minh được giao ở part 7
+- Recap lại các state transition: - Mock core: từ 28/02 lên 02/03, nay hoàn thành
+1) Recap cuối: Các task hoàn thành: mock core, filter, firewall, data mẫu, deploy owner
+- Các task đang progress: UI prototype, integration test, container memory

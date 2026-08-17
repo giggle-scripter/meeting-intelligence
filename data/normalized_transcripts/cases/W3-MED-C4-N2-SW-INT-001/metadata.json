@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W3-MED-C4-N2-SW-INT-001",
+  "meeting_id": "W3-MED-C4-N2-SW-INT-001",
+  "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+  "meeting_date": "2026-02-05",
+  "wave": 3,
+  "wave_name": "wave_3_feature_interaction",
+  "labels": [
+    "feature_interaction",
+    "deadline_replacement",
+    "recap_duplicate_risk",
+    "unresolved_item",
+    "negative_context"
+  ],
+  "objective": "Môi trường test, lỗi đăng nhập, tài liệu triển khai và recap. Deadline của một task bị đổi; hai task cùng liên quan tài liệu nhưng khác deliverable.",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_3_feature_interaction/W3-MED-C4-N2-SW-INT-001/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-flash"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 1547,
+    "turn_count": 63
+  },
+  "ground_truth": {
+    "available": false,
+    "expected_output_file": ""
+  }
+}

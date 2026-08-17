@@ -1,0 +1,77 @@
+{
+  "case": {
+    "wave": 4,
+    "case_index": 11,
+    "meeting_id": "W4-LONG-C5-N3-PROD-STATE-011",
+    "meeting_date": "2026-02-25",
+    "title": "Họp điều phối triển khai hệ thống",
+    "labels": "long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk",
+    "objective": "P01: Mở meeting, bàn môi trường test và tài liệu triển khai. Tạo hai task có tên gần giống nhau, đặt một deadline ban đầu và một task không deadline. | P02: Chuyển sang lỗi đăng nhập và dữ liệu test. Tạo thêm task, distractor và unresolved reviewer; chưa sửa task P01. | P03: Quay lại tài liệu P01. Handoff owner của một task và thay deadline của task còn lại; phải tham chiếu tự nhiên qua khoảng cách dài. | P04: Bàn release và monitoring. Hủy một task cũ, đặt một deadline gần lời bàn về task khác nhưng thuộc đúng antecedent cũ. | P05: Xử lý các điểm cuối, recap trạng thái cuối cùng, không tạo duplicate và giữ một unresolved item nếu chưa chốt."
+  },
+  "part_index": 1,
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 2139,
+    "turn_count": 81
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 103.04208679999283
+    },
+    {
+      "attempt": 2,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005238600002485327
+    },
+    {
+      "attempt": 3,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.003089300007559359
+    },
+    {
+      "attempt": 4,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005019599993829615
+    },
+    {
+      "attempt": 5,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005002799996873364
+    },
+    {
+      "attempt": 6,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005155699996976182
+    },
+    {
+      "attempt": 7,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 213.2980813000031
+    }
+  ]
+}

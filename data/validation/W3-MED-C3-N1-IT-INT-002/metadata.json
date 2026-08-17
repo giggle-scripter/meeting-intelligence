@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W3-MED-C3-N1-IT-INT-002",
+  "meeting_id": "W3-MED-C3-N1-IT-INT-002",
+  "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+  "meeting_date": "2026-02-06",
+  "wave": 3,
+  "wave_name": "wave_3_feature_interaction",
+  "labels": [
+    "feature_interaction",
+    "deadline_replacement",
+    "recap_duplicate_risk",
+    "unresolved_item",
+    "negative_context"
+  ],
+  "objective": "API integration, dữ liệu mẫu, quyền truy cập và rollout. Có handoff owner, một task bị hủy và một unresolved reviewer.",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_3_feature_interaction/W3-MED-C3-N1-IT-INT-002/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-flash"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 1600,
+    "turn_count": 62
+  },
+  "ground_truth": {
+    "available": true,
+    "expected_output_file": "expected_output.json",
+    "reviewer": "Codex",
+    "review_method": "full_transcript_and_final_state_audit",
+    "review_policy_version": "1.0",
+    "review_notes": "Reviewed against full transcript, final recap/state transitions, cancellation/handoff semantics, and deterministic date policy."
+  }
+}

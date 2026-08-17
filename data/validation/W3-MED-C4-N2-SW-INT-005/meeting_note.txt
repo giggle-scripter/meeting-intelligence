@@ -1,0 +1,11 @@
+note nhanh
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / trien khai / giao / test / hoan / thanh / khi
+- Tôi sẽ theo dõi ticket
+* Em sẽ giao cho Châu test vào ngày mai, 10/2
+- Vậy giao Bình fix lỗi đăng nhập, hoàn thành push code hôm nay, dl test ngày 10/2
+1) Em sẽ test ngay sau khi có bản mới trên dev
+- Correction này cập nhật thông tin cho task tài liệu, không tạo task mới
+* Tôi sẽ tổng kết lại
+- Em sẽ gửi cho anh Quân bên operation sau khi hoàn thành
+1) Châu, em có báo cáo gì? ? chưa chốt

@@ -1,0 +1,53 @@
+{
+  "meeting_title": "Họp điều phối triển khai hệ thống",
+  "tasks": [
+    {
+      "task_name": "Thiết lập môi trường staging",
+      "assignee": "Bình",
+      "start_date": "2026-02-20",
+      "due_date": "2026-03-05",
+      "due_date_text": "deadline 05/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Soạn tài liệu hướng dẫn triển khai",
+      "assignee": "Cường",
+      "start_date": "2026-02-20",
+      "due_date": "2026-03-10",
+      "due_date_text": "deadline 10/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Xử lý lỗi LDAP",
+      "assignee": "Bình",
+      "start_date": "2026-02-20",
+      "due_date": "2026-02-27",
+      "due_date_text": "deadline 27/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Soạn hướng dẫn cấu hình LDAP",
+      "assignee": "Dung",
+      "start_date": "2026-02-20",
+      "due_date": "2026-02-24",
+      "due_date_text": "deadline 24/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Ẩn danh dữ liệu test",
+      "assignee": "Dung",
+      "start_date": "2026-02-20",
+      "due_date": "2026-02-28",
+      "due_date_text": "deadline 28/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Cấu hình monitoring",
+      "assignee": "Bình",
+      "start_date": "2026-02-20",
+      "due_date": "",
+      "due_date_text": "trước release dự kiến cuối tháng 3",
+      "status": "Proposed"
+    }
+  ]
+}

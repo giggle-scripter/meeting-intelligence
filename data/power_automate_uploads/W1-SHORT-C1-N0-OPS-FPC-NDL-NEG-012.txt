@@ -1,0 +1,28 @@
+=== MEETING METADATA ===
+meeting_id: W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012
+meeting_title: Chuẩn bị bản demo
+meeting_date: 2026-01-27
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:05] Minh: Chào mọi người, hôm nay mình họp nhanh để rà soát tiến độ chuẩn bị bản demo cho khách hàng tuần sau nhé.
+[09:00:12] Lan: Vâng, em đã gần xong phần nội dung chính, nhưng slide thuyết trình vẫn còn dang dở.
+[09:00:18] Minh: Vậy Lan cần thêm thời gian để hoàn thiện slide à? Có khó khăn gì không?
+[09:00:24] Lan: Em cần tích hợp mấy biểu đồ từ dữ liệu mới nhất, nhưng bên kỹ thuật chưa gửi file tổng hợp.
+[09:00:30] Tùng: Mình thấy nếu chạy demo thì nên có thêm animation để bản trình bày mượt hơn, kiểu chuyển động khi kéo thả.
+[09:00:37] Minh: Ý tưởng của Tùng cũng hay, nhưng mình sợ tốn thời gian, với lại chưa rõ khách hàng có thích không.
+[09:00:44] Lan: Em cũng phân vân, vì làm animation thì phải chỉnh lại toàn bộ template, mà deadline của cả demo là tuần sau.
+[09:00:51] Minh: Ừ, thôi mình giữ nội dung hiện tại cho an toàn, phần animation để dành cân nhắc sau.
+[09:00:57] Tùng: Ok, vậy mình sẽ ghi chú lại, nếu sau này có thời gian thì thử.
+[09:01:03] Minh: Quay lại việc chính, Lan cố gắng hoàn thành nốt slide trình bày nhé, vì đó là phần quan trọng nhất để khách hiểu sản phẩm.
+[09:01:10] Lan: Dạ, em sẽ tập trung làm, nhưng không dám hứa chính xác ngày nào xong vì còn chờ dữ liệu.
+[09:01:16] Minh: Không sao, em cứ làm hết sức, khi nào có bản nháp thì gửi mọi người xem trước.
+[09:01:22] Tùng: Thế mình có cần duyệt lại giao diện app demo không? Tôi thấy vài chỗ text bị lệch trên tablet.
+[09:01:29] Lan: Em cũng để ý rồi, nhưng chưa tiện sửa vì đang tập trung slide.
+[09:01:33] Minh: Vậy để ghi nhận, nhưng ưu tiên số một vẫn là slide của Lan. Tùng hỗ trợ Lan nếu cần tài liệu nhé.
+[09:01:40] Tùng: Ok, tôi sẽ gửi mấy mẫu infographic dùng được cho phần biểu đồ.
+[09:01:46] Minh: Còn ai có câu hỏi gì nữa không?
+[09:01:49] Lan: Em không còn gì, chỉ hy vọng bên kỹ thuật sớm gửi dữ liệu.
+[09:01:54] Tùng: Tôi cũng hết ý kiến.
+[09:01:56] Minh: Vậy kết thúc họp ở đây. Lan làm slide nhanh nhanh giúp cả team nhé. Cảm ơn mọi người.
+[09:02:01] Lan: Cảm ơn anh, em sẽ cố gắng.
+[09:02:04] Tùng: Bye mọi người.

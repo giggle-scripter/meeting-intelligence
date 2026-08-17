@@ -1,0 +1,11 @@
+note nhanh
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / trien khai / release / staging / dashboard / huong / dan
+- Tôi thấy task "viết tài liệu hướng dẫn sử dụng" và "viết release notes" na ná nhau, nhưng khác mục đích
+* Đồng ý, topic này không tạo task trong cuộc họp này
+- correction: dashboard dl lên 24/02, tài liệu hướng dẫn sử dụng dl 26/02
+1) dời sang 25/02
+- Recap lần cuối: - Minh: fix bug #234, dl 22/02. - Huy: cập nhật dashboard, dl 24/02 (đã
+* correction), hỗ trợ Anh. - Trang: release notes, k dl. - Anh: hướng dẫn sử dụng, dl 26/02 (đã
+- correction). - Trang: staging, dl 23/02. - Huy: test load, dl 25/02 (đã
+1) Huy, dashboard hiện tại đã cập nhật chưa? ? chưa chốt

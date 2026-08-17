@@ -1,0 +1,9 @@
+note nhanh
+chủ đề: Theo dõi lỗi và tài liệu
+kw: tai lieu / kiem thu / api / dang / nhan / chat / luong
+- Tôi nhận thấy chất lượng bug report đang giảm, ảnh hưởng đến tiến độ fix bug
+* Mai cũng đang owner kiểm thử hiệu năng, e là cũng không rảnh
+- Chuyển sang tài liệu API cho bên thứ ba, gần đây có thay đổi nhưng chưa cập nhật
+1) Cái này cần làm sớm
+- Tôi sẽ đưa vào danh sách việc cần làm + phân bổ khi có người
+* Tài liệu setup môi trường test hiện tại đã lỗi thời, đúng không? ? chưa chốt

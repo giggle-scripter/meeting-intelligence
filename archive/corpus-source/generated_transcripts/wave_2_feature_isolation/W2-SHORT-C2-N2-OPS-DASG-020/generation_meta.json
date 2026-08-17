@@ -1,0 +1,28 @@
+{
+  "case": {
+    "wave": 2,
+    "case_index": 20,
+    "meeting_id": "W2-SHORT-C2-N2-OPS-DASG-020",
+    "meeting_date": "2026-02-14",
+    "title": "Chuẩn bị bản phát hành nội bộ",
+    "labels": "direct_assignment,negative_context",
+    "objective": "{\"name\": \"direct assignment\", \"code\": \"DASG\", \"labels\": \"direct_assignment,negative_context\", \"requirements\": \"Lead giao trực tiếp action cho một người; có một đề xuất khác chưa được chốt.\"}"
+  },
+  "model": "deepseek-v4-pro",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 692,
+    "turn_count": 29
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 538.7899805000052
+    }
+  ]
+}

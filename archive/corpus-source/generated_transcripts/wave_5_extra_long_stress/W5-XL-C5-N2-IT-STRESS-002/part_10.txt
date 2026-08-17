@@ -1,0 +1,122 @@
+MEETING_ID: W5-XL-C5-N2-IT-STRESS-002
+PART: P10/10
+
+T000525 [10:26:00] Minh: Mọi người, đây là part cuối cùng của cuộc họp hôm nay. Tôi muốn tổng kết toàn bộ trạng thái các task, các thay đổi và những item chưa giải quyết. Chúng ta sẽ không tạo thêm task mới.
+
+T000526 [10:26:12] Lan: Vâng, em sẵn sàng.
+
+T000527 [10:26:16] Hùng: Em nghe.
+
+T000528 [10:26:20] Đức: Tôi cũng vậy.
+
+T000529 [10:26:24] Trang: Em đây.
+
+T000530 [10:26:28] Tuấn: OK.
+
+T000531 [10:26:32] Minh: Đầu tiên, task phân tích log thanh toán của Lan. Deadline ban đầu 28/02, sau điều chỉnh thành 29/02. Lan, em có cam kết gửi báo cáo sơ bộ đúng hạn không?
+
+T000532 [10:26:48] Lan: Em cam kết. Nếu log về sớm, em sẽ gửi trước.
+
+T000533 [10:26:54] Minh: Tốt. Sau đó, Đức sẽ review code, deadline đã dời từ 03/03 thành 04/03. Đức, anh có vấn đề gì không?
+
+T000534 [10:27:06] Đức: Không, tôi sẽ review trong ngày 04/03.
+
+T000535 [10:27:12] Minh: Task xuất log và metric của Tuấn: deadline sáng 27/02. Tuấn, em vẫn giữ đúng?
+
+T000536 [10:27:22] Tuấn: Vâng, em gửi trước 10h.
+
+T000537 [10:27:28] Minh: Task deploy hotfix giá và cache hôm nay 15h. Tuấn và Lan phối hợp. Staging ổn, tiến hành.
+
+T000538 [10:27:40] Lan: Em đã sẵn sàng.
+
+T000539 [10:27:44] Tuấn: Em cũng vậy.
+
+T000540 [10:27:48] Minh: Task review design placement: ban đầu deadline 01/03, sau dời thành 03/03, rồi tiếp tục dời thành 04/03 do release sớm. Lan, em là owner chính, Đức hỗ trợ. Đúng không?
+
+T000541 [10:28:06] Lan: Đúng ạ. Em sẽ review và gửi feedback trước 04/03.
+
+T000542 [10:28:14] Đức: Tôi sẽ hỗ trợ nếu có vấn đề kỹ thuật.
+
+T000543 [10:28:20] Minh: Task review API FastShip: Hùng và Đức, deadline 07/03, scope spec mới (không OAuth2 mà dùng API key). Hùng, em đã nhận spec từ Trang chưa?
+
+T000544 [10:28:36] Hùng: Em vừa nhận, sẽ xem ngay.
+
+T000545 [10:28:42] Minh: Task này vẫn giữ deadline, nhưng nếu cần có thể kéo dài 10/03. Tuy nhiên, chưa có quyết định.
+
+T000546 [10:28:54] Đức: Tôi nghĩ giữ 07/03 là ổn.
+
+T000547 [10:28:58] Minh: Task tối ưu image mobile: Hùng, deadline 04/03, phụ thuộc quyền CDN từ Tuấn. Tuấn đã cấp quyền chưa?
+
+T000548 [10:29:12] Tuấn: Đã cấp, Hùng kiểm tra.
+
+T000549 [10:29:16] Hùng: Em check rồi, OK.
+
+T000550 [10:29:20] Minh: Task capacity payment: Đức, deadline 06/03. Có phụ thuộc metric từ Tuấn, nhưng Tuấn sẽ gửi sáng mai. Đức, anh ổn chứ?
+
+T000551 [10:29:32] Đức: Ổn, tôi sẽ hoàn thành.
+
+T000552 [10:29:36] Minh: Task phân loại alert đã bị hủy. Hùng, em không cần làm nữa.
+
+T000553 [10:29:44] Hùng: Em rõ.
+
+T000554 [10:29:48] Minh: Các task tồn tại khác không thay đổi.
+
+T000555 [10:29:52] Trang: Anh Minh, em muốn hỏi về spec product placement. Em đã gửi, Lan sẽ review. Nhưng còn vụ webhook từ FastShip, chúng ta chưa giải quyết.
+
+T000556 [10:30:06] Minh: Đúng, webhook vẫn là unresolved. Không ai assigned. Tôi ghi nhận, sẽ đưa vào sprint 15.
+
+T000557 [10:30:16] Đức: Ngoài ra, owner FastShip vẫn chưa xác định. Lead product chưa trả lời.
+
+T000558 [10:30:26] Minh: Đúng, unresolved item này sẽ được tôi hỏi sau cuộc họp.
+
+T000559 [10:30:34] Lan: Về lỗi mobile loading, chúng ta đã có task image, nhưng còn lỗi JS. Đó cũng là unresolved.
+
+T000560 [10:30:44] Minh: Ghi nhận. Đưa vào backlog.
+
+T000561 [10:30:48] Hùng: Anh Minh, em muốn xác nhận: task tối ưu image của em có cần phải test trên staging trước production không?
+
+T000562 [10:31:00] Minh: Cần, như đã nói. Tuấn sẽ setup staging cho em sau deploy cache.
+
+T000563 [10:31:08] Tuấn: Em sẽ làm.
+
+T000564 [10:31:12] Đức: Tôi muốn nhấn mạnh: task thanh toán có hand-off hai bước. Lan báo cáo, tôi review code. Đây không phải change owner.
+
+T000565 [10:31:24] Minh: Đúng, Lan vẫn là owner chính.
+
+T000566 [10:31:28] Trang: Support vẫn có vài ticket nhỏ, em sẽ handle nhưng không cần meeting.
+
+T000567 [10:31:36] Minh: OK.
+
+T000568 [10:31:40] Tuấn: Em có một clarification: log third-party có thể trễ 1-2 tiếng do bên họ gửi chậm. Nhưng em vẫn gửi trong sáng mai.
+
+T000569 [10:31:52] Lan: Không sao, em vẫn kịp.
+
+T000570 [10:31:56] Minh: Tổng kết lại, các unresolved items cuối meeting:
+- Owner chính thức cho integration FastShip (chưa có).
+- Webhook FastShip (chưa được xử lý).
+- Lỗi JS mobile (backlog).
+- Ngày workshop FastShip chưa chốt.
+
+Còn gì khác không?
+
+T000571 [10:32:14] Đức: Không.
+
+T000572 [10:32:16] Hùng: Em không.
+
+T000573 [10:32:18] Trang: Em nghĩ vậy là đủ.
+
+T000574 [10:32:22] Lan: Em cũng đồng ý.
+
+T000575 [10:32:26] Minh: Vậy tôi xin phép kết thúc cuộc họp. Cảm ơn mọi người đã tham gia. Hãy chuẩn bị cho deploy 15h và tuân thủ các deadline đã thống nhất. Mọi thắc mắc phát sinh, liên hệ tôi hoặc lead.
+
+T000576 [10:32:40] Hùng: Cảm ơn anh.
+
+T000577 [10:32:42] Lan: Em cảm ơn.
+
+T000578 [10:32:44] Đức: Cảm ơn mọi người.
+
+T000579 [10:32:46] Trang: Bye mọi người.
+
+T000580 [10:32:48] Tuấn: Tạm biệt.
+
+--- END OF PART P10 ---

@@ -1,0 +1,36 @@
+=== MEETING METADATA ===
+meeting_id: W2-SHORT-C3-N2-SW-RECF-017
+meeting_title: Rà soát công việc sprint
+meeting_date: 2026-02-11
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:03] Minh: Chào mọi người, hôm nay mình ngồi lại để rà soát công việc sprint này. Trước tiên cho mình hỏi Lan, phần tài liệu API đang đến đâu rồi nhỉ?
+[09:00:15] Lan: Em vừa bắt đầu xem lại cấu trúc hôm qua. Cũng mới chỉ phác thảo phần mô tả endpoint thôi.
+[09:00:22] Hùng: À đúng rồi, cái đó sprint trước đã nói là cần làm gấp mà nhỉ? Mình tưởng đã xong rồi.
+[09:00:28] Minh: Ừ, thực ra sprint trước có đưa vào backlog nhưng chưa đụng tới, nên vẫn còn nguyên.
+[09:00:34] Lan: Vậy thì em sẽ ưu tiên xong phần core trong tuần này. Còn phần example code chắc cần thêm vài ngày làm việc nữa.
+[09:00:40] Minh: OK, vậy mốc chính là hoàn thành core API docs trong tuần này nhé. Cuối tuần mình kiểm tra lại.
+[09:00:47] Lan: Dạ rõ rồi. Em sẽ gửi bản draft sớm.
+[09:00:50] Hùng: Nhưng mà nhỡ test gặp vấn đề thì có cần mình hỗ trợ viết lại mô tả cho đúng không? Hay để Lan tự làm?
+[09:00:57] Lan: Tạm thời em tự làm cũng được, vì mấy cái đó liên quan trực tiếp đến code bên em.
+[09:01:04] Minh: Đồng ý. Quan trọng là phải có đủ mô tả để bên QA hiểu rõ khi test. Mà nhắc lại, cái tài liệu này bên marketing cũng đang chờ đấy.
+[09:01:12] Hùng: Vậy thì chốt lại: Lan làm tài liệu API, ưu tiên core xong trong tuần này, phần example để sang tuần sau. Đúng không?
+[09:01:20] Minh: Đúng. Mình recap lại: Lan sẽ hoàn thành phần core API docs trước thứ Sáu. Example để sau. Mọi người còn hỏi gì không?
+[09:01:28] Lan: Không, em nắm được rồi. Để em note vào task của sprint.
+[09:01:32] Hùng: Mà lỡ có ai cần gấp mấy cái example thì phải làm sao?
+[09:01:36] Minh: Thì sẽ escalate lên mình, nhưng chắc không đâu. Khi nào core xong, mình sẽ thông báo cho các bên.
+[09:01:43] Lan: À, mà phần core này có bao gồm authentication endpoints không anh?
+[09:01:48] Minh: Có chứ, đó là phần quan trọng nhất. Em làm kỹ nhé.
+[09:01:53] Lan: OK, vậy em sẽ bắt đầu với auth endpoints, sau đó đến CRUD user, product.
+[09:01:59] Hùng: Nghe hợp lý. Mình đứng từ góc nhìn QA thì nên có ví dụ curl cho mỗi endpoint để test cho nhanh.
+[09:02:07] Minh: Cái đó có thể nằm trong phần example code. Nhưng trước mắt cứ tập trung core đã.
+[09:02:13] Lan: Dạ. Em sẽ cố gắng hoàn thành bản nháp core vào thứ Năm để thứ Sáu mọi người review.
+[09:02:20] Minh: Tốt. Vậy nhớ nhé, task này quan trọng, đừng để trôi nữa.
+[09:02:25] Hùng: À mà để mình recap lại lần nữa cho chắc: Lan làm tài liệu API, core hoàn thành trước thứ Sáu, example sang tuần sau. Ai cần gấp thì báo Minh.
+[09:02:35] Lan: Đúng rồi, không cần recap lại nữa đâu, em nhớ mà. Mọi người nói nhiều quá.
+[09:02:41] Minh: Ha ha, tại vì quan trọng nên mới nhắc lại thôi. Nhưng thôi được rồi, chuyển qua phần nào tiếp theo nào.
+[09:02:48] Hùng: À, có cần mình hỗ trợ viết mô tả lỗi nếu phát hiện thiếu sót trong lúc test không? Hay để Lan tự sửa?
+[09:02:55] Minh: Cứ tạo ticket rồi assign cho Lan nhé. Nhưng cái này nằm ngoài task tài liệu API, là phần bug tracking thôi.
+[09:03:04] Hùng: Rõ ràng. Vậy thôi mình kết thúc ở đây nhé.
+[09:03:08] Minh: OK. Nhớ nhé Lan, thứ Sáu anh check. Cảm ơn mọi người.
+[09:03:12] Lan: Em biết rồi, anh không cần nhắc thêm nữa đâu.

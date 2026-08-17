@@ -1,0 +1,16 @@
+chốt sơ bộ
+chủ đề: Họp tổng hợp phát triển và vận hành sản phẩm
+kw: bao cao / release / payment / api / oauth / spec / review
+- Giao task review design cho Đức và Lan, dl cuối tuần 01/03
+* Tôi tổng kết các task chính: - Task 1: Lan – phân tích log thanh toán, báo cáo sơ bộ hạn 28/02 (sau đó gia hạn khả năng 01/03)
+- correction: - Task payment analysis: Lan, dl 29/02 (sau
+1) Tổng kết scope update trong part này: task thanh toán mở rộng thêm code review, dl review của Đức 03/03
+- Vậy tôi quyết định hủy task banner động khỏi sprint 14
+* correction dl thứ hai cho task capacity payment: từ 05/03 thành 06/03
+- Tôi muốn recap các thay đổi trong part này: - Hủy task banner động. - Tạo task tối ưu image (Hùng, dl 04/03). -
+1) Recap local: integration FastShip spec thay đổi, task review vẫn dl 07/03, scope cập nhật
+- Tổng kết: task review API vẫn tiến hành, dl 07/03, spec mới
+* Task review design placement: ban đầu dl 01/03, sau dời thành 03/03, rồi tiếp tục dời thành 04/03 do release sớm
+- Task review API FastShip: Hùng và Đức, dl 07/03, scope spec mới (không OAuth2 mà dùng API key)
+1) Task tối ưu image mobile: Hùng, dl 04/03, phụ thuộc quyền CDN từ Tuấn
+- Hùng, em không cần làm nữa

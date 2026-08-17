@@ -1,0 +1,7 @@
+chốt sơ bộ
+chủ đề: Chuẩn bị môi trường kiểm thử
+kw: du lieu / moi truong / kiem thu / cai / dat / chiu / trach
+- Minh, em sẽ chịu trách nhiệm chính việc cài đặt môi trường test trên server 192.168.1.50
+* Em cần cài đặt hệ điều hành, cơ sở dữ liệu và application server
+- Ừ, anh sẽ kiểm tra sau
+1) Em sẽ bắt tay vào làm ngay sau meeting

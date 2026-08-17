@@ -1,0 +1,299 @@
+{
+  "pipeline_version": "v1",
+  "meeting_context_mode": "assist",
+  "meeting_notes": "sidecar_if_present",
+  "prompt_version": "v1-selective-fallback",
+  "model": "deterministic",
+  "mode": "local",
+  "endpoint": "",
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 3,
+    "unreviewed_ground_truth_count": 0,
+    "unreviewed_case_ids": [],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.0,
+    "task_identity_recall": 0.0,
+    "task_precision": 0.0,
+    "task_recall": 0.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "reviewed_metrics": {
+    "case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.0,
+    "task_identity_recall": 0.0,
+    "task_precision": 0.0,
+    "task_recall": 0.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "exploratory_metrics": {
+    "case_count": 0,
+    "passed_case_count": 0,
+    "failed_case_count": 0,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 1.0,
+    "task_identity_recall": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 9,
+    "rule_event_count": 6,
+    "ai_event_count": 0,
+    "ai_window_count": 6,
+    "ai_context_clause_count": 118,
+    "unresolved_window_count": 6,
+    "weighted_ai_call_rate": 0.6666666666666666,
+    "ai_clause_coverage": 0.6519337016574586
+  },
+  "fallback_metrics": {
+    "rule_only": 0,
+    "ai_fallback_not_configured": 3,
+    "ai_fallback_resolved": 0,
+    "ai_fallback_unresolved": 0,
+    "ai_fallback_failed": 0
+  },
+  "job_execution": [],
+  "execution_errors": [],
+  "case_execution": [
+    {
+      "case_id": "W2-SHORT-C3-N1-SW-FPC-001",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 3,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 3
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-PROD-NDL-023",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 1,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 1
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-SW-NDL-005",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 2,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 2
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "W2-SHORT-C3-N1-SW-FPC-001",
+      "passed": false,
+      "expected_task_count": 1,
+      "actual_task_count": 0,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Làm API thanh toán",
+          "assignee": "Minh",
+          "start_date": "2026-01-26",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0,
+      "field_counts": {}
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-PROD-NDL-023",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 4,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Duy trì tài liệu theo dõi lỗi",
+          "assignee": "Linh",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Fix lỗi mới",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-17",
+          "due_date": "2026-02-19",
+          "due_date_text": "trước thứ Sáu",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Tổng hợp lại toàn bộ danh sách lỗi đang mở, phân loại và ghi rõ trạng thái",
+          "assignee": "Linh",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Linh: Em sẽ tổng hợp lại toàn bộ danh sách lỗi đang mở, phân loại và ghi rõ trạng thái.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm đầu mối",
+          "assignee": "Linh",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Nam: Linh, em làm đầu mối nhé.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo file tracking và chia sẻ link nội bộ",
+          "assignee": "Linh",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Linh: Em sẽ tạo file tracking và chia sẻ link nội bộ.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Mở meeting note",
+          "assignee": "Linh",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Linh: Em sẽ mở meeting note",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0,
+      "field_counts": {}
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-SW-NDL-005",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 1,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Tối ưu hiệu năng module báo cáo tổng hợp",
+          "assignee": "Bình",
+          "start_date": "2026-01-30",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chuẩn bị dữ liệu mẫu lớn để load test",
+          "assignee": "Dung",
+          "start_date": "2026-01-30",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Cập nhật kết quả profiling",
+          "assignee": "Trần Thị Bình",
+          "start_date": "2026-01-30",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Trần Thị Bình: Em sẽ cập nhật kết quả profiling vào giữa tuần sau.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0,
+      "field_counts": {}
+    }
+  ],
+  "case_diagnostics": {
+    "W2-SHORT-C3-N1-SW-FPC-001": {
+      "caption_count": 29,
+      "deduplicated_caption_count": 29,
+      "turn_count": 29,
+      "sentence_count": 59,
+      "clause_count": 66,
+      "candidate_window_count": 4,
+      "rule_event_count": 1,
+      "ai_event_count": 0,
+      "ai_window_count": 3,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 52,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 3,
+      "ai_call_rate": 0.75,
+      "ai_clause_coverage": 0.7878787878787878
+    },
+    "W2-SHORT-C3-N2-PROD-NDL-023": {
+      "caption_count": 25,
+      "deduplicated_caption_count": 25,
+      "turn_count": 25,
+      "sentence_count": 52,
+      "clause_count": 55,
+      "candidate_window_count": 1,
+      "rule_event_count": 4,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 41,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.7454545454545455
+    },
+    "W2-SHORT-C3-N2-SW-NDL-005": {
+      "caption_count": 32,
+      "deduplicated_caption_count": 32,
+      "turn_count": 32,
+      "sentence_count": 55,
+      "clause_count": 60,
+      "candidate_window_count": 4,
+      "rule_event_count": 1,
+      "ai_event_count": 0,
+      "ai_window_count": 2,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 25,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 2,
+      "ai_call_rate": 0.5,
+      "ai_clause_coverage": 0.4166666666666667
+    }
+  }
+}

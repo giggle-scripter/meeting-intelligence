@@ -1,0 +1,29 @@
+[00:00:00] Linh: Chào mọi người, hôm nay mình họp về việc chuẩn bị bản phát hành nội bộ. Chúng ta cần phân công rõ ràng các đầu việc.
+[00:00:10] Linh: Đầu tiên, việc merge code từ develop sang release. Minh, anh nhận nhé.
+[00:00:20] Minh: Được, tôi sẽ làm, dự kiến xong trước thứ Sáu.
+[00:00:30] Linh: Tiếp theo, Hương lo regression test.
+[00:00:35] Hương: Ok, tôi sẽ bắt đầu từ thứ Hai tuần sau, mất khoảng hai ba ngày làm việc.
+[00:00:45] Linh: Còn Tuấn viết release note.
+[00:00:50] Tuấn: Vâng, em sẽ soạn bản tóm tắt các thay đổi.
+[00:01:00] Linh: Còn một việc quan trọng: tính năng thanh toán mới đã refactor, cần kiểm tra kỹ trên môi trường staging trước khi release nội bộ. Ai có thể đảm nhận?
+[00:01:15] Minh: Tôi đang bận merge và fix bug, không chạy thêm được việc này.
+[00:01:25] Hương: Bên QA cũng kẹt, với lại thanh toán cần nghiệp vụ, không đơn thuần test.
+[00:01:35] Tuấn: Em còn yếu phần đó, chắc các anh chị khác rành hơn.
+[00:01:45] Linh: Hay mình nhờ team back-end? Họ hiểu code.
+[00:01:55] Minh: Anh Hùng bên back-end hợp nhất, nhưng anh ấy nghỉ phép đến giữa tuần sau. Còn anh Khoa thì đang bận dự án khác.
+[00:02:10] Linh: Vậy không ổn, cần người sớm hơn.
+[00:02:15] Hương: Hay tạm ghi nhận việc cần làm, rồi sau cuộc họp tìm người?
+[00:02:25] Linh: Ừ, nhưng đây là việc bắt buộc, không kiểm tra mà có lỗi thì nguy.
+[00:02:35] Minh: Tôi đồng ý là cần, nhưng ở đây không ai nhận được vào lúc này.
+[00:02:45] System: (Im lặng)
+[00:02:55] Linh: Thôi, chúng ta chốt đầu việc “Kiểm tra tính năng thanh toán trên staging” là phải làm trước release. Tôi sẽ tìm người sau, có thể là nhờ quản lý team khác.
+[00:03:15] Minh: Vậy giờ mình chốt các việc đã có người phụ trách.
+[00:03:25] Minh: Tôi merge code xong trước thứ Sáu 5 giờ.
+[00:03:35] Hương: Tôi cần bản build từ anh Minh để test từ thứ Hai.
+[00:03:45] Minh: Ok, tôi sẽ gửi build khi xong.
+[00:03:55] Tuấn: Em sẽ gửi bản nháp release note vào thứ Tư cho mọi người xem.
+[00:04:05] Linh: Tốt. Còn việc kiểm tra thanh toán, tạm thời chưa có người, nhưng tôi sẽ cố gắng tìm và thông báo ngay khi có. Nếu đến thứ Ba tuần sau chưa có, mình họp gấp.
+[00:04:25] Hương: Hi vọng sẽ tìm được người sớm.
+[00:04:35] Minh: Tôi cũng sẽ hỏi thêm bên team back-end xem có ai hỗ trợ được không.
+[00:04:45] Linh: Ừ, anh hỏi giúp cũng tốt. Cảm ơn anh.
+[00:04:55] Linh: Vậy kết thúc cuộc họp nhé. Cảm ơn mọi người.

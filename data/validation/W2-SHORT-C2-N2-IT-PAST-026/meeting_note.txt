@@ -1,0 +1,6 @@
+note nhanh
+chủ đề: Trao đổi kế hoạch tích hợp
+kw: du lieu / migration / giao / dich / ticket / lieu / lich
+- còn có ticket về migration dữ liệu lịch sử giao dịch
+* Tuy nhiên, em thấy có một số bản ghi giao dịch từ năm ngoái bị thiếu trường mã giao dịch
+- Nhân tiện, em muốn hỏi về document API phiên bản mới ? chưa chốt

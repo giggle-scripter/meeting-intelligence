@@ -1,0 +1,116 @@
+MEETING_ID: W5-XL-C5-N3-SW-STRESS-001
+PART: P07/10
+
+T000342 [13:11:00] Hoàng: Bây giờ chúng ta chuyển sang chủ đề monitoring và support. Hòa, em có cập nhật về monitoring integration cho module thanh toán không?
+
+T000343 [13:11:45] Hòa: Vâng. Em đã thiết lập một số alert cơ bản cho API thanh toán dựa trên log từ staging. Tuy nhiên, để monitoring real-time production, cần tích hợp với hệ thống central logging.
+
+T000344 [13:12:35] Linh: Đây là yêu cầu từ part 2, chúng ta cần thảo luận kỹ hơn. Ai sẽ là owner? Có thể giao cho Hòa, nhưng cần support từ Minh về format log.
+
+T000345 [13:13:25] Minh: Bên Dev có thể define log format chuẩn. Nhưng task này phụ thuộc vào spec integration, vì log cần ghi đúng trường của CRM.
+
+T000346 [13:14:15] Hoàng: Đúng là long-distance dependency: từ spec integration (Thắng, deadline thứ Năm) đến log format. Vậy task monitoring integration chưa thể giao ngay.
+
+T000347 [13:15:05] Hòa: Em có thể bắt đầu thiết lập dashboard sơ bộ dựa trên log hiện tại, sau đó tinh chỉnh khi có format. Điều này không cần chờ spec hoàn toàn.
+
+T000348 [13:15:55] Linh: Em đồng ý. Vậy task monitoring integration assign Hòa, nhưng deadline mềm: trước khi release production (ngày 20/3). Có thể làm song song.
+
+T000349 [13:16:45] Trang: Liên quan đến monitoring, QA cũng cần access vào dashboard để theo dõi test. Hòa có thể share quyền không?
+
+T000350 [13:17:35] Hòa: Được, em sẽ tạo một view riêng cho QA. Làm trong chiều nay.
+
+T000351 [13:18:25] An: Tôi có một thắc mắc: monitoring có bao gồm cả multi-currency không? Nếu có, cần thêm metric.
+
+T000352 [13:19:15] Hòa: Chưa rõ. Em sẽ đợi spec multi-currency từ Dũng để biết thêm endpoint.
+
+T000353 [13:20:05] Dũng: Spec multi-currency em đang viết, dự kiến có thứ Năm. Trong đó có liệt kê các API cần monitor.
+
+T000354 [13:20:55] Hoàng: Vậy chúng ta có một long-distance reference: từ task multi-currency spec (Dũng) đến monitoring integration (Hòa). Nhưng không phải task mới.
+
+T000355 [13:21:45] Minh: Em nhắc lại một antecedent: task performance analysis của Dũng (deadline thứ Hai tuần sau) cần data từ monitoring. Hòa có thể cung cấp log server từ tuần trước?
+
+T000356 [13:22:35] Hòa: Em đã gửi log cho Minh từ hôm kia. Nhưng nếu Dũng cần, em có thể export lại.
+
+T000357 [13:23:25] Dũng: Em cần log về query performance. Hòa gửi em file CSV được không?
+
+T000358 [13:24:15] Hòa: OK, em gửi vào cuối ngày.
+
+T000359 [13:25:05] Trang: Em có một clarification: test phase 1 đã pass, nhưng bug UI vẫn chưa fix. Bug đó có liên quan đến monitoring không? Vì UI lỗi có thể ảnh hưởng đến view log.
+
+T000360 [13:25:55] Minh: Bug UI nhỏ, không ảnh hưởng monitoring. Thắng sẽ fix sau.
+
+T000361 [13:26:45] Linh: Em thấy chúng ta đang phân tán. Tôi muốn focus vào support cho Dũng. Ai có thể hỗ trợ Dũng analyze log? Trang? Hòa? Hay An?
+
+T000362 [13:27:35] An: Bên em có thể phân tích business impact dựa trên log, nhưng technical em không rành.
+
+T000363 [13:28:25] Hòa: Em có thể support kỹ thuật, nhưng em đang có task monitoring và SSL. Có thể dành 2 tiếng vào thứ Sáu.
+
+T000364 [13:29:15] Minh: Em có thể hướng dẫn Dũng cách đọc log, nhưng không có thời gian chạy script. Thắng đang bận spec integration.
+
+T000365 [13:30:05] Hoàng: Vậy có một negative block: thiếu resource support. Tôi propose Dũng tự phân tích, nếu khó thì nhờ Hòa hướng dẫn từ xa.
+
+T000366 [13:30:55] Dũng: Em có thể tự làm, nhưng cần mẫu query. Hòa gửi em sample được không?
+
+T000367 [13:31:45] Hòa: Được, em gửi kèm file log.
+
+T000368 [13:32:35] Trang: Em có một đề xuất: deadline performance analysis thứ Hai tuần sau, nhưng Dũng cũng có test case multi-currency deadline cùng ngày. Đây là deadline gần nhau, có thể gây conflict. Cần correction không?
+
+T000369 [13:33:25] Hoàng: Đó là deadline gần task khác, nhưng không trùng. Dũng có thể ưu tiên test case trước. Nếu không kịp, có thể correction performance analysis thêm một ngày.
+
+T000370 [13:34:15] Linh: Em không muốn correction thêm, vì đã nhiều lần. Hãy giữ nguyên deadline.
+
+T000371 [13:35:05] Minh: Vậy Dũng cần quản lý thời gian tốt. Nếu cần, em có thể giúp review test case.
+
+T000372 [13:35:55] Dũng: Cảm ơn, em sẽ cố gắng.
+
+T000373 [13:36:45] Hòa: Em có một vấn đề về support: team Ops cần một dev để config alert cho CI/CD pipeline mới. Minh, ai có thể?
+
+T000374 [13:37:35] Minh: Thắng đã xong verification CI/CD, có thể assign Thắng. Nhưng Thắng có spec integration deadline thứ Năm. Có thể làm thêm?
+
+T000375 [13:38:25] Hoàng: Task support CI/CD assign Thắng, deadline? Cần trước release production.
+
+T000376 [13:39:15] Hòa: Không gấp, có thể làm sau spec integration. Deadline mềm: cuối tuần sau.
+
+T000377 [13:40:05] Linh: Vậy task đó không tạo thêm áp lực.
+
+T000378 [13:40:55] Trang: Em muốn hỏi về môi trường test cho multi-currency. Hòa, staging có đủ resource không?
+
+T000379 [13:41:45] Hòa: Hiện tại staging còn ổn, nhưng nếu chạy benchmark performance, có thể cần thêm node. Em sẽ kiểm tra.
+
+T000380 [13:42:35] An: Business có thể cung cấp data test mẫu cho multi-currency. Em sẽ gửi Dũng tham khảo.
+
+T000381 [13:43:25] Dũng: Tốt, em cần mẫu giao dịch.
+
+T000382 [13:44:15] Hoàng: Chúng ta có một repeated mention về canary deployment. Vẫn chưa quyết định. Có nên thảo luận lại không?
+
+T000383 [13:45:05] Linh: Chưa cần, vì canary phụ thuộc vào multi-currency spec. Để sau part này.
+
+T000384 [13:45:55] Minh: Vậy unresolved vẫn giữ.
+
+T000385 [13:46:45] Hòa: Em thấy có một số task deadline gần nhau: Dũng hai task cùng thứ Hai, Trang test case thứ Hai, An test data thứ Hai. Có thể sắp xếp lệch?
+
+T000386 [13:47:35] Hoàng: Lịch là do các bên tự điều chỉnh. Không cần correction.
+
+T000387 [13:48:25] Trang: Em confirm test case multi-currency có thể viết xong thứ Hai, nhưng nếu spec trễ, em báo.
+
+T000388 [13:49:15] An: Em cũng vậy, test data phụ thuộc spec.
+
+T000389 [13:50:05] Linh: Vậy chúng ta có một chuỗi phụ thuộc dài.
+
+T000390 [13:50:55] Hoàng: Part 7 sắp kết thúc. Tổng kết:
+
+- Task monitoring integration assign Hòa, deadline mềm trước release.
+- Support CI/CD assign Thắng, deadline cuối tuần sau.
+- Long-distance reference: multi-currency spec ảnh hưởng monitoring.
+- Deadline gần: Dũng, Trang, An cùng thứ Hai, không correction.
+- Unresolved: canary deployment, support resource cho Dũng.
+
+T000391 [13:51:45] Minh: Còn task wireframe admin UI vẫn tiến triển.
+
+T000392 [13:52:35] Trang: Em có một comment: monitoring integration nên bắt đầu sớm để kịp production.
+
+T000393 [13:53:25] Hòa: Em sẽ làm trong tuần này.
+
+T000394 [13:54:15] Hoàng: Cảm ơn. Part 7 kết thúc.
+
+--- END OF PART P07 ---

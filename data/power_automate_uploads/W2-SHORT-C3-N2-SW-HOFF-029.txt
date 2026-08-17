@@ -1,0 +1,32 @@
+=== MEETING METADATA ===
+meeting_id: W2-SHORT-C3-N2-SW-HOFF-029
+meeting_title: Rà soát công việc sprint
+meeting_date: 2026-02-23
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:05] Minh: Chào mọi người, hôm qua mình có sync nhanh với bên product. Hôm nay mình rà soát các task trong sprint nhé. Linh, bắt đầu với PROJ-101 đi, task Xây dựng API thanh toán định kỳ. Cậu có update gì không?
+[09:00:18] Linh: Về task này, mình đang bị kẹt bởi hai bug production khẩn. Chắc mình không thể hoàn thành đúng tiến độ được.
+[09:00:28] Minh: Có chuyển giao cho ai khác được không? Task này vẫn cần hoàn thành trước 16/03, quan trọng đó.
+[09:00:36] Linh: Mình nghĩ Tùng là ứng viên tốt nhất vì Tùng đã code phần core thanh toán. Tùng, cậu có bandwidth không?
+[09:00:46] Tùng: Mình cũng đang có task PROJ-105 dở dang. Nhưng nếu gấp thì mình có thể cân nhắc. Cho mình xem tài liệu đặc tả đã, rồi mới biết khối lượng công việc thế nào.
+[09:00:58] Minh: Hương, em gửi lại tài liệu đặc tả cho Tùng nhé. Và cả use case cập nhật mới nữa.
+[09:01:06] Hương: Dạ vâng, em sẽ gửi ngay. Tùng lưu ý phần xử lý khi thẻ hết hạn nhé, vì bên FinTech yêu cầu flow mới.
+[09:01:15] Tùng: Cảm ơn Hương. Vậy cho mình thời gian xem tài liệu. Mình sẽ confirm khả năng nhận task vào cuối buổi họp này.
+[09:01:24] Minh: Ok, vậy tạm thời PROJ-101 vẫn treo, mình để Unassigned. Linh, cậu brief nhanh cho Tùng kiến trúc phần API nhé.
+[09:01:34] Linh: Ừ, chiều nay mình sẽ ngồi với Tùng giải thích các endpoint và logic hiện tại. Chủ yếu là REST với xác thực OAuth2.
+[09:01:44] Tùng: Ok, mình sẽ note lại.
+[09:01:48] Minh: Tốt. Tiếp theo, task PROJ-102 "Tối ưu tốc độ load trang dashboard" ban đầu assign cho Linh. Nhưng mình thấy chưa có estimation, và Hương có ý kiến gì không?
+[09:02:03] Hương: Dạ, em vừa họp với user sáng nay, họ nói hiện tại tốc độ load 2 giây là chấp nhận được. Với lại họ sắp thay đổi giao diện dashboard, nên tối ưu lúc này có thể xung đột với thiết kế mới.
+[09:02:18] Linh: Đúng đó, mình cũng nghĩ tối ưu bây giờ dễ gây lỗi khi họ deploy giao diện mới. Nếu không có yêu cầu cấp bách thì nên bỏ.
+[09:02:28] Minh: Vậy mình reject PROJ-102 nhé, đánh dấu là Won't Do trong sprint này. Ai có ý kiến gì không?
+[09:02:36] Tùng: Mình đồng ý. Làm sau khi có giao diện mới sẽ tốt hơn.
+[09:02:43] Hương: Em cũng đồng ý ạ.
+[09:02:45] Minh: Ok, reject. Cảm ơn cả nhà.
+[09:02:49] Minh: Quay lại PROJ-101. Tùng, cậu đã xem qua tài liệu Hương gửi chưa? Thấy sao?
+[09:02:58] Tùng: Mình vừa lướt qua, khối lượng cũng không quá lớn. Mình có thể nhận task này nếu Linh hỗ trợ giải đáp lúc cần.
+[09:03:08] Linh: Chắc chắn rồi, mình sẽ support cậu. Có gì cứ ping mình.
+[09:03:14] Minh: Vậy Tùng confirm nhận PROJ-101 nhé? Deadline 16/03 giữ nguyên được không?
+[09:03:22] Tùng: Mình confirm nhận. Deadline 16/03 vẫn khả thi. Mình sẽ lên kế hoạch ngay.
+[09:03:30] Minh: Tuyệt, vậy mình chính thức gán Tùng là assignee. Cảm ơn Linh đã handoff và Tùng nhận nhé. Cả nhà còn vấn đề gì không?
+[09:03:41] Hương: Em có một ý tưởng nhỏ về cải thiện trải nghiệm tìm kiếm, nhưng để sprint sau bàn vậy, chưa cần gấp.
+[09:03:50] Minh: Ok, note lại để discuss sau. Cảm ơn em. Vậy hôm nay kết thúc ở đây. Cảm ơn mọi người.

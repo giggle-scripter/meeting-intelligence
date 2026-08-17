@@ -1,0 +1,37 @@
+{
+  "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+  "tasks": [
+    {
+      "task_name": "Hoàn thiện meeting summary flow",
+      "assignee": "An",
+      "start_date": "2026-02-15",
+      "due_date": "2026-02-19",
+      "due_date_text": "trước 20/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Làm báo cáo chi phí",
+      "assignee": "Dũng",
+      "start_date": "2026-02-15",
+      "due_date": "2026-02-25",
+      "due_date_text": "25/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Hiển thị SP365",
+      "assignee": "An",
+      "start_date": "2026-02-15",
+      "due_date": "2026-03-01",
+      "due_date_text": "01/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Sửa parser transcript",
+      "assignee": "Bình",
+      "start_date": "2026-02-15",
+      "due_date": "",
+      "due_date_text": "",
+      "status": "Proposed"
+    }
+  ]
+}

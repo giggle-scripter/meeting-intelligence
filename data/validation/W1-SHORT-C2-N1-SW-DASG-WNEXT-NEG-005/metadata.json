@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005",
+  "meeting_id": "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005",
+  "meeting_title": "Chuẩn bị môi trường kiểm thử",
+  "meeting_date": "2026-01-20",
+  "wave": 1,
+  "wave_name": "wave_1_baseline",
+  "labels": [
+    "direct_assignment",
+    "weekday_next",
+    "negative_context"
+  ],
+  "objective": "Giao việc trực tiếp với mốc một thứ trong tuần sau; có thông tin tham khảo không tạo task.",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_1_baseline/W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-flash"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 556,
+    "turn_count": 32
+  },
+  "ground_truth": {
+    "available": true,
+    "expected_output_file": "expected_output.json",
+    "reviewer": "Codex",
+    "review_method": "full_transcript_and_final_state_audit",
+    "review_policy_version": "1.0",
+    "review_notes": "Reviewed against full transcript, final recap/state transitions, cancellation/handoff semantics, and deterministic date policy."
+  }
+}

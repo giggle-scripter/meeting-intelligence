@@ -1,0 +1,132 @@
+MEETING_ID: W4-LONG-C4-N2-OPS-STATE-004
+PART: P03/5
+
+T000169 [09:52:00] Ms. Lan: Chúng ta quay lại vấn đề tài liệu triển khai từ đầu buổi. Minh, em đã bắt đầu viết chưa?
+
+T000170 [09:52:18] Minh: Dạ, em mới phác thảo vài phần, nhưng chưa có bản hoàn chỉnh. Hiện em đang tập trung fix lỗi đăng nhập.
+
+T000171 [09:52:36] Hoa: Tài liệu đó có vẻ bị chậm so với kế hoạch. Em thấy cần ưu tiên hơn.
+
+T000172 [09:52:54] Anh Tuấn: Tôi đồng ý. Nhưng Minh đang gánh nhiều task: staging, login, và cả tài liệu. Em ấy quá tải.
+
+T000173 [09:53:12] Ms. Lan: Đúng vậy. Tôi nghĩ nên chuyển giao chủ sở hữu của task tài liệu cho người khác. Anh Tuấn, anh có thể đảm nhận việc viết tài liệu được không?
+
+T000174 [09:53:30] Anh Tuấn: Tôi có thể viết, nhưng tôi cũng phải review dữ liệu test và fix conflict port. Có lẽ Hoa làm thì hợp lý hơn.
+
+T000175 [09:53:48] Hoa: Em cũng đang lo dữ liệu test deadline 20/2. Nếu nhận thêm tài liệu, em cần thêm thời gian.
+
+T000176 [09:54:06] Minh: Em nghĩ nếu Anh Tuấn viết tài liệu, em sẽ hỗ trợ review phần kỹ thuật. Như vậy phân công hợp lý.
+
+T000177 [09:54:24] Anh Tuấn: Được, tôi sẽ nhận viết tài liệu. Nhưng cần Minh cung cấp các thông tin về cấu hình token và secret key.
+
+T000178 [09:54:42] Minh: Vâng, em sẽ gửi mail chi tiết vào cuối ngày.
+
+T000179 [09:55:00] Hoa: Vậy bây giờ ai là owner của task tài liệu? Lúc đầu là Minh, giờ chuyển sang Anh Tuấn?
+
+T000180 [09:55:18] Ms. Lan: Đúng vậy. Từ giờ, Anh Tuấn là owner. Minh hỗ trợ review. Deadline giữ nguyên 05/03?
+
+T000181 [09:55:36] Anh Tuấn: 05/03 có thể được, nhưng tôi cần Minh gửi thông tin sớm để kịp.
+
+T000182 [09:55:54] Minh: Em sẽ gửi trong hôm nay.
+
+T000183 [09:56:12] Hoa: Còn task staging thì sao? Em thấy nó đang bị chậm do conflict port.
+
+T000184 [09:56:30] Anh Tuấn: Tôi đã fix xong conflict port sáng nay. Staging đã hoạt động trở lại.
+
+T000185 [09:56:48] Minh: Vậy task staging có thể test được rồi. Nhưng deadline 25/2 vẫn còn xa.
+
+T000186 [09:57:06] Ms. Lan: Tôi muốn thay đổi deadline của task staging. Vì chúng ta có thêm nhiều việc, nên dời sang 28/02 để an toàn hơn.
+
+T000187 [09:57:24] Hoa: 28/02 là thứ Bảy. Có khả năng không? Lịch làm việc chỉ đến thứ Sáu.
+
+T000188 [09:57:42] Anh Tuấn: Nếu dời, tôi kiến nghị lùi đến thứ Hai 02/03. Cuối tháng 2 có thể bận.
+
+T000189 [09:58:00] Ms. Lan: Được, vậy deadline staging sửa thành 02/03. Task tài liệu vẫn 05/03.
+
+T000190 [09:58:18] Minh: Nhưng task lỗi đăng nhập của em deadline 25/2, có cần điều chỉnh không?
+
+T000191 [09:58:36] Ms. Lan: Task đó giữ nguyên. Em cố gắng.
+
+T000192 [09:58:54] Hoa: Em thấy deadline staging mới 02/03, còn login 25/2, vậy em có thể test login sau khi Minh fix xong.
+
+T000193 [09:59:12] Minh: Vâng, em sẽ ưu tiên login trước.
+
+T000194 [09:59:30] Anh Tuấn: Quay lại tài liệu, tôi muốn thảo luận nội dung chính. Có cần thêm mục troubleshooting không?
+
+T000195 [09:59:48] Hoa: Em nghĩ nên có. Phần đó giúp người triển khai dễ dàng hơn.
+
+T000196 [10:00:06] Ms. Lan: Anh Tuấn, anh tự quyết định. Miễn là đầy đủ.
+
+T000197 [10:00:24] Minh: Em góp ý: nên thêm phần check list các bước sau triển khai.
+
+T000198 [10:00:42] Anh Tuấn: Ý hay. Tôi sẽ thêm.
+
+T000199 [10:01:00] Hoa: Còn về dữ liệu test, em có script tạo 100 user rồi. Cần thêm dữ liệu biên như người dùng bị khóa.
+
+T000200 [10:01:18] Ms. Lan: Tốt, cứ thêm vào. Nhưng đừng quên deadline 20/2.
+
+T000201 [10:01:36] Hoa: Vâng, em đang tiến hành.
+
+T000202 [10:01:54] Anh Tuấn: Tôi có một câu hỏi về tài liệu: phần mô tả kiến trúc cần vẽ sơ đồ hay chỉ text?
+
+T000203 [10:02:12] Minh: Em nghĩ nên có sơ đồ, dễ hiểu hơn. Em có thể hỗ trợ vẽ.
+
+T000204 [10:02:30] Ms. Lan: Được, Minh vẽ sơ đồ, Anh Tuấn viết nội dung. Phối hợp tốt.
+
+T000205 [10:02:48] Hoa: Vậy tài liệu có version history không? Em thấy nhiều dự án thiếu phần đó.
+
+T000206 [10:03:06] Anh Tuấn: Tôi sẽ thêm changelog.
+
+T000207 [10:03:24] Minh: Em gợi ý dùng git để quản lý version.
+
+T000208 [10:03:42] Ms. Lan: Đồng ý. Anh Tuấn tạo repo riêng cho tài liệu.
+
+T000209 [10:04:00] Hoa: Ngoài ra, em thấy hiện tại chưa có reviewer cho tài liệu. Anh Tuấn viết, ai review?
+
+T000210 [10:04:18] Ms. Lan: Lúc nãy Minh sẽ review phần kỹ thuật. Còn tổng thể để tôi review.
+
+T000211 [10:04:36] Anh Tuấn: Vậy tôi sẽ gửi bản nháp cho Minh và chị Lan trước thứ Hai 02/03.
+
+T000212 [10:04:54] Minh: Deadline đó hợp lý.
+
+T000213 [10:05:12] Hoa: Em thấy chúng ta đã điều chỉnh nhiều. Cần recap không?
+
+T000214 [10:05:30] Ms. Lan: Không cần recap chi tiết, tránh lặp. Chỉ cần nhớ task nào ai làm.
+
+T000215 [10:05:48] Anh Tuấn: Vậy tôi xác nhận: staging deadline 02/03, login deadline 25/2, data test deadline 20/2, tài liệu deadline 05/03, owner tài liệu là tôi.
+
+T000216 [10:06:06] Minh: Còn task tài liệu cũ deadline 05/03, đúng không?
+
+T000217 [10:06:24] Ms. Lan: Đúng. Các em nhớ cập nhật trên hệ thống.
+
+T000218 [10:06:42] Hoa: Về dữ liệu test, em sẽ gửi bản nháp cho anh Tuấn vào thứ Năm 19/2 để review.
+
+T000219 [10:07:00] Anh Tuấn: Tôi sẽ review vào thứ Sáu.
+
+T000220 [10:07:18] Minh: Em lo lắng task login có thể bị ảnh hưởng nếu Anh Tuấn bận review tài liệu.
+
+T000221 [10:07:36] Anh Tuấn: Tôi vẫn cân đối được. Còn phần conflict port đã xong, nên tôi rảnh hơn.
+
+T000222 [10:07:54] Ms. Lan: Có vấn đề gì muốn thảo luận thêm không?
+
+T000223 [10:08:12] Hoa: Em muốn hỏi về việc dùng chung server staging cho nhiều task có xảy ra xung đột không?
+
+T000224 [10:08:30] Anh Tuấn: Không, vì tôi đã cấu hình lại port.
+
+T000225 [10:08:48] Ms. Lan: Vậy chúng ta tạm ổn. Nhưng tôi thấy task login vẫn có nguy cơ trễ. Minh có cần hỗ trợ thêm?
+
+T000226 [10:09:06] Minh: Em có thể nhờ Hoa test sơ bộ trong quá trình fix.
+
+T000227 [10:09:24] Hoa: Em sẵn sàng.
+
+T000228 [10:09:42] Ms. Lan: Tốt. Tôi muốn kết thúc phần này. Chuẩn bị cho cuộc họp chiều 5 giờ.
+
+T000229 [10:10:00] Anh Tuấn: Vâng, tôi sẽ chuẩn bị báo cáo.
+
+T000230 [10:10:18] Minh: Em cũng vậy.
+
+T000231 [10:10:36] Hoa: Em không có câu hỏi thêm.
+
+T000232 [10:10:54] Ms. Lan: Tạm dừng tại đây. Hẹn gặp lại.
+
+--- END OF PART P03 ---

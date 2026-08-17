@@ -1,0 +1,281 @@
+=== MEETING METADATA ===
+meeting_id: W4-LONG-C5-N2-SW-STATE-001
+meeting_title: Họp điều phối triển khai hệ thống
+meeting_date: 2026-02-15
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:15] Chị Lan: Chào cả team, hôm nay chúng ta họp về kế hoạch triển khai hệ thống đợt này. Mục tiêu chính là rà soát môi trường test và tài liệu triển khai. Anh Tuấn, em có thông tin gì từ bên vận hành chưa?
+[09:00:45] Anh Tuấn: Dạ chị, bên vận hành chưa confirm lịch mở môi trường staging. Họ nói tuần sau mới có, nhưng em nghĩ mình nên chuẩn bị trước tài liệu để không bị chậm.
+[09:01:15] Chị Lan: Đúng rồi, tài liệu triển khai là phần quan trọng. Chị Hoa, bên QA có bản kịch bản kiểm thử cho môi trường staging chưa?
+[09:01:45] Chị Hoa: Em có draft rồi, nhưng còn thiếu phần test integration với service cũ. Anh Minh đang hỗ trợ viết spec, mong là xong trong tuần này.
+[09:02:10] Anh Minh: Vâng, em đang viết spec cho module kết nối, dự kiến cuối ngày mai hoàn thành. Sau đó chị Hoa có thể update kịch bản.
+[09:02:40] Chị Lan: Tốt. Vậy chúng ta có hai việc cần làm: một là cập nhật tài liệu triển khai tổng thể, hai là cập nhật kịch bản kiểm thử triển khai. Anh Tuấn, em phụ trách tài liệu triển khai nhé? Deadline em tự đặt được không?
+[09:03:10] Anh Tuấn: Em nghĩ tài liệu triển khai cần được review kỹ, nếu có thể em sẽ hoàn thành bản draft trước thứ Sáu tuần này, tức 19/02. Nhưng chưa có deadline chính thức vì phụ thuộc vào spec.
+[09:03:40] Chị Lan: Được, không cần deadline cứng cho tài liệu lúc này. Còn kịch bản kiểm thử triển khai, chị Hoa, em cần hoàn thành trước ngày 20/02 để kịp chạy thử khi có staging.
+[09:04:10] Chị Hoa: Vâng, em sẽ cố gắng. Nhưng em cần spec từ anh Minh trước, nếu không kịp thì e là deadline 20/02 khó đạt.
+[09:04:40] Anh Minh: Em sẽ ưu tiên spec integration, hứa trước 9h sáng mai gửi chị Hoa. Còn spec chi tiết có thể gửi sau, không ảnh hưởng kịch bản chính.
+[09:05:10] Chị Lan: OK, vậy task "Cập nhật kịch bản kiểm thử triển khai" có deadline 20/02, assignee là chị Hoa, nhưng cần spec từ anh Minh. Task "Cập nhật tài liệu triển khai" anh Tuấn làm, không deadline cứng, nhưng cần có draft để review.
+[09:05:40] Anh Tuấn: Vâng, em cũng muốn hỏi thêm về phần môi trường test. Bên vận hành có yêu cầu mình phải setup certificate mới không? Trong tài liệu cũ chưa đề cập.
+[09:06:10] Chị Lan: Để chị hỏi lại. Hôm qua anh Dũng bên infra nói là vẫn dùng cert cũ, nhưng cần xác nhận bằng mail. Chị sẽ forward cho em.
+[09:06:40] Anh Minh: Em xin phép bổ sung: spec module kết nối sẽ có phần về xác thực, nếu cert thay đổi thì em phải sửa luôn.
+[09:07:10] Chị Hoa: Vậy em cần biết cert trước khi viết kịch bản test authentication. Nếu không thì 20/02 cũng khó vì thiếu thông tin.
+[09:07:40] Chị Lan: Thôi thì tạm thời em cứ viết dựa trên cert cũ, sau đó update nếu có thay đổi. Việc này không ảnh hưởng nhiều đến logic test.
+[09:08:10] Anh Tuấn: Em đồng ý. Về tài liệu triển khai, em thấy tài liệu hiện tại thiếu phần rollback, thường team mình hay quên. Em định bổ sung vào.
+[09:08:40] Chị Lan: Quan trọng đó. Em cứ thêm vào, nhưng nhớ đừng làm tài liệu dài quá, cô đọng thôi.
+[09:09:10] Chị Hoa: Em sẽ xem tài liệu triển khai của anh Tuấn để đảm bảo kịch bản test phù hợp. Có thể có sự chồng chéo giữa tài liệu và kịch bản?
+[09:09:40] Anh Tuấn: Có thể, nhưng tài liệu triển khai mô tả các bước thực hiện, còn kịch bản test kiểm tra tính đúng đắn. Em sẽ cố gắng viết rõ ràng để chị Hoa dễ đối chiếu.
+[09:10:10] Chị Lan: Vậy hai task này có điểm chung là đều liên quan đến quy trình triển khai. Mọi người lưu ý tránh làm trùng lặp nội dung. Anh Minh, em có comment gì thêm về phía BA?
+[09:10:40] Anh Minh: Em thấy cần thống nhất thuật ngữ trong cả hai tài liệu. Ví dụ "deployment" hay "triển khai" – nên dùng một từ. Em sẽ gửi glossary nhỏ cho mọi người.
+[09:11:10] Chị Hoa: Đồng ý, vì em thấy tài liệu cũ dùng lẫn lộn, gây khó hiểu.
+[09:11:40] Anh Tuấn: Em cũng muốn đề cập: có cần tài liệu hướng dẫn cấu hình môi trường không? Hay là gộp vào tài liệu triển khai?
+[09:12:10] Chị Lan: Gộp vào một tài liệu thôi, đừng tạo thêm đầu việc. Tài liệu triển khai nên bao gồm các bước từ chuẩn bị đến go-live, cả rollback.
+[09:12:40] Anh Tuấn: Vâng, em sẽ làm như vậy. Nhưng phần cấu hình môi trường em cần thông tin từ bên vận hành, chị giúp em liên hệ nhé.
+[09:13:10] Chị Lan: OK, chị sẽ gửi email và cc em. Dự kiến cuối ngày hôm nay có thông tin.
+[09:13:40] Chị Hoa: Em có một băn khoăn: kịch bản kiểm thử triển khai thường chỉ test trên staging, nhưng nếu môi trường staging chưa sẵn sàng thì em viết xong cũng không chạy được. Có nên chờ đến khi có staging không?
+[09:14:10] Chị Lan: Không nên chờ. Em viết kịch bản trước, khi có staging thì chỉ việc chạy. Việc này tiết kiệm thời gian.
+[09:14:40] Anh Minh: Em cũng nghĩ vậy. Hơn nữa kịch bản test triển khai thường dựa trên tài liệu, nên có thể review chéo.
+[09:15:10] Anh Tuấn: Mà chị Lan ơi, em thấy tài liệu triển khai của dự án trước team mình từng làm khá tốt, em có thể tham khảo và điều chỉnh cho phù hợp.
+[09:15:40] Chị Lan: Ừ, em lấy template cũ, nhưng nhớ cập nhật công nghệ mới, đặc biệt là phần database migration.
+[09:16:10] Anh Tuấn: Vâng, database migration là phần quan trọng. Em sẽ viết chi tiết.
+[09:16:40] Chị Hoa: Anh Tuấn cho em hỏi: tài liệu triển khai có đề cập đến việc kiểm tra log sau triển khai không? Em định đưa vào kịch bản test.
+[09:17:10] Anh Tuấn: Có, em sẽ thêm bước kiểm tra log và cảnh báo. Như vậy kịch bản test của chị nên bao gồm test log.
+[09:17:40] Chị Hoa: Ok, em sẽ bổ sung. Vậy task của em phụ thuộc khá nhiều vào đầu vào từ cả anh Tuấn và anh Minh.
+[09:18:10] Chị Lan: Đúng, nhưng em vẫn chịu trách nhiệm chính. Anh Tuấn và anh Minh hỗ trợ đúng hạn nhé.
+[09:18:40] Anh Minh: Dạ. Em cũng muốn thảo luận thêm về phần tài liệu hướng dẫn người dùng, liệu có cần trong đợt này không? Hay để sau?
+[09:19:10] Chị Lan: Để sau, đợt này tập trung triển khai kỹ thuật. Tài liệu người dùng sẽ làm ở phase sau.
+[09:19:40] Anh Tuấn: Về môi trường test, ngoài staging còn có môi trường UAT không? Team mình có cần chuẩn bị gì không?
+[09:20:10] Chị Lan: UAT sẽ do bên business test, mình không cần can thiệp nhiều. Nhưng tài liệu triển khai nên có phần bàn giao cho UAT.
+[09:20:40] Anh Tuấn: Ok em sẽ thêm.
+[09:21:10] Chị Hoa: Em thấy task của em có tên “cập nhật kịch bản kiểm thử triển khai” hơi giống với task “cập nhật tài liệu triển khai” của anh Tuấn. Liệu có gây nhầm lẫn không?
+[09:21:40] Anh Tuấn: Cũng hơi giống, nhưng nội dung khác. Tài liệu của em là procedure, còn của chị là test case. Nên ghi rõ trong hệ thống.
+[09:22:10] Chị Lan: Chị sẽ ghi chú rõ trong meeting notes. Cả hai đều là task riêng, không gộp.
+[09:22:40] Anh Minh: Về việc phân công, em thấy task tài liệu triển khai chưa có deadline chính thức, liệu có cần đặt một deadline ước lượng để dễ theo dõi không?
+[09:23:10] Chị Lan: Tạm thời chưa cần, vì còn phụ thuộc nhiều. Khi nào có thông tin từ vận hành thì sẽ điều chỉnh. Anh Tuấn, em cứ làm, cuối tuần này báo cáo tiến độ.
+[09:23:40] Anh Tuấn: Vâng, em sẽ cố gắng có draft vào thứ Sáu.
+[09:24:10] Chị Hoa: Em xin phép confirm lại: deadline cho task của em là 20/02, nhưng em cần spec từ anh Minh trước 9h sáng mai. Nếu không có spec, deadline có thể bị trễ.
+[09:24:40] Chị Lan: Anh Minh, em cam kết được chứ? Nếu không thì phải điều chỉnh deadline.
+[09:25:10] Anh Minh: Em cam kết gửi spec trước 9h sáng 16/02, không kể cuối tuần. Hôm nay là thứ Hai, mai là thứ Ba, em sẽ gửi đúng hạn.
+[09:25:40] Chị Hoa: Vậy em yên tâm. Em sẽ bắt đầu viết kịch bản từ chiều nay dựa trên template cũ, sau đó update khi có spec.
+[09:26:10] Anh Tuấn: Nếu chị Hoa cần phần về rollback, em có thể gửi sơ qua cho chị luôn bây giờ.
+[09:26:40] Chị Hoa: Tốt quá, anh gửi giúp em, em sẽ tham khảo.
+[09:27:10] Chị Lan: Mọi người có vấn đề gì khác về môi trường test không? Em thấy chưa bàn đến phần dữ liệu test.
+[09:27:40] Anh Tuấn: Dạ, em đang định hỏi. Dữ liệu test cho staging có sẵn từ đợt trước, nhưng cần làm mới. Em sẽ tạo script để refresh.
+[09:28:10] Chị Hoa: Việc đó có nằm trong task của em không? Hay là task riêng?
+[09:28:40] Chị Lan: Có thể là task phụ, nhưng chưa cần chính thức. Anh Tuấn cứ làm, sau này tính.
+[09:29:10] Anh Tuấn: Vâng, em sẽ tự sắp xếp.
+[09:29:40] Anh Minh: Em có ý kiến: nếu tài liệu triển khai và kịch bản test đều viết xong, team mình nên có một buổi review chung để đảm bảo consistency. Có thể tổ chức vào tuần sau.
+[09:30:10] Chị Lan: Đồng ý, nhưng chờ khi có bản draft cụ thể. Anh Tuấn và chị Hoa, sau khi hoàn thành thì schedule meeting riêng.
+[09:30:40] Anh Tuấn: OK.
+[09:31:10] Chị Hoa: Vâng.
+[09:31:40] Chị Lan: Tổng kết lại, hôm nay chúng ta có hai task chính: "Cập nhật tài liệu triển khai" do anh Tuấn, không deadline cứng; "Cập nhật kịch bản kiểm thử triển khai" do chị Hoa, deadline 20/02, phụ thuộc spec từ anh Minh. Anh Minh sẽ gửi spec trước 9h sáng mai. Ngoài ra, chị sẽ hỏi thông tin cert và môi trường từ bên vận hành. Có ai cần clarify gì thêm không?
+[09:32:10] Anh Tuấn: Em muốn hỏi về việc dùng tool quản lý task? Có cần update lên Jira không?
+[09:32:40] Chị Lan: Có, em sẽ tạo task trên Jira sau meeting. Chị sẽ assign đúng người.
+[09:33:10] Anh Minh: Em không có thắc mắc gì thêm.
+[09:33:40] Chị Hoa: Em cũng không.
+[09:34:10] Chị Lan: Vậy chúng ta tạm dừng ở đây. Phần còn lại về kiến trúc và timeline triển khai sẽ bàn ở phần sau. Cảm ơn mọi người.
+[09:34:40] Chị Lan: Khoan, chị nhớ ra còn một vấn đề cần bàn nhanh trước khi kết thúc phần này. Lỗi đăng nhập trên staging cũ vẫn chưa được xử lý triệt để. Anh Minh, em có thông tin gì mới không?
+[09:35:10] Anh Minh: Dạ, em có log từ tuần trước, lỗi xảy ra khi user nhập sai mật khẩu quá 3 lần, hệ thống không khóa tài khoản đúng cách. Em đã fix tạm nhưng chưa deploy.
+[09:35:40] Chị Lan: Vậy cần test kỹ trên môi trường mới. Chị Hoa, em có thể thêm test case cho tình huống này vào kịch bản kiểm thử triển khai không?
+[09:36:10] Chị Hoa: Vâng, em sẽ thêm. Nhưng cần spec chi tiết về luồng xử lý lock account từ anh Minh.
+[09:36:40] Anh Minh: Em sẽ viết luôn phần này trong spec gửi chị Hoa sáng mai. Có thể đưa vào mục authentication.
+[09:37:10] Chị Lan: Tốt. Còn dữ liệu test, anh Tuấn nói sẽ refresh, nhưng có cần tạo thêm dữ liệu giả cho test đăng nhập không?
+[09:37:40] Anh Tuấn: Em nghĩ cần. Dữ liệu cũ chỉ có vài user, em sẽ tạo script sinh thêm 20 user với các role khác nhau. Việc này không mất nhiều thời gian.
+[09:38:10] Chị Hoa: Vậy anh Tuấn làm luôn nhé, em cần dữ liệu đa dạng để test các trường hợp.
+[09:38:40] Anh Tuấn: OK, em sẽ làm trong sáng nay. Nhưng script này có cần review không?
+[09:39:10] Chị Lan: Có, em gửi cho chị và anh Minh review trước khi chạy. Đề phòng script ảnh hưởng đến dữ liệu thật.
+[09:39:40] Anh Minh: Em đồng ý. Em có thể review nhanh vào cuối ngày.
+[09:40:10] Chị Hoa: Mà em thấy việc tạo dữ liệu test và viết kịch bản test hơi chồng chéo. Liệu có nên gộp thành một task chung không?
+[09:40:40] Chị Lan: Không, vì bản chất khác nhau. Dữ liệu test là đầu vào, kịch bản test là quy trình. Giữ riêng để dễ quản lý.
+[09:41:10] Anh Tuấn: Vậy task tạo dữ liệu test có deadline không? Hay em cứ làm và báo cáo?
+[09:41:40] Chị Lan: Tạm thời chưa có deadline, nhưng cần hoàn thành trước khi staging sẵn sàng. Em cứ ước lượng và báo chị.
+[09:42:10] Anh Tuấn: Dạ, em nghĩ cuối ngày mai là xong script và dữ liệu mẫu. Sau đó chờ review.
+[09:42:40] Chị Lan: Vậy thành task không chính thức nhé, em chủ động.
+[09:43:10] Anh Minh: Nhân tiện, em muốn hỏi về lỗi đăng nhập: fix của em có thể gây conflict với module kết nối không? Vì có phần xác thực token.
+[09:43:40] Chị Lan: Em cần check kỹ. Anh Tuấn, em có thể hỗ trợ review phần này không?
+[09:44:10] Anh Tuấn: Em có thể review, nhưng em không rõ chi tiết module kết nối. Anh Minh gửi code snippet cho em, em xem buổi chiều.
+[09:44:40] Anh Minh: Ok, em sẽ gửi. Có thể phát sinh lỗi nếu không đồng bộ.
+[09:45:10] Chị Hoa: Vậy em có cần thêm test case cho conflict này không? Hay chờ sau khi fix?
+[09:45:40] Chị Lan: Chờ sau. Đừng làm phức tạp thêm. Tập trung vào kịch bản chính.
+[09:46:10] Anh Tuấn: Em thấy nên có một người review tổng thể cho tất cả tài liệu và kịch bản, tránh thiếu sót. Chị Lan có thể làm không?
+[09:46:40] Chị Lan: Chị có thể review, nhưng không cam kết thời gian vì còn nhiều việc. Anh Minh hay chị Hoa có thể đảm nhận không?
+[09:47:10] Anh Minh: Em có thể review kịch bản test và tài liệu triển khai sau khi hoàn thành, nhưng không phải ngay lập tức.
+[09:47:40] Chị Hoa: Em cũng có thể review chéo tài liệu của anh Tuấn, nhưng cần thời gian.
+[09:48:10] Chị Lan: Vậy chưa assign ai chính thức. Cứ để sau khi có draft, chị sẽ chỉ định. Đây là việc cần làm nhưng chưa có người chịu trách nhiệm.
+[09:48:40] Anh Tuấn: Em hiểu. Vậy em sẽ viết tài liệu và gửi cho cả team, ai rảnh thì review.
+[09:49:10] Chị Hoa: Em nghĩ cũng nên có một buổi họp ngắn để review chung, như anh Minh đề cập lúc nãy.
+[09:49:40] Chị Lan: Sẽ tính sau. Bây giờ quay lại lỗi đăng nhập: anh Minh, fix của em đã được test trên môi trường local chưa?
+[09:50:10] Anh Minh: Em đã test manual, nhưng chưa có unit test. Em định viết unit test sau.
+[09:50:40] Chị Lan: Cần thiết. Em thêm task viết unit test cho module authentication nhé. Không deadline, nhưng nên làm trước khi deploy.
+[09:51:10] Anh Minh: Vâng, em sẽ ghi nhớ. Nhưng hiện tại em đang tập trung spec integration.
+[09:51:40] Chị Hoa: Anh Minh, nếu em viết unit test, em có thể dùng dữ liệu test từ script của anh Tuấn không? Hay tự tạo?
+[09:52:10] Anh Minh: Em có thể dùng chung, nhưng cần đảm bảo script chạy ổn định.
+[09:52:40] Anh Tuấn: Em sẽ cố gắng hoàn thành script sớm để anh Minh có dữ liệu.
+[09:53:10] Chị Lan: Vậy mọi người nhớ phối hợp. Còn vấn đề gì về dữ liệu test hay lỗi đăng nhập nữa không?
+[09:53:40] Anh Tuấn: Em muốn hỏi: dữ liệu test có cần bao gồm dữ liệu cho tính năng mới sắp release không? Hay chỉ dùng cho staging hiện tại?
+[09:54:10] Chị Lan: Chỉ staging hiện tại. Tính năng mới sẽ có đợt test riêng.
+[09:54:40] Anh Minh: OK. Em nghĩ mình nên có một checklist các đầu việc liên quan đến môi trường test, tránh quên.
+[09:55:10] Chị Hoa: Em đồng ý, nhưng không nên biến thành task cứng. Có thể ghi trong meeting notes.
+[09:55:40] Chị Lan: Chị sẽ ghi lại. Bây giờ chị thấy có một số việc chưa rõ ràng: ai sẽ là reviewer chính cho tài liệu? Chị đề nghị anh Minh làm reviewer kỹ thuật, chị Hoa reviewer nghiệp vụ. Có okay không?
+[09:56:10] Anh Minh: Em có thể, nhưng cần đợi có draft.
+[09:56:40] Chị Hoa: Em cũng được, nhưng nếu có xung đột lịch thì em báo sau.
+[09:57:10] Anh Tuấn: Vậy em sẽ ghi rõ trong tài liệu: phần kỹ thuật do anh Minh review, phần nghiệp vụ do chị Hoa.
+[09:57:40] Chị Lan: Nhưng chưa assign chính thức, chỉ là dự kiến. Khi có draft, chị sẽ confirm lại.
+[09:58:10] Chị Hoa: Vậy vẫn là unresolved. Em thấy cũng ổn, vì chưa có gì để review.
+[09:58:40] Anh Tuấn: Chị Lan, em nghĩ chúng ta nên dừng phần này ở đây. Còn vấn đề kiến trúc sẽ bàn sau.
+[09:59:10] Chị Lan: Đồng ý. Tổng kết: có task mới "Viết unit test authentication" anh Minh tự quản, không deadline. Task tạo dữ liệu test là không chính thức, anh Tuấn làm. Và reviewer dự kiến là anh Minh và chị Hoa, nhưng chưa chốt. Còn task cũ từ đầu giờ vẫn giữ nguyên. Mọi người có gì thêm không?
+[09:59:40] Anh Minh: Không.
+[10:00:10] Chị Hoa: Em không.
+[10:00:40] Chị Lan: Vậy chúng ta chuyển sang phần kiến trúc và timeline triển khai ở phần sau. Tạm nghỉ 5 phút rồi tiếp tục.
+[10:01:00] Chị Lan: OK, cả team, sau 5 phút nghỉ chúng ta quay lại. Chị muốn bàn tiếp về phần tài liệu triển khai và kịch bản kiểm thử đã thảo luận từ đầu giờ. Anh Tuấn, tài liệu triển khai của em tiến độ thế nào?
+[10:01:30] Anh Tuấn: Em mới bắt đầu viết phần mở đầu, vẫn còn chờ thông tin cert từ chị. Nhưng em nghĩ có thể giao phần này cho người khác nếu cần, vì em cũng đang bận lo dữ liệu test.
+[10:02:00] Chị Lan: Chị đang định nói đến việc đó. Chị thấy anh Minh có thể đảm nhận tài liệu triển khai vì em ấy rõ technical hơn. Anh Tuấn, em có đồng ý chuyển task này cho anh Minh không?
+[10:02:30] Anh Tuấn: Dạ, em đồng ý. Anh Minh có thể viết phần triển khai tốt hơn. Em sẽ chuyển các ghi chú và template cho anh.
+[10:03:00] Anh Minh: Em cũng OK, nhưng em đang có spec integration và unit test. Em có thể nhận tài liệu triển khai, nhưng deadline có thể phải đẩy lùi.
+[10:03:30] Chị Lan: Vậy chị sẽ reassign task "Cập nhật tài liệu triển khai" từ anh Tuấn sang anh Minh. Anh Minh, em tự đặt deadline mới nhé, nhưng không quá trễ.
+[10:04:00] Anh Minh: Em nghĩ cuối tuần sau, tức 26/02, có thể có draft. Nhưng phụ thuộc vào cert và thông tin từ vận hành.
+[10:04:30] Chị Lan: OK, vậy deadline mới là 26/02. Anh Tuấn, em gửi template và lưu ý cho anh Minh sau meeting.
+[10:05:00] Anh Tuấn: Vâng. Em cũng có một số ghi chú về database migration, em sẽ chuyển luôn.
+[10:05:30] Chị Hoa: Vậy còn task của em, kịch bản kiểm thử triển khai, deadline 20/02 liệu có cần thay đổi không? Vì spec từ anh Minh sẽ đến sáng mai, nhưng tài liệu triển khai giờ lại do anh Minh viết, nếu anh ấy chậm thì em cũng bị ảnh hưởng.
+[10:06:00] Chị Lan: Chị nghĩ deadline của em vẫn giữ 20/02, vì em chỉ cần spec authentication, không cần toàn bộ tài liệu. Kịch bản test có thể viết độc lập phần lớn.
+[10:06:30] Anh Minh: Đúng, spec của em gửi sáng mai sẽ đủ để chị Hoa viết test case cho đăng nhập và lock account. Phần triển khai chung có thể bổ sung sau.
+[10:07:00] Chị Hoa: Nhưng nếu tài liệu triển khai thay đổi sau khi em viết kịch bản, em sẽ phải sửa lại. Có thể gây tốn công.
+[10:07:30] Chị Lan: Điều đó đúng, nhưng em vẫn nên bắt đầu. Phần lớn kịch bản test triển khai dựa trên quy trình chuẩn, không phụ thuộc nhiều vào tài liệu cụ thể. Anh Minh, em cố gắng viết tài liệu sớm để chị Hoa có thể review cross.
+[10:08:00] Anh Minh: Em sẽ cố. Nhưng vì mới nhận task, em cần thời gian để làm quen.
+[10:08:30] Anh Tuấn: Em có thể hỗ trợ anh Minh bằng cách cung cấp template cũ và các bước chính. Em đã có sẵn, chỉ cần copy.
+[10:09:00] Chị Lan: Tốt. Vậy task của chị Hoa vẫn 20/02, task của anh Minh 26/02. Nhưng cần lưu ý: nếu đến 20/02 chị Hoa chưa có spec, deadline có thể bị ảnh hưởng. Anh Minh, em cam kết gửi spec đúng hạn chứ?
+[10:09:30] Anh Minh: Em cam kết sáng mai 16/02, không thay đổi.
+[10:10:00] Chị Hoa: Vậy em yên tâm hơn. Em sẽ viết kịch bản dựa trên spec và template cũ.
+[10:10:30] Chị Lan: Nhân tiện, chị muốn hỏi lại về task tạo dữ liệu test. Anh Tuấn, em tiến hành chưa?
+[10:11:00] Anh Tuấn: Em chuẩn bị viết script, dự kiến cuối ngày mai. Nhưng em sẽ ưu tiên trước template cho anh Minh.
+[10:11:30] Chị Lan: OK, em tự sắp xếp. Còn việc review tài liệu, chị nghĩ anh Minh nên review phần kỹ thuật của tài liệu triển khai, còn chị Hoa review nghiệp vụ. Nhưng chưa có ai review công việc của chị Hoa?
+[10:12:00] Chị Hoa: Em có thể nhờ anh Minh review kịch bản test của em, vì có phần kỹ thuật.
+[10:12:30] Anh Minh: Em có thể, nhưng sau khi em viết xong tài liệu triển khai.
+[10:13:00] Chị Lan: Vậy vẫn chưa có reviewer chính thức. Để sau khi có draft, chị sẽ chỉ định. Có thể chị sẽ review tổng thể.
+[10:13:30] Anh Tuấn: Em thấy chúng ta đã thay đổi owner cho tài liệu triển khai và điều chỉnh deadline. Vậy task ban đầu của em giờ không còn nữa.
+[10:14:00] Chị Lan: Đúng, task của em đã được reassign. Em chỉ còn phụ trách dữ liệu test không chính thức.
+[10:14:30] Anh Tuấn: Vâng, em hiểu. Em sẽ tập trung vào dữ liệu test.
+[10:15:00] Chị Hoa: Chị Lan, em muốn hỏi về phần rollback trong kịch bản test. Anh Tuấn có nói sẽ viết vào tài liệu, nhưng giờ anh Tuấn không làm tài liệu nữa. Vậy em lấy thông tin từ đâu?
+[10:15:30] Anh Minh: Em sẽ đưa rollback vào tài liệu triển khai. Chị Hoa cứ tạm dùng template cũ, sau đó em sẽ cập nhật.
+[10:16:00] Chị Hoa: Nhưng nếu em viết kịch bản xong trước khi có tài liệu, em phải sửa lại. Có cách nào đồng bộ không?
+[10:16:30] Chị Lan: Chị nghĩ em nên viết sơ lược trước, đánh dấu các phần cần bổ sung. Khi có tài liệu, em chỉ cần điều chỉnh.
+[10:17:00] Anh Minh: Em sẽ cố gắng viết phần rollback trong tuần này để chị Hoa kịp deadline.
+[10:17:30] Chị Hoa: Vậy nếu anh Minh gửi phần rollback trước 19/02, em có thể tích hợp vào kịch bản.
+[10:18:00] Anh Minh: Em sẽ cố. Nhưng không hứa chắc vì còn phụ thuộc thông tin infra.
+[10:18:30] Chị Lan: Được, tạm thời vậy. Chúng ta cũng nên bàn về timeline triển khải tổng thể. Nhưng trước hết, chị muốn confirm lại trạng thái các task: - Task 1: "Cập nhật tài liệu triển khai" – owner mới là anh Minh, deadline 26/02. - Task 2: "Cập nhật kịch bản kiểm thử triển khai" – chị Hoa, deadline 20/02, phụ thuộc spec từ anh Minh. - Task 3: "Viết unit test authentication" – anh Minh, không deadline. - Task phụ: "Tạo dữ liệu test" – anh Tuấn, không chính thức. - Reviewer: chưa assign. Đúng không?
+[10:19:00] Anh Minh: Đúng.
+[10:19:30] Chị Hoa: Vâng.
+[10:20:00] Anh Tuấn: Dạ.
+[10:20:30] Chị Lan: Vậy còn vấn đề gì cần thảo luận thêm về tài liệu không? Hay chúng ta chuyển sang phần kiến trúc?
+[10:21:00] Anh Minh: Em có một thắc mắc về spec integration. Nếu tài liệu triển khai của em thay đổi, spec có cần cập nhật không? Hay spec độc lập?
+[10:21:30] Chị Lan: Spec nên độc lập, vì nó mô tả module kết nối, không phụ thuộc vào quy trình triển khai. Em cứ giữ nguyên.
+[10:22:00] Anh Minh: Vậy em yên tâm.
+[10:22:30] Chị Hoa: Em cũng muốn hỏi: kịch bản test của em có cần bao gồm test cho spec integration không? Hay chỉ test triển khai?
+[10:23:00] Chị Lan: Chỉ test triển khai, không test module. Việc test module sẽ do QA riêng.
+[10:23:30] Chị Hoa: Rõ.
+[10:24:00] Anh Tuấn: Em thấy mọi việc đã ổn. Chúng ta có thể chuyển sang phần tiếp theo.
+[10:24:30] Chị Lan: Chưa vội, chị muốn nhấn mạnh: deadline 20/02 của chị Hoa là quan trọng, vì staging dự kiến có trong tuần đó. Anh Minh, em cố gắng hỗ trợ spec và rollback sớm.
+[10:25:00] Anh Minh: Em sẽ cố gắng.
+[10:25:30] Chị Hoa: Em sẽ nỗ lực.
+[10:26:00] Chị Lan: Tốt. Vậy chúng ta tạm dừng phần tài liệu ở đây. Phần tiếp theo sẽ bàn về kiến trúc tổng thể và timeline.
+[10:26:30] Chị Lan: OK, chúng ta chuyển sang phần release và monitoring. Anh Minh, em có kế hoạch gì cho việc giám sát hệ thống sau khi triển khai chưa?
+[10:27:00] Anh Minh: Em có draft một số metric cần theo dõi, như response time, error rate, và CPU usage. Nhưng chưa có công cụ cụ thể.
+[10:27:30] Chị Lan: Cần có kế hoạch rõ ràng. Chị nghĩ nên dùng Prometheus và Grafana như dự án trước. Anh Tuấn, em thấy sao?
+[10:28:00] Anh Tuấn: Dạ, em đồng ý. Nhưng cần cấu hình alert cho các ngưỡng quan trọng.
+[10:28:30] Chị Hoa: Vậy monitoring có nằm trong kịch bản test không? Em nghĩ nên test cả cảnh báo.
+[10:29:00] Chị Lan: Không, monitoring là việc riêng. Em tập trung test triển khai thôi.
+[10:29:30] Anh Minh: Nhân tiện, em muốn nói về task unit test authentication. Em thấy nó không cần thiết ngay bây giờ vì spec integration còn đang làm. Em đề nghị hủy task đó.
+[10:30:00] Chị Lan: Lý do?
+[10:30:30] Anh Minh: Vì unit test sẽ phụ thuộc vào code hoàn chỉnh, mà module authentication còn thay đổi. Nếu viết sớm, sẽ phải sửa nhiều.
+[10:31:00] Chị Lan: Hợp lý. Vậy chính thức hủy task "Viết unit test authentication". Anh Minh, em không cần làm nữa.
+[10:31:30] Anh Minh: Vâng.
+[10:32:00] Chị Hoa: Vậy task của em vẫn giữ 20/02 nhé?
+[10:32:30] Chị Lan: Ừ, giữ nguyên.
+[10:33:00] Anh Tuấn: Em có đề xuất: task tạo dữ liệu test của em nên có deadline cụ thể, vì nó ảnh hưởng đến kịch bản test. Em nghĩ nên đặt deadline 19/02 để chị Hoa có dữ liệu trước khi chạy.
+[10:33:30] Chị Lan: Đồng ý. Vậy task "Tạo dữ liệu test" trở thành task chính thức, deadline 19/02, assignee anh Tuấn.
+[10:34:00] Anh Tuấn: Vâng, em sẽ hoàn thành script và dữ liệu trước ngày đó.
+[10:34:30] Chị Hoa: Tốt, em sẽ có dữ liệu để test.
+[10:35:00] Chị Lan: Còn về monitoring, em nghĩ mình cần một task riêng. Anh Minh, em có thể lên kế hoạch cài đặt Prometheus và Grafana không?
+[10:35:30] Anh Minh: Em có thể, nhưng cần thời gian. Có thể sau khi tài liệu triển khai xong.
+[10:36:00] Chị Lan: Vậy tạm thời chưa phải task chính thức. Em ghi nhớ và báo cáo sau.
+[10:36:30] Anh Minh: OK.
+[10:37:00] Chị Hoa: Em muốn hỏi về release plan: mình có dự kiến ngày deploy lên production không?
+[10:37:30] Chị Lan: Chưa có. Phải chờ staging test xong. Nhưng ước chừng cuối tháng 3.
+[10:38:00] Anh Tuấn: Vậy timeline khá gấp. Em sẽ cố gắng dữ liệu test sớm.
+[10:38:30] Anh Minh: Em cũng sẽ viết tài liệu triển khai đúng hạn 26/02.
+[10:39:00] Chị Lan: Lưu ý: task của anh Minh deadline 26/02, task của chị Hoa 20/02, task dữ liệu test của anh Tuấn 19/02. Các deadline này gần nhau, cần phối hợp.
+[10:39:30] Anh Tuấn: Vâng, em sẽ hoàn thành dữ liệu trước để anh Minh có thể tham khảo.
+[10:40:00] Anh Minh: Cảm ơn.
+[10:40:30] Chị Hoa: Em có vấn đề: kịch bản test của em phụ thuộc vào spec authentication, nhưng spec đó đã được anh Minh hứa sáng mai. Nếu không có, deadline 20/02 khó giữ.
+[10:41:00] Chị Lan: Anh Minh, em đã cam kết rồi, phải giữ.
+[10:41:30] Anh Minh: Em sẽ gửi đúng hạn.
+[10:42:00] Chị Hoa: Vậy em yên tâm. Em cũng muốn thảo luận về monitoring: có cần test cảnh báo trong kịch bản không?
+[10:42:30] Chị Lan: Chị nghĩ không. Monitoring là việc của vận hành.
+[10:43:00] Anh Tuấn: Em đồng ý. Tập trung vào triển khai chính.
+[10:43:30] Anh Minh: Em thấy task tạo dữ liệu test và kịch bản test có thể chạy song song. Anh Tuấn gửi dữ liệu trước 19/02 là đủ.
+[10:44:00] Chị Lan: Đúng. Còn ai có thắc mắc về release và monitoring không?
+[10:44:30] Anh Hùng (mới tham gia): Chị Lan, em vừa vào. Em có thể hỗ trợ phần monitoring nếu cần.
+[10:45:00] Chị Lan: Chào anh Hùng, em đến muộn nhưng kịp. Em có kinh nghiệm về Prometheus không?
+[10:45:30] Anh Hùng: Có, em đã làm ở dự án trước.
+[10:46:00] Chị Lan: Tốt. Vậy em sẽ phụ trách monitoring, nhưng chưa có task chính thức. Anh Minh sẽ bàn giao lại sau.
+[10:46:30] Anh Hùng: Vâng.
+[10:47:00] Anh Minh: Em sẽ gửi tài liệu monitoring draft cho anh Hùng.
+[10:47:30] Chị Hoa: Vậy có thêm một người, việc sẽ nhẹ hơn.
+[10:48:00] Chị Lan: Quay lại task cũ: task "Viết unit test authentication" đã hủy, không còn. Các task khác giữ nguyên. Chị muốn recap: - Anh Minh: tài liệu triển khai deadline 26/02. - Chị Hoa: kịch bản test deadline 20/02, phụ thuộc spec. - Anh Tuấn: dữ liệu test deadline 19/02. - Anh Hùng: monitoring (chưa chính thức). - Reviewer: chưa assign. Ai cần clarify?
+[10:48:30] Anh Minh: Rõ.
+[10:49:00] Chị Hoa: OK.
+[10:49:30] Anh Tuấn: Không.
+[10:50:00] Anh Hùng: Em chỉ muốn hỏi: có cần tài liệu monitoring riêng không?
+[10:50:30] Chị Lan: Có, nhưng để sau. Bây giờ tập trung triển khai.
+[10:51:00] Anh Hùng: Hiểu.
+[10:51:30] Chị Lan: Vậy phần này tạm ổn. Chúng ta sẽ bàn tiếp về timeline tổng thể ở phần cuối.
+[10:52:00] Chị Lan: Chúng ta đã đi qua nhiều phần. Bây giờ, hãy cùng tổng kết lại toàn bộ các task và trạng thái cuối cùng để đảm bảo mọi người đều nắm rõ trước khi ra quyết định cho những việc tiếp theo.
+[10:52:30] Anh Minh: Em nghĩ nên bắt đầu từ timeline tổng thể. Anh Tuấn, em có thông tin gì về ngày staging được bàn giao từ vận hành chưa?
+[10:53:00] Anh Tuấn: Chưa có xác nhận chính thức, nhưng bên vận hành dự kiến tuần sau, tức tuần 17/02 – 21/02. Nếu đúng thì chúng ta có khoảng 2 tuần để test trước khi release cuối tháng 3.
+[10:53:30] Chị Hoa: Vậy deadline 20/02 của em khá sát. Em cần môi trường để chạy thử kịch bản test sau khi viết xong.
+[10:54:00] Anh Minh: Nếu staging có vào giữa tuần 20/02, em nghĩ chị Hoa có thể viết kịch bản trước, sau đó chạy thử ngay khi có môi trường.
+[10:54:30] Chị Lan: Nhưng cần lưu ý: nếu staging trễ, việc test sẽ bị đẩy lùi. Chúng ta có phương án dự phòng không? Anh Hùng, em mới vào, có ý kiến gì?
+[10:55:00] Anh Hùng: Em nghĩ có thể dùng môi trường local để test sơ bộ, nhưng không thể thay thế staging vì phụ thuộc vào network và cert.
+[10:55:30] Anh Tuấn: Đồng ý. Em sẽ chuẩn bị script dữ liệu test trên local trước, để khi có staging chỉ việc import.
+[10:56:00] Chị Lan: Vậy task "Tạo dữ liệu test" của anh Tuấn deadline 19/02 vẫn ổn. Em cần đảm bảo script chạy được trên cả local và staging.
+[10:56:30] Anh Tuấn: Vâng, em sẽ viết script linh hoạt.
+[10:57:00] Chị Hoa: Em có một vấn đề: kịch bản test của em có phần kiểm tra rollback, mà rollback lại phụ thuộc vào tài liệu triển khai của anh Minh. Nếu tài liệu chưa có, em phải viết tạm.
+[10:57:30] Anh Minh: Em đã nói sẽ viết phần rollback trước 19/02. Em sẽ cố gắng gửi cho chị Hoa vào cuối ngày 18/02.
+[10:58:00] Chị Hoa: Vậy em sẽ chờ. Nếu không kịp, em sẽ đánh dấu phần đó và bổ sung sau.
+[10:58:30] Chị Lan: Về phía monitoring, anh Hùng, em đã có kế hoạch cụ thể chưa?
+[10:59:00] Anh Hùng: Em vừa vào nên cần thời gian. Em muốn hỏi anh Minh về các metric cần theo dõi trước khi bắt đầu.
+[10:59:30] Anh Minh: Em sẽ gửi tài liệu monitoring draft cho anh Hùng trong tuần này, trước 19/02.
+[11:00:00] Chị Lan: Vậy task monitoring vẫn chưa chính thức, nhưng anh Hùng nhận trách nhiệm. Anh Minh hỗ trợ ban đầu.
+[11:00:30] Anh Minh: Đúng vậy.
+[11:01:00] Anh Tuấn: Chị Lan, em thấy có một điểm unresolved từ đầu meeting: reviewer cho tài liệu và kịch bản. Chúng ta chưa chốt ai sẽ review.
+[11:01:30] Chị Hoa: Đúng. Em nghĩ nếu không có reviewer chính thức, sau khi có draft chúng ta có thể tổ chức một buổi review chung.
+[11:02:00] Chị Lan: Vậy để sau khi anh Minh và chị Hoa có draft, chị sẽ schedule một buổi review riêng. Lúc đó sẽ chỉ định reviewer. Tạm thời vẫn để unresolved.
+[11:02:30] Anh Minh: OK. Nhưng em muốn hỏi: nếu buổi review bị trễ, liệu có ảnh hưởng đến deadline deploy không?
+[11:03:00] Chị Lan: Có thể. Nhưng ưu tiên là hoàn thành draft đúng hạn, review có thể linh hoạt.
+[11:03:30] Anh Tuấn: Em đồng ý.
+[11:04:00] Chị Hoa: Em cũng đồng ý.
+[11:04:30] Anh Hùng: Em thấy việc này hợp lý.
+[11:05:00] Chị Lan: Bây giờ, hãy điểm lại tất cả task hiện tại: - Task "Cập nhật tài liệu triển khai": owner Anh Minh, deadline 26/02, phụ thuộc cert và thông tin vận hành. - Task "Cập nhật kịch bản kiểm thử triển khai": owner Chị Hoa, deadline 20/02, phụ thuộc spec authentication (sáng mai) và rollback (dự kiến 18/02). - Task "Tạo dữ liệu test": owner Anh Tuấn, deadline 19/02, đã chính thức. - Task monitoring: chưa chính thức, owner Anh Hùng, hỗ trợ từ Anh Minh. - Task "Viết unit test authentication" đã bị hủy. - Reviewer: chưa assign, sẽ xác định sau khi có draft. Mọi người có bổ sung gì không?
+[11:05:30] Anh Tuấn: Em muốn nhắc: cert và thông tin môi trường từ chị Lan vẫn chưa có, ảnh hưởng đến cả tài liệu và dữ liệu test.
+[11:06:00] Chị Lan: Chị sẽ gửi email trong chiều nay, cc toàn bộ team. Em yên tâm.
+[11:06:30] Anh Minh: Em cũng cần cert để viết spec authentication. Nếu không có, em phải dùng cert cũ.
+[11:07:00] Chị Lan: Cứ dùng cert cũ tạm, sau đó update nếu thay đổi. Như đã thống nhất từ đầu.
+[11:07:30] Chị Hoa: Vậy spec authentication dựa trên cert cũ, em sẽ viết kịch bản theo đó.
+[11:08:00] Anh Minh: Chính xác.
+[11:08:30] Anh Hùng: Em muốn hỏi về timeline release. Dự kiến release production cuối tháng 3, vậy chúng ta có kế hoạch dry-run trước đó không?
+[11:09:00] Chị Lan: Có, chúng ta sẽ có một buổi dry-run trên staging sau khi test xong. Dự kiến tuần đầu tháng 3.
+[11:09:30] Anh Hùng: Vậy em cần chuẩn bị monitoring cho dry-run đó.
+[11:10:00] Chị Lan: Đúng. Anh Hùng, em có thể bắt đầu survey tool từ bây giờ.
+[11:10:30] Anh Hùng: Vâng, em sẽ làm.
+[11:11:00] Anh Tuấn: Chị Lan, em thấy deadline của em và chị Hoa khá gần nhau, cần có sự phối hợp chặt chẽ. Em sẽ gửi dữ liệu test cho chị Hoa ngay khi có.
+[11:11:30] Chị Hoa: Cảm ơn anh. Em cũng sẽ gửi kịch bản test cho anh Minh để review phần kỹ thuật trước khi chốt.
+[11:12:00] Chị Lan: Tốt. Như vậy mọi việc đã rõ. Chúng ta còn vấn đề gì chưa được giải quyết không?
+[11:12:30] Anh Minh: Về phần reviewer, em nghĩ nên tạm thời chưa assign để linh hoạt. Nhưng nếu cần, em có thể review chéo với chị Hoa.
+[11:13:00] Chị Hoa: Em đồng ý.
+[11:13:30] Chị Lan: Vậy vẫn giữ unresolved cho reviewer. Khi nào có draft, chúng ta sẽ quyết định.
+[11:14:00] Anh Tuấn: Em không còn ý kiến.
+[11:14:30] Anh Hùng: Không.
+[11:15:00] Chị Lan: Vậy cuộc họp hôm nay đến đây là kết thúc. Cảm ơn mọi người đã tham gia. Chị sẽ gửi meeting notes và cập nhật Jira sau. Hẹn gặp lại trong buổi review draft.
+[11:15:30] Anh Minh: Cảm ơn chị.
+[11:16:00] Chị Hoa: Cảm ơn.
+[11:16:30] Anh Tuấn: Cảm ơn.
+[11:17:00] Anh Hùng: Cảm ơn.

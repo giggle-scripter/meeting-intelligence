@@ -1,0 +1,16 @@
+note nhanh
+chủ đề: Họp tổng hợp phát triển và vận hành sản phẩm
+kw: staging / payment / runbook / api / config / spec / them
+- Thêm task cho Tuấn: viết log spec, dl 2/3
+* Task runbook giao An, dl 8/3
+- Task cho An: setup sandbox, dl 3/3
+1) Vậy task sandbox hoàn thành trước dl 3/3
+- Thêm task review code payment với dl 5/3
+* Chuyển sang task config staging
+- Vậy chính thức hủy task workshop khỏi board
+1) Vậy tổng kết P06: hủy task workshop, tạo task CI/CD pipeline (An, dl 12/3),
+- correction review code từ 5/3 lên 8/3 (giao Hà)
+* Vậy tổng kết P07: task metric (Tuấn, 10/3), task alerting (An, 12/3), mở lại log spec (Tuấn, 11/3), task support process (Lan, 13/3)
+- Ở P02, chúng ta có task API draft do Tuấn owner,
+1) Còn task metric define sẽ có số liệu từ An, em sẽ hoàn thành
+- Em muốn hỏi về môi trường staging, hiện tại đang có vấn đề với container orchestration ? chưa chốt

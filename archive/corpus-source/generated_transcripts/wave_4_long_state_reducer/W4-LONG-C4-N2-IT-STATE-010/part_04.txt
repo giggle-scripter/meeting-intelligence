@@ -1,0 +1,94 @@
+MEETING_ID: W4-LONG-C4-N2-IT-STATE-010
+PART: P04/5
+
+T000193 [10:14:10] Anh Minh: Chúng ta chuyển sang phần release và monitoring. Tuấn, em đã có kế hoạch release bản đầu tiên chưa?  
+
+T000194 [10:14:35] Anh Tuấn: Dạ, em dự kiến cuối tuần sau, sau khi môi trường test ổn định và fix lỗi đăng nhập hoàn tất.  
+
+T000195 [10:15:00] Chị Hà: Release có cần tài liệu hướng dẫn cho người dùng không? Em có thể chuẩn bị.  
+
+T000196 [10:15:25] Anh Minh: Cần, nhưng em tập trung vào tài liệu môi trường test trước. Release có thể trễ nếu thiếu tài liệu.  
+
+T000197 [10:15:50] Chị Lan: Vậy ai sẽ monitor sau release? Em nghĩ cần người theo dõi lỗi phát sinh.  
+
+T000198 [10:16:15] Anh Minh: Tôi giao cho Tuấn và Khoa. Nhưng Khoa đang fix lỗi đăng nhập, nên Tuấn sẽ là chính.  
+
+T000199 [10:16:40] Anh Tuấn: Vâng. Em sẽ lập lịch monitor hàng ngày trong tuần đầu.  
+
+T000200 [10:17:05] Chị Hà: Nhân tiện, về task dữ liệu mẫu của Lan, em thấy không cần thiết vì đã có dữ liệu từ fix lỗi đăng nhập.  
+
+T000201 [10:17:30] Anh Minh: Đúng. Lan, em hủy task đó đi. Em tập trung vào test case và dữ liệu cho release.  
+
+T000202 [10:17:55] Chị Lan: Vâng. Em sẽ hủy task dữ liệu mẫu và chuyển hướng sang test case cho đăng nhập.  
+
+T000203 [10:18:20] Anh Tuấn: Vậy task dữ liệu mẫu chính thức bị hủy. Còn deadline cho tài liệu môi trường test, em nghĩ nên đặt sớm hơn để kịp release.  
+
+T000204 [10:18:45] Anh Minh: Ý em là gì?  
+
+T000205 [10:19:10] Anh Tuấn: Hiện tại deadline của tài liệu là thứ Sáu. Nhưng release dự kiến cuối tuần sau, nếu tài liệu có sớm, em có thể chạy thử trước.  
+
+T000206 [10:19:35] Anh Minh: Vậy đẩy deadline lên thứ Năm? Hà có làm được không?  
+
+T000207 [10:20:00] Chị Hà: Em sẽ cố gắng, nhưng cần thông tin từ Tuấn về cấu hình trong hôm nay.  
+
+T000208 [10:20:25] Anh Tuấn: Tôi sẽ gửi thông tin sơ bộ trong chiều nay. Đến thứ Tư có bản chi tiết.  
+
+T000209 [10:20:50] Anh Minh: Vậy deadline mới cho tài liệu môi trường test là thứ Năm, trước release một tuần.  
+
+T000210 [10:21:15] Chị Hà: Vâng. Em sẽ hoàn thành đúng thứ Năm.  
+
+T000211 [10:21:40] Anh Tuấn: Tốt. Về monitoring, em sẽ setup dashboard để theo dõi lỗi sau release.  
+
+T000212 [10:22:05] Chị Lan: Dashboard có cần tích hợp với hệ thống log hiện tại không?  
+
+T000213 [10:22:30] Anh Tuấn: Có, em sẽ dùng ELK stack để thu thập log.  
+
+T000214 [10:22:55] Anh Minh: Vậy ai sẽ bảo trì dashboard đó?  
+
+T000215 [10:23:20] Anh Tuấn: Em và Khoa. Nhưng Khoa bận fix lỗi, nên em lo phần đầu.  
+
+T000216 [10:23:45] Anh Minh: Được. Vậy task monitoring này không có deadline cụ thể, nhưng em cần hoàn thành trước release.  
+
+T000217 [10:24:10] Anh Tuấn: Vâng.  
+
+T000218 [10:24:35] Chị Hà: Em muốn hỏi: tài liệu môi trường test có cần phần hướng dẫn monitoring không?  
+
+T000219 [10:25:00] Anh Minh: Không, tài liệu đó chỉ tập trung vào setup môi trường. Monitoring sẽ có tài liệu riêng sau.  
+
+T000220 [10:25:25] Chị Lan: Vậy test case của em có cần bao gồm kịch bản monitor không?  
+
+T000221 [10:25:50] Anh Minh: Không, test case chỉ cho đăng nhập. Em cứ tập trung.  
+
+T000222 [10:26:15] Anh Tuấn: Tôi có một vấn đề: ai sẽ phê duyệt release?  
+
+T000223 [10:26:40] Anh Minh: Tôi và Hà. Hà sẽ review tài liệu, tôi review code fix.  
+
+T000224 [10:27:05] Chị Hà: Vậy em cần bản tài liệu trước thứ Năm để kịp review.  
+
+T000225 [10:27:30] Anh Minh: Ừ. Vậy deadline cho review tài liệu cũng là thứ Năm, nhưng của Hà tự đặt.  
+
+T000226 [10:27:55] Anh Tuấn: Vậy tổng kết: task dữ liệu mẫu bị hủy. Deadline tài liệu môi trường test dời lên thứ Năm. Các task khác giữ nguyên.  
+
+T000227 [10:28:20] Chị Lan: Em xác nhận hủy task của mình.  
+
+T000228 [10:28:45] Chị Hà: Em xác nhận deadline mới.  
+
+T000229 [10:29:10] Anh Minh: Tốt. Chúng ta có vẻ ổn. Còn gì về release và monitoring nữa không?  
+
+T000230 [10:29:35] Anh Tuấn: Em muốn hỏi: sau release, ai sẽ chịu trách nhiệm sửa lỗi nếu có?  
+
+T000231 [10:30:00] Anh Minh: Tạm thời em và Khoa. Nếu lỗi nghiêm trọng, tôi sẽ điều phối thêm.  
+
+T000232 [10:30:25] Chị Hà: Vậy em sẽ ghi chú vào tài liệu triển khai tổng thể phần xử lý sự cố.  
+
+T000233 [10:30:50] Anh Minh: Được. Còn ai muốn hỏi gì thêm không?  
+
+T000234 [10:31:15] Chị Lan: Em nghĩ nên có buổi họp ngắn trước release để rà soát lần cuối.  
+
+T000235 [10:31:40] Anh Minh: Ý hay. Để sau part này tính. Bây giờ tạm dừng ở đây.  
+
+T000236 [10:32:05] Anh Tuấn: Vâng. Em sẽ chuẩn bị dashboard.  
+
+T000237 [10:32:30] Anh Minh: Kết thúc part này. Part sau chúng ta sẽ bàn về tài liệu tổng thể và các vấn đề còn lại.  
+
+--- END OF PART P04 ---

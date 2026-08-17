@@ -1,0 +1,32 @@
+[09:00:05] Nguyễn Văn An: Chào mọi người, hôm nay mình ngồi lại 15 phút để rà soát tiến độ sprint. Tuần này là tuần cuối rồi.
+[09:00:12] Trần Thị Bình: Chào anh, em đây.
+[09:00:15] Lê Văn Cường: Em có mặt.
+[09:00:17] Phạm Thu Dung: Chào mọi người, em vào muộn tí.
+[09:00:20] Nguyễn Văn An: Không sao, bắt đầu luôn nhé. Bình, phần module xuất báo cáo PDF của em đến đâu rồi?
+[09:00:28] Trần Thị Bình: Module đó em vừa xong hôm qua, đã merge lên develop. Dung test giúp em nhé.
+[09:00:35] Phạm Thu Dung: Ok chị, em sẽ tạo test case và chạy trong hôm nay.
+[09:00:39] Nguyễn Văn An: Tốt, vậy task đó coi như done. Còn task sửa lỗi phân trang trên bảng dữ liệu, Cường đang làm à?
+[09:00:47] Lê Văn Cường: Dạ em đang fix, còn một case đặc biệt phát sinh nên chắc cần thêm thời gian. Em đã update trên Jira.
+[09:00:55] Nguyễn Văn An: Case đó có phức tạp không? Em ước lượng khi nào xong?
+[09:01:02] Lê Văn Cường: Em nghĩ khoảng cuối ngày mai, nhưng chưa chắc chắn vì còn phụ thuộc API bên team ngoài. Em sẽ cố hết sức.
+[09:01:11] Nguyễn Văn An: Ok, không sao, miễn là trong sprint này. Bây giờ còn một việc quan trọng. Hiệu năng module báo cáo tổng hợp đang bị chậm lúc load dữ liệu lớn. Ai xung phong nhận task này?
+[09:01:23] Trần Thị Bình: Em có thể nhận, tại module đó trước em có tham gia viết một phần.
+[09:01:30] Nguyễn Văn An: Nhưng em đang có task khác không? Sợ quá tải.
+[09:01:35] Trần Thị Bình: Dạ không, em vừa xong module PDF, còn đúng task này nếu nhận thì làm luôn. Em cũng muốn cải thiện phần đó vì có mấy lần khách hàng phản hồi.
+[09:01:45] Nguyễn Văn An: Vậy em triển khai tối ưu hiệu năng module báo cáo tổng hợp nhé. Có cần deadline cụ thể không?
+[09:01:54] Trần Thị Bình: Thú thực em chưa dám cam kết ngày cụ thể, vì phải profile lại toàn bộ truy vấn và kiểm tra cache. Em sẽ làm xong sớm nhất có thể và báo cáo tiến độ hàng ngày.
+[09:02:05] Nguyễn Văn An: Vậy cũng được, miễn là thấy em làm là anh yên tâm. Không gấp lắm, nhưng em làm dứt điểm trong một hai tuần tới là tốt.
+[09:02:15] Lê Văn Cường: Em nghĩ task đó quan trọng, nhưng không có deadline liệu có bị trôi không?
+[09:02:22] Trần Thị Bình: Tôi sẽ ưu tiên nó ngay sau khi xong mấy cái phát sinh nếu có. Tôi tự thấy có trách nhiệm với phần đó, đã từng code rồi mà.
+[09:02:32] Nguyễn Văn An: Ừ, Bình làm việc có tinh thần trách nhiệm cao, nên không cần áp deadline cứng. Em cứ triển khai thoải mái.
+[09:02:41] Trần Thị Bình: Cảm ơn anh. Em sẽ cập nhật kết quả profiling vào giữa tuần sau.
+[09:02:48] Phạm Thu Dung: Vậy phần tester có cần em hỗ trợ benchmark không chị Bình?
+[09:02:53] Trần Thị Bình: Có, em giúp chị dựng bộ dữ liệu mẫu lớn để load test nhé, không cần vội. Khi nào chị viết xong script tối ưu thì mình cùng chạy.
+[09:03:02] Phạm Thu Dung: Ok chị, em cũng sẽ tranh thủ lúc rảnh để chuẩn bị dữ liệu. Chị không cần set deadline cho em đâu.
+[09:03:10] Nguyễn Văn An: Vậy thống nhất nhé, task tối ưu hiệu năng module báo cáo tổng hợp do Bình làm, không có deadline cố định, Dung hỗ trợ test. Các bạn cứ triển khai tự do. À Cường, còn task sửa lỗi phân trang, nhớ báo anh khi có kết quả từ API.
+[09:03:22] Lê Văn Cường: Vâng anh.
+[09:03:25] Nguyễn Văn An: Còn ai có vấn đề gì cần thảo luận thêm không?
+[09:03:30] Trần Thị Bình: Em hết.
+[09:03:32] Phạm Thu Dung: Em cũng hết.
+[09:03:34] Lê Văn Cường: Em hết.
+[09:03:36] Nguyễn Văn An: Ok, vậy kết thúc meeting. Cảm ơn mọi người.

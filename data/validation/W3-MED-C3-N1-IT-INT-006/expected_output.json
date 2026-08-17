@@ -1,0 +1,45 @@
+{
+  "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+  "tasks": [
+    {
+      "task_name": "Hoàn thiện tài liệu API",
+      "assignee": "Mai",
+      "start_date": "2026-02-10",
+      "due_date": "2026-02-20",
+      "due_date_text": "deadline 20/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết script dữ liệu mẫu",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-10",
+      "due_date": "",
+      "due_date_text": "",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Kiểm tra dữ liệu mẫu",
+      "assignee": "Linh",
+      "start_date": "2026-02-10",
+      "due_date": "",
+      "due_date_text": "trong 2 ngày sau khi có script",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Kiểm tra quyền truy cập",
+      "assignee": "Linh",
+      "start_date": "2026-02-10",
+      "due_date": "2026-02-18",
+      "due_date_text": "deadline 18/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Setup môi trường staging",
+      "assignee": "Hùng",
+      "start_date": "2026-02-10",
+      "due_date": "2026-02-24",
+      "due_date_text": "deadline mới là 24/02",
+      "status": "Proposed"
+    }
+  ]
+}

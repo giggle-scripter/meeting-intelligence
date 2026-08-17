@@ -1,0 +1,116 @@
+MEETING_ID: W5-XL-C5-N2-OPS-STRESS-004
+PART: P07/10
+
+T000418 [10:40:30] Minh: Chúng ta chuyển sang topic monitoring và support. Sau khi payment service được deploy, cần giám sát hoạt động. An, em đã có kế hoạch gì chưa?
+
+T000419 [10:40:45] An: Em đã dựa trên log spec từ Tuấn để phác thảo monitoring dashboard. Nhưng cần bổ sung alerting rule.
+
+T000420 [10:41:00] Tuấn: Log spec đã có thông tin về format, nhưng chưa có metric về performance.
+
+T000421 [10:41:15] Minh: Vậy cần thêm task define metric cho payment. Tuấn, em có thể làm?
+
+T000422 [10:41:30] Tuấn: Em có thể, nhưng cần biết threshold. Có thể tham khảo từ team ops.
+
+T000423 [10:41:45] An: Em có số liệu từ stress test sơ bộ, em sẽ gửi.
+
+T000424 [10:42:00] Minh: Vậy task define metric và threshold, assign Tuấn, deadline 10/3. An hỗ trợ số liệu.
+
+T000425 [10:42:15] Lan: Em thấy deadline này gần với deadline CI/CD pipeline (12/3). Có cần điều chỉnh không?
+
+T000426 [10:42:30] Minh: Không, vì metric độc lập.
+
+T000427 [10:42:45] Hà: Em có thắc mắc, monitoring có cần tích hợp với hệ thống alerting hiện tại hay dùng riêng?
+
+T000428 [10:43:00] An: Dùng chung với hệ thống hiện tại, đỡ chi phí.
+
+T000429 [10:43:15] Minh: Đồng ý. Vậy ai sẽ cấu hình alert?
+
+T000430 [10:43:30] An: Em có thể, nhưng cần Tuấn xác định threshold trước.
+
+T000431 [10:43:45] Tuấn: Em sẽ gửi threshold trong bản metric.
+
+T000432 [10:44:00] Minh: Vậy task alerting configuration assign An, deadline 12/3, phụ thuộc vào Tuấn.
+
+T000433 [10:44:15] Lan: Ghi nhận event-dependent deadline: alerting phụ thuộc metric define.
+
+T000434 [10:44:30] Hà: Em muốn hỏi về support plan. Khi deploy, ai sẽ on-call?
+
+T000435 [10:44:45] Minh: Ban đầu, team dev và ops. An và Tuấn sẽ túc trực trong 48h đầu.
+
+T000436 [10:45:00] An: Em OK, nhưng cần Tuấn shared tài liệu troubleshooting.
+
+T000437 [10:45:15] Tuấn: Em đã viết runbook, An đang hoàn thiện.
+
+T000438 [10:45:30] Minh: Vậy runbook cần xong trước deploy. Deadline runbook là 8/3, vẫn ổn?
+
+T000439 [10:45:45] An: Em sẽ cố gắng xong sớm.
+
+T000440 [10:46:00] Lan: Em nhắc lại, task runbook đã có từ trước, không tạo duplicate. Chỉ cần theo dõi.
+
+T000441 [10:46:15] Tuấn: Em có vấn đề, task log spec đã đóng, nhưng em thấy cần cập nhật thêm section về error codes. Đó có phải task mới?
+
+T000442 [10:46:30] Minh: Không, đó là update của task đã đóng. Có thể mở lại nếu cần. Nhưng không tạo mới.
+
+T000443 [10:46:45] An: Em nghĩ error codes cần có trong doc, vì anh Tuấn chưa ghi.
+
+T000444 [10:47:00] Minh: Vậy mở lại task log spec với scope bổ sung error codes, assign Tuấn, deadline 11/3.
+
+T000445 [10:47:15] Hà: Như vậy task cũ được mở lại, không phải mới.
+
+T000446 [10:47:30] Tuấn: OK, em sẽ cập nhật.
+
+T000447 [10:47:45] Lan: Anh Minh, em thấy có long-distance reference: task ETL data migration từ P02 vẫn unresolved. Có cần nhắc lại?
+
+T000448 [10:48:00] Minh: Chỉ nhắc, không tạo task. Nhưng anh sẽ hỏi Huy và Giang sau.
+
+T000449 [10:48:15] An: Em có câu hỏi, monitoring dashboard cần bao gồm cả CRM integration? Vì sẽ có traffic từ họ.
+
+T000450 [10:48:30] Minh: Tạm thời chưa, chỉ payment.
+
+T000451 [10:48:45] Tuấn: Em thấy có rủi ro nếu không monitor CRM, nhưng ok.
+
+T000452 [10:49:00] Hà: Vậy test plan monitoring có cần test các alert không?
+
+T000453 [10:49:15] An: Có, em sẽ test sau khi config.
+
+T000454 [10:49:30] Minh: Vậy thêm test alert vào task của An.
+
+T000455 [10:49:45] Lan: Ghi chú, task alerting bao gồm test.
+
+T000456 [10:50:00] Tuấn: Em muốn hỏi, deadline metric define 10/3, alerting 12/3, có quá gần không? Nếu metric chậm, alerting ảnh hưởng.
+
+T000457 [10:50:15] Minh: Nếu cần, có thể dời deadline metric lên 9/3. Nhưng anh nghĩ 10/3 ổn.
+
+T000458 [10:50:30] Lan: Vậy giữ nguyên.
+
+T000459 [10:50:45] Hà: Có negative context ở đây: nếu metric không kịp, alerting bị delay, ảnh hưởng support.
+
+T000460 [10:51:00] Minh: Đúng, nhưng chúng ta có buffer. Nếu cần, sẽ dời deploy.
+
+T000461 [10:51:15] An: Em đồng ý.
+
+T000462 [10:51:30] Tuấn: Em sẽ ưu tiên metric.
+
+T000463 [10:51:45] Minh: Chuyển sang vấn đề khác. Hệ thống support ticket cần được set up. Ai làm?
+
+T000464 [10:52:00] Lan: Em có thể tạo kênh Slack. Nhưng cần xác định quy trình.
+
+T000465 [10:52:15] Minh: Vậy Lan tạo task quy trình support, deadline 13/3.
+
+T000466 [10:52:30] Hà: Em muốn hỏi, ticket có cần tích hợp với payment không?
+
+T000467 [10:52:45] Minh: Không, support riêng.
+
+T000468 [10:53:00] An: Em có ý kiến, nếu có sự cố, cần có playbook reference runbook.
+
+T000469 [10:53:15] Minh: Playbook có thể viết sau.
+
+T000470 [10:53:30] Tuấn: Em thấy chúng ta có nhiều task monitoring, cần prioritize.
+
+T000471 [10:53:45] Minh: Đồng ý, ưu tiên metric và alerting. Còn support để sau.
+
+T000472 [10:54:00] Lan: Vậy tổng kết P07: task metric (Tuấn, 10/3), task alerting (An, 12/3), mở lại log spec (Tuấn, 11/3), task support process (Lan, 13/3). Còn unresolved ETL vẫn giữ.
+
+T000473 [10:54:15] Minh: Đúng. Cảm ơn, kết thúc P07.
+
+--- END OF PART P07 ---

@@ -1,0 +1,23 @@
+[09:00:00] Minh: Chào mọi người, hôm nay chúng ta họp nhanh về lỗi đăng nhập Google mà QA ghi nhận. Lan, em trình bày sơ qua nhé.
+[09:00:18] Lan: Dạ, thưa anh Minh, từ hôm qua khoảng 5% người dùng không đăng nhập được bằng tài khoản Google, lỗi trả về invalid_grant. Tụi em đã test trên nhiều thiết bị, lỗi xuất hiện ngẫu nhiên.
+[09:00:42] Anh: Tôi đã xem sơ log server, có vẻ token hết hạn nhưng flow refresh không chạy đúng. Cần kiểm tra thêm class xử lý OAuth.
+[09:01:03] Minh: Rõ rồi. Anh, em phân tích sâu hơn được không? Dự kiến bao nhiêu thời gian?
+[09:01:20] Anh: Tôi có thể dành chiều nay để phân tích, nhưng cần dữ liệu từ backend. Tôi sẽ gửi request.
+[09:01:38] Lan: Nếu cần môi trường test, em có thể chuẩn bị sẵn các kịch bản.
+[09:01:55] Minh: Tốt. Vậy giao cho Anh task phân tích nguyên nhân lỗi, deadline cuối ngày mai. Anh ok chứ?
+[09:02:12] Anh: Ok, tôi sẽ cố gắng.
+[09:02:28] Lan: Anh Minh cho em hỏi, sau khi có kết quả phân tích, ai sẽ sửa lỗi này? Em thấy nó khá gấp.
+[09:02:50] Minh: Hiện tại team mình đang thiếu người, Anh đang ôm task khác, còn em Lan cũng bận dự án priority cao. Ai có thể đảm nhận phần sửa không?
+[09:03:10] Lan: Em e là không, tuần này em phải xong module mới.
+[09:03:25] Anh: Tôi cũng không rảnh để sửa, chỉ phân tích được thôi.
+[09:03:42] Minh: Vậy tạm thời chưa có ai nhận. Để khi có phân tích chi tiết, tôi sẽ assign người phù hợp hoặc thuê ngoài. Chúng ta tập trung vào phân tích trước.
+[09:04:05] Minh: Ngoài ra, tôi cũng cần ai đó cập nhật tài liệu hướng dẫn đăng nhập cho khách hàng. Lan, em đảm nhận được không? Deadline thứ Sáu tuần này.
+[09:04:22] Lan: Được ạ, em sẽ làm. Em có thể thêm phần khắc phục lỗi thường gặp.
+[09:04:40] Anh: Tôi nghĩ nên đưa luôn thông tin về lỗi Google vào tài liệu sau khi có kết quả.
+[09:04:55] Minh: Ý hay. Vậy tóm lại: Anh phân tích lỗi đăng nhập Google – deadline mai, Lan cập nhật tài liệu – deadline thứ Sáu. Còn việc sửa lỗi, tôi sẽ báo sau.
+[09:05:18] Lan: Em muốn hỏi thêm, lỗi này chỉ xuất hiện trên web hay cả mobile?
+[09:05:35] Anh: Theo log, có cả mobile, nhưng tỉ lệ cao hơn trên Android.
+[09:05:50] Minh: Chú ý vào cả hai nền tảng. Anh có cần hỗ trợ gì thêm không?
+[09:06:08] Anh: Hiện tại chưa cần, tôi sẽ báo nếu có vấn đề.
+[09:06:25] Lan: Vậy em sẽ soạn sẵn test case cho việc sửa sau này.
+[09:06:40] Minh: Cảm ơn mọi người. Hãy update tiến độ vào cuối mỗi ngày. Cuộc họp kết thúc.

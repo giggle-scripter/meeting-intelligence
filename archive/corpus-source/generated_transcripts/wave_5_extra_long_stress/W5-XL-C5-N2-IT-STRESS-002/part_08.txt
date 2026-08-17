@@ -1,0 +1,108 @@
+MEETING_ID: W5-XL-C5-N2-IT-STRESS-002
+PART: P08/10
+
+T000426 [10:12:36] Minh: Mọi người, trước khi chúng ta chuẩn bị cho deploy 15h, tôi muốn quay lại vấn đề tích hợp FastShip. Trang, em có thông tin gì mới về API spec từ phía họ không?
+
+T000427 [10:12:50] Trang: Dạ, em vừa nhận email từ bên FastShip, họ gửi bản cập nhật API spec version 1.2. Có một số thay đổi nhỏ về endpoint tracking và cách xác thực.
+
+T000428 [10:13:06] Đức: Thay đổi gì? Có ảnh hưởng đến kế hoạch review không?
+
+T000429 [10:13:12] Trang: Họ thay đổi endpoint từ /tracking/id thành /track/{order_id}, và bắt buộc dùng API key mới, không còn OAuth2.
+
+T000430 [10:13:24] Hùng: Cái đó khác hoàn toàn với spec trước. Chúng ta đã bắt đầu review dựa trên OAuth2, giờ phải làm lại.
+
+T000431 [10:13:34] Minh: Vậy ambiguity này cần giải quyết: chúng ta có nên tiếp tục với spec cũ hay chuyển sang mới? Tôi muốn thống nhất.
+
+T000432 [10:13:46] Đức: Rõ ràng phải dùng spec mới vì đó là yêu cầu bên họ. Nhưng điều này làm trễ task review của tôi và Hùng.
+
+T000433 [10:13:56] Hùng: Em đồng ý. Nếu chuyển, deadline 07/03 có thể không kịp.
+
+T000434 [10:14:04] Minh: Tôi đề nghị điều chỉnh: task review API FastShip vẫn giữ deadline 07/03, nhưng scope sẽ là spec mới. Hùng và Đức cần cập nhật.
+
+T000435 [10:14:18] Hùng: Vậy em cần xem trước spec mới từ Trang. Trang, em gửi ngay được không?
+
+T000436 [10:14:24] Trang: Em sẽ forward email trong 5 phút nữa.
+
+T000437 [10:14:28] Tuấn: Tôi cũng cần spec để cập nhật pipeline. Liệu có cần tạo mới hay chỉnh sửa?
+
+T000438 [10:14:36] Minh: Chưa, chúng ta mới review. Sau đó mới tích hợp.
+
+T000439 [10:14:42] Lan: Em xin hỏi, vụ thay đổi spec này có làm tăng scope công việc không? Nếu có, có thể cần thêm người.
+
+T000440 [10:14:52] Minh: Tôi nghĩ không, vì chỉ thay đổi authentication, không ảnh hưởng data.
+
+T000441 [10:15:00] Đức: Nhưng cần kiểm tra code cũ có hỗ trợ API key không. Hùng, mày rành nhất.
+
+T000442 [10:15:08] Hùng: Em sẽ check. Tuy nhiên, nếu spec thay đổi, chúng ta có thể cần một buổi workshop khác với FastShip.
+
+T000443 [10:15:18] Minh: Workshop đã được Trang lên lịch thứ Tư hoặc thứ Năm tuần sau. Vẫn giữ.
+
+T000444 [10:15:26] Trang: Nhưng bây giờ chưa xác nhận ngày vì bên họ chưa reply.
+
+T000445 [10:15:32] Minh: Vậy vẫn unresolved. Chúng ta giữ reference này.
+
+T000446 [10:15:38] Tuấn: Một câu hỏi: nếu thay đổi authentication, liệu có ảnh hưởng đến security review không? Tôi nghĩ cần Đức xem.
+
+T000447 [10:15:50] Đức: Tôi sẽ xem trong review. Không vấn đề.
+
+T000448 [10:15:56] Hùng: Anh Minh, em muốn hỏi rõ: task review API của em và Đức có phải đưa ra ước lượng luôn không? Hay chỉ review kỹ thuật?
+
+T000449 [10:16:08] Minh: Task hiện tại là review spec, đưa ra nhận xét về tính khả thi. Chưa yêu cầu ước lượng. Đó là việc sau.
+
+T000450 [10:16:18] Lan: Vậy task này chỉ dừng ở review, không phải code. OK.
+
+T000451 [10:16:24] Trang: Anh Minh, em cần biết workshop có cần sự tham gia của bên dev không? Hay chỉ support?
+
+T000452 [10:16:34] Minh: Cần Hùng hoặc Đức tham gia. Ai rảnh?
+
+T000453 [10:16:38] Hùng: Em có thể tham gia nếu không phải sáng thứ Năm.
+
+T000454 [10:16:44] Đức: Tôi cũng được. Nhưng chờ lịch cụ thể.
+
+T000455 [10:16:50] Trang: Em sẽ gửi poll.
+
+T000456 [10:16:54] Minh: Tốt.
+
+T000457 [10:16:58] Tuấn: Ngoài ra, tôi thấy cần có một môi trường test riêng cho tích hợp, tránh ảnh hưởng staging.
+
+T000458 [10:17:08] Minh: Đúng, nhưng chưa phải bây giờ. Khi có review và ước lượng, chúng ta sẽ tạo sandbox.
+
+T000459 [10:17:18] Hùng: Em muốn hỏi về unresolved owner FastShip. Nếu chưa xác định, workshop có cần người chủ trì không?
+
+T000460 [10:17:28] Minh: Tôi sẽ chủ trì tạm. Nhưng vẫn chưa resolve.
+
+T000461 [10:17:34] Lan: Em thấy nhiều vấn đề chưa rõ. Nhưng em tập trung thanh toán.
+
+T000462 [10:17:40] Đức: Recap local: integration FastShip spec thay đổi, task review vẫn deadline 07/03, scope cập nhật. Workshop chưa chốt lịch, owner unresolved. Đúng không?
+
+T000463 [10:17:54] Minh: Đúng. Không tạo task mới từ recap.
+
+T000464 [10:17:58] Trang: Anh Minh, em muốn confirm lại: em có cần follow hợp đồng FastShip hay không? Hay chờ lead?
+
+T000465 [10:18:08] Minh: Vẫn chờ. Tôi chưa gặp lead.
+
+T000466 [10:18:14] Hùng: Em có một câu hỏi khác: spec mới có yêu cầu phải dùng webhook không? Em thấy họ đề cập.
+
+T000467 [10:18:24] Trang: Có, họ có webhook để thông báo trạng thái đơn hàng.
+
+T000468 [10:18:30] Đức: Cái đó là feature riêng, có thể đưa vào sau.
+
+T000469 [10:18:36] Minh: Ghi nhận.
+
+T000470 [10:18:40] Tuấn: Vậy là chúng ta có ambiguity về authentication và webhook, đã giải quyết authentication bằng spec mới, nhưng webhook chưa.
+
+T000471 [10:18:50] Minh: Đúng. Webhook giữ unresolved.
+
+T000472 [10:18:54] Lan: Anh Minh, thời gian deploy sắp đến. Em cần ra ngoài chuẩn bị.
+
+T000473 [10:19:00] Minh: OK, gần xong. Tổng kết: task review API vẫn tiến hành, deadline 07/03, spec mới. Workshop chưa chốt. Owner FastShip chưa resolve. Webhook unresolved.
+
+T000474 [10:19:16] Hùng: Em rõ.
+
+T000475 [10:19:18] Đức: Không còn gì.
+
+T000476 [10:19:20] Trang: Em sẽ gửi spec ngay.
+
+T000477 [10:19:24] Minh: Vậy kết thúc block này. Mọi người chuẩn bị deploy 15h.
+
+--- END OF PART P08 ---

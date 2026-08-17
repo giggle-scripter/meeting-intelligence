@@ -1,0 +1,62 @@
+MEETING_ID: W4-LONG-C5-N2-SW-STATE-001
+PART: P04/5
+
+T000174 [10:26:30] Chị Lan: OK, chúng ta chuyển sang phần release và monitoring. Anh Minh, em có kế hoạch gì cho việc giám sát hệ thống sau khi triển khai chưa?
+T000175 [10:27:00] Anh Minh: Em có draft một số metric cần theo dõi, như response time, error rate, và CPU usage. Nhưng chưa có công cụ cụ thể.
+T000176 [10:27:30] Chị Lan: Cần có kế hoạch rõ ràng. Chị nghĩ nên dùng Prometheus và Grafana như dự án trước. Anh Tuấn, em thấy sao?
+T000177 [10:28:00] Anh Tuấn: Dạ, em đồng ý. Nhưng cần cấu hình alert cho các ngưỡng quan trọng.
+T000178 [10:28:30] Chị Hoa: Vậy monitoring có nằm trong kịch bản test không? Em nghĩ nên test cả cảnh báo.
+T000179 [10:29:00] Chị Lan: Không, monitoring là việc riêng. Em tập trung test triển khai thôi.
+T000180 [10:29:30] Anh Minh: Nhân tiện, em muốn nói về task unit test authentication. Em thấy nó không cần thiết ngay bây giờ vì spec integration còn đang làm. Em đề nghị hủy task đó.
+T000181 [10:30:00] Chị Lan: Lý do?
+T000182 [10:30:30] Anh Minh: Vì unit test sẽ phụ thuộc vào code hoàn chỉnh, mà module authentication còn thay đổi. Nếu viết sớm, sẽ phải sửa nhiều.
+T000183 [10:31:00] Chị Lan: Hợp lý. Vậy chính thức hủy task "Viết unit test authentication". Anh Minh, em không cần làm nữa.
+T000184 [10:31:30] Anh Minh: Vâng.
+T000185 [10:32:00] Chị Hoa: Vậy task của em vẫn giữ 20/02 nhé?
+T000186 [10:32:30] Chị Lan: Ừ, giữ nguyên.
+T000187 [10:33:00] Anh Tuấn: Em có đề xuất: task tạo dữ liệu test của em nên có deadline cụ thể, vì nó ảnh hưởng đến kịch bản test. Em nghĩ nên đặt deadline 19/02 để chị Hoa có dữ liệu trước khi chạy.
+T000188 [10:33:30] Chị Lan: Đồng ý. Vậy task "Tạo dữ liệu test" trở thành task chính thức, deadline 19/02, assignee anh Tuấn.
+T000189 [10:34:00] Anh Tuấn: Vâng, em sẽ hoàn thành script và dữ liệu trước ngày đó.
+T000190 [10:34:30] Chị Hoa: Tốt, em sẽ có dữ liệu để test.
+T000191 [10:35:00] Chị Lan: Còn về monitoring, em nghĩ mình cần một task riêng. Anh Minh, em có thể lên kế hoạch cài đặt Prometheus và Grafana không?
+T000192 [10:35:30] Anh Minh: Em có thể, nhưng cần thời gian. Có thể sau khi tài liệu triển khai xong.
+T000193 [10:36:00] Chị Lan: Vậy tạm thời chưa phải task chính thức. Em ghi nhớ và báo cáo sau.
+T000194 [10:36:30] Anh Minh: OK.
+T000195 [10:37:00] Chị Hoa: Em muốn hỏi về release plan: mình có dự kiến ngày deploy lên production không?
+T000196 [10:37:30] Chị Lan: Chưa có. Phải chờ staging test xong. Nhưng ước chừng cuối tháng 3.
+T000197 [10:38:00] Anh Tuấn: Vậy timeline khá gấp. Em sẽ cố gắng dữ liệu test sớm.
+T000198 [10:38:30] Anh Minh: Em cũng sẽ viết tài liệu triển khai đúng hạn 26/02.
+T000199 [10:39:00] Chị Lan: Lưu ý: task của anh Minh deadline 26/02, task của chị Hoa 20/02, task dữ liệu test của anh Tuấn 19/02. Các deadline này gần nhau, cần phối hợp.
+T000200 [10:39:30] Anh Tuấn: Vâng, em sẽ hoàn thành dữ liệu trước để anh Minh có thể tham khảo.
+T000201 [10:40:00] Anh Minh: Cảm ơn.
+T000202 [10:40:30] Chị Hoa: Em có vấn đề: kịch bản test của em phụ thuộc vào spec authentication, nhưng spec đó đã được anh Minh hứa sáng mai. Nếu không có, deadline 20/02 khó giữ.
+T000203 [10:41:00] Chị Lan: Anh Minh, em đã cam kết rồi, phải giữ.
+T000204 [10:41:30] Anh Minh: Em sẽ gửi đúng hạn.
+T000205 [10:42:00] Chị Hoa: Vậy em yên tâm. Em cũng muốn thảo luận về monitoring: có cần test cảnh báo trong kịch bản không?
+T000206 [10:42:30] Chị Lan: Chị nghĩ không. Monitoring là việc của vận hành.
+T000207 [10:43:00] Anh Tuấn: Em đồng ý. Tập trung vào triển khai chính.
+T000208 [10:43:30] Anh Minh: Em thấy task tạo dữ liệu test và kịch bản test có thể chạy song song. Anh Tuấn gửi dữ liệu trước 19/02 là đủ.
+T000209 [10:44:00] Chị Lan: Đúng. Còn ai có thắc mắc về release và monitoring không?
+T000210 [10:44:30] Anh Hùng (mới tham gia): Chị Lan, em vừa vào. Em có thể hỗ trợ phần monitoring nếu cần.
+T000211 [10:45:00] Chị Lan: Chào anh Hùng, em đến muộn nhưng kịp. Em có kinh nghiệm về Prometheus không?
+T000212 [10:45:30] Anh Hùng: Có, em đã làm ở dự án trước.
+T000213 [10:46:00] Chị Lan: Tốt. Vậy em sẽ phụ trách monitoring, nhưng chưa có task chính thức. Anh Minh sẽ bàn giao lại sau.
+T000214 [10:46:30] Anh Hùng: Vâng.
+T000215 [10:47:00] Anh Minh: Em sẽ gửi tài liệu monitoring draft cho anh Hùng.
+T000216 [10:47:30] Chị Hoa: Vậy có thêm một người, việc sẽ nhẹ hơn.
+T000217 [10:48:00] Chị Lan: Quay lại task cũ: task "Viết unit test authentication" đã hủy, không còn. Các task khác giữ nguyên. Chị muốn recap:
+- Anh Minh: tài liệu triển khai deadline 26/02.
+- Chị Hoa: kịch bản test deadline 20/02, phụ thuộc spec.
+- Anh Tuấn: dữ liệu test deadline 19/02.
+- Anh Hùng: monitoring (chưa chính thức).
+- Reviewer: chưa assign.
+Ai cần clarify?
+T000218 [10:48:30] Anh Minh: Rõ.
+T000219 [10:49:00] Chị Hoa: OK.
+T000220 [10:49:30] Anh Tuấn: Không.
+T000221 [10:50:00] Anh Hùng: Em chỉ muốn hỏi: có cần tài liệu monitoring riêng không?
+T000222 [10:50:30] Chị Lan: Có, nhưng để sau. Bây giờ tập trung triển khai.
+T000223 [10:51:00] Anh Hùng: Hiểu.
+T000224 [10:51:30] Chị Lan: Vậy phần này tạm ổn. Chúng ta sẽ bàn tiếp về timeline tổng thể ở phần cuối.
+
+--- END OF PART P04 ---

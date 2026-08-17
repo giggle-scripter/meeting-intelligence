@@ -1,0 +1,120 @@
+MEETING_ID: W5-XL-C5-N2-OPS-STRESS-004
+PART: P02/10
+
+T000104 [09:22:00] Minh: Tiếp tục nhé. Chúng ta cần bàn về tích hợp payment với module CRM. Lan, em có cập nhật gì từ phía đối tác không?
+
+T000105 [09:22:15] Lan: Có, bên CRM yêu cầu chúng ta cung cấp API để đồng bộ trạng thái đơn hàng. Họ muốn hai chiều.
+
+T000106 [09:22:30] Tuấn: API hiện tại chỉ có một chiều từ payment sang CRM. Cần thêm endpoint để CRM gửi cập nhật.
+
+T000107 [09:22:45] Hà: Vậy có thay đổi spec không? Em cần cập nhật test plan.
+
+T000108 [09:23:00] Minh: Chưa rõ. Anh cần Huy bàn với bên CRM, nhưng Huy vắng. Có thể hoãn sang tuần sau.
+
+T000109 [09:23:15] An: Nhưng nếu hoãn thì lịch deploy bị ảnh hưởng.
+
+T000110 [09:23:30] Minh: Để anh assign tạm cho Tuấn viết API draft dựa trên tài liệu cũ. Tuấn, em làm được không?
+
+T000111 [09:23:45] Tuấn: Em có thể phác thảo, nhưng cần confirmation từ product.
+
+T000112 [09:24:00] Minh: Vậy em viết draft, deadline 4/3. Sau đó anh sẽ review.
+
+T000113 [09:24:15] Lan: Còn việc đồng bộ dữ liệu lịch sử? Payment có dữ liệu từ năm ngoái, cần migrate lên CRM.
+
+T000114 [09:24:30] An: Em thấy cần script chạy batch. Có thể dùng ETL pipeline.
+
+T000115 [09:24:45] Minh: Ai sẽ làm việc đó? Chưa assign.
+
+T000116 [09:25:00] Hà: Theo anh, team data hay team dev? Em thấy cần chuyên môn về data.
+
+T000117 [09:25:15] Minh: Để hỏi Giang khi quay lại. Nhưng tạm thời tạo task với owner unresolved.
+
+T000118 [09:25:30] Lan: Vậy deadline dự kiến? Nếu không có owner thì khó.
+
+T000119 [09:25:45] Minh: Deadline tham khảo 10/3, nhưng sẽ xác nhận sau.
+
+T000120 [09:26:00] Tuấn: Em có thể hỗ trợ viết script nếu có spec rõ.
+
+T000121 [09:26:15] Hà: Nhưng Tuấn đã có nhiều task rồi. Liệu có quá tải?
+
+T000122 [09:26:30] Minh: Em nói đúng. Để phân công lại: task migration data tạm gác, chờ Huy và Giang.
+
+T000123 [09:26:45] An: Vậy còn việc setup môi trường cho CRM test? Bên họ cần sandbox.
+
+T000124 [09:27:00] Minh: An, em làm được không? Cần bao lâu?
+
+T000125 [09:27:15] An: Khoảng 2 ngày, nhưng cần Tuấn mở port trên firewall.
+
+T000126 [09:27:30] Tuấn: Em sẽ làm ngay. Deadline mở port là hôm nay.
+
+T000127 [09:27:45] Minh: OK, ghi nhận. Task cho An: setup sandbox, deadline 3/3.
+
+T000128 [09:28:00] Lan: Anh Minh, em thấy có hai task tên giống nhau: "viết script migration" cho database và "viết script migration" cho CRM. Dễ nhầm.
+
+T000129 [09:28:15] Minh: Ừ, cần phân biệt. Một cái là write ETL, một cái là write db migration. Ghi rõ trong ticket.
+
+T000130 [09:28:30] Hà: Em nghĩ nên đặt tên khác, ví dụ "ETL data migration" và "schema migration".
+
+T000131 [09:28:45] Minh: Đồng ý, Lan update board nhé.
+
+T000132 [09:29:00] Lan: Vâng. Có ai phản đối gì không? ... Không.
+
+T000133 [09:29:15] Tuấn: Em có thắc mắc, schema migration có dependency với payment deploy. Nếu payment chưa xong thì migration không chạy được.
+
+T000134 [09:29:30] Minh: Đúng vậy, cần đồng bộ. Vậy deadline của migration script phải sau payment API. Điều chỉnh thành 22/3.
+
+T000135 [09:29:45] An: Nhưng lịch deploy là 15/3, script phải có trước đó.
+
+T000136 [09:30:00] Minh: Anh nhầm, payment deploy 15/3, nên script cần trước 14/3. OK.
+
+T000137 [09:30:15] Hà: Vậy migration script deadline 14/3? Nhưng vẫn chưa có owner.
+
+T000138 [09:30:30] Minh: Tạm thời assign Tuấn, nhưng nếu quá tải thì chuyển cho người khác sau.
+
+T000139 [09:30:45] Tuấn: Em có thể đảm nhận, nhưng cần support từ data team.
+
+T000140 [09:31:00] Minh: Ok, có negative context ở đây: Tuấn nhận nhưng không chắc. Ghi chú trong ticket.
+
+T000141 [09:31:15] Lan: Chúng ta đang có nhiều task overlapping. Em sợ mất tracking.
+
+T000142 [09:31:30] Minh: Vậy phần còn lại của P02, chúng ta tập trung giải quyết vấn đề kỹ thuật khác. An, em có báo cáo gì về Kubernetes?
+
+T000143 [09:31:45] An: Kubernetes cluster sắp hết resource, cần scale. Nhưng chưa có budget approve.
+
+T000144 [09:32:00] Minh: Việc đó ngoài scope. Cho qua.
+
+T000145 [09:32:15] Hà: Em muốn hỏi, test environment cho integration có ổn không?
+
+T000146 [09:32:30] An: Đang dùng chung với dev, có thể conflict.
+
+T000147 [09:32:45] Tuấn: Em nghĩ nên tách riêng môi trường integration.
+
+T000148 [09:33:00] Minh: Nhưng tốn thêm chi phí. Có cách khác không?
+
+T000149 [09:33:15] An: Có thể dùng namespace riêng trong cùng cluster, không tốn thêm.
+
+T000150 [09:33:30] Minh: OK, An làm việc đó, deadline 5/3.
+
+T000151 [09:33:45] Lan: Em thấy mọi người đang quá tải, chúng ta nên ưu tiên lại.
+
+T000152 [09:34:00] Minh: Ý em là cancel một số task không critical?
+
+T000153 [09:34:15] Lan: Ví dụ như workshop deploy flow có thể hoãn, vì chưa cần ngay.
+
+T000154 [09:34:30] An: Nhưng đã set date rồi.
+
+T000155 [09:34:45] Minh: Để giữ nguyên. Quyết định giữ.
+
+T000156 [09:35:00] Hà: Còn vấn đề về notification? Em thấy payment không có notification đã là negative.
+
+T000157 [09:35:15] Minh: Đã bàn, bỏ qua. Chuyển chủ đề.
+
+T000158 [09:35:30] Tuấn: Em cần làm rõ, ETL script có dùng chung connector với notification không? Vì dependency.
+
+T000159 [09:35:45] Minh: Không, separate. Em cứ làm.
+
+T000160 [09:36:00] Lan: Vậy chốt P02, còn nhiều việc chưa resolved, hẹn part sau.
+
+T000161 [09:36:15] Minh: Đúng, kết thúc phần này. Cảm ơn mọi người.
+
+--- END OF PART P02 ---

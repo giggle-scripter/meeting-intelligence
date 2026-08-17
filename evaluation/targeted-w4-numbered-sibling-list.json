@@ -1,0 +1,362 @@
+{
+  "pipeline_version": "v1",
+  "meeting_context_mode": "assist",
+  "meeting_notes": "sidecar_if_present",
+  "prompt_version": "v1-ledger-mutation-v1",
+  "model": "deterministic",
+  "reasoning_effort": "not_applicable",
+  "mode": "local",
+  "endpoint": "",
+  "completed_case_count": 1,
+  "expected_case_count": 1,
+  "metrics_are_partial": false,
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 1,
+    "unreviewed_ground_truth_count": 0,
+    "unreviewed_case_ids": [],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 1,
+    "passed_case_count": 0,
+    "failed_case_count": 1,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.18181818181818182,
+    "task_identity_recall": 0.4,
+    "task_precision": 0.18181818181818182,
+    "task_recall": 0.4,
+    "field_accuracy": 0.5833333333333334,
+    "assignee_accuracy": 0.0,
+    "due_date_accuracy": 0.5,
+    "due_date_text_exact_accuracy": 0.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "reviewed_metrics": {
+    "case_count": 1,
+    "passed_case_count": 0,
+    "failed_case_count": 1,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.18181818181818182,
+    "task_identity_recall": 0.4,
+    "task_precision": 0.18181818181818182,
+    "task_recall": 0.4,
+    "field_accuracy": 0.5833333333333334,
+    "assignee_accuracy": 0.0,
+    "due_date_accuracy": 0.5,
+    "due_date_text_exact_accuracy": 0.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "exploratory_metrics": {
+    "case_count": 0,
+    "passed_case_count": 0,
+    "failed_case_count": 0,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 1.0,
+    "task_identity_recall": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 28,
+    "rule_event_count": 60,
+    "ai_event_count": 0,
+    "ai_window_count": 2,
+    "ai_batch_count": 2,
+    "ai_context_clause_count": 59,
+    "unresolved_window_count": 2,
+    "event_count_before_deduplication": 61,
+    "event_count_after_deduplication": 61,
+    "terminal_replay_blocked_count": 0,
+    "ledger_task_created_count": 32,
+    "ledger_task_updated_count": 24,
+    "exact_id_link_count": 0,
+    "exact_alias_link_count": 6,
+    "semantic_link_count": 18,
+    "unresolved_mutation_count": 1,
+    "duplicate_task_merge_count": 0,
+    "provisional_task_created_count": 24,
+    "provisional_task_promoted_count": 4,
+    "provisional_promotion_blocked_count": 0,
+    "ambiguous_identity_mutation_blocked_count": 0,
+    "sibling_identity_split_count": 0,
+    "ai_contract_rejection_count": 0,
+    "ai_structural_contract_rejection_count": 0,
+    "ai_semantic_rejection_count": 0,
+    "ai_unknown_task_id_rejection_count": 0,
+    "ai_invalid_source_clause_rejection_count": 0,
+    "ai_invalid_anchor_clause_rejection_count": 0,
+    "ai_non_concrete_action_rejection_count": 0,
+    "ai_invalid_assignee_rejection_count": 0,
+    "ai_fallback_error_count": 0,
+    "unauthorized_creation_blocked_count": 4,
+    "ledger_unknown_task_id_rejection_count": 0,
+    "weighted_ai_call_rate": 0.07142857142857142,
+    "ai_clause_coverage": 0.0900763358778626
+  },
+  "fallback_metrics": {
+    "rule_only": 0,
+    "ai_fallback_not_configured": 1,
+    "ai_fallback_skipped_no_candidate": 0,
+    "ai_fallback_resolved": 0,
+    "ai_fallback_unresolved": 0,
+    "ai_fallback_failed": 0
+  },
+  "job_execution": [],
+  "execution_errors": [],
+  "case_execution": [
+    {
+      "case_id": "W4-LONG-C4-N3-OPS-STATE-008",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 2,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 2,
+      "unresolved_mutation_count": 1,
+      "provisional_task_created_count": 24,
+      "provisional_task_promoted_count": 4,
+      "provisional_promotion_blocked_count": 0,
+      "ambiguous_identity_mutation_blocked_count": 0,
+      "sibling_identity_split_count": 0,
+      "ai_contract_rejection_count": 0,
+      "ai_structural_contract_rejection_count": 0,
+      "ai_semantic_rejection_count": 0,
+      "ai_unknown_task_id_rejection_count": 0,
+      "ai_invalid_source_clause_rejection_count": 0,
+      "ai_invalid_anchor_clause_rejection_count": 0,
+      "ai_non_concrete_action_rejection_count": 0,
+      "ai_invalid_assignee_rejection_count": 0,
+      "unauthorized_creation_blocked_count": 4,
+      "ledger_unknown_task_id_rejection_count": 0
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "W4-LONG-C4-N3-OPS-STATE-008",
+      "passed": false,
+      "expected_task_count": 5,
+      "actual_task_count": 11,
+      "matched_task_count": 2,
+      "missing_tasks": [
+        {
+          "task_name": "Hoàn thiện logic khóa đăng nhập",
+          "assignee": "Châu",
+          "start_date": "2026-02-22",
+          "due_date": "2026-02-22",
+          "due_date_text": "19h hôm nay",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Lập release plan",
+          "assignee": "Bình; Dũng",
+          "start_date": "2026-02-22",
+          "due_date": "2026-02-26",
+          "due_date_text": "end of day thứ 5 tuần sau",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết release note",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Của em: fix lỗi module đăng nhập",
+          "assignee": "Châu",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Châu: Anh An, em muốn confirm lại task của em: fix lỗi module đăng nhập, push code trước 17h, đúng không ạ?\nAn: Task 1: Châu fix lỗi đăng nhập, deadline 17h hôm nay.\nAn: Ừ, em có thể tổng kết nhanh: Task A: Châu fix lỗi đăng nhập và thêm logic khóa – deadline 19h.\nAn: Vậy task fix lỗi đăng nhập vẫn\nAn: Em điểm qua: Task 1: Châu fix lỗi đăng nhập (token đã xong, logic khóa deadline 19h hôm nay).",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Deploy UAT",
+          "assignee": "Bình",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Bình: Còn task deploy UAT của em, chưa có deadline cụ thể vì phụ thuộc môi trường.\nAn: Task 2: Bình deploy UAT, không deadline.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấp VPN cho em trong sáng nay",
+          "assignee": "Bình",
+          "start_date": "2026-02-22",
+          "due_date": "2026-02-22",
+          "due_date_text": "trong sáng nay",
+          "evidence": "Bình: Em sẽ cấp VPN cho em trong sáng nay.\nAn: Vậy tôi sẽ cắt bớt task cho em.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Kiểm thử tích hợp, ai làm",
+          "assignee": "An",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "An: còn việc kiểm thử tích hợp, ai làm?",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Của Châu có hai phần: fix lỗi token và thêm logic khóa",
+          "assignee": "Châu",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "An: Vậy task của Châu có hai phần: fix lỗi token và thêm logic khóa.\nAn: Ừ, em có thể tổng kết nhanh: Task A: Châu fix lỗi đăng nhập và thêm logic khóa – deadline 19h.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết xong, em sẽ bắt đầu làm ngay",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Dũng: Em chưa viết xong, em sẽ bắt đầu làm ngay.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Test suite cũ, em sẽ update thêm dựa trên dữ liệu mới",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Dũng: Em có test suite cũ, em sẽ update thêm dựa trên dữ liệu mới.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Deploy phần token lên UAT",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Bình: Em sẽ reset DB xong rồi deploy phần token lên UAT trước 15h.\nChâu: Em cần test thử token trước khi deploy lên UAT.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấp list changes",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "sau khi fix xong",
+          "evidence": "Châu: Em sẽ cung cấp list changes sau khi fix xong.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Viết tài liệu production",
+          "field": "assignee",
+          "expected": "Dũng",
+          "actual": "Em"
+        },
+        {
+          "task_name": "Viết tài liệu production",
+          "field": "due_date",
+          "expected": "2026-03-01",
+          "actual": ""
+        },
+        {
+          "task_name": "Viết tài liệu production",
+          "field": "due_date_text",
+          "expected": "deadline 01/03",
+          "actual": ""
+        },
+        {
+          "task_name": "Setup monitoring",
+          "field": "assignee",
+          "expected": "Dũng",
+          "actual": "Em"
+        },
+        {
+          "task_name": "Setup monitoring",
+          "field": "due_date_text",
+          "expected": "deadline 28/02",
+          "actual": "28/02"
+        }
+      ],
+      "checked_field_count": 12,
+      "correct_field_count": 7,
+      "field_counts": {
+        "assignee_accuracy": [
+          2,
+          0
+        ],
+        "due_date_accuracy": [
+          2,
+          1
+        ],
+        "due_date_text_exact_accuracy": [
+          2,
+          0
+        ],
+        "state_link_accuracy": [
+          2,
+          2
+        ]
+      }
+    }
+  ],
+  "case_diagnostics": {
+    "W4-LONG-C4-N3-OPS-STATE-008": {
+      "caption_count": 356,
+      "deduplicated_caption_count": 356,
+      "turn_count": 353,
+      "sentence_count": 638,
+      "clause_count": 655,
+      "candidate_window_count": 28,
+      "rule_event_count": 60,
+      "ai_event_count": 0,
+      "ai_window_count": 2,
+      "ai_provider_enabled": false,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 59,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 2,
+      "ai_call_rate": 0.07142857142857142,
+      "ai_clause_coverage": 0.0900763358778626,
+      "ai_batch_count": 2,
+      "event_count_before_deduplication": 61,
+      "event_count_after_deduplication": 61,
+      "terminal_replay_blocked_count": 0,
+      "ledger_task_created_count": 32,
+      "ledger_task_updated_count": 24,
+      "exact_id_link_count": 0,
+      "exact_alias_link_count": 6,
+      "semantic_link_count": 18,
+      "unresolved_mutation_count": 1,
+      "duplicate_task_merge_count": 0,
+      "provisional_task_created_count": 24,
+      "provisional_task_promoted_count": 4,
+      "provisional_promotion_blocked_count": 0,
+      "ambiguous_identity_mutation_blocked_count": 0,
+      "sibling_identity_split_count": 0,
+      "ai_contract_rejection_count": 0,
+      "ai_structural_contract_rejection_count": 0,
+      "ai_semantic_rejection_count": 0,
+      "ai_unknown_task_id_rejection_count": 0,
+      "ai_invalid_source_clause_rejection_count": 0,
+      "ai_invalid_anchor_clause_rejection_count": 0,
+      "ai_non_concrete_action_rejection_count": 0,
+      "ai_invalid_assignee_rejection_count": 0,
+      "unauthorized_creation_blocked_count": 4,
+      "ledger_unknown_task_id_rejection_count": 0,
+      "recap_scope": "AUTHORITATIVE"
+    }
+  }
+}

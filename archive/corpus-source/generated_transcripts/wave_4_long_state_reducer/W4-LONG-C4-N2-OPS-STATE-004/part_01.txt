@@ -1,0 +1,173 @@
+MEETING_ID: W4-LONG-C4-N2-OPS-STATE-004
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-18
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:00:00] Ms. Lan: Chào mọi người, hôm nay chúng ta họp để bàn về kế hoạch triển khai hệ thống. Trước tiên, tôi muốn điểm qua tình hình môi trường test.
+
+T000002 [09:00:18] Anh Tuấn: Vâng, tôi đã kiểm tra sơ qua staging. Có một số vấn đề về cấu hình database cần xử lý.
+
+T000003 [09:00:35] Minh: Em cũng thấy phần docker-compose chưa đồng bộ với yêu cầu thực tế.
+
+T000004 [09:00:50] Hoa: Bên QA chúng tôi cần môi trường ổn định để chạy test automation trong tuần này.
+
+T000005 [09:01:08] Ms. Lan: Được rồi, trước mắt Anh Tuấn hãy phối hợp với Minh để ổn định lại staging. Tôi muốn có kết quả sớm.
+
+T000006 [09:01:25] Anh Tuấn: Em nghĩ mất khoảng 2-3 ngày để fix xong mấy lỗi cấu hình. Nhưng còn phần network policy cũng cần review.
+
+T000007 [09:01:42] Minh: Network policy em đã làm draft rồi, nhưng chưa được duyệt.
+
+T000008 [09:01:58] Ms. Lan: Vậy chúng ta sẽ assign task kiểm tra môi trường test staging cho Hoa và Minh. Hạn chót là thứ Tư tuần sau, ngày 25 tháng 2.
+
+T000009 [09:02:15] Hoa: Hạn đó có khả năng không? Vì nếu staging chưa xong thì QA không thể test được.
+
+T000010 [09:02:32] Anh Tuấn: Tôi sẽ cố gắng xong phần cấu hình trước thứ Hai. Minh hỗ trợ phần docker.
+
+T000011 [09:02:48] Minh: Vâng, em sẽ update compose file chiều nay.
+
+T000012 [09:03:02] Ms. Lan: Tốt. Task này tạm gọi là “Kiểm tra môi trường test staging”. Assign cho Hoa và Minh, deadline 25/02.
+
+T000013 [09:03:20] Hoa: Còn tài liệu triển khai thì sao? Tôi thấy bản hôm qua gửi còn thiếu phần hướng dẫn rollback.
+
+T000014 [09:03:38] Anh Tuấn: Phần đó do tôi viết nhưng chưa kịp bổ sung. Có lẽ cần một task riêng để hoàn thiện tài liệu.
+
+T000015 [09:03:55] Ms. Lan: Đúng vậy. Tài liệu triển khai hệ thống cũng quan trọng không kém. Minh, em có thể đảm nhận việc kiểm tra và cập nhật tài liệu này không?
+
+T000016 [09:04:12] Minh: Em có thể, nhưng cần Anh Tuấn cung cấp thông tin về phần rollback và các script.
+
+T000017 [09:04:28] Anh Tuấn: Tôi sẽ gửi email chi tiết vào cuối ngày hôm nay.
+
+T000018 [09:04:42] Ms. Lan: Vậy task thứ hai là “Kiểm tra tài liệu triển khai hệ thống”, do Minh làm. Vì tài liệu chưa có deadline cụ thể, chúng ta sẽ không ấn định thời gian, nhưng cố gắng xong trong tháng 2.
+
+T000019 [09:05:00] Hoa: Thế còn phần test plan cho release? Em nghĩ cần sớm có plan.
+
+T000020 [09:05:16] Ms. Lan: Hoa, em lo phần đó sau khi staging ổn định. Giờ tập trung hai task chính đã.
+
+T000021 [09:05:33] Anh Tuấn: Tôi thấy tên hai task khá giống nhau, “môi trường test” với “tài liệu triển khai”, dễ nhầm.
+
+T000022 [09:05:50] Ms. Lan: Đúng, nhưng phạm vi khác nhau. Cứ tạm dùng vậy, sau này có thể đổi tên.
+
+T000023 [09:06:07] Minh: Em xin phép hỏi: staging hiện tại có support cho việc test load không? Vì tài liệu yêu cầu kiểm tra throughput.
+
+T000024 [09:06:25] Anh Tuấn: Chưa, phải cài thêm tool. Đó là việc của tuần sau.
+
+T000025 [09:06:40] Ms. Lan: Vậy nhắc lại, task 1: Kiểm tra môi trường test staging – Hoa và Minh, deadline 25/02. Task 2: Kiểm tra tài liệu triển khai hệ thống – Minh, không deadline ấn định, nhưng cố gắng hoàn thành cuối tháng.
+
+T000026 [09:07:00] Hoa: Rõ rồi ạ. Nhưng em muốn biết ai sẽ review tài liệu sau khi Minh cập nhật.
+
+T000027 [09:07:16] Ms. Lan: Anh Tuấn sẽ review. Có vấn đề gì không?
+
+T000028 [09:07:30] Anh Tuấn: Tôi đồng ý. Tuy nhiên tôi cũng bận với phần cấu hình, nên mong Minh gửi sớm để tôi review.
+
+T000029 [09:07:48] Minh: Em sẽ cố gắng xong bản nháp vào thứ Năm tuần này.
+
+T000030 [09:08:04] Ms. Lan: Chú ý, trong tài liệu cần có hướng dẫn cài đặt step-by-step, phần rollback, và list dependencies.
+
+T000031 [09:08:22] Minh: Vâng, em đã nắm được. Nhưng phần dependency có thể thay đổi theo môi trường, em sẽ viết chung.
+
+T000032 [09:08:38] Hoa: Tôi thấy môi trường test staging hiện tại còn thiếu certificate SSL. Ai sẽ lo vụ đó?
+
+T000033 [09:08:55] Anh Tuấn: Vụ đó tôi đã request rồi, chờ bên infra cấp. Có thể tuần sau mới có.
+
+T000034 [09:09:10] Ms. Lan: Vậy task 1 sẽ bao gồm cả việc xác nhận certificate đã có. Hoa, em ghi nhận nhé.
+
+T000035 [09:09:26] Hoa: Dạ. Em nghĩ cần thêm một mục kiểm tra log hệ thống nữa, vì staging chưa có centralized logging.
+
+T000036 [09:09:44] Minh: Cái đó thuộc về hạ tầng, không phải việc của bọn mình.
+
+T000037 [09:09:58] Anh Tuấn: Đúng, nhưng nếu không có log thì khó debug. Tôi sẽ nói với team infra.
+
+T000038 [09:10:14] Ms. Lan: Tạm thời cứ giải quyết các vấn đề chính. Đừng lan man quá.
+
+T000039 [09:10:30] Hoa: Vâng. Vậy task 1 chỉ tập trung vào staging availability và cấu hình đúng spec.
+
+T000040 [09:10:46] Ms. Lan: Chính xác. Bây giờ tôi muốn kiểm tra tiến độ của các task khác từ tuần trước. Anh Tuấn, báo cáo về phần API gateway.
+
+T000041 [09:11:04] Anh Tuấn: API gateway đã deploy lên staging rồi, nhưng có vấn đề về rate limiting chưa config. Tôi đã tạo ticket.
+
+T000042 [09:11:22] Ms. Lan: Ticket đó có ảnh hưởng đến hai task mới không?
+
+T000043 [09:11:38] Anh Tuấn: Không trực tiếp, nhưng nếu không fix thì test load sẽ fail.
+
+T000044 [09:11:54] Minh: Em có thể support phần config rate limit. Nó không mất nhiều thời gian.
+
+T000045 [09:12:10] Ms. Lan: Tốt, nhưng đừng làm chậm task chính. Minh, em tự cân đối.
+
+T000046 [09:12:26] Minh: Em hiểu. Em sẽ ưu tiên tài liệu và staging trước.
+
+T000047 [09:12:42] Hoa: Nói về tài liệu, bản trước đó có phần mô tả kiến trúc hơi sai. Em đã comment.
+
+T000048 [09:12:58] Minh: À, phần đó do em viết, có thể nhầm lẫn. Em sẽ sửa.
+
+T000049 [09:13:14] Ms. Lan: Cần sự chính xác. Nếu không, sau này triển khai sẽ rối.
+
+T000050 [09:13:30] Anh Tuấn: Tôi nghĩ nên có một buổi review tài liệu giữa team trước khi release.
+
+T000051 [09:13:46] Ms. Lan: Đó là ý hay. Nhưng chúng ta để sau khi Minh hoàn thành bản nháp.
+
+T000052 [09:14:02] Hoa: Thế bao giờ có bản nháp? Em muốn xem trước để điều chỉnh test case.
+
+T000053 [09:14:18] Minh: Như em nói, thứ Năm tuần này. Em sẽ gửi cho mọi người.
+
+T000054 [09:14:34] Ms. Lan: Lưu ý, tài liệu cần có version control và changelog. Minh nhé.
+
+T000055 [09:14:50] Minh: Vâng, em sẽ dùng markdown và push lên repo riêng.
+
+T000056 [09:15:06] Anh Tuấn: Tôi thấy staging hiện đang có conflict port với service cũ. Cần giải quyết trước khi Hoa test.
+
+T000057 [09:15:22] Ms. Lan: Đó là việc khẩn. Anh Tuấn và Minh họp nhanh sau meeting này để fix.
+
+T000058 [09:15:40] Hoa: Em có thể hỗ trợ test thử sau khi họ fix.
+
+T000059 [09:15:56] Ms. Lan: Vậy tạm thời chúng ta có hai task rõ ràng. Còn vấn đề gì muốn thảo luận thêm không?
+
+T000060 [09:16:12] Minh: Em muốn hỏi về việc dùng chung tài liệu triển khai cho nhiều môi trường. Có nên viết một bản chính hay tách riêng?
+
+T000061 [09:16:30] Anh Tuấn: Tôi nghĩ nên viết một bản chính, có phần biến môi trường. Dễ maintain.
+
+T000062 [09:16:46] Ms. Lan: Đồng ý. Minh hãy tham khảo template cũ và điều chỉnh.
+
+T000063 [09:17:02] Hoa: Tôi thấy trong template cũ có mục “Kiểm tra sau triển khai” nhưng lại thiếu bước xác thực.
+
+T000064 [09:17:18] Minh: Em sẽ bổ sung. Cảm ơn Hoa.
+
+T000065 [09:17:34] Ms. Lan: Chúng ta đang đi đúng hướng. Tôi muốn nhấn mạnh: hai task này rất quan trọng cho release đợt này. Không được trễ.
+
+T000066 [09:17:52] Anh Tuấn: Nếu staging không xong kịp deadline 25/02, chúng ta có phương án dự phòng không?
+
+T000067 [09:18:08] Ms. Lan: Có thể dời deadline nhưng không quá 28/02. Còn tài liệu thì phải xong trước 05/03.
+
+T000068 [09:18:24] Hoa: Vậy deadline cho task 2 chính thức là 05/03? Lúc nãy chị nói không deadline.
+
+T000069 [09:18:40] Ms. Lan: Ừ, thực ra tôi không ấn định lúc đầu, nhưng để tránh kéo dài, ta đặt mục tiêu 05/03. Anh Tuấn kiểm tra được không?
+
+T000070 [09:18:58] Anh Tuấn: Được, nhưng tôi phải review kỹ, cần Minh gửi sớm.
+
+T000071 [09:19:14] Minh: Em sẽ gửi trước thứ Năm, có bản sơ bộ.
+
+T000072 [09:19:30] Ms. Lan: Tốt. Vậy task 1 deadline 25/02, task 2 deadline 05/03. Ghi lại nhé.
+
+T000073 [09:19:48] Hoa: Em xin phép hỏi, nếu staging xong sớm, em có thể test tài liệu trước deadline không?
+
+T000074 [09:20:04] Ms. Lan: Được, nhưng ưu tiên test môi trường trước.
+
+T000075 [09:20:20] Anh Tuấn: Tôi có một vấn đề: tài liệu triển khai hiện chưa có phần monitoring setup. Có cần thêm không?
+
+T000076 [09:20:38] Ms. Lan: Cần, nhưng việc đó thuộc phase sau. Không đưa vào task này.
+
+T000077 [09:20:54] Minh: Vâng, em chỉ viết những gì liên quan đến installation thôi.
+
+T000078 [09:21:10] Hoa: Vậy em có thể request thêm một task riêng cho monitoring sau.
+
+T000079 [09:21:26] Ms. Lan: Để sau meeting này. Giờ chúng ta cần kết thúc và đi vào họp ngắn giữa Anh Tuấn và Minh về conflict port.
+
+T000080 [09:21:44] Anh Tuấn: Ok, tôi sẽ vào phòng họp riêng với Minh sau.
+
+T000081 [09:22:00] Ms. Lan: Mọi người khác có thắc mắc gì cuối không?
+
+T000082 [09:22:16] Hoa: Em không có thêm.
+
+T000083 [09:22:30] Ms. Lan: Vậy tạm dừng tại đây. Chúng ta sẽ tiếp tục part sau để bàn chi tiết hơn. Cảm ơn mọi người.
+
+--- END OF PART P01 ---

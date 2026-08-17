@@ -1,0 +1,154 @@
+MEETING_ID: W4-LONG-C4-N3-OPS-STATE-008
+PART: P03/5
+
+T000162 [09:44:00] An: Mọi người, quay lại vụ tài liệu triển khai. Em và Dũng, hai em đã thống nhất template chưa?
+
+T000163 [09:44:15] Em: Dạ, bọn em mới trao đổi qua. Cơ bản đồng ý dùng template markdown của em, nhưng Dũng muốn thêm một số format cho phần CICD.
+
+T000164 [09:44:30] Dũng: Ừ, template của Em thiếu mấy bước pipeline. Em thêm vào để đồng bộ.
+
+T000165 [09:44:45] An: Vậy là xong phần template? Deadline 24/02 vẫn giữ nhé.
+
+T000166 [09:45:00] Em: Vâng, em nghĩ xong sớm. Nhưng mà anh, em có một vấn đề về task tài liệu production.
+
+T000167 [09:45:15] An: Nói đi.
+
+T000168 [09:45:25] Em: Là em đang bận với training chiều và còn việc khác. Em không chắc hoàn thành tài liệu production kịp 27/02. Em muốn nhờ Dũng làm thay.
+
+T000169 [09:45:40] Dũng: Em? Em đã có tài liệu staging rồi, giờ thêm production thì nặng quá.
+
+T000170 [09:45:55] An: Nhưng em có kinh nghiệm viết doc hơn, và Em cần tập trung vào template với các việc khác. Vậy có ổn không?
+
+T000171 [09:46:10] Dũng: Em có thể làm, nhưng deadline 27/02 phải giãn ra. Hoặc em chỉ viết draft, rồi Em review sau.
+
+T000172 [09:46:25] An: Không được, cần một người chịu trách nhiệm duy nhất. Vậy từ giờ, Dũng chịu trách nhiệm tài liệu production. Em chuyển hết tài liệu draft cho Dũng.
+
+T000173 [09:46:40] Em: Vâng, em sẽ gửi mail với bản draft em đã viết từ tuần trước.
+
+T000174 [09:46:55] An: OK, vậy handoff task đó cho Dũng. Còn deadline, Dũng cần thêm thời gian không?
+
+T000175 [09:47:10] Dũng: Em cần đến 01/03 thay vì 27/02, vì em phải học format mới.
+
+T000176 [09:47:25] An: 01/03 hơi xa, nhưng được. Chấp nhận. Vậy deadline tài liệu production thành 01/03.
+
+T000177 [09:47:40] Bình: Anh An, vậy em và Dũng có thêm việc. Em thấy Dũng đang ôm nhiều task: script dữ liệu, test case, giờ thêm doc.
+
+T000178 [09:47:55] An: Ừ, nhưng không còn ai phù hợp. Còn tài liệu staging của em Dũng, lúc đầu em giao không deadline. Bây giờ em muốn đặt deadline để tránh trễ.
+
+T000179 [09:48:10] Dũng: Hồi đầu anh nói làm trong tuần, giờ cụ thể là ngày nào?
+
+T000180 [09:48:25] An: 25/02 được không? Để kịp review với production doc.
+
+T000181 [09:48:40] Dũng: 25/02 gần quá, em cần 27/02 để có thời gian chỉnh sửa.
+
+T000182 [09:48:55] An: Không, 25/02. Em đã có template rồi, chỉ việc update nội dung.
+
+T000183 [09:49:10] Dũng: Nhưng em còn script dữ liệu deadline 14h hôm nay, với test case. Áp lực quá.
+
+T000184 [09:49:25] Bình: Anh thấy nên dời script dữ liệu deadline sang 16h, vì em còn review. Em OK không?
+
+T000185 [09:49:40] Dũng: Cũng được, nếu Bình review sớm.
+
+T000186 [09:49:55] An: Vậy điều chỉnh: Dũng script dữ liệu deadline 16h, Bình review sau đó. Còn tài liệu staging deadline 25/02.
+
+T000187 [09:50:10] Dũng: OK, em cố gắng.
+
+T000188 [09:50:20] Em: Anh, em có thể hỗ trợ Dũng viết một phần tài liệu staging nếu cần, vì em biết rõ process.
+
+T000189 [09:50:35] An: Không, để Dũng tự làm cho đồng bộ. Em chỉ cần gửi draft production cho Dũng thôi.
+
+T000190 [09:50:50] Em: Vâng.
+
+T000191 [09:51:00] Châu: Anh An, em xin phép cập nhật nhanh tình hình lỗi đăng nhập. Em vừa fix xong phần token, còn logic khóa sẽ làm sau 16h.
+
+T000192 [09:51:15] An: Tốt. Vậy phần token đã ổn để deploy chưa?
+
+T000193 [09:51:25] Châu: Chưa test trên môi trường, em cần Bình deploy để kiểm tra.
+
+T000194 [09:51:35] Bình: Em sẽ reset DB xong rồi deploy phần token lên UAT trước 15h.
+
+T000195 [09:51:50] An: OK. Dũng, script dữ liệu của em có kịp để import sau khi reset không?
+
+T000196 [09:52:05] Dũng: Em sẽ gửi script trước 14h, Bình import sau khi reset.
+
+T000197 [09:52:20] Bình: Được. Em reset DB lúc 13h, sau đó import dữ liệu mới.
+
+T000198 [09:52:35] An: Vậy timeline: Bình reset 13h, Dũng gửi script 14h, Bình import, Châu deploy token 15h. Mọi người ghi nhận.
+
+T000199 [09:52:55] Châu: Em có cần chờ dữ liệu mới để test không?
+
+T000200 [09:53:10] Dũng: Có, script của em tạo user test mới, Châu nên dùng để test token.
+
+T000201 [09:53:25] An: Vậy Châu test sau khi Bình import xong.
+
+T000202 [09:53:40] Bình: Import xong khoảng 14h30.
+
+T000203 [09:53:55] An: Rõ. Giờ quay lại tài liệu. Dũng, em có cần hỗ trợ gì từ Em về nội dung production không?
+
+T000204 [09:54:10] Dũng: Có, em muốn biết phần monitoring em nên mô tả tool nào.
+
+T000205 [09:54:20] Em: Dùng Prometheus và Grafana, em có sẵn diagram.
+
+T000206 [09:54:30] Dũng: OK, em sẽ copy.
+
+T000207 [09:54:45] An: Lưu ý, tài liệu staging và production phải giống format, nhưng nội dung khác nhau. Đừng nhầm.
+
+T000208 [09:55:00] Dũng: Vâng, em để tên khác nhau.
+
+T000209 [09:55:10] Bình: Anh An, em thấy task review tài liệu của em vẫn chưa có deadline cụ thể. Sau khi Dũng xong staging, em review khi nào?
+
+T000210 [09:55:25] An: Review staging sau 25/02, review production sau 01/03. Em tự sắp xếp.
+
+T000211 [09:55:35] Bình: OK.
+
+T000212 [09:55:45] Châu: Anh ơi, em muốn hỏi về môi trường dev. Em cần test thử token trước khi deploy lên UAT.
+
+T000213 [09:56:00] Bình: Môi trường dev đang down, em báo infra sáng nay. Họ hẹn 15h.
+
+T000214 [09:56:10] Châu: Vậy em đợi. Không có dev thì em không test được.
+
+T000215 [09:56:25] An: Vậy Châu tranh thủ viết code logic khóa trong lúc chờ.
+
+T000216 [09:56:35] Châu: Em đang làm.
+
+T000217 [09:56:45] An: Tốt.
+
+T000218 [09:56:55] Em: Anh, em có một thắc mắc về tài liệu production: phần rollback em nên viết chi tiết đến đâu?
+
+T000219 [09:57:10] An: Viết từng bước: stop service, restore DB, redeploy version cũ. Dũng sẽ tham khảo.
+
+T000220 [09:57:25] Dũng: Em sẽ viết theo hướng dẫn.
+
+T000221 [09:57:35] Bình: Em thấy chúng ta có nhiều task phụ thuộc vào nhau. Em lo có conflict.
+
+T000222 [09:57:50] An: Cụ thể?
+
+T000223 [09:58:00] Bình: Ví dụ script dữ liệu của Dũng phải xong trước khi em import, mà em cần review script. Nếu review trễ thì import trễ.
+
+T000224 [09:58:15] An: Đã có deadline 16h cho script, 14h cho gửi. Em review ngay sau đó.
+
+T000225 [09:58:25] Dũng: Em sẽ gửi sớm.
+
+T000226 [09:58:35] An: Vậy không lo.
+
+T000227 [09:58:45] Châu: Anh, em sắp phải đi training. Em sẽ gửi code token fix cho Bình trước 14h.
+
+T000228 [09:58:55] Bình: OK. Em deploy sau khi import dữ liệu.
+
+T000229 [09:59:05] An: Nhớ cập nhật Slack khi xong.
+
+T000230 [09:59:15] Dũng: Em cũng sẽ gửi script trước 14h.
+
+T000231 [09:59:25] An: Còn ai có vấn đề gì về tài liệu hoặc test nữa không?
+
+T000232 [09:59:35] Em: Em chỉ muốn confirm rằng task tài liệu production giờ thuộc về Dũng, deadline 01/03. Em không còn liên quan.
+
+T000233 [09:59:45] An: Đúng. Dũng chịu trách nhiệm.
+
+T000234 [09:59:55] Bình: Còn tài liệu staging deadline 25/02, Dũng nhé.
+
+T000235 [10:00:05] Dũng: Rõ.
+
+T000236 [10:00:15] An: Vậy tạm thời kết thúc topic tài liệu. Chúng ta sang vấn đề khác sau. Cảm ơn mọi người.
+
+--- END OF PART P03 ---

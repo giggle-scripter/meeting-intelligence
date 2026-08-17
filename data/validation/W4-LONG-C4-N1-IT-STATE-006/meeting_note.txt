@@ -1,0 +1,14 @@
+minutes nháp
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / moi truong / trien khai / staging / lieu / phu
+- Task "Chuẩn bị tài liệu triển khai" thì giao cho Dung, chưa có dl vì
+* Task 2: "Soạn tài liệu hướng dẫn triển khai" – Dung owner, dl chưa xác định
+- Vậy task thứ ba: "Sắp xếp meeting với IT hạ tầng", Bình owner, dl 22/02
+1) Nhưng trước khi đổi topic, tôi muốn recap lại các task vừa tạo: Task 1: "Thiết lập môi trường staging" – Bình, dl 25/02
+- Vậy task 6: "Chuẩn bị dữ liệu test cho staging", Dung owner, dl 28/02
+* chốt lại: task 1 + 2 đã điều chỉnh, các task khác không đổi
+- Vậy ta hủy task 3 đi
+1) Được, vậy dl mới cho task 2 là 10/03
+- Task 5 của em sau khi anh Cường review xong, em sẽ cập nhật
+* Vậy tổng cộng 6 task active, 1 task cancel
+- Anh nghĩ nên chuẩn bị tài liệu triển khai song song, không đợi môi trường ? chưa chốt

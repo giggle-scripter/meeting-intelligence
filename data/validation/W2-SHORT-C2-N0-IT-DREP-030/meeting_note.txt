@@ -1,0 +1,9 @@
+minutes nháp
+chủ đề: Trao đổi kế hoạch tích hợp
+kw: kiem thu / module / thanh / toan / tich / lai / xac
+- Về task tích hợp module thanh toán, mình cần xác nhận lại
+* riêng việc kiểm thử module thanh toán thành task con
+- Đúng, dl mới là 5 tháng 3
+1) Em sẽ điều chỉnh test plan theo mốc này
+- Tóm lại task tích hợp module thanh toán dl mới là 5/3, không
+* Còn vấn đề gì về tài liệu API không Hoa? ? chưa chốt

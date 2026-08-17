@@ -1,0 +1,11 @@
+chốt sơ bộ
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / moi truong / trien khai / staging / kiem / tra / trong
+- Khi nào Tuấn đưa mẫu đầu ra, em sẽ kiểm tra trong vòng 2 ngày
+* chuyển sang quyền truy cập
+- Chốt lại: Hùng setup môi trường staging, dl mới là 24/02
+1) Em sẽ liên hệ ngay trong chiều nay
+- Ừ, Linh nhớ kiểm tra phân quyền trước 18/02
+* Chị sẽ đóng gói bản build vào 19/02, sau khi hoàn tất tài liệu trước đó một ngày
+- ba là kiểm tra quyền truy cập, Linh owner, dl 18/02;
+1) Thực ra việc kiểm tra của em cũng chưa có dl vì phụ thuộc, nhưng em sẽ hoàn thành trong 2 ngày sau khi có script

@@ -1,0 +1,7 @@
+chốt sơ bộ
+chủ đề: Theo dõi tiến độ tài liệu
+kw: tai lieu / uat / hoan / thanh / vao / tai / lieu
+- Dạ, em có cập nhật về tài liệu kỹ thuật
+* Em nghĩ em sẽ hoàn thành vào 20/3
+- Vậy tổng kết: chị Lan hoàn thành tài liệu kỹ thuật và gửi vào 15/3, hỗ trợ hình ảnh cho anh Tuấn vào ngày mai
+1) Anh Tuấn gửi bản nháp hướng dẫn sử dụng vào 15/3 + hoàn thành final vào 20/3

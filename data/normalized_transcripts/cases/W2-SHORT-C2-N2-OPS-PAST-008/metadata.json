@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W2-SHORT-C2-N2-OPS-PAST-008",
+  "meeting_id": "W2-SHORT-C2-N2-OPS-PAST-008",
+  "meeting_title": "Chuẩn bị bản phát hành nội bộ",
+  "meeting_date": "2026-02-02",
+  "wave": 2,
+  "wave_name": "wave_2_feature_isolation",
+  "labels": [
+    "past_completed_work",
+    "informational_statement"
+  ],
+  "objective": "{\"name\": \"past completed work\", \"code\": \"PAST\", \"labels\": \"past_completed_work,informational_statement\", \"requirements\": \"Speaker báo cáo các việc đã làm xong; không biến hành động quá khứ thành task mới.\"}",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_2_feature_isolation/W2-SHORT-C2-N2-OPS-PAST-008/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-flash"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 860,
+    "turn_count": 38
+  },
+  "ground_truth": {
+    "available": false,
+    "expected_output_file": ""
+  }
+}

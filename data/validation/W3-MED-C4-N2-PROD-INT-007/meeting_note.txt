@@ -1,0 +1,11 @@
+minutes nháp
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: trien khai / api / spec / flow / 16h / parser / vua
+- Task UI flow em vừa điều chỉnh dl lên 11/02 chiều rồi mà
+* Chốt lại, topic chi phí chưa có quyết định, không có task
+- Anh nhắc, task UI flow của Lan dl hôm nay 11/02 16h
+1) Còn task spec SP365 dl 14/02, cũng Lan
+- Task parser của em vẫn giữ dl 18/02
+* Thứ nhất, task fix API connection: Lan, dl 11/02 16h, đã thay đổi từ dl cũ
+- Em có một clarification nhỏ: task parser dl 18/02, nhưng hôm qua em thấy vẫn chưa có spec chi tiết, đề nghị business bổ sung
+1) Em sẽ sửa trong sáng nay, dl cũ của task này là 12/02 nhưng có thể đẩy lên sớm hơn nếu cần ? chưa chốt

@@ -1,0 +1,7 @@
+{
+  "meeting_title": "Chuẩn bị bản demo",
+  "tasks": [
+    {"task_name":"Làm mockup","assignee":"Hoa","start_date":"2026-01-31","due_date":"","due_date_text":"thứ Hai hoặc thứ Ba","status":"Proposed"},
+    {"task_name":"Làm frontend với mock data","assignee":"Minh","start_date":"2026-01-31","due_date":"","due_date_text":"","status":"Proposed"}
+  ]
+}

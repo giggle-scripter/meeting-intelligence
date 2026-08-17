@@ -1,0 +1,14 @@
+chốt sơ bộ
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / moi truong / trien khai / release / staging / monitoring
+- Vậy giao cho Minh task “Khắc phục lỗi đăng nhập trên staging”
+* Vậy giao thêm task “Chuẩn bị dữ liệu test cho module đăng nhập” cho Hoa
+- Lúc nãy chị nói task 1 dl 25/2
+1) Vậy tóm lại em có task fix lỗi đăng nhập, dl 25/2
+- Task 2 tài liệu, Minh lo, dl 5/3
+* Vậy tôi quyết định hủy task "Kiểm tra môi trường test staging"
+- Vậy giao cho Anh Tuấn task "Yêu cầu monitoring cho staging"
+1) Em thấy dl 28/02 cho hai task khác nhau: release plan và monitoring
+- Task data test của Hoa dl 20/2, sắp tới
+* Đừng quên task login 25/2
+- Vậy task đó đã được chốt owner

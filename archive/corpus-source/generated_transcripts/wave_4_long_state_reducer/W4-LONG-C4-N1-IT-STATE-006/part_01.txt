@@ -1,0 +1,158 @@
+MEETING_ID: W4-LONG-C4-N1-IT-STATE-006
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-20
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:00:00] An: Chào mọi người, bắt đầu cuộc họp điều phối triển khai hệ thống lần này nhé. Hôm nay chúng ta có 5 phần, phần đầu sẽ tập trung vào môi trường test và tài liệu triển khai. Mời các bạn tham gia đầy đủ.
+
+T000002 [09:00:12] Bình: Vâng, em đã sẵn sàng.
+
+T000003 [09:00:17] Cường: Tôi cũng có mặt.
+
+T000004 [09:00:20] Dung: Em có mặt ạ.
+
+T000005 [09:00:25] An: Tốt. Trước hết, về môi trường test, tuần trước chúng ta đã thảo luận, nhưng hiện tại vẫn chưa có tiến triển. Bình, em có thể cập nhật tình hình không?
+
+T000006 [09:00:38] Bình: Dạ, em đang chờ server staging được cấp. Bên IT hạ tầng nói sẽ hoàn thành trong tuần này, nhưng chưa có ngày cụ thể. Em đã gửi yêu cầu nhưng chưa có phản hồi.
+
+T000007 [09:00:55] Cường: Vậy là vẫn chưa có gì chắc chắn. Chúng ta cần một kế hoạch dự phòng. Anh nghĩ nên chuẩn bị tài liệu triển khai song song, không đợi môi trường.
+
+T000008 [09:01:12] An: Đúng, đó là ý hay. Vậy chúng ta sẽ tạo hai đầu việc: một là chuẩn bị môi trường test, hai là chuẩn bị tài liệu triển khai. Có ai có ý kiến gì không?
+
+T000009 [09:01:22] Dung: Em thấy được. Nhưng tài liệu triển khai cần dựa trên cấu hình thực tế của môi trường, nên nếu không có môi trường thì viết tài liệu sẽ thiếu chính xác.
+
+T000010 [09:01:32] Bình: Có thể viết tạm dựa trên thiết kế, sau đó update khi có môi trường. Em nghĩ không có vấn đề lớn.
+
+T000011 [09:01:42] An: Vậy được. Tôi sẽ assign task "Chuẩn bị môi trường test" cho Bình, deadline là 25/02. Task "Chuẩn bị tài liệu triển khai" thì giao cho Dung, chưa có deadline vì còn phụ thuộc vào môi trường.
+
+T000012 [09:02:05] Cường: Khoan, tôi thấy hai task này tên gần giống nhau: "Chuẩn bị môi trường test" và "Chuẩn bị tài liệu triển khai". Sau này dễ nhầm lẫn. Hay ta đặt rõ hơn: "Thiết lập môi trường staging" và "Soạn tài liệu hướng dẫn triển khai"?
+
+T000013 [09:02:22] An: Ừ, hợp lý. Vậy điều chỉnh lại. Task 1: "Thiết lập môi trường staging" – Bình phụ trách, deadline 25/02. Task 2: "Soạn tài liệu hướng dẫn triển khai" – Dung phụ trách, deadline chưa xác định.
+
+T000014 [09:02:40] Bình: Vâng, em nhận task 1. Nhưng em muốn hỏi, nếu quá deadline mà server chưa có thì sao?
+
+T000015 [09:02:50] An: Thì em vẫn phải báo cáo tiến độ, không được bỏ qua. Nếu cần delay thì ta sẽ xem xét sau.
+
+T000016 [09:03:02] Dung: Em cũng nhận task 2. Tuy nhiên, em cần template tài liệu từ anh Cường, vì trước đây chưa có.
+
+T000017 [09:03:15] Cường: Ừ, tôi sẽ gửi template cho em cuối giờ chiều nay. Nhưng lưu ý là tài liệu cần bao gồm cả hướng dẫn rollback và check list trước khi deploy.
+
+T000018 [09:03:28] Dung: Vâng, em sẽ làm theo.
+
+T000019 [09:03:35] An: Tốt. Vậy chúng ta đã có hai task cơ bản. Tiếp theo, tôi muốn thảo luận về quy trình kiểm thử. Dung, em có đề xuất gì không?
+
+T000020 [09:03:48] Dung: Em nghĩ nên có bộ test case cho môi trường mới, nhưng hiện tại chưa có môi trường nên chưa thể kiểm thử tích hợp. Em có thể soạn test case trước khi có môi trường.
+
+T000021 [09:04:02] Bình: Nếu viết test case sớm, sau này có thể phải sửa nhiều. Tốt nhất nên đợi môi trường ổn định.
+
+T000022 [09:04:12] Cường: Tôi đồng ý với Bình. Viết test case quá sớm sẽ lãng phí công sức. Nhưng chúng ta có thể phác thảo kịch bản kiểm thử chính.
+
+T000023 [09:04:25] An: Vậy tạm thời chưa tạo task cho test case. Chúng ta sẽ quay lại khi có môi trường. Bây giờ, hãy nói về tài liệu triển khai chi tiết hơn. Dung, em cần bao lâu để hoàn thành?
+
+T000024 [09:04:38] Dung: Nếu có template, em mất khoảng 3 ngày để viết bản nháp, sau đó cần review. Nhưng vì chưa có deadline, em có thể làm từ từ.
+
+T000025 [09:04:50] An: Vậy tạm thời không gấp. Nhưng em nên bắt đầu ngay sau khi nhận template. Cường, anh gửi template sớm nhé.
+
+T000026 [09:05:00] Cường: Tôi sẽ gửi trong ngày hôm nay.
+
+T000027 [09:05:05] Bình: Anh ơi, về môi trường staging, em thấy bên IT hạ tầng có vẻ chậm. Hay ta yêu cầu một cuộc họp riêng với họ?
+
+T000028 [09:05:18] An: Tốt, em chủ động sắp xếp. Nếu cần, tôi sẽ tham gia. Vậy ta đặt lịch cho tuần sau?
+
+T000029 [09:05:28] Bình: Em sẽ gửi lời mời vào sáng mai.
+
+T000030 [09:05:35] Dung: Em có thắc mắc: tài liệu triển khai có cần bao gồm phần cấu hình database không? Vì database hiện tại đang dùng phiên bản cũ.
+
+T000031 [09:05:48] Cường: Cần, vì khi triển khai mới có thể phải nâng cấp. Em nhớ ghi chú rõ các bước migrate.
+
+T000032 [09:05:58] Dung: Vâng, em sẽ chú ý.
+
+T000033 [09:06:05] An: Chúng ta cũng cần lưu ý về vấn đề bảo mật. Tài liệu có nên được lưu trữ an toàn không?
+
+T000034 [09:06:15] Cường: Tất nhiên, vì tài liệu có chứa thông tin cấu hình. Em nên đặt quyền truy cập hạn chế.
+
+T000035 [09:06:25] Dung: Em sẽ đưa vào drive team và chỉ chia sẻ với người cần.
+
+T000036 [09:06:32] An: OK. Vậy tạm thời chúng ta đã có những việc cần làm. Tôi muốn kiểm tra lại task: task 1 của Bình là "Thiết lập môi trường staging", deadline 25/02. task 2 của Dung là "Soạn tài liệu hướng dẫn triển khai", chưa có deadline. Có ai thấy thiếu gì không?
+
+T000037 [09:06:50] Bình: Em nghĩ cần có một task phụ: "Họp với IT hạ tầng về môi trường staging" để đảm bảo tiến độ.
+
+T000038 [09:07:00] An: Thực ra đó là hoạt động, không phải task riêng. Em có thể ghi trong tiến độ của mình. Nhưng nếu em muốn, ta có thể tạo task "Sắp xếp meeting với IT hạ tầng", deadline trước 22/02.
+
+T000039 [09:07:15] Bình: Vâng, thế được ạ.
+
+T000040 [09:07:20] An: Vậy task thứ ba: "Sắp xếp meeting với IT hạ tầng", Bình phụ trách, deadline 22/02.
+
+T000041 [09:07:30] Cường: Lưu ý là task này có thể ảnh hưởng đến task chính. Nếu meeting không thành công, ta sẽ phải điều chỉnh.
+
+T000042 [09:07:42] An: Đúng, nhưng tạm thời cứ làm. Bây giờ, tôi muốn điểm qua các rủi ro. Bình, em thấy rủi ro lớn nhất là gì?
+
+T000043 [09:07:55] Bình: Rủi ro lớn nhất là IT hạ tầng không cấp server kịp deadline 25/02. Nếu vậy, chúng ta sẽ không có môi trường để test.
+
+T000044 [09:08:05] Dung: Em cũng lo tài liệu triển khai sẽ không hoàn thiện nếu thiếu thông tin từ môi trường thực tế.
+
+T000045 [09:08:15] An: Vậy chúng ta cần có phương án dự phòng. Nếu server không có, ta có thể dùng môi trường ảo hóa tạm thời? Cường, anh nghĩ sao?
+
+T000046 [09:08:28] Cường: Khả thi, nhưng cần cấu hình tương tự. Tôi nghĩ có thể dùng Docker trên máy local để test nhanh. Nhưng đó chỉ là tạm thời.
+
+T000047 [09:08:40] An: Được, ghi nhận ý kiến. Ta sẽ bàn sau khi biết kết quả meeting với IT. Tiếp theo, về tài liệu, Dung em cần hỗ trợ không?
+
+T000048 [09:08:52] Dung: Hiện tại chưa cần, em sẽ tự tìm hiểu. Nếu có vướng mắc, em sẽ hỏi anh Cường.
+
+T000049 [09:09:02] Cường: OK.
+
+T000050 [09:09:08] An: Vậy tôi thấy phần đầu đã ổn. Chúng ta hãy chuyển sang chủ đề tiếp theo: lịch trình tổng thể của dự án. Nhưng trước khi đổi topic, tôi muốn recap lại các task vừa tạo:
+
+T000051 [09:09:22] An: Task 1: "Thiết lập môi trường staging" – Bình, deadline 25/02.
+T000052 [09:09:32] An: Task 2: "Soạn tài liệu hướng dẫn triển khai" – Dung, chưa deadline.
+T000053 [09:09:42] An: Task 3: "Sắp xếp meeting với IT hạ tầng" – Bình, deadline 22/02.
+T000054 [09:09:50] An: Có ai muốn bổ sung không?
+
+T000055 [09:09:55] Bình: Không ạ.
+
+T000056 [09:09:58] Dung: Em không có.
+
+T000057 [09:10:00] Cường: Tôi thấy ổn.
+
+T000058 [09:10:05] An: Vậy chúng ta lưu lại. Bây giờ chuyển sang thảo luận về lịch trình tổng thể. Tôi muốn mọi người cho ý kiến về các mốc chính.
+
+T000059 [09:10:18] Cường: Theo tôi, sau khi có môi trường staging, chúng ta cần 2 tuần để kiểm thử và sửa lỗi. Sau đó mới deploy lên production.
+
+T000060 [09:10:30] Bình: Em nghĩ cần thêm thời gian cho việc chuyển đổi dữ liệu từ hệ thống cũ, vì database hiện tại đang có nhiều bản ghi lỗi.
+
+T000061 [09:10:42] An: Vấn đề đó chưa được đề cập trước đây. Bình, em có thể nói rõ hơn không?
+
+T000062 [09:10:50] Bình: Dạ, trong quá trình vận hành, database tích lũy nhiều dữ liệu không chuẩn. Khi migrate sang hệ thống mới, cần làm sạch. Em ước tính mất thêm 1 tuần.
+
+T000063 [09:11:05] Cường: Nhưng nếu chưa có môi trường mới, ta chưa thể kiểm tra dữ liệu. Vậy ta cần một task riêng cho "Làm sạch dữ liệu cũ".
+
+T000064 [09:11:15] An: Có lẽ nên đưa vào kế hoạch tổng thể, nhưng chưa tạo task ngay vì còn phụ thuộc. Tôi sẽ ghi nhận.
+
+T000065 [09:11:25] Dung: Em có thắc mắc về tài liệu: phần hướng dẫn migrate dữ liệu có nên được viết riêng không?
+
+T000066 [09:11:35] Cường: Nên, nhưng có thể là một phần trong tài liệu triển khai.
+
+T000067 [09:11:42] An: Được. Vậy ta tạm thời chưa quyết định. Quay lại lịch trình, tôi thấy cần có timeline cụ thể. Tuy nhiên, vì còn nhiều ẩn số, tôi đề nghị sau khi có kết quả meeting với IT, ta sẽ họp lại để lên kế hoạch chi tiết.
+
+T000068 [09:12:00] Bình: Em đồng ý.
+
+T000069 [09:12:03] Dung: Em cũng đồng ý.
+
+T000070 [09:12:06] Cường: Vậy phần đầu xem như xong. Chúng ta cần tiếp tục với các nội dung khác không?
+
+T000071 [09:12:15] An: Hôm nay chúng ta chỉ kịp thảo luận môi trường test và tài liệu. Tôi nghĩ đây là ranh giới tốt cho phần 1. Chúng ta sẽ tạm dừng ở đây, các phần sau sẽ bàn về lịch trình chi tiết và các rủi ro khác.
+
+T000072 [09:12:30] Bình: Vâng, em không có ý kiến.
+
+T000073 [09:12:33] Dung: Em cũng thế.
+
+T000074 [09:12:36] Cường: OK.
+
+T000075 [09:12:40] An: Vậy kết thúc phần 1. Nhớ cập nhật task và gửi meeting invite cho IT nhé Bình.
+
+T000076 [09:12:50] Bình: Vâng.
+
+T000077 [09:12:53] An: Hẹn gặp lại các bạn ở phần 2.
+
+--- END OF PART P01 ---

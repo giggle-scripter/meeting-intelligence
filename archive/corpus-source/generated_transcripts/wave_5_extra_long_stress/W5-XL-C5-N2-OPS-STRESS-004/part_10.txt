@@ -1,0 +1,84 @@
+MEETING_ID: W5-XL-C5-N2-OPS-STRESS-004
+PART: P10/10
+
+T000581 [11:21:15] Minh: Chúng ta bước vào phần cuối cùng của buổi họp. Cần recap lại toàn bộ trạng thái các task và chốt những gì còn tồn đọng. Lan, em tổng hợp giúp anh.
+
+T000582 [11:21:30] Lan: Dạ, em xin điểm qua. Đầu tiên, các task đã hoàn thành: review code payment (Hà, deadline 8/3), mở firewall cho CRM (Tuấn, sớm), workshop deploy flow (đã hủy), log spec bản đầu (Tuấn, đã đóng). Các task đang progress: CI/CD pipeline (An, deadline dời lên 13/3), alerting configuration (An, 12/3), metric define (Tuấn, 10/3), log spec error codes (Tuấn, 13/3), E2E test scenario (Tuấn, 9/3, chờ Hà review), support process (Lan, 13/3), API draft cho CRM (Tuấn, 13/3), và dữ liệu mẫu cho CRM (đã hủy). Deadline quan trọng: payment deploy 20/3, migration script (An, 18/3). Còn unresolved: task ETL data migration cho CRM đã hủy, nhưng vẫn có issue về webhook spec chờ product.
+
+T000583 [11:21:55] Minh: Cảm ơn. Có gì thiếu không?
+
+T000584 [11:22:10] Tuấn: Em thấy task viết unit test coverage 80% đã được Hà review, coi như done. Nhưng chưa có ticket riêng.
+
+T000585 [11:22:25] Hà: Em đã review, feedback đã gửi. Tuấn sửa xong, em có thể confirm.
+
+T000586 [11:22:40] Minh: Vậy task unit test coverage có thể đóng. Nhưng không tạo duplicate, chỉ ghi nhận.
+
+T000587 [11:22:55] An: Em muốn nhấn mạnh, CI/CD pipeline đang bị block vì quyền repository, cần anh Minh cấp quyền admin.
+
+T000588 [11:23:10] Minh: Anh sẽ cấp ngay sau cuộc họp. Gửi email nhắc anh.
+
+T000589 [11:23:25] Lan: Về task support process, em đã tạo kênh Slack và draft quy trình, cần mọi người góp ý.
+
+T000590 [11:23:40] Hà: Em có thể xem sau meeting.
+
+T000591 [11:23:55] Tuấn: Em có thắc mắc, sau khi API draft cho CRM hoàn thành, cần ai review? Anh Minh đã nhận?
+
+T000592 [11:24:10] Minh: Anh sẽ review, nhưng nếu bận, Hà có thể review thay.
+
+T000593 [11:24:25] Hà: OK, em có thể.
+
+T000594 [11:24:40] An: Em có update về alerting, đã cấu hình xong, đang test. Deadline 12/3 vẫn ổn.
+
+T000595 [11:24:55] Minh: Tốt. Còn task metric define, Tuấn cần số liệu từ An. An đã gửi chưa?
+
+T000596 [11:25:10] An: Em đã gửi trong chiều nay. Tuấn check mail.
+
+T000597 [11:25:25] Tuấn: Có rồi, em sẽ hoàn thành metric trước 10/3.
+
+T000598 [11:25:40] Hà: Vậy còn test plan cho payment? Em đã điều chỉnh theo deploy 20/3. Không có vấn đề.
+
+T000599 [11:25:55] Minh: OK. Bây giờ, anh muốn nhắc lại các deadline quan trọng: 9/3 E2E test, 10/3 metric, 12/3 alerting, 13/3 CI/CD, log spec error codes, API draft, support process, 14/3 dữ liệu mẫu (đã hủy), 18/3 migration script, 20/3 deploy. Có xung đột nào không?
+
+T000600 [11:26:15] Lan: Em thấy 13/3 có nhiều task cùng lúc. Có thể quá tải cho Tuấn và An.
+
+T000601 [11:26:30] Tuấn: Em có ba task deadline 13/3: log spec error codes, API draft, và hỗ trợ CI/CD. Em nghĩ em có thể làm được, nhưng cần ưu tiên.
+
+T000602 [11:26:45] An: Em có hai task 12/3 và 13/3, cũng ổn.
+
+T000603 [11:27:00] Minh: Vậy giữ nguyên. Nếu có vấn đề, báo sớm.
+
+T000604 [11:27:15] Hà: Em có một unresolved item: spec webhook từ product vẫn chưa có. Điều này ảnh hưởng đến API draft và test plan integration.
+
+T000605 [11:27:30] Minh: Đó là unresolved thật sự. Chúng ta không giải quyết được trong meeting này. Anh sẽ gửi email cho product yêu cầu spec trước 15/3.
+
+T000606 [11:27:45] Lan: Vậy tạo task cho anh Minh: liên hệ product về webhook spec, deadline 15/3.
+
+T000607 [11:28:00] Minh: OK, nhưng đây là task cho anh, không phải technical task, chỉ là communication.
+
+T000608 [11:28:15] Tuấn: Em có một clarification: task migration script đã handoff từ em sang An, nhưng em vẫn hỗ trợ. Có cần update gì không?
+
+T000609 [11:28:30] An: Em đã nhận, deadline 18/3, không cần thay đổi.
+
+T000610 [11:28:45] Minh: Vậy mọi thứ đã rõ. Recap toàn meeting: chúng ta đã thảo luận về payment development, integration với CRM, monitoring, release plan, và support. Các task chính đã được assign, deadline có điều chỉnh. Còn unresolved duy nhất là spec webhook từ product.
+
+T000611 [11:29:05] Lan: Em muốn bổ sung, task ETL migration đã hủy, không cần theo dõi.
+
+T000612 [11:29:20] Hà: Còn test plan cho integration sẽ được cập nhật sau khi có spec.
+
+T000613 [11:29:35] An: Em có một negative: cluster resource vẫn thiếu, có thể ảnh hưởng performance test. Nhưng đã ghi nhận.
+
+T000614 [11:29:50] Minh: Đó là vấn đề ops, để anh bàn với Huy sau.
+
+T000615 [11:30:05] Tuấn: Em có một positive: code payment cơ bản đã ổn, chỉ cần fix lỗi review.
+
+T000616 [11:30:20] Minh: Tốt. Cảm ơn mọi người vì buổi họp dài. Chúng ta sẽ có meeting tiếp theo vào ngày 10/3 để kiểm tra tiến độ. Giờ thì kết thúc.
+
+T000617 [11:30:35] Lan: Cảm ơn anh Minh.
+
+T000618 [11:30:45] Hà: Bye mọi người.
+
+T000619 [11:30:55] Tuấn: Tạm biệt.
+
+T000620 [11:31:05] An: Hẹn gặp lại.
+
+--- END OF PART P10 ---

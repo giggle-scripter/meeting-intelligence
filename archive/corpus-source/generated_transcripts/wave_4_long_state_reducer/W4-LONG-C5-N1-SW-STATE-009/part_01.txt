@@ -1,0 +1,133 @@
+MEETING_ID: W4-LONG-C5-N1-SW-STATE-009
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-23
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:00:00] Minh: Chào mọi người, cảm ơn đã có mặt đúng giờ. Hôm nay chúng ta sẽ họp về kế hoạch triển khai hệ thống cho đợt này. Trước tiên, mình muốn điểm qua tình hình môi trường test và tài liệu hướng dẫn triển khai.
+
+T000002 [09:00:30] Hà: Vâng, em xin phép bắt đầu. Môi trường test staging hiện tại mới chỉ có server backend, còn frontend và database replication chưa hoàn tất. Tuần trước anh Tuấn có update một số bản vá, nhưng em chưa kiểm tra lại toàn bộ.
+
+T000003 [09:01:05] Tuấn: Đúng rồi, tối qua em vừa push bản fix lỗi authentication. Nhưng bên DevOps chưa deploy lên môi trường test vì đang chờ tài liệu cấu hình. Em nghĩ cần làm rõ quy trình.
+
+T000004 [09:01:40] Minh: Được, chúng ta sẽ bàn cụ thể. Lan, phía BA có cập nhật gì về tài liệu triển khai không?
+
+T000005 [09:02:05] Lan: Dạ, tài liệu hướng dẫn triển khai bản mới em đã viết xong phần environment variables và database migration. Tuy nhiên phần cấu hình CI/CD vẫn còn thiếu mục trạng thái hiện tại của pipeline.
+
+T000006 [09:02:40] Hà: Em thấy tài liệu đó hơi dài, có nên tách ra thành hai phần: một cho môi trường test và một cho production không? Hay giữ nguyên một file duy nhất?
+
+T000007 [09:03:10] Minh: Ý kiến hay, nhưng trước mắt chúng ta cần một bản hoàn chỉnh cho môi trường test trước, vì deadline sắp tới. Tuấn, em thấy tình hình deployment hiện tại thế nào?
+
+T000008 [09:03:45] Tuấn: Thực tế em vừa deploy thử backend lên môi trường test hôm qua, nhưng database chưa có dữ liệu mẫu. Bên QA cần dữ liệu để chạy test, em nghĩ cần một task riêng cho việc chuẩn bị dataset.
+
+T000009 [09:04:20] Hà: Em đồng ý. Ngoài ra, tài liệu triển khai cần mô tả cách setup môi trường local cho developer nữa, vì team dev mới vào còn lúng túng.
+
+T000010 [09:04:55] Lan: Hiện tại em đã có bản nháp phần local setup, nhưng chưa review. Nếu được, em sẽ update vào cuối tuần này.
+
+T000011 [09:05:30] Minh: Vậy ta thống nhất hướng đi. Đầu tiên, mình sẽ giao task "Hoàn thiện môi trường test" cho Hà và Tuấn. Hà chịu trách nhiệm verify các bản vá và dữ liệu mẫu; Tuấn hỗ trợ kỹ thuật khi cần. Deadline cho task này là thứ Sáu tuần này – 28/02. Mọi người có đồng ý không?
+
+T000012 [09:06:10] Hà: Em OK, nhưng cần thêm thời gian để check logic nếu có bug phát sinh. Em đề xuất nếu không có vấn đề lớn, sẽ hoàn thành vào 28/02.
+
+T000013 [09:06:40] Tuấn: Em cũng OK. Nhưng lưu ý là bên DevOps chưa sẵn sàng deploy frontend, em đã gửi ticket yêu cầu nhưng chưa nhận hồi đáp. Có thể ảnh hưởng đến deadline.
+
+T000014 [09:07:15] Minh: Vậy em ghi nhận và mình sẽ bám sát vấn đề này. Task thứ hai là "Hoàn thiện tài liệu triển khai" – Lan phụ trách chính, nhưng tài liệu cần được review bởi cả team. Deadline các bạn tự đề xuất, nhưng mình muốn có bản draft vào cuối tuần sau, cụ thể ngày 07/03.
+
+T000015 [09:07:50] Lan: Dạ, em có thể hoàn thành bản draft trước 05/03, nhưng phần CI/CD em cần thông tin từ Phúc bên DevOps. Anh Minh có thể giúp em đôn đốc Phúc không?
+
+T000016 [09:08:20] Minh: Được, mình sẽ nói chuyện với Phúc chiều nay. Task này chưa có deadline cụ thể, vì còn phụ thuộc vào nhiều yếu tố. Nhưng chúng ta sẽ đặt mục tiêu là 07/03 cho bản review lần một.
+
+T000017 [09:08:55] Hà: Em muốn hỏi thêm, nếu môi trường test chưa ổn định thì tài liệu viết ra có đảm bảo không? Vì thực tế em thấy một số bước trong tài liệu của Lan đã sai với môi trường hiện tại.
+
+T000018 [09:09:30] Lan: Có thể do em chưa cập nhật kịp các thay đổi từ Tuấn. Em sẽ sync với Tuấn sau meeting này.
+
+T000019 [09:09:50] Tuấn: Ok, lát nữa em gửi Lan file cấu hình mới. Nhưng em cũng cần biết chính xác quy trình để viết lại phần hướng dẫn pipeline.
+
+T000020 [09:10:25] Minh: Hai việc này liên quan chặt chẽ. Chúng ta nên xem xét việc làm task "Cập nhật môi trường test" và "Cập nhật tài liệu triển khai" song song. Nhưng lưu ý là đừng để giống nhau quá về tên gọi, dễ gây nhầm lẫn. À, mình vừa giao hai task có tên gần giống: "Hoàn thiện môi trường test" và "Hoàn thiện tài liệu triển khai". Có lẽ nên đổi tên task tài liệu thành "Viết tài liệu triển khai chi tiết" để phân biệt.
+
+T000021 [09:11:10] Hà: Em thấy cũng ổn. Nhưng mà task môi trường test có deadline cụ thể, còn task tài liệu chưa có deadline rõ ràng – chỉ là mục tiêu. Liệu sau này có cần đưa deadline chính thức không?
+
+T000022 [09:11:45] Minh: Đúng, vì tài liệu phụ thuộc vào nhiều thứ. Ta sẽ để mục tiêu là bản review 07/03, nhưng deadline cuối cùng sẽ quyết định sau khi môi trường test ổn định. Cứ ghi nhận vậy.
+
+T000023 [09:12:15] Tuấn: Vậy em có thể bắt đầu task môi trường test ngay bây giờ. Em cần Hà confirm lại danh sách các test case cần chạy.
+
+T000024 [09:12:40] Hà: Em sẽ gửi list test case cho Tuấn trước 10h sáng mai. Nhưng có một vấn đề: bộ test tự động hiện tại chưa được cập nhật cho bản mới, nên em định ưu tiên manual testing trước.
+
+T000025 [09:13:15] Minh: Manual testing cũng được, miễn là đảm bảo coverage. Nhưng nhớ note lại để sau này tự động hóa. Về tài liệu, Lan cần lưu ý phần troubleshooting – nhiều dev hay gặp lỗi khi setup môi trường.
+
+T000026 [09:13:50] Lan: Em sẽ bổ sung mục FAQ và các lỗi thường gặp dựa trên feedback từ team. Em cũng định viết thêm video hướng dẫn nếu có thời gian.
+
+T000027 [09:14:20] Minh: Video hướng dẫn là tốt, nhưng có thể để part sau. Hiện tại cứ tập trung vào tài liệu text trước. Mình thấy tiến độ có vẻ ổn, nhưng cần lưu ý tình trạng thiếu thông tin từ DevOps. Có ai có thể liên hệ Phúc ngay bây giờ không?
+
+T000028 [09:14:55] Tuấn: Em có số của Phúc, nhưng anh ấy đang trong meeting khác đến 10h. Em sẽ nhắn trước.
+
+T000029 [09:15:20] Minh: Được, vậy mình chốt tạm các task ban đầu. Ngoài ra, còn một vấn đề nhỏ: tài liệu triển khai hiện tại có phần môi trường Staging và Production viết chung, Lan có thể tách ra chưa?
+
+T000030 [09:15:55] Lan: Em dự định tách sau khi có bản review đầu tiên. Nhưng nếu cần trước deadline 07/03, em có thể làm song song.
+
+T000031 [09:16:20] Hà: Em nghĩ nên tách ngay từ bây giờ để tránh nhầm lẫn. Ví dụ phần config cho staging khác production, viết chung dễ sai.
+
+T000032 [09:16:50] Minh: Ý kiến hay. Lan, em sửa luôn trong bản draft này nhé. Vậy nội dung tài liệu sẽ gồm: (1) hướng dẫn setup môi trường local, (2) hướng dẫn deploy staging, (3) hướng dẫn deploy production. Mỗi phần đều có troubleshooting.
+
+T000033 [09:17:25] Lan: Dạ, ok. Em sẽ update và gửi lại bản mới vào cuối ngày mai.
+
+T000034 [09:17:50] Tuấn: Em có một câu hỏi về task môi trường test: dữ liệu mẫu cần bao gồm những bảng nào? Database hiện tại có schema mới, em cần Hà chỉ rõ.
+
+T000035 [09:18:20] Hà: Các bảng liên quan đến core business: users, orders, payments. Em sẽ gửi file SQL mẫu kèm data mẫu.
+
+T000036 [09:18:50] Minh: Rõ ràng. Ngoài ra, mình muốn nhấn mạnh: mọi thay đổi trên môi trường test đều phải được ghi log lại để sau này dễ trace. Hà, em có thể làm việc đó không?
+
+T000037 [09:19:20] Hà: Được, em sẽ tạo một sheet log và cập nhật hàng ngày.
+
+T000038 [09:19:40] Minh: Tốt. Bây giờ chúng ta thử điểm lại các task đã thống nhất: Task 1 – "Hoàn thiện môi trường test" (deadline 28/02), owner Hà và Tuấn. Task 2 – "Viết tài liệu triển khai chi tiết" (mục tiêu review 07/03, chưa deadline chính thức), owner Lan. Còn ai có bổ sung gì không?
+
+T000039 [09:20:15] Tuấn: Em nghĩ nên thêm một task phụ: "Xác nhận quy trình deploy từ DevOps" do Phúc chịu trách nhiệm, nhưng hôm nay Phúc vắng mặt. Có thể đưa vào agenda part sau.
+
+T000040 [09:20:50] Minh: Đúng, mình sẽ ghi nhớ. Vì vậy, chúng ta sẽ không chốt task đó hôm nay. Còn Lan, em có cần hỗ trợ gì thêm không?
+
+T000041 [09:21:15] Lan: Hiện tại em cần Tuấn cung cấp cấu hình mới nhất của server backend và API endpoint list để viết tài liệu cho chính xác.
+
+T000042 [09:21:40] Tuấn: Em sẽ gửi file config và Swagger collection sau meeting này.
+
+T000043 [09:22:05] Minh: Vậy mọi người đã rõ. Mình sẽ gửi meeting minutes tổng hợp qua email. Trước khi kết thúc, ai có thắc mắc nào về môi trường test không?
+
+T000044 [09:22:35] Hà: Em có một băn khoăn: hiện tại log trên staging server bị thiếu một số endpoint, không biết có ảnh hưởng tới việc debug không. Anh Tuấn có thể kiểm tra giúp không?
+
+T000045 [09:23:05] Tuấn: Vâng, em sẽ check và thêm log cho các endpoint còn thiếu. Việc này có thể mất vài tiếng, em sẽ làm trong chiều nay.
+
+T000046 [09:23:35] Minh: OK, vậy note lại là Tuấn sẽ xử lý log server. Vậy là chúng ta có thêm một mục việc nhỏ, không chính thức thành task. Nhưng cần ghi nhận.
+
+T000047 [09:24:00] Lan: Em cũng có một concern: tài liệu triển khai hiện tại khá dài, em sợ dev mới đọc sẽ bỏ qua bước quan trọng. Có nên làm checklist riêng không?
+
+T000048 [09:24:30] Minh: Ý hay, checklist sẽ giúp giảm sai sót. Em có thể thêm ở cuối mỗi phần. Nhưng đừng làm quá nhiều việc cùng lúc, focus vào bản draft trước.
+
+T000049 [09:24:55] Hà: Em đồng tình. Mình cũng nên có một buổi test thử tài liệu với người mới để phát hiện thiếu sót. Nhưng việc đó có thể làm sau khi có bản hoàn chỉnh.
+
+T000050 [09:25:20] Minh: Chính xác. Vậy chúng ta sẽ quay lại vấn đề này ở meeting lần sau. Hôm nay mới chỉ là khởi động, còn nhiều việc sẽ được thảo luận ở các part tiếp theo.
+
+T000051 [09:25:50] Tuấn: Em cũng muốn hỏi về timeline tổng thể: khi nào cần có môi trường test ổn định để bắt đầu UAT? Hay chưa có kế hoạch?
+
+T000052 [09:26:20] Minh: Kế hoạch UAT sẽ được bàn ở part 3, tạm thời chúng ta chưa cần lo. Mình muốn thấy tiến độ task môi trường test đúng deadline 28/02 đã.
+
+T000053 [09:26:50] Hà: Vậy em sẽ cố gắng hoàn thành trước deadline đó, nhưng nếu có bug nghiêm trọng thì có thể trễ 1-2 ngày.
+
+T000054 [09:27:15] Minh: Hiểu. Nếu cần gia hạn, chúng ta sẽ bàn sau. Còn ai có ý kiến gì nữa không?
+
+T000055 [09:27:40] Lan: Em có một câu hỏi về tài liệu: phần môi trường production nên viết sau khi staging ổn định, hay viết ngay luôn?
+
+T000056 [09:28:05] Minh: Viết song song cũng được, nhưng cần dựa trên môi trường staging hiện tại. Khi production có thay đổi sẽ cập nhật sau.
+
+T000057 [09:28:30] Hà: Em nghĩ nên viết trước bản cho staging, vì production còn nhiều ẩn số.
+
+T000058 [09:28:50] Lan: Vậy em sẽ tập trung viết phần staging trước, phần production viết tạm dưới dạng note.
+
+T000059 [09:29:15] Minh: Nhất trí. Vậy hôm nay cơ bản đã xong. Mình sẽ update task list vào Jira ngay sau meeting. Cảm ơn mọi người.
+
+T000060 [09:29:45] Tuấn: Cảm ơn anh Minh.
+
+T000061 [09:30:00] Hà: Em không có thêm ý kiến.
+
+T000062 [09:30:20] Lan: Em cũng ổn.
+
+T000063 [09:30:40] Minh: Vậy chúng ta kết thúc part này tại đây. Hẹn gặp lại trong part 2 vào ngày mai để tiếp tục bàn về CI/CD và các vấn đề phát sinh.
+
+--- END OF PART P01 ---

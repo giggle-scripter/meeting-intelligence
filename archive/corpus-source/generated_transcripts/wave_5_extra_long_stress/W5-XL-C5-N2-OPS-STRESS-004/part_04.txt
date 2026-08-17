@@ -1,0 +1,124 @@
+MEETING_ID: W5-XL-C5-N2-OPS-STRESS-004
+PART: P04/10
+
+T000226 [09:52:30] Minh: Chuyển sang topic sản phẩm. Anh có vài điểm cần thảo luận về tính năng recurring payment. Lan, em có thông tin từ phía product không?
+
+T000227 [09:52:45] Lan: Có, họ muốn thêm chức năng thanh toán định kỳ cho khách hàng doanh nghiệp. Spec sơ bộ đã được gửi qua email.
+
+T000228 [09:53:00] Hà: Em chưa thấy spec đó. Có thể gửi lại không?
+
+T000229 [09:53:15] Lan: Anh Minh, em có thể forward lại sau cuộc họp.
+
+T000230 [09:53:30] Minh: OK. Vậy cần tìm hiểu xem chức năng này có ảnh hưởng đến API payment hiện tại không.
+
+T000231 [09:53:45] Tuấn: Chắc chắn có. Recurring payment cần thêm endpoint mới và logic scheduling.
+
+T000232 [09:54:00] An: Và cần thêm cronjob để xử lý thanh toán định kỳ.
+
+T000233 [09:54:15] Minh: Đúng, nhưng trước mắt chưa làm. Cần lên kế hoạch. Chúng ta sẽ tạo một task nghiên cứu spec.
+
+T000234 [09:54:30] Lan: Ai sẽ làm việc đó? Tuấn có thể đọc spec và đánh giá tác động.
+
+T000235 [09:54:45] Tuấn: Em có thể, nhưng cần thời gian. Dự kiến 2 ngày.
+
+T000236 [09:55:00] Minh: Vậy task "đánh giá tác động recurring payment" assign Tuấn, deadline 7/3.
+
+T000237 [09:55:15] Hà: Sau đó em cần update test plan dựa trên đánh giá đó. Deadline phụ thuộc vào Tuấn.
+
+T000238 [09:55:30] Minh: Vậy deadline cho Hà là 10/3, nhưng phụ thuộc vào Tuấn hoàn thành.
+
+T000239 [09:55:45] Lan: Có thể tạo event-dependent deadline: một khi Tuấn xong, Hà có 3 ngày để làm.
+
+T000240 [09:56:00] Minh: Ghi nhận. Vậy deadline Hà là "10/3 hoặc 3 ngày sau khi Tuấn xong, tùy cái nào đến trước?" Thực tế là sau.
+
+T000241 [09:56:15] Tuấn: Em sẽ cố gắng hoàn thành sớm.
+
+T000242 [09:56:30] An: Còn về infra, recurring payment cần database schema mới. Có thể phải migrate sau.
+
+T000243 [09:56:45] Minh: Tạm thời chưa có task cụ thể, chờ đánh giá tác động.
+
+T000244 [09:57:00] Hà: Em có câu hỏi, nếu recurring payment được triển khai, liệu nó có block release 2.0 không?
+
+T000245 [09:57:15] Minh: Không, release 2.0 chỉ gồm payment cơ bản. Recurring là cho phiên bản sau.
+
+T000246 [09:57:30] Lan: Vậy task này không ảnh hưởng lịch hiện tại.
+
+T000247 [09:57:45] Tuấn: Tuy nhiên, em cần xem spec có requirement nào thay đổi API cũ không.
+
+T000248 [09:58:00] Minh: Nếu có, thì cần báo sớm.
+
+T000249 [09:58:15] An: Chúng ta cũng cần nghĩ đến monitoring cho recurring. Nhưng để sau.
+
+T000250 [09:58:30] Minh: Ok, chuyển sang vấn đề khác. Anh thấy trong spec payment hiện tại có phần refund đã bỏ qua, nhưng product muốn đưa vào release 2.0?
+
+T000251 [09:58:45] Lan: Có, em vừa nhận email từ họ sáng nay. Họ muốn refund feature trong đợt này.
+
+T000252 [09:59:00] Hà: Vậy spec thay đổi, ảnh hưởng đến test plan.
+
+T000253 [09:59:15] Minh: Nghiêm trọng. Chúng ta cần thêm task implement refund. Tuấn, em có thể đảm nhận?
+
+T000254 [09:59:30] Tuấn: Em có thể, nhưng deadline API payment đã gần. Nếu thêm refund, phải dời deadline.
+
+T000255 [09:59:45] Minh: Vậy cần thảo luận. Anh nghĩ refund có thể làm sau release 2.0, nhưng product lại muốn gấp.
+
+T000256 [10:00:00] Lan: Em có thể đàm phán với họ, nhưng cần thời gian.
+
+T000257 [10:00:15] An: Nếu thêm refund, thì cần thay đổi schema và migration script, kéo theo nhiều việc.
+
+T000258 [10:00:30] Minh: Để anh quyết định: tạm thời không thêm refund. Chúng ta tập trung vào payment cơ bản. Nếu product không đồng ý, sẽ bàn sau.
+
+T000259 [10:00:45] Hà: Vậy test plan giữ nguyên.
+
+T000260 [10:01:00] Tuấn: Em đồng ý.
+
+T000261 [10:01:15] Lan: Em sẽ thông báo cho product.
+
+T000262 [10:01:30] Minh: Tạo task cho Lan: thông báo quyết định cho product, deadline 4/3.
+
+T000263 [10:01:45] An: Anh Minh, em có ý kiến về việc dùng third-party gateway cho refund? Có thể giảm công việc.
+
+T000264 [10:02:00] Minh: Nhưng tốn thêm chi phí. Chưa xem xét.
+
+T000265 [10:02:15] Hà: Em muốn hỏi, còn task review spec cho refund không? Mặc dù không làm, vẫn cần review?
+
+T000266 [10:02:30] Minh: Không, bỏ qua.
+
+T000267 [10:02:45] Tuấn: Em có thắc mắc, deadline cho task đánh giá recurring payment vẫn là 7/3, nhưng nếu bận việc refund thì có thể dời?
+
+T000268 [10:03:00] Minh: Không, refund không được chọn. Vẫn giữ deadline 7/3.
+
+T000269 [10:03:15] Lan: Vậy có task mới nào khác không? Anh Minh, em thấy chúng ta cần một task tổng hợp các requirement từ product.
+
+T000270 [10:03:30] Minh: Anh nghĩ Lan làm việc đó. Deadline 6/3.
+
+T000271 [10:03:45] Hà: Task đó có liên quan đến test plan? Em có thể cần.
+
+T000272 [10:04:00] Lan: Em sẽ gửi cho Hà khi hoàn thành.
+
+T000273 [10:04:15] An: Em có vấn đề về resource: cluster đang thiếu memory, có thể ảnh hưởng đến performance test.
+
+T000274 [10:04:30] Minh: Vấn đề ops, không thuộc topic sản phẩm. Ghi nhận để bàn sau.
+
+T000275 [10:04:45] Tuấn: Em thấy chúng ta có nhiều task phụ thuộc vào nhau. Ví dụ, task đánh giá recurring payment cần spec từ product, nhưng spec chưa gửi.
+
+T000276 [10:05:00] Lan: Spec sẽ được gửi trong ngày hôm nay.
+
+T000277 [10:05:15] Minh: Vậy Tuấn có thể bắt đầu sau khi nhận.
+
+T000278 [10:05:30] Hà: Còn về task update test plan cho payment, em có thể làm song song.
+
+T000279 [10:05:45] Minh: OK, không có vấn đề.
+
+T000280 [10:06:00] Lan: Anh Minh, em thấy topic sản phẩm đã được ổn. Có cần thêm gì không?
+
+T000281 [10:06:15] Minh: Chưa, tạm đủ. Chúng ta chuyển sang vấn đề khác.
+
+T000282 [10:06:30] An: Em có báo cáo về performance test môi trường dev, cần cải thiện.
+
+T000283 [10:06:45] Minh: Để dành cho phần vận hành sau. Bây giờ, tổng kết P04.
+
+T000284 [10:07:00] Lan: Vậy task mới: đánh giá recurring payment (Tuấn, 7/3), update test plan phụ thuộc (Hà, 10/3), tổng hợp requirement (Lan, 6/3), thông báo product (Lan, 4/3). Có gì thiếu?
+
+T000285 [10:07:15] Minh: Đủ. Không giải quyết gì từ part trước. Kết thúc P04.
+
+--- END OF PART P04 ---

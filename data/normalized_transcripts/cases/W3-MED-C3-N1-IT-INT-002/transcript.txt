@@ -1,0 +1,62 @@
+[09:00:05] Minh: Chào mọi người. Hôm nay chúng ta có nhiều việc cần bàn. Trước hết là tình hình tích hợp API, sau đó đến dữ liệu mẫu, quyền truy cập và kế hoạch rollout.
+[09:00:30] Lan: Em vừa kiểm tra thì thấy module kết nối với hệ thống bên đối tác vẫn báo lỗi APIConnectionError. Họ bảo đầu bên mình chưa mở port đúng.
+[09:00:55] Tuấn: Cái đó em đã báo bên hạ tầng rồi. Nhưng mà chưa có phản hồi.
+[09:01:15] Đức: Ừ, để anh check lại. Nhưng tuần trước anh có ghi nhận yêu cầu rồi, chắc bên kia chưa xử lý xong.
+[09:01:40] Hoa: Theo em, nếu không fix sớm thì ảnh hưởng tới lịch chạy thử dữ liệu mẫu. Thứ Sáu tuần này em đã lên kế hoạch chạy test.
+[09:02:05] Minh: Được rồi. Vậy Tuấn, em trực tiếp làm việc với bên hạ tầng, đôn đốc họ mở port đúng. Deadline là trước thứ Năm, để Lan còn test lại.
+[09:02:30] Tuấn: Vâng, em sẽ làm ngay. Nhưng nếu họ chậm thì em không cam kết được.
+[09:02:50] Minh: Cố gắng đẩy nhanh. Còn phần dữ liệu mẫu, Lan em đã chuẩn bị xong chưa?
+[09:03:15] Lan: Gần xong rồi. Còn một số trường hợp exception em chưa cover hết. Em dự kiến xong chiều nay.
+[09:03:40] Minh: Ok. Vậy em tiếp tục. Nhưng mà chú ý các field liên quan đến quyền truy cập, vì sau này sẽ dùng để phân quyền user. Có cần điều chỉnh gì không?
+[09:04:10] Hoa: Bên BA em đã review sơ bộ. Có một số field em muốn bổ sung thêm role. Nhưng chưa chốt.
+[09:04:35] Minh: Cái đó để sau. Bây giờ tập trung vào dữ liệu mẫu và API đã.
+[09:04:55] Đức: Anh có một vấn đề. Hệ thống cũ đang dùng cơ chế refresh token khác, nếu tích hợp API mới thì phải xử lý đồng thời. Em Lan có tính đến chuyện đó chưa?
+[09:05:20] Lan: Dạ em có để ý, nhưng em nghĩ sẽ dùng adapter pattern. Nhưng mà cần anh Đức confirm lại kiến trúc.
+[09:05:45] Minh: Vậy Tuấn và Đức, hai anh em ngồi lại với nhau, đưa ra quyết định về adapter. Tuấn, em ghi nhận task này nhé: "Xử lý adapter token cho API mới". Anh Đức anh chịu trách nhiệm review.
+[09:06:15] Đức: Ok, anh sẽ review. Nhưng thời gian cụ thể? Tuần này em bận cài đặt môi trường.
+[09:06:40] Minh: Chưa cần deadline gấp. Cứ làm xong dữ liệu mẫu trước đã.
+[09:07:00] Hoa: Em có một đề xuất. Hay là mình chạy thử trước với một số user nội bộ, lấy feedback sớm.
+[09:07:25] Minh: Ý hay đấy. Nhưng chưa chốt, cần xem lịch rollout. Để lát nữa bàn sau.
+[09:07:50] Tuấn: Vừa nãy em có nhận email từ bên đối tác, họ hỏi thông tin về sample data. Em nghĩ mình nên gửi trước một bản mẫu.
+[09:08:15] Lan: Em có thể gửi bản draft chiều nay, nhưng chưa chính thức vì còn thiếu exception cases.
+[09:08:40] Minh: Cứ gửi bản tạm cho họ. Lan, em gửi qua cho Hoa review trước nhé. Và nhớ ghi rõ là draft.
+[09:09:05] Hoa: Để em kiểm tra. Em sẽ góp ý trong ngày hôm nay.
+[09:09:30] Minh: Tốt. Bây giờ chuyển sang phần quyền truy cập. Ai đang phụ trách việc thiết kế role?
+[09:09:55] Hoa: Em đang làm. Nhưng mà em thấy chưa rõ về mối quan hệ giữa role API và role report. Có thể sẽ phải điều chỉnh.
+[09:10:20] Minh: Cần có người chịu trách nhiệm chính. Hay để em phụ trách toàn bộ việc phân quyền, từ API đến UI. Em có làm được không?
+[09:10:45] Hoa: Dạ được. Nhưng em cần input từ anh Đức về các endpoint. Để em gửi list cho anh.
+[09:11:10] Đức: Gửi đi, anh sẽ check. Nhưng mà anh đang bận xử lý connection error, có thể hơi chậm.
+[09:11:35] Minh: Vậy ưu tiên connection error trước. Việc phân quyền để cuối tuần này làm.
+[09:12:00] Tuấn: Em thấy có một task hơi giống với task "Xử lý adapter token" là "Xử lý refresh token cho API", nhưng mà hai cái khác nhau. Anh Minh xác nhận.
+[09:12:30] Minh: Ừ, cái adapter là kiến trúc tổng thể, còn refresh token là implement cụ thể. Không phải duplicate.
+[09:13:00] Lan: Em sẽ ghi chú lại. Tiện thể em xin confirm lại task "Hoàn thiện dữ liệu mẫu" em đang làm, deadline em đã để cuối ngày hôm nay. Nhưng mà exception cases có thể trễ hơn một chút.
+[09:13:30] Minh: Không sao, cứ cố gắng. Em nhớ cập nhật deadline lên board.
+[09:14:00] Hoa: Em thấy tuần trước có task "Kiểm tra dữ liệu mẫu" do Tuấn làm. Nay Lan lại làm "Hoàn thiện dữ liệu mẫu". Có bị trùng không?
+[09:14:25] Tuấn: Không, em chỉ test thôi, còn Lan làm data. Nên không phải duplicate.
+[09:14:50] Minh: Okay. Tiếp theo, về rollout. Em Hoa có proposal gì?
+[09:15:15] Hoa: Em có draft kế hoạch chia làm 3 phase: phase 1 thử nghiệm nội bộ, phase 2 triển khai một số phòng, phase 3 toàn bộ. Nhưng em chưa có timeline cụ thể vì phụ thuộc vào API.
+[09:15:45] Minh: Tạm thời chưa giao task cho rollout. Đợi khi API ổn định đã.
+[09:16:10] Đức: Anh có một thắc mắc. Việc xử lý connection error hiện tại đã giao cho Tuấn, nhưng mà bên hạ tầng cũng có người phụ trách. Hay là em Tuấn chuyển giao cho bên đó luôn, anh làm đầu mối?
+[09:16:40] Tuấn: Vâng, em đồng ý. Vậy em sẽ handoff cho anh Đức, và anh Đức sẽ là owner chính.
+[09:17:05] Minh: Nhưng mà Tuấn vẫn phải follow đến khi xong nhé. Không được bỏ.
+[09:17:30] Tuấn: Dạ. Vậy task "Mở port cho API" đã chuyển chủ sang anh Đức. Deadline thứ Năm.
+[09:17:55] Đức: Rồi, anh nhận. Nhưng mà nếu bên hạ tầng chậm thì anh sẽ báo lại.
+[09:18:20] Lan: Em có một vấn đề. API vẫn lỗi connection error nên em chưa thể test dữ liệu mẫu. Vậy task test dữ liệu mẫu có tạm dừng không?
+[09:18:45] Minh: Tạm dừng cho đến khi connection error được fix. Khi fix xong thì em test lại. Nhưng em vẫn hoàn thiện dữ liệu mẫu offline.
+[09:19:10] Hoa: Em thấy có một điểm chưa rõ. Ai sẽ review dữ liệu mẫu? Tuấn hay em?
+[09:19:35] Minh: Để Tuấn review kỹ thuật, Hoa review nghiệp vụ. Nhưng chưa có deadline cụ thể cho việc review. Mọi người tự sắp xếp.
+[09:20:00] Tuấn: Vậy em sẽ review sau khi Lan bàn giao. Khoảng cuối tuần.
+[09:20:30] Lan: Em nghĩ mình cần thống nhất lại toàn bộ task. Anh Minh, anh tổng kết giúp em.
+[09:20:55] Minh: Được. Tôi sẽ recap nhanh. Đầu tiên, task "Fix connection error API" – hiện do anh Đức làm, sau khi handoff từ Tuấn. Deadline trước thứ Năm. Task "Hoàn thiện dữ liệu mẫu" – Lan làm, deadline cuối ngày hôm nay, nhưng exception có thể trễ. Task "Review dữ liệu mẫu" – không deadline cụ thể. Task "Xử lý adapter token" – Tuấn làm, Đức review, chưa deadline. Task "Phân quyền truy cập" – Hoa phụ trách, dự kiến end tuần này. Còn rollout chưa tạo task.
+[09:21:50] Tuấn: Anh Minh, em thấy task "Xử lý adapter token" và "Xử lý refresh token" có vẻ giống nhau. Hay là gộp lại?
+[09:22:15] Minh: Không, hai cái khác. Adapter là mẫu kiến trúc, refresh token là phần con. Không duplicate.
+[09:22:40] Hoa: Em xin phép nói thêm. Về việc reviewer cho phần dữ liệu mẫu, em vẫn chưa xác nhận có đủ thời gian hay không. Em muốn giữ lại để sau meeting.
+[09:23:05] Minh: Được, đó là unresolved item. Em sẽ suy nghĩ và báo lại sau. Chúng ta không giải quyết được ngay.
+[09:23:30] Đức: Anh muốn hủy task "Cài đặt môi trường test" vì đã thay đổi hướng tiếp cận. Cần không?
+[09:23:55] Minh: Ừ, hủy đi. Không ảnh hưởng.
+[09:24:15] Lan: Em thấy phần recap vừa rồi khá rõ. Có gì em sẽ cập nhật lại lên hệ thống.
+[09:24:40] Tuấn: Vậy meeting hôm nay còn vấn đề gì không? Em còn việc khác.
+[09:25:00] Minh: Chờ một chút. Có một điểm negative – việc chậm trễ connection error có thể kéo lùi toàn bộ lịch. Mọi người cần nghiêm túc hơn.
+[09:25:30] Hoa: Em đồng ý. Nhất là bên hạ tầng, họ hay chậm.
+[09:25:55] Đức: Anh sẽ đôn đốc. Không để chậm nữa.
+[09:26:15] Minh: Tốt. Vậy kết thúc meeting. Cảm ơn mọi người.

@@ -1,0 +1,8 @@
+chốt sơ bộ
+chủ đề: Chuẩn bị bản phát hành nội bộ
+kw: tro / viet / huong / dan / giao / binh / trong
+- Tôi thấy task viết hướng dẫn sử dụng được giao cho Bình trong kế hoạch trước
+* Em cũng đang làm task hỗ trợ team A
+- Được, tôi sẽ bàn với cấp trên về việc này
+1) Chuyển sang regression test
+- Được ạ, em sẽ gửi ticket yêu cầu hỗ trợ

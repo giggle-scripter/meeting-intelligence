@@ -1,0 +1,78 @@
+[00:00:05] Anh Minh: Chào mọi người, hôm nay chúng ta họp để bàn về các đầu việc triển khai đợt này. Trước tiên, tôi muốn cập nhật về meeting summary flow. Chị Lan, phần đó đến đâu rồi?
+[00:00:15] Chị Lan: Dạ, em đang làm phần tích hợp flow với hệ thống cũ. Tuy nhiên có một số vấn đề về định dạng đầu ra.
+[00:00:22] Anh Tuấn: Tôi nghĩ chúng ta cần chuẩn hóa lại flow trước khi đưa vào sản xuất. Anh Minh có ý kiến gì không?
+[00:00:30] Anh Minh: Ừ, đúng vậy. Tôi sẽ chịu trách nhiệm review flow tổng thể và gửi lại cho Lan. Chị Lan, em update lại doc theo template mới nhé?
+[00:00:40] Chị Lan: Vâng, em sẽ làm. Nhưng em cần template từ anh trước.
+[00:00:45] Anh Minh: OK, tôi sẽ gửi template chiều nay. Hạn cuối để hoàn thành flow là thứ Sáu tuần sau, ngày 13/02.
+[00:00:55] Anh Tuấn: Vậy deadline cho flow là 13/02. Nhưng tôi thấy cần kiểm tra lại parser transcript trước, vì nó phụ thuộc vào flow.
+[00:01:05] Chị Hoa: Về parser transcript, tôi đã có bản nháp. Nhưng cần điều chỉnh để khớp với flow mới.
+[00:01:12] Anh Tuấn: Parser transcript cần đồng bộ với spec flow. Tôi đã thấy một số điểm chưa rõ trong mô tả flow.
+[00:01:20] Chị Lan: Anh Minh, em có thể hỏi chi tiết về phần xử lý lỗi trong flow? Nó ảnh hưởng đến parser.
+[00:01:28] Anh Minh: Phần xử lý lỗi tôi sẽ ghi chú trong template. Chị Lan yên tâm. Anh Tuấn, anh phụ trách parser được không?
+[00:01:35] Anh Tuấn: Được, tôi sẽ làm parser. Tuy nhiên deadline cho parser là khi nào? Tôi nghĩ nên sau khi flow hoàn tất.
+[00:01:42] Anh Minh: Hợp lý. Vậy parser sẽ có deadline là 18/02, sau flow 5 ngày. Nhưng mà khoan, tôi cần sửa deadline của flow. Thứ Sáu tuần sau là 13/02, nhưng tôi vừa nói 13 là đúng rồi. Không cần sửa.
+[00:01:55] Chị Lan: Em nhớ anh vừa bảo deadline 13. Vậy giữ nguyên.
+[00:02:00] Anh Minh: Đúng. Vậy flow deadline 13/02, parser deadline 18/02.
+[00:02:08] Anh Tuấn: Correction vừa rồi không thay đổi deadline, chỉ xác nhận. Tuy nhiên tôi muốn hỏi: nếu flow chậm thì parser có bị ảnh hưởng?
+[00:02:15] Anh Minh: Có, nên chị Lan cần đảm bảo đúng hạn. Nếu có rủi ro thì báo sớm.
+[00:02:22] Chị Lan: Em sẽ cố gắng. Nhưng em cũng muốn biết về SP365 display. Chức năng đó có cần tích hợp gì với flow không?
+[00:02:30] Chị Hoa: SP365 display tôi đang nghiên cứu. Nó hiển thị kết quả từ parser. Có một ý tưởng cho phase sau là thêm biểu đồ động, nhưng hiện tại chưa cần.
+[00:02:38] Anh Minh: Ý tưởng đó hay, nhưng chưa phải bây giờ. Trước mắt, chị Hoa hãy hoàn thiện phần display cơ bản. Tôi giao cho chị việc này, không có deadline cụ thể, nhưng cần hoàn thành sau khi parser xong.
+[00:02:48] Chị Hoa: Vâng, em sẽ làm display. Em cần thông số kỹ thuật từ parser để thiết kế giao diện.
+[00:02:55] Anh Tuấn: Tôi sẽ cung cấp thông số parser output sau khi hoàn thành. Chị Hoa có thể bắt đầu với spec flow trước.
+[00:03:02] Chị Lan: Về chi phí, tôi có báo cáo sơ bộ. Chi phí cho đợt này dự kiến tăng 10% so với dự toán. Chúng ta cần xem xét.
+[00:03:10] Anh Minh: Chi phí là vấn đề quan trọng, nhưng để sau khi chốt flow và parser chúng ta sẽ bàn. Hiện tại chưa cần task cụ thể cho chi phí.
+[00:03:18] Chị Hoa: Vậy chúng ta có ba đầu việc chính: flow, parser, display. Còn vấn đề chi phí chưa có task.
+[00:03:25] Anh Tuấn: Tôi muốn nhắc lại về flow. Chị Lan, phần flow có cần thêm bước kiểm thử tự động không?
+[00:03:32] Chị Lan: Có, em đã thêm bước kiểm thử trong doc. Nhưng chưa được review.
+[00:03:38] Anh Minh: Tốt, tôi sẽ review luôn. Mà tôi thấy có một vấn đề chưa giải quyết: việc tích hợp với hệ thống cũ vẫn còn rủi ro. Chị Lan, em có đề xuất gì không?
+[00:03:48] Chị Lan: Em đã thử một số cách nhưng chưa khả thi. Có lẽ cần thêm thời gian nghiên cứu.
+[00:03:55] Anh Minh: Vậy vấn đề tích hợp này tạm thời chưa giải quyết. Chúng ta để lại unresolved và bàn sau.
+[00:04:02] Anh Tuấn: OK. Quay lại parser, tôi cần hỏi: định dạng đầu ra của parser là JSON hay XML?
+[00:04:10] Chị Hoa: Theo spec flow mới, định dạng là JSON với các trường cụ thể như speaker, timestamp, nội dung.
+[00:04:18] Anh Minh: Chị Hoa nói đúng. Anh Tuấn, anh dựa vào spec đó.
+[00:04:22] Anh Tuấn: Rõ. Tôi sẽ làm parser dựa trên spec flow. Nhưng spec flow hiện tại chưa có phần speaker_id.
+[00:04:30] Chị Lan: Em sẽ bổ sung speaker_id vào flow template. Anh Minh, anh thêm vào template nhé?
+[00:04:36] Anh Minh: Được, tôi sẽ thêm. Vậy em chờ template của tôi để hoàn thiện flow.
+[00:04:42] Chị Hoa: Về display, tôi cần biết parser có output trường start_time không. Để hiển thị thanh thời gian.
+[00:04:50] Anh Tuấn: Có, tôi sẽ đưa start_time vào output.
+[00:04:55] Anh Minh: Vậy parser output sẽ có timestamp. Chị Hoa dựa vào đó.
+[00:05:00] Chị Lan: Em có một câu hỏi về deadline của flow. Anh Minh vừa nói deadline 13/02, em cần template trước 2 ngày để kịp.
+[00:05:08] Anh Minh: OK, tôi sẽ gửi template vào ngày 11/02. Vậy flow có 2 ngày để làm từ 11 đến 13. Chị Lan có ổn không?
+[00:05:16] Chị Lan: Vâng, em sẽ hoàn thành trong thời gian đó.
+[00:05:20] Anh Tuấn: Tôi cần lưu ý: task parser có tên "xây dựng parser transcript" rất giống với một task cũ "cập nhật parser" từ đợt trước. Nhưng chúng khác nhau.
+[00:05:28] Anh Minh: Đúng, task lần này là xây dựng mới. Task cập nhật đã hoàn thành. Chúng ta phân biệt rõ.
+[00:05:35] Chị Hoa: Vậy có hai task gần giống nhau nhưng chỉ một task active trong meeting này.
+[00:05:40] Anh Minh: Chính xác. Không có duplicate.
+[00:05:44] Chị Lan: Recap lại sau khi thảo luận: flow (Minh review template, Lan làm flow, deadline 13/02), parser (Tuấn làm, deadline 18/02), display (Hoa làm, không deadline). Hoa support Lan phần test nếu cần. Unresolved: tích hợp hệ thống cũ. Topic chi phí không tạo task. Distractor: ý tưởng phase sau về biểu đồ.
+[00:06:06] Anh Minh: Recap đúng. Nhưng lưu ý: deadline flow đã được xác nhận là 13, không thay đổi owner. Có correction nào không? Chỉ là xác nhận lại.
+[00:06:15] Anh Tuấn: Tôi có correction: lúc đầu anh Minh nói deadline flow là 13, sau đó không sửa. Nên không có thay đổi. Nhưng vẫn được coi là deadline replacement? Không, vì không thay đổi.
+[00:06:25] Anh Minh: Ừ, không có replacement. Vậy recap không có gì thay đổi.
+[00:06:30] Chị Hoa: Về negative context, tôi lo ngại hiệu năng parser khi xử lý transcript dài. Có thể gây chậm.
+[00:06:38] Anh Tuấn: Đó là rủi ro. Tôi sẽ thiết kế parser có cơ chế xử lý batch.
+[00:06:44] Anh Minh: Tốt. Ghi nhận rủi ro. Nhưng chưa phải unresolved.
+[00:06:48] Chị Lan: Còn vấn đề APIConnectionError khi gọi dịch vụ bên ngoài? Anh Tuấn vừa nhắc.
+[00:06:55] Anh Tuấn: Đúng, parser có thể gọi API dịch thuật hoặc nhận dạng. Lỗi kết nối là negative context cần có fallback.
+[00:07:02] Anh Minh: Chúng ta sẽ xem xét sau. Hiện tại tập trung vào flow và parser cơ bản trước.
+[00:07:08] Anh Tuấn: Tôi có một suggestion: nên dùng chung thư viện xử lý lỗi cho cả flow và parser để đồng bộ.
+[00:07:14] Anh Minh: Suggestion tốt, nhưng chưa phải task. Ghi nhận.
+[00:07:20] Chị Hoa: Vậy ngoài các task chính, có distractor về ý tưởng phase sau, không tạo task.
+[00:07:26] Anh Minh: Đúng. Và có một task được nhắc lại là "xây dựng parser", nhưng không tạo duplicate vì chỉ có một.
+[00:07:32] Chị Lan: Em muốn xác nhận: task display không deadline, nhưng em có thể hỗ trợ flow. Đó có phải direct assignment không?
+[00:07:38] Anh Minh: Đó là first-person commitment: chị Hoa tự nhận hỗ trợ. Còn direct assignment là tôi giao flow cho Lan, parser cho Tuấn.
+[00:07:46] Chị Hoa: Vâng, em sẽ support Lan khi cần.
+[00:07:50] Anh Tuấn: Về deadline, tôi thấy deadline của flow và parser nằm ở các lượt khác nhau. Flow deadline được nói lúc đầu, parser deadline sau.
+[00:07:58] Anh Minh: Đúng. Cả hai deadline đều được gắn với task riêng.
+[00:08:02] Chị Lan: Em có một câu hỏi về "phần đó" – phần flow – có cần tích hợp với module cũ không? Hay chỉ làm mới?
+[00:08:08] Anh Minh: Chỉ làm mới. Tích hợp cũ là unresolved, không nằm trong task này.
+[00:08:12] Chị Hoa: Vậy phần "đầu việc lúc nãy" về display có cần chờ parser không?
+[00:08:18] Anh Minh: Chị có thể bắt đầu dựa trên spec flow, không cần đợi parser output.
+[00:08:22] Anh Tuấn: Tôi muốn nhấn mạnh: task "xây dựng parser" và task "cập nhật parser" là hai việc khác nhau, dù tên gần giống. Ở đây chỉ có xây dựng.
+[00:08:30] Anh Minh: Nhắc lại đúng. Không có duplicate.
+[00:08:34] Chị Lan: Vậy chúng ta có 3 active task. Một topic chi phí không tạo task. Một unresolved item. Một distractor.
+[00:08:40] Anh Tuấn: Recap này đầy đủ.
+[00:08:44] Anh Minh: Để kết thúc, tôi muốn mọi người cập nhật tiến độ vào tool sau meeting. Cảm ơn.
+[00:08:50] Chị Hoa: Cảm ơn anh Minh.
+[00:08:54] Chị Lan: Em sẽ cập nhật doc.
+[00:08:58] Anh Tuấn: Tôi bắt đầu parser ngay.
+[00:09:02] Anh Minh: OK, hẹn gặp lại.

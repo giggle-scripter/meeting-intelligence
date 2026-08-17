@@ -1,0 +1,124 @@
+MEETING_ID: W4-LONG-C4-N1-OPS-STATE-012
+PART: P02/5
+
+T000072 [09:30:02] Linh: Chúng ta tiếp tục. Phần trước đã bàn về môi trường test và tài liệu. Bây giờ em muốn chuyển sang một vấn đề mới: lỗi đăng nhập mà team QA báo cáo gần đây. Có ai nắm thông tin không?
+
+T000073 [09:30:30] Minh: Em có nghe, hình như là lỗi khi nhập sai mật khẩu quá 3 lần, hệ thống không khóa tài khoản đúng cách.
+
+T000074 [09:30:55] Huy: Em cũng thấy vài log lỗi trên server staging. Có thể liên quan đến module xác thực.
+
+T000075 [09:31:18] Trang: Nhưng mà lỗi đó có ảnh hưởng đến kế hoạch triển khai không? Em nghĩ nên ưu tiên môi trường test trước.
+
+T000076 [09:31:40] Linh: Đúng, nhưng nếu để lâu, QA sẽ không test được login flow. Em đề xuất tạo task riêng cho việc này.
+
+T000077 [09:32:02] Minh: Vậy để em phụ trách. Em sẽ kiểm tra code và sửa lỗi. Nhưng cần truy cập repository, em đã có quyền.
+
+T000078 [09:32:25] Huy: Em có thể hỗ trợ review code sau khi Minh sửa. Nhưng mà trước đó cần có dữ liệu test để kiểm tra.
+
+T000079 [09:32:48] Linh: Ok, vậy ta có task E – “Xử lý lỗi đăng nhập” do Minh, deadline? Em nghĩ nên đặt trong tuần sau, trước khi bước vào test phase.
+
+T000080 [09:33:10] Minh: Có thể 03/03, vì cuối tuần này em bận task A.
+
+T000081 [09:33:30] Linh: Vậy deadline 03/03. Nhưng mà cần dữ liệu test, ai lo phần đó?
+
+T000082 [09:33:52] Huy: Em có thể chuẩn bị dữ liệu test mẫu, nhưng cần biết yêu cầu cụ thể. Hay tạo task F – “Chuẩn bị dữ liệu test cho login” do em, không deadline vì phụ thuộc vào task E.
+
+T000083 [09:34:15] Trang: Dữ liệu test có thể lấy từ production clone không? Hay cần tự tạo?
+
+T000084 [09:34:35] Huy: Nên dùng dữ liệu giả lập, tránh ảnh hưởng dữ liệu thật. Em sẽ viết script tạo user test.
+
+T000085 [09:34:58] Linh: Cái đó hay. Nhưng mà em thấy task F nghe giống với task B “Thiết lập môi trường test” của Trang. Có trùng không?
+
+T000086 [09:35:20] Trang: Không, task B là viết hướng dẫn thiết lập môi trường, còn task F là tạo dữ liệu cho một chức năng cụ thể.
+
+T000087 [09:35:40] Huy: Em xin phép task F, nhưng mà deadline không có, em sẽ làm sau task E.
+
+T000088 [09:36:00] Linh: Vậy task E deadline 03/03, task F chưa deadline. Còn ai review task E? Huy đã đề xuất, vậy Huy làm reviewer.
+
+T000089 [09:36:22] Huy: Em có thể review, nhưng mà lịch em hơi kín. Có thể đẩy review sang sau khi em hoàn thành task C.
+
+T000090 [09:36:45] Minh: Vậy tạm thời chưa có reviewer cố định? Hay là để Trang?
+
+T000091 [09:37:05] Trang: Em không rõ code, chỉ review tài liệu thôi. Em nghĩ nên để Huy.
+
+T000092 [09:37:25] Linh: Vậy reviewer là Huy, nhưng chưa chốt thời gian. Em sẽ ghi là “unresolved reviewer” và sẽ xác định sau.
+
+T000093 [09:37:48] Huy: Có thể em sẽ review sau 03/03, nếu không kịp thì nhờ anh Tuấn.
+
+T000094 [09:38:08] Linh: Để sau. Bây giờ em muốn thảo luận về negative context của lỗi đăng nhập. Nó có thể gây ra rủi ro gì?
+
+T000095 [09:38:30] Minh: Nếu không sửa kịp, QA không test được, ảnh hưởng tiến độ triển khai.
+
+T000096 [09:38:50] Huy: Thêm nữa, log lỗi không rõ ràng, có thể cần debug lâu.
+
+T000097 [09:39:12] Trang: Em cũng lo là nếu dữ liệu test không đúng, sẽ tạo ra bug giả.
+
+T000098 [09:39:35] Linh: Tất cả đều là rủi ro. Chúng ta cần theo dõi. Ngoài ra, em thấy có một distractor: hôm qua team marketing hỏi về tính năng mới, nhưng không liên quan đến kỹ thuật. Có nên bỏ qua?
+
+T000099 [09:40:00] Minh: Bỏ qua, vì không ảnh hưởng.
+
+T000100 [09:40:20] Huy: Em đồng ý.
+
+T000101 [09:40:40] Trang: Nhưng mà họ cần báo cáo, em có thể trả lời sau.
+
+T000102 [09:41:00] Linh: Vậy em giao Trang trả lời marketing, nhưng không phải task chính. Đó là task G – “Phản hồi marketing về tính năng mới”, không deadline, Trang tự xử lý.
+
+T000103 [09:41:25] Trang: Ok, em sẽ trả lời trong tuần.
+
+T000104 [09:41:45] Linh: Quay lại vấn đề chính. Về lỗi đăng nhập, Minh có cần hỗ trợ gì thêm không?
+
+T000105 [09:42:05] Minh: Hiện tại chưa, để em xem log trước. Nếu cần em sẽ báo.
+
+T000106 [09:42:25] Huy: Em muốn hỏi là dữ liệu test có cần bao gồm các trường hợp đặc biệt như tài khoản bị khóa không?
+
+T000107 [09:42:48] Linh: Tốt, em nên thêm vào task F.
+
+T000108 [09:43:08] Huy: Vậy em sẽ viết script tạo user với nhiều trạng thái.
+
+T000109 [09:43:30] Trang: Khi nào có dữ liệu, em có thể cập nhật tài liệu test case.
+
+T000110 [09:43:50] Linh: Ok, vậy task E, F, G. Nhưng em thấy task E và task A có liên quan không? Vì task A là môi trường test.
+
+T000111 [09:44:12] Minh: Không liên quan trực tiếp, lỗi đăng nhập là trên code, không phải môi trường.
+
+T000112 [09:44:32] Huy: Nhưng nếu sửa lỗi, cần deploy lên môi trường test, phụ thuộc vào task A.
+
+T000113 [09:44:55] Linh: Đúng, vậy task E phải sau task A. Nhưng deadline task E là 03/03, task A là 28/02, vậy ổn.
+
+T000114 [09:45:18] Minh: Em sẽ cố gắng hoàn thành task A sớm để có base.
+
+T000115 [09:45:40] Huy: Em cũng cần task A để chạy script dữ liệu test.
+
+T000116 [09:46:00] Linh: Các phụ thuộc đã rõ. Bây giờ em muốn thảo luận thêm về dữ liệu test. Huy, em có cần input từ team QA không?
+
+T000117 [09:46:25] Huy: Có, em cần danh sách tình huống test. Em sẽ hỏi chị Lan.
+
+T000118 [09:46:48] Trang: Chị Lan bận, em có thể cung cấp một số test case cơ bản từ tài liệu cũ.
+
+T000119 [09:47:10] Huy: Vậy em sẽ lấy từ Trang, đỡ mất thời gian.
+
+T000120 [09:47:32] Linh: Tốt. Có ai muốn thêm vấn đề gì khác không? Về phần môi trường test, Minh có tiến triển gì chưa?
+
+T000121 [09:47:55] Minh: Em vừa gửi email cho anh Dũng, chờ phản hồi. Có thể chiều nay có kết quả.
+
+T000122 [09:48:15] Huy: Nếu không có, em có thể nhờ anh Tuấn bên IT.
+
+T000123 [09:48:35] Linh: Để xem. Bây giờ em thấy nhiều task rồi, nhưng có một vấn đề: task B của Trang vẫn chưa có deadline. Có nên đặt tạm không?
+
+T000124 [09:48:58] Trang: Em nghĩ chờ task A xong rồi tính, vì nội dung phụ thuộc.
+
+T000125 [09:49:18] Linh: Ok. Vậy chúng ta tạm kết thúc phần lỗi đăng nhập và dữ liệu test. Còn gì muốn thảo luận nữa không?
+
+T000126 [09:49:40] Minh: Em không có.
+
+T000127 [09:49:58] Huy: Em cũng không.
+
+T000128 [09:50:15] Trang: Em có một thắc mắc nhỏ: tài liệu triển khai có cần đề cập đến lỗi đăng nhập không?
+
+T000129 [09:50:38] Linh: Có thể thêm ở phần troubleshooting, nhưng không ưu tiên.
+
+T000130 [09:51:00] Huy: Nếu sửa xong, Trang nên cập nhật.
+
+T000131 [09:51:20] Linh: Vậy chúng ta tạm dừng tại đây. Part sau sẽ bàn về testing phase và các vấn đề khác. Cảm ơn mọi người.
+
+--- END OF PART P02 ---

@@ -1,0 +1,394 @@
+{
+  "pipeline_version": "v1",
+  "meeting_context_mode": "assist",
+  "meeting_notes": "sidecar_if_present",
+  "prompt_version": "v1-ledger-mutation-v1",
+  "model": "deterministic",
+  "reasoning_effort": "not_applicable",
+  "mode": "local",
+  "endpoint": "",
+  "completed_case_count": 1,
+  "expected_case_count": 1,
+  "metrics_are_partial": false,
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 1,
+    "unreviewed_ground_truth_count": 0,
+    "unreviewed_case_ids": [],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 1,
+    "passed_case_count": 0,
+    "failed_case_count": 1,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.2,
+    "task_identity_recall": 0.75,
+    "task_precision": 0.2,
+    "task_recall": 0.75,
+    "field_accuracy": 0.5555555555555556,
+    "assignee_accuracy": 0.0,
+    "due_date_accuracy": 0.3333333333333333,
+    "due_date_text_exact_accuracy": 0.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "reviewed_metrics": {
+    "case_count": 1,
+    "passed_case_count": 0,
+    "failed_case_count": 1,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.2,
+    "task_identity_recall": 0.75,
+    "task_precision": 0.2,
+    "task_recall": 0.75,
+    "field_accuracy": 0.5555555555555556,
+    "assignee_accuracy": 0.0,
+    "due_date_accuracy": 0.3333333333333333,
+    "due_date_text_exact_accuracy": 0.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "exploratory_metrics": {
+    "case_count": 0,
+    "passed_case_count": 0,
+    "failed_case_count": 0,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 1.0,
+    "task_identity_recall": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 22,
+    "rule_event_count": 66,
+    "ai_event_count": 0,
+    "ai_window_count": 5,
+    "ai_batch_count": 4,
+    "ai_context_clause_count": 104,
+    "unresolved_window_count": 5,
+    "event_count_before_deduplication": 69,
+    "event_count_after_deduplication": 69,
+    "terminal_replay_blocked_count": 2,
+    "ledger_task_created_count": 26,
+    "ledger_task_updated_count": 34,
+    "exact_id_link_count": 0,
+    "exact_alias_link_count": 12,
+    "semantic_link_count": 22,
+    "unresolved_mutation_count": 5,
+    "duplicate_task_merge_count": 0,
+    "provisional_task_created_count": 11,
+    "provisional_task_promoted_count": 1,
+    "provisional_promotion_blocked_count": 1,
+    "ambiguous_identity_mutation_blocked_count": 0,
+    "sibling_identity_split_count": 0,
+    "ai_contract_rejection_count": 0,
+    "ai_structural_contract_rejection_count": 0,
+    "ai_semantic_rejection_count": 0,
+    "ai_unknown_task_id_rejection_count": 0,
+    "ai_invalid_source_clause_rejection_count": 0,
+    "ai_invalid_anchor_clause_rejection_count": 0,
+    "ai_non_concrete_action_rejection_count": 0,
+    "ai_invalid_assignee_rejection_count": 0,
+    "ai_fallback_error_count": 0,
+    "unauthorized_creation_blocked_count": 2,
+    "ledger_unknown_task_id_rejection_count": 0,
+    "weighted_ai_call_rate": 0.22727272727272727,
+    "ai_clause_coverage": 0.17077175697865354
+  },
+  "fallback_metrics": {
+    "rule_only": 0,
+    "ai_fallback_not_configured": 1,
+    "ai_fallback_skipped_no_candidate": 0,
+    "ai_fallback_resolved": 0,
+    "ai_fallback_unresolved": 0,
+    "ai_fallback_failed": 0
+  },
+  "job_execution": [],
+  "execution_errors": [],
+  "case_execution": [
+    {
+      "case_id": "W4-LONG-C5-N1-PROD-STATE-003",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 5,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 5,
+      "unresolved_mutation_count": 5,
+      "provisional_task_created_count": 11,
+      "provisional_task_promoted_count": 1,
+      "provisional_promotion_blocked_count": 1,
+      "ambiguous_identity_mutation_blocked_count": 0,
+      "sibling_identity_split_count": 0,
+      "ai_contract_rejection_count": 0,
+      "ai_structural_contract_rejection_count": 0,
+      "ai_semantic_rejection_count": 0,
+      "ai_unknown_task_id_rejection_count": 0,
+      "ai_invalid_source_clause_rejection_count": 0,
+      "ai_invalid_anchor_clause_rejection_count": 0,
+      "ai_non_concrete_action_rejection_count": 0,
+      "ai_invalid_assignee_rejection_count": 0,
+      "unauthorized_creation_blocked_count": 2,
+      "ledger_unknown_task_id_rejection_count": 0
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "W4-LONG-C5-N1-PROD-STATE-003",
+      "passed": false,
+      "expected_task_count": 4,
+      "actual_task_count": 15,
+      "matched_task_count": 3,
+      "missing_tasks": [
+        {
+          "task_name": "Kiểm tra config sandbox",
+          "assignee": "Hùng; Minh",
+          "start_date": "2026-02-17",
+          "due_date": "2026-02-27",
+          "due_date_text": "27/2",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Thêm mục \"Rollback procedure\"",
+          "assignee": "Minh",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Vâng, em sẽ thêm mục \"Rollback procedure\".",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo nhé, em có quyền truy cập DB sandbox",
+          "assignee": "Lan",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Lan, em tự tạo nhé, em có quyền truy cập DB sandbox.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết tổng quát, Lan viết cụ thể sandbox",
+          "assignee": "Minh",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Em sẽ viết tổng quát, Lan viết cụ thể sandbox.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm ngay sau meeting",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Ok, em sẽ làm ngay sau meeting.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi tài liệu hướng dẫn triển khai môi trường test chỉ tập trung",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "2026-02-17",
+          "due_date_text": "trong chiều nay",
+          "evidence": "Hùng: Em sẽ gửi query mẫu.\nHùng: Em sẽ gửi trong chiều nay.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo một vài user giả trong DB",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "sau khi restore",
+          "evidence": "Hùng: Em sẽ tạo một vài user giả trong DB sau khi restore.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chạy thử deploy script sau restore",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Em sẽ chạy thử deploy script sau restore.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Add một mục \"Maintenance tasks\" nhỏ",
+          "assignee": "Lan",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ add một mục \"Maintenance tasks\" nhỏ.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết script đó nữa",
+          "assignee": "Lan",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Lan, em không cần viết script đó nữa.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo channel riêng",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Em sẽ tạo channel riêng.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Setup health check cho từng cái",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Em sẽ setup health check cho từng cái.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm, không cần task mới",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Em sẽ làm, không cần task mới.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Viết tài liệu triển khai hệ thống",
+          "field": "assignee",
+          "expected": "Hùng",
+          "actual": "Minh"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai hệ thống",
+          "field": "due_date",
+          "expected": "2026-02-25",
+          "actual": "2026-02-17"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai hệ thống",
+          "field": "due_date_text",
+          "expected": "25/2",
+          "actual": "trong chiều nay"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai test",
+          "field": "assignee",
+          "expected": "Lan",
+          "actual": "Hùng"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai test",
+          "field": "due_date",
+          "expected": "2026-02-27",
+          "actual": "2026-02-26"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai test",
+          "field": "due_date_text",
+          "expected": "27/2",
+          "actual": "vào 26/2"
+        },
+        {
+          "task_name": "Cấu hình monitoring alert",
+          "field": "assignee",
+          "expected": "Hùng",
+          "actual": ""
+        },
+        {
+          "task_name": "Cấu hình monitoring alert",
+          "field": "due_date_text",
+          "expected": "28/2",
+          "actual": "deadline 28/2"
+        }
+      ],
+      "checked_field_count": 18,
+      "correct_field_count": 10,
+      "field_counts": {
+        "assignee_accuracy": [
+          3,
+          0
+        ],
+        "due_date_accuracy": [
+          3,
+          1
+        ],
+        "due_date_text_exact_accuracy": [
+          3,
+          0
+        ],
+        "state_link_accuracy": [
+          3,
+          3
+        ]
+      }
+    }
+  ],
+  "case_diagnostics": {
+    "W4-LONG-C5-N1-PROD-STATE-003": {
+      "caption_count": 297,
+      "deduplicated_caption_count": 297,
+      "turn_count": 294,
+      "sentence_count": 595,
+      "clause_count": 609,
+      "candidate_window_count": 22,
+      "rule_event_count": 66,
+      "ai_event_count": 0,
+      "ai_window_count": 5,
+      "ai_provider_enabled": false,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 104,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 5,
+      "ai_call_rate": 0.22727272727272727,
+      "ai_clause_coverage": 0.17077175697865354,
+      "ai_batch_count": 4,
+      "event_count_before_deduplication": 69,
+      "event_count_after_deduplication": 69,
+      "terminal_replay_blocked_count": 2,
+      "ledger_task_created_count": 26,
+      "ledger_task_updated_count": 34,
+      "exact_id_link_count": 0,
+      "exact_alias_link_count": 12,
+      "semantic_link_count": 22,
+      "unresolved_mutation_count": 5,
+      "duplicate_task_merge_count": 0,
+      "provisional_task_created_count": 11,
+      "provisional_task_promoted_count": 1,
+      "provisional_promotion_blocked_count": 1,
+      "ambiguous_identity_mutation_blocked_count": 0,
+      "sibling_identity_split_count": 0,
+      "ai_contract_rejection_count": 0,
+      "ai_structural_contract_rejection_count": 0,
+      "ai_semantic_rejection_count": 0,
+      "ai_unknown_task_id_rejection_count": 0,
+      "ai_invalid_source_clause_rejection_count": 0,
+      "ai_invalid_anchor_clause_rejection_count": 0,
+      "ai_non_concrete_action_rejection_count": 0,
+      "ai_invalid_assignee_rejection_count": 0,
+      "unauthorized_creation_blocked_count": 2,
+      "ledger_unknown_task_id_rejection_count": 0,
+      "recap_scope": "AUTHORITATIVE",
+      "meeting_date_source": "REQUEST",
+      "effective_meeting_date": "2026-02-17",
+      "explicit_task_start_date_count": 0
+    }
+  }
+}

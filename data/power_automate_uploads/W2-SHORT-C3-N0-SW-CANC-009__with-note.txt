@@ -1,0 +1,40 @@
+=== MEETING METADATA ===
+meeting_id: W2-SHORT-C3-N0-SW-CANC-009
+meeting_title: Rà soát công việc sprint
+meeting_date: 2026-02-03
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+minutes nháp
+chủ đề: Rà soát công việc sprint
+kw: cancel / khong / assign / sprint / planning / binh / ngoai
+- À task TASK-205, em được assign từ sprint planning
+* Đúng rồi Bình, mình sẽ cancel task TASK-205
+- Đúng rồi anh, ngoài TASK-205 vừa cancel thì không
+1) Có, mình sẽ họp retro vào chiều mai, nhưng hôm nay chốt danh sách task cancelled là ổn
+- Vậy mình thống nhất: TASK-205 bị hủy, không
+* Nhưng tới giờ vẫn chưa có API specs từ phía ZaloPay, nên em chưa bắt tay vào làm được ? chưa chốt
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:00:00] Linh (Scrum Master): Chào cả nhà, hôm nay mình rà soát nhanh các đầu việc còn lại trong sprint. Anh An có update gì không?
+[09:00:05] An (Product Owner): Chào Linh, chào Bình. Mình có một điểm cần quyết định gấp, liên quan đến task tích hợp cổng thanh toán ZaloPay.
+[09:00:12] Bình (Developer): À task TASK-205, em được assign từ sprint planning. Nhưng tới giờ vẫn chưa có API specs từ phía ZaloPay, nên em chưa bắt tay vào làm được.
+[09:00:19] An: Đúng rồi, phía đối tác họ báo lùi lịch cung cấp sandbox đến nửa tháng nữa, mà không có cam kết cụ thể. Sprint này mình còn 3 ngày, khả năng hoàn thành gần như bằng không.
+[09:00:26] Linh: Vậy mình có nên chuyển task đó sang sprint sau không anh? Hay mình giữ lại chờ?
+[09:00:30] An: Thực ra mình đã cân nhắc chuyển sprint, nhưng phía business họ vừa quyết định tạm dừng tích hợp ZaloPay vô thời hạn, vì bên kia thay đổi chính sách phí, không còn phù hợp nữa.
+[09:00:37] Bình: Vậy là mình cancel hẳn task này luôn hả anh?
+[09:00:40] An: Đúng rồi Bình, mình sẽ cancel task TASK-205. Coi như không còn nhu cầu làm nữa.
+[09:00:45] Linh: Em đồng ý. Dù hơi tiếc vì đã dành effort để grooming kỹ, nhưng nếu không còn business value thì cancel là hợp lý.
+[09:00:52] Bình: Vâng, em chỉ lo là mình đã estimate 5 story points, giờ bỏ thì sprint velocity sẽ bị ảnh hưởng.
+[09:00:58] An: Không sao, velocity chỉ là con số tham khảo. Quan trọng là mình không lãng phí thêm công sức vào một tính năng sẽ không dùng. Linh cập nhật giúp mình trên Jira nhé, chuyển sang trạng thái Cancelled.
+[09:01:05] Linh: OK, em sẽ chuyển status và ghi lý do là "Ngừng tích hợp do thay đổi chính sách đối tác".
+[09:01:10] An: Bình yên tâm, phần việc khác của em trong sprint vẫn đang on track chứ?
+[09:01:14] Bình: Dạ, hai task còn lại là sửa lỗi checkout và cải thiện tốc độ trang giỏ hàng em đã xong hết từ hôm qua, đang chờ QA verify.
+[09:01:20] Linh: À, QA cũng vừa báo với chị là hai task đó pass hết rồi, nên coi như sprint này mình đã done toàn bộ những gì có thể.
+[09:01:26] An: Tuyệt vời. Vậy không còn active task nào đúng không?
+[09:01:30] Linh: Đúng rồi anh, ngoài TASK-205 vừa cancel thì không còn task nào đang mở. Sprint này mình close được rồi.
+[09:01:35] Bình: Em cũng không có thêm task nào khác. Mình có cần họp retrospective không chị?
+[09:01:39] Linh: Có, mình sẽ họp retro vào chiều mai, nhưng hôm nay chốt danh sách task cancelled là ổn.
+[09:01:44] An: Cảm ơn cả hai. Vậy mình thống nhất: TASK-205 bị hủy, không còn active task, sprint coi như đóng. Có ai có ý kiến gì thêm không?
+[09:01:50] Bình: Không anh, em đồng ý.
+[09:01:53] Linh: Em cũng không. Chốt nhé, em đi update Jira ngay.
+[09:01:56] An: OK, meeting này kết thúc. Cảm ơn mọi người.

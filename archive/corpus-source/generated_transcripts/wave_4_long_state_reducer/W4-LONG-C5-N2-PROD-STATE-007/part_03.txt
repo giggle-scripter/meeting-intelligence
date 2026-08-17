@@ -1,0 +1,98 @@
+MEETING_ID: W4-LONG-C5-N2-PROD-STATE-007
+PART: P03/5
+
+T000145 [10:22:10] Linh: Về chỗ ngồi nào. Chúng ta quay lại vấn đề tài liệu triển khai mà Hà đã đề cập từ đầu. Tôi thấy mình chưa có tiến triển gì cho task template.
+
+T000146 [10:22:48] Hà: Dạ, em vẫn chưa bắt đầu vì ưu tiên task D và E. Nhưng em có suy nghĩ: template này có thể để Duy làm vì Duy là người sử dụng cuối.
+
+T000147 [10:23:22] Duy: Em cũng muốn tham gia, nhưng em chưa rõ format. Nếu Hà chuyển giao lại cho em, em cần một bản mẫu từ Hà.
+
+T000148 [10:23:58] Linh: Vậy Hà vẫn là người tạo mẫu, nhưng sau đó Duy sẽ kế thừa và phát triển. Tôi muốn chuyển owner của task template từ Hà sang Duy.
+
+T000149 [10:24:35] Hà: Em đồng ý. Em sẽ viết một bản nháp cấu trúc cơ bản, rồi chuyển cho Duy hoàn chỉnh.
+
+T000150 [10:25:10] Duy: Em ok. Nhưng em cần Hà ghi rõ các mục bắt buộc và mục tùy chọn.
+
+T000151 [10:25:45] Linh: Tốt. Vậy task C bây giờ có owner là Duy, Hà support. Nhưng deadline chưa có. Tôi muốn đặt deadline cho task C là ngày 26/02, để kịp cho đợt training.
+
+T000152 [10:26:20] Hà: 26/02 em nghĩ là khả thi, nếu Duy bắt đầu ngay sau khi có mẫu.
+
+T000153 [10:26:55] Duy: Vâng, em sẽ cố gắng.
+
+T000154 [10:27:28] Minh: Như vậy task C có deadline mới. Còn task A thì sao? Em thấy deadline ngày mai có vẻ gấp, vì em vừa nhận tin server có thể cấp chậm.
+
+T000155 [10:28:05] Linh: Server cấp chậm? Chiều nay không có à?
+
+T000156 [10:28:38] Minh: Bên IT báo tối nay mới có. Vậy ngày mai em chỉ có buổi sáng để cài đặt, e là không kịp.
+
+T000157 [10:29:12] Linh: Vậy ta phải điều chỉnh deadline của task A. Thay vì 22/02, dời sang 23/02. Nhưng Minh phải đảm bảo xong trước cuối ngày 23/02.
+
+T000158 [10:29:48] Minh: Dạ, em nghĩ 23/02 là được.
+
+T000159 [10:30:20] Hà: Như vậy deadline task A thay đổi. Còn task E cũng lùi theo, vì script seed phụ thuộc vào môi trường.
+
+T000160 [10:30:55] Duy: Đúng. Nếu môi trường chưa có, em không thể chạy seed.
+
+T000161 [10:31:28] Linh: Vậy task E cũng lùi deadline: script seed có thể viết trước, nhưng chạy seed sẽ sau khi môi trường payment sẵn sàng. Tôi đề nghị script vẫn nộp trước 10h sáng 23/02, còn chạy seed thì linh hoạt hơn.
+
+T000162 [10:32:05] Minh: Em ok. Em sẽ viết script dựa trên spec mẫu, không cần môi trường thật.
+
+T000163 [10:32:40] Hà: Em có một lo ngại: nếu lùi deadline task A, deadline task D cũng có thể bị ảnh hưởng? Vì cần dữ liệu seed để phân tích.
+
+T000164 [10:33:15] Linh: Tạm thời task D vẫn giữ deadline tham khảo 27/02, vì có thể capture log độc lập.
+
+T000165 [10:33:50] Duy: Vâng. Em muốn hỏi về việc chạy seed: ai sẽ là người chạy cuối cùng? Trước em và Minh đã phân công, nhưng sau khi handoff task C, em có thể bận.
+
+T000166 [10:34:28] Linh: Nếu Duy bận, Minh có thể tự chạy sau khi viết script. Hà review.
+
+T000167 [10:35:02] Minh: Em nghĩ em chạy luôn cũng được. Vậy sửa lại: Minh viết script và chạy seed, Hà review.
+
+T000168 [10:35:38] Hà: Em ok.
+
+T000169 [10:36:10] Linh: Vậy task E: owner Minh, Hà review, không có deadline cứng nhưng linh hoạt theo task A.
+
+T000170 [10:36:45] Duy: Em cần xác nhận lại: task C bây giờ là của em, deadline 26/02, Hà support. Task A deadline 23/02. Task D deadline 27/02. Task B và C cũ chưa sửa.
+
+T000171 [10:37:20] Minh: Vâng, em ghi nhận.
+
+T000172 [10:37:55] Hà: Một vấn đề nữa: task B môi trường sync vẫn chưa có chủ rõ ràng. Liệu có cần điều chỉnh không?
+
+T000173 [10:38:30] Linh: Tạm thời giữ nguyên. Khi nào task A và C xong, ta sẽ xem xét.
+
+T000174 [10:39:05] Duy: Em có một ý: có thể dùng template tài liệu cho cả sync và payment. Như vậy task C sẽ ảnh hưởng đến task B sau này.
+
+T000175 [10:39:40] Hà: Đúng, nên template cần được thiết kế tổng quát.
+
+T000176 [10:40:12] Linh: Vậy Duy, em cần lưu ý điều đó khi làm template. Hà sẽ hỗ trợ em về mặt kỹ thuật.
+
+T000177 [10:40:48] Duy: Vâng, em sẽ liên hệ Hà sau meeting để lấy mẫu.
+
+T000178 [10:41:20] Minh: Em thấy mình đã điều chỉnh nhiều. Có cần tổng kết lại toàn bộ không?
+
+T000179 [10:41:55] Linh: Không cần, chúng ta còn phần sau. Nhưng tôi muốn chốt lại rằng các deadline đã thay đổi như vậy.
+
+T000180 [10:42:30] Hà: Vâng. Em xin phép nói về task D: em đã capture log sơ bộ, thấy token expiry set 5 phút, đúng như dự đoán.
+
+T000181 [10:43:05] Linh: Vậy nguyên nhân đã rõ. Em có cần sửa config không?
+
+T000182 [10:43:38] Hà: Em cần quyền deploy để sửa file cấu hình. Hiện tại em chưa có.
+
+T000183 [10:44:10] Minh: Em có quyền deploy staging. Hà gửi em thay đổi, em sẽ apply.
+
+T000184 [10:44:45] Linh: Vậy task D có thêm hành động: Hà xác định config cần sửa, Minh apply. Nhưng vẫn giữ owner Hà.
+
+T000185 [10:45:18] Hà: Được. Em sẽ gửi config mới qua chat cho Minh.
+
+T000186 [10:45:50] Duy: Như vậy task D có tiến triển tốt.
+
+T000187 [10:46:20] Linh: Tôi muốn nhấn mạnh rằng việc handoff task C và thay đổi deadline task A là những điều chỉnh cần thiết. Chúng ta không có gì khẩn cấp hơn.
+
+T000188 [10:46:58] Minh: Em hoàn toàn đồng ý.
+
+T000189 [10:47:30] Hà: Vâng.
+
+T000190 [10:48:00] Duy: Em cũng vậy.
+
+T000191 [10:48:35] Linh: Vậy tôi xin kết thúc phần thảo luận về tài liệu và deadline. Chúng ta sẽ sang phần bốn sau khi nghỉ ngắn.
+
+--- END OF PART P03 ---

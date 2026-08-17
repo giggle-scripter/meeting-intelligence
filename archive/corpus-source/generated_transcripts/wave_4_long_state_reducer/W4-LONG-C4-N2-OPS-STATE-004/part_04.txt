@@ -1,0 +1,124 @@
+MEETING_ID: W4-LONG-C4-N2-OPS-STATE-004
+PART: P04/5
+
+T000233 [10:27:00] Ms. Lan: Chúng ta tiếp tục. Hôm nay còn một vấn đề quan trọng: kế hoạch release và monitoring.
+
+T000234 [10:27:18] Anh Tuấn: Tôi nghĩ chúng ta cần xác định thời điểm release. Hiện tại staging đã ổn, nhưng còn nhiều task dang dở.
+
+T000235 [10:27:36] Hoa: Em đề xuất tháng 3 tuần đầu là khả thi, sau khi các task hoàn tất.
+
+T000236 [10:27:54] Minh: Nhưng task login của em deadline 25/2, nếu xong sớm thì có thể release sớm hơn.
+
+T000237 [10:28:12] Ms. Lan: Đúng, nhưng còn tài liệu và data test. Chúng ta cần một cái nhìn tổng thể.
+
+T000238 [10:28:30] Anh Tuấn: Tôi lo rằng task kiểm tra môi trường test staging từ đầu buổi giờ không còn phù hợp. Staging đã được fix và chúng ta đang test trực tiếp.
+
+T000239 [10:28:48] Hoa: Em đồng ý. Task đó chỉ gây thêm việc hành chính.
+
+T000240 [10:29:06] Minh: Thực ra nó đã được implicit hoàn thành khi staging ổn định.
+
+T000241 [10:29:24] Ms. Lan: Vậy tôi quyết định hủy task "Kiểm tra môi trường test staging". Các nội dung liên quan sẽ gộp vào task release validation.
+
+T000242 [10:29:42] Anh Tuấn: Đồng ý. Như vậy Hoa và Minh không cần làm báo cáo riêng cho task đó.
+
+T000243 [10:30:00] Hoa: Vậy còn deadline cũ 02/03 của staging? Giờ bỏ đi, chúng ta chỉ còn các deadline khác.
+
+T000244 [10:30:18] Ms. Lan: Đúng. Bây giờ chúng ta cần set deadline cho release plan. Tôi muốn có bản kế hoạch release trước ngày 28/02.
+
+T000245 [10:30:36] Minh: 28/02 là thứ Bảy, nhưng có thể gửi trước 27/02.
+
+T000246 [10:30:54] Anh Tuấn: Ai sẽ chịu trách nhiệm viết release plan? Tôi nghĩ Minh, vì em nắm rõ các task.
+
+T000247 [10:31:12] Minh: Em có thể viết, nhưng cần input từ Hoa về kết quả test.
+
+T000248 [10:31:30] Hoa: Em sẽ gửi báo cáo data test trước 20/2, nhưng kết quả login còn phụ thuộc.
+
+T000249 [10:31:48] Ms. Lan: Vậy release plan deadline 28/02. Minh viết, Hoa và Anh Tuấn review. Có vấn đề gì không?
+
+T000250 [10:32:06] Anh Tuấn: Tôi có thể review, nhưng cần Minh gửi draft trước 26/02.
+
+T000251 [10:32:24] Minh: Được. Em sẽ cố gắng.
+
+T000252 [10:32:42] Hoa: Em muốn hỏi về monitoring. Chúng ta có cần set up công cụ giám sát staging trước release không?
+
+T000253 [10:33:00] Ms. Lan: Cần, nhưng đó là việc của team infra. Chúng ta chỉ cần yêu cầu.
+
+T000254 [10:33:18] Anh Tuấn: Tôi có thể liên hệ bên infra để yêu cầu Grafana và alert.
+
+T000255 [10:33:36] Minh: Nếu có monitoring, em sẽ dễ dàng xác định nguyên nhân lỗi hơn.
+
+T000256 [10:33:54] Ms. Lan: Vậy giao cho Anh Tuấn task "Yêu cầu monitoring cho staging". Không có deadline, nhưng cần làm trong tuần này.
+
+T000257 [10:34:12] Hoa: Task đó có phụ thuộc vào release plan không?
+
+T000258 [10:34:30] Anh Tuấn: Không trực tiếp, nhưng nên hoàn thành trước release.
+
+T000259 [10:34:48] Minh: Em đề xuất deadline cho monitoring là 25/02, cùng với login.
+
+T000260 [10:35:06] Ms. Lan: 25/02 hợp lý. Anh Tuấn, anh có làm kịp không?
+
+T000261 [10:35:24] Anh Tuấn: Tôi sẽ cố, nhưng cần phối hợp với infra. Nếu không, dời sang 28/02.
+
+T000262 [10:35:42] Ms. Lan: Deadline 28/02, cùng với release plan. Anh Tuấn, anh update nhé.
+
+T000263 [10:36:00] Anh Tuấn: Vậy tôi nhận monitoring deadline 28/02.
+
+T000264 [10:36:18] Hoa: Em thấy deadline 28/02 cho hai task khác nhau: release plan và monitoring. Có thể bị nhầm lẫn.
+
+T000265 [10:36:36] Ms. Lan: Đúng, nhưng khác nội dung. Cứ để vậy, sau này điều chỉnh nếu cần.
+
+T000266 [10:36:54] Minh: Em muốn thảo luận thêm về release plan: có cần bao gồm rollback procedure không?
+
+T000267 [10:37:12] Anh Tuấn: Cần. Đó là phần quan trọng.
+
+T000268 [10:37:30] Hoa: Em sẽ cung cấp các case test rollback.
+
+T000269 [10:37:48] Ms. Lan: Tốt, Minh nhớ tích hợp vào plan.
+
+T000270 [10:38:06] Minh: Vâng.
+
+T000271 [10:38:24] Anh Tuấn: Tôi có một băn khoăn: task login deadline 25/2, nhưng nếu delay thì release plan dựa trên đó sẽ sai.
+
+T000272 [10:38:42] Ms. Lan: Đó là lý do chúng ta cần bám sát tiến độ. Cuộc họp chiều nay sẽ kiểm tra.
+
+T000273 [10:39:00] Hoa: Nếu login trễ, em có thể test tay và báo cáo sớm.
+
+T000274 [10:39:18] Minh: Em sẽ cập nhật trạng thái hàng ngày.
+
+T000275 [10:39:36] Ms. Lan: Có thêm vấn đề gì về monitoring không?
+
+T000276 [10:39:54] Anh Tuấn: Tôi muốn hỏi: có cần set up alert qua email hay slack?
+
+T000277 [10:40:12] Minh: Slack thì tiện hơn.
+
+T000278 [10:40:30] Hoa: Em nghĩ nên cả hai.
+
+T000279 [10:40:48] Ms. Lan: Anh Tuấn tự quyết định. Miễn là hoạt động.
+
+T000280 [10:41:06] Anh Tuấn: Vậy tôi sẽ yêu cầu cả email và slack.
+
+T000281 [10:41:24] Minh: Về release plan, em có thể dùng template cũ của dự án trước.
+
+T000282 [10:41:42] Hoa: Template đó thiếu phần risk assessment.
+
+T000283 [10:42:00] Ms. Lan: Minh bổ sung thêm.
+
+T000284 [10:42:18] Anh Tuấn: Tôi thấy hôm nay đã giải quyết được nhiều việc. Còn task nào cần nhắc lại không?
+
+T000285 [10:42:36] Hoa: Task tài liệu vẫn cần Anh Tuấn viết, deadline 05/03. Đã có.
+
+T000286 [10:42:54] Minh: Task data test của Hoa deadline 20/2, sắp tới.
+
+T000287 [10:43:12] Ms. Lan: Đừng quên task login 25/2. Tôi hy vọng mọi người đều nắm rõ.
+
+T000288 [10:43:30] Anh Tuấn: Rõ rồi. Tôi sẽ điều phối với infra.
+
+T000289 [10:43:48] Minh: Em không có câu hỏi thêm.
+
+T000290 [10:44:06] Hoa: Em cũng vậy.
+
+T000291 [10:44:24] Ms. Lan: Vậy tạm dừng tại đây. Chúng ta sẽ họp lại chiều nay lúc 5 giờ để kiểm tra tiến độ.
+
+T000292 [10:44:42] Anh Tuấn: Hẹn gặp lại.
+
+--- END OF PART P04 ---

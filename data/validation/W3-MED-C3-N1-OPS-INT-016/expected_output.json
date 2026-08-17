@@ -1,0 +1,61 @@
+{
+  "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+  "tasks": [
+    {
+      "task_name": "Fix bug #234",
+      "assignee": "Minh",
+      "start_date": "2026-02-20",
+      "due_date": "2026-02-22",
+      "due_date_text": "22/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Cập nhật dashboard",
+      "assignee": "Huy",
+      "start_date": "2026-02-20",
+      "due_date": "2026-02-24",
+      "due_date_text": "24/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết release notes",
+      "assignee": "Trang",
+      "start_date": "2026-02-20",
+      "due_date": "",
+      "due_date_text": "",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết hướng dẫn sử dụng",
+      "assignee": "Anh",
+      "start_date": "2026-02-20",
+      "due_date": "2026-02-26",
+      "due_date_text": "26/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Chuẩn bị staging",
+      "assignee": "Trang",
+      "start_date": "2026-02-20",
+      "due_date": "2026-02-23",
+      "due_date_text": "23/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Test load",
+      "assignee": "Huy",
+      "start_date": "2026-02-20",
+      "due_date": "2026-02-25",
+      "due_date_text": "25/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Nghiên cứu API cũ",
+      "assignee": "Anh",
+      "start_date": "2026-02-20",
+      "due_date": "",
+      "due_date_text": "",
+      "status": "Proposed"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+note nhanh
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / moi truong / trien khai / staging / payment / config
+- Để tôi tổng kết lại các task ban đầu: - Task A: Triển khai môi trường test module payment – owner Minh, dl 22/02
+* Tôi sẽ tổng kết nhanh các task trong phần này: - Task D: Xử lý lỗi đăng nhập staging, owner Hà, support Minh, dl tham khảo 27/02
+- Như vậy task C có dl mới
+1) Em cần xác nhận lại: task C bây giờ là của em, dl 26/02, Hà support
+- Vậy task D có thêm hành động: Hà xác định config cần sửa, Minh apply
+* Em sẽ verify sau khi task D và task E hoàn thành
+- Em sẽ hoàn thành task A trước, rồi
+1) Task A: "Triển khai môi trường test module payment", owner Minh, dl đã điều chỉnh thành 23/02
+- Task C: "Tạo template tài liệu triển khai", owner chuyển từ Hà sang Duy trong part 3, dl 26/02
+* Em chưa, nhưng em sẽ bắt đầu sau khi task A hoàn tất
+- Minh, em thấy môi trường staging payment cần bao lâu để hoàn tất cấu hình? ? chưa chốt

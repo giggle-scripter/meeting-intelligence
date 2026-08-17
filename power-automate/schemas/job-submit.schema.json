@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["job_id", "status", "created", "status_url"],
+  "properties": {
+    "job_id": {"type": "string", "pattern": "^job-"},
+    "status": {"enum": ["queued", "running", "succeeded", "failed"]},
+    "created": {"type": "boolean"},
+    "status_url": {"type": "string", "pattern": "^/api/v1/meetings/jobs/"}
+  },
+  "additionalProperties": false
+}

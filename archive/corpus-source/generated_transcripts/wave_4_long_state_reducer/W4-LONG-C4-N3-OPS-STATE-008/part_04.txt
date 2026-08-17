@@ -1,0 +1,138 @@
+MEETING_ID: W4-LONG-C4-N3-OPS-STATE-008
+PART: P04/5
+
+T000237 [10:00:30] An: Giờ chúng ta chuyển sang vấn đề release và monitoring. Bình, em có kế hoạch gì cho việc release lên production chưa?
+
+T000238 [10:00:50] Bình: Dạ, em đang draft một schedule. Dự kiến tuần sau, sau khi test UAT ổn, nhưng còn phụ thuộc vào fix lỗi đăng nhập và dữ liệu test.
+
+T000239 [10:01:10] An: Vậy em cần chốt timeline. Còn monitoring, ai lo?
+
+T000240 [10:01:25] Bình: Em nghĩ mình cần setup monitoring ngay từ đầu. Có team infra hỗ trợ, nhưng cần người đứng đầu.
+
+T000241 [10:01:40] An: Em nghĩ Dũng có thể phụ trách monitoring vì em đã làm với Grafana.
+
+T000242 [10:01:55] Dũng: Em có kinh nghiệm, nhưng em đang ôm nhiều task rồi. Có thể giao cho Châu?
+
+T000243 [10:02:10] Châu: Em cũng không rành monitoring lắm. Em nghĩ Bình làm thì tốt.
+
+T000244 [10:02:25] Bình: Anh sẽ hỗ trợ, nhưng không thể chính. Vậy để em assign cho Hùng, nhưng Hùng không trong meeting.
+
+T000245 [10:02:40] An: Không, cần người trong team. Dũng, em cân đối thời gian. Em có thể làm monitoring vào cuối tuần.
+
+T000246 [10:02:55] Dũng: Nhưng em còn test UAT và tài liệu. Không biết có kịp không.
+
+T000247 [10:03:10] An: Vậy tôi sẽ cắt bớt task cho em. Tôi thấy tài liệu staging bây giờ không cần thiết nữa, vì chúng ta sẽ dùng chung tài liệu production. Hủy task tài liệu staging nhé.
+
+T000248 [10:03:30] Dũng: Hả? Em vừa có deadline 25/02. Giờ hủy thì công sức đổ sông đổ bể.
+
+T000249 [10:03:45] An: Không sao, em tập trung vào tài liệu production và monitoring. Còn staging, nếu cần thì ai đó khác làm sau.
+
+T000250 [10:04:00] Bình: Anh An nói đúng. Em cũng thấy tài liệu staging trùng lặp với production. Hủy là hợp lý.
+
+T000251 [10:04:15] Dũng: Vậy thôi. Em OK. Nhưng em muốn được bồi thường thời gian không?
+
+T000252 [10:04:25] An: Có thể debate sau. Giờ tập trung vào monitoring.
+
+T000253 [10:04:35] Em: Anh, em có thể hỗ trợ monitoring sơ qua, nhưng em cũng đang làm tài liệu production.
+
+T000254 [10:04:50] An: Không, em vẫn giữ tài liệu production, còn monitoring giao Dũng.
+
+T000255 [10:05:00] Dũng: Vậy em nhận monitoring. Em có script sẵn, chỉ cần cấu hình.
+
+T000256 [10:05:15] Bình: Anh sẽ hỗ trợ config. Deadline monitoring khoảng khi nào?
+
+T000257 [10:05:30] An: Hãy set deadline cho việc setup monitoring là 28/02, trước release tuần sau.
+
+T000258 [10:05:45] Dũng: 28/02 OK. Nhưng phải có môi trường UAT ổn trước.
+
+T000259 [10:06:00] An: Như chúng ta đã bàn, UAT sẽ deploy chiều nay.
+
+T000260 [10:06:15] Bình: Nhân tiện, em muốn nhắc deadline cho script dữ liệu của Dũng. Lúc nãy đã dời sang 16h, nhưng bây giờ đã 10h, em cần gửi sớm để em kịp review.
+
+T000261 [10:06:35] Dũng: Em đang gấp, em sẽ gửi trước 14h như cũ.
+
+T000262 [10:06:50] An: OK, vậy deadline script dữ liệu vẫn là 14h, không đổi.
+
+T000263 [10:07:00] Châu: Em muốn cập nhật. Em vừa gửi code token fix cho Bình qua email. Bình kiểm tra đi.
+
+T000264 [10:07:15] Bình: Em nhận rồi. Sẽ build và deploy sau khi reset DB.
+
+T000265 [10:07:30] An: Tốt. Về release, em cần ai đó viết release note.
+
+T000266 [10:07:45] Em: Em có thể viết, nhưng em chưa biết nội dung fix.
+
+T000267 [10:08:00] Châu: Em sẽ cung cấp list changes sau khi fix xong.
+
+T000268 [10:08:15] An: Vậy Em đợi changes từ Châu, rồi viết release note.
+
+T000269 [10:08:30] Em: Deadline?
+
+T000270 [10:08:40] An: Khi nào Châu xong, em viết. Không deadline cứng.
+
+T000271 [10:08:50] Bình: Nhưng em thấy cần có release plan sớm.
+
+T000272 [10:09:05] An: Được, Bình và Dũng lập release plan, trình vào end of day thứ 5 tuần sau.
+
+T000273 [10:09:20] Dũng: OK.
+
+T000274 [10:09:30] Bình: Còn monitoring, em cần list metric cần theo dõi.
+
+T000275 [10:09:45] An: Em và Dũng brainstorm, sau đó submit.
+
+T000276 [10:10:00] Châu: Anh, em lo về vụ security. Monitoring có bao gồm bảo mật không?
+
+T000277 [10:10:15] Bình: Chưa, chỉ performance.
+
+T000278 [10:10:25] An: Bảo mật để sau, khi có tài liệu chính thức.
+
+T000279 [10:10:35] Em: Em thấy hủy tài liệu staging là quyết định tốt, nhưng em vẫn lo nếu production doc chưa xong thì không có gì.
+
+T000280 [10:10:50] Dũng: Em sẽ đẩy nhanh. Deadline 01/03, em OK.
+
+T000281 [10:11:00] An: Vậy chốt. Task bị hủy: tài liệu staging. Task mới: release note (Em, không deadline), release plan (Bình và Dũng, end of day thứ 5 tuần sau), monitoring setup (Dũng, deadline 28/02). Còn task cũ như fix lỗi, script vẫn giữ.
+
+T000282 [10:11:30] Bình: Anh thấy có sự chồng chéo. Dũng vừa monitoring vừa test UAT vừa tài liệu production.
+
+T000283 [10:11:45] An: Đúng, nhưng Dũng có thể xử lý. Nếu quá tải, báo lại.
+
+T000284 [10:12:00] Dũng: Em sẽ cố gắng. Nhưng em muốn nhờ Em hỗ trợ viết một phần release note.
+
+T000285 [10:12:10] Em: Em có thể, nhưng em cần changes.
+
+T000286 [10:12:20] Châu: Em sẽ gửi changes sớm.
+
+T000287 [10:12:30] An: Vậy ổn. Giờ thảo luận về monitoring metric.
+
+T000288 [10:12:45] Bình: Theo em, cần theo dõi CPU, memory, response time, error rate.
+
+T000289 [10:13:00] Dũng: Thêm số lượng user đăng nhập, số session active.
+
+T000290 [10:13:15] An: OK. Bình, em có script template cho monitoring không?
+
+T000291 [10:13:25] Bình: Có, em sẽ gửi cho Dũng.
+
+T000292 [10:13:35] Dũng: Cảm ơn.
+
+T000293 [10:13:45] Châu: Em xin phép quay lại vụ training. Em phải đi lúc 14h, mong mọi người thông cảm.
+
+T000294 [10:14:00] An: OK. Em cố gắng xong phần token trước đó.
+
+T000295 [10:14:10] Châu: Em đã xong, vừa gửi.
+
+T000296 [10:14:20] Bình: Em nhận rồi.
+
+T000297 [10:14:30] An: Vậy đến đây, mọi người có vấn đề gì không?
+
+T000298 [10:14:40] Em: Em muốn confirm lại, task tài liệu production vẫn deadline 01/03, và Dũng là owner, đúng không?
+
+T000299 [10:14:55] An: Đúng.
+
+T000300 [10:15:05] Dũng: Rõ.
+
+T000301 [10:15:15] Bình: Còn script dữ liệu deadline 14h, em review sau đó.
+
+T000302 [10:15:25] Dũng: Em sẽ gửi sớm.
+
+T000303 [10:15:35] An: Vậy tạm thời kết thúc phần này. Chúng ta sẽ gặp lại trong part cuối. Cảm ơn mọi người.
+
+--- END OF PART P04 ---

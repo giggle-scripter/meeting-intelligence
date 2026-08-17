@@ -1,0 +1,76 @@
+MEETING_ID: W2-SHORT-C2-N1-OPS-REJT-028
+CASE_LABELS: task_rejection,rejected_without_replacement
+MEETING_DATE: 2026-02-22
+TITLE: Chuẩn bị bản phát hành nội bộ
+
+[10:00:00] An: Chào mọi người, chúng ta bắt đầu họp. Hôm nay ngày 22/2, chuẩn bị cho bản phát hành nội bộ 2.0. Danh sách công việc gồm: viết hướng dẫn sử dụng, chạy regression test, fix bug critical.
+
+[10:00:18] Chi: Em đã cập nhật test case cho regression, sẵn sàng thực hiện.
+
+[10:00:30] Bình: Em đã xem lại các bug critical, cần ưu tiên fix trước khi merge code.
+
+[10:00:42] An: Được. Tôi thấy task viết hướng dẫn sử dụng được giao cho Bình trong kế hoạch trước. Bình nói sao?
+
+[10:00:58] Bình: Thưa anh, em xin từ chối việc này. Lý do là em đang quá tải với fix bug và kiểm tra code. Em không có đủ thời gian để làm doc, và nếu làm vội, chất lượng sẽ kém.
+
+[10:01:20] An: Nhưng em là người nắm rõ nhất. Nếu không có doc, bên vận hành sẽ gặp khó.
+
+[10:01:32] Bình: Em có thể hỗ trợ review doc sau khi có bản nháp, chứ không thể viết từ đầu.
+
+[10:01:44] Chi: Anh ơi, em thấy Dũng cũng biết về module, để em thử nhờ Dũng?
+
+[10:01:52] An: Dũng, em nghĩ sao?
+
+[10:02:00] Dũng: Dạ, em cũng không tự tin lắm. Em mới được giới thiệu sơ qua, chưa nắm chi tiết. Em cũng đang làm task hỗ trợ team A. Em không thể đảm nhận thêm.
+
+[10:02:18] An: Vậy là cả hai không thể. Tình huống này khá khó khăn. Chúng ta có phương án nào khác không?
+
+[10:02:30] Bình: Em đề nghị loại bỏ hướng dẫn sử dụng khỏi bản phát hành này. Hoặc nếu bắt buộc, thuê bên ngoài.
+
+[10:02:42] Chi: Loại bỏ thì tiếc quá, nhưng nếu không ai làm, đành vậy.
+
+[10:02:50] An: Được, tôi sẽ bàn với cấp trên về việc này. Tạm thời, task viết hướng dẫn sử dụng bị từ chối và chưa có người thay. Chúng ta move on.
+
+[10:03:05] Bình: Vâng.
+
+[10:03:10] Dũng: Đồng ý.
+
+[10:03:15] Chi: Ok.
+
+[10:03:20] An: Chuyển sang regression test. Chi, em có gì cần thảo luận?
+
+[10:03:30] Chi: Em dự kiến chạy test vào thứ Tư, sau khi code được merge. Thời gian test mất 2 ngày làm việc. Cần đảm bảo môi trường test ổn định.
+
+[10:03:48] An: Môi trường có vấn đề gì không?
+
+[10:03:55] Chi: Gần đây server test hay bị lag. Em muốn nhờ team infra hỗ trợ.
+
+[10:04:05] An: Bình, em có thể liên hệ với team infra được không?
+
+[10:04:12] Bình: Được ạ, em sẽ gửi ticket yêu cầu hỗ trợ.
+
+[10:04:20] An: Cố gắng giải quyết sớm. Tiếp theo, fix bug critical của Bình. Em ước lượng thế nào?
+
+[10:04:30] Bình: Em có 5 bug, ước chừng 3 ngày làm việc. Nhưng nếu gặp vấn đề phức tạp, có thể kéo dài.
+
+[10:04:42] An: Em theo dõi sát, có gì báo ngay.
+
+[10:04:48] Bình: Vâng.
+
+[10:04:52] An: Về Dũng, em vẫn đang support team A. Khi nào xong?
+
+[10:05:00] Dũng: Em sẽ kết thúc vào cuối tuần này, tuần sau em có thể quay lại.
+
+[10:05:10] An: Tốt. Vậy lịch trình như sau: Chi chạy regression thứ Tư - thứ Năm, Bình fix bug từ thứ Hai đến thứ Tư, Dũng quay lại tuần sau. Mọi người có ý kiến gì không?
+
+[10:05:30] Chi: Em ok.
+
+[10:05:35] Bình: Em ok.
+
+[10:05:40] Dũng: Em được ạ.
+
+[10:05:45] An: Kết luận: task hướng dẫn sử dụng bị từ chối, không có người thay thế, tạm thời pending để chờ quyết định cấp trên. Các task khác tiếp tục. Có ai thắc mắc gì thêm không?
+
+[10:06:00] Tất cả: Không.
+
+[10:06:05] An: Vậy họp kết thúc. Cảm ơn mọi người.

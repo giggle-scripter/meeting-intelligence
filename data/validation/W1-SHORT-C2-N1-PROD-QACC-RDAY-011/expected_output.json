@@ -1,0 +1,7 @@
+{
+  "meeting_title": "Rà soát lỗi đăng nhập",
+  "tasks": [
+    {"task_name":"Fix lỗi đăng nhập","assignee":"Minh","start_date":"2026-01-26","due_date":"2026-01-27","due_date_text":"trong ngày mai","status":"Proposed"},
+    {"task_name":"Test bản fix đăng nhập","assignee":"An","start_date":"2026-01-26","due_date":"","due_date_text":"ngay khi có bản build","status":"Proposed"}
+  ]
+}

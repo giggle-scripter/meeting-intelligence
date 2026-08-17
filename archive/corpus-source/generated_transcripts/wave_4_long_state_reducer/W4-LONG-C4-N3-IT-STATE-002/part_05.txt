@@ -1,0 +1,110 @@
+MEETING_ID: W4-LONG-C4-N3-IT-STATE-002
+PART: P05/5
+
+T000218 [09:36:25] Minh: Bây giờ chúng ta vào phần cuối cùng của buổi họp. Tôi muốn điểm qua toàn bộ trạng thái các task và đưa ra một số quyết định.
+
+T000219 [09:36:38] Lan: Em đã tổng hợp danh sách task hiện tại. Có thể bắt đầu.
+
+T000220 [09:36:48] Minh: Đầu tiên, task "Kiểm tra môi trường test staging" – Hùng, tiến độ thế nào?
+
+T000221 [09:36:59] Hùng: Em đã có quyền truy cập từ sáng. Đã chạy một số kiểm tra cơ bản, hệ thống hoạt động. Em sẽ hoàn thành báo cáo trước deadline 26/02.
+
+T000222 [09:37:12] Minh: Tốt. Vậy task này đang on track.
+
+T000223 [09:37:20] Lan: Tiếp theo, task "Hoàn thiện tài liệu triển khai" đã handoff sang Hùng, deadline 27/02. Hùng, em có cần hỗ trợ gì thêm?
+
+T000224 [09:37:32] Hùng: Em đã nhận draft từ Lan. Sẽ viết tiếp phần cấu hình sau khi Tuấn gửi. Dự kiến hoàn thành sớm hơn deadline.
+
+T000225 [09:37:44] Minh: Lưu ý: Lan vẫn là reviewer cho task này. Khi nào xong, gửi Lan review trước 25/02 để kịp.
+
+T000226 [09:37:55] Lan: Dạ.
+
+T000227 [09:38:04] Minh: Task "Điều tra lỗi đăng nhập" – deadline mới là 28/02. Hùng, em có khả năng đáp ứng không?
+
+T000228 [09:38:15] Hùng: Em đang phân tích log staging. Cần access production mới xác định nguyên nhân. Em đã gửi yêu cầu, nhưng chưa có phản hồi. Đây là unresolved item.
+
+T000229 [09:38:28] Minh: Nếu đến 26/02 chưa có access, ta sẽ escalate lên Ops manager. Tôi sẽ ghi nhận điều này.
+
+T000230 [09:38:40] Lan: Vậy task điều tra lỗi vẫn còn phụ thuộc.
+
+T000231 [09:38:49] Hùng: Đúng vậy. Nếu không có access, deadline 28/02 khó đảm bảo.
+
+T000232 [09:38:59] Minh: Chúng ta có thể xem xét delay deadline. Nhưng chưa quyết định ngay.
+
+T000233 [09:39:08] Lan: Em đề xuất giữ nguyên deadline, nếu có trễ thì báo cáo sau.
+
+T000234 [09:39:17] Minh: Đồng ý.
+
+T000235 [09:39:25] Hùng: Tiếp theo, task "Cấu hình monitoring cho release 05/03" – Tuấn mới nhận. Em có biết Tuấn bắt đầu chưa?
+
+T000236 [09:39:37] Lan: Em nói chuyện với Tuấn sáng nay, Tuấn sẽ bắt đầu từ ngày mai.
+
+T000237 [09:39:47] Minh: Deadline 28/02 cho monitoring. Lưu ý rằng Tuấn cần môi trường test ổn định để cấu hình.
+
+T000238 [09:39:58] Hùng: Task test môi trường của em xong ngày 26/02, vậy kịp cho Tuấn.
+
+T000239 [09:40:08] Minh: Tốt.
+
+T000240 [09:40:16] Lan: Còn task bị hủy: "Cập nhật dữ liệu test đăng nhập". Đã xóa khỏi danh sách.
+
+T000241 [09:40:26] Minh: Đúng. Tôi xác nhận hủy.
+
+T000242 [09:40:35] Hùng: Tôi muốn nhắc lại vấn đề reviewer cho task monitoring: ai sẽ review kết quả của Tuấn? Chưa có.
+
+T000243 [09:40:47] Lan: Em có thể review, nhưng không chuyên sâu về monitoring.
+
+T000244 [09:40:56] Minh: Vậy ta tạm thời để unresolved. Tuấn có thể tự review với Ops.
+
+T000245 [09:41:06] Hùng: Vậy mục này chưa được chốt.
+
+T000246 [09:41:14] Minh: Đúng. Ghi nhận unresolved item: reviewer cho monitoring chưa được assign.
+
+T000247 [09:41:25] Lan: Vậy tổng kết các task hiện tại: 4 task active (test môi trường, tài liệu, lỗi đăng nhập, monitoring) và 1 task bị hủy.
+
+T000248 [09:41:37] Minh: Chính xác.
+
+T000249 [09:41:45] Hùng: Em muốn hỏi về release plan chi tiết: sau khi monitoring xong, có cần dry-run không?
+
+T000250 [09:41:57] Lan: Thường có dry-run trước 1-2 ngày. Nếu release 05/03, dry-run có thể 03/03.
+
+T000251 [09:42:07] Minh: Việc đó chưa cần quyết định hôm nay. Tôi sẽ bàn riêng với Tuấn.
+
+T000252 [09:42:17] Hùng: Vậy không có task mới về dry-run.
+
+T000253 [09:42:25] Minh: Đúng.
+
+T000254 [09:42:33] Lan: Em thấy có một rủi ro: deadline 28/02 cho monitoring và lỗi đăng nhập trùng nhau. Nếu Tuấn và Hùng cùng cần hỗ trợ, có thể quá tải.
+
+T000255 [09:42:46] Minh: Đó là negative. Ta cần phân bổ hợp lý. Hùng, em có thể hỗ trợ Tuấn nếu cần?
+
+T000256 [09:42:57] Hùng: Em có thể, nhưng nếu lỗi đăng nhập chưa xong, em khó hỗ trợ.
+
+T000257 [09:43:07] Lan: Vậy em sẽ theo dõi sát.
+
+T000258 [09:43:15] Minh: Tôi lưu ý: nếu có xung đột, ưu tiên lỗi đăng nhập vì ảnh hưởng release.
+
+T000259 [09:43:26] Hùng: Rõ.
+
+T000260 [09:43:34] Minh: Bây giờ tôi muốn recap nhanh toàn bộ trạng thái cuối cùng, tránh nhầm lẫn.
+
+T000261 [09:43:44] Lan: Em sẽ recap: Task 1 – Kiểm tra môi trường test staging, owner Hùng, deadline 26/02, reviewer Lan (theo quyết định cũ). Task 2 – Hoàn thiện tài liệu triển khai, owner Hùng, deadline 27/02, reviewer Lan. Task 3 – Điều tra lỗi đăng nhập, owner Hùng, deadline 28/02, chưa có reviewer (Lan có thể review sau). Task 4 – Cấu hình monitoring, owner Tuấn, deadline 28/02, reviewer chưa có. Và task hủy: Cập nhật dữ liệu test đăng nhập.
+
+T000262 [09:44:05] Minh: Chính xác. Tôi không muốn tạo duplicate, vì vậy chỉ nhắc một lần.
+
+T000263 [09:44:14] Hùng: Em đồng ý.
+
+T000264 [09:44:22] Lan: Unresolved item: reviewer cho monitoring, và access production cho lỗi đăng nhập.
+
+T000265 [09:44:32] Minh: Đúng. Chúng ta sẽ giải quyết trong các buổi họp sau.
+
+T000266 [09:44:42] Hùng: Vậy meeting hôm nay đến đây kết thúc?
+
+T000267 [09:44:50] Minh: Đúng. Cảm ơn mọi người đã tham gia. Các task rõ ràng. Chúng ta sẽ update qua email nếu cần.
+
+T000268 [09:45:00] Lan: Em sẽ gửi meeting minutes.
+
+T000269 [09:45:08] Hùng: Cảm ơn mọi người.
+
+T000270 [09:45:15] Minh: Kết thúc cuộc họp.
+
+--- END OF PART P05 ---

@@ -1,0 +1,21 @@
+{
+  "meeting_title": "Theo dõi lỗi và tài liệu",
+  "tasks": [
+    {
+      "task_name": "Viết tài liệu",
+      "assignee": "Bình",
+      "start_date": "2026-02-05",
+      "due_date": "2026-02-14",
+      "due_date_text": "hạn 14/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Review tài liệu",
+      "assignee": "Châu",
+      "start_date": "2026-02-05",
+      "due_date": "2026-02-11",
+      "due_date_text": "trước 12/02",
+      "status": "Proposed"
+    }
+  ]
+}

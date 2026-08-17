@@ -1,0 +1,100 @@
+MEETING_ID: W4-LONG-C4-N1-IT-STATE-006
+PART: P05/5
+
+T000254 [09:43:00] An: Chúng ta vào phần cuối cùng, phần 5. Mục tiêu là điểm lại tình hình và chốt các đầu việc. Mọi người có cập nhật gì mới từ các task đã giao không?  
+
+T000255 [09:43:12] Bình: Dạ, về task 4 "Xử lý lỗi đăng nhập LDAP", em đã phân tích log và bước đầu xác định lỗi do cấu hình sai cổng kết nối. Em đang chờ thông tin firewall từ IT để kiểm tra xem có bị chặn không.  
+
+T000256 [09:43:30] Cường: Tốt. Vậy em đã có hướng rồi. Khi có thông tin firewall, em sẽ sửa cấu hình và test.  
+
+T000257 [09:43:38] Dung: Về task 5 "Soạn hướng dẫn cấu hình LDAP", em đã hoàn thành và gửi cho anh Cường review. Anh có nhận được chưa?  
+
+T000258 [09:43:48] Cường: Tôi đã nhận và đọc qua. Cần chỉnh một vài chỗ về tham số kết nối. Tôi sẽ gửi lại nhận xét trong chiều nay.  
+
+T000259 [09:43:58] Dung: Vâng, em sẽ sửa theo.  
+
+T000260 [09:44:05] An: Task 6 "Chuẩn bị dữ liệu test" thế nào?  
+
+T000261 [09:44:10] Dung: Em đã thu thập dữ liệu mẫu và đang ẩn danh. Dự kiến hoàn thành trước deadline 28/02.  
+
+T000262 [09:44:20] Bình: Em muốn hỏi, task 1 "Thiết lập môi trường staging" của em có deadline 05/03. Hiện tại IT chưa cấp server, nhưng em đã thiết lập môi trường ảo hóa cục bộ để test trước.  
+
+T000263 [09:44:35] Cường: Đó là cách tốt. Khi có server thật, em chỉ cần migrate.  
+
+T000264 [09:44:42] An: Vậy task 1 vẫn đang tiến hành. Task 2 "Soạn tài liệu hướng dẫn triển khai" của Cường có gì mới?  
+
+T000265 [09:44:52] Cường: Tôi đã bắt đầu dựa trên template của Dung và phác thảo phần tổng quan. Nhưng cần thông tin về staging để viết phần cấu hình chi tiết.  
+
+T000266 [09:45:05] An: Được. Vậy khi task 1 hoàn thành, anh sẽ hoàn thiện.  
+
+T000267 [09:45:12] Bình: Nhân tiện, về lỗi đăng nhập, em cũng đang chuẩn bị các test case. Anh Cường có thể review phần đó trong tài liệu LDAP của Dung.  
+
+T000268 [09:45:25] Cường: Ừ, tôi sẽ gộp vào review.  
+
+T000269 [09:45:30] An: Tôi nhắc lại, task 3 đã bị hủy vì không cần meeting. Các task khác vẫn giữ nguyên.  
+
+T000270 [09:45:38] Dung: Còn distractor "Cập nhật tài liệu hướng dẫn sử dụng" chưa ai nhận.  
+
+T000271 [09:45:45] Cường: Để sau khi release. Hiện không ưu tiên.  
+
+T000272 [09:45:50] An: Đồng ý. Vậy chúng ta có một unresolved: việc setup monitoring cho release. Tôi muốn giao cho ai đó phụ trách. Bình, em có đảm nhận được không?  
+
+T000273 [09:46:05] Bình: Em có thể, nhưng cần anh Cường hỗ trợ về dashboard.  
+
+T000274 [09:46:12] Cường: Tôi sẽ giúp. Vậy Bình là owner, tôi là đồng hỗ trợ.  
+
+T000275 [09:46:20] An: Vậy task monitoring chưa có deadline, nhưng cần hoàn thành trước release dự kiến cuối tháng 3. Tạm thời chưa đặt ngày.  
+
+T000276 [09:46:32] Bình: Vâng.  
+
+T000277 [09:46:35] Dung: Em có thể hỗ trợ viết script thu thập log.  
+
+T000278 [09:46:40] An: Tốt. Vậy ta đã phân công sơ bộ.  
+
+T000279 [09:46:45] Cường: Tôi muốn làm rõ deadline task 2 của tôi là 10/03. Liệu có cần điều chỉnh không?  
+
+T000280 [09:46:55] An: Hiện tại giữ nguyên. Nếu staging chậm, ta sẽ xem xét.  
+
+T000281 [09:47:00] Bình: Em có một vấn đề: firewall thông tin vẫn chưa rõ. Đó là rủi ro cho task 4.  
+
+T000282 [09:47:10] An: Vậy em chủ động email lại IT. Nếu không phản hồi, báo tôi.  
+
+T000283 [09:47:18] Bình: Vâng.  
+
+T000284 [09:47:22] Dung: Task 5 của em sau khi anh Cường review xong, em sẽ cập nhật.  
+
+T000285 [09:47:30] Cường: Tôi sẽ gửi nhận xét chiều nay.  
+
+T000286 [09:47:35] An: Tôi muốn điểm nhanh trạng thái từng task để tránh nhầm lẫn.  
+
+T000287 [09:47:42] Bình: Vâng.  
+
+T000288 [09:47:45] An: Task 1 – Bình, staging – đang tiến hành, deadline 05/03.  
+T000289 [09:47:52] An: Task 2 – Cường, tài liệu triển khai – đang viết, deadline 10/03.  
+T000290 [09:48:00] An: Task 3 – đã hủy.  
+T000291 [09:48:05] An: Task 4 – Bình, lỗi LDAP – đang phân tích, deadline 27/02, reviewer Cường.  
+T000292 [09:48:15] An: Task 5 – Dung, hướng dẫn LDAP – chờ review, deadline 24/02.  
+T000293 [09:48:22] An: Task 6 – Dung, dữ liệu test – đang ẩn danh, deadline 28/02, reviewer Cường.  
+T000294 [09:48:30] An: Và task monitoring mới, owner Bình, chưa deadline.  
+
+T000295 [09:48:38] Cường: Anh nhắc đúng. Không có duplicate.  
+
+T000296 [09:48:42] Dung: Em không thấy thiếu.  
+
+T000297 [09:48:46] Bình: Vậy tổng cộng 6 task active, 1 task cancel.  
+
+T000298 [09:48:52] An: Chính xác.  
+
+T000299 [09:48:55] Cường: Còn một unresolved: thông tin firewall từ IT vẫn chưa có. Đó là điểm cần theo dõi.  
+
+T000300 [09:49:05] Bình: Em sẽ đôn đốc.  
+
+T000301 [09:49:10] An: Tốt. Vậy chúng ta đã hoàn thành phần 5. Tôi cảm ơn mọi người đã tham gia đầy đủ. Hãy cập nhật tiến độ vào hệ thống. Hẹn gặp lại trong các cuộc họp tiếp theo.  
+
+T000302 [09:49:25] Bình: Cảm ơn anh.  
+
+T000303 [09:49:28] Dung: Em cảm ơn.  
+
+T000304 [09:49:30] Cường: Tạm biệt.  
+
+--- END OF PART P05 ---

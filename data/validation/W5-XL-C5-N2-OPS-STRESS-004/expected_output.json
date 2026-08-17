@@ -1,0 +1,85 @@
+{
+  "meeting_title": "Họp tổng hợp phát triển và vận hành sản phẩm",
+  "tasks": [
+    {
+      "task_name": "Thiết lập CI/CD pipeline cho payment",
+      "assignee": "An",
+      "start_date": "2026-02-28",
+      "due_date": "2026-03-13",
+      "due_date_text": "deadline dời lên 13/3",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Cấu hình alerting",
+      "assignee": "An",
+      "start_date": "2026-02-28",
+      "due_date": "2026-03-12",
+      "due_date_text": "12/3",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Định nghĩa metric và threshold",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-28",
+      "due_date": "2026-03-10",
+      "due_date_text": "10/3",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Cập nhật log spec error codes",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-28",
+      "due_date": "2026-03-13",
+      "due_date_text": "13/3",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết E2E test scenario",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-28",
+      "due_date": "2026-03-09",
+      "due_date_text": "9/3",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Thiết lập support process",
+      "assignee": "Lan",
+      "start_date": "2026-02-28",
+      "due_date": "2026-03-13",
+      "due_date_text": "13/3",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết API draft cho CRM",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-28",
+      "due_date": "2026-03-13",
+      "due_date_text": "13/3",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết migration script",
+      "assignee": "An",
+      "start_date": "2026-02-28",
+      "due_date": "2026-03-18",
+      "due_date_text": "18/3",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Deploy payment",
+      "assignee": "",
+      "start_date": "2026-02-28",
+      "due_date": "2026-03-20",
+      "due_date_text": "20/3",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Liên hệ product về webhook spec",
+      "assignee": "Minh",
+      "start_date": "2026-02-28",
+      "due_date": "2026-03-14",
+      "due_date_text": "trước 15/3",
+      "status": "Proposed"
+    }
+  ]
+}

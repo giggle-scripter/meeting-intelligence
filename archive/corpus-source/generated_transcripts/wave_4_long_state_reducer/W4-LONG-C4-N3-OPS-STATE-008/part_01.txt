@@ -1,0 +1,161 @@
+MEETING_ID: W4-LONG-C4-N3-OPS-STATE-008
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-22
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:00:00] An: Chào mọi người, cảm ơn đã đến họp đúng giờ. Hôm nay chúng ta sẽ tập trung vào môi trường test và tài liệu triển khai. Mở đầu, mời Bình cập nhật tình hình môi trường UAT.
+
+T000002 [09:00:20] Bình: Dạ, em vừa kiểm tra lại server UAT. Hiện tại đã setup xong nhưng chưa deploy build mới nhất vì tụi em đang chờ bản fix lỗi từ Châu.
+
+T000003 [09:00:45] An: Châu, bên em fix xong chưa? Cần ưu tiên để deploy sớm.
+
+T000004 [09:01:00] Châu: Dạ, em còn vài lỗi nhỏ với module đăng nhập. Em nghĩ chiều nay sẽ xong.
+
+T000005 [09:01:25] Bình: Vậy em có thể push code lên nhánh test trước 17h không? Tối nay anh muốn deploy thử.
+
+T000006 [09:01:45] Châu: Được, em cố gắng. Nhưng mà em thấy môi trường UAT ổn chưa anh? Em sợ push lên rồi không chạy được.
+
+T000007 [09:02:05] An: Có vấn đề gì về môi trường à? Dũng, em phụ trách testing, có feedback gì không?
+
+T000008 [09:02:20] Dũng: Em mới chạy smoke test trên đó tối qua, bị lỗi kết nối DB. Em nghĩ do config hoặc network.
+
+T000009 [09:02:40] Bình: Cái đó em đang xử lý. Anh sẽ update lại config sáng nay. Châu cứ push code đi, khi nào xong em báo anh.
+
+T000010 [09:03:00] An: Tốt. Vậy tạm thời phân công: Châu fix lỗi module đăng nhập, deadline trước 17h hôm nay. Sau đó Bình sẽ deploy lên UAT. Dũng kiểm tra lại sau khi deploy.
+
+T000011 [09:03:25] Dũng: Rõ. Em có cần viết test case cho UAT không? Hay dùng test suite cũ?
+
+T000012 [09:03:40] Bình: Dùng test suite cũ đi, nhưng em update thêm case cho module đăng nhập.
+
+T000013 [09:04:00] An: Khoan, còn vụ tài liệu triển khai. Em cần một tài liệu hướng dẫn triển khai cho môi trường production. Em giao cho ai?
+
+T000014 [09:04:20] Em: Anh ơi, em có thể làm cái đó. Em đã viết draft cho staging rồi, giờ chỉ cần chỉnh sửa.
+
+T000015 [09:04:40] An: Ừ, vậy em làm luôn. Nhưng cẩn thận, tài liệu triển khai cho production khác với staging. Em cần có phần rollback và monitoring.
+
+T000016 [09:05:00] Em: Vâng, em sẽ làm. Anh cho em bao nhiêu thời gian?
+
+T000017 [09:05:15] An: Để xem… Tuần sau là 27/02 rồi, deadline 25/02 được không? Em có kịp không?
+
+T000018 [09:05:35] Em: 25/02 hơi gấp, em còn việc khác. Nhưng em cố gắng.
+
+T000019 [09:05:55] Bình: Em nghĩ nên đặt deadline là 27/02, để Em có thời gian kiểm tra chéo.
+
+T000020 [09:06:10] An: 27/02 cũng được. Nhưng mà còn một tài liệu nữa: tài liệu hướng dẫn triển khai cho môi trường staging, ai làm?
+
+T000021 [09:06:30] Dũng: Cái đó em có thể viết, vì em test staging nhiều. Nhưng mà tài liệu staging đã có sẵn từ đợt trước, chỉ cần update.
+
+T000022 [09:06:50] An: Vậy Dũng update tài liệu staging, không deadline cụ thể nhưng ưu tiên làm trong tuần. Còn Em làm tài liệu production, deadline 27/02. Hai tài liệu này gần giống nhau, đừng nhầm.
+
+T000023 [09:07:15] Em: Dạ, em sẽ để tên khác nhau: "HuongDanTrienKhai_Production" và "HuongDanTrienKhai_Staging".
+
+T000024 [09:07:30] An: OK. Quay lại vụ môi trường. Bình, em nói config DB đang fix? Cụ thể thế nào?
+
+T000025 [09:07:50] Bình: Bên infra cấp sai port, em đã Báo họ sửa. Họ hẹn trưa nay xong.
+
+T000026 [09:08:05] An: Vậy trưa nay mới có môi trường ổn. Châu, em có thể push code sớm hơn không? Hay phải đợi?
+
+T000027 [09:08:25] Châu: Code của em độc lập với DB, em push được ngay khi fix xong. Nhưng để test thì cần DB ổn.
+
+T000028 [09:08:45] An: Rõ. Vậy kế hoạch: Châu push code trước 17h, Bình depoy khi môi trường ổn, Dũng test sau đó. Mọi người OK?
+
+T000029 [09:09:05] Bình: OK.
+
+T000030 [09:09:10] Châu: OK.
+
+T000031 [09:09:15] Dũng: OK.
+
+T000032 [09:09:20] Em: Em có thắc mắc về tài liệu production, nên thêm phần về secret management không?
+
+T000033 [09:09:40] An: Có, em thêm vào. Cần mô tả cách lấy secret từ vault.
+
+T000034 [09:09:55] Em: Vâng. Mà em thấy tài liệu staging hiện tại thiếu phần CICD, Dũng update luôn nhé?
+
+T000035 [09:10:10] Dũng: Để em xem lại. Có vẻ phần CICD đã có ở tài liệu khác, em có thể link chéo.
+
+T000036 [09:10:30] An: Không, nên copy vào một chỗ để dễ tra cứu. Dũng chịu khó viết thêm.
+
+T000037 [09:10:45] Dũng: OK, em sẽ thêm.
+
+T000038 [09:11:00] Bình: Anh nghĩ chúng ta cần thống nhất template tài liệu. Em với Dũng dùng cùng format không?
+
+T000039 [09:11:20] Em: Em dùng markdown, có bảng và hình.
+
+T000040 [09:11:30] Dũng: Em cũng dùng markdown, nhưng em có template riêng. Có thể merge lại.
+
+T000041 [09:11:50] An: Vậy hai em thống nhất một template chung, rồi up lên confluence. Deadline thứ 4 tuần sau.
+
+T000042 [09:12:10] Bình: Thứ 4 là 25/02 à? Cũng được.
+
+T000043 [09:12:20] An: Ừ. Bình, em có thể support review tài liệu không?
+
+T000044 [09:12:35] Bình: Được, nhưng em bận fix config sáng nay. Em có thể review chiều.
+
+T000045 [09:12:50] An: Tốt. Còn ai có vấn đề gì về môi trường test nữa không?
+
+T000046 [09:13:05] Châu: Em thấy môi trường dev cũng cần nâng cấp, nhưng không nằm trong scope meeting này.
+
+T000047 [09:13:20] An: OK, để hôm khác. Bây giờ tập trung vào hai việc chính: test UAT và tài liệu.
+
+T000048 [09:13:40] Dũng: Em muốn hỏi, test UAT có cần test hiệu năng không? Hay chỉ functional?
+
+T000049 [09:13:55] Bình: Chỉ functional thôi. Hiệu năng sẽ test sau ở môi trường staging.
+
+T000050 [09:14:10] An: Nhưng em cần đảm bảo UAT không bị chậm do lỗi code. Châu check lại các query nhé.
+
+T000051 [09:14:30] Châu: Dạ, em đã optimize rồi. Nhưng có một số API chưa được cache.
+
+T000052 [09:14:45] Bình: Cache thì để sau, ưu tiên fix lỗi đăng nhập.
+
+T000053 [09:15:00] An: Vậy Châu tập trung vào lỗi đăng nhập. Bình deploy xong thì báo cho cả team.
+
+T000054 [09:15:20] Bình: Em sẽ tạo channel trên Slack thông báo.
+
+T000055 [09:15:35] An: OK. Còn tài liệu, Em và Dũng cần merge template xong trước 24/02 để Bình kịp review.
+
+T000056 [09:16:00] Em: 24/02 là thứ 3, em OK.
+
+T000057 [09:16:10] Dũng: Em cũng OK.
+
+T000058 [09:16:20] Bình: Anh thấy timeline hơi tight, nhưng cố gắng.
+
+T000059 [09:16:35] An: Chúng ta có thể điều chỉnh sau nếu cần. Nhưng ưu tiên giữ đúng tiến độ.
+
+T000060 [09:16:55] Châu: Anh An, em muốn confirm lại task của em: fix lỗi module đăng nhập, push code trước 17h, đúng không ạ?
+
+T000061 [09:17:10] An: Đúng. Deadline hôm nay. Không có deadline sau.
+
+T000062 [09:17:25] Bình: Còn task deploy UAT của em, chưa có deadline cụ thể vì phụ thuộc môi trường.
+
+T000063 [09:17:40] An: Đúng. Khi môi trường xong thì deploy ngay. Vậy coi như không deadline, nhưng ưu tiên.
+
+T000064 [09:18:00] Dũng: Em thấy task "kiểm thử UAT" cũng chưa có deadline. Em nên đặt không?
+
+T000065 [09:18:15] An: Tạm thời chưa, vì còn phụ thuộc deploy. Sau khi deploy xong thì Dũng test và báo kết quả trong ngày.
+
+T000066 [09:18:35] Dũng: Rõ.
+
+T000067 [09:18:45] An: Tổng kết lại: Chúng ta có mấy task. Task 1: Châu fix lỗi đăng nhập, deadline 17h hôm nay. Task 2: Bình deploy UAT, không deadline. Task 3: Dũng viết tài liệu staging, không deadline. Task 4: Em viết tài liệu production, deadline 27/02. Task 5: Em và Dũng thống nhất template, deadline 24/02. Task 6: Bình review tài liệu, sau 24/02.
+
+T000068 [09:19:15] Em: Anh ơi, em thấy task 4 và task 5 tên gần giống nhau, dễ nhầm. Em có thể đặt tên rõ hơn: "Tạo tài liệu hướng dẫn triển khai production" và "Cập nhật tài liệu hướng dẫn triển khai staging".
+
+T000069 [09:19:40] An: OK, vậy em dùng tên đó. Còn vấn đề gì nữa không?
+
+T000070 [09:19:55] Bình: Anh có một vấn đề: hiện tại chúng ta đang thiếu nhân sự cho việc review bảo mật. Có nên đưa vào tài liệu không?
+
+T000071 [09:20:10] An: Chưa cần, vì mới ở giai đoạn test. Sau này sẽ bổ sung.
+
+T000072 [09:20:25] Châu: Em thấy task fix lỗi của em cần access đến server để test. Em chưa có vpn.
+
+T000073 [09:20:40] Bình: Em sẽ cấp VPN cho em trong sáng nay. Em nhắn anh trên Slack.
+
+T000074 [09:20:55] Châu: Cảm ơn anh.
+
+T000075 [09:21:05] An: Mọi người lưu ý, có thể có thay đổi về môi trường do bên infra. Nếu có gì bất thường, báo ngay.
+
+T000076 [09:21:25] Dũng: Vâng.
+
+T000077 [09:21:35] An: Vậy tạm thời đến đây thôi. Chúng ta sẽ tiếp tục vào buổi họp sau. Cảm ơn mọi người.
+
+--- END OF PART P01 ---

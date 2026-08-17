@@ -1,0 +1,373 @@
+=== MEETING METADATA ===
+meeting_id: W4-LONG-C4-N2-OPS-STATE-004
+meeting_title: Họp điều phối triển khai hệ thống
+meeting_date: 2026-02-18
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+chốt sơ bộ
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / moi truong / trien khai / release / staging / monitoring
+- Vậy giao cho Minh task “Khắc phục lỗi đăng nhập trên staging”
+* Vậy giao thêm task “Chuẩn bị dữ liệu test cho module đăng nhập” cho Hoa
+- Lúc nãy chị nói task 1 dl 25/2
+1) Vậy tóm lại em có task fix lỗi đăng nhập, dl 25/2
+- Task 2 tài liệu, Minh lo, dl 5/3
+* Vậy tôi quyết định hủy task "Kiểm tra môi trường test staging"
+- Vậy giao cho Anh Tuấn task "Yêu cầu monitoring cho staging"
+1) Em thấy dl 28/02 cho hai task khác nhau: release plan và monitoring
+- Task data test của Hoa dl 20/2, sắp tới
+* Đừng quên task login 25/2
+- Vậy task đó đã được chốt owner
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:00:00] Ms. Lan: Chào mọi người, hôm nay chúng ta họp để bàn về kế hoạch triển khai hệ thống. Trước tiên, tôi muốn điểm qua tình hình môi trường test.
+[09:00:18] Anh Tuấn: Vâng, tôi đã kiểm tra sơ qua staging. Có một số vấn đề về cấu hình database cần xử lý.
+[09:00:35] Minh: Em cũng thấy phần docker-compose chưa đồng bộ với yêu cầu thực tế.
+[09:00:50] Hoa: Bên QA chúng tôi cần môi trường ổn định để chạy test automation trong tuần này.
+[09:01:08] Ms. Lan: Được rồi, trước mắt Anh Tuấn hãy phối hợp với Minh để ổn định lại staging. Tôi muốn có kết quả sớm.
+[09:01:25] Anh Tuấn: Em nghĩ mất khoảng 2-3 ngày để fix xong mấy lỗi cấu hình. Nhưng còn phần network policy cũng cần review.
+[09:01:42] Minh: Network policy em đã làm draft rồi, nhưng chưa được duyệt.
+[09:01:58] Ms. Lan: Vậy chúng ta sẽ assign task kiểm tra môi trường test staging cho Hoa và Minh. Hạn chót là thứ Tư tuần sau, ngày 25 tháng 2.
+[09:02:15] Hoa: Hạn đó có khả năng không? Vì nếu staging chưa xong thì QA không thể test được.
+[09:02:32] Anh Tuấn: Tôi sẽ cố gắng xong phần cấu hình trước thứ Hai. Minh hỗ trợ phần docker.
+[09:02:48] Minh: Vâng, em sẽ update compose file chiều nay.
+[09:03:02] Ms. Lan: Tốt. Task này tạm gọi là “Kiểm tra môi trường test staging”. Assign cho Hoa và Minh, deadline 25/02.
+[09:03:20] Hoa: Còn tài liệu triển khai thì sao? Tôi thấy bản hôm qua gửi còn thiếu phần hướng dẫn rollback.
+[09:03:38] Anh Tuấn: Phần đó do tôi viết nhưng chưa kịp bổ sung. Có lẽ cần một task riêng để hoàn thiện tài liệu.
+[09:03:55] Ms. Lan: Đúng vậy. Tài liệu triển khai hệ thống cũng quan trọng không kém. Minh, em có thể đảm nhận việc kiểm tra và cập nhật tài liệu này không?
+[09:04:12] Minh: Em có thể, nhưng cần Anh Tuấn cung cấp thông tin về phần rollback và các script.
+[09:04:28] Anh Tuấn: Tôi sẽ gửi email chi tiết vào cuối ngày hôm nay.
+[09:04:42] Ms. Lan: Vậy task thứ hai là “Kiểm tra tài liệu triển khai hệ thống”, do Minh làm. Vì tài liệu chưa có deadline cụ thể, chúng ta sẽ không ấn định thời gian, nhưng cố gắng xong trong tháng 2.
+[09:05:00] Hoa: Thế còn phần test plan cho release? Em nghĩ cần sớm có plan.
+[09:05:16] Ms. Lan: Hoa, em lo phần đó sau khi staging ổn định. Giờ tập trung hai task chính đã.
+[09:05:33] Anh Tuấn: Tôi thấy tên hai task khá giống nhau, “môi trường test” với “tài liệu triển khai”, dễ nhầm.
+[09:05:50] Ms. Lan: Đúng, nhưng phạm vi khác nhau. Cứ tạm dùng vậy, sau này có thể đổi tên.
+[09:06:07] Minh: Em xin phép hỏi: staging hiện tại có support cho việc test load không? Vì tài liệu yêu cầu kiểm tra throughput.
+[09:06:25] Anh Tuấn: Chưa, phải cài thêm tool. Đó là việc của tuần sau.
+[09:06:40] Ms. Lan: Vậy nhắc lại, task 1: Kiểm tra môi trường test staging – Hoa và Minh, deadline 25/02. Task 2: Kiểm tra tài liệu triển khai hệ thống – Minh, không deadline ấn định, nhưng cố gắng hoàn thành cuối tháng.
+[09:07:00] Hoa: Rõ rồi ạ. Nhưng em muốn biết ai sẽ review tài liệu sau khi Minh cập nhật.
+[09:07:16] Ms. Lan: Anh Tuấn sẽ review. Có vấn đề gì không?
+[09:07:30] Anh Tuấn: Tôi đồng ý. Tuy nhiên tôi cũng bận với phần cấu hình, nên mong Minh gửi sớm để tôi review.
+[09:07:48] Minh: Em sẽ cố gắng xong bản nháp vào thứ Năm tuần này.
+[09:08:04] Ms. Lan: Chú ý, trong tài liệu cần có hướng dẫn cài đặt step-by-step, phần rollback, và list dependencies.
+[09:08:22] Minh: Vâng, em đã nắm được. Nhưng phần dependency có thể thay đổi theo môi trường, em sẽ viết chung.
+[09:08:38] Hoa: Tôi thấy môi trường test staging hiện tại còn thiếu certificate SSL. Ai sẽ lo vụ đó?
+[09:08:55] Anh Tuấn: Vụ đó tôi đã request rồi, chờ bên infra cấp. Có thể tuần sau mới có.
+[09:09:10] Ms. Lan: Vậy task 1 sẽ bao gồm cả việc xác nhận certificate đã có. Hoa, em ghi nhận nhé.
+[09:09:26] Hoa: Dạ. Em nghĩ cần thêm một mục kiểm tra log hệ thống nữa, vì staging chưa có centralized logging.
+[09:09:44] Minh: Cái đó thuộc về hạ tầng, không phải việc của bọn mình.
+[09:09:58] Anh Tuấn: Đúng, nhưng nếu không có log thì khó debug. Tôi sẽ nói với team infra.
+[09:10:14] Ms. Lan: Tạm thời cứ giải quyết các vấn đề chính. Đừng lan man quá.
+[09:10:30] Hoa: Vâng. Vậy task 1 chỉ tập trung vào staging availability và cấu hình đúng spec.
+[09:10:46] Ms. Lan: Chính xác. Bây giờ tôi muốn kiểm tra tiến độ của các task khác từ tuần trước. Anh Tuấn, báo cáo về phần API gateway.
+[09:11:04] Anh Tuấn: API gateway đã deploy lên staging rồi, nhưng có vấn đề về rate limiting chưa config. Tôi đã tạo ticket.
+[09:11:22] Ms. Lan: Ticket đó có ảnh hưởng đến hai task mới không?
+[09:11:38] Anh Tuấn: Không trực tiếp, nhưng nếu không fix thì test load sẽ fail.
+[09:11:54] Minh: Em có thể support phần config rate limit. Nó không mất nhiều thời gian.
+[09:12:10] Ms. Lan: Tốt, nhưng đừng làm chậm task chính. Minh, em tự cân đối.
+[09:12:26] Minh: Em hiểu. Em sẽ ưu tiên tài liệu và staging trước.
+[09:12:42] Hoa: Nói về tài liệu, bản trước đó có phần mô tả kiến trúc hơi sai. Em đã comment.
+[09:12:58] Minh: À, phần đó do em viết, có thể nhầm lẫn. Em sẽ sửa.
+[09:13:14] Ms. Lan: Cần sự chính xác. Nếu không, sau này triển khai sẽ rối.
+[09:13:30] Anh Tuấn: Tôi nghĩ nên có một buổi review tài liệu giữa team trước khi release.
+[09:13:46] Ms. Lan: Đó là ý hay. Nhưng chúng ta để sau khi Minh hoàn thành bản nháp.
+[09:14:02] Hoa: Thế bao giờ có bản nháp? Em muốn xem trước để điều chỉnh test case.
+[09:14:18] Minh: Như em nói, thứ Năm tuần này. Em sẽ gửi cho mọi người.
+[09:14:34] Ms. Lan: Lưu ý, tài liệu cần có version control và changelog. Minh nhé.
+[09:14:50] Minh: Vâng, em sẽ dùng markdown và push lên repo riêng.
+[09:15:06] Anh Tuấn: Tôi thấy staging hiện đang có conflict port với service cũ. Cần giải quyết trước khi Hoa test.
+[09:15:22] Ms. Lan: Đó là việc khẩn. Anh Tuấn và Minh họp nhanh sau meeting này để fix.
+[09:15:40] Hoa: Em có thể hỗ trợ test thử sau khi họ fix.
+[09:15:56] Ms. Lan: Vậy tạm thời chúng ta có hai task rõ ràng. Còn vấn đề gì muốn thảo luận thêm không?
+[09:16:12] Minh: Em muốn hỏi về việc dùng chung tài liệu triển khai cho nhiều môi trường. Có nên viết một bản chính hay tách riêng?
+[09:16:30] Anh Tuấn: Tôi nghĩ nên viết một bản chính, có phần biến môi trường. Dễ maintain.
+[09:16:46] Ms. Lan: Đồng ý. Minh hãy tham khảo template cũ và điều chỉnh.
+[09:17:02] Hoa: Tôi thấy trong template cũ có mục “Kiểm tra sau triển khai” nhưng lại thiếu bước xác thực.
+[09:17:18] Minh: Em sẽ bổ sung. Cảm ơn Hoa.
+[09:17:34] Ms. Lan: Chúng ta đang đi đúng hướng. Tôi muốn nhấn mạnh: hai task này rất quan trọng cho release đợt này. Không được trễ.
+[09:17:52] Anh Tuấn: Nếu staging không xong kịp deadline 25/02, chúng ta có phương án dự phòng không?
+[09:18:08] Ms. Lan: Có thể dời deadline nhưng không quá 28/02. Còn tài liệu thì phải xong trước 05/03.
+[09:18:24] Hoa: Vậy deadline cho task 2 chính thức là 05/03? Lúc nãy chị nói không deadline.
+[09:18:40] Ms. Lan: Ừ, thực ra tôi không ấn định lúc đầu, nhưng để tránh kéo dài, ta đặt mục tiêu 05/03. Anh Tuấn kiểm tra được không?
+[09:18:58] Anh Tuấn: Được, nhưng tôi phải review kỹ, cần Minh gửi sớm.
+[09:19:14] Minh: Em sẽ gửi trước thứ Năm, có bản sơ bộ.
+[09:19:30] Ms. Lan: Tốt. Vậy task 1 deadline 25/02, task 2 deadline 05/03. Ghi lại nhé.
+[09:19:48] Hoa: Em xin phép hỏi, nếu staging xong sớm, em có thể test tài liệu trước deadline không?
+[09:20:04] Ms. Lan: Được, nhưng ưu tiên test môi trường trước.
+[09:20:20] Anh Tuấn: Tôi có một vấn đề: tài liệu triển khai hiện chưa có phần monitoring setup. Có cần thêm không?
+[09:20:38] Ms. Lan: Cần, nhưng việc đó thuộc phase sau. Không đưa vào task này.
+[09:20:54] Minh: Vâng, em chỉ viết những gì liên quan đến installation thôi.
+[09:21:10] Hoa: Vậy em có thể request thêm một task riêng cho monitoring sau.
+[09:21:26] Ms. Lan: Để sau meeting này. Giờ chúng ta cần kết thúc và đi vào họp ngắn giữa Anh Tuấn và Minh về conflict port.
+[09:21:44] Anh Tuấn: Ok, tôi sẽ vào phòng họp riêng với Minh sau.
+[09:22:00] Ms. Lan: Mọi người khác có thắc mắc gì cuối không?
+[09:22:16] Hoa: Em không có thêm.
+[09:22:30] Ms. Lan: Vậy tạm dừng tại đây. Chúng ta sẽ tiếp tục part sau để bàn chi tiết hơn. Cảm ơn mọi người.
+[09:24:00] Ms. Lan: Chúng ta quay lại cuộc họp chính. Anh Tuấn và Minh đã giải quyết xong conflict port chưa?
+[09:24:18] Anh Tuấn: Vẫn đang xử lý, nhưng tạm thời tôi muốn báo cáo một vấn đề khác: hệ thống ghi nhận lỗi đăng nhập trên staging sau khi deploy API gateway.
+[09:24:36] Minh: Dạ, em cũng vừa thấy. Lỗi xảy ra khi người dùng nhập đúng thông tin nhưng server vẫn trả về 401.
+[09:24:54] Hoa: Tôi test thử vài case, username/password hợp lệ nhưng không được. Có vẻ liên quan đến JWT token.
+[09:25:12] Ms. Lan: Vậy đây là issue nghiêm trọng. Ai sẽ điều tra và fix?
+[09:25:30] Anh Tuấn: Tôi nghĩ Minh nên lo vụ này, vì em biết cấu hình token.
+[09:25:48] Minh: Em có thể xem, nhưng cần log chi tiết từ cluster. Hiện tại logging chưa đầy đủ.
+[09:26:06] Hoa: Tôi đã ghi lại các bước test, có thể gửi cho Minh.
+[09:26:22] Ms. Lan: Tốt. Vậy giao cho Minh task “Khắc phục lỗi đăng nhập trên staging”. Deadline trong tuần này, thứ Sáu ngày 20/2 được không?
+[09:26:40] Minh: Thứ Sáu 20/2 hơi gấp, vì em còn phải làm tài liệu và staging. Có thể dời sang thứ Hai 23/2?
+[09:26:58] Ms. Lan: Được, thứ Hai 23/2. Hoa hỗ trợ kiểm tra sau khi fix.
+[09:27:16] Hoa: Vâng, nhưng em cần môi trường staging ổn định để test.
+[09:27:34] Anh Tuấn: Staging đang có conflict port, tôi đang fix. Có lẽ xong trưa nay.
+[09:27:52] Ms. Lan: Vậy task này phụ thuộc vào task kia. Cần ưu tiên giải quyết conflict trước.
+[09:28:10] Minh: Em đề xuất dùng OAuth2 thay vì JWT custom, sẽ bền hơn. Nhưng cần thời gian.
+[09:28:28] Hoa: OAuth2 có cần thêm hạ tầng không? Nếu phải thì đây là chuyện lớn.
+[09:28:46] Anh Tuấn: Có vài giải pháp, nhưng tôi nghĩ không nên thay đổi kiến trúc giữa chừng. Tạm thời fix lỗi đúng spec.
+[09:29:04] Minh: Nhưng nếu fix tạm, sau này vẫn lỗi lại. Em thấy bản chất là do secret key không sync.
+[09:29:22] Ms. Lan: Tranh luận về OAuth2 để sau. Giờ tập trung fix lỗi ngay.
+[09:29:40] Minh: Vâng, em sẽ check lại secret key và xác thực việc ký token.
+[09:29:58] Hoa: Ngoài ra, tôi thấy dữ liệu test hiện tại khá ít, chỉ có 10 user sample. Cần tạo thêm dữ liệu mẫu.
+[09:30:16] Ms. Lan: Đó cũng là việc quan trọng. Chúng ta cần một dataset đầy đủ để test toàn diện.
+[09:30:34] Anh Tuấn: Ai sẽ lo phần dữ liệu test? Tôi nghĩ Hoa, vì QA cần data.
+[09:30:52] Hoa: Em có thể viết script tạo dữ liệu, nhưng cần định nghĩa các trường hợp biên.
+[09:31:10] Ms. Lan: Vậy giao thêm task “Chuẩn bị dữ liệu test cho module đăng nhập” cho Hoa. Không có deadline cụ thể, nhưng cần ưu tiên.
+[09:31:28] Hoa: Em muốn có hướng dẫn từ Anh Tuấn về các trường dữ liệu tối thiểu.
+[09:31:46] Anh Tuấn: Tôi sẽ gửi email mô tả schema. Cần bao gồm cả role và permission.
+[09:32:04] Ms. Lan: Lưu ý, dữ liệu test phải giống production nhất có thể. Tránh sai lệch.
+[09:32:22] Minh: Em muốn hỏi, việc dùng SSH key để xác thực có cần test không? Hay chỉ username/password?
+[09:32:40] Hoa: Theo yêu cầu, đợt này chỉ test username/password thôi.
+[09:32:58] Anh Tuấn: Tôi nghĩ cần test cả trường hợp token hết hạn và refresh token.
+[09:33:16] Minh: Phần đó thuộc về task lỗi đăng nhập hay dữ liệu test?
+[09:33:34] Ms. Lan: Là phần của lỗi đăng nhập. Khi fix, em nhớ xử lý thêm refresh token.
+[09:33:52] Minh: Rõ rồi. Nhưng nếu thêm refresh token, deadline thứ Hai 23/2 có kịp không?
+[09:34:10] Ms. Lan: Cố gắng. Nếu không, có thể lùi 2 ngày, tới thứ Tư 25/2.
+[09:34:28] Hoa: Lúc nãy chị nói task 1 deadline 25/2. Giờ task này cũng 25/2, lo quá.
+[09:34:46] Ms. Lan: Đúng, nhiều việc. Nhưng 25/2 là hạn chót, phải sắp xếp.
+[09:35:04] Anh Tuấn: Tôi sẽ hỗ trợ Minh nếu cần, phần conflict port có thể xong sớm.
+[09:35:22] Minh: Em cảm ơn. Vậy em tập trung fix lỗi đăng nhập và sửa tài liệu song song.
+[09:35:40] Hoa: Em hỏi về task dữ liệu test: ai sẽ review dữ liệu sau khi em tạo?
+[09:35:58] Ms. Lan: Anh Tuấn review, vì em quen với schema.
+[09:36:16] Anh Tuấn: Tôi đồng ý, nhưng hiện tại tôi bận với conflict port và review tài liệu.
+[09:36:34] Hoa: Vậy ai review dữ liệu test? Có thể Minh không?
+[09:36:52] Minh: Em có thể review, nhưng em không rõ về mặt nghiệp vụ dữ liệu.
+[09:37:10] Ms. Lan: Vậy để tôi tìm người khác, hoặc tôi sẽ review. Nhưng tôi đang bận với báo cáo cho sếp.
+[09:37:28] Hoa: Thế thì chưa có reviewer ư? Em lo dữ liệu sai sẽ ảnh hưởng test.
+[09:37:46] Anh Tuấn: Tôi có thể thu xếp tối nay, nhưng không hứa trước. Để tôi báo sau.
+[09:38:04] Ms. Lan: Tạm thời chưa assign reviewer. Khi nào có, tôi sẽ báo. Hoa cứ làm trước.
+[09:38:22] Minh: Vậy tóm lại em có task fix lỗi đăng nhập, deadline 25/2. Hoa có task tạo dữ liệu test, chưa có deadline.
+[09:38:40] Hoa: Nhưng em cần biết deadline để ưu tiên. Em có thể làm xong trong 3 ngày.
+[09:38:58] Ms. Lan: Đặt deadline end of this week, 20/2 nhé. Nhưng nếu cần thêm, nói tôi.
+[09:39:16] Hoa: 20/2 được. Vậy em sẽ hoàn thành script và dữ liệu.
+[09:39:34] Anh Tuấn: Tôi khuyên Hoa nên tạo file CSV mẫu trước, rồi import vào DB.
+[09:39:52] Hoa: Em sẽ làm theo hướng đó.
+[09:40:10] Ms. Lan: Về distractor, tôi nhận thấy chúng ta tốn quá nhiều thời gian bàn về OAuth2 mà không đi đến đâu. Giờ quay lại vấn đề chính.
+[09:40:28] Minh: Em xin lỗi, tại em thấy giải pháp OAuth2 tối ưu.
+[09:40:46] Anh Tuấn: Ý của Minh tốt, nhưng thời điểm này không phù hợp. Để sau release.
+[09:41:04] Hoa: Đồng ý. Release sắp tới cần ổn định.
+[09:41:22] Ms. Lan: Vậy chúng ta đã có thêm hai task mới. Cần nhắc lại: task 1 môi trường test staging vẫn giữ nguyên, Hoa và Minh lo, deadline 25/2. Task 2 tài liệu, Minh lo, deadline 5/3. Task 3 lỗi đăng nhập, Minh lo, deadline 25/2. Task 4 dữ liệu test, Hoa lo, deadline 20/2. Còn task nào nữa?
+[09:41:42] Anh Tuấn: Conflict port đang xử lý, không phải task riêng.
+[09:42:00] Minh: Thế còn việc review tài liệu? Ai sẽ review? Lúc nãy chị nói Anh Tuấn.
+[09:42:18] Anh Tuấn: Tôi sẽ review, nhưng muốn Minh gửi sớm.
+[09:42:36] Hoa: Vậy reviewer cho tài liệu đã có. Còn reviewer cho dữ liệu test thì chưa, như chị Lan nói.
+[09:42:54] Ms. Lan: Để tôi assign sau. Có thể nhờ bên BA.
+[09:43:12] Anh Tuấn: BA bận dự án khác, tôi nghĩ không khả thi.
+[09:43:30] Ms. Lan: Vậy tôi sẽ tự review. Nhưng tôi cần Hoa gửi bản nháp sớm.
+[09:43:48] Hoa: Dạ, em sẽ gửi trước 20/2.
+[09:44:06] Minh: Em có thắc mắc: task lỗi đăng nhập và task staging có liên quan đến nhau, vì staging chưa ổn định. Nếu staging không xong, em không test được.
+[09:44:24] Anh Tuấn: Tôi đang fix conflict port, hứa xong trong hôm nay. Sau đó Minh có thể dùng staging.
+[09:44:42] Hoa: Vậy phải đảm bảo timeline không trượt.
+[09:45:00] Ms. Lan: Tất cả đều phụ thuộc lẫn nhau. Các em chủ động phối hợp.
+[09:45:18] Anh Tuấn: Tôi đề nghị cuối giờ chiều nay có một buổi họp ngắn 15 phút để kiểm tra tiến độ.
+[09:45:36] Ms. Lan: Ý hay. 5 giờ chiều nay, mọi người có mặt online. Tôi sẽ gửi invite.
+[09:45:54] Minh: Vâng, em được.
+[09:46:10] Hoa: Em cũng được.
+[09:46:26] Ms. Lan: Có vấn đề gì muốn thảo luận thêm cho phần này không?
+[09:46:44] Anh Tuấn: Tôi có một câu hỏi về dữ liệu test: có cần test với dữ liệu lớn 10.000 bản ghi không? Hay chỉ mẫu nhỏ?
+[09:47:02] Hoa: Em nghĩ cần có test performance nữa, nhưng đó là phần sau.
+[09:47:20] Ms. Lan: Lần này chỉ test chức năng. Performance để phase 2.
+[09:47:38] Minh: Vậy em yên tâm.
+[09:47:56] Ms. Lan: Chúng ta đã đi qua nhiều nội dung. Tôi muốn dừng tại đây, chuẩn bị cho cuộc họp chiều.
+[09:48:14] Hoa: Vâng, em sẽ note lại các task.
+[09:48:30] Anh Tuấn: Tôi tiếp tục fix conflict port.
+[09:48:46] Minh: Em sẽ bắt đầu phân tích lỗi đăng nhập.
+[09:49:02] Ms. Lan: Cảm ơn mọi người. Tạm biệt.
+[09:52:00] Ms. Lan: Chúng ta quay lại vấn đề tài liệu triển khai từ đầu buổi. Minh, em đã bắt đầu viết chưa?
+[09:52:18] Minh: Dạ, em mới phác thảo vài phần, nhưng chưa có bản hoàn chỉnh. Hiện em đang tập trung fix lỗi đăng nhập.
+[09:52:36] Hoa: Tài liệu đó có vẻ bị chậm so với kế hoạch. Em thấy cần ưu tiên hơn.
+[09:52:54] Anh Tuấn: Tôi đồng ý. Nhưng Minh đang gánh nhiều task: staging, login, và cả tài liệu. Em ấy quá tải.
+[09:53:12] Ms. Lan: Đúng vậy. Tôi nghĩ nên chuyển giao chủ sở hữu của task tài liệu cho người khác. Anh Tuấn, anh có thể đảm nhận việc viết tài liệu được không?
+[09:53:30] Anh Tuấn: Tôi có thể viết, nhưng tôi cũng phải review dữ liệu test và fix conflict port. Có lẽ Hoa làm thì hợp lý hơn.
+[09:53:48] Hoa: Em cũng đang lo dữ liệu test deadline 20/2. Nếu nhận thêm tài liệu, em cần thêm thời gian.
+[09:54:06] Minh: Em nghĩ nếu Anh Tuấn viết tài liệu, em sẽ hỗ trợ review phần kỹ thuật. Như vậy phân công hợp lý.
+[09:54:24] Anh Tuấn: Được, tôi sẽ nhận viết tài liệu. Nhưng cần Minh cung cấp các thông tin về cấu hình token và secret key.
+[09:54:42] Minh: Vâng, em sẽ gửi mail chi tiết vào cuối ngày.
+[09:55:00] Hoa: Vậy bây giờ ai là owner của task tài liệu? Lúc đầu là Minh, giờ chuyển sang Anh Tuấn?
+[09:55:18] Ms. Lan: Đúng vậy. Từ giờ, Anh Tuấn là owner. Minh hỗ trợ review. Deadline giữ nguyên 05/03?
+[09:55:36] Anh Tuấn: 05/03 có thể được, nhưng tôi cần Minh gửi thông tin sớm để kịp.
+[09:55:54] Minh: Em sẽ gửi trong hôm nay.
+[09:56:12] Hoa: Còn task staging thì sao? Em thấy nó đang bị chậm do conflict port.
+[09:56:30] Anh Tuấn: Tôi đã fix xong conflict port sáng nay. Staging đã hoạt động trở lại.
+[09:56:48] Minh: Vậy task staging có thể test được rồi. Nhưng deadline 25/2 vẫn còn xa.
+[09:57:06] Ms. Lan: Tôi muốn thay đổi deadline của task staging. Vì chúng ta có thêm nhiều việc, nên dời sang 28/02 để an toàn hơn.
+[09:57:24] Hoa: 28/02 là thứ Bảy. Có khả năng không? Lịch làm việc chỉ đến thứ Sáu.
+[09:57:42] Anh Tuấn: Nếu dời, tôi kiến nghị lùi đến thứ Hai 02/03. Cuối tháng 2 có thể bận.
+[09:58:00] Ms. Lan: Được, vậy deadline staging sửa thành 02/03. Task tài liệu vẫn 05/03.
+[09:58:18] Minh: Nhưng task lỗi đăng nhập của em deadline 25/2, có cần điều chỉnh không?
+[09:58:36] Ms. Lan: Task đó giữ nguyên. Em cố gắng.
+[09:58:54] Hoa: Em thấy deadline staging mới 02/03, còn login 25/2, vậy em có thể test login sau khi Minh fix xong.
+[09:59:12] Minh: Vâng, em sẽ ưu tiên login trước.
+[09:59:30] Anh Tuấn: Quay lại tài liệu, tôi muốn thảo luận nội dung chính. Có cần thêm mục troubleshooting không?
+[09:59:48] Hoa: Em nghĩ nên có. Phần đó giúp người triển khai dễ dàng hơn.
+[10:00:06] Ms. Lan: Anh Tuấn, anh tự quyết định. Miễn là đầy đủ.
+[10:00:24] Minh: Em góp ý: nên thêm phần check list các bước sau triển khai.
+[10:00:42] Anh Tuấn: Ý hay. Tôi sẽ thêm.
+[10:01:00] Hoa: Còn về dữ liệu test, em có script tạo 100 user rồi. Cần thêm dữ liệu biên như người dùng bị khóa.
+[10:01:18] Ms. Lan: Tốt, cứ thêm vào. Nhưng đừng quên deadline 20/2.
+[10:01:36] Hoa: Vâng, em đang tiến hành.
+[10:01:54] Anh Tuấn: Tôi có một câu hỏi về tài liệu: phần mô tả kiến trúc cần vẽ sơ đồ hay chỉ text?
+[10:02:12] Minh: Em nghĩ nên có sơ đồ, dễ hiểu hơn. Em có thể hỗ trợ vẽ.
+[10:02:30] Ms. Lan: Được, Minh vẽ sơ đồ, Anh Tuấn viết nội dung. Phối hợp tốt.
+[10:02:48] Hoa: Vậy tài liệu có version history không? Em thấy nhiều dự án thiếu phần đó.
+[10:03:06] Anh Tuấn: Tôi sẽ thêm changelog.
+[10:03:24] Minh: Em gợi ý dùng git để quản lý version.
+[10:03:42] Ms. Lan: Đồng ý. Anh Tuấn tạo repo riêng cho tài liệu.
+[10:04:00] Hoa: Ngoài ra, em thấy hiện tại chưa có reviewer cho tài liệu. Anh Tuấn viết, ai review?
+[10:04:18] Ms. Lan: Lúc nãy Minh sẽ review phần kỹ thuật. Còn tổng thể để tôi review.
+[10:04:36] Anh Tuấn: Vậy tôi sẽ gửi bản nháp cho Minh và chị Lan trước thứ Hai 02/03.
+[10:04:54] Minh: Deadline đó hợp lý.
+[10:05:12] Hoa: Em thấy chúng ta đã điều chỉnh nhiều. Cần recap không?
+[10:05:30] Ms. Lan: Không cần recap chi tiết, tránh lặp. Chỉ cần nhớ task nào ai làm.
+[10:05:48] Anh Tuấn: Vậy tôi xác nhận: staging deadline 02/03, login deadline 25/2, data test deadline 20/2, tài liệu deadline 05/03, owner tài liệu là tôi.
+[10:06:06] Minh: Còn task tài liệu cũ deadline 05/03, đúng không?
+[10:06:24] Ms. Lan: Đúng. Các em nhớ cập nhật trên hệ thống.
+[10:06:42] Hoa: Về dữ liệu test, em sẽ gửi bản nháp cho anh Tuấn vào thứ Năm 19/2 để review.
+[10:07:00] Anh Tuấn: Tôi sẽ review vào thứ Sáu.
+[10:07:18] Minh: Em lo lắng task login có thể bị ảnh hưởng nếu Anh Tuấn bận review tài liệu.
+[10:07:36] Anh Tuấn: Tôi vẫn cân đối được. Còn phần conflict port đã xong, nên tôi rảnh hơn.
+[10:07:54] Ms. Lan: Có vấn đề gì muốn thảo luận thêm không?
+[10:08:12] Hoa: Em muốn hỏi về việc dùng chung server staging cho nhiều task có xảy ra xung đột không?
+[10:08:30] Anh Tuấn: Không, vì tôi đã cấu hình lại port.
+[10:08:48] Ms. Lan: Vậy chúng ta tạm ổn. Nhưng tôi thấy task login vẫn có nguy cơ trễ. Minh có cần hỗ trợ thêm?
+[10:09:06] Minh: Em có thể nhờ Hoa test sơ bộ trong quá trình fix.
+[10:09:24] Hoa: Em sẵn sàng.
+[10:09:42] Ms. Lan: Tốt. Tôi muốn kết thúc phần này. Chuẩn bị cho cuộc họp chiều 5 giờ.
+[10:10:00] Anh Tuấn: Vâng, tôi sẽ chuẩn bị báo cáo.
+[10:10:18] Minh: Em cũng vậy.
+[10:10:36] Hoa: Em không có câu hỏi thêm.
+[10:10:54] Ms. Lan: Tạm dừng tại đây. Hẹn gặp lại.
+[10:27:00] Ms. Lan: Chúng ta tiếp tục. Hôm nay còn một vấn đề quan trọng: kế hoạch release và monitoring.
+[10:27:18] Anh Tuấn: Tôi nghĩ chúng ta cần xác định thời điểm release. Hiện tại staging đã ổn, nhưng còn nhiều task dang dở.
+[10:27:36] Hoa: Em đề xuất tháng 3 tuần đầu là khả thi, sau khi các task hoàn tất.
+[10:27:54] Minh: Nhưng task login của em deadline 25/2, nếu xong sớm thì có thể release sớm hơn.
+[10:28:12] Ms. Lan: Đúng, nhưng còn tài liệu và data test. Chúng ta cần một cái nhìn tổng thể.
+[10:28:30] Anh Tuấn: Tôi lo rằng task kiểm tra môi trường test staging từ đầu buổi giờ không còn phù hợp. Staging đã được fix và chúng ta đang test trực tiếp.
+[10:28:48] Hoa: Em đồng ý. Task đó chỉ gây thêm việc hành chính.
+[10:29:06] Minh: Thực ra nó đã được implicit hoàn thành khi staging ổn định.
+[10:29:24] Ms. Lan: Vậy tôi quyết định hủy task "Kiểm tra môi trường test staging". Các nội dung liên quan sẽ gộp vào task release validation.
+[10:29:42] Anh Tuấn: Đồng ý. Như vậy Hoa và Minh không cần làm báo cáo riêng cho task đó.
+[10:30:00] Hoa: Vậy còn deadline cũ 02/03 của staging? Giờ bỏ đi, chúng ta chỉ còn các deadline khác.
+[10:30:18] Ms. Lan: Đúng. Bây giờ chúng ta cần set deadline cho release plan. Tôi muốn có bản kế hoạch release trước ngày 28/02.
+[10:30:36] Minh: 28/02 là thứ Bảy, nhưng có thể gửi trước 27/02.
+[10:30:54] Anh Tuấn: Ai sẽ chịu trách nhiệm viết release plan? Tôi nghĩ Minh, vì em nắm rõ các task.
+[10:31:12] Minh: Em có thể viết, nhưng cần input từ Hoa về kết quả test.
+[10:31:30] Hoa: Em sẽ gửi báo cáo data test trước 20/2, nhưng kết quả login còn phụ thuộc.
+[10:31:48] Ms. Lan: Vậy release plan deadline 28/02. Minh viết, Hoa và Anh Tuấn review. Có vấn đề gì không?
+[10:32:06] Anh Tuấn: Tôi có thể review, nhưng cần Minh gửi draft trước 26/02.
+[10:32:24] Minh: Được. Em sẽ cố gắng.
+[10:32:42] Hoa: Em muốn hỏi về monitoring. Chúng ta có cần set up công cụ giám sát staging trước release không?
+[10:33:00] Ms. Lan: Cần, nhưng đó là việc của team infra. Chúng ta chỉ cần yêu cầu.
+[10:33:18] Anh Tuấn: Tôi có thể liên hệ bên infra để yêu cầu Grafana và alert.
+[10:33:36] Minh: Nếu có monitoring, em sẽ dễ dàng xác định nguyên nhân lỗi hơn.
+[10:33:54] Ms. Lan: Vậy giao cho Anh Tuấn task "Yêu cầu monitoring cho staging". Không có deadline, nhưng cần làm trong tuần này.
+[10:34:12] Hoa: Task đó có phụ thuộc vào release plan không?
+[10:34:30] Anh Tuấn: Không trực tiếp, nhưng nên hoàn thành trước release.
+[10:34:48] Minh: Em đề xuất deadline cho monitoring là 25/02, cùng với login.
+[10:35:06] Ms. Lan: 25/02 hợp lý. Anh Tuấn, anh có làm kịp không?
+[10:35:24] Anh Tuấn: Tôi sẽ cố, nhưng cần phối hợp với infra. Nếu không, dời sang 28/02.
+[10:35:42] Ms. Lan: Deadline 28/02, cùng với release plan. Anh Tuấn, anh update nhé.
+[10:36:00] Anh Tuấn: Vậy tôi nhận monitoring deadline 28/02.
+[10:36:18] Hoa: Em thấy deadline 28/02 cho hai task khác nhau: release plan và monitoring. Có thể bị nhầm lẫn.
+[10:36:36] Ms. Lan: Đúng, nhưng khác nội dung. Cứ để vậy, sau này điều chỉnh nếu cần.
+[10:36:54] Minh: Em muốn thảo luận thêm về release plan: có cần bao gồm rollback procedure không?
+[10:37:12] Anh Tuấn: Cần. Đó là phần quan trọng.
+[10:37:30] Hoa: Em sẽ cung cấp các case test rollback.
+[10:37:48] Ms. Lan: Tốt, Minh nhớ tích hợp vào plan.
+[10:38:06] Minh: Vâng.
+[10:38:24] Anh Tuấn: Tôi có một băn khoăn: task login deadline 25/2, nhưng nếu delay thì release plan dựa trên đó sẽ sai.
+[10:38:42] Ms. Lan: Đó là lý do chúng ta cần bám sát tiến độ. Cuộc họp chiều nay sẽ kiểm tra.
+[10:39:00] Hoa: Nếu login trễ, em có thể test tay và báo cáo sớm.
+[10:39:18] Minh: Em sẽ cập nhật trạng thái hàng ngày.
+[10:39:36] Ms. Lan: Có thêm vấn đề gì về monitoring không?
+[10:39:54] Anh Tuấn: Tôi muốn hỏi: có cần set up alert qua email hay slack?
+[10:40:12] Minh: Slack thì tiện hơn.
+[10:40:30] Hoa: Em nghĩ nên cả hai.
+[10:40:48] Ms. Lan: Anh Tuấn tự quyết định. Miễn là hoạt động.
+[10:41:06] Anh Tuấn: Vậy tôi sẽ yêu cầu cả email và slack.
+[10:41:24] Minh: Về release plan, em có thể dùng template cũ của dự án trước.
+[10:41:42] Hoa: Template đó thiếu phần risk assessment.
+[10:42:00] Ms. Lan: Minh bổ sung thêm.
+[10:42:18] Anh Tuấn: Tôi thấy hôm nay đã giải quyết được nhiều việc. Còn task nào cần nhắc lại không?
+[10:42:36] Hoa: Task tài liệu vẫn cần Anh Tuấn viết, deadline 05/03. Đã có.
+[10:42:54] Minh: Task data test của Hoa deadline 20/2, sắp tới.
+[10:43:12] Ms. Lan: Đừng quên task login 25/2. Tôi hy vọng mọi người đều nắm rõ.
+[10:43:30] Anh Tuấn: Rõ rồi. Tôi sẽ điều phối với infra.
+[10:43:48] Minh: Em không có câu hỏi thêm.
+[10:44:06] Hoa: Em cũng vậy.
+[10:44:24] Ms. Lan: Vậy tạm dừng tại đây. Chúng ta sẽ họp lại chiều nay lúc 5 giờ để kiểm tra tiến độ.
+[10:44:42] Anh Tuấn: Hẹn gặp lại.
+[10:47:00] Ms. Lan: Chúng ta vào part cuối của buổi họp hôm nay. Tôi muốn tổng kết lại toàn bộ trạng thái các task để tránh nhầm lẫn.
+[10:47:18] Anh Tuấn: Vâng, tôi cũng cần một cái nhìn tổng thể.
+[10:47:36] Hoa: Em đã ghi chép, nhưng sợ thiếu.
+[10:47:54] Minh: Em nghĩ nên review từng task một.
+[10:48:12] Ms. Lan: Bắt đầu với task đầu tiên: tài liệu triển khai hệ thống. Hiện tại ai là owner, deadline nào?
+[10:48:30] Anh Tuấn: Là tôi viết, deadline 05/03, Minh hỗ trợ review phần kỹ thuật, chị Lan review tổng thể.
+[10:48:48] Minh: Đúng vậy. Em đã gửi thông tin về cấu hình token cho anh Tuấn chiều qua.
+[10:49:06] Hoa: Vậy task đó đã được chốt owner.
+[10:49:24] Ms. Lan: Task thứ hai: khắc phục lỗi đăng nhập trên staging. Minh, deadline?
+[10:49:42] Minh: Deadline 25/02. Em đang fix phần secret key và refresh token. Dự kiến xong sớm.
+[10:50:00] Hoa: Em có thể test thử sau khi Minh fix.
+[10:50:18] Ms. Lan: Tốt. Task thứ ba: chuẩn bị dữ liệu test cho module đăng nhập. Hoa, em làm đến đâu?
+[10:50:36] Hoa: Em đã tạo script 100 user, đang thêm dữ liệu biên. Deadline 20/02, còn 2 ngày.
+[10:50:54] Anh Tuấn: Em có gửi cho tôi review chưa? Tôi cần xem trước.
+[10:51:12] Hoa: Em sẽ gửi bản nháp vào thứ Năm 19/02, tức ngày mai.
+[10:51:30] Anh Tuấn: Được. Tôi sẽ review trong thứ Sáu.
+[10:51:48] Ms. Lan: Vậy reviewer cho dữ liệu test là Anh Tuấn, đúng không? Hay còn ai nữa?
+[10:52:06] Anh Tuấn: Tôi review, nhưng nếu cần thêm, có thể nhờ Minh.
+[10:52:24] Minh: Em có thể, nhưng em chỉ check phần kỹ thuật.
+[10:52:42] Hoa: Vậy hiện tại reviewer chưa được assign chính thức? Lúc nãy chị Lan nói sẽ tự review.
+[10:53:00] Ms. Lan: Ừ, tôi nói thế nhưng giờ Anh Tuấn review được rồi. Vậy giao cho anh ấy. Nếu anh ấy không kịp, tôi sẽ vào.
+[10:53:18] Hoa: Rõ rồi. Nhưng em muốn có xác nhận cuối.
+[10:53:36] Anh Tuấn: Tôi xác nhận sẽ review dữ liệu test của Hoa.
+[10:53:54] Ms. Lan: Vậy là resolved nhé. Tiếp theo, task yêu cầu monitoring cho staging. Anh Tuấn, deadline?
+[10:54:12] Anh Tuấn: Deadline 28/02. Tôi đã liên hệ infra, họ hứa tuần sau.
+[10:54:30] Minh: Vậy chúng ta sẽ có monitoring trước release.
+[10:54:48] Ms. Lan: Task cuối: release plan. Minh viết, deadline 28/02, Hoa và Anh Tuấn review.
+[10:55:06] Minh: Vâng, em sẽ gửi draft trước 26/02.
+[10:55:24] Hoa: Em sẵn sàng review.
+[10:55:42] Anh Tuấn: Tôi cũng vậy.
+[10:56:00] Ms. Lan: Ngoài ra, còn task nào khác? Task staging đã hủy, không nhắc lại.
+[10:56:18] Minh: Hình như còn vấn đề về reviewer cho tài liệu? Chưa ai review tổng thể ngoài chị Lan.
+[10:56:36] Ms. Lan: Tôi làm review tổng thể. Nhưng hiện tôi bận, nên anh Tuấn có thể review sơ bộ trước.
+[10:56:54] Anh Tuấn: Được, tôi sẽ review sơ bộ, rồi chị Lan review lần cuối.
+[10:57:12] Hoa: Vậy tài liệu cũng có hai reviewer.
+[10:57:30] Ms. Lan: Đúng. Nhưng lưu ý: tài liệu deadline 05/03, không được trễ.
+[10:57:48] Minh: Em thấy các deadline khá gần nhau. Cần ưu tiên.
+[10:58:06] Anh Tuấn: Tôi lo nhất là login 25/02, vì nó ảnh hưởng release.
+[10:58:24] Hoa: Nếu login trễ, em có thể dùng dữ liệu test nhưng không test login được.
+[10:58:42] Ms. Lan: Đó là rủi ro. Minh cố gắng.
+[10:59:00] Minh: Em sẽ làm hết sức.
+[10:59:18] Hoa: Còn về release plan, em có ý kiến: nên thêm phần rủi ro nếu login trễ.
+[10:59:36] Ms. Lan: Tốt, Minh bổ sung.
+[10:59:54] Anh Tuấn: Tôi muốn hỏi: có cần test integration giữa login và data test không? Hay làm riêng?
+[11:00:12] Hoa: Em nghĩ nên test integration trước release.
+[11:00:30] Ms. Lan: Vậy Minh và Hoa phối hợp khi login xong.
+[11:00:48] Minh: Vâng, em sẽ báo khi hoàn thành.
+[11:01:06] Hoa: Em có một unresolved item: ai sẽ review dữ liệu test cuối cùng? Lúc nãy anh Tuấn nhận, nhưng chưa chắc.
+[11:01:24] Anh Tuấn: Tôi xác nhận lần nữa, tôi review.
+[11:01:42] Ms. Lan: Vậy là xong. Còn gì chưa chốt? Tôi thấy chỉ còn việc thực hiện.
+[11:02:00] Minh: Em nghĩ cần nhấn mạnh: deadline 20/02 là sắp tới, Hoa chú ý.
+[11:02:18] Hoa: Em biết, em đang làm.
+[11:02:36] Ms. Lan: Vậy tổng kết: tài liệu – Anh Tuấn, 05/03; login – Minh, 25/02; data test – Hoa, 20/02, reviewer Anh Tuấn; monitoring – Anh Tuấn, 28/02; release plan – Minh, 28/02. Mọi thứ rõ ràng.
+[11:02:54] Anh Tuấn: Nhắc lại, data test cần gửi trước 19/02.
+[11:03:12] Hoa: Vâng.
+[11:03:30] Ms. Lan: Cảm ơn mọi người đã làm việc tích cực. Buổi họp hôm nay kết thúc tại đây. Hẹn gặp lại 5 giờ chiều.
+[11:03:48] Minh: Cảm ơn chị.
+[11:04:06] Anh Tuấn: Chúc mọi người buổi chiều hiệu quả.
+[11:04:24] Hoa: Em cũng cảm ơn.

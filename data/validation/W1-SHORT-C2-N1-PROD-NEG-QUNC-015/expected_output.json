@@ -1,0 +1,7 @@
+{
+  "meeting_title": "Rà soát lỗi đăng nhập",
+  "tasks": [
+    {"task_name":"Phân tích lỗi đăng nhập Google","assignee":"Anh","start_date":"2026-01-30","due_date":"2026-01-31","due_date_text":"cuối ngày mai","status":"Proposed"},
+    {"task_name":"Cập nhật tài liệu hướng dẫn đăng nhập","assignee":"Lan","start_date":"2026-01-30","due_date":"2026-01-30","due_date_text":"thứ Sáu tuần này","status":"Proposed"}
+  ]
+}

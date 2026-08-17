@@ -1,0 +1,28 @@
+{
+  "case": {
+    "wave": 2,
+    "case_index": 14,
+    "meeting_id": "W2-SHORT-C2-N2-IT-WORK-014",
+    "meeting_date": "2026-02-08",
+    "title": "Trao đổi kế hoạch tích hợp",
+    "labels": "working_day_duration,deadline_in_separate_sentence",
+    "objective": "{\"name\": \"working-day duration\", \"code\": \"WORK\", \"labels\": \"working_day_duration,deadline_in_separate_sentence\", \"requirements\": \"Deadline là N ngày làm việc và phải giữ rõ cụm “ngày làm việc”, không đổi thành ngày lịch.\"}"
+  },
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 910,
+    "turn_count": 44
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 173.32453240000177
+    }
+  ]
+}

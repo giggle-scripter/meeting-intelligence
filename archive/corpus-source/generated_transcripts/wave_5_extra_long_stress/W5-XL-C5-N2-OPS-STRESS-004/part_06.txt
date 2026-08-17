@@ -1,0 +1,122 @@
+MEETING_ID: W5-XL-C5-N2-OPS-STRESS-004
+PART: P06/10
+
+T000359 [10:26:00] Minh: Chúng ta bước sang topic release. Anh muốn thảo luận về kế hoạch release 2.0. Đã có nhiều thay đổi về deadline. Lan, em cập nhật giúp anh.
+
+T000360 [10:26:15] Lan: Dạ, hiện tại payment deploy dời lên 20/3, migration script deadline 18/3, còn API code complete vẫn 3/3.
+
+T000361 [10:26:30] Hà: Nhưng test plan phải dời theo deploy, em cần điều chỉnh.
+
+T000362 [10:26:45] Minh: Đúng. Có task nào cần hủy không? Anh thấy workshop deploy flow đã tổ chức xong, không cần duy trì.
+
+T000363 [10:27:00] An: Workshop đã diễn ra hôm 5/3, mọi người đều tham dự. Vậy task đó có thể đóng.
+
+T000364 [10:27:15] Minh: Vậy chính thức hủy task workshop khỏi board. Có ai phản đối không?
+
+T000365 [10:27:30] Tuấn: Không, em đồng ý.
+
+T000366 [10:27:45] Lan: Nhưng chúng ta cần một task thay thế để đảm bảo deploy suôn sẻ. Anh Minh, em đề xuất tạo task "thiết lập CI/CD pipeline cho payment".
+
+T000367 [10:28:00] Minh: Ý hay. Ai có thể làm? An, em có kinh nghiệm về CI/CD?
+
+T000368 [10:28:15] An: Em có thể, nhưng cần Tuấn hỗ trợ config build.
+
+T000369 [10:28:30] Tuấn: Em sẵn sàng.
+
+T000370 [10:28:45] Minh: Vậy task mới: thiết lập CI/CD pipeline, assign An, hỗ trợ Tuấn. Deadline bao lâu?
+
+T000371 [10:29:00] An: Khoảng 5 ngày, từ nay đến 12/3.
+
+T000372 [10:29:15] Minh: Được, deadline 12/3. Ghi nhận.
+
+T000373 [10:29:30] Hà: Vậy task này có phụ thuộc vào migration script không? Vì pipeline cần schema mới.
+
+T000374 [10:29:45] An: Không, pipeline chỉ build và test, không deploy production. Schema chưa cần.
+
+T000375 [10:30:00] Minh: Tốt. Tiếp theo, anh thấy deadline cho task review code payment vẫn là 5/3. Hôm nay là 6/3 rồi. Có ai đã review chưa?
+
+T000376 [10:30:15] Minh: Anh chưa, do bận. Hà, em đã review chưa?
+
+T000377 [10:30:30] Hà: Em đợi anh review trước. Nhưng nếu không kịp, em có thể review độc lập.
+
+T000378 [10:30:45] Minh: Vậy em review luôn, deadline đẩy lên 8/3. Anh sẽ review sau.
+
+T000379 [10:31:00] Lan: Vậy correction deadline: review code từ 5/3 lên 8/3, chuyển từ Minh sang Hà thực hiện.
+
+T000380 [10:31:15] Tuấn: Em cần feedback sớm để sửa lỗi.
+
+T000381 [10:31:30] Hà: Em sẽ review ngay trong ngày mai.
+
+T000382 [10:31:45] An: Em có vấn đề về CI/CD tool: cần chọn giữa Jenkins và GitLab CI. Anh Minh có ý kiến không?
+
+T000383 [10:32:00] Minh: Em tự quyết, miễn tích hợp được.
+
+T000384 [10:32:15] Lan: Task CI/CD cần tài liệu hướng dẫn. An có thể viết luôn?
+
+T000385 [10:32:30] An: Em sẽ viết doc sau khi hoàn thành.
+
+T000386 [10:32:45] Hà: Em muốn hỏi, task ETL data migration cho CRM vẫn unresolved. Giang đã đi làm lại chưa?
+
+T000387 [10:33:00] Lan: Giang mới đi làm hôm qua, nhưng chưa có thời gian.
+
+T000388 [10:33:15] Minh: Vậy vẫn chưa assign. Có thể hủy task đó không? Vì phạm vi thay đổi.
+
+T000389 [10:33:30] Tuấn: Nhưng product cần dữ liệu lịch sử. Nếu không làm, CRM không có thông tin.
+
+T000390 [10:33:45] Minh: Vậy vẫn giữ, nhưng cần người. Anh sẽ nói chuyện với Huy và Giang.
+
+T000391 [10:34:00] An: Anh Minh, em muốn nhấn mạnh deadline migration script 18/3 là rất quan trọng. Nếu không có, payment deploy 20/3 sẽ bị block.
+
+T000392 [10:34:15] Minh: Anh hiểu. Em có thể đảm bảo không?
+
+T000393 [10:34:30] An: Có thể, nếu không có trục trặc.
+
+T000394 [10:34:45] Hà: Em có câu hỏi về test automation. Em cần môi trường stable để chạy regression.
+
+T000395 [10:35:00] An: Môi trường staging đang ổn, nhưng có thể bị ảnh hưởng bởi CI/CD setup.
+
+T000396 [10:35:15] Minh: Thế thì cần đồng bộ. An, cố gắng không làm gián đoạn staging.
+
+T000397 [10:35:30] An: Em sẽ dùng namespace riêng cho pipeline.
+
+T000398 [10:35:45] Tuấn: Em thấy có nhiều task phụ thuộc vào CI/CD. Có thể làm trước các task khác.
+
+T000399 [10:36:00] Minh: Hợp lý. Vậy ưu tiên CI/CD.
+
+T000400 [10:36:15] Lan: Anh Minh, em thấy board có task "update log spec" đã hoàn thành chưa? Tuấn báo cáo.
+
+T000401 [10:36:30] Tuấn: Dạ, em đã gửi bản cuối, An xác nhận đã nhận.
+
+T000402 [10:36:45] An: Đúng, em đã dùng để viết runbook.
+
+T000403 [10:37:00] Minh: Vậy task log spec đóng.
+
+T000404 [10:37:15] Hà: Còn task runbook, An làm đến đâu?
+
+T000405 [10:37:30] An: Em đang viết, dự kiến xong 8/3.
+
+T000406 [10:37:45] Minh: OK.
+
+T000407 [10:38:00] Lan: Vậy tổng kết P06: hủy task workshop, tạo task CI/CD pipeline (An, deadline 12/3), correction review code từ 5/3 lên 8/3 (giao Hà). Còn gì nữa?
+
+T000408 [10:38:15] Tuấn: Em muốn hỏi, task ETL data migration có owner chưa? Nếu chưa, em có thể tạm nhận, nhưng sẽ quá tải.
+
+T000409 [10:38:30] Minh: Không, em không nhận. Để sau.
+
+T000410 [10:38:45] Hà: Em thấy chúng ta có quá nhiều task chưa resolved. Có nên giảm bớt không?
+
+T000411 [10:39:00] Minh: Không, vẫn giữ. Mọi người cố gắng.
+
+T000412 [10:39:15] An: Em có ý kiến, task "viết E2E test scenario" của Tuấn có deadline 7/3, nhưng Tuấn chưa bắt đầu.
+
+T000413 [10:39:30] Tuấn: Em sẽ làm ngay sau khi review code. Có thể chậm một chút.
+
+T000414 [10:39:45] Minh: Vậy dời deadline lên 9/3.
+
+T000415 [10:40:00] Lan: Ghi nhận deadline correction thứ hai: E2E test từ 7/3 lên 9/3.
+
+T000416 [10:40:15] Hà: Có vẻ nhiều correction. Cần đảm bảo tracking.
+
+T000417 [10:40:30] Minh: Lan update board. Cảm ơn mọi người, kết thúc P06.
+
+--- END OF PART P06 ---

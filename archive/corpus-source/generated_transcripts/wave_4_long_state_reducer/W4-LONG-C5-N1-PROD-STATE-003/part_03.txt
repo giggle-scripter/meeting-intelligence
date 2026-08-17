@@ -1,0 +1,46 @@
+MEETING_ID: W4-LONG-C5-N1-PROD-STATE-003
+PART: P03/5
+
+T000155 [09:33:00] Anh Tuấn: Quay lại vấn đề tài liệu hồi đầu meeting. Minh, task tài liệu triển khai hệ thống của em tiến độ sao rồi?
+T000156 [09:33:12] Minh: Dạ, em viết được 70% rồi. Thiếu phần rollback và security checklist.
+T000157 [09:33:24] Anh Tuấn: Còn deadline 20/2, em nghĩ em kịp chứ?
+T000158 [09:33:36] Minh: Em nghĩ kịp, nhưng mà hơi căng. Vì em còn phải xử lý mấy task khác Hùng giao.
+T000159 [09:33:48] Hùng: Task kiểm tra config trên sandbox đó hả? Cái đó em làm chính, Minh chỉ support thôi mà.
+T000160 [09:34:00] Minh: Vâng, nhưng em muốn review kỹ phần debug common errors nữa, nên thời hơi bị hẹp.
+T000161 [09:34:12] Lan: Tài liệu test của em cũng đang viết. Em thấy mình nên ưu tiên tài liệu chính trước.
+T000162 [09:34:24] Anh Tuấn: Đúng. Minh, nếu em thấy deadline quá sức, ta có thể điều chỉnh. Còn task tài liệu test của Lan, em thấy sao? Có ổn không?
+T000163 [09:34:36] Lan: Em viết tạm ổn, nhưng mà phần seed data em chưa chắc chắn. Hùng hứa gửi query mẫu mà chưa thấy.
+T000164 [09:34:48] Hùng: À, em xin lỗi. Em sẽ gửi trong chiều nay. Lan cứ viết phần còn lại trước.
+T000165 [09:35:00] Anh Tuấn: Tôi nghĩ đến việc chuyển giao. Minh, task tài liệu hệ thống có phần hạ tầng nặng, Hùng rành hơn. Hay mình chuyển task đó cho Hùng từ bây giờ?
+T000166 [09:35:14] Minh: Nếu Hùng nhận thì em rất mừng, vì em cũng không tự tin về phần rollback và config DB.
+T000167 [09:35:26] Hùng: Em cũng đã viết tài liệu tương tự cho dự án cũ. Nhưng mà hiện tại em đang bận CI/CD, e là không kịp deadline 20/2.
+T000168 [09:35:38] Anh Tuấn: Nếu chuyển sang Hùng thì deadline nên đẩy lên. Còn task tài liệu test của Lan, deadline có cần đặt không?
+T000169 [09:35:50] Lan: Em nghĩ nếu Hùng viết tài liệu hệ thống thì em có thể hỗ trợ Hùng về phần test. Còn tài liệu test của em, em vẫn làm.
+T000170 [09:36:02] Anh Tuấn: Vậy thế này: Hùng, em nhận viết tài liệu triển khai hệ thống, deadline đẩy lên 25/2. Minh, em chuyển sang support Hùng và hoàn thành tài liệu test cùng Lan. Có ok không?
+T000171 [09:36:16] Hùng: Em ok. Nhưng mà em cần Minh cung cấp những gì em đã viết. Minh gửi bản draft hiện tại cho em.
+T000172 [09:36:28] Minh: Vâng, em gửi ngay sau meeting. Trong đó em có ghi chú các phần cần hoàn thiện.
+T000173 [09:36:40] Anh Tuấn: Còn deadline cho tài liệu test? Lan, em có muốn đặt deadline không?
+T000174 [09:36:52] Lan: Em nghĩ nên có deadline để tránh trôi. Em đề xuất 27/2, vì sau khi Hùng xong tài liệu hệ thống thì em mới có base để update.
+T000175 [09:37:04] Anh Tuấn: Hợp lý. Vậy tài liệu test của Lan deadline 27/2. Nhưng mà lưu ý: tài liệu test không phụ thuộc hoàn toàn vào tài liệu hệ thống.
+T000176 [09:37:16] Lan: Em biết, em chỉ cần phần cấu hình cuối cùng để xác nhận step. Em vẫn viết 80% trước.
+T000177 [09:37:28] Anh Tuấn: Tốt. Như vậy task của Minh (cũ) đã được handoff sang Hùng, deadline thay đổi từ 20/2 thành 25/2. Còn task của Lan có deadline mới 27/2. Mọi người đồng ý?
+T000178 [09:37:40] Minh: Em đồng ý.
+T000179 [09:37:46] Hùng: Đồng ý.
+T000180 [09:37:50] Lan: Em cũng đồng ý.
+T000181 [09:37:58] Hùng: Nhưng mà em có một băn khoăn: tài liệu của Minh đã viết về phần kiến trúc, em không chắc có cần giữ nguyên không. Hay em viết lại?
+T000182 [09:38:10] Anh Tuấn: Em xem bản draft rồi quyết định. Nếu giữ được thì càng tốt, đừng làm lại từ đầu.
+T000183 [09:38:22] Minh: Phần kiến trúc em vẽ sơ đồ draw.io rồi, em sẽ gửi cả file nguồn.
+T000184 [09:38:34] Hùng: Ok, em sẽ dùng lại. Em chỉ tập trung phần config và rollback.
+T000185 [09:38:46] Lan: Còn tài liệu test, em muốn thêm phần môi trường staging, nhưng chưa có server. Nếu deadline 27/2 mà staging chưa xong thì sao?
+T000186 [09:38:58] Anh Tuấn: Thì em viết dựa trên sandbox, khi có staging sẽ update. Ta có thể có bản revision sau.
+T000187 [09:39:10] Hùng: Em nghĩ staging sẽ có trong tuần sau, nên Lan yên tâm.
+T000188 [09:39:22] Anh Tuấn: Vậy nhé, mọi người giữ trạng thái này. Còn vấn đề gì về tài liệu không?
+T000189 [09:39:34] Minh: Em muốn hỏi: task "Clean data" của Lan và "Restore DB" của Hùng có ảnh hưởng đến tài liệu không?
+T000190 [09:39:46] Anh Tuấn: Có thể Lan sẽ thêm script clean vào tài liệu test. Hùng, em viết restore DB như ad-hoc, không cần document.
+T000191 [09:39:58] Lan: Em sẽ add một mục "Maintenance tasks" nhỏ.
+T000192 [09:40:10] Hùng: Em thấy ổn.
+T000193 [09:40:20] Anh Tuấn: Thế thôi, tạm thời chốt. Có ai cần clarify gì thêm?
+T000194 [09:40:30] Minh: Em không có.
+T000195 [09:40:36] Lan: Em cũng không.
+T000196 [09:40:42] Anh Tuấn: Vậy chúng ta tiếp tục nội dung khác sau. Cảm ơn.
+--- END OF PART P03 ---

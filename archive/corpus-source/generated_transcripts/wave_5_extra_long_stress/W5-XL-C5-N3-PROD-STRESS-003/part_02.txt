@@ -1,0 +1,232 @@
+MEETING_ID: W5-XL-C5-N3-PROD-STRESS-003
+PART: P02/10
+
+T000098 [00:15:05] Thảo: Chúng ta quay lại. Vừa rồi đã có 15 phút giải lao, tiếp tục với vấn đề tích hợp dữ liệu.
+
+T000099 [00:15:12] Hùng: Em có câu hỏi về dữ liệu mẫu cho test. Trong test plan em đã outline, nhưng chưa có data cụ thể.
+
+T000100 [00:15:20] Thảo: Task đó giao cho anh Huy, nhưng Huy chưa vào. Để xem Huy có online không.
+
+T000101 [00:15:27] Huy: Dạ em vào rồi, xin lỗi mọi người. Em bị lỗi mic lúc nãy. Chị Thảo gọi em ạ?
+
+T000102 [00:15:35] Thảo: Vâng, em cần Huy hỗ trợ chuẩn bị data mẫu cho test, dựa trên requirement module X. Deadline có thể đến 01/03.
+
+T000103 [00:15:44] Huy: 01/03? Em e là hơi ngắn, vì em cần thống nhất với bên business về format. Có thể đẩy lên 02/03?
+
+T000104 [00:15:52] Thảo: 02/03 cũng được, nhưng phải đảm bảo đủ sớm trước khi test. Vậy đồng ý 02/03.
+
+T000105 [00:15:59] Huy: Vâng, em note. Nhưng em cần input từ Minh về cấu trúc API response.
+
+T000106 [00:16:06] Minh: Em đã gửi spec, trong đó có schema dự kiến. Anh xem trong doc.
+
+T000107 [00:16:13] Huy: Được rồi, em sẽ dựa vào đó.
+
+T000108 [00:16:18] Anh: Nhớ là data phải bao gồm các edge case, vì demo sẽ có tình huống lỗi. Không chỉ happy path.
+
+T000109 [00:16:26] Huy: Vâng em để ý.
+
+T000110 [00:16:30] Hùng: Còn vụ mapping data từ table cũ? Có cần em hỗ trợ truy xuất DB không?
+
+T000111 [00:16:38] Huy: Có lẽ em cần view mẫu từ production staging. Nhưng hiện tại chưa có quyền. Ai có thể cấp quyền?
+
+T000112 [00:16:46] Thảo: Anh Dũng xử lý, nhưng Dũng ốm. Có thể nhờ admin tạm thời. Linh, em có thể liên hệ admin như đã nói?
+
+T000113 [00:16:54] Linh: Em sẽ làm luôn. Đã có ticket cho DNS, giờ em thêm request quyền DB view.
+
+T000114 [00:17:01] Thảo: Tốt. Vậy Linh gộp chung hai việc. Deadline cho DB access là 28/02.
+
+T000115 [00:17:09] Linh: Vâng.
+
+T000116 [00:17:13] Minh: Em vừa mới check lại mock server, phát hiện cần thêm vài endpoint nữa. Có thể deadline core mock bị trễ.
+
+T000117 [00:17:22] Thảo: Cụ thể thế nào? Em đã nói core mock xong 28/02.
+
+T000118 [00:17:28] Minh: Dạ, vì có thêm các yêu cầu về authentication flow, mà bên đối tác chưa trả lời. Em sợ chỉ có thể hoàn thành 30/02? À 28/02 không có ngày 30, ý em là 02/03.
+
+T000119 [00:17:38] Hùng: Như vậy là thay đổi lớn. Test của em phụ thuộc vào mock.
+
+T000120 [00:17:44] Thảo: Chưa chắc đã thay đổi. Linh, em gọi đối tác chưa?
+
+T000121 [00:17:50] Linh: Em gọi rồi, họ hứa gửi key và doc trong tuần, nhưng không chắc ngày. Có thể cuối tuần.
+
+T000122 [00:17:59] Thảo: Vậy vẫn mơ hồ. Mình cần quyết định: Nếu đến 28/02 không có thông tin, Minh có thể tự assume flow dựa trên tài liệu cũ.
+
+T000123 [00:18:08] Minh: Được, em sẽ làm vậy, và nếu sau có thay đổi thì sửa sau.
+
+T000124 [00:18:15] Hùng: Rủi ro lớn, nhưng không còn cách nào khác.
+
+T000125 [00:18:20] Anh: Em đề xuất thay vì gọi là mock core, hãy gọi là "provisional stub". Như vậy tâm lý thoải mái hơn.
+
+T000126 [00:18:29] Thảo: Ha ha, không cần, cứ gọi mock. Giữ deadline 28/02 cho core, nhưng nếu bất khả kháng thì báo.
+
+T000127 [00:18:38] Minh: OK em cố gắng.
+
+T000128 [00:18:43] Huy: Em có thắc mắc về dữ liệu mẫu: Cần bao nhiêu record cho mỗi endpoint?
+
+T000129 [00:18:51] Hùng: Ít nhất 5 record cho mỗi loại, và thêm các case đặc biệt.
+
+T000130 [00:18:58] Huy: 5 record, vậy em lấy từ production sampling. Nhưng cần permission.
+
+T000131 [00:19:05] Thảo: Linh đang lo permission. Em tạm thời tự tạo mock data bằng tay.
+
+T000132 [00:19:12] Huy: Vâng.
+
+T000133 [00:19:16] Anh: Vấn đề về module Y hình như cũng có overlapping với data này. Một số field chung.
+
+T000134 [00:19:24] Hùng: Nếu module Y dùng chung DB, có thể ảnh hưởng.
+
+T000135 [00:19:31] Thảo: Chưa bàn module Y bây giờ. Tập trung vào X.
+
+T000136 [00:19:36] (tiếng ồn nền) Minh: Alo, mất kết nối một lát. Xin lỗi, em vừa nghe thấy gì?
+
+T000137 [00:19:44] Thảo: Minh, em còn không? Chúng ta đang nói về data sample.
+
+T000138 [00:19:50] Minh: Vâng, em nghe lại. Huy sẽ tự tạo data. Em thấy ổn.
+
+T000139 [00:19:56] Linh: Em muốn hỏi về endpoint /auth: có cần đưa vào mock không? Hay bỏ qua vì dùng token giả?
+
+T000140 [00:20:03] Thảo: Hùng, theo em?
+
+T000141 [00:20:06] Hùng: Cần có mock /auth để test flow login. Nếu không, integration test bị thiếu.
+
+T000142 [00:20:13] Minh: Nhưng token giả có thể hardcode. Em thêm endpoint /auth trả về token fixed.
+
+T000143 [00:20:20] Thảo: Vậy thêm vào mock. Deadline có kịp không?
+
+T000144 [00:20:26] Minh: Có, thêm nhẹ. Vẫn 28/02.
+
+T000145 [00:20:31] Huy: Dữ liệu mẫu cho /auth thì cần gì? Chỉ cần username và role?
+
+T000146 [00:20:38] Hùng: Chủ yếu token, nhưng cũng nên có thông tin user để test permissions.
+
+T000147 [00:20:45] Huy: Em sẽ tạo 2 user: admin và user thường.
+
+T000148 [00:20:50] Thảo: Được.
+
+T000149 [00:20:55] Anh: Còn vụ demonstration: bên PO muốn xem bản demo vào 04/03. Nếu mock chưa hoàn chỉnh, có thể dùng UI prototype.
+
+T000150 [00:21:03] Thảo: UI prototype đã có từ team design chưa? Hùng, em biết không?
+
+T000151 [00:21:09] Hùng: Em nghĩ thiết kế đã done, chỉ chờ tích hợp.
+
+T000152 [00:21:15] Thảo: Tốt, để em xác nhận với design team sau.
+
+T000153 [00:21:20] Minh: Em thấy có một issue: ai sẽ là người chịu trách nhiệm cho việc deploy lên staging? Từ trước đến giờ chưa rõ.
+
+T000154 [00:21:28] Thảo: Đúng, owner chưa assign. Theo process, deploy thường do DevOps. Nhưng DevOps hiện có một người là anh Trung, nhưng Trung không họp.
+
+T000155 [00:21:37] Hùng: Vậy ai sẽ trigger build? Có thể Minh tự làm build test?
+
+T000156 [00:21:44] Minh: Em có thể chạy local, nhưng staging environment cần access.
+
+T000157 [00:21:51] Linh: Em có quyền access staging. Em có thể giúp deploy sau khi Minh build.
+
+T000158 [00:21:58] Thảo: Vậy tạm thời: Minh build artifact, Linh deploy lên staging. Nhưng owner chính thức vẫn cần xác định. Em sẽ assign cho Trung, nhưng Trung sẽ comment sau.
+
+T000159 [00:22:08] Anh: Owner không rõ là vấn đề. Có thể dẫn đến chậm trễ.
+
+T000160 [00:22:14] Thảo: Để em giải quyết offline. Tiếp theo, có ai có ý kiến về integration test strategy?
+
+T000161 [00:22:22] Hùng: Em có draft test strategy, nhưng cần review. Em gửi doc sau.
+
+T000162 [00:22:29] Thảo: Gửi trong group, hạn chót 28/02 để mọi người comment.
+
+T000163 [00:22:36] Hùng: Vâng.
+
+T000164 [00:22:39] Minh: Em nghĩ cần một buổi họp ngắn để align giữa mock và test script. Có thể tổ chức sáng 01/03?
+
+T000165 [00:22:48] Thảo: Sáng 01/03 chủ nhật? Có thể không ai rảnh. Chuyển sang 02/03, chiều.
+
+T000166 [00:22:56] Hùng: Chiều 02/03 em được.
+
+T000167 [00:23:00] Minh: Em cũng ok.
+
+T000168 [00:23:04] Thảo: Vậy 14h 02/03, họp ngắn 30 phút. Linh, Huy cũng tham gia.
+
+T000169 [00:23:12] Linh: Vâng.
+
+T000170 [00:23:15] Huy: Em cũng tham gia.
+
+T000171 [00:23:19] Anh: Em nghĩ mình cần thảo luận về risk mitigation plan trước khi kết thúc. Phần này chưa giải quyết.
+
+T000172 [00:23:27] Thảo: Có, nhưng em muốn để topic riêng. Hôm nay còn một số vấn đề về dữ liệu và integration. Anh cần nói thêm gì không?
+
+T000173 [00:23:36] Anh: Chỉ muốn nhấn mạnh rằng nếu đối tác không gửi kịp, deadline demo 04/03 có thể bị ảnh hưởng.
+
+T000174 [00:23:44] Thảo: Đã ghi nhận. Mình sẽ có plan B. Em sẽ yêu cầu Huy chuẩn bị slide mô phỏng để backup.
+
+T000175 [00:23:52] Huy: Vâng, em làm.
+
+T000176 [00:23:56] Linh: Em vừa check mail, đối tác gửi doc rồi! Em sẽ đọc và chuyển cho Minh.
+
+T000177 [00:24:05] Thảo: Tuyệt vời! Vậy mock có thể điều chỉnh theo doc thật. Minh, em nhận được chưa?
+
+T000178 [00:24:11] Minh: Chưa, chờ Linh gửi.
+
+T000179 [00:24:15] Linh: Em đang forward.
+
+T000180 [00:24:19] Thảo: Vậy mọi thứ có vẻ sáng sủa hơn. Nhưng vẫn giữ kế hoạch cũ. Bây giờ em muốn review lại các task một lần nữa.
+
+T000181 [00:24:28] Hùng: Em xin phép phát biểu. Về test script, em nghĩ cần thống nhất tool chung: dùng Jest hay Mocha.
+
+T000182 [00:24:37] Minh: Em thích Jest vì tích hợp sẵn.
+
+T000183 [00:24:42] Hùng: Nhưng team QA quen Mocha. Em nghĩ nên thảo luận.
+
+T000184 [00:24:49] Thảo: Chuyện đó để ở họp 02/03. Không chốt vội.
+
+T000185 [00:24:55] Anh: Có thể gây mất thời gian nếu không đồng bộ.
+
+T000186 [00:25:01] Thảo: Đúng, nhưng ta cần quyết định sớm. Em sẽ vote sau.
+
+T000187 [00:25:07] Hùng: Vậy em chờ.
+
+T000188 [00:25:11] Minh: Em cũng chờ.
+
+T000189 [00:25:15] Huy: Về data mẫu, em sẽ tạo theo spec cũ. Nếu doc mới khác, em update sau.
+
+T000190 [00:25:23] Thảo: Hợp lý.
+
+T000191 [00:25:27] Linh: Em hoàn thành việc DNS và DB access rồi. Admin đã confirm.
+
+T000192 [00:25:34] Thảo: Nhanh vậy? Tốt. Vậy Huy có thể truy cập DB từ giờ.
+
+T000193 [00:25:41] Huy: Em kiểm tra sau.
+
+T000194 [00:25:45] Hùng: Về test plan, em đã gửi draft. Mọi người feedback nhé.
+
+T000195 [00:25:52] Thảo: Em xem qua, ổn. Có thể bổ sung thêm mục test environment.
+
+T000196 [00:25:59] Hùng: Em sẽ cập nhật.
+
+T000197 [00:26:05] Anh: Hôm nay em có hội nghị khác sắp tới, em phải out. Cho em tổng kết nhanh.
+
+T000198 [00:26:13] Thảo: Vâng, anh đi đi. Mọi người nhìn chung đã có việc. Còn một số item unresolved: owner của deploy staging chưa chính thức, và họp 02/03 14h.
+
+T000199 [00:26:24] Anh: Tạm biệt mọi người.
+
+T000200 [00:26:28] Thảo: Vâng. Tiếp tục nào.
+
+T000201 [00:26:33] Hùng: Em thấy vẫn chưa có ai assign cho integration testing giữa mock và real API.
+
+T000202 [00:26:41] Thảo: Việc đó để sau khi có mock và test script. Sẽ assign sau.
+
+T000203 [00:26:48] Minh: Em nghĩ em và Hùng có thể cùng làm phần đó.
+
+T000204 [00:26:53] Hùng: Đồng ý.
+
+T000205 [00:26:56] Thảo: Tốt, ghi nhận.
+
+T000206 [00:27:00] Huy: Em còn việc phải làm data, em xin phép đi.
+
+T000207 [00:27:06] Thảo: OK, em đi đi. Chúng ta tạm dừng ở đây, phần sau sẽ bàn về risk mitigation và module Y.
+
+T000208 [00:27:14] Hùng: Vâng.
+
+T000209 [00:27:17] Linh: Em cũng chuẩn bị cho task khác.
+
+T000210 [00:27:21] Minh: Em sẽ update task board.
+
+T000211 [00:27:26] Thảo: Vậy kết thúc part 2.
+
+--- END OF PART P02 ---

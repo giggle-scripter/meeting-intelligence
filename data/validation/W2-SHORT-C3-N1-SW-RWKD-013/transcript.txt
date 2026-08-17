@@ -1,0 +1,26 @@
+[00:00:00] PM: Chào cả nhà, hôm nay thứ Bảy nhưng mình cần rà soát nhanh các task chuẩn bị cho sprint tuần sau. Trước hết, ai có update gì về task X không? Deadline cũ là trước thứ Năm tuần này mà tôi chưa thấy ai báo cáo.
+[00:00:15] An: Dạ, em đây anh. Task X em đang làm dở, thực sự em bị kẹt phần integration test. Lẽ ra phải xong trước thứ Năm nhưng em xin lỗi vì trễ mất rồi. Em dự kiến sẽ hoàn thành trong hôm nay.
+[00:00:28] PM: Hôm nay là thứ Bảy, cũng là cuối tuần. Em chắc chứ? Hay cần thêm người hỗ trợ?
+[00:00:34] An: Em nghĩ em tự làm được, chỉ cần thêm vài giờ nữa. Em sẽ cố gắng xong trước tối nay.
+[00:00:40] PM: OK, vậy task X sẽ đóng vào cuối ngày hôm nay. Còn task W thì sao, mọi người? Tôi nhớ có ai đề xuất nhưng có lẽ cancel vì khách hàng đổi yêu cầu.
+[00:00:52] Bình: Đúng rồi anh, task W không còn phù hợp, mình cancel hẳn nhé.
+[00:00:57] PM: Thống nhất. Giờ sang task mới: task Y từ phía đối tác, họ muốn có bản build để demo vào thứ Ba tuần sau. Vậy mình cần giao task Y với deadline trước thứ Ba tuần sau. Ai xung phong?
+[00:01:12] Bình: Em nhận ạ. Nhưng cho em hỏi, trước thứ Ba nghĩa là code và test đều xong trước khi bắt đầu ngày thứ Ba, hay chỉ cần code xong để họ tự test?
+[00:01:22] PM: À, cần cả test. Nên phần code phải xong trước thứ Hai để bên QA test trong ngày thứ Hai, kịp giao trước thứ Ba. Chi, em thấy sao?
+[00:01:32] Chi (QA): Dạ, nếu code xong trước thứ Hai thì em test cả ngày thứ Hai, sáng thứ Ba em verify lần cuối và bàn giao trước trưa thứ Ba. Vậy phần code phải sẵn sàng trước 8h sáng thứ Hai.
+[00:01:46] Bình: OK, vậy em sẽ hoàn thành code task Y trước thứ Hai tuần sau. Phần em test unit cũng xong trong lúc đó.
+[00:01:54] PM: Tốt. Còn task Z, đây là task quan trọng. Trước đây tôi định deadline là trước thứ Tư tuần sau, nhưng sáng nay khách hàng gọi, họ dời lịch họp lên thứ Hai tuần sau, nên mình buộc phải giao sớm hơn. Tôi muốn đẩy deadline task Z lên trước thứ Hai tuần sau. Ai làm được?
+[00:02:10] An: Em đang làm task X, nhưng nếu task X xong hôm nay thì em có thể làm task Z. Tuy nhiên trước thứ Hai thì căng quá, vì chỉ còn đúng một ngày Chủ nhật. Em sợ không kịp.
+[00:02:22] Bình: Em có thể hỗ trợ An phần backend của task Z. Nhưng em cũng đang nhận task Y với deadline trước thứ Hai. Nếu em làm cả hai, khó đảm bảo.
+[00:02:32] PM: Hay đổi lại: Bình, em chuyển task Y cho An, còn em tập trung làm task Z. An, em làm task Y vì nó nhẹ hơn, deadline code cũng trước thứ Hai, nhưng test có thể đẩy sang thứ Hai muộn nhất là sáng thứ Ba. Em làm được không?
+[00:02:48] An: Dạ, nếu vậy em nhận task Y. Em sẽ cố gắng code xong trước thứ Hai, rồi bàn giao cho Chi test. Nhưng em cần rõ: trước thứ Hai là trước thời điểm nào? Sáng thứ Hai hay tối Chủ nhật?
+[00:03:02] PM: Trước thứ Hai nghĩa là trước khi bắt đầu giờ làm việc sáng thứ Hai, tức là muộn nhất là tối Chủ nhật phải xong, để sáng thứ Hai QA có thể bắt đầu test. Chi, em confirm giúp.
+[00:03:13] Chi: Dạ đúng, em cần code trên môi trường test trước 8h sáng thứ Hai. Nếu không, em không kịp test để giao trước thứ Ba.
+[00:03:21] An: OK, em hiểu rồi. Vậy em sẽ cố gắng hoàn thành task Y trước tối Chủ nhật.
+[00:03:27] PM: Còn Bình, em làm task Z, deadline cũng trước thứ Hai, áp lực cao nhưng anh tin em. Em cần hỗ trợ gì không?
+[00:03:35] Bình: Dạ, em sẽ tập trung. Nếu cần thêm resource thì em sẽ báo anh vào chiều Chủ nhật. Nhưng em sẽ cố xong trước thứ Hai.
+[00:03:43] PM: Được. Vậy tổng kết: task X đang dở, sẽ xong hôm nay. Task W cancel. Task Y: An nhận, code trước thứ Hai, test trước thứ Ba. Task Z: Bình nhận, code và test nội bộ trước thứ Hai. Mọi người rõ chưa?
+[00:04:02] An: Rõ.
+[00:04:03] Bình: Rõ.
+[00:04:04] Chi: Rõ ạ.
+[00:04:06] PM: OK, meeting kết thúc. Cảm ơn mọi người, cuối tuần vui vẻ nhưng cũng nhớ giữ deadline nhé!

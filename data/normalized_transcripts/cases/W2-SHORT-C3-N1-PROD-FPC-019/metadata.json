@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W2-SHORT-C3-N1-PROD-FPC-019",
+  "meeting_id": "W2-SHORT-C3-N1-PROD-FPC-019",
+  "meeting_title": "Theo dõi lỗi và tài liệu",
+  "meeting_date": "2026-02-13",
+  "wave": 2,
+  "wave_name": "wave_2_feature_isolation",
+  "labels": [
+    "first_person_commitment",
+    "negative_context"
+  ],
+  "objective": "{\"name\": \"first-person commitment\", \"code\": \"FPC\", \"labels\": \"first_person_commitment,negative_context\", \"requirements\": \"Người nói tự nhận một công việc tương lai rõ ràng; có câu gần đó dùng “sẽ” nhưng chỉ là thông tin, không phải task.\"}",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_2_feature_isolation/W2-SHORT-C3-N1-PROD-FPC-019/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-pro"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 829,
+    "turn_count": 26
+  },
+  "ground_truth": {
+    "available": false,
+    "expected_output_file": ""
+  }
+}

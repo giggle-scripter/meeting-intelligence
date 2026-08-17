@@ -1,0 +1,6 @@
+{
+  "meeting_title": "Theo dõi tiến độ tài liệu",
+  "tasks": [
+    {"task_name":"Hoàn thành draft báo cáo","assignee":"Minh","start_date":"2026-01-21","due_date":"2026-03-14","due_date_text":"trước ngày 15/03","status":"Proposed"}
+  ]
+}

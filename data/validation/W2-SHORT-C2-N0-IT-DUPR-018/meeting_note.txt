@@ -1,0 +1,9 @@
+ghi vội
+chủ đề: Trao đổi kế hoạch tích hợp
+kw: payment / khong / test / trong / tao / them / cap
+- An, em cập nhật task TASK-567 đi
+* Không cần đâu Hoa, task TASK-567 đã có sẵn phần test acceptance rồi
+- Em định nhờ team review chung trong task TASK-567 luôn, thay vì tạo task mới
+1) Dạ, em sẽ thêm vào bộ test hiện có, cũng trong task đó
+- Quay lại recap chính: task TASK-567 - tích hợp payment gateway, An đang làm, dl 20/02, đã cover cả test và bảo mật
+* Chúng ta không tạo thêm task con hay task phụ nào liên quan, để tránh duplicate và loãng thông tin

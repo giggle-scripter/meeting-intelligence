@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W2-SHORT-C2-N1-OPS-SEPD-016",
+  "meeting_id": "W2-SHORT-C2-N1-OPS-SEPD-016",
+  "meeting_title": "Chuẩn bị bản phát hành nội bộ",
+  "meeting_date": "2026-02-10",
+  "wave": 2,
+  "wave_name": "wave_2_feature_isolation",
+  "labels": [
+    "deadline_in_separate_sentence",
+    "task_mentioned_across_turns"
+  ],
+  "objective": "{\"name\": \"deadline in separate sentence\", \"code\": \"SEPD\", \"labels\": \"deadline_in_separate_sentence,task_mentioned_across_turns\", \"requirements\": \"Action, assignee và deadline nằm ở các lượt khác nhau nhưng liên kết rõ.\"}",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_2_feature_isolation/W2-SHORT-C2-N1-OPS-SEPD-016/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-pro"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 798,
+    "turn_count": 26
+  },
+  "ground_truth": {
+    "available": false,
+    "expected_output_file": ""
+  }
+}

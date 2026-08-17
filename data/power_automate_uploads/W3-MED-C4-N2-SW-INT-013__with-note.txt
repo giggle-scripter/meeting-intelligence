@@ -1,0 +1,100 @@
+=== MEETING METADATA ===
+meeting_id: W3-MED-C4-N2-SW-INT-013
+meeting_title: Họp phối hợp triển khai và xử lý vấn đề
+meeting_date: 2026-02-17
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+ghi vội
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / moi truong / trien khai / test / loi / sang / tai
+- Tôi sẽ điểm qua tình hình môi trường test, lỗi đăng nhập, + tài liệu triển khai
+* Chuyển sang tài liệu triển khai
+- 23/02 hơi gấp, nhưng em sẽ cố
+1) correction dl
+- Sau deploy, em sẽ chạy lại bộ test login vào sáng mai
+* Việc đó không tạo task mới, follow-up thôi
+- Em sẽ xem cuối tuần sau khi fix lỗi
+1) Trong recap này, tôi thấy có nguy cơ duplicate task giữa "tài liệu hướng dẫn người dùng" + "tài liệu triển khai" vì cùng mảng tài liệu, nhưng đã phân biệt deliverable
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:00:00] An: Chào mọi người, hôm nay chúng ta có cuộc họp phối hợp tuần này. Tôi sẽ điểm qua tình hình môi trường test, lỗi đăng nhập, và tài liệu triển khai. Có ai cần bổ sung chủ đề không?
+[09:00:15] Em: Em muốn nhắc về việc khảo sát công cụ monitoring, tuần trước chưa có quyết định.
+[09:00:30] An: Được, sẽ đề cập sau. Bắt đầu từ môi trường test. Bình, anh báo cáo tình hình.
+[09:00:45] Bình: Dạ, môi trường staging hiện tại có vấn đề về hiệu năng, load chậm, và hay bị timeout. Em đã kiểm tra sơ bộ, có thể do cấu hình memory.
+[09:01:00] Chi: Em thêm vào đó, lỗi đăng nhập vẫn còn. User nhập đúng tài khoản mật khẩu nhưng hệ thống báo lỗi. Em đã log chi tiết.
+[09:01:15] An: Lỗi này nghiêm trọng, ảnh hưởng tới test của toàn bộ module. Bình, anh xem và fix ngay. Anh cần hỗ trợ gì không?
+[09:01:30] Bình: Em cần quyền truy cập vào log server để xem chi tiết. Hiện em chưa có.
+[09:01:45] Dũng: Anh có thể tạo ticket IT, tôi sẽ approve nhanh.
+[09:02:00] An: Vậy Bình tạo ticket, Dũng lo. Task này có deadline cụ thể. Anh định làm trong bao lâu?
+[09:02:15] Bình: Em nghĩ 2 ngày là đủ, đến thứ Năm 19/02.
+[09:02:30] An: OK, deadline thứ Năm. Nhưng nếu cần thêm người, báo tôi. Chi, em có thông tin gì thêm về lỗi?
+[09:02:45] Chi: Em thấy lỗi chỉ xảy ra với tài khoản admin, user thường vẫn login được. Có thể liên quan tới phân quyền.
+[09:03:00] Bình: Cảm ơn, em sẽ kiểm tra hướng đó.
+[09:03:15] An: Tốt. Chuyển sang tài liệu triển khai. Dũng, anh chuẩn bị đến đâu rồi?
+[09:03:30] Dũng: Em đã có bản nháp cho cả tài liệu hướng dẫn người dùng và tài liệu triển khai kỹ thuật. Cần mọi người review.
+[09:03:45] An: Hai tài liệu này khác nhau, nhưng tên nghe khá giống. Cần phân biệt rõ nội dung. Tài liệu hướng dẫn người dùng tập trung vào thao tác, tài liệu triển khai dành cho admin cài đặt. Dũng, deadline dự kiến?
+[09:04:00] Dũng: Em dự kiến tài liệu hướng dẫn người dùng xong 21/02, tài liệu triển khai kỹ thuật xong 25/02.
+[09:04:15] An: Tài liệu triển khai cần sớm hơn vì team vận hành cần training. Chuyển deadline lên 23/02 được không?
+[09:04:30] Dũng: 23/02 hơi gấp, nhưng em sẽ cố. Có thể cần Bình review phần kỹ thuật sớm.
+[09:04:45] Bình: Em sẽ review sau khi fix lỗi xong, có lẽ cuối tuần này.
+[09:05:00] An: Vậy điều chỉnh: tài liệu triển khai deadline 23/02, giữ nguyên tài liệu người dùng 21/02. Đây là correction deadline. Dũng, anh nhớ cập nhật.
+[09:05:15] Dũng: Vâng.
+[09:05:30] Chi: Về phần test, em cần tài liệu triển khai để biết cách cài môi trường. Có thể release sớm hơn không?
+[09:05:45] An: Dũng sẽ cố gắng hoàn thiện sớm nhất. Nhưng đừng đổi deadline đã thống nhất. Tiếp theo, vấn đề feature interaction giữa export báo cáo và module bảo mật. Ai nắm tình hình?
+[09:06:00] Bình: Bên dev đã fix, nhưng chưa merge vào nhánh staging. Cần merge và test.
+[09:06:15] An: Vậy giao cho Bình luôn. Em merge và test, deadline 21/02 được không? Vì nếu trễ sẽ ảnh hưởng release.
+[09:06:30] Bình: 21/02 hơi sát vì còn lỗi đăng nhập. Em đề xuất 22/02.
+[09:06:45] An: Cố gắng 21/02, nếu không kịp thì báo tôi trước. Đây là deadline thay thế, tôi sẽ theo dõi.
+[09:07:00] Chi: Em có thể hỗ trợ test phần export sau khi merge. Em sẽ chuẩn bị test case.
+[09:07:15] An: Tốt, Chi nhận test export. Không có deadline cứng, nhưng phải hoàn thành trước ngày release dự kiến. Đó là task không deadline.
+[09:07:30] Dũng: Anh An, em có một đề xuất: nên làm thêm tài liệu FAQ cho khách hàng để giảm hỗ trợ. Em nghĩ rất hữu ích.
+[09:07:45] An: Hiện tại chưa có yêu cầu, không phải task bây giờ. Ghi nhận và để sau.
+[09:08:00] Em: Về monitoring, team em đang đánh giá Prometheus và Grafana, nhưng chưa chốt. Có một số vấn đề về chi phí.
+[09:08:15] An: Đây là unresolved item. Em tiếp tục nghiên cứu, cuối tuần báo cáo sơ bộ. Không có deadline cứng.
+[09:08:30] Bình: Anh An, em vừa kiểm tra log lỗi đăng nhập. Nguyên nhân có thể do chứng chỉ SSL hết hạn. Em cần deploy lại cấu hình.
+[09:08:45] An: Được, em deploy tối nay nếu đã chuẩn bị. Nhưng nhớ backup.
+[09:09:00] Bình: OK, em sẽ làm.
+[09:09:15] Chi: Sau deploy, em sẽ chạy lại bộ test login vào sáng mai. Báo kết quả.
+[09:09:30] An: Được. Việc đó không tạo task mới, follow-up thôi.
+[09:09:45] Dũng: Em gửi bản nháp tài liệu hướng dẫn người dùng qua email chiều nay để mọi người review.
+[09:10:00] An: Mọi người review trong 2 ngày. Bình, em chú ý phần kỹ thuật.
+[09:10:15] Bình: Em sẽ xem cuối tuần sau khi fix lỗi.
+[09:10:30] An: Lưu ý: review không phải task riêng, là part trong task viết tài liệu. Dũng chịu trách nhiệm hoàn thiện dựa trên feedback.
+[09:10:45] Chi: Em muốn hỏi về môi trường staging. Sau khi Bình deploy fix login, em có thể dùng staging để test không? Hay cần môi trường riêng?
+[09:11:00] An: Cứ dùng staging, nhưng báo trước cho team để tránh conflict.
+[09:11:15] Bình: Em sẽ thông báo trong channel.
+[09:11:30] An: Tốt. Quay lại vấn đề feature interaction. Bình, em có cần ai hỗ trợ merge không?
+[09:11:45] Bình: Hiện tại em tự làm được. Nhưng nếu gặp conflict lớn, em sẽ nhờ dev khác.
+[09:12:00] An: OK. Nhắc lại các đầu việc. Đầu tiên, lỗi đăng nhập – Bình fix, deadline 19/02.
+[09:12:15] Bình: Vâng.
+[09:12:30] An: Thứ hai, tài liệu hướng dẫn người dùng – Dũng viết, deadline 21/02.
+[09:12:45] Dũng: Rõ.
+[09:13:00] An: Thứ ba, tài liệu triển khai kỹ thuật – Dũng viết, deadline đã sửa thành 23/02.
+[09:13:15] Dũng: Vâng.
+[09:13:30] An: Thứ tư, merge và test feature interaction export – Bình, deadline 21/02.
+[09:13:45] Bình: Em đã ghi.
+[09:14:00] An: Thứ năm, test export – Chi, không deadline cứng.
+[09:14:15] Chi: Vâng.
+[09:14:30] An: Thứ sáu, khảo sát monitoring – Em, báo cáo sơ bộ cuối tuần.
+[09:14:45] Em: Vâng.
+[09:15:00] An: Trong recap này, tôi thấy có nguy cơ duplicate task giữa "tài liệu hướng dẫn người dùng" và "tài liệu triển khai" vì cùng mảng tài liệu, nhưng đã phân biệt deliverable. Cần tránh nhầm lẫn. Ngoài ra, còn một unresolved item từ hôm trước: lỗi bảo mật trên module cũ. Chưa có giải pháp, cần chờ lead quyết định. Việc đó vẫn để unresolved.
+[09:15:15] Bình: Em đồng ý, lỗi đó phức tạp, cần phân tích thêm.
+[09:15:30] An: Vậy chưa giao task. Có ai muốn thảo luận thêm?
+[09:15:45] Em: Em có một ý tưởng về tự động hóa test regression, nhưng hiện tại thiếu nhân lực, chưa khả thi.
+[09:16:00] An: Đó là ý tưởng, chưa phải task. Ghi nhận, không hành động.
+[09:16:15] Chi: Anh An, về tài liệu hướng dẫn người dùng, em có thể góp ý sau khi review. Nhưng em thấy phần mô tả chức năng có thể thiếu sót.
+[09:16:30] Dũng: Em sẽ tiếp thu và chỉnh sửa.
+[09:16:45] An: Tốt. Bây giờ tôi muốn mỗi người commit công khai. Tôi tự nhận trách nhiệm theo dõi tiến độ và giải quyết vướng mắc. Bình, anh commit xử lý lỗi đăng nhập và merge export.
+[09:17:00] Bình: Em commit.
+[09:17:15] An: Dũng, anh commit viết hai tài liệu với deadline đã điều chỉnh.
+[09:17:30] Dũng: Em commit.
+[09:17:45] An: Chi, em commit test export và hỗ trợ test login.
+[09:18:00] Chi: Em commit.
+[09:18:15] An: Em, em commit khảo sát monitoring và báo cáo.
+[09:18:30] Em: Vâng.
+[09:18:45] An: Có ai muốn hỏi thêm gì về deadline hoặc scope không?
+[09:19:00] Bình: Em muốn làm rõ: task merge export có cần phải deploy lên staging không? Hay chỉ merge code thôi?
+[09:19:15] An: Merge code và deploy lên staging để Chi test. Em chịu trách nhiệm cả deploy.
+[09:19:30] Bình: OK.
+[09:19:45] An: Vậy kết thúc recap. Hãy tập trung vào các task. Nếu có vấn đề, báo ngay. Cuộc họp kết thúc.
+[09:20:00] Dũng: Cảm ơn anh và mọi người.

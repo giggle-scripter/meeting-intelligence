@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W2-SHORT-C2-N2-IT-WORK-014",
+  "meeting_id": "W2-SHORT-C2-N2-IT-WORK-014",
+  "meeting_title": "Trao đổi kế hoạch tích hợp",
+  "meeting_date": "2026-02-08",
+  "wave": 2,
+  "wave_name": "wave_2_feature_isolation",
+  "labels": [
+    "working_day_duration",
+    "deadline_in_separate_sentence"
+  ],
+  "objective": "{\"name\": \"working-day duration\", \"code\": \"WORK\", \"labels\": \"working_day_duration,deadline_in_separate_sentence\", \"requirements\": \"Deadline là N ngày làm việc và phải giữ rõ cụm “ngày làm việc”, không đổi thành ngày lịch.\"}",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_2_feature_isolation/W2-SHORT-C2-N2-IT-WORK-014/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-flash"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 910,
+    "turn_count": 44
+  },
+  "ground_truth": {
+    "available": true,
+    "expected_output_file": "expected_output.json",
+    "reviewer": "Codex",
+    "review_method": "full_transcript_and_final_state_audit",
+    "review_policy_version": "1.0",
+    "review_notes": "Reviewed against full transcript, final recap/state transitions, cancellation/handoff semantics, and deterministic date policy."
+  }
+}

@@ -1,0 +1,141 @@
+MEETING_ID: W4-LONG-C5-N2-PROD-STATE-007
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-21
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:02:05] Linh: Chào mọi người, cảm ơn đã đến đúng giờ. Hôm nay chúng ta có một phiên dài, nên tôi muốn mở đầu nhanh và đi vào việc chính. Mục tiêu của meeting này là rà soát toàn bộ lộ trình triển khai hệ thống mới, đặc biệt là phần môi trường test và tài liệu vận hành. Chúng ta sẽ có năm phần nhỏ, nhưng hôm nay chỉ tập trung vào khối mở đầu thôi.
+
+T000002 [09:02:38] Minh: Em chào anh chị. Em xin phép điểm qua tình hình hiện tại. Bên em đang chuẩn bị hai môi trường staging: một cho module payment, một cho module sync. Nhưng hiện tại cả hai đều chưa có tài liệu hướng dẫn triển khai cụ thể.
+
+T000003 [09:03:11] Hà: Mình thấy phần tài liệu đang là điểm nghẽn. Nếu không có doc thì khi chuyển giao cho team vận hành sau này sẽ rất rối. Có khi mình nên xác định rõ ai viết, hạn chót là bao giờ.
+
+T000004 [09:03:45] Linh: Đồng ý. Trước tiên, tôi muốn lên danh sách các task cần làm ngay. Minh, em thấy môi trường staging payment cần bao lâu để hoàn tất cấu hình?
+
+T000005 [09:04:22] Minh: Dạ, nếu chỉ cài đặt cơ bản thì trong ngày mai là xong. Nhưng cần có người verify lại.
+
+T000006 [09:04:48] Linh: Được rồi. Tôi ghi nhận task "Triển khai môi trường test cho module thanh toán". Minh sẽ là owner, và deadline là ngày mai, tức 22/02/2026. Sau đó Hà sẽ review. Có vấn đề gì không?
+
+T000007 [09:05:15] Hà: Em ok. Nhưng em muốn hỏi thêm: còn môi trường cho module sync thì sao? Nó cũng đang chờ.
+
+T000008 [09:05:42] Minh: Module sync phức tạp hơn, vì liên quan đến database seeding và API mock. Em ước lượng tầm hai, ba ngày nữa, nhưng chưa chốt được ngày chính xác.
+
+T000009 [09:06:11] Linh: Vậy task thứ hai: "Triển khai môi trường test cho module đồng bộ dữ liệu". Tạm thời chưa có deadline, vì còn phụ thuộc vào việc hoàn thiện API. Nhưng em phải báo cáo tiến độ vào mỗi cuối ngày.
+
+T000010 [09:06:49] Duy: (vào muộn) Chào mọi người, em xin lỗi vì đến trễ. Em có thể góp ý về phần tài liệu được không? Bên vận hành cần một bản hướng dẫn riêng, không lẫn với tài liệu kỹ thuật.
+
+T000011 [09:07:18] Linh: Có, Duy. Chính xác là hôm nay chúng ta cũng cần bàn về việc viết tài liệu. Hà, em thấy mình nên chia làm hai loại hay gộp chung?
+
+T000012 [09:07:50] Hà: Em nghĩ nên tách biệt. Một bản là technical deployment guide cho team infra, một bản là operation manual cho team vận hành. Nhưng trước mắt, em ưu tiên việc có môi trường test trước đã.
+
+T000013 [09:08:22] Minh: Em cũng thấy vậy. Nếu không có môi trường thì viết tài liệu cũng khó vì chưa có gì để chụp màn hình hay test thực tế.
+
+T000014 [09:08:56] Linh: Hợp lý. Vậy ta sẽ thống nhất: Task 1 – môi trường payment, minh làm, deadline ngày mai. Task 2 – môi trường sync, chưa có deadline nhưng Minh vẫn theo dõi. Còn việc viết tài liệu, ta sẽ bàn sau khi có môi trường.
+
+T000015 [09:09:25] Duy: Nhưng em muốn nhấn mạnh: nếu tới cuối tuần này chưa có tài liệu thì team em sẽ không kịp training cho đợt rollout đầu tháng sau. Em mong anh chị cân nhắc.
+
+T000016 [09:09:58] Linh: Tôi ghi nhận. Nếu task 1 hoàn thành đúng hạn, sang tuần sau ta có thể bắt đầu viết tài liệu cho payment. Còn tài liệu sync sẽ theo sau. Hà, em có thể support Minh về mặt nội dung kỹ thuật được không?
+
+T000017 [09:10:32] Hà: Được ạ. Em có thể review doc mẫu từ các dự án trước.
+
+T000018 [09:11:00] Minh: Nhân tiện, em muốn hỏi về môi trường payment: em định dùng Docker compose, có cần phải dùng Kubernetes không? Vì nếu dùng K8s thì sẽ mất thêm thời gian cài đặt cluster.
+
+T000019 [09:11:38] Linh: Tốt nhất là dùng compose trước cho nhanh, vì deadline ngày mai. Sau này nếu cần scale thì chuyển lên K8s. Nhưng em phải ghi chú rõ trong tài liệu các bước đã làm.
+
+T000020 [09:12:10] Hà: Em đồng ý với anh Linh. Nếu dùng K8s ngay thì tuần này chưa xong được.
+
+T000021 [09:12:44] Duy: Vậy em có một lo ngại. Nếu dùng Docker compose, sau này migrate lên K8s có khả thi không? Em sợ mất công refactor.
+
+T000022 [09:13:15] Minh: Cũng không quá khó đâu anh Duy. Vì compose file có thể dùng làm cơ sở để generate manifest. Em đã từng làm rồi.
+
+T000023 [09:13:48] Linh: Tốt. Vậy Minh cứ làm compose, nhưng nhớ ghi log đầy đủ để sau này dễ chuyển. Tiếp theo, tôi muốn bàn về tài liệu triển khai cho cả hai module.
+
+T000024 [09:14:20] Hà: Em xin phép đề xuất: thay vì đợi có môi trường rồi mới viết, mình có thể bắt đầu viết template trước. Sau đó chỉ cần điền thông số thực tế.
+
+T000025 [09:14:58] Linh: Cũng là một ý hay. Nhưng ai sẽ giữ template đó?
+
+T000026 [09:15:27] Hà: Em có thể tạo một bản nháp trên Confluence, rồi gán quyền edit cho Minh và Duy.
+
+T000027 [09:15:55] Minh: Em ok. Nhưng em muốn Hà review giúp phần kiến trúc tổng quan trước khi em viết chi tiết.
+
+T000028 [09:16:28] Linh: Được. Vậy ta có thêm một task phụ: "Tạo template tài liệu triển khai". Hà làm owner, không có deadline nhưng cần hoàn thành trước khi bắt đầu viết doc payment.
+
+T000029 [09:17:00] Duy: Liệu template đó có bao gồm cả hướng dẫn cho operation không? Hay chỉ riêng phần technical?
+
+T000030 [09:17:33] Hà: Em nghĩ nên có cả hai phần trong một template, vì nhiều mục trùng nhau. Sau đó khi viết cụ thể thì mình tách ra.
+
+T000031 [09:18:05] Linh: Hợp lý. Để tôi tổng kết lại các task ban đầu:
+- Task A: Triển khai môi trường test module payment – owner Minh, deadline 22/02.
+- Task B: Triển khai môi trường test module sync – owner Minh, chưa có deadline.
+- Task C: Tạo template tài liệu triển khai – owner Hà, không có deadline.
+Mọi người có thêm gì không?
+
+T000032 [09:18:48] Minh: Em có một băn khoăn. Task A và Task B có tên khá giống nhau, sau này dễ nhầm. Hay mình đặt ký hiệu rõ hơn?
+
+T000033 [09:19:20] Linh: Ừ, cũng nên. Nhưng tạm thời cứ giữ vậy, tôi sẽ nhắc lại trong các part sau. Quan trọng là mình phân biệt rõ trong header task.
+
+T000034 [09:19:52] Hà: Em thấy vẫn ổn. Vì deadline khác nhau và module khác nhau.
+
+T000035 [09:20:25] Duy: Vâng. Em xin phép góp ý thêm: Về tài liệu, em đề nghị có một mục riêng về troubleshooting. Vì team vận hành hay gặp lỗi mà không có hướng dẫn xử lý ban đầu.
+
+T000036 [09:21:00] Hà: Cái đó em sẽ thêm vào template.
+
+T000037 [09:21:30] Linh: Tốt. Còn vấn đề gì nữa không? Về môi trường test, bên IT có hỗ trợ server chưa?
+
+T000038 [09:22:02] Minh: Bên IT nói sẽ cấp server ảo vào chiều nay. Em sẽ kiểm tra và bắt đầu cài đặt ngay.
+
+T000039 [09:22:38] Hà: Nhưng nếu server chưa sẵn sàng thì deadline ngày mai có nguy cơ trượt. Mình có kế hoạch dự phòng chưa?
+
+T000040 [09:23:10] Linh: Đúng. Nếu server trễ, Minh có thể dùng local machine tạm thời để dựng môi trường demo? Không cần production-ready.
+
+T000041 [09:23:44] Minh: Dạ được. Em có thể dựng local bằng Vagrant, sau đó xuất thành image. Nhưng em muốn hỏi: có cần môi trường payment phải chạy 24/7 không?
+
+T000042 [09:24:18] Linh: Không, chỉ để test thôi. Hà, em có yêu cầu gì đặc biệt cho môi trường test?
+
+T000043 [09:24:50] Hà: Em cần có khả năng inject dữ liệu test để verify flow. Nếu dùng local thì cũng được, nhưng phải đồng bộ DB với team backend.
+
+T000044 [09:25:22] Minh: DB em dùng PostgreSQL, có thể tạo dump sẵn. Vấn đề là cần access từ bên ngoài.
+
+T000045 [09:25:55] Duy: Nếu dùng local thì team em không truy cập được để kiểm tra operation manual. Em nghĩ nên dùng server thật.
+
+T000046 [09:26:28] Linh: Chúng ta sẽ ưu tiên server thật. Nếu chiều nay IT không cấp, sáng mai ta họp khẩn. Còn bây giờ, tôi muốn tập trung vào việc phân rõ phạm vi của hai task môi trường.
+
+T000047 [09:27:05] Minh: Em hiểu. Về module payment: gồm cài đặt API gateway, payment service, và database. Module sync: gồm sync worker, message queue, và connector.
+
+T000048 [09:27:38] Hà: Như vậy task A và B khác biệt rõ.
+
+T000049 [09:28:12] Linh: Vậy tôi xác nhận. Mọi người có thắc mắc gì về tài liệu cho hai module này không? Có cần tài liệu riêng cho từng module hay gộp chung?
+
+T000050 [09:28:48] Hà: Em nghĩ nên có tài liệu riêng, vì mỗi module có cấu hình riêng. Nhưng có thể dùng chung template.
+
+T000051 [09:29:20] Duy: Đồng ý. Mỗi module một bộ document riêng, nhưng format giống nhau. Vận hành sẽ dễ theo dõi.
+
+T000052 [09:29:52] Linh: Vậy ta thống nhất. Minh chịu trách nhiệm nội dung kỹ thuật cho cả hai module. Hà hỗ trợ review. Duy sẽ đưa ra yêu cầu từ phía vận hành.
+
+T000053 [09:30:28] Minh: Em ok. Nhưng em chỉ có thể viết tài liệu sau khi dựng xong môi trường.
+
+T000054 [09:31:00] Hà: Không sao, template sẽ có sẵn. Em viết sau cũng được.
+
+T000055 [09:31:35] Linh: Một việc nữa: deadline của task A là ngày mai. Minh, em có cần support thêm gì không?
+
+T000056 [09:32:08] Minh: Dạ, em cần quyền sudo trên server, và cần danh sách port được mở. Em sẽ liên hệ IT.
+
+T000057 [09:32:40] Hà: Em có thể giúp Minh liên hệ IT nếu cần, vì em quen bên đó.
+
+T000058 [09:33:12] Linh: Tốt. Hà, em làm việc đó. Vậy ta đã có các đầu việc rõ ràng.
+
+T000059 [09:33:45] Duy: Em muốn nhấn mạnh: nếu task A chậm, task C template cũng sẽ chậm theo, vì không có nội dung để điền. Em đề nghị có một buổi họp nhanh vào cuối ngày mai để review tiến độ.
+
+T000060 [09:34:20] Linh: Đồng ý. Tôi sẽ gửi invite cho tất cả, dài 30 phút, vào 4h chiều mai. Có ai không được không?
+
+T000061 [09:34:55] Minh: Em ok.
+T000062 [09:35:10] Hà: Em cũng được.
+T000063 [09:35:25] Duy: Em ok.
+
+T000064 [09:35:50] Linh: Vậy kết thúc phần một. Chúng ta đã có ba task chính và một cuộc họp phụ. Tôi sẽ ghi chú lại toàn bộ. Cảm ơn mọi người.
+
+T000065 [09:36:22] Minh: Em cảm ơn.
+T000066 [09:36:48] Hà: Em cảm ơn anh.
+T000067 [09:37:12] Duy: Hẹn gặp lại.
+
+--- END OF PART P01 ---

@@ -1,0 +1,28 @@
+{
+  "case": {
+    "wave": 2,
+    "case_index": 8,
+    "meeting_id": "W2-SHORT-C2-N2-OPS-PAST-008",
+    "meeting_date": "2026-02-02",
+    "title": "Chuẩn bị bản phát hành nội bộ",
+    "labels": "past_completed_work,informational_statement",
+    "objective": "{\"name\": \"past completed work\", \"code\": \"PAST\", \"labels\": \"past_completed_work,informational_statement\", \"requirements\": \"Speaker báo cáo các việc đã làm xong; không biến hành động quá khứ thành task mới.\"}"
+  },
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 860,
+    "turn_count": 38
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 243.09410030000436
+    }
+  ]
+}

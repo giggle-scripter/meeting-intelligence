@@ -1,0 +1,134 @@
+MEETING_ID: W3-MED-C4-N2-SW-INT-005
+CASE_LABELS: feature_interaction,deadline_replacement,recap_duplicate_risk,unresolved_item,negative_context
+MEETING_DATE: 2026-02-09
+TITLE: Họp phối hợp triển khai và xử lý vấn đề
+
+[09:00:00] PM: Chào mọi người, hôm nay ngày 9/2, chúng ta có khoảng một tiếng để họp. Trước hết, điểm qua tình hình môi trường test. Châu, em có báo cáo gì?
+
+[09:00:25] QA: Dạ, em đã lên môi trường staging sáng nay. Có một số vấn đề: staging không có dữ liệu mẫu, em phải tự seed. Thêm nữa, em không thể đăng nhập vào console quản trị vì lỗi permission. Em đã gửi email cho anh Lam bên infra nhưng chưa thấy phản hồi.
+
+[09:01:10] PM: Vậy vấn đề này chưa có lời giải. Chúng ta sẽ để lại unresolved. Bình, em có thể help Châu về permission không, hay để anh liên hệ infra?
+
+[09:01:35] Dev: Em nghĩ là bên infra mới có quyền. Nhưng em có thể tạo ticket trên Jira và assign cho team infra. Em sẽ làm ngay sau meeting.
+
+[09:02:00] PM: OK, nhưng đó vẫn chưa phải là giải pháp. Tôi sẽ theo dõi ticket. Bây giờ, chuyển qua lỗi đăng nhập. Châu, em nói rõ hơn về lỗi.
+
+[09:02:30] QA: Vâng. Lỗi này xảy ra ở môi trường production nhưng QC bắt gặp. Khi user nhập sai password, hệ thống không trả về lỗi mà chỉ reload trang. Em đã tái hiện trên staging, và thấy log lỗi 500 ở server side nhưng client không bắt được. Em nghĩ là do code xử lý exception chưa tốt.
+
+[09:03:20] Dev: Đúng rồi. Em có check source code. Ở login controller, khi authenticate thất bại, nó không set message error mà chỉ redirect lại. Em đã fix sơ bộ, nhưng chưa push lên. Em sẽ hoàn thiện và push lên dev để Châu test.
+
+[09:04:00] PM: Thời gian cụ thể? Cần có deadline để bám.
+
+[09:04:20] Dev: Em nghĩ xong hôm nay, ngày 9/2. Nhưng test phải đợi môi trường dev hoạt động ổn. Em sẽ giao cho Châu test vào ngày mai, 10/2.
+
+[09:04:50] PM: Được. Vậy giao Bình fix lỗi đăng nhập, hoàn thành push code hôm nay, deadline test ngày 10/2. Bình, confirm.
+
+[09:05:10] Dev: Dạ, em confirm.
+
+[09:05:30] QA: Em sẽ test ngay sau khi có bản mới trên dev.
+
+[09:05:45] PM: Tốt. Tiếp theo, về tài liệu triển khai. Dũng, em thấy tiến độ thế nào?
+
+[09:06:15] BA: Em đã viết gần xong tài liệu cho operation team. Còn phần mô tả các biến môi trường mới, em cần Bình cung cấp. Em dự kiến hoàn thành vào 12/2.
+
+[09:06:50] PM: 12/2 là deadline ban đầu. Nhưng tôi xem lịch release đã dời xuống cuối tháng 2, nên có thể linh động. Bình, em có thể cung cấp biến môi trường khi nào?
+
+[09:07:20] Dev: Em có sẵn một phần, nhưng có một số biến liên quan đến security key chưa được cấp. Em sẽ gửi bản hiện tại cho Dũng sau meeting. Phần còn lại, em sẽ bổ sung khi security confirm.
+
+[09:08:00] PM: Vậy Dũng sẽ dựa vào bản hiện tại để viết, và để placeholder cho các biến chưa có. Deadline cho tài liệu, tôi muốn điều chỉnh thành 14/2 để có thời gian review kỹ. Dũng, em có OK không?
+
+[09:08:50] BA: Dạ, 14/2 em hoàn thành và gửi review. Em cũng sẽ thêm phần troubleshooting và rollback như Châu gợi ý.
+
+[09:09:20] QA: Vâng, em nghĩ cần có phần đó.
+
+[09:09:30] PM: Vậy deadline tài liệu hướng dẫn triển khai được thay đổi từ 12/2 thành 14/2. Đây là deadline replacement. Bình vẫn cung cấp thông tin hôm nay.
+
+[09:10:00] Dev: Em sẽ gửi ngay sau meeting. Có điều, em muốn nói rõ, tài liệu này sẽ có hai phần: một phần cho deploy thường, một phần cho rollback. Dũng cần ghi rõ.
+
+[09:10:30] BA: Em hiểu. Em đã có template sẵn. Nhưng em cũng muốn hỏi, nếu security chưa approve, phần cấu hình đó có thể thay đổi, vậy tài liệu có tính tạm thời không?
+
+[09:11:00] PM: Đúng, vậy Dũng ghi rõ là draft, hoặc đánh dấu pending. Khi nào security confirm, Bình báo lại và em update final.
+
+[09:11:30] Dev: Em sẽ chủ động gửi update. Và em xin đính chính, thông tin security key em chưa có, phải đợi team security cấp. Em sẽ gửi phần đã có trước, phần key em sẽ bổ sung sau. Dũng cứ để placeholder.
+
+[09:12:00] BA: OK, em hiểu. Vậy em sẽ dùng placeholder.
+
+[09:12:20] PM: Correction này cập nhật thông tin cho task tài liệu, không tạo task mới.
+
+[09:12:40] QA: Em thấy cũng phức tạp. Về test case, em cũng cần biết các thay đổi đó để update test.
+
+[09:13:00] Dev: Châu, em có test case cho trường hợp timeout không? Vì có thể xảy ra khi login.
+
+[09:13:20] QA: Em có test timeout rồi. Nhưng chưa có dữ liệu chính xác từ mô phỏng.
+
+[09:13:40] Dev: Được. Em sẽ cho em thông số timeout từ config.
+
+[09:14:00] QA: Cảm ơn.
+
+[09:14:15] PM: Còn gì về tài liệu nữa không? Dũng, em có cần Bình confirm danh sách service restart?
+
+[09:14:35] BA: Dạ, em có hỏi Bình, nhưng chưa có câu trả lời chính xác. Bình, service nào cần restart khi deploy?
+
+[09:15:00] Dev: Service chính là api, worker và cron. Riêng nginx chỉ cần reload. Em sẽ ghi cụ thể trong email.
+
+[09:15:30] BA: Vậy em sẽ đợi email.
+
+[09:16:00] PM: Châu, em có việc gì về test case chưa? Em nói em đã viết xong login test case.
+
+[09:16:20] QA: Dạ, em đã viết xong login rồi. Còn test case cho module account và phân quyền, em đang làm. Em dự định hoàn thành trong tuần, không có deadline cố định vì em sẽ viết dần và update theo tiến độ.
+
+[09:17:00] PM: OK, vậy task đó không có deadline, em tự quản lý. Nhưng lưu ý, test case account phải cover đủ các role.
+
+[09:17:30] QA: Vâng, em sẽ lưu ý.
+
+[09:17:50] Dev: Em thấy có hai tài liệu liên quan đến triển khai và test case. Dễ nhầm. Nên trong tài liệu triển khai, có thể tham chiếu đến test case không?
+
+[09:18:20] BA: Có thể, em sẽ thêm cross-reference.
+
+[09:18:40] PM: Tiện thể, Dũng, em có thể update lại tài liệu architecture tổng thể không? Hay việc đó đã có?
+
+[09:19:00] BA: Việc architecture hiện tại em chưa viết. Em nghĩ nên để sau vì release này không thay đổi lớn.
+
+[09:19:20] PM: Vậy tạm thời không giao việc đó. Chúng ta chỉ tập trung vào tài liệu triển khai.
+
+[09:19:45] Dev: Anh ơi, em vừa nghĩ, có thể viết một script tự động deploy để operation dễ hơn. Nhưng đó là tính năng, không nằm trong sprint này.
+
+[09:20:10] PM: Cũng là ý hay, nhưng chưa phải task bây giờ. Để roadmap sau.
+
+[09:20:30] QA: Vậy còn vấn đề về database migration? Trong tài liệu triển khai có cần phần DB không, Dũng?
+
+[09:20:55] BA: Em có để phần DB migration riêng, nhưng cần script từ Bình.
+
+[09:21:15] Dev: Script migration em đã viết xong tuần trước. Em sẽ gửi Dũng cùng với biến môi trường.
+
+[09:21:35] PM: OK. Bây giờ, tôi muốn quay lại vấn đề môi trường test. Châu, nếu permission không được giải quyết sớm, em có kế hoạch dự phòng không?
+
+[09:22:05] QA: Em có thể test trên môi trường local, nhưng không thể test được luồng tích hợp. Em cũng có thể dùng account của team khác để test một phần, nhưng sợ ảnh hưởng. Thực sự, việc này cần infra.
+
+[09:22:45] PM: Vậy vẫn là unresolved. Tôi sẽ đôn đốc infra. Không có task riêng cho việc này, nhưng tôi sẽ chịu trách nhiệm follow up.
+
+[09:23:10] Dev: Em xin lưu ý, việc fix lỗi đăng nhập cũng cần test trên môi trường có dữ liệu thật, nếu staging không truy cập được, Châu có thể test local với dữ liệu giả, nhưng khó đảm bảo.
+
+[09:23:45] QA: Em sẽ cố gắng test local trước, rồi khi staging ổn thì test lại.
+
+[09:24:10] PM: Đó là kế hoạch. Có ai muốn thảo luận gì thêm về technical không?
+
+[09:24:40] Dev: Em có một thắc mắc. Trong tài liệu triển khai, có phần mô tả các service cần restart. Dũng định viết thế nào?
+
+[09:25:05] BA: Em sẽ liệt kê các service chính và lệnh restart. Cần Bình confirm danh sách.
+
+[09:25:25] Dev: OK, em sẽ confirm trong email.
+
+[09:25:45] PM: Sắp hết giờ rồi. Tôi sẽ tổng kết lại. Thứ nhất, Bình fix lỗi đăng nhập, push code hôm nay, test ngày mai. Thứ hai, Dũng viết tài liệu hướng dẫn triển khai, deadline 14/2, Bình cung cấp thông tin hôm nay. Thứ ba, Châu viết test case account & phân quyền, không deadline. Thứ tư, vấn đề permission môi trường chưa giải quyết, tôi sẽ xử lý. Còn gì thiếu không?
+
+[09:26:20] Dev: Em nghĩ là đủ. Nhưng em muốn nhấn mạnh, tài liệu triển khai cần được review bởi operation team, Dũng nhớ gửi cho họ.
+
+[09:26:45] BA: Em sẽ gửi cho anh Quân bên operation sau khi hoàn thành.
+
+[09:27:05] QA: Em cũng muốn hỏi, sau khi Bình fix lỗi, em có cần báo cáo kết quả test cho ai không?
+
+[09:27:25] PM: Em báo cáo qua ticket và píng trực tiếp tôi. Không cần họp riêng.
+
+[09:27:45] Dev: Vâng.
+
+[09:28:00] PM: Vậy cảm ơn mọi người. Họp kết thúc.

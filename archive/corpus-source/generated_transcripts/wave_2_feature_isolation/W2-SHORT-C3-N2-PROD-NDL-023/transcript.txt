@@ -1,0 +1,55 @@
+MEETING_ID: W2-SHORT-C3-N2-PROD-NDL-023
+CASE_LABELS: task_without_deadline,first_person_commitment
+MEETING_DATE: 2026-02-17
+PRIMARY_FEATURE: task without deadline
+TITLE: Theo dõi lỗi và tài liệu
+
+[00:00:03] Nam: Chào mọi người, hôm nay mình họp ngắn về việc theo dõi lỗi sau đợt release tuần trước. Tuấn, bên phát triển có ghi nhận gì mới không?
+
+[00:00:12] Tuấn: Em vừa kiểm tra lại, có ba lỗi mới trong module thanh toán, mức medium, và hai lỗi đã fix xong ở bản vá tối qua.
+
+[00:00:21] Nam: Những lỗi fixed đó mình đã test lại chưa, Linh?
+
+[00:00:25] Linh: Em mới test lại một lỗi, còn một lỗi nữa chưa có môi trường để verify. Em đang chờ bên ops setup.
+
+[00:00:33] Tuấn: À đúng rồi, lỗi đó liên quan đến session timeout, trên môi trường dev không tái hiện được. Phải lên staging mới test được.
+
+[00:00:42] Nam: Ops bảo bao giờ staging sẵn sàng?
+
+[00:00:45] Tuấn: Chiều nay. Nhưng em nghĩ nên có một tài liệu tracking riêng cho các lỗi kiểu này, vì tình trạng chờ môi trường xảy ra cũng nhiều.
+
+[00:00:54] Nam: Đúng ý anh. Linh, em đang phụ trách mảng QA, em có thể đảm nhận việc cập nhật và duy trì một file tracking lỗi chi tiết hơn không? Bao gồm các vấn đề như chờ môi trường, blocked, cần clarification từ khách hàng, vân vân.
+
+[00:01:12] Linh: Dạ được anh. Em sẽ tổng hợp lại toàn bộ danh sách lỗi đang mở, phân loại và ghi rõ trạng thái. Cái này cũng giúp ích cho báo cáo cuối tháng.
+
+[00:01:22] Nam: Tốt. Vậy em cứ triển khai nhé. Anh nghĩ tài liệu này nên dùng chung cho cả team dev và QA, để mọi người cùng cập nhật.
+
+[00:01:31] Tuấn: Em có thể phụ một tay, nhưng chỉ phần liên quan đến code fix thôi. Còn mấy phần như chờ môi trường hay clarification thì Linh nắm rõ hơn.
+
+[00:01:40] Linh: Ừ, Tuấn cứ ghi chú vào cột solution, em sẽ import vào sheet chung.
+
+[00:01:46] Nam: Linh, em làm đầu mối nhé. Mọi người sẽ gửi thông tin cho em để cập nhật.
+
+[00:01:52] Linh: Dạ, em nhận nhiệm vụ này. Khi nào bắt đầu thì em sẽ báo lại team.
+
+[00:01:58] Tuấn: Mà việc này có deadline không anh? Hay mình cần có một timeline để không bị trôi?
+
+[00:02:05] Nam: Thực ra cũng không cần gấp gáp. Nội dung này là duy trì liên tục, không có điểm dừng cụ thể. Linh làm trong lúc rảnh, ưu tiên mấy cái hotfix trước mắt vẫn được.
+
+[00:02:18] Linh: Em sẽ cân đối, nhưng không cam kết thời gian cụ thể đâu. Trước đây có task viết guideline test, không có deadline thì để lâu quá cũng mất đà.
+
+[00:02:28] Nam: Ừ, anh biết. Nhưng việc theo dõi lỗi này nó liên tục, em cứ bắt đầu rồi tích lũy dần, không nhất thiết phải xong trong một tuần hay một tháng. Miễn là mỗi ngày một ít, tài liệu sống động là được.
+
+[00:02:41] Tuấn: Vậy em sẽ theo đó, cần gì em bổ sung cho Linh. Còn mấy lỗi mới hôm nay thì em fix nốt trong tuần này.
+
+[00:02:49] Nam: OK, Tuấn fix mấy lỗi medium đó trước thứ Sáu nhé. Còn với Linh, em cứ chủ động update sheet, không áp lực deadline.
+
+[00:02:58] Linh: Dạ rõ rồi anh. Em sẽ tạo file tracking và chia sẻ link nội bộ. Có gì mọi người góp ý thêm.
+
+[00:03:03] Nam: Tốt. Vậy mình chốt: Linh phụ trách duy trì tài liệu theo dõi lỗi, không có deadline cứng, Tuấn fix lỗi mới trước cuối tuần. Ai cần thảo luận thêm gì không?
+
+[00:03:14] Tuấn: Không anh.
+
+[00:03:16] Linh: Em cũng không. Em sẽ mở meeting note riêng cho task này để tracking cập nhật.
+
+[00:03:23] Nam: Cảm ơn mọi người. Kết thúc ở đây nhé.

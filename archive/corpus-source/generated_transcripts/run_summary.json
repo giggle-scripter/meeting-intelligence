@@ -1,0 +1,4342 @@
+{
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "concurrency": 5,
+  "max_attempts": 10,
+  "requested": 86,
+  "succeeded": 86,
+  "failed": 0,
+  "results": [
+    {
+      "wave": 1,
+      "case_index": 1,
+      "meeting_id": "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 2,
+      "meeting_id": "W1-SHORT-C1-N0-IT-DASG-ABS-002",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C1-N0-IT-DASG-ABS-002\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 19.791562800004613
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 3,
+      "meeting_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-003",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C2-N1-PROD-QACC-RDAY-003\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 40.18502560000343
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 4,
+      "meeting_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 42.730768499997794
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 5,
+      "meeting_id": "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 45.4809430000023
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 6,
+      "meeting_id": "W1-SHORT-C1-N0-IT-FPC-DM-006",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C1-N0-IT-FPC-DM-006\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 23.610755599991535
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 7,
+      "meeting_id": "W1-SHORT-C2-N1-PROD-NEG-QUNC-007",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C2-N1-PROD-NEG-QUNC-007\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 83.75453770000604
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 8,
+      "meeting_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-008",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C1-N0-OPS-FPC-NDL-008\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 9,
+      "meeting_id": "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 10,
+      "meeting_id": "W1-SHORT-C1-N0-IT-DASG-ABS-010",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C1-N0-IT-DASG-ABS-010\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 11,
+      "meeting_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-011",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C2-N1-PROD-QACC-RDAY-011\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 12,
+      "meeting_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 13,
+      "meeting_id": "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 14,
+      "meeting_id": "W1-SHORT-C1-N0-IT-FPC-DM-014",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C1-N0-IT-FPC-DM-014\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 65.81785279999895
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 15,
+      "meeting_id": "W1-SHORT-C2-N1-PROD-NEG-QUNC-015",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C2-N1-PROD-NEG-QUNC-015\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 75.22201110000606
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 16,
+      "meeting_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-016",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C1-N0-OPS-FPC-NDL-016\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 17,
+      "meeting_id": "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-017",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-017\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 67.97462130000349
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 18,
+      "meeting_id": "W1-SHORT-C1-N0-IT-DASG-ABS-018",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C1-N0-IT-DASG-ABS-018\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 65.36396680001053
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 19,
+      "meeting_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-019",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C2-N1-PROD-QACC-RDAY-019\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 1,
+      "case_index": 20,
+      "meeting_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_1_baseline\\W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 1,
+      "meeting_id": "W2-SHORT-C3-N1-SW-FPC-001",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N1-SW-FPC-001\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 2,
+      "meeting_id": "W2-SHORT-C2-N2-IT-DASG-002",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N2-IT-DASG-002\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 3,
+      "meeting_id": "W2-SHORT-C3-N0-PROD-QACC-003",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N0-PROD-QACC-003\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 4,
+      "meeting_id": "W2-SHORT-C2-N1-OPS-NOOWN-004",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N1-OPS-NOOWN-004\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 5,
+      "meeting_id": "W2-SHORT-C3-N2-SW-NDL-005",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N2-SW-NDL-005\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 6,
+      "meeting_id": "W2-SHORT-C2-N0-IT-BRST-006",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N0-IT-BRST-006\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 7,
+      "meeting_id": "W2-SHORT-C3-N1-PROD-SUGG-007",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N1-PROD-SUGG-007\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 8,
+      "meeting_id": "W2-SHORT-C2-N2-OPS-PAST-008",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N2-OPS-PAST-008\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 243.09410030000436
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 9,
+      "meeting_id": "W2-SHORT-C3-N0-SW-CANC-009",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N0-SW-CANC-009\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 10,
+      "meeting_id": "W2-SHORT-C2-N1-IT-REJT-010",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N1-IT-REJT-010\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 0; cần ít nhất khoảng 25.",
+            "Không tìm thấy timestamp hợp lệ."
+          ],
+          "elapsed_seconds": 216.53609490000235
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 321.0284459000104
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 11,
+      "meeting_id": "W2-SHORT-C3-N2-PROD-HOFF-011",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N2-PROD-HOFF-011\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 170.00842250000278
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 12,
+      "meeting_id": "W2-SHORT-C2-N0-OPS-DREP-012",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N0-OPS-DREP-012\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 13,
+      "meeting_id": "W2-SHORT-C3-N1-SW-RWKD-013",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N1-SW-RWKD-013\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 14,
+      "meeting_id": "W2-SHORT-C2-N2-IT-WORK-014",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N2-IT-WORK-014\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 173.32453240000177
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 15,
+      "meeting_id": "W2-SHORT-C3-N0-PROD-EVTD-015",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N0-PROD-EVTD-015\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 102.98272299999371
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005193299992242828
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004767100006574765
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.007842700011678971
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005403900009696372
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005185699992580339
+        },
+        {
+          "attempt": 7,
+          "kind": "api_error",
+          "errors": [
+            "RuntimeError: DeepSeek trả content rỗng."
+          ],
+          "elapsed_seconds": 213.86829569999827
+        },
+        {
+          "attempt": 8,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 0; cần ít nhất khoảng 25.",
+            "Không tìm thấy timestamp hợp lệ."
+          ],
+          "elapsed_seconds": 245.66665199999989
+        },
+        {
+          "attempt": 9,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 0; cần ít nhất khoảng 25.",
+            "Không tìm thấy timestamp hợp lệ."
+          ],
+          "elapsed_seconds": 156.00370349999866
+        },
+        {
+          "attempt": 10,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 97.07873639999889
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 16,
+      "meeting_id": "W2-SHORT-C2-N1-OPS-SEPD-016",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N1-OPS-SEPD-016\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 17,
+      "meeting_id": "W2-SHORT-C3-N2-SW-RECF-017",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N2-SW-RECF-017\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 18,
+      "meeting_id": "W2-SHORT-C2-N0-IT-DUPR-018",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N0-IT-DUPR-018\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 19,
+      "meeting_id": "W2-SHORT-C3-N1-PROD-FPC-019",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N1-PROD-FPC-019\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 20,
+      "meeting_id": "W2-SHORT-C2-N2-OPS-DASG-020",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N2-OPS-DASG-020\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 21,
+      "meeting_id": "W2-SHORT-C3-N0-SW-QACC-021",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N0-SW-QACC-021\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 22,
+      "meeting_id": "W2-SHORT-C2-N1-IT-NOOWN-022",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N1-IT-NOOWN-022\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 23,
+      "meeting_id": "W2-SHORT-C3-N2-PROD-NDL-023",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N2-PROD-NDL-023\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 24,
+      "meeting_id": "W2-SHORT-C2-N0-OPS-BRST-024",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N0-OPS-BRST-024\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 102.98119829999632
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.007887700005085208
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004786699995747767
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0058062000025529414
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.011012199989636429
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0050826999940909445
+        },
+        {
+          "attempt": 7,
+          "kind": "api_error",
+          "errors": [
+            "RuntimeError: DeepSeek trả content rỗng."
+          ],
+          "elapsed_seconds": 159.98310440000205
+        },
+        {
+          "attempt": 8,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 268.03588179999497
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 25,
+      "meeting_id": "W2-SHORT-C3-N1-SW-SUGG-025",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N1-SW-SUGG-025\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 26,
+      "meeting_id": "W2-SHORT-C2-N2-IT-PAST-026",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N2-IT-PAST-026\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 102.98276509999414
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0035640999994939193
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005145699993590824
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003228100002161227
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004544999988866039
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005130599995027296
+        },
+        {
+          "attempt": 7,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 0; cần ít nhất khoảng 25.",
+            "Không tìm thấy timestamp hợp lệ."
+          ],
+          "elapsed_seconds": 339.7358424999984
+        },
+        {
+          "attempt": 8,
+          "kind": "api_error",
+          "errors": [
+            "RuntimeError: DeepSeek trả content rỗng."
+          ],
+          "elapsed_seconds": 204.70927380000649
+        },
+        {
+          "attempt": 9,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 0; cần ít nhất khoảng 25.",
+            "Không tìm thấy timestamp hợp lệ."
+          ],
+          "elapsed_seconds": 131.7009659000032
+        },
+        {
+          "attempt": 10,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 98.39565000000584
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 27,
+      "meeting_id": "W2-SHORT-C3-N0-PROD-CANC-027",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N0-PROD-CANC-027\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 102.9855033000058
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.00841039999795612
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003776899990043603
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005256899996311404
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004625999994459562
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005171500000869855
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 344.60098819999257
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 28,
+      "meeting_id": "W2-SHORT-C2-N1-OPS-REJT-028",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N1-OPS-REJT-028\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 102.98813579999842
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005194700002903119
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005271699992590584
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004101899990928359
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004925100001855753
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0051743000076385215
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 310.43162689999735
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 29,
+      "meeting_id": "W2-SHORT-C3-N2-SW-HOFF-029",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C3-N2-SW-HOFF-029\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 2,
+      "case_index": 30,
+      "meeting_id": "W2-SHORT-C2-N0-IT-DREP-030",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_2_feature_isolation\\W2-SHORT-C2-N0-IT-DREP-030\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 1,
+      "meeting_id": "W3-MED-C4-N2-SW-INT-001",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C4-N2-SW-INT-001\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 102.99033260000579
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005249199995887466
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004777699999976903
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005159499996807426
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.007666399993468076
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0052278999937698245
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 380.19660919999296
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 2,
+      "meeting_id": "W3-MED-C3-N1-IT-INT-002",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C3-N1-IT-INT-002\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 102.99409619999642
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005100599999423139
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005409899997175671
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005367899997509085
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003453600002103485
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005341500000213273
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 385.76320619999024
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 3,
+      "meeting_id": "W3-MED-C4-N2-PROD-INT-003",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C4-N2-PROD-INT-003\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 102.99815729999682
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.00526420000824146
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005157599996891804
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005470200005220249
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005078100002720021
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003799400001298636
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 261.92331959999865
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 4,
+      "meeting_id": "W3-MED-C3-N1-OPS-INT-004",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C3-N1-OPS-INT-004\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.00233469999512
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.002951500006020069
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0051928000029874966
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005509700000402518
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.00547460000962019
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004250999991199933
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 197.7865305000014
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 5,
+      "meeting_id": "W3-MED-C4-N2-SW-INT-005",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C4-N2-SW-INT-005\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.00652619999892
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0055921000021044165
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004998400007025339
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005274700000882149
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.00824359999387525
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004751200001919642
+        },
+        {
+          "attempt": 7,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 1204 từ; cần ít nhất khoảng 1800."
+          ],
+          "elapsed_seconds": 130.748517
+        },
+        {
+          "attempt": 8,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 361.7623079000041
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 6,
+      "meeting_id": "W3-MED-C3-N1-IT-INT-006",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C3-N1-IT-INT-006\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 7,
+      "meeting_id": "W3-MED-C4-N2-PROD-INT-007",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C4-N2-PROD-INT-007\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.01084770000307
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005803000007290393
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005185000001802109
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0058428000047570094
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004864300004555844
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0033469000045442954
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 169.69387180000194
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 8,
+      "meeting_id": "W3-MED-C3-N1-OPS-INT-008",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C3-N1-OPS-INT-008\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.01426290000381
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005071300009149127
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004171900000073947
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003023800003575161
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004789499987964518
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004631000003428198
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 57.60762189999514
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 9,
+      "meeting_id": "W3-MED-C4-N2-SW-INT-009",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C4-N2-SW-INT-009\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.01731090000249
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005128400007379241
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004692499991506338
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004354900011094287
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.010536499990848824
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004087299996172078
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 80.76267870000447
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 10,
+      "meeting_id": "W3-MED-C3-N1-IT-INT-010",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C3-N1-IT-INT-010\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 11,
+      "meeting_id": "W3-MED-C4-N2-PROD-INT-011",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C4-N2-PROD-INT-011\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 12,
+      "meeting_id": "W3-MED-C3-N1-OPS-INT-012",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C3-N1-OPS-INT-012\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.01942759999656
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004132800007937476
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0056287000043084845
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005274399998597801
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005492199998116121
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.002968699991470203
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 96.59203850000631
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 13,
+      "meeting_id": "W3-MED-C4-N2-SW-INT-013",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C4-N2-SW-INT-013\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.01964630000293
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004516299988608807
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005369499995140359
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005368199999793433
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004973999995854683
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005178899999009445
+        },
+        {
+          "attempt": 7,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 1219 từ; cần ít nhất khoảng 1800.",
+            "Quá ít turn: 49; cần ít nhất khoảng 80."
+          ],
+          "elapsed_seconds": 409.3673462000006
+        },
+        {
+          "attempt": 8,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 238.6314960000018
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 14,
+      "meeting_id": "W3-MED-C3-N1-IT-INT-014",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C3-N1-IT-INT-014\\transcript.txt"
+      ],
+      "attempts": [],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 15,
+      "meeting_id": "W3-MED-C4-N2-PROD-INT-015",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C4-N2-PROD-INT-015\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.02024240000173
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.008314299993799068
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0052281999960541725
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004157099989242852
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0028338000120129436
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.00455810000130441
+        },
+        {
+          "attempt": 7,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 1265 từ; cần ít nhất khoảng 1800.",
+            "Quá ít turn: 49; cần ít nhất khoảng 80."
+          ],
+          "elapsed_seconds": 137.42401240000618
+        },
+        {
+          "attempt": 8,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 298.2549113999994
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 16,
+      "meeting_id": "W3-MED-C3-N1-OPS-INT-016",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C3-N1-OPS-INT-016\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.0215487999958
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0032619999983580783
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004658499994548038
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0030393999913940206
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0043436999985715374
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005442399997264147
+        },
+        {
+          "attempt": 7,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 0; cần ít nhất khoảng 80.",
+            "Không tìm thấy timestamp hợp lệ."
+          ],
+          "elapsed_seconds": 207.20159989999956
+        },
+        {
+          "attempt": 8,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 1051 từ; cần ít nhất khoảng 1800.",
+            "Quá ít turn: 47; cần ít nhất khoảng 80."
+          ],
+          "elapsed_seconds": 293.4736857000098
+        },
+        {
+          "attempt": 9,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 0; cần ít nhất khoảng 80.",
+            "Không tìm thấy timestamp hợp lệ."
+          ],
+          "elapsed_seconds": 161.784270499993
+        },
+        {
+          "attempt": 10,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 174.01614300000074
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 17,
+      "meeting_id": "W3-MED-C4-N2-SW-INT-017",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C4-N2-SW-INT-017\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.02251329999126
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005648200007271953
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005008399995858781
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005467599999974482
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004702999998698942
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003587100000004284
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 264.9336823000049
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 18,
+      "meeting_id": "W3-MED-C3-N1-IT-INT-018",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C3-N1-IT-INT-018\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.02423299998918
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0042166999919572845
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004190199993900023
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005573300004471093
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.006975600001169369
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003599699994083494
+        },
+        {
+          "attempt": 7,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 1098 từ; cần ít nhất khoảng 1800."
+          ],
+          "elapsed_seconds": 183.765324100008
+        },
+        {
+          "attempt": 8,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 329.95329210000637
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 19,
+      "meeting_id": "W3-MED-C4-N2-PROD-INT-019",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C4-N2-PROD-INT-019\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.02565549999417
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003744599991478026
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004572700010612607
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005029799998737872
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004988300002878532
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.00493369999458082
+        },
+        {
+          "attempt": 7,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 0; cần ít nhất khoảng 80.",
+            "Không tìm thấy timestamp hợp lệ."
+          ],
+          "elapsed_seconds": 94.71023859998968
+        },
+        {
+          "attempt": 8,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 309.6330567999976
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 3,
+      "case_index": 20,
+      "meeting_id": "W3-MED-C3-N1-OPS-INT-020",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_3_feature_interaction\\W3-MED-C3-N1-OPS-INT-020\\transcript.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.02701240000897
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003973500002757646
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005364800003007986
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004775499997776933
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0053989000007277355
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005182799999602139
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 349.69016920001013
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 1,
+      "meeting_id": "W4-LONG-C5-N2-SW-STATE-001",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N2-SW-STATE-001\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N2-SW-STATE-001\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N2-SW-STATE-001\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N2-SW-STATE-001\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N2-SW-STATE-001\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.0283774999989
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003930000006221235
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003380900001502596
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004510200000368059
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005410599987953901
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004513399995630607
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 256.3544661999913
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 264.68097139999736
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 165.47022620000644
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 119.75272869999753
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 765 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 39; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 104.21244279999519
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 92.87222499999916
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 2,
+      "meeting_id": "W4-LONG-C4-N3-IT-STATE-002",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N3-IT-STATE-002\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N3-IT-STATE-002\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N3-IT-STATE-002\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N3-IT-STATE-002\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N3-IT-STATE-002\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.02959089999786
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004645399996661581
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.007814500000677072
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004695399999036454
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005081900002551265
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005386500008171424
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 288.09366150001006
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 261.97138459999405
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 135.32674089999637
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 803 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 34; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 124.1938622000016
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 110.37434100000246
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 855 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 86.45574450001004
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 76.70175399999425
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 3,
+      "meeting_id": "W4-LONG-C5-N1-PROD-STATE-003",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N1-PROD-STATE-003\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N1-PROD-STATE-003\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N1-PROD-STATE-003\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N1-PROD-STATE-003\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N1-PROD-STATE-003\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.03078749999986
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005443100002594292
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004412599999341182
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004886299997451715
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005637700000079349
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005484699999215081
+        },
+        {
+          "attempt": 7,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 125.13506909999705
+        },
+        {
+          "attempt": 8,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 310.8409293000004
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 188.20958720000635
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 119.3394616000005
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 114.21856920000573
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 787 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 34; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 89.69859050000377
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 877 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 79.8413520000031
+        },
+        {
+          "attempt": 3,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 65.96983240000554
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 4,
+      "meeting_id": "W4-LONG-C4-N2-OPS-STATE-004",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N2-OPS-STATE-004\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N2-OPS-STATE-004\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N2-OPS-STATE-004\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N2-OPS-STATE-004\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N2-OPS-STATE-004\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.03208350000205
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005707300006179139
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0038690000073984265
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005459299994981848
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0031362000008812174
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.006251200000406243
+        },
+        {
+          "attempt": 7,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 39; cần ít nhất khoảng 60.",
+            "Turn ID không tăng liên tục từng đơn vị."
+          ],
+          "elapsed_seconds": 312.0289963999967
+        },
+        {
+          "attempt": 8,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 242.11262620000343
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 145.7565290999919
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 109.10295689999475
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 108.46009860000049
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 80.61739020000095
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 5,
+      "meeting_id": "W4-LONG-C5-N3-SW-STATE-005",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N3-SW-STATE-005\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N3-SW-STATE-005\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N3-SW-STATE-005\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N3-SW-STATE-005\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N3-SW-STATE-005\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.03352779999841
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005056199996033683
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005081800001789816
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.00806670000019949
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003218899990315549
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005458700004965067
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 263.3547099999996
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 300.73335589999624
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 145.24360059999162
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 111.60620429999835
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 864 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 29; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 109.4190099999978
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 844 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 35; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 79.35805670000263
+        },
+        {
+          "attempt": 3,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 897 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 35; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 66.78220349999901
+        },
+        {
+          "attempt": 4,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 747 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 29; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 45.304446900001494
+        },
+        {
+          "attempt": 5,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 39.94514110000455
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 6,
+      "meeting_id": "W4-LONG-C4-N1-IT-STATE-006",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N1-IT-STATE-006\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N1-IT-STATE-006\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N1-IT-STATE-006\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N1-IT-STATE-006\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N1-IT-STATE-006\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.03512729999784
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005437100000563078
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005314499998348765
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.00402260001283139
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0035591999912867323
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005634100001771003
+        },
+        {
+          "attempt": 7,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 19; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 126.95720420000725
+        },
+        {
+          "attempt": 8,
+          "kind": "api_error",
+          "errors": [
+            "RuntimeError: DeepSeek trả content rỗng."
+          ],
+          "elapsed_seconds": 295.2121114000038
+        },
+        {
+          "attempt": 9,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 168.86488229999668
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 125.58349869999802
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 101.38509599999816
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 109.92563589999918
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 566 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 33; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 64.73982319999777
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 737 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 52.93388080000295
+        },
+        {
+          "attempt": 3,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 39.339449199993396
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 7,
+      "meeting_id": "W4-LONG-C5-N2-PROD-STATE-007",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N2-PROD-STATE-007\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N2-PROD-STATE-007\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N2-PROD-STATE-007\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N2-PROD-STATE-007\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N2-PROD-STATE-007\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.03644850000273
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005021200006012805
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004915599987725727
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004886899987468496
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0041373999993084
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004666999986511655
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 106.37647639999341
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 317.11863179999636
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 191.6772781000036
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 143.7539839999954
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 864 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 95.70163219999813
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 827 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 106.23370799999975
+        },
+        {
+          "attempt": 3,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 853 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 30; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 73.94151389999024
+        },
+        {
+          "attempt": 4,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 58.33677150000585
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 8,
+      "meeting_id": "W4-LONG-C4-N3-OPS-STATE-008",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N3-OPS-STATE-008\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N3-OPS-STATE-008\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N3-OPS-STATE-008\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N3-OPS-STATE-008\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N3-OPS-STATE-008\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.03775109999697
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0041658999980427325
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005095500004244968
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005975099993520416
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005092899998999201
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005236500001046807
+        },
+        {
+          "attempt": 7,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 0; cần ít nhất khoảng 60.",
+            "Không tìm thấy timestamp hợp lệ.",
+            "Không tìm thấy turn ID dạng T000001."
+          ],
+          "elapsed_seconds": 292.0225888999994
+        },
+        {
+          "attempt": 8,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 247.95892739998817
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 150.82753009999578
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 129.68084509999608
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 117.87090860000171
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 878 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 89.73464499998954
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 834 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 57.90910140000051
+        },
+        {
+          "attempt": 3,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 854 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 29.599333100006334
+        },
+        {
+          "attempt": 4,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 784 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 32.73575649999839
+        },
+        {
+          "attempt": 5,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 24.609858499999973
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 9,
+      "meeting_id": "W4-LONG-C5-N1-SW-STATE-009",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N1-SW-STATE-009\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N1-SW-STATE-009\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N1-SW-STATE-009\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N1-SW-STATE-009\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N1-SW-STATE-009\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.03906070000085
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005061399991973303
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.00697760000184644
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004731200009700842
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004135700000915676
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004490499995881692
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 128.21040170000924
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 302.30213009999716
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 201.7625521000009
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 130.64984769999865
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 110.13377790000231
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 10,
+      "meeting_id": "W4-LONG-C4-N2-IT-STATE-010",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N2-IT-STATE-010\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N2-IT-STATE-010\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N2-IT-STATE-010\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N2-IT-STATE-010\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N2-IT-STATE-010\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.04085980000673
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004812400002265349
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005011500004911795
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005593199995928444
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0048774000024423
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003763699991395697
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 390.25313710000773
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 212.58251189999282
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 144.92279739999503
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 885 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 102.93973909999477
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 116.87824869999895
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 90.04681169999822
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 11,
+      "meeting_id": "W4-LONG-C5-N3-PROD-STATE-011",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N3-PROD-STATE-011\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N3-PROD-STATE-011\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N3-PROD-STATE-011\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N3-PROD-STATE-011\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C5-N3-PROD-STATE-011\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.04208679999283
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005238600002485327
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003089300007559359
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005019599993829615
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005002799996873364
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005155699996976182
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 213.2980813000031
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 273.7992596999975
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 173.23780029999034
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 38; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 121.55917930000578
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 124.64373989999876
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 35; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 93.38724370001
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 74.25317369999539
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 4,
+      "case_index": 12,
+      "meeting_id": "W4-LONG-C4-N1-OPS-STATE-012",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N1-OPS-STATE-012\\part_01.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N1-OPS-STATE-012\\part_02.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N1-OPS-STATE-012\\part_03.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N1-OPS-STATE-012\\part_04.txt",
+        "generated_transcripts\\wave_4_long_state_reducer\\W4-LONG-C4-N1-OPS-STATE-012\\part_05.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.043294099989
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0048123000015039
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005789499991806224
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005135700004757382
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004633500007912517
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004880899999989197
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 249.4059375999932
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 270.0141345000011
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 143.60353069999837
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 124.72479680000106
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 686 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 27; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 100.61448689999816
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 883 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 92.43591529999685
+        },
+        {
+          "attempt": 3,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 705 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 37; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 70.46473130000231
+        },
+        {
+          "attempt": 4,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 53.37408380000852
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 5,
+      "case_index": 1,
+      "meeting_id": "W5-XL-C5-N3-SW-STRESS-001",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-SW-STRESS-001\\part_01.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-SW-STRESS-001\\part_02.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-SW-STRESS-001\\part_03.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-SW-STRESS-001\\part_04.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-SW-STRESS-001\\part_05.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-SW-STRESS-001\\part_06.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-SW-STRESS-001\\part_07.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-SW-STRESS-001\\part_08.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-SW-STRESS-001\\part_09.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-SW-STRESS-001\\part_10.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.04462339999736
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005333000008249655
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005227000001468696
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005749100004322827
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005353699991246685
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005407199991168454
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 345.49435580000863
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 253.8958214999875
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 144.83294009999372
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 105.9798879000009
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 755 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 32; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 106.93329210000229
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Timestamp không tăng dần."
+          ],
+          "elapsed_seconds": 83.32517090000329
+        },
+        {
+          "attempt": 3,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 820 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 34; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 56.488650899991626
+        },
+        {
+          "attempt": 4,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 47.77429360001406
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 822 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 32; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 22.4761029999936
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 33.99684839999827
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ít turn: 39; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 23.00887300001341
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 30.248259400003008
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 24.78748289999203
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 20.366399099992123
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 716 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 29; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 17.194018199996208
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 21.32004350000352
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 5,
+      "case_index": 2,
+      "meeting_id": "W5-XL-C5-N2-IT-STRESS-002",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-IT-STRESS-002\\part_01.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-IT-STRESS-002\\part_02.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-IT-STRESS-002\\part_03.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-IT-STRESS-002\\part_04.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-IT-STRESS-002\\part_05.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-IT-STRESS-002\\part_06.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-IT-STRESS-002\\part_07.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-IT-STRESS-002\\part_08.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-IT-STRESS-002\\part_09.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-IT-STRESS-002\\part_10.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.04698329999519
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.00542420000419952
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0049310000031255186
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.010724399995524436
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005304899998009205
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005150400000275113
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 315.56086830000277
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 244.94664330000523
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 131.64324299999862
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 125.76005929999519
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 119.5166978000052
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 842 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 39; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 93.48579439999594
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 71.8962915000011
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 38.17500760000257
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 756 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 26.415137799995136
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 777 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 19.090606899990235
+        },
+        {
+          "attempt": 3,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 672 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 33; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 16.481953000009526
+        },
+        {
+          "attempt": 4,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 765 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 35; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 17.474192499998026
+        },
+        {
+          "attempt": 5,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 24.670652800006792
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 32.37633559999813
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 735 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 20.95808159999433
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 767 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 23.429372700004023
+        },
+        {
+          "attempt": 3,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 729 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 36; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 18.58664029999636
+        },
+        {
+          "attempt": 4,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 20.681776400000672
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 5,
+      "case_index": 3,
+      "meeting_id": "W5-XL-C5-N3-PROD-STRESS-003",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-PROD-STRESS-003\\part_01.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-PROD-STRESS-003\\part_02.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-PROD-STRESS-003\\part_03.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-PROD-STRESS-003\\part_04.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-PROD-STRESS-003\\part_05.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-PROD-STRESS-003\\part_06.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-PROD-STRESS-003\\part_07.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-PROD-STRESS-003\\part_08.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-PROD-STRESS-003\\part_09.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N3-PROD-STRESS-003\\part_10.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.04826209999737
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003674799998407252
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004582299996400252
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005290899993269704
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.005155700011528097
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.003944900003261864
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 352.1863216000056
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 287.8158972999954
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 150.15090929999133
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 805 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 111.31353109999327
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 103.27601990000403
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 878 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 79.95186770000146
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 45.004673199990066
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 38.90684130000591
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 33.903220100008184
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 20.782408800005214
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 830 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 26.222224399985862
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 722 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 24.37694949998695
+        },
+        {
+          "attempt": 3,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 709 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 21.94956500000262
+        },
+        {
+          "attempt": 4,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 27.274336899994523
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 596 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 35; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 14.887898599990876
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 806 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 17.850394699999015
+        },
+        {
+          "attempt": 3,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 22.05239189999702
+        }
+      ],
+      "final_errors": []
+    },
+    {
+      "wave": 5,
+      "case_index": 4,
+      "meeting_id": "W5-XL-C5-N2-OPS-STRESS-004",
+      "success": true,
+      "files": [
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-OPS-STRESS-004\\part_01.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-OPS-STRESS-004\\part_02.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-OPS-STRESS-004\\part_03.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-OPS-STRESS-004\\part_04.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-OPS-STRESS-004\\part_05.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-OPS-STRESS-004\\part_06.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-OPS-STRESS-004\\part_07.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-OPS-STRESS-004\\part_08.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-OPS-STRESS-004\\part_09.txt",
+        "generated_transcripts\\wave_5_extra_long_stress\\W5-XL-C5-N2-OPS-STRESS-004\\part_10.txt"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 103.04946840000048
+        },
+        {
+          "attempt": 2,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.004660499995225109
+        },
+        {
+          "attempt": 3,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0053084999963175505
+        },
+        {
+          "attempt": 4,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0042932999931508675
+        },
+        {
+          "attempt": 5,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.0033226000086870044
+        },
+        {
+          "attempt": 6,
+          "kind": "api_error",
+          "errors": [
+            "APIConnectionError: Connection error."
+          ],
+          "elapsed_seconds": 0.00583379999443423
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 57.41971889999695
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 350.2335571000003
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 855 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 191.62331110000378
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Turn đầu phải là T000162, nhận T000001."
+          ],
+          "elapsed_seconds": 128.3070604999957
+        },
+        {
+          "attempt": 3,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 848 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 99.75249220000114
+        },
+        {
+          "attempt": 4,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 103.93244829999458
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 92.54490369999257
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 644 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 37; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 46.35418109998864
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 51.228811799999676
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 884 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 22.335590000002412
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 23.61564410000574
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 23.171182900012354
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 731 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 36; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 15.520422400004463
+        },
+        {
+          "attempt": 2,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 810 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 17.71116130000155
+        },
+        {
+          "attempt": 3,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 573 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 30; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 14.226000800001202
+        },
+        {
+          "attempt": 4,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 791 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 19.5322840000008
+        },
+        {
+          "attempt": 5,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 614 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 33; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 15.898161999997683
+        },
+        {
+          "attempt": 6,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 752 từ; cần ít nhất khoảng 1200.",
+            "Quá ít turn: 36; cần ít nhất khoảng 60."
+          ],
+          "elapsed_seconds": 18.10352590000548
+        },
+        {
+          "attempt": 7,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 23.536511400001473
+        },
+        {
+          "attempt": 1,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 31.551834899990354
+        },
+        {
+          "attempt": 1,
+          "kind": "validation_error",
+          "errors": [
+            "Quá ngắn: 784 từ; cần ít nhất khoảng 1200."
+          ],
+          "elapsed_seconds": 16.42592490000243
+        },
+        {
+          "attempt": 2,
+          "kind": "success",
+          "errors": [],
+          "elapsed_seconds": 23.336532499990426
+        }
+      ],
+      "final_errors": []
+    }
+  ]
+}

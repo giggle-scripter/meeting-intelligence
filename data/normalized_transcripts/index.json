@@ -1,0 +1,1615 @@
+{
+  "schema_version": "1.0",
+  "dataset_name": "normalized-generated-transcripts",
+  "source": "../generated_transcripts",
+  "case_count": 86,
+  "ground_truth_available": false,
+  "cases": [
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-002",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Theo dõi tiến độ tài liệu",
+      "meeting_date": "2026-01-17",
+      "labels": [
+        "direct_assignment",
+        "absolute_date",
+        "clean_transcript"
+      ],
+      "path": "cases/W1-SHORT-C1-N0-IT-DASG-ABS-002",
+      "part_count": 1,
+      "word_count": 535,
+      "turn_count": 30,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-010",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Theo dõi tiến độ tài liệu",
+      "meeting_date": "2026-01-25",
+      "labels": [
+        "direct_assignment",
+        "absolute_date",
+        "clean_transcript"
+      ],
+      "path": "cases/W1-SHORT-C1-N0-IT-DASG-ABS-010",
+      "part_count": 1,
+      "word_count": 625,
+      "turn_count": 23,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-018",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Theo dõi tiến độ tài liệu",
+      "meeting_date": "2026-02-02",
+      "labels": [
+        "direct_assignment",
+        "absolute_date",
+        "clean_transcript"
+      ],
+      "path": "cases/W1-SHORT-C1-N0-IT-DASG-ABS-018",
+      "part_count": 1,
+      "word_count": 541,
+      "turn_count": 25,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-FPC-DM-006",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Theo dõi tiến độ tài liệu",
+      "meeting_date": "2026-01-21",
+      "labels": [
+        "first_person_commitment",
+        "day_month_deadline",
+        "mild_noise"
+      ],
+      "path": "cases/W1-SHORT-C1-N0-IT-FPC-DM-006",
+      "part_count": 1,
+      "word_count": 697,
+      "turn_count": 37,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-FPC-DM-014",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Theo dõi tiến độ tài liệu",
+      "meeting_date": "2026-01-29",
+      "labels": [
+        "first_person_commitment",
+        "day_month_deadline",
+        "mild_noise"
+      ],
+      "path": "cases/W1-SHORT-C1-N0-IT-FPC-DM-014",
+      "part_count": 1,
+      "word_count": 500,
+      "turn_count": 26,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-008",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Chuẩn bị bản demo",
+      "meeting_date": "2026-01-23",
+      "labels": [
+        "first_person_commitment",
+        "no_deadline",
+        "mild_noise"
+      ],
+      "path": "cases/W1-SHORT-C1-N0-OPS-FPC-NDL-008",
+      "part_count": 1,
+      "word_count": 440,
+      "turn_count": 18,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-016",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Chuẩn bị bản demo",
+      "meeting_date": "2026-01-31",
+      "labels": [
+        "first_person_commitment",
+        "no_deadline",
+        "mild_noise"
+      ],
+      "path": "cases/W1-SHORT-C1-N0-OPS-FPC-NDL-016",
+      "part_count": 1,
+      "word_count": 687,
+      "turn_count": 30,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Chuẩn bị bản demo",
+      "meeting_date": "2026-01-19",
+      "labels": [
+        "task_without_deadline",
+        "negative_context",
+        "clean_transcript"
+      ],
+      "path": "cases/W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004",
+      "part_count": 1,
+      "word_count": 681,
+      "turn_count": 47,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Chuẩn bị bản demo",
+      "meeting_date": "2026-01-27",
+      "labels": [
+        "task_without_deadline",
+        "negative_context",
+        "clean_transcript"
+      ],
+      "path": "cases/W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012",
+      "part_count": 1,
+      "word_count": 476,
+      "turn_count": 22,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Chuẩn bị bản demo",
+      "meeting_date": "2026-02-04",
+      "labels": [
+        "task_without_deadline",
+        "negative_context",
+        "clean_transcript"
+      ],
+      "path": "cases/W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020",
+      "part_count": 1,
+      "word_count": 635,
+      "turn_count": 26,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-PROD-NEG-QUNC-007",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Rà soát lỗi đăng nhập",
+      "meeting_date": "2026-01-22",
+      "labels": [
+        "question_unconfirmed",
+        "negative_only",
+        "clean_transcript"
+      ],
+      "path": "cases/W1-SHORT-C2-N1-PROD-NEG-QUNC-007",
+      "part_count": 1,
+      "word_count": 552,
+      "turn_count": 26,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-PROD-NEG-QUNC-015",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Rà soát lỗi đăng nhập",
+      "meeting_date": "2026-01-30",
+      "labels": [
+        "question_unconfirmed",
+        "negative_only",
+        "clean_transcript"
+      ],
+      "path": "cases/W1-SHORT-C2-N1-PROD-NEG-QUNC-015",
+      "part_count": 1,
+      "word_count": 549,
+      "turn_count": 23,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-003",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Rà soát lỗi đăng nhập",
+      "meeting_date": "2026-01-18",
+      "labels": [
+        "question_then_acceptance",
+        "relative_day_deadline",
+        "mild_noise"
+      ],
+      "path": "cases/W1-SHORT-C2-N1-PROD-QACC-RDAY-003",
+      "part_count": 1,
+      "word_count": 554,
+      "turn_count": 35,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-011",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Rà soát lỗi đăng nhập",
+      "meeting_date": "2026-01-26",
+      "labels": [
+        "question_then_acceptance",
+        "relative_day_deadline",
+        "mild_noise"
+      ],
+      "path": "cases/W1-SHORT-C2-N1-PROD-QACC-RDAY-011",
+      "part_count": 1,
+      "word_count": 453,
+      "turn_count": 23,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-019",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Rà soát lỗi đăng nhập",
+      "meeting_date": "2026-02-03",
+      "labels": [
+        "question_then_acceptance",
+        "relative_day_deadline",
+        "mild_noise"
+      ],
+      "path": "cases/W1-SHORT-C2-N1-PROD-QACC-RDAY-019",
+      "part_count": 1,
+      "word_count": 551,
+      "turn_count": 23,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Chuẩn bị môi trường kiểm thử",
+      "meeting_date": "2026-01-20",
+      "labels": [
+        "direct_assignment",
+        "weekday_next",
+        "negative_context"
+      ],
+      "path": "cases/W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005",
+      "part_count": 1,
+      "word_count": 556,
+      "turn_count": 32,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Chuẩn bị môi trường kiểm thử",
+      "meeting_date": "2026-01-28",
+      "labels": [
+        "direct_assignment",
+        "weekday_next",
+        "negative_context"
+      ],
+      "path": "cases/W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013",
+      "part_count": 1,
+      "word_count": 538,
+      "turn_count": 21,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Chuẩn bị môi trường kiểm thử",
+      "meeting_date": "2026-01-16",
+      "labels": [
+        "first_person_commitment",
+        "weekday_deadline",
+        "negative_context"
+      ],
+      "path": "cases/W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001",
+      "part_count": 1,
+      "word_count": 664,
+      "turn_count": 25,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Chuẩn bị môi trường kiểm thử",
+      "meeting_date": "2026-01-24",
+      "labels": [
+        "first_person_commitment",
+        "weekday_deadline",
+        "negative_context"
+      ],
+      "path": "cases/W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009",
+      "part_count": 1,
+      "word_count": 505,
+      "turn_count": 20,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-017",
+      "wave": 1,
+      "wave_name": "wave_1_baseline",
+      "meeting_title": "Chuẩn bị môi trường kiểm thử",
+      "meeting_date": "2026-02-01",
+      "labels": [
+        "first_person_commitment",
+        "weekday_deadline",
+        "negative_context"
+      ],
+      "path": "cases/W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-017",
+      "part_count": 1,
+      "word_count": 632,
+      "turn_count": 29,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N0-IT-BRST-006",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Trao đổi kế hoạch tích hợp",
+      "meeting_date": "2026-01-31",
+      "labels": [
+        "brainstorm_only",
+        "no_active_task"
+      ],
+      "path": "cases/W2-SHORT-C2-N0-IT-BRST-006",
+      "part_count": 1,
+      "word_count": 892,
+      "turn_count": 25,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N0-IT-DREP-030",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Trao đổi kế hoạch tích hợp",
+      "meeting_date": "2026-02-24",
+      "labels": [
+        "deadline_replacement",
+        "deadline_in_separate_sentence"
+      ],
+      "path": "cases/W2-SHORT-C2-N0-IT-DREP-030",
+      "part_count": 1,
+      "word_count": 590,
+      "turn_count": 38,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N0-IT-DUPR-018",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Trao đổi kế hoạch tích hợp",
+      "meeting_date": "2026-02-12",
+      "labels": [
+        "task_mentioned_across_turns",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W2-SHORT-C2-N0-IT-DUPR-018",
+      "part_count": 1,
+      "word_count": 582,
+      "turn_count": 28,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N0-OPS-BRST-024",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Chuẩn bị bản phát hành nội bộ",
+      "meeting_date": "2026-02-18",
+      "labels": [
+        "brainstorm_only",
+        "no_active_task"
+      ],
+      "path": "cases/W2-SHORT-C2-N0-OPS-BRST-024",
+      "part_count": 1,
+      "word_count": 980,
+      "turn_count": 37,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N0-OPS-DREP-012",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Chuẩn bị bản phát hành nội bộ",
+      "meeting_date": "2026-02-06",
+      "labels": [
+        "deadline_replacement",
+        "deadline_in_separate_sentence"
+      ],
+      "path": "cases/W2-SHORT-C2-N0-OPS-DREP-012",
+      "part_count": 1,
+      "word_count": 622,
+      "turn_count": 25,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N1-IT-NOOWN-022",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Trao đổi kế hoạch tích hợp",
+      "meeting_date": "2026-02-16",
+      "labels": [
+        "task_without_owner",
+        "unresolved_owner"
+      ],
+      "path": "cases/W2-SHORT-C2-N1-IT-NOOWN-022",
+      "part_count": 1,
+      "word_count": 827,
+      "turn_count": 26,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N1-IT-REJT-010",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Trao đổi kế hoạch tích hợp",
+      "meeting_date": "2026-02-04",
+      "labels": [
+        "task_rejection",
+        "rejected_without_replacement"
+      ],
+      "path": "cases/W2-SHORT-C2-N1-IT-REJT-010",
+      "part_count": 1,
+      "word_count": 667,
+      "turn_count": 26,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N1-OPS-NOOWN-004",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Chuẩn bị bản phát hành nội bộ",
+      "meeting_date": "2026-01-29",
+      "labels": [
+        "task_without_owner",
+        "unresolved_owner"
+      ],
+      "path": "cases/W2-SHORT-C2-N1-OPS-NOOWN-004",
+      "part_count": 1,
+      "word_count": 547,
+      "turn_count": 29,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N1-OPS-REJT-028",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Chuẩn bị bản phát hành nội bộ",
+      "meeting_date": "2026-02-22",
+      "labels": [
+        "task_rejection",
+        "rejected_without_replacement"
+      ],
+      "path": "cases/W2-SHORT-C2-N1-OPS-REJT-028",
+      "part_count": 1,
+      "word_count": 707,
+      "turn_count": 36,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N1-OPS-SEPD-016",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Chuẩn bị bản phát hành nội bộ",
+      "meeting_date": "2026-02-10",
+      "labels": [
+        "deadline_in_separate_sentence",
+        "task_mentioned_across_turns"
+      ],
+      "path": "cases/W2-SHORT-C2-N1-OPS-SEPD-016",
+      "part_count": 1,
+      "word_count": 798,
+      "turn_count": 26,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N2-IT-DASG-002",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Trao đổi kế hoạch tích hợp",
+      "meeting_date": "2026-01-27",
+      "labels": [
+        "direct_assignment",
+        "negative_context"
+      ],
+      "path": "cases/W2-SHORT-C2-N2-IT-DASG-002",
+      "part_count": 1,
+      "word_count": 697,
+      "turn_count": 26,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N2-IT-PAST-026",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Trao đổi kế hoạch tích hợp",
+      "meeting_date": "2026-02-20",
+      "labels": [
+        "past_completed_work",
+        "informational_statement"
+      ],
+      "path": "cases/W2-SHORT-C2-N2-IT-PAST-026",
+      "part_count": 1,
+      "word_count": 777,
+      "turn_count": 26,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N2-IT-WORK-014",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Trao đổi kế hoạch tích hợp",
+      "meeting_date": "2026-02-08",
+      "labels": [
+        "working_day_duration",
+        "deadline_in_separate_sentence"
+      ],
+      "path": "cases/W2-SHORT-C2-N2-IT-WORK-014",
+      "part_count": 1,
+      "word_count": 910,
+      "turn_count": 44,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N2-OPS-DASG-020",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Chuẩn bị bản phát hành nội bộ",
+      "meeting_date": "2026-02-14",
+      "labels": [
+        "direct_assignment",
+        "negative_context"
+      ],
+      "path": "cases/W2-SHORT-C2-N2-OPS-DASG-020",
+      "part_count": 1,
+      "word_count": 692,
+      "turn_count": 29,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C2-N2-OPS-PAST-008",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Chuẩn bị bản phát hành nội bộ",
+      "meeting_date": "2026-02-02",
+      "labels": [
+        "past_completed_work",
+        "informational_statement"
+      ],
+      "path": "cases/W2-SHORT-C2-N2-OPS-PAST-008",
+      "part_count": 1,
+      "word_count": 860,
+      "turn_count": 38,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N0-PROD-CANC-027",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Theo dõi lỗi và tài liệu",
+      "meeting_date": "2026-02-21",
+      "labels": [
+        "task_cancellation",
+        "cancelled_not_output"
+      ],
+      "path": "cases/W2-SHORT-C3-N0-PROD-CANC-027",
+      "part_count": 1,
+      "word_count": 576,
+      "turn_count": 22,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N0-PROD-EVTD-015",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Theo dõi lỗi và tài liệu",
+      "meeting_date": "2026-02-09",
+      "labels": [
+        "event_dependent_deadline",
+        "dependency_commitment"
+      ],
+      "path": "cases/W2-SHORT-C3-N0-PROD-EVTD-015",
+      "part_count": 1,
+      "word_count": 732,
+      "turn_count": 32,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N0-PROD-QACC-003",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Theo dõi lỗi và tài liệu",
+      "meeting_date": "2026-01-28",
+      "labels": [
+        "question_then_acceptance",
+        "task_confirmed_later"
+      ],
+      "path": "cases/W2-SHORT-C3-N0-PROD-QACC-003",
+      "part_count": 1,
+      "word_count": 885,
+      "turn_count": 24,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N0-SW-CANC-009",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Rà soát công việc sprint",
+      "meeting_date": "2026-02-03",
+      "labels": [
+        "task_cancellation",
+        "cancelled_not_output"
+      ],
+      "path": "cases/W2-SHORT-C3-N0-SW-CANC-009",
+      "part_count": 1,
+      "word_count": 601,
+      "turn_count": 23,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N0-SW-QACC-021",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Rà soát công việc sprint",
+      "meeting_date": "2026-02-15",
+      "labels": [
+        "question_then_acceptance",
+        "task_confirmed_later"
+      ],
+      "path": "cases/W2-SHORT-C3-N0-SW-QACC-021",
+      "part_count": 1,
+      "word_count": 634,
+      "turn_count": 24,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N1-PROD-FPC-019",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Theo dõi lỗi và tài liệu",
+      "meeting_date": "2026-02-13",
+      "labels": [
+        "first_person_commitment",
+        "negative_context"
+      ],
+      "path": "cases/W2-SHORT-C3-N1-PROD-FPC-019",
+      "part_count": 1,
+      "word_count": 829,
+      "turn_count": 26,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N1-PROD-SUGG-007",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Theo dõi lỗi và tài liệu",
+      "meeting_date": "2026-02-01",
+      "labels": [
+        "suggestion_not_committed",
+        "no_active_task"
+      ],
+      "path": "cases/W2-SHORT-C3-N1-PROD-SUGG-007",
+      "part_count": 1,
+      "word_count": 851,
+      "turn_count": 25,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N1-SW-FPC-001",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Rà soát công việc sprint",
+      "meeting_date": "2026-01-26",
+      "labels": [
+        "first_person_commitment",
+        "negative_context"
+      ],
+      "path": "cases/W2-SHORT-C3-N1-SW-FPC-001",
+      "part_count": 1,
+      "word_count": 691,
+      "turn_count": 29,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N1-SW-RWKD-013",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Rà soát công việc sprint",
+      "meeting_date": "2026-02-07",
+      "labels": [
+        "weekday_current",
+        "before_day"
+      ],
+      "path": "cases/W2-SHORT-C3-N1-SW-RWKD-013",
+      "part_count": 1,
+      "word_count": 880,
+      "turn_count": 26,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N1-SW-SUGG-025",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Rà soát công việc sprint",
+      "meeting_date": "2026-02-19",
+      "labels": [
+        "suggestion_not_committed",
+        "no_active_task"
+      ],
+      "path": "cases/W2-SHORT-C3-N1-SW-SUGG-025",
+      "part_count": 1,
+      "word_count": 537,
+      "turn_count": 25,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-PROD-HOFF-011",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Theo dõi lỗi và tài liệu",
+      "meeting_date": "2026-02-05",
+      "labels": [
+        "owner_handoff",
+        "task_confirmed_later"
+      ],
+      "path": "cases/W2-SHORT-C3-N2-PROD-HOFF-011",
+      "part_count": 1,
+      "word_count": 623,
+      "turn_count": 35,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-PROD-NDL-023",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Theo dõi lỗi và tài liệu",
+      "meeting_date": "2026-02-17",
+      "labels": [
+        "task_without_deadline",
+        "first_person_commitment"
+      ],
+      "path": "cases/W2-SHORT-C3-N2-PROD-NDL-023",
+      "part_count": 1,
+      "word_count": 706,
+      "turn_count": 25,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-SW-HOFF-029",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Rà soát công việc sprint",
+      "meeting_date": "2026-02-23",
+      "labels": [
+        "owner_handoff",
+        "task_confirmed_later"
+      ],
+      "path": "cases/W2-SHORT-C3-N2-SW-HOFF-029",
+      "part_count": 1,
+      "word_count": 680,
+      "turn_count": 26,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-SW-NDL-005",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Rà soát công việc sprint",
+      "meeting_date": "2026-01-30",
+      "labels": [
+        "task_without_deadline",
+        "first_person_commitment"
+      ],
+      "path": "cases/W2-SHORT-C3-N2-SW-NDL-005",
+      "part_count": 1,
+      "word_count": 765,
+      "turn_count": 32,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-SW-RECF-017",
+      "wave": 2,
+      "wave_name": "wave_2_feature_isolation",
+      "meeting_title": "Rà soát công việc sprint",
+      "meeting_date": "2026-02-11",
+      "labels": [
+        "repeated_confirmation",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W2-SHORT-C3-N2-SW-RECF-017",
+      "part_count": 1,
+      "word_count": 707,
+      "turn_count": 30,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C3-N1-IT-INT-002",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-06",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C3-N1-IT-INT-002",
+      "part_count": 1,
+      "word_count": 1600,
+      "turn_count": 62,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C3-N1-IT-INT-006",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-10",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C3-N1-IT-INT-006",
+      "part_count": 1,
+      "word_count": 2933,
+      "turn_count": 99,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C3-N1-IT-INT-010",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-14",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C3-N1-IT-INT-010",
+      "part_count": 1,
+      "word_count": 2701,
+      "turn_count": 110,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C3-N1-IT-INT-014",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-18",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C3-N1-IT-INT-014",
+      "part_count": 1,
+      "word_count": 2168,
+      "turn_count": 77,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C3-N1-IT-INT-018",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-22",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C3-N1-IT-INT-018",
+      "part_count": 1,
+      "word_count": 1332,
+      "turn_count": 95,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C3-N1-OPS-INT-004",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-08",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C3-N1-OPS-INT-004",
+      "part_count": 1,
+      "word_count": 1373,
+      "turn_count": 76,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C3-N1-OPS-INT-008",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-12",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C3-N1-OPS-INT-008",
+      "part_count": 1,
+      "word_count": 1495,
+      "turn_count": 70,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C3-N1-OPS-INT-012",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-16",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C3-N1-OPS-INT-012",
+      "part_count": 1,
+      "word_count": 1594,
+      "turn_count": 103,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C3-N1-OPS-INT-016",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-20",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C3-N1-OPS-INT-016",
+      "part_count": 1,
+      "word_count": 2060,
+      "turn_count": 113,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C3-N1-OPS-INT-020",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-24",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C3-N1-OPS-INT-020",
+      "part_count": 1,
+      "word_count": 1552,
+      "turn_count": 64,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C4-N2-PROD-INT-003",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-07",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C4-N2-PROD-INT-003",
+      "part_count": 1,
+      "word_count": 1865,
+      "turn_count": 78,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C4-N2-PROD-INT-007",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-11",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C4-N2-PROD-INT-007",
+      "part_count": 1,
+      "word_count": 1710,
+      "turn_count": 64,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C4-N2-PROD-INT-011",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-15",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C4-N2-PROD-INT-011",
+      "part_count": 1,
+      "word_count": 1978,
+      "turn_count": 86,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C4-N2-PROD-INT-015",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-19",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C4-N2-PROD-INT-015",
+      "part_count": 1,
+      "word_count": 1347,
+      "turn_count": 63,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C4-N2-PROD-INT-019",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-23",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C4-N2-PROD-INT-019",
+      "part_count": 1,
+      "word_count": 1968,
+      "turn_count": 100,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C4-N2-SW-INT-001",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-05",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C4-N2-SW-INT-001",
+      "part_count": 1,
+      "word_count": 1547,
+      "turn_count": 63,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C4-N2-SW-INT-005",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-09",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C4-N2-SW-INT-005",
+      "part_count": 1,
+      "word_count": 1733,
+      "turn_count": 65,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C4-N2-SW-INT-009",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-13",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C4-N2-SW-INT-009",
+      "part_count": 1,
+      "word_count": 1547,
+      "turn_count": 93,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C4-N2-SW-INT-013",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-17",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C4-N2-SW-INT-013",
+      "part_count": 1,
+      "word_count": 1621,
+      "turn_count": 81,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W3-MED-C4-N2-SW-INT-017",
+      "wave": 3,
+      "wave_name": "wave_3_feature_interaction",
+      "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+      "meeting_date": "2026-02-21",
+      "labels": [
+        "feature_interaction",
+        "deadline_replacement",
+        "recap_duplicate_risk",
+        "unresolved_item",
+        "negative_context"
+      ],
+      "path": "cases/W3-MED-C4-N2-SW-INT-017",
+      "part_count": 1,
+      "word_count": 1768,
+      "turn_count": 85,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C4-N1-IT-STATE-006",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-20",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C4-N1-IT-STATE-006",
+      "part_count": 5,
+      "word_count": 6682,
+      "turn_count": 304,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C4-N1-OPS-STATE-012",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-26",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C4-N1-OPS-STATE-012",
+      "part_count": 5,
+      "word_count": 6572,
+      "turn_count": 281,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C4-N2-IT-STATE-010",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-24",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C4-N2-IT-STATE-010",
+      "part_count": 5,
+      "word_count": 6072,
+      "turn_count": 278,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C4-N2-OPS-STATE-004",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-18",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C4-N2-OPS-STATE-004",
+      "part_count": 5,
+      "word_count": 7021,
+      "turn_count": 351,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C4-N3-IT-STATE-002",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-16",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C4-N3-IT-STATE-002",
+      "part_count": 5,
+      "word_count": 6006,
+      "turn_count": 270,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C4-N3-OPS-STATE-008",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-22",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C4-N3-OPS-STATE-008",
+      "part_count": 5,
+      "word_count": 6923,
+      "turn_count": 356,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C5-N1-PROD-STATE-003",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-17",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C5-N1-PROD-STATE-003",
+      "part_count": 5,
+      "word_count": 6918,
+      "turn_count": 297,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C5-N1-SW-STATE-009",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-23",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C5-N1-SW-STATE-009",
+      "part_count": 5,
+      "word_count": 7395,
+      "turn_count": 259,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C5-N2-PROD-STATE-007",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-21",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C5-N2-PROD-STATE-007",
+      "part_count": 5,
+      "word_count": 7129,
+      "turn_count": 305,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C5-N2-SW-STATE-001",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-15",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C5-N2-SW-STATE-001",
+      "part_count": 5,
+      "word_count": 7342,
+      "turn_count": 275,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-25",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C5-N3-PROD-STATE-011",
+      "part_count": 5,
+      "word_count": 7922,
+      "turn_count": 314,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W4-LONG-C5-N3-SW-STATE-005",
+      "wave": 4,
+      "wave_name": "wave_4_long_state_reducer",
+      "meeting_title": "Họp điều phối triển khai hệ thống",
+      "meeting_date": "2026-02-19",
+      "labels": [
+        "long_meeting",
+        "long_distance_correction",
+        "owner_handoff",
+        "task_cancellation",
+        "topic_revisited",
+        "recap_duplicate_risk"
+      ],
+      "path": "cases/W4-LONG-C5-N3-SW-STATE-005",
+      "part_count": 5,
+      "word_count": 7640,
+      "turn_count": 268,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W5-XL-C5-N2-IT-STRESS-002",
+      "wave": 5,
+      "wave_name": "wave_5_extra_long_stress",
+      "meeting_title": "Họp tổng hợp phát triển và vận hành sản phẩm",
+      "meeting_date": "2026-02-26",
+      "labels": [
+        "extra_long_meeting",
+        "multi_step_handoff",
+        "multiple_deadline_corrections",
+        "long_distance_dependency",
+        "ambiguous_reference",
+        "heavy_recoverable_noise"
+      ],
+      "path": "cases/W5-XL-C5-N2-IT-STRESS-002",
+      "part_count": 10,
+      "word_count": 12177,
+      "turn_count": 580,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+      "wave": 5,
+      "wave_name": "wave_5_extra_long_stress",
+      "meeting_title": "Họp tổng hợp phát triển và vận hành sản phẩm",
+      "meeting_date": "2026-02-28",
+      "labels": [
+        "extra_long_meeting",
+        "multi_step_handoff",
+        "multiple_deadline_corrections",
+        "long_distance_dependency",
+        "ambiguous_reference",
+        "heavy_recoverable_noise"
+      ],
+      "path": "cases/W5-XL-C5-N2-OPS-STRESS-004",
+      "part_count": 10,
+      "word_count": 11872,
+      "turn_count": 620,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W5-XL-C5-N3-PROD-STRESS-003",
+      "wave": 5,
+      "wave_name": "wave_5_extra_long_stress",
+      "meeting_title": "Họp tổng hợp phát triển và vận hành sản phẩm",
+      "meeting_date": "2026-02-27",
+      "labels": [
+        "extra_long_meeting",
+        "multi_step_handoff",
+        "multiple_deadline_corrections",
+        "long_distance_dependency",
+        "ambiguous_reference",
+        "heavy_recoverable_noise"
+      ],
+      "path": "cases/W5-XL-C5-N3-PROD-STRESS-003",
+      "part_count": 10,
+      "word_count": 13604,
+      "turn_count": 774,
+      "valid": true,
+      "ground_truth_available": false
+    },
+    {
+      "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+      "wave": 5,
+      "wave_name": "wave_5_extra_long_stress",
+      "meeting_title": "Họp tổng hợp phát triển và vận hành sản phẩm",
+      "meeting_date": "2026-02-25",
+      "labels": [
+        "extra_long_meeting",
+        "multi_step_handoff",
+        "multiple_deadline_corrections",
+        "long_distance_dependency",
+        "ambiguous_reference",
+        "heavy_recoverable_noise"
+      ],
+      "path": "cases/W5-XL-C5-N3-SW-STRESS-001",
+      "part_count": 10,
+      "word_count": 13914,
+      "turn_count": 536,
+      "valid": true,
+      "ground_truth_available": false
+    }
+  ]
+}

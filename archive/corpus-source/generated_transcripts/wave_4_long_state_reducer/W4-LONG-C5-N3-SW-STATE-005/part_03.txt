@@ -1,0 +1,96 @@
+MEETING_ID: W4-LONG-C5-N3-SW-STATE-005
+PART: P03/5
+
+T000133 [09:48:30] Anh Minh: Tôi muốn quay lại vấn đề tài liệu triển khai và môi trường test mà chúng ta đã bàn từ đầu. Sau khi nghe các ý kiến, tôi thấy cần điều chỉnh một số điểm.
+
+T000134 [09:49:00] Anh Tuấn: Anh nói cụ thể hơn được không ạ? Em đang tập trung vào script lock, nên chưa rõ anh muốn thay đổi gì.
+
+T000135 [09:49:25] Anh Minh: Liên quan đến task môi trường test. Tôi thấy anh Tuấn đang có quá nhiều việc: vừa nâng cấp server, vừa viết script, vừa tạo dữ liệu. Tôi nghĩ nên chuyển trách nhiệm task môi trường test cho người khác.
+
+T000136 [09:49:50] Chị Lan: Em có thể đảm nhận phần đó. Em đã theo dõi sát từ đầu, và hiểu rõ các yêu cầu kỹ thuật. Dù không trực tiếp làm infra, nhưng em có thể điều phối.
+
+T000137 [09:50:15] Anh Minh: Ý chị Lan hay. Vậy từ giờ, chị Lan sẽ là owner chính của task "Hoàn thiện môi trường test staging". Anh Tuấn, em chuyển giao lại cho chị Lan nhé. Em vẫn hỗ trợ kỹ thuật khi cần.
+
+T000138 [09:50:40] Anh Tuấn: Vâng, em không vấn đề. Em sẽ gửi lại toàn bộ thông tin hiện trạng cho chị Lan sau cuộc họp.
+
+T000139 [09:51:00] Chị Lan: Cảm ơn anh Tuấn. Em sẽ tiếp quản và đảm bảo deadline 25/2 vẫn được giữ.
+
+T000140 [09:51:18] Anh Minh: Tốt. Về deadline đó, tôi thấy cần xem lại. Chị Lan, em nghĩ 25/2 có khả thi không? Hay cần điều chỉnh?
+
+T000141 [09:51:40] Chị Lan: Em nghĩ 25/2 hơi gấp vì còn phải chờ linh kiện. Nếu được, em xin dời sang 28/2.
+
+T000142 [09:52:00] Anh Minh: Nhưng bên QA đã lên lịch test, nếu dời thì họ cũng phải dời theo. Tôi thấy chấp nhận được. Vậy deadline mới là 28/2 cho task môi trường test.
+
+T000143 [09:52:20] Anh Tuấn: Vậy còn deadline cũ 25/2 của em? Chị Lan sẽ chịu trách nhiệm từ giờ, nên deadline 28/2 áp cho chị Lan.
+
+T000144 [09:52:40] Anh Minh: Đúng vậy. Anh Tuấn, em không còn lo task đó nữa, nhưng vẫn hỗ trợ.
+
+T000145 [09:52:58] Chị Hà: Em có một thắc mắc. Task tài liệu của em hiện không có deadline. Liệu có nên đặt một mốc nào đó không? Vì em thấy mọi task khác đều có hạn.
+
+T000146 [09:53:20] Anh Minh: Đó là ý tốt. Tôi nghĩ chúng ta nên đặt deadline cho task tài liệu, để đồng bộ. Chị Hà, em có thể hoàn thành trước ngày 5/3 được không?
+
+T000147 [09:53:40] Chị Hà: Em nghĩ được. Trước 5/3 em sẽ gửi bản cuối cho mọi người review.
+
+T000148 [09:53:58] Anh Minh: Vậy task B "Hoàn thiện tài liệu hướng dẫn triển khai staging" sẽ có deadline 5/3. Chị Hà, em nhớ cập nhật.
+
+T000149 [09:54:15] Chị Hà: Vâng ạ.
+
+T000150 [09:54:30] Anh Tuấn: Anh Minh, em muốn nhắc lại về task script lock. Hiện tại em đang viết, dự kiến xong sáng mai. Nhưng nếu deadline môi trường test dời, thì việc test script cũng sẽ bị ảnh hưởng.
+
+T000151 [09:54:55] Chị Lan: Em có thể test script trên sandbox riêng, không phụ thuộc vào môi trường staging. Nên không sao.
+
+T000152 [09:55:12] Anh Minh: Vậy ổn. Chúng ta có bốn task chính. Tôi muốn điểm lại trạng thái. Task A (môi trường test) giờ do chị Lan phụ trách, deadline 28/2. Task B (tài liệu) chị Hà, deadline 5/3. Task C (script lock) anh Tuấn, xong mai. Task D (dữ liệu test) anh Tuấn, cuối tuần.
+
+T000153 [09:55:40] Chị Hà: Anh Minh, em xin lưu ý. Task D em thấy chưa có deadline rõ ràng. Nếu chỉ "cuối tuần" thì không cụ thể.
+
+T000154 [09:56:00] Anh Tuấn: Em sẽ hoàn thành trước thứ Hai tuần sau tức 23/2. Như vậy được không?
+
+T000155 [09:56:18] Anh Minh: Được, em tự chốt. Nhưng nếu không kịp thì báo sớm.
+
+T000156 [09:56:35] Chị Lan: Em muốn hỏi về nguồn lực cho task A. Em cần một bạn kỹ thuật hỗ trợ lắp đặt linh kiện. Anh Tuấn có thể giới thiệu không?
+
+T000157 [09:56:55] Anh Tuấn: Bạn Khoa có thể, nhưng đang bận. Em có thể hỗ trợ ngoài giờ nếu cần.
+
+T000158 [09:57:12] Anh Minh: Chị Lan, em có thể làm việc trực tiếp với bạn Khoa. Nếu cần thiết, tôi sẽ nói chuyện với trưởng phòng của bạn ấy.
+
+T000159 [09:57:30] Chị Lan: Vâng, em sẽ liên hệ.
+
+T000160 [09:57:45] Chị Hà: Em có một concern về tài liệu. Do deadline 5/3, em cần anh Tuấn review phần kỹ thuật trước ngày 1/3. Anh Tuấn có thể sắp xếp không?
+
+T000161 [09:58:05] Anh Tuấn: Anh có thể review vào cuối tuần này, nhưng chỉ được hai ngày. Em gửi draft trước thứ Bảy.
+
+T000162 [09:58:22] Chị Hà: Vậy thứ Bảy em gửi, anh review Chủ nhật? Nếu được thì em sẽ điều chỉnh.
+
+T000163 [09:58:40] Anh Tuấn: Ok, em cố gắng.
+
+T000164 [09:58:55] Anh Minh: Như vậy chúng ta đã có kế hoạch rõ ràng. Tôi thấy hài lòng. Có ai muốn bổ sung gì không?
+
+T000165 [09:59:15] Chị Lan: Em muốn hỏi về việc backup dữ liệu khi nâng cấp. Task A cần có bước backup trước. Em sẽ viết kế hoạch.
+
+T000166 [09:59:32] Anh Minh: Viết kế hoạch và gửi cho tôi duyệt. Tốt nhất là trong hai ngày tới.
+
+T000167 [09:59:50] Chị Lan: Vâng.
+
+T000168 [10:00:05] Anh Tuấn: Anh Minh, về task script lock, em muốn thêm một yêu cầu: cần có người review code. Anh Khoa có thể review không ạ?
+
+T000169 [10:00:25] Anh Minh: Trước đó em nói tự review. Nhưng nếu muốn thì em gửi anh Khoa. Tôi không ép.
+
+T000170 [10:00:40] Anh Tuấn: Vậy em gửi, nhưng không chắc có phản hồi kịp.
+
+T000171 [10:00:55] Chị Hà: Em có thể review phần code đơn giản, nhưng chuyên sâu thì không.
+
+T000172 [10:01:10] Anh Minh: Tạm thời cứ gửi đi. Nếu không ai review, em tự chịu trách nhiệm.
+
+T000173 [10:01:25] Anh Tuấn: Vâng.
+
+T000174 [10:01:38] Anh Minh: Còn vấn đề gì khác không? Tôi thấy tiến độ ổn. Chúng ta có thể kết thúc phần này.
+
+T000175 [10:01:55] Chị Lan: Em muốn confirm lại: deadline task A là 28/2, task B là 5/3, task C xong mai, task D trước 23/2. Đúng không ạ?
+
+T000176 [10:02:12] Anh Minh: Chính xác.
+
+T000177 [10:02:25] Chị Hà: Vậy em sẽ cập nhật vào biên bản.
+
+T000178 [10:02:38] Anh Minh: Cảm ơn mọi người. Tạm dừng ở đây.
+
+--- END OF PART P03 ---

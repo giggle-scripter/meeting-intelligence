@@ -1,0 +1,63 @@
+MEETING_ID: W4-LONG-C5-N2-SW-STATE-001
+PART: P05/5
+
+T000225 [10:52:00] Chị Lan: Chúng ta đã đi qua nhiều phần. Bây giờ, hãy cùng tổng kết lại toàn bộ các task và trạng thái cuối cùng để đảm bảo mọi người đều nắm rõ trước khi ra quyết định cho những việc tiếp theo.
+T000226 [10:52:30] Anh Minh: Em nghĩ nên bắt đầu từ timeline tổng thể. Anh Tuấn, em có thông tin gì về ngày staging được bàn giao từ vận hành chưa?
+T000227 [10:53:00] Anh Tuấn: Chưa có xác nhận chính thức, nhưng bên vận hành dự kiến tuần sau, tức tuần 17/02 – 21/02. Nếu đúng thì chúng ta có khoảng 2 tuần để test trước khi release cuối tháng 3.
+T000228 [10:53:30] Chị Hoa: Vậy deadline 20/02 của em khá sát. Em cần môi trường để chạy thử kịch bản test sau khi viết xong.
+T000229 [10:54:00] Anh Minh: Nếu staging có vào giữa tuần 20/02, em nghĩ chị Hoa có thể viết kịch bản trước, sau đó chạy thử ngay khi có môi trường.
+T000230 [10:54:30] Chị Lan: Nhưng cần lưu ý: nếu staging trễ, việc test sẽ bị đẩy lùi. Chúng ta có phương án dự phòng không? Anh Hùng, em mới vào, có ý kiến gì?
+T000231 [10:55:00] Anh Hùng: Em nghĩ có thể dùng môi trường local để test sơ bộ, nhưng không thể thay thế staging vì phụ thuộc vào network và cert.
+T000232 [10:55:30] Anh Tuấn: Đồng ý. Em sẽ chuẩn bị script dữ liệu test trên local trước, để khi có staging chỉ việc import.
+T000233 [10:56:00] Chị Lan: Vậy task "Tạo dữ liệu test" của anh Tuấn deadline 19/02 vẫn ổn. Em cần đảm bảo script chạy được trên cả local và staging.
+T000234 [10:56:30] Anh Tuấn: Vâng, em sẽ viết script linh hoạt.
+T000235 [10:57:00] Chị Hoa: Em có một vấn đề: kịch bản test của em có phần kiểm tra rollback, mà rollback lại phụ thuộc vào tài liệu triển khai của anh Minh. Nếu tài liệu chưa có, em phải viết tạm.
+T000236 [10:57:30] Anh Minh: Em đã nói sẽ viết phần rollback trước 19/02. Em sẽ cố gắng gửi cho chị Hoa vào cuối ngày 18/02.
+T000237 [10:58:00] Chị Hoa: Vậy em sẽ chờ. Nếu không kịp, em sẽ đánh dấu phần đó và bổ sung sau.
+T000238 [10:58:30] Chị Lan: Về phía monitoring, anh Hùng, em đã có kế hoạch cụ thể chưa?
+T000239 [10:59:00] Anh Hùng: Em vừa vào nên cần thời gian. Em muốn hỏi anh Minh về các metric cần theo dõi trước khi bắt đầu.
+T000240 [10:59:30] Anh Minh: Em sẽ gửi tài liệu monitoring draft cho anh Hùng trong tuần này, trước 19/02.
+T000241 [11:00:00] Chị Lan: Vậy task monitoring vẫn chưa chính thức, nhưng anh Hùng nhận trách nhiệm. Anh Minh hỗ trợ ban đầu.
+T000242 [11:00:30] Anh Minh: Đúng vậy.
+T000243 [11:01:00] Anh Tuấn: Chị Lan, em thấy có một điểm unresolved từ đầu meeting: reviewer cho tài liệu và kịch bản. Chúng ta chưa chốt ai sẽ review.
+T000244 [11:01:30] Chị Hoa: Đúng. Em nghĩ nếu không có reviewer chính thức, sau khi có draft chúng ta có thể tổ chức một buổi review chung.
+T000245 [11:02:00] Chị Lan: Vậy để sau khi anh Minh và chị Hoa có draft, chị sẽ schedule một buổi review riêng. Lúc đó sẽ chỉ định reviewer. Tạm thời vẫn để unresolved.
+T000246 [11:02:30] Anh Minh: OK. Nhưng em muốn hỏi: nếu buổi review bị trễ, liệu có ảnh hưởng đến deadline deploy không?
+T000247 [11:03:00] Chị Lan: Có thể. Nhưng ưu tiên là hoàn thành draft đúng hạn, review có thể linh hoạt.
+T000248 [11:03:30] Anh Tuấn: Em đồng ý.
+T000249 [11:04:00] Chị Hoa: Em cũng đồng ý.
+T000250 [11:04:30] Anh Hùng: Em thấy việc này hợp lý.
+T000251 [11:05:00] Chị Lan: Bây giờ, hãy điểm lại tất cả task hiện tại:
+- Task "Cập nhật tài liệu triển khai": owner Anh Minh, deadline 26/02, phụ thuộc cert và thông tin vận hành.
+- Task "Cập nhật kịch bản kiểm thử triển khai": owner Chị Hoa, deadline 20/02, phụ thuộc spec authentication (sáng mai) và rollback (dự kiến 18/02).
+- Task "Tạo dữ liệu test": owner Anh Tuấn, deadline 19/02, đã chính thức.
+- Task monitoring: chưa chính thức, owner Anh Hùng, hỗ trợ từ Anh Minh.
+- Task "Viết unit test authentication" đã bị hủy.
+- Reviewer: chưa assign, sẽ xác định sau khi có draft.
+Mọi người có bổ sung gì không?
+T000252 [11:05:30] Anh Tuấn: Em muốn nhắc: cert và thông tin môi trường từ chị Lan vẫn chưa có, ảnh hưởng đến cả tài liệu và dữ liệu test.
+T000253 [11:06:00] Chị Lan: Chị sẽ gửi email trong chiều nay, cc toàn bộ team. Em yên tâm.
+T000254 [11:06:30] Anh Minh: Em cũng cần cert để viết spec authentication. Nếu không có, em phải dùng cert cũ.
+T000255 [11:07:00] Chị Lan: Cứ dùng cert cũ tạm, sau đó update nếu thay đổi. Như đã thống nhất từ đầu.
+T000256 [11:07:30] Chị Hoa: Vậy spec authentication dựa trên cert cũ, em sẽ viết kịch bản theo đó.
+T000257 [11:08:00] Anh Minh: Chính xác.
+T000258 [11:08:30] Anh Hùng: Em muốn hỏi về timeline release. Dự kiến release production cuối tháng 3, vậy chúng ta có kế hoạch dry-run trước đó không?
+T000259 [11:09:00] Chị Lan: Có, chúng ta sẽ có một buổi dry-run trên staging sau khi test xong. Dự kiến tuần đầu tháng 3.
+T000260 [11:09:30] Anh Hùng: Vậy em cần chuẩn bị monitoring cho dry-run đó.
+T000261 [11:10:00] Chị Lan: Đúng. Anh Hùng, em có thể bắt đầu survey tool từ bây giờ.
+T000262 [11:10:30] Anh Hùng: Vâng, em sẽ làm.
+T000263 [11:11:00] Anh Tuấn: Chị Lan, em thấy deadline của em và chị Hoa khá gần nhau, cần có sự phối hợp chặt chẽ. Em sẽ gửi dữ liệu test cho chị Hoa ngay khi có.
+T000264 [11:11:30] Chị Hoa: Cảm ơn anh. Em cũng sẽ gửi kịch bản test cho anh Minh để review phần kỹ thuật trước khi chốt.
+T000265 [11:12:00] Chị Lan: Tốt. Như vậy mọi việc đã rõ. Chúng ta còn vấn đề gì chưa được giải quyết không?
+T000266 [11:12:30] Anh Minh: Về phần reviewer, em nghĩ nên tạm thời chưa assign để linh hoạt. Nhưng nếu cần, em có thể review chéo với chị Hoa.
+T000267 [11:13:00] Chị Hoa: Em đồng ý.
+T000268 [11:13:30] Chị Lan: Vậy vẫn giữ unresolved cho reviewer. Khi nào có draft, chúng ta sẽ quyết định.
+T000269 [11:14:00] Anh Tuấn: Em không còn ý kiến.
+T000270 [11:14:30] Anh Hùng: Không.
+T000271 [11:15:00] Chị Lan: Vậy cuộc họp hôm nay đến đây là kết thúc. Cảm ơn mọi người đã tham gia. Chị sẽ gửi meeting notes và cập nhật Jira sau. Hẹn gặp lại trong buổi review draft.
+T000272 [11:15:30] Anh Minh: Cảm ơn chị.
+T000273 [11:16:00] Chị Hoa: Cảm ơn.
+T000274 [11:16:30] Anh Tuấn: Cảm ơn.
+T000275 [11:17:00] Anh Hùng: Cảm ơn.
+
+--- END OF PART P05 ---

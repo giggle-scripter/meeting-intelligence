@@ -1,0 +1,96 @@
+MEETING_ID: W4-LONG-C4-N3-IT-STATE-002
+PART: P02/5
+
+T000065 [09:11:15] Minh: Rồi, sau phần thảo luận về môi trường test và tài liệu, tôi muốn chuyển sang một vấn đề khác. Có báo cáo từ team test về lỗi đăng nhập trên hệ thống mới. Lan, em có thông tin gì không?
+
+T000066 [09:11:30] Lan: Dạ, tuần trước team test phát hiện một số tài khoản không thể đăng nhập do lỗi xác thực. Họ đã log lại, nhưng chưa xác định nguyên nhân chính xác.
+
+T000067 [09:11:42] Minh: Có mẫu cụ thể không? Ví dụ là lỗi trên môi trường nào?
+
+T000068 [09:11:52] Lan: Theo báo cáo, lỗi xảy ra trên môi trường staging và cả local của một số dev. Có vẻ liên quan đến token service.
+
+T000069 [09:12:05] Hùng: Em có tình cờ thấy log lỗi, hình như token bị hết hạn quá sớm. Nhưng em chưa có thời gian đào sâu.
+
+T000070 [09:12:17] Minh: Được rồi. Chúng ta cần một task để điều tra và sửa lỗi đăng nhập. Tôi muốn giao cho Hùng và Tuấn cùng xem, vì Tuấn có kinh nghiệm về authentication.
+
+T000071 [09:12:30] Lan: Nhưng Tuấn đang bận viết tài liệu. Liệu có nên chờ không?
+
+T000072 [09:12:39] Minh: Tạm thời cứ giao cho Hùng chính, Tuấn hỗ trợ khi cần. Task này không có deadline ngay, nhưng cần ưu tiên.
+
+T000073 [09:12:50] Hùng: Em ok, nhưng em muốn có quyền truy cập server production để xem log chi tiết. Hiện tại chỉ có staging.
+
+T000074 [09:13:00] Minh: Việc đó cần phê duyệt từ Ops. Em sẽ gửi yêu cầu, tôi sẽ hỗ trợ.
+
+T000075 [09:13:10] Lan: Vậy em sẽ tạo một task tạm gọi là "Điều tra lỗi đăng nhập", owner Hùng, để follow.
+
+T000076 [09:13:20] Minh: Đúng. Nhưng chú ý đừng nhầm với task "Kiểm tra môi trường test" vì tên hơi giống. Ghi rõ nội dung.
+
+T000077 [09:13:30] Hùng: Em sẽ ghi: "Điều tra lỗi đăng nhập trên staging và production", khác hẳn.
+
+T000078 [09:13:40] Minh: Tốt. Ngoài ra, chúng ta cũng cần dữ liệu test cho việc kiểm tra đăng nhập. Có ai có sẵn không?
+
+T000079 [09:13:52] Lan: Team test có một bộ dữ liệu mẫu, nhưng chưa được cập nhật cho phiên bản mới. Cần tạo lại.
+
+T000080 [09:14:02] Minh: Vậy cần một task nữa: "Cập nhật dữ liệu test đăng nhập". Giao cho ai đây?
+
+T000081 [09:14:10] Hùng: Em nghĩ nên giao cho bạn Khang bên QA, vì Khang phụ trách test data.
+
+T000082 [09:14:20] Minh: Khang có trong meeting không? Tôi thấy vắng. Tôi sẽ nhắn riêng sau.
+
+T000083 [09:14:28] Lan: Nhưng nếu giao Khang, task này có thể bị delay vì Khang đang bận viết test case cho module khác.
+
+T000084 [09:14:38] Minh: Vậy chúng ta tạm thời unresolved reviewer. Ai sẽ review kết quả sau? Lan, em có thể không?
+
+T000085 [09:14:48] Lan: Em có thể review dữ liệu test nếu cần, nhưng không phải chuyên sâu.
+
+T000086 [09:14:57] Minh: Tạm thời ghi là "Chưa có reviewer xác nhận". Chúng ta sẽ quyết định sau.
+
+T000087 [09:15:07] Hùng: Em muốn hỏi rõ: lỗi đăng nhập này có liên quan đến việc migration dữ liệu từ hệ thống cũ không? Nếu có thì cần xem xét thêm.
+
+T000088 [09:15:20] Lan: Chưa rõ lắm, em nghĩ nên test trước trên môi trường isolated.
+
+T000089 [09:15:28] Minh: Đồng ý. Việc migration sẽ để part sau thảo luận.
+
+T000090 [09:15:37] Lan: Vậy task "Điều tra lỗi đăng nhập" sẽ bao gồm việc kiểm tra token service và các dependency.
+
+T000091 [09:15:48] Minh: Đúng. Còn task "Cập nhật dữ liệu test đăng nhập", tôi sẽ assign tạm cho Khang và ghi chú chờ reviewer.
+
+T000092 [09:16:00] Hùng: Em có thể hỗ trợ Khang nếu cần script tạo dữ liệu.
+
+T000093 [09:16:08] Lan: Tốt. Vậy chúng ta có thêm hai task mới. Nhưng tôi muốn nhấn mạnh: đừng quên task tài liệu triển khai vẫn còn đó.
+
+T000094 [09:16:20] Minh: Yên tâm, tôi vẫn nhớ. Tôi sẽ không để lẫn.
+
+T000095 [09:16:28] Hùng: Em cũng muốn nói thêm: nếu lỗi đăng nhập là do môi trường, thì task test staging sẽ cần ưu tiên hơn.
+
+T000096 [09:16:40] Minh: Có lý. Nhưng hôm nay ta chưa thay đổi deadline hay ưu tiên gì cả.
+
+T000097 [09:16:50] Lan: Em thấy đang có nhiều task cùng lúc. Liệu có nhiều quá không? Cần tập trung.
+
+T000098 [09:16:58] Minh: Đây là negative cần lưu ý. Nhưng scope hôm nay chỉ thiết lập, chưa chốt execution.
+
+T000099 [09:17:08] Hùng: Vậy em sẽ bắt đầu điều tra lỗi đăng nhập từ chiều nay. Cần access production sớm.
+
+T000100 [09:17:18] Minh: Tôi sẽ gửi email tới Ops ngay sau meeting.
+
+T000101 [09:17:26] Lan: Em muốn hỏi về mức độ ưu tiên: nếu lỗi đăng nhập nghiêm trọng, có nên halt các task khác không?
+
+T000102 [09:17:36] Minh: Chưa tới mức đó. Cứ tiến hành song song. Sau khi có kết quả điều tra sẽ quyết định.
+
+T000103 [09:17:46] Hùng: Em lo rằng nếu không có dữ liệu test mới, việc reproduce lỗi sẽ khó khăn.
+
+T000104 [09:17:55] Lan: Vậy task dữ liệu test cũng quan trọng. Nhưng Khang chưa được assign rõ.
+
+T000105 [09:18:04] Minh: Tôi sẽ bổ sung sau meeting. Giờ cứ ghi nhận.
+
+T000106 [09:18:12] Hùng: Em thấy cần thêm một buổi họp riêng với Khang và Ops để bàn về dữ liệu.
+
+T000107 [09:18:20] Lan: Có thể, nhưng chưa phải lúc này.
+
+T000108 [09:18:28] Minh: Đồng ý. Tạm thời chúng ta dừng ở đây. Tôi tổng kết: có thêm task "Điều tra lỗi đăng nhập" (Hùng) và task "Cập nhật dữ liệu test đăng nhập" (Khang tạm thời, chưa reviewer). Các task cũ vẫn nguyên.
+
+T000109 [09:18:42] Lan: Rõ. Em sẽ cập nhật danh sách task sau meeting.
+
+T000110 [09:18:50] Minh: Cảm ơn mọi người. Chúng ta sẽ tiếp tục ở part sau với những vấn đề tồn đọng.
+
+--- END OF PART P02 ---

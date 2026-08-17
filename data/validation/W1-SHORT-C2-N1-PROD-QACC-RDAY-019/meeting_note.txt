@@ -1,0 +1,8 @@
+minutes nháp
+chủ đề: Rà soát lỗi đăng nhập
+kw: test case / fix / qua / slack / nhe / check / review
+- Gửi qua Slack nhé, mình sẽ check ngay
+* Để mình review lại commit
+- Vậy mình sẽ tạo task “Fix lỗi đăng nhập sai khi đúng mật khẩu”, assign cho Minh, dl ngày mai
+1) Mình sẽ chuẩn bị test case và sẵn sàng test bản fix
+- Minh, cậu có thể nhận và cam kết xong trước ngày mai không? ? chưa chốt

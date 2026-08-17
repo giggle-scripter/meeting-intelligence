@@ -1,0 +1,58 @@
+MEETING_ID: W4-LONG-C5-N2-SW-STATE-001
+PART: P02/5
+
+T000070 [09:34:40] Chị Lan: Khoan, chị nhớ ra còn một vấn đề cần bàn nhanh trước khi kết thúc phần này. Lỗi đăng nhập trên staging cũ vẫn chưa được xử lý triệt để. Anh Minh, em có thông tin gì mới không?
+T000071 [09:35:10] Anh Minh: Dạ, em có log từ tuần trước, lỗi xảy ra khi user nhập sai mật khẩu quá 3 lần, hệ thống không khóa tài khoản đúng cách. Em đã fix tạm nhưng chưa deploy.
+T000072 [09:35:40] Chị Lan: Vậy cần test kỹ trên môi trường mới. Chị Hoa, em có thể thêm test case cho tình huống này vào kịch bản kiểm thử triển khai không?
+T000073 [09:36:10] Chị Hoa: Vâng, em sẽ thêm. Nhưng cần spec chi tiết về luồng xử lý lock account từ anh Minh.
+T000074 [09:36:40] Anh Minh: Em sẽ viết luôn phần này trong spec gửi chị Hoa sáng mai. Có thể đưa vào mục authentication.
+T000075 [09:37:10] Chị Lan: Tốt. Còn dữ liệu test, anh Tuấn nói sẽ refresh, nhưng có cần tạo thêm dữ liệu giả cho test đăng nhập không?
+T000076 [09:37:40] Anh Tuấn: Em nghĩ cần. Dữ liệu cũ chỉ có vài user, em sẽ tạo script sinh thêm 20 user với các role khác nhau. Việc này không mất nhiều thời gian.
+T000077 [09:38:10] Chị Hoa: Vậy anh Tuấn làm luôn nhé, em cần dữ liệu đa dạng để test các trường hợp.
+T000078 [09:38:40] Anh Tuấn: OK, em sẽ làm trong sáng nay. Nhưng script này có cần review không?
+T000079 [09:39:10] Chị Lan: Có, em gửi cho chị và anh Minh review trước khi chạy. Đề phòng script ảnh hưởng đến dữ liệu thật.
+T000080 [09:39:40] Anh Minh: Em đồng ý. Em có thể review nhanh vào cuối ngày.
+T000081 [09:40:10] Chị Hoa: Mà em thấy việc tạo dữ liệu test và viết kịch bản test hơi chồng chéo. Liệu có nên gộp thành một task chung không?
+T000082 [09:40:40] Chị Lan: Không, vì bản chất khác nhau. Dữ liệu test là đầu vào, kịch bản test là quy trình. Giữ riêng để dễ quản lý.
+T000083 [09:41:10] Anh Tuấn: Vậy task tạo dữ liệu test có deadline không? Hay em cứ làm và báo cáo?
+T000084 [09:41:40] Chị Lan: Tạm thời chưa có deadline, nhưng cần hoàn thành trước khi staging sẵn sàng. Em cứ ước lượng và báo chị.
+T000085 [09:42:10] Anh Tuấn: Dạ, em nghĩ cuối ngày mai là xong script và dữ liệu mẫu. Sau đó chờ review.
+T000086 [09:42:40] Chị Lan: Vậy thành task không chính thức nhé, em chủ động.
+T000087 [09:43:10] Anh Minh: Nhân tiện, em muốn hỏi về lỗi đăng nhập: fix của em có thể gây conflict với module kết nối không? Vì có phần xác thực token.
+T000088 [09:43:40] Chị Lan: Em cần check kỹ. Anh Tuấn, em có thể hỗ trợ review phần này không?
+T000089 [09:44:10] Anh Tuấn: Em có thể review, nhưng em không rõ chi tiết module kết nối. Anh Minh gửi code snippet cho em, em xem buổi chiều.
+T000090 [09:44:40] Anh Minh: Ok, em sẽ gửi. Có thể phát sinh lỗi nếu không đồng bộ.
+T000091 [09:45:10] Chị Hoa: Vậy em có cần thêm test case cho conflict này không? Hay chờ sau khi fix?
+T000092 [09:45:40] Chị Lan: Chờ sau. Đừng làm phức tạp thêm. Tập trung vào kịch bản chính.
+T000093 [09:46:10] Anh Tuấn: Em thấy nên có một người review tổng thể cho tất cả tài liệu và kịch bản, tránh thiếu sót. Chị Lan có thể làm không?
+T000094 [09:46:40] Chị Lan: Chị có thể review, nhưng không cam kết thời gian vì còn nhiều việc. Anh Minh hay chị Hoa có thể đảm nhận không?
+T000095 [09:47:10] Anh Minh: Em có thể review kịch bản test và tài liệu triển khai sau khi hoàn thành, nhưng không phải ngay lập tức.
+T000096 [09:47:40] Chị Hoa: Em cũng có thể review chéo tài liệu của anh Tuấn, nhưng cần thời gian.
+T000097 [09:48:10] Chị Lan: Vậy chưa assign ai chính thức. Cứ để sau khi có draft, chị sẽ chỉ định. Đây là việc cần làm nhưng chưa có người chịu trách nhiệm.
+T000098 [09:48:40] Anh Tuấn: Em hiểu. Vậy em sẽ viết tài liệu và gửi cho cả team, ai rảnh thì review.
+T000099 [09:49:10] Chị Hoa: Em nghĩ cũng nên có một buổi họp ngắn để review chung, như anh Minh đề cập lúc nãy.
+T000100 [09:49:40] Chị Lan: Sẽ tính sau. Bây giờ quay lại lỗi đăng nhập: anh Minh, fix của em đã được test trên môi trường local chưa?
+T000101 [09:50:10] Anh Minh: Em đã test manual, nhưng chưa có unit test. Em định viết unit test sau.
+T000102 [09:50:40] Chị Lan: Cần thiết. Em thêm task viết unit test cho module authentication nhé. Không deadline, nhưng nên làm trước khi deploy.
+T000103 [09:51:10] Anh Minh: Vâng, em sẽ ghi nhớ. Nhưng hiện tại em đang tập trung spec integration.
+T000104 [09:51:40] Chị Hoa: Anh Minh, nếu em viết unit test, em có thể dùng dữ liệu test từ script của anh Tuấn không? Hay tự tạo?
+T000105 [09:52:10] Anh Minh: Em có thể dùng chung, nhưng cần đảm bảo script chạy ổn định.
+T000106 [09:52:40] Anh Tuấn: Em sẽ cố gắng hoàn thành script sớm để anh Minh có dữ liệu.
+T000107 [09:53:10] Chị Lan: Vậy mọi người nhớ phối hợp. Còn vấn đề gì về dữ liệu test hay lỗi đăng nhập nữa không?
+T000108 [09:53:40] Anh Tuấn: Em muốn hỏi: dữ liệu test có cần bao gồm dữ liệu cho tính năng mới sắp release không? Hay chỉ dùng cho staging hiện tại?
+T000109 [09:54:10] Chị Lan: Chỉ staging hiện tại. Tính năng mới sẽ có đợt test riêng.
+T000110 [09:54:40] Anh Minh: OK. Em nghĩ mình nên có một checklist các đầu việc liên quan đến môi trường test, tránh quên.
+T000111 [09:55:10] Chị Hoa: Em đồng ý, nhưng không nên biến thành task cứng. Có thể ghi trong meeting notes.
+T000112 [09:55:40] Chị Lan: Chị sẽ ghi lại. Bây giờ chị thấy có một số việc chưa rõ ràng: ai sẽ là reviewer chính cho tài liệu? Chị đề nghị anh Minh làm reviewer kỹ thuật, chị Hoa reviewer nghiệp vụ. Có okay không?
+T000113 [09:56:10] Anh Minh: Em có thể, nhưng cần đợi có draft.
+T000114 [09:56:40] Chị Hoa: Em cũng được, nhưng nếu có xung đột lịch thì em báo sau.
+T000115 [09:57:10] Anh Tuấn: Vậy em sẽ ghi rõ trong tài liệu: phần kỹ thuật do anh Minh review, phần nghiệp vụ do chị Hoa.
+T000116 [09:57:40] Chị Lan: Nhưng chưa assign chính thức, chỉ là dự kiến. Khi có draft, chị sẽ confirm lại.
+T000117 [09:58:10] Chị Hoa: Vậy vẫn là unresolved. Em thấy cũng ổn, vì chưa có gì để review.
+T000118 [09:58:40] Anh Tuấn: Chị Lan, em nghĩ chúng ta nên dừng phần này ở đây. Còn vấn đề kiến trúc sẽ bàn sau.
+T000119 [09:59:10] Chị Lan: Đồng ý. Tổng kết: có task mới "Viết unit test authentication" anh Minh tự quản, không deadline. Task tạo dữ liệu test là không chính thức, anh Tuấn làm. Và reviewer dự kiến là anh Minh và chị Hoa, nhưng chưa chốt. Còn task cũ từ đầu giờ vẫn giữ nguyên. Mọi người có gì thêm không?
+T000120 [09:59:40] Anh Minh: Không.
+T000121 [10:00:10] Chị Hoa: Em không.
+T000122 [10:00:40] Chị Lan: Vậy chúng ta chuyển sang phần kiến trúc và timeline triển khai ở phần sau. Tạm nghỉ 5 phút rồi tiếp tục.
+
+--- END OF PART P02 ---

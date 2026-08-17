@@ -1,0 +1,45 @@
+{
+  "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+  "tasks": [
+    {
+      "task_name": "Fix API connection",
+      "assignee": "Lan",
+      "start_date": "2026-02-11",
+      "due_date": "2026-02-11",
+      "due_date_text": "trước 16h hôm nay",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Xử lý parser transcript",
+      "assignee": "Hoa",
+      "start_date": "2026-02-11",
+      "due_date": "2026-02-18",
+      "due_date_text": "deadline mới",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Hoàn thiện spec SP365",
+      "assignee": "Lan",
+      "start_date": "2026-02-11",
+      "due_date": "2026-02-14",
+      "due_date_text": "deadline 14/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Cập nhật UI flow summary",
+      "assignee": "Lan",
+      "start_date": "2026-02-11",
+      "due_date": "2026-02-11",
+      "due_date_text": "deadline hôm nay",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Phân tích lỗi timestamp",
+      "assignee": "Hoa; Tuấn",
+      "start_date": "2026-02-11",
+      "due_date": "2026-02-12",
+      "due_date_text": "trong ngày mai",
+      "status": "Proposed"
+    }
+  ]
+}

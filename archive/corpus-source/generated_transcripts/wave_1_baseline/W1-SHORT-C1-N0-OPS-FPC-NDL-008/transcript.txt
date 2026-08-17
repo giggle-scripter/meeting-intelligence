@@ -1,0 +1,23 @@
+MEETING_ID: W1-SHORT-C1-N0-OPS-FPC-NDL-008
+CASE_LABELS: first_person_commitment,no_deadline,mild_noise
+MEETING_DATE: 2026-01-23
+TITLE: Chuẩn bị bản demo
+
+[00:00:05] Minh: Chào mọi người, hôm nay mình ngồi lại nhanh về bản demo cho khách hàng bên TechCom tuần sau nhé.
+[00:00:12] Lan: Oke anh, em cũng vừa nhận được email xác nhận lịch demo sáng thứ Tư.
+[00:00:18] Tuấn: Bên mình cần demo cả phần backend xử lý dữ liệu luôn hay chỉ giao diện chính thôi anh?
+[00:00:25] Minh: Mình demo cả hai phần, nhưng tập trung vào luồng chính cho đơn giản. Lan, em thấy nội dung demo cần những gì?
+[00:00:34] Lan: Dạ, em nghĩ cần slide tổng quan, rồi chạy thử ứng dụng thực tế, kèm một vài kịch bản người dùng. Có thể thêm phần so sánh phiên bản cũ để họ thấy cải tiến.
+[00:00:46] Minh: Ý kiến hay đấy. Em chuẩn bị phần nội dung đó được không?
+[00:00:52] Lan: Được anh, em sẽ làm phần nội dung demo. Mà chắc cũng cần Tuấn hỗ trợ setup môi trường test cho mượt.
+[00:01:01] Tuấn: Ok, mình lo phần kỹ thuật, đảm bảo không lag với crash. Hôm qua có bản cập nhật mới, mình sẽ tranh thủ cài đặt trước.
+[00:01:10] Minh: Tốt. Vậy Lan khi nào xong nội dung để mình duyệt trước nhỉ?
+[00:01:16] Lan: Em sẽ cố gắng hoàn thiện trong vài ngày tới, cụ thể thì để em xem khối lượng công việc rồi báo lại anh sau.
+[00:01:24] Minh: Sớm được thì tốt, tại còn phải tập duyệt một lần nữa. Em cứ làm rồi báo anh.
+[00:01:30] Tuấn: Mà các bạn cho hỏi ngoài lề tí, cái máy chiếu phòng họp lớn đã sửa xong chưa nhỉ? Lần trước bị ám vàng.
+[00:01:38] Minh: À, mình chưa kiểm tra lại. Để mình hỏi bên hành chính xem sao. Không liên quan lắm nhưng cũng cần lưu ý.
+[00:01:45] Lan: Em cũng định hỏi, không thì lúc demo lại mất thời gian chỉnh. Thôi em tập trung nội dung trước đã.
+[00:01:52] Tuấn: Vậy tóm lại đầu tuần sau mình chạy thử một lượt nhé, trước khi demo chính thức.
+[00:01:58] Minh: Ừ, để chốt lịch chạy thử sau. Giờ Lan lo nội dung, Tuấn lo kỹ thuật, ai cần thêm gì cứ nhắn nhóm. Cảm ơn mọi người.
+[00:02:05] Lan: Cảm ơn anh.
+[00:02:07] Tuấn: Ok anh.

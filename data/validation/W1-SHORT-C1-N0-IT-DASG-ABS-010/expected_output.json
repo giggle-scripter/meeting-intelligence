@@ -1,0 +1,7 @@
+{
+  "meeting_title": "Theo dõi tiến độ tài liệu",
+  "tasks": [
+    {"task_name":"Gửi tài liệu module báo cáo","assignee":"Lan","start_date":"2026-01-25","due_date":"2026-01-27","due_date_text":"trước ngày 28/01/2026","status":"Proposed"},
+    {"task_name":"Hoàn thành tài liệu module quản lý người dùng","assignee":"Minh","start_date":"2026-01-25","due_date":"","due_date_text":"trong tuần sau","status":"Proposed"}
+  ]
+}

@@ -1,0 +1,336 @@
+=== MEETING METADATA ===
+meeting_id: W4-LONG-C5-N3-PROD-STATE-011
+meeting_title: Họp điều phối triển khai hệ thống
+meeting_date: 2026-02-25
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+minutes nháp
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / trien khai / staging / production / monitoring / database
+- Bây giờ tôi tổng kết lại các task chính trong part này: Thứ nhất, DevLead owner cập nhật database staging, dl thứ Tư
+* Một điểm nhỏ: task copy dữ liệu từ production, tôi cần quyền truy cập từ bên vận hành
+- Như vậy, unresolved review cho task debug lỗi đăng nhập
+1) Tôi quyết định: task fix lỗi đăng nhập cần được ưu tiên
+- Chúng ta tạm thời có ba task mới: fix lỗi đăng nhập, tạo dữ liệu test giả, + kiểm tra tương thích
+* Vậy task "Tài liệu hướng dẫn triển khai" sẽ có dl thứ Tư tuần sau, owner là Doc, với sự hỗ trợ từ DevLead
+- Vậy chúng ta chính thức hủy task "tạo dữ liệu test giả" do Tuấn owner
+1) Không cần làm nữa
+- Bây giờ tôi muốn điểm qua trạng thái cuối cùng của các task chính: - Copy dữ liệu: DevLead, dl thứ Năm
+* dl thứ Hai. - Tài liệu hướng dẫn triển khai: Doc (với hỗ trợ DevLead), dl thứ Tư. - Kiểm tra tương thích: Arch, dl thứ Sáu. - Lỗi đăng nhập: Tuấn và QA, chưa có…
+- Anh DevLead, tình hình môi trường test hiện tại thế nào? ? chưa chốt
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:00:00] PM: Chào mọi người, chúng ta bắt đầu buổi họp điều phối triển khai hệ thống hôm nay nhé. Mục tiêu chính là thống nhất kế hoạch triển khai cho đợt này.
+[09:00:12] DevLead: Vâng, tôi đã chuẩn bị sơ bộ danh sách công việc. Hy vọng hôm nay có thể chốt được timeline.
+[09:00:23] QA: Em cũng có vài vấn đề về môi trường test cần làm rõ.
+[09:00:30] PM: Ok, chúng ta sẽ bắt đầu bằng việc rà soát môi trường test trước, sau đó đến tài liệu triển khai.
+[09:00:45] Doc: Tôi có bản nháp các tài liệu hướng dẫn triển khai, nhưng cần xác nhận nội dung từ bên phát triển.
+[09:00:58] PM: Tốt, vậy chúng ta đi vào vấn đề. Anh DevLead, tình hình môi trường test hiện tại thế nào?
+[09:01:10] DevLead: Môi trường test staging đã được chuẩn bị xong từ tuần trước, nhưng có một số thay đổi về cấu hình database cần cập nhật.
+[09:01:25] PM: Cụ thể là thay đổi gì? Có ảnh hưởng đến lịch triển khai không?
+[09:01:33] DevLead: Chúng tôi chuyển từ PostgreSQL sang MySQL cho module báo cáo, nên cần kiểm tra lại kết nối. Dự kiến xong trong 2 ngày.
+[09:01:48] QA: Như vậy môi trường test sẽ chưa sẵn sàng để QA vào test cho đến khi anh làm xong?
+[09:01:56] DevLead: Đúng vậy, tôi sẽ ưu tiên hoàn thành việc này trước. Có thể đến thứ Năm tuần này.
+[09:02:07] PM: Được, anh cứ làm. Còn vấn đề gì khác về môi trường không?
+[09:02:14] QA: Em thấy môi trường dev vẫn chạy ổn, nhưng staging hiện không có bản sao dữ liệu sản phẩm, chỉ có dữ liệu mẫu.
+[09:02:30] DevLead: Chúng ta đã bàn việc này, tôi sẽ tạo bản sao dữ liệu từ producstion sau khi cập nhật xong. Cần thêm 1 ngày nữa.
+[09:02:42] PM: Vậy thời gian staging sẵn sàng có thể bị trễ đến cuối tuần. Anh chị lưu ý để điều phối công việc.
+[09:02:55] Arch: Tôi muốn bổ sung: cần kiểm tra bảo mật cho môi trường staging trước khi đưa dữ liệu thật vào. Điều này tôi đã đề cập trong tuần trước.
+[09:03:10] PM: Đúng, vậy chúng ta phải có task riêng cho việc kiểm tra bảo mật. Ai sẽ phụ trách?
+[09:03:18] Arch: Tôi sẽ làm phần đó, nhưng cần sự hỗ trợ từ team Dev để thiết lập firewall rules.
+[09:03:30] DevLead: Ok, tôi sẽ assign một người hỗ trợ anh. Nhưng cần lưu ý deadline cho việc này là khi nào?
+[09:03:40] PM: Trước khi staging đưa vào sử dụng, tức là cuối tuần này. Vậy task kiểm tra bảo mật có deadline cuối ngày thứ Sáu.
+[09:03:55] Arch: Đã rõ. Tôi sẽ ghi nhận.
+[09:04:02] PM: Chúng ta chuyển sang tài liệu triển khai. Chị Doc, chị đã làm đến đâu rồi?
+[09:04:12] Doc: Tôi đã soạn thảo bản nháp cho hai tài liệu: "Tài liệu triển khai hệ thống" và "Tài liệu hướng dẫn triển khai". Cả hai đều có cấu trúc tương tự nhau nhưng nội dung khác biệt.
+[09:04:30] PM: Ồ, hai tài liệu gần giống tên nhau nhỉ? Cần phân biệt rõ để tránh nhầm lẫn.
+[09:04:38] Doc: Vâng, "Tài liệu triển khai hệ thống" là bản tổng quan quy trình, còn "Tài liệu hướng dẫn triển khai" là từng bước chi tiết. Tôi muốn xin review từ team trước.
+[09:04:55] DevLead: Tôi có thể review phần kỹ thuật trong cả hai. Nhưng lịch review dự kiến thế nào?
+[09:05:03] PM: Chúng ta cần đặt deadline cho bản hoàn chỉnh. Tôi nghĩ nên giao "Tài liệu triển khai hệ thống" hoàn thành trước, vì nó là cơ sở.
+[09:05:18] Doc: Tôi có thể hoàn thiện bản đó trong 3 ngày, tức là cuối tuần này. Còn tài liệu hướng dẫn cần thêm thời gian vì phải chờ các bước thực tế.
+[09:05:32] PM: Ok, vậy giao deadline cho "Tài liệu triển khai hệ thống" là thứ Sáu tuần này. Còn "Tài liệu hướng dẫn triển khai" chưa cần deadline ngay, sẽ xác định sau khi staging ổn định.
+[09:05:50] QA: Vậy tài liệu nào sẽ dùng cho team QA? Tôi cần tham khảo để viết test case.
+[09:05:58] Doc: Cả hai đều liên quan, nhưng trước mắt chị có thể dùng bản nháp của "Tài liệu triển khai hệ thống" để nắm quy trình.
+[09:06:10] PM: Tôi assign task viết tài liệu cho chị Doc, deadline thứ Sáu cho bản chính, và bản hướng dẫn không deadline cứng. Mọi người đồng ý không?
+[09:06:22] Arch: Tôi có ý kiến: bản hướng dẫn cần có checklist cụ thể để tránh sai sót khi triển khai. Tôi đề nghị chị Doc thêm phần đó.
+[09:06:35] Doc: Tôi sẽ ghi nhận và bổ sung sau khi có phản hồi từ anh.
+[09:06:42] DevLead: Ngoài ra, tôi thấy tài liệu triển khai cần đề cập đến quy trình rollback. Có thể mất thêm thời gian.
+[09:06:55] PM: Đúng, đó là phần quan trọng. Nhưng chúng ta chưa thống nhất hết yêu cầu, có thể để part sau bàn kỹ hơn.
+[09:07:05] QA: Em muốn hỏi thêm về việc ai sẽ là người review chính thức? Hay là mọi người đều review?
+[09:07:15] PM: Anh DevLead review phần kỹ thuật, tôi review phần quy trình. Chị Doc sau đó tổng hợp. Được không?
+[09:07:25] Doc: Vâng, tôi sẽ gửi bản nháp cho mọi người trong hôm nay để họ review sớm.
+[09:07:35] PM: Tốt. Giờ chúng ta quay lại vấn đề môi trường test một chút. Tôi thấy có nhiều việc phải làm song song.
+[09:07:48] DevLead: Tôi muốn làm rõ: task cập nhật database và tạo bản sao dữ liệu có thể tiến hành đồng thời không? Hay cần tuần tự?
+[09:08:00] Arch: Nên tuần tự vì bản sao dữ liệu sẽ lấy từ production, mà production đang chạy ổn, không muốn ảnh hưởng. Tôi đề nghị làm cập nhật xong rồi mới copy.
+[09:08:18] DevLead: Ok, vậy tôi sẽ làm cập nhật database trước, ước tính 2 ngày, sau đó copy dữ liệu mất 1 ngày.
+[09:08:28] PM: Như vậy thứ Năm có thể có bản sao dữ liệu, còn kiểm tra bảo mật của anh Arch làm song song? Hay sau?
+[09:08:40] Arch: Tôi có thể bắt đầu kiểm tra bảo mật ngay trên môi trường hiện tại, không cần dữ liệu thật. Nhưng kết quả cuối cùng cần có dữ liệu thật để validate.
+[09:08:55] PM: Vậy ta có thể chạy song song. Thứ Sáu là hạn chót cho tất cả.
+[09:09:05] QA: Đối với QA, chúng em cần môi trường staging ổn định để chạy test. Nếu thứ Sáu mới xong thì tuần sau mới test được.
+[09:09:17] PM: Đúng vậy, đó là kế hoạch. Tuần sau chúng ta sẽ có part họp khác để bàn chi tiết test.
+[09:09:28] DevLead: Tôi muốn nhấn mạnh: các task về môi trường test có deadline rõ ràng, nhưng cần sự phối hợp chặt chẽ.
+[09:09:40] PM: Đã rõ. Bây giờ tôi tổng kết lại các task chính trong part này:
+[09:09:48] PM: Thứ nhất, DevLead phụ trách cập nhật database staging, deadline thứ Tư. Thứ hai, copy dữ liệu production sang staging, deadline thứ Năm. Thứ ba, Arch kiểm tra bảo mật, deadline thứ Sáu. Thứ tư, Doc viết "Tài liệu triển khai hệ thống", deadline thứ Sáu. Còn "Tài liệu hướng dẫn triển khai" để sau.
+[09:10:10] QA: Em có thắc mắc nhỏ: hai tài liệu có tên gần giống nhau, trong quá trình làm việc dễ nhầm. Có nên đặt tên khác không?
+[09:10:20] Doc: Tôi nghĩ nên để nguyên vì đó là tên chính thức từ yêu cầu dự án. Chỉ cần phân biệt rõ nội dung.
+[09:10:30] PM: Tôi đồng ý với chị Doc. Nhưng mọi người khi trao đổi cần ghi rõ "tài liệu triển khai" hay "hướng dẫn triển khai" để tránh hiểu nhầm.
+[09:10:45] Arch: Tôi thấy vậy ổn. Thực ra còn nhiều việc khác, chúng ta nên tập trung.
+[09:10:55] DevLead: Tôi có một ý kiến về việc phân công hỗ trợ cho Arch. Tôi sẽ cử anh Nam (Dev) làm đầu mối.
+[09:11:08] PM: Ok, ghi nhận. Vậy chúng ta đã có các task và người phụ trách.
+[09:11:18] QA: Em muốn hỏi về timeline cho việc viết test case? Em cần dựa vào tài liệu để viết.
+[09:11:27] PM: Việc đó sẽ bàn sau khi tài liệu được review xong, có thể trong part sau. Tạm thời chưa có deadline.
+[09:11:38] Arch: Một vấn đề nữa: nếu staging chưa sẵn sàng, tôi có thể test bảo mật trên môi trường dev không? Vì dev có dữ liệu giả.
+[09:11:50] DevLead: Dev đang dùng cho phát triển, tôi không muốn can thiệp quá nhiều. Nhưng nếu anh cần, tôi sẽ check lại.
+[09:12:00] PM: Tốt nhất anh Arch nên làm trên staging dù chưa có dữ liệu thật, vì dev có thể bị thay đổi liên tục.
+[09:12:12] Arch: Vậy tôi sẽ chờ staging có dữ liệu vào thứ Năm để test bảo mật toàn diện. Còn trước đó tôi xem xét cấu hình mạng.
+[09:12:25] PM: Hợp lý. Anh chị nào có thêm câu hỏi gì không?
+[09:12:33] Doc: Tôi muốn xác nhận: bản nháp tài liệu triển khai tôi gửi hôm nay, mọi người review trong mấy ngày? Cần deadline cho review.
+[09:12:45] PM: Review trong vòng 2 ngày, tức là đến thứ Năm sẽ góp ý. Sau đó chị Doc chỉnh sửa và hoàn thiện vào thứ Sáu.
+[09:12:55] DevLead: Tôi có thể review nhanh trong thứ Tư. Không vấn đề.
+[09:13:03] QA: Em sẽ cố gắng review trước thứ Năm.
+[09:13:10] PM: Tốt. Như vậy mọi người đã nắm được công việc của mình. Tôi sẽ ghi biên bản và gửi email sau họp.
+[09:13:22] DevLead: Một điểm nhỏ: task copy dữ liệu từ production, tôi cần quyền truy cập từ bên vận hành. Ai sẽ liên hệ?
+[09:13:33] PM: Tôi sẽ liên hệ với anh Quản trị hệ thống, xin access. Anh cứ chuẩn bị script trước.
+[09:13:42] Arch: Lưu ý: dữ liệu production có thông tin nhạy cảm, cần tuân thủ quy định bảo mật. Tôi đã có process.
+[09:13:55] PM: Đã rõ. Chúng ta cần cẩn trọng. Còn gì nữa không?
+[09:14:02] QA: Em thấy lịch trình khá chặt, nếu có vấn đề bất ngờ thì sao?
+[09:14:10] PM: Sẽ có các part họp tiếp theo để điều chỉnh. Hôm nay chúng ta mới khởi động, còn nhiều việc phải bàn sâu hơn.
+[09:14:22] Doc: Tôi có thể gửi tài liệu vào đầu giờ chiều nay được không? Vì còn vài phần cần chỉnh.
+[09:14:30] PM: Càng sớm càng tốt. Trước 14h nhé.
+[09:14:38] Doc: Vâng.
+[09:14:42] PM: Vậy tôi xin tạm dừng part 1 ở đây. Chúng ta sẽ gặp lại trong part 2 để tiếp tục bàn về kế hoạch test và tài liệu hướng dẫn.
+[09:14:55] Arch: Tôi mong đợi part sau có thời gian bàn về rollback.
+[09:15:02] PM: Sẽ được đưa vào agenda. Cảm ơn mọi người.
+[09:15:10] QA: Chị PM ơi, em có một vấn đề về lỗi đăng nhập trên môi trường dev muốn báo cáo. Hôm qua em thử nghiệm thì thấy không thể đăng nhập được bằng tài khoản test.
+[09:15:25] PM: Ồ, vấn đề đó có nghiêm trọng không? Anh DevLead đã biết chưa?
+[09:15:33] DevLead: Tôi chưa nghe báo cáo này. Lỗi gì cụ thể thế?
+[09:15:40] QA: Em thử đăng nhập bằng user "tester" với mật khẩu mặc định, nó báo "Invalid credentials". Nhưng tài khoản đó vẫn dùng được tuần trước.
+[09:15:55] DevLead: Có thể do thay đổi cấu hình database mới đây. Để tôi kiểm tra lại bảng user trong PostgreSQL.
+[09:16:05] QA: Nhưng staging đang chuyển sang MySQL, sao dev lại dùng PostgreSQL?
+[09:16:12] DevLead: Dev vẫn giữ nguyên PostgreSQL cho module chính. Chỉ staging mới chuyển MySQL cho module báo cáo. Có thể script đồng bộ dữ liệu bị lỗi.
+[09:16:25] PM: Vậy chúng ta cần có task riêng cho việc debug lỗi đăng nhập. Anh DevLead làm luôn được không?
+[09:16:35] DevLead: Tôi sẽ xem, nhưng hiện đang bận với database staging. Có thể giao cho anh Nam hỗ trợ QA.
+[09:16:45] QA: Em muốn tự debug cùng với Dev để hiểu rõ quy trình, nhưng cần có quyền truy cập log.
+[09:16:55] Arch: Tôi nghĩ lỗi đăng nhập có thể liên quan đến việc thay đổi authentication flow trong bản cập nhật gần đây. Có cần review lại code không?
+[09:17:08] DevLead: Chưa chắc. Để tôi check log trước, nếu cần thiết sẽ mở task fix. Tạm thời assign cho em Tuấn (Dev) hỗ trợ QA.
+[09:17:20] QA: Vậy em và Tuấn sẽ cùng phân tích. Cần thêm dữ liệu test để tái hiện lỗi. Dữ liệu test hiện tại có đủ không?
+[09:17:30] Doc: Tôi có thể cung cấp danh sách tài khoản test từ tài liệu, nhưng không chắc đồng bộ với database hiện tại.
+[09:17:42] PM: Vậy chúng ta cần có dữ liệu test chuẩn. Ai sẽ tạo bộ dữ liệu test cho lỗi đăng nhập?
+[09:17:52] QA: Em đề nghị DevLead cung cấp script tạo dữ liệu test dựa trên cấu hình mới.
+[09:18:00] DevLead: Tôi không có sẵn script đó. Có thể để em Tuấn viết, nhưng cần thời gian.
+[09:18:10] PM: Vậy task tạo dữ liệu test sẽ giao cho ai? Chưa rõ reviewer.
+[09:18:18] QA: Em có thể viết test case dựa trên dữ liệu hiện có, nhưng cần dữ liệu thực tế từ Dev để tái hiện.
+[09:18:28] Arch: Tôi thấy việc này nên có người chịu trách nhiệm chính. Nhưng thực sự đang thiếu nhân lực.
+[09:18:38] PM: Tạm thời, em QA và Tuấn cùng làm, chưa có deadline cứng. Kết quả báo cáo trong part sau.
+[09:18:50] DevLead: Như vậy, unresolved review cho task debug lỗi đăng nhập. Tôi sẽ assign cho Tuấn, nhưng chưa có người review chính thức.
+[09:19:00] QA: Em thấy lỗi này có thể do database migration không đồng bộ. Cần kiểm tra both môi trường.
+[09:19:08] DevLead: Đúng, nhưng tôi đang bận. Có thể part sau mới giải quyết triệt để.
+[09:19:18] PM: Được, chúng ta tạm gác lại và chuyển sang topic dữ liệu test. Chị Doc, chị có thể hỗ trợ làm rõ yêu cầu dữ liệu test không?
+[09:19:30] Doc: Tôi có bản mô tả dữ liệu test trong tài liệu hướng dẫn, nhưng chưa cập nhật cho phần đăng nhập. Có thể cần điều chỉnh.
+[09:19:42] QA: Em muốn có dữ liệu test bao gồm các trường hợp: tài khoản hợp lệ, không hợp lệ, hết hạn. Devần cần cung cấp.
+[09:19:55] DevLead: Được, tôi sẽ yêu cầu Tuấn soạn một bộ dữ liệu mẫu. Nhưng cần ưu tiên cho staging trước.
+[09:20:05] PM: Vậy task tạo dữ liệu test cho lỗi đăng nhập có người làm là Tuấn, nhưng ai review? Chưa có.
+[09:20:13] QA: Em có thể review phần logic, nhưng không đủ chuyên môn để review dữ liệu kỹ thuật.
+[09:20:22] Arch: Tôi có thể review nếu cần, nhưng không phải chuyên về dữ liệu test.
+[09:20:32] PM: Vậy unresolved: reviewer cho task dữ liệu test. Sẽ quyết định sau.
+[09:20:42] DevLead: Một vấn đề khác: nếu lỗi đăng nhập tồn tại, việc copy dữ liệu production sang staging có thể gặp rủi ro. Vì script copy cũng dùng thông tin đăng nhập.
+[09:20:55] PM: Anh có đề xuất gì?
+[09:21:02] DevLead: Tôi nghĩ nên fix lỗi đăng nhập trước khi copy dữ liệu, để tránh ảnh hưởng đến quá trình đồng bộ.
+[09:21:10] Arch: Nhưng copy dữ liệu cần dùng tài khoản service riêng, không phải user test. Có thể vẫn chạy được.
+[09:21:20] QA: Em lo lắng nếu không fix, QA không thể test login trên staging.
+[09:21:30] PM: Chúng ta có thể điều chỉnh kế hoạch. Tôi quyết định: task fix lỗi đăng nhập cần được ưu tiên. Anh DevLead, anh bố trí người làm, deadline trước khi copy dữ liệu, tức thứ Năm.
+[09:21:48] DevLead: Nhưng tôi đã nói là bận. Có thể giao cho Tuấn sửa, nhưng cần thời gian tìm hiểu.
+[09:21:58] PM: Vậy task này có deadline thứ Năm, assign cho Tuấn, nhưng cần DevLead support. Chưa có reviewer.
+[09:22:08] QA: Em có thể hỗ trợ test sau khi fix.
+[09:22:15] Arch: Tôi đề nghị thêm một task kiểm tra tính tương thích giữa authentication và database mới, phòng khi có vấn đề khác.
+[09:22:28] PM: Ghi nhận. Nhưng hôm nay chúng ta có quá nhiều task. Tôi muốn focus vào dữ liệu test trước.
+[09:22:38] QA: Em muốn biết: dữ liệu test cho staging sẽ lấy từ đâu? Có dùng bản sao production không?
+[09:22:48] DevLead: Sau khi copy xong thì có dữ liệu thật. Nhưng trước đó, chúng ta cần dữ liệu giả để test.
+[09:22:58] PM: Vậy Tuấn tạo dữ liệu giả, deadline thứ Tư để kịp test trước copy. OK?
+[09:23:08] QA: Ok, nhưng em cần danh sách các tài khoản test từ chị Doc.
+[09:23:15] Doc: Tôi sẽ gửi danh sách trong email hôm nay.
+[09:23:22] PM: Tốt. Chúng ta tạm thời có ba task mới: fix lỗi đăng nhập, tạo dữ liệu test giả, và kiểm tra tương thích. Cả ba đều chưa có reviewer chính thức.
+[09:23:38] Arch: Tôi có thể review task tương thích, nhưng không phải task fix.
+[09:23:45] QA: Em có thể review test case, nhưng dữ liệu test thì cần người khác.
+[09:23:55] PM: Vậy unresolved reviewer cho task tạo dữ liệu test giả. Sẽ bàn trong part sau.
+[09:24:05] DevLead: Một điểm tiêu cực: nếu task fix lỗi đăng nhập không kịp, toàn bộ kế hoạch test có thể bị trễ.
+[09:24:15] PM: Tôi hiểu. Nhưng chúng ta vẫn đang trong quá trình lên kế hoạch. Có thể điều chỉnh sau.
+[09:24:25] QA: Em đề nghị có một buổi họp ngắn giữa QA và Dev để thống nhất dữ liệu test trước khi part sau.
+[09:24:35] PM: Tốt, em QA và anh DevLead tự sắp xếp. Tôi sẽ không tham gia.
+[09:24:42] Arch: Về task tương thích, tôi cần spec từ DevLead về database mới.
+[09:24:50] DevLead: Tôi sẽ gửi spec qua email chiều nay.
+[09:24:58] PM: Ok. Vậy chúng ta đã bàn được nhiều việc. Tôi thấy căng thẳng về deadline, nhưng cố gắng.
+[09:25:08] QA: Em có thêm một câu hỏi: dữ liệu test giả có cần bao gồm dữ liệu nhạy cảm không?
+[09:25:16] Arch: Không, dữ liệu giả phải là dữ liệu ẩn danh, tuân thủ quy định.
+[09:25:24] DevLead: Tôi sẽ nhắc Tuấn.
+[09:25:30] PM: Tốt. Vậy tôi xin tạm dừng part hai tại đây. Các task chưa có reviewer sẽ được giải quyết trong part sau. Cảm ơn mọi người.
+[09:25:38] PM: Chúng ta tiếp tục part 3. Hôm nay tôi muốn quay lại vấn đề tài liệu triển khai đã bàn từ đầu buổi. Chị Doc, tình hình tiến độ thế nào?
+[09:25:52] Doc: Tôi đã gửi bản nháp "Tài liệu triển khai hệ thống" cho mọi người review sáng nay. Nhưng tôi nhận thấy có một vấn đề: nội dung phần quy trình rollback còn thiếu, và tôi không có đủ thông tin kỹ thuật để hoàn thiện.
+[09:26:10] PM: Vậy chị cần ai hỗ trợ? Anh DevLead có thể cung cấp thông tin đó không?
+[09:26:18] DevLead: Tôi có thể viết phần rollback, nhưng hiện đang xử lý lỗi đăng nhập và database staging. Không biết có kịp không.
+[09:26:30] Doc: Tôi đề nghị chuyển ownership của "Tài liệu triển khai hệ thống" sang cho anh DevLead, vì anh có chuyên môn về kỹ thuật. Tôi chỉ hỗ trợ phần biên tập.
+[09:26:45] PM: Handoff owner? Điều đó có nghĩa là anh DevLead sẽ chịu trách nhiệm chính về tài liệu này? Còn deadline thì sao?
+[09:26:55] DevLead: Tôi không phản đối, nhưng nếu nhận thêm việc này, tôi cần điều chỉnh deadline. Deadline thứ Sáu có vẻ quá gấp vì tôi còn nhiều việc khác.
+[09:27:08] PM: Vậy chị Doc, chị có đồng ý handoff không? Chị sẽ chuyển giao toàn bộ nội dung hiện có cho anh DevLead.
+[09:27:18] Doc: Tôi đồng ý. Tôi sẽ gửi bản nháp và các ghi chú cho anh DevLead ngay sau họp.
+[09:27:28] PM: Ok, vậy task "Tài liệu triển khai hệ thống" chính thức được chuyển owner từ Doc sang DevLead. Còn deadline? Chúng ta có thể thay đổi không?
+[09:27:40] DevLead: Tôi đề nghị dời deadline sang thứ Hai tuần sau, vì cuối tuần này tôi phải tập trung cho staging.
+[09:27:50] PM: Mọi người có ý kiến gì không? Việc dời deadline có ảnh hưởng đến kế hoạch tổng thể không?
+[09:28:00] Arch: Nếu tài liệu chậm, việc triển khai thực tế cũng bị ảnh hưởng. Nhưng tôi nghĩ chất lượng quan trọng hơn. Đồng ý dời.
+[09:28:10] QA: Em cũng ok, nhưng cần tài liệu trước khi em viết test case. Nếu thứ Hai, em có thể chờ.
+[09:28:20] PM: Vậy deadline mới cho "Tài liệu triển khai hệ thống" là thứ Hai tuần sau. Ghi nhận.
+[09:28:30] Doc: Còn "Tài liệu hướng dẫn triển khai" thì sao? Task đó vẫn chưa có deadline.
+[09:28:38] PM: Đúng, chúng ta đã để task đó không deadline. Nhưng bây giờ tôi thấy cần ấn định để tránh trễ. Anh DevLead nghĩ sao?
+[09:28:48] DevLead: Tôi nghĩ nên giao cho chị Doc tiếp tục, với deadline sau khi tài liệu triển khai hoàn thành, ví dụ thứ Tư tuần sau.
+[09:28:58] PM: Nhưng chị Doc vừa handoff, liệu chị có đủ thời gian không? Chị Doc, chị có nhận không?
+[09:29:06] Doc: Tôi có thể nhận, nhưng cần hỗ trợ từ anh DevLead về nội dung kỹ thuật. Deadline thứ Tư tuần sau tôi làm được.
+[09:29:16] PM: Vậy task "Tài liệu hướng dẫn triển khai" sẽ có deadline thứ Tư tuần sau, owner là Doc, với sự hỗ trợ từ DevLead. Như vậy chúng ta đã điều chỉnh cả hai task tài liệu.
+[09:29:32] DevLead: Một điểm cần lưu ý: tôi đã nhận thêm task tài liệu triển khai, nên cần xem lại khối lượng công việc. Task fix lỗi đăng nhập vẫn đang tiến hành.
+[09:29:45] PM: Tôi hiểu. Chúng ta có thể bàn về ưu tiên sau. Bây giờ, hãy quay lại nội dung tài liệu triển khai. Anh DevLead, anh dự định sẽ bổ sung phần rollback như thế nào?
+[09:29:58] DevLead: Tôi sẽ dựa trên quy trình đã từng làm ở dự án trước, nhưng cần điều chỉnh cho phù hợp với hệ thống hiện tại. Có thể mất 2 ngày để viết.
+[09:30:10] Arch: Tôi muốn góp ý: phần rollback cần liệt kê các bước cụ thể, kèm script mẫu. Nếu không, khi xảy ra sự cố sẽ lúng túng.
+[09:30:22] DevLead: Vâng, tôi sẽ làm chi tiết. Nhưng cần sự phối hợp từ Arch để đảm bảo an toàn dữ liệu.
+[09:30:32] PM: Tốt. Như vậy task mới cho DevLead là viết phần rollback trong tài liệu triển khai. Không cần tạo task riêng, vì nó nằm trong tài liệu.
+[09:30:45] QA: Em muốn hỏi: sau khi tài liệu triển khai hoàn thành, em có thể dùng nó để viết test case ngay không? Hay cần chờ tài liệu hướng dẫn?
+[09:30:55] PM: Em có thể bắt đầu ngay sau khi tài liệu triển khai được review xong. Tài liệu hướng dẫn sẽ bổ sung chi tiết hơn.
+[09:31:05] Doc: Tôi sẽ cố gắng hoàn thiện phần hướng dẫn nhanh để QA không bị chậm.
+[09:31:12] DevLead: Tôi thấy có một vấn đề: deadline thứ Hai cho tài liệu triển khai và thứ Tư cho hướng dẫn, nhưng giữa đó có thể có xung đột lịch. Tôi cần biết ai sẽ review chính thức cho tài liệu triển khai?
+[09:31:28] PM: Trước đây tôi và anh DevLead review. Nhưng bây giờ anh DevLead là owner, vậy ai review? Tôi nghĩ tôi và Arch sẽ review.
+[09:31:38] Arch: Tôi đồng ý. Tôi có thể review phần kỹ thuật, PM review phần quy trình.
+[09:31:45] PM: Vậy reviewer cho tài liệu triển khai là PM và Arch. Còn tài liệu hướng dẫn, ai review?
+[09:31:52] Doc: Tôi đề nghị DevLead review phần kỹ thuật, QA review phần usability.
+[09:32:00] DevLead: Tôi ok, nhưng cần lưu ý thời gian. Nếu tôi bận, có thể chậm review.
+[09:32:08] PM: Chúng ta sẽ linh hoạt. Bây giờ, tôi muốn nhắc lại một task cũ từ part 1: task kiểm tra bảo mật của Arch. Tình hình sao rồi?
+[09:32:22] Arch: Tôi đã bắt đầu rà soát cấu hình mạng, nhưng chưa có dữ liệu thật để test. Dự kiến thứ Năm mới có.
+[09:32:32] PM: Vậy vẫn đúng tiến độ. Nhưng lưu ý deadline thứ Sáu.
+[09:32:38] Arch: Vâng.
+[09:32:42] DevLead: Về task copy dữ liệu, tôi vẫn chờ quyền truy cập từ bên vận hành. PM đã liên hệ chưa?
+[09:32:52] PM: Tôi đã gửi email, nhưng chưa có phản hồi. Tôi sẽ đôn đốc lại.
+[09:33:00] DevLead: Nếu không có quyền, task copy sẽ bị trễ. Đây là rủi ro.
+[09:33:08] PM: Tôi hiểu. Sẽ cố gắng xử lý trong hôm nay.
+[09:33:15] QA: Em thấy nhiều task phụ thuộc lẫn nhau, nếu một task trễ sẽ ảnh hưởng dây chuyền.
+[09:33:25] PM: Đúng vậy. Chúng ta cần có kế hoạch dự phòng. Nhưng hôm nay chưa bàn sâu.
+[09:33:35] Arch: Tôi đề nghị part sau chúng ta nên dành thời gian xây dựng lộ trình tổng thể, gắn các task lại với nhau.
+[09:33:45] PM: Ghi nhận. Vậy tôi xin tạm kết thúc part 3 tại đây. Chúng ta đã handoff tài liệu triển khai, thay đổi deadline, và thảo luận về nội dung. Cảm ơn mọi người.
+[09:33:50] PM: Chúng ta bắt đầu part 4. Hôm nay tôi muốn tập trung vào kế hoạch release và monitoring cho hệ thống. Chúng ta đã có nhiều task từ các part trước, giờ cần xem xét tổng thể.
+[09:34:05] DevLead: Vâng, tôi nghĩ chúng ta cần một bản release plan cụ thể. Hiện tại staging chưa sẵn sàng, nhưng có thể bắt đầu lên kế hoạch từ bây giờ.
+[09:34:18] Arch: Tôi đồng ý. Việc monitoring cũng cần được thiết lập trước khi release. Chúng ta có hệ thống monitoring nào chưa?
+[09:34:28] QA: Em thấy hiện tại chỉ có log cơ bản, chưa có dashboard để theo dõi hiệu năng. Cần bổ sung.
+[09:34:38] PM: Vậy chúng ta cần task thiết lập monitoring. Ai sẽ phụ trách?
+[09:34:45] DevLead: Tôi có thể setup cơ bản, nhưng cần thêm thời gian vì đang bận nhiều việc.
+[09:34:55] Arch: Tôi có thể hỗ trợ phần cảnh báo và threshold. Nhưng cần xác định rõ yêu cầu.
+[09:35:05] PM: Trước mắt, tôi assign task thiết lập monitoring cho DevLead, với sự hỗ trợ từ Arch. Deadline? Chúng ta cần trước release. Release dự kiến khi nào?
+[09:35:18] DevLead: Nếu mọi chuyện suôn sẻ, có thể cuối tuần sau. Nhưng còn phụ thuộc vào nhiều yếu tố.
+[09:35:28] QA: Em nghĩ monitoring nên có trước khi staging đưa vào sử dụng, để theo dõi lỗi ngay.
+[09:35:38] PM: Vậy deadline cho monitoring là thứ Sáu tuần này, cùng với các task khác. Như vậy có nhiều việc cùng lúc.
+[09:35:48] Arch: Tôi lo rằng nếu quá nhiều task cùng deadline, chất lượng sẽ giảm. Có thể dời monitoring sang tuần sau?
+[09:35:58] DevLead: Tôi đồng ý với Arch. Hãy để monitoring sau khi staging ổn định. Deadline thứ Hai tuần sau.
+[09:36:08] PM: Ok, vậy monitoring deadline thứ Hai tuần sau. Ghi nhận.
+[09:36:16] QA: Em muốn hỏi về release plan: ai sẽ viết bản kế hoạch? Có cần tài liệu không?
+[09:36:26] PM: Tôi nghĩ anh DevLead nên viết release plan, vì anh nắm rõ các bước. Chị Doc hỗ trợ biên tập.
+[09:36:36] DevLead: Tôi có thể viết, nhưng cần thông tin từ Arch về bảo mật và từ QA về test criteria.
+[09:36:45] QA: Em có thể cung cấp test criteria sau khi có tài liệu triển khai.
+[09:36:55] Arch: Tôi sẽ gửi các yêu cầu bảo mật cần kiểm tra trước release.
+[09:37:03] PM: Vậy task release plan có owner là DevLead, hỗ trợ từ Doc, Arch, QA. Deadline? Trước release ít nhất 2 ngày, tức thứ Năm tuần sau.
+[09:37:15] DevLead: Nếu deadline thứ Năm, tôi cần các đầu vào trước thứ Ba. Mọi người có thể gửi đúng hạn không?
+[09:37:25] QA: Em sẽ cố gắng gửi test criteria trước thứ Ba.
+[09:37:33] Arch: Tôi cũng ok.
+[09:37:40] PM: Tốt. Bây giờ tôi muốn nói về một task cũ. Nhớ task tạo dữ liệu test giả từ part 2? Tôi thấy task đó không còn cần thiết nữa, vì chúng ta đã có dữ liệu từ production sau khi copy.
+[09:37:58] DevLead: Đúng vậy, nếu copy dữ liệu thành công, dữ liệu giả sẽ không dùng đến. Có thể hủy task đó.
+[09:38:06] QA: Nhưng em đã dựa vào dữ liệu giả để viết test case sơ bộ. Nếu hủy, em có thể dùng dữ liệu thật sau.
+[09:38:16] PM: Vậy chúng ta chính thức hủy task "tạo dữ liệu test giả" do Tuấn phụ trách. Không cần làm nữa.
+[09:38:26] DevLead: Ghi nhận. Tôi sẽ thông báo cho Tuấn.
+[09:38:33] Arch: Một điểm khác: task kiểm tra bảo mật của tôi có deadline thứ Sáu, nhưng tôi cần có dữ liệu thật để kiểm tra. Nếu copy dữ liệu bị trễ, tôi không thể hoàn thành.
+[09:38:48] PM: Vậy anh có đề xuất gì? Có thể dời deadline không?
+[09:38:55] Arch: Tôi đề nghị deadline thứ Hai tuần sau, cùng với monitoring. Như vậy tôi có thêm thời gian.
+[09:39:05] DevLead: Nhưng nếu dời deadline, toàn bộ kế hoạch release có thể bị ảnh hưởng. Tôi không muốn chậm trễ.
+[09:39:15] QA: Em thấy nên giữ deadline thứ Sáu cho bảo mật, vì nó là task then chốt. Nếu không kịp, chúng ta có thể release muộn hơn.
+[09:39:25] PM: Tôi quyết định: giữ deadline thứ Sáu cho bảo mật, nhưng Arch có thể làm việc với dữ liệu giả hiện có. Nếu không đủ, anh báo cáo và chúng ta sẽ điều chỉnh.
+[09:39:38] Arch: Vậy tôi sẽ cố gắng, nhưng cảnh báo trước rằng kết quả có thể không chính xác tuyệt đối.
+[09:39:48] PM: Hiểu. Chúng ta chấp nhận rủi ro đó.
+[09:39:55] DevLead: Về copy dữ liệu, tôi vẫn chưa có quyền truy cập. PM, tình hình thế nào?
+[09:40:03] PM: Tôi đã gửi email nhắc lại, nhưng chưa có hồi âm. Tôi sẽ gọi điện trực tiếp sau họp.
+[09:40:12] DevLead: Nếu không có quyền hôm nay, task copy sẽ trễ. Đây là vấn đề nghiêm trọng.
+[09:40:20] QA: Em lo rằng nếu copy trễ, toàn bộ test của em cũng bị ảnh hưởng.
+[09:40:28] PM: Tôi sẽ xử lý ngay. Anh DevLead, anh có thể chuẩn bị script trong lúc chờ không?
+[09:40:36] DevLead: Script đã sẵn sàng, chỉ cần chạy thôi.
+[09:40:42] Arch: Một ý kiến khác: chúng ta nên có kế hoạch dự phòng cho release, phòng khi staging chưa sẵn sàng. Ví dụ, dùng dev environment tạm thời.
+[09:40:55] PM: Đó là ý hay, nhưng cần bàn sau. Bây giờ tôi muốn quay lại monitoring.
+[09:41:03] DevLead: Tôi cần xác định các chỉ số cần monitor. Ai sẽ cung cấp danh sách?
+[09:41:11] QA: Em có thể đề xuất các chỉ số từ góc nhìn user: response time, error rate.
+[09:41:19] Arch: Tôi sẽ thêm các chỉ số bảo mật: số lần đăng nhập thất bại, truy cập bất thường.
+[09:41:28] PM: Tốt, vậy anh DevLead tổng hợp lại. Tôi nghĩ chúng ta nên có một buổi họp nhỏ về monitoring sau part này.
+[09:41:40] DevLead: Tôi đồng ý. Càng sớm càng tốt.
+[09:41:46] QA: Em muốn hỏi về release: chúng ta có cần thông báo cho các bên liên quan không?
+[09:41:55] PM: Tôi sẽ lo phần thông báo. Các anh chị chỉ cần hoàn thành task của mình.
+[09:42:03] Arch: Tôi thấy deadline cho bảo mật thứ Sáu, monitoring thứ Hai, release plan thứ Năm. Có vẻ ổn.
+[09:42:12] DevLead: Nhưng tôi lo lịch trình quá tải. Bản thân tôi có quá nhiều task: database, copy dữ liệu, bảo mật hỗ trợ, monitoring, release plan.
+[09:42:25] PM: Tôi hiểu. Có thể phân bổ lại. Anh có thể ủy quyền một số task cho người khác không?
+[09:42:33] DevLead: Monitoring có thể giao cho một Dev khác, nhưng cần đào tạo.
+[09:42:40] PM: Vậy tôi suggest: monitoring task sẽ do anh Nam (Dev) phụ trách, với sự hướng dẫn của anh. Anh DevLead vẫn là owner.
+[09:42:52] DevLead: Ok, tôi sẽ hướng dẫn Nam. Nhưng vẫn cần thời gian.
+[09:42:58] QA: Em thấy có một lỗ hổng: chưa có ai phụ trách kiểm tra tính tương thích database như Arch đề xuất ở part 2. Task đó vẫn unresolved.
+[09:43:10] Arch: Tôi vẫn có thể làm, nhưng cần spec từ DevLead. Anh đã gửi chưa?
+[09:43:18] DevLead: Chưa, tôi sẽ gửi chiều nay. Nhưng task đó có cần deadline không?
+[09:43:25] PM: Tôi nghĩ nên có deadline. Em QA, em có cần task đó cho test không?
+[09:43:33] QA: Có, em cần biết database mới có ảnh hưởng gì đến login không.
+[09:43:40] PM: Vậy deadline cho task kiểm tra tương thích là thứ Sáu, cùng với bảo mật. Arch làm, với spec từ DevLead.
+[09:43:52] Arch: Tôi ok, nhưng cần spec trước thứ Tư.
+[09:43:58] DevLead: Tôi sẽ gửi spec hôm nay.
+[09:44:05] PM: Vậy chúng ta đã có lịch trình rõ hơn. Bây giờ, tôi muốn nhấn mạnh: task bảo mật có deadline thứ Sáu, nhưng tôi thấy có một deadline khác gần đó là task tài liệu triển khai (thứ Hai). Đây là những deadline quan trọng.
+[09:44:22] Arch: Vâng, tôi sẽ cố gắng.
+[09:44:28] QA: Em có một vấn đề negative: nếu task bảo mật không kịp, release sẽ bị hoãn. Chúng ta có kế hoạch B không?
+[09:44:38] PM: Kế hoạch B là dùng dev environment tạm thời, nhưng cần bàn thêm. Có thể part sau.
+[09:44:48] DevLead: Tôi đề nghị chúng ta nên lập một biểu đồ Gantt cho các task. Nhưng không có thời gian làm ngay.
+[09:44:58] PM: Tôi sẽ ghi nhận và làm sau họp. Bây giờ, còn vấn đề gì khác không?
+[09:45:05] Arch: Tôi muốn nhắc lại task tài liệu triển khai đã handoff cho DevLead. Anh đã bắt đầu chưa?
+[09:45:13] DevLead: Tôi sẽ bắt đầu sau khi xong việc với staging. Có thể thứ Bảy.
+[09:45:20] PM: Nhưng deadline thứ Hai, anh cần làm sớm hơn.
+[09:45:26] DevLead: Tôi sẽ cố gắng làm vào cuối tuần.
+[09:45:32] QA: Em thấy mọi người đều quá tải. Liệu có cần thêm nhân lực không?
+[09:45:40] PM: Đó là vấn đề của dự án. Tôi sẽ báo cáo lên trên. Nhưng hiện tại, chúng ta phải tự xoay sở.
+[09:45:50] Arch: Tôi đồng ý. Cố gắng hết sức.
+[09:45:56] PM: Vậy tôi xin tạm kết thúc part 4 tại đây. Chúng ta đã hủy task dữ liệu test giả, đặt deadline cho bảo mật thứ Sáu, và thảo luận về monitoring. Còn nhiều việc, hẹn part cuối.
+[09:46:02] PM: Chúng ta bước vào part cuối cùng, part 5. Mục tiêu là tổng kết và xử lý các điểm còn tồn đọng. Trước hết, tôi muốn cập nhật tình hình các task từ part 4.
+[09:46:18] DevLead: Tôi đã nhận được quyền truy cập từ bên vận hành ngay sau khi kết thúc part 4. Copy dữ liệu có thể bắt đầu trong chiều nay.
+[09:46:32] PM: Tin tốt. Vậy task copy dữ liệu sẽ tiến hành, deadline thứ Năm vẫn giữ nguyên?
+[09:46:40] DevLead: Đúng, tôi sẽ chạy script vào cuối giờ chiều, dự kiến hoàn thành sáng thứ Năm.
+[09:46:50] QA: Nếu copy xong sớm, em có thể bắt đầu test với dữ liệu thật sớm hơn.
+[09:46:58] PM: Tốt. Về task kiểm tra bảo mật, anh Arch đã tiến triển đến đâu?
+[09:47:06] Arch: Tôi đã rà soát cấu hình mạng xong, đang chờ dữ liệu thật để chạy các kiểm tra cuối. Deadline thứ Sáu vẫn khả thi.
+[09:47:18] PM: Lưu ý: nếu có vấn đề gì phát sinh, báo ngay để điều chỉnh.
+[09:47:26] DevLead: Về task monitoring, tôi đã hướng dẫn Nam setup cơ bản. Dashboard dự kiến có sẵn vào thứ Hai.
+[09:47:36] QA: Em muốn xem thử dashboard để góp ý. Có thể cho em xem bản nháp trước không?
+[09:47:44] DevLead: Tôi sẽ yêu cầu Nam gửi preview vào thứ Sáu.
+[09:47:50] PM: Ok. Bây giờ, tôi muốn quay lại vấn đề tài liệu triển khai. Anh DevLead, anh đã bắt đầu viết phần rollback chưa?
+[09:48:02] DevLead: Tôi đã phác thảo sơ bộ, nhưng cần thêm thông tin từ Arch về quy trình khôi phục dữ liệu.
+[09:48:10] Arch: Tôi có thể gửi tài liệu tham khảo về rollback database trong ngày hôm nay.
+[09:48:18] PM: Vậy deadline thứ Hai cho tài liệu triển khai vẫn giữ? Anh có kịp không?
+[09:48:28] DevLead: Tôi sẽ cố gắng, nhưng nếu copy dữ liệu chiếm nhiều thời gian, có thể phải dời sang thứ Ba.
+[09:48:38] PM: Tôi không muốn dời thêm. Hãy ưu tiên tài liệu vào cuối tuần. Anh có thể làm vào tối thứ Sáu và thứ Bảy.
+[09:48:48] DevLead: Vậy tôi sẽ sắp xếp.
+[09:48:54] QA: Còn tài liệu hướng dẫn triển khai của chị Doc? Deadline thứ Tư tuần sau, chị có cần hỗ trợ gì không?
+[09:49:04] Doc: Tôi đã nhận được ý kiến review từ QA, đang chỉnh sửa. Cần thêm thông tin từ DevLead về các bước chi tiết.
+[09:49:14] DevLead: Tôi sẽ gửi phần mô tả các bước triển khai vào thứ Hai, sau khi hoàn thành tài liệu chính.
+[09:49:22] PM: Vậy chị Doc sẽ có đầu vào từ anh DevLead. Deadline thứ Tư có ổn không?
+[09:49:30] Doc: Tôi nghĩ được, nhưng nếu chậm từ anh DevLead thì tôi sẽ báo.
+[09:49:38] PM: Ghi nhận. Chúng ta cũng có task kiểm tra tương thích database, do Arch phụ trách, deadline thứ Sáu. Anh DevLead đã gửi spec chưa?
+[09:49:50] DevLead: Tôi đã gửi email spec chiều qua. Arch nhận được chưa?
+[09:49:56] Arch: Tôi đã nhận và bắt đầu phân tích. Sẽ có kết quả sớm.
+[09:50:04] PM: Vậy tổng thể các task đều có tiến triển. Bây giờ, tôi muốn nhắc lại một task đã bị hủy ở part 4: task tạo dữ liệu test giả. Chúng ta đã hủy đúng không?
+[09:50:18] QA: Vâng, task đó không còn giá trị. Nhưng em đã viết test case dựa trên dữ liệu giả, có thể sử dụng lại khi có dữ liệu thật.
+[09:50:28] PM: Không cần tạo duplicate. Test case đó có thể áp dụng cho dữ liệu thật. Tốt.
+[09:50:36] Arch: Một vấn đề: task fix lỗi đăng nhập từ part 2 vẫn chưa có reviewer chính thức. Chúng ta chưa chốt được ai review.
+[09:50:48] PM: Đúng, đó là unresolved item. Tôi đề nghị để nguyên, vì hiện tại lỗi đăng nhập đã được debug sơ bộ bởi Tuấn và QA, và có thể không cần review chính thức nếu fix đơn giản.
+[09:51:00] DevLead: Tôi có thể review nếu cần, nhưng tôi quá tải. Để part sau quyết định.
+[09:51:08] PM: Vậy unresolved reviewer vẫn tồn tại. Chúng ta không chốt hôm nay.
+[09:51:16] QA: Em đồng ý, vì lỗi đó có thể tự kiểm tra qua test.
+[09:51:22] PM: Tốt. Bây giờ tôi muốn điểm qua trạng thái cuối cùng của các task chính: - Copy dữ liệu: DevLead, deadline thứ Năm. - Kiểm tra bảo mật: Arch, deadline thứ Sáu. - Monitoring: DevLead (với Nam), deadline thứ Hai. - Tài liệu triển khai hệ thống: DevLead (handoff từ Doc), deadline thứ Hai. - Tài liệu hướng dẫn triển khai: Doc (với hỗ trợ DevLead), deadline thứ Tư. - Kiểm tra tương thích: Arch, deadline thứ Sáu. - Lỗi đăng nhập: Tuấn và QA, chưa có reviewer. - Task dữ liệu test giả: đã hủy.
+[09:52:10] DevLead: Vâng, tôi nắm được.
+[09:52:16] QA: Em thấy lịch trình vẫn khả thi, nhưng cần theo dõi sát.
+[09:52:24] Arch: Tôi có một đề xuất: nên có buổi họp nhanh vào đầu tuần sau để review tiến độ, tránh phát sinh.
+[09:52:34] PM: Ý hay. Tôi sẽ lên lịch part 6 không chính thức hoặc một buổi standup. Nhưng hôm nay chúng ta kết thúc meeting chính.
+[09:52:46] Doc: Tôi muốn cảm ơn mọi người đã phối hợp. Dù có nhiều khó khăn nhưng đã đi được xa.
+[09:52:54] DevLead: Đồng cảm. Hy vọng phần còn lại suôn sẻ.
+[09:53:02] QA: Em cũng vậy. Sẽ cố gắng test nhanh sau khi có dữ liệu.
+[09:53:10] PM: Cảm ơn tất cả. Buổi họp hôm nay đã thống nhất được nhiều việc. Chúng ta sẽ tiếp tục ở các part sau nếu cần. Chúc mọi người hoàn thành tốt công việc.

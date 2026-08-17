@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W2-SHORT-C2-N1-OPS-NOOWN-004",
+  "meeting_id": "W2-SHORT-C2-N1-OPS-NOOWN-004",
+  "meeting_title": "Chuẩn bị bản phát hành nội bộ",
+  "meeting_date": "2026-01-29",
+  "wave": 2,
+  "wave_name": "wave_2_feature_isolation",
+  "labels": [
+    "task_without_owner",
+    "unresolved_owner"
+  ],
+  "objective": "{\"name\": \"task without owner\", \"code\": \"NOOWN\", \"labels\": \"task_without_owner,unresolved_owner\", \"requirements\": \"Một action được chốt là cần làm nhưng cuộc họp không chốt ai phụ trách.\"}",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_2_feature_isolation/W2-SHORT-C2-N1-OPS-NOOWN-004/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-pro"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 547,
+    "turn_count": 29
+  },
+  "ground_truth": {
+    "available": false,
+    "expected_output_file": ""
+  }
+}

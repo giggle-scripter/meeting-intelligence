@@ -1,0 +1,7 @@
+ghi vội
+chủ đề: Chuẩn bị bản phát hành nội bộ
+kw: release / trach / thao / chiu / nhiem / fix / cung
+- Nhưng chưa ai chịu trách nhiệm fix, mà cũng chưa thảo luận chi tiết
+* còn PO owner summary
+- Để em thử phác thảo outline release notes rồi gửi mọi người review
+1) Mình không giao việc cho ai, mỗi người tự suy nghĩ thêm

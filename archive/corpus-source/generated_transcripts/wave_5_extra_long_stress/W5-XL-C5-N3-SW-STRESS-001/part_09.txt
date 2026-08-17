@@ -1,0 +1,106 @@
+MEETING_ID: W5-XL-C5-N3-SW-STRESS-001
+PART: P09/10
+
+T000448 [14:38:30] Hoàng: Chúng ta bước vào part 9. Tôi muốn chốt một số state transition còn dang dở. Đầu tiên, về quyết định protocol REST hay GraphQL cho CRM. Linh, em đã hỏi CRM team chưa?
+
+T000449 [14:39:20] Linh: Dạ rồi, họ nói REST là ổn, nhưng có thể support GraphQL trong tương lai. Vậy chúng ta chốt REST.
+
+T000450 [14:40:10] Trang: Tốt, test case integration sẽ dùng REST.
+
+T000451 [14:40:55] Hòa: Ops sẽ setup REST endpoints.
+
+T000452 [14:41:45] Hoàng: Vậy state transition: protocol decision resolved.
+
+T000453 [14:42:35] Minh: Tiếp theo, về canary deployment. Chúng ta có thể chốt không? Tôi propose chấp nhận canary cho production.
+
+T000454 [14:43:25] Linh: Em đồng ý, nhưng cần Hòa confirm infra sẵn sàng.
+
+T000455 [14:44:15] Hòa: Infra production có thể support, nhưng cần thêm 2 ngày setup.
+
+T000456 [14:45:05] Hoàng: Vậy canary được chấp thuận. Task setup canary assign Hòa, deadline? Để kịp release 20/3, cần hoàn thành trước 15/3.
+
+T000457 [14:46:00] Hòa: OK, deadline 15/3.
+
+T000458 [14:46:50] Trang: Như vậy là resolved unresolved item từ lâu.
+
+T000459 [14:47:40] An: Tôi có một thông tin: chargeback data từ Finance cuối cùng đã gửi vào sáng nay dù task đã hủy. Có nên dùng cho gì không?
+
+T000460 [14:48:30] Linh: Task chargeback data đã hủy, nhưng data có thể archive. Không tạo task mới.
+
+T000461 [14:49:20] Hoàng: Đây là cancellation muộn – dữ liệu đến nhưng không dùng.
+
+T000462 [14:50:10] Minh: Liên quan đến performance analysis của Dũng, em muốn hỏi Hòa đã gửi log chưa?
+
+T000463 [14:51:00] Hòa: Em gửi rồi, từ chiều qua. Dũng nhận chưa?
+
+T000464 [14:51:50] Dũng: Em nhận rồi, đang phân tích.
+
+T000465 [14:52:40] Trang: Về test case multi-currency, em đã viết skeleton. Tuy nhiên, do spec integration bị delay, em cần correction deadline test case từ thứ Hai lên thứ Ba tuần sau.
+
+T000466 [14:53:30] Hoàng: Đây là correction chain cuối. Deadline test case integration đã từ thứ Sáu tuần trước? Nhưng part này chúng ta chưa có correction cụ thể. Em muốn correction test case integration sang thứ Ba.
+
+T000467 [14:54:20] Linh: Em approve. Vậy test case integration deadline thứ Ba tuần sau.
+
+T000468 [14:55:10] Hoàng: Ghi nhận. Còn task mock server cho third-party API của Hòa, deadline thứ Hai tuần sau. Liệu có cần correction không?
+
+T000469 [14:56:00] Hòa: Không, em vẫn kịp.
+
+T000470 [14:56:50] Minh: Em có một đề xuất: hủy task support CI/CD cho Thắng, vì CI/CD đã ổn. Task đó không cần thiết.
+
+T000471 [14:57:40] Hoàng: Hủy task support CI/CD. Ghi nhận cancellation.
+
+T000472 [14:58:30] Linh: Vậy chúng ta có một cancellation khác.
+
+T000473 [14:59:20] Trang: Sau khi có spec integration vào thứ Năm, em sẽ cần 2 ngày để viết test case full. Vậy deadline test case integration thứ Ba là khả thi.
+
+T000474 [15:00:10] An: Em đã gửi mapping data cho Thắng. Thắng nhận chưa?
+
+T000475 [15:01:00] Thắng: Dạ, em đã có. Em sẽ integrate vào spec.
+
+T000476 [15:01:50] Hoàng: Tốt. Bây giờ tôi muốn recap trạng thái các task chính trước part cuối:
+
+- Spec integration: Thắng lead, deadline thứ Năm.
+- Test case integration: Trang, deadline thứ Ba tuần sau.
+- Multi-currency spec: Dũng, deadline thứ Năm (input cho Thắng thứ Ba).
+- Performance analysis: Dũng, deadline thứ Hai tuần sau (đã correction).
+- Test data multi-currency: An, deadline thứ Hai tuần sau.
+- Mock server: Hòa, deadline thứ Hai tuần sau.
+- Monitoring integration: Hòa, deadline mềm.
+- Setup canary: Hòa, deadline 15/3.
+- Wireframe admin UI: Huyền (không có trong meeting), deadline thứ Năm tuần sau.
+
+T000477 [15:02:40] Linh: Recap này không tạo duplicate, chỉ tổng hợp.
+
+T000478 [15:03:30] Minh: Còn unresolved về resource support cho Dũng. Tôi propose dùng Hòa support 2 tiếng thứ Sáu.
+
+T000479 [15:04:20] Hòa: OK.
+
+T000480 [15:05:10] Hoàng: Vậy solved.
+
+T000481 [15:06:00] Dũng: Em cảm ơn.
+
+T000482 [15:06:50] Trang: Em muốn hỏi: bug UI từ phase 1 đã fix chưa?
+
+T000483 [15:07:40] Minh: Em assign Thắng fix, Thắng đã commit chiều qua. Sẽ deploy cùng bản build.
+
+T000484 [15:08:30] Trang: OK.
+
+T000485 [15:09:20] An: Em có một vague issue: data mapping cho multi-currency có thể thay đổi nếu partner yêu cầu thêm field. Nhưng chưa rõ.
+
+T000486 [15:10:10] Linh: Để chúng ta xử lý khi có thông tin mới. Không tạo task.
+
+T000487 [15:11:00] Hoàng: Part 9 gần kết thúc. Chúng ta đã có nhiều transition: protocol resolved, canary approved, cancellation của support CI/CD và chargeback data, correction chain cho test case integration. Một số unresolved đã được giải quyết.
+
+T000488 [15:11:50] Minh: Còn vấn đề Crypto khảo sát? Đã assign Dũng deadline thứ Hai, nhưng chưa update.
+
+T000489 [15:12:40] Hoàng: Khảo sát crypto vẫn giữ nguyên.
+
+T000490 [15:13:30] Trang: Em thấy timeline đã rõ.
+
+T000491 [15:14:20] Hòa: Em confirm SSL staging đã renew.
+
+T000492 [15:15:10] Linh: Tốt.
+
+T000493 [15:16:00] Hoàng: Part 9 kết thúc, chưa closing. Cảm ơn mọi người.
+
+--- END OF PART P09 ---

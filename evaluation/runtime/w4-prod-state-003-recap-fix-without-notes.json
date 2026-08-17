@@ -1,0 +1,262 @@
+{
+  "pipeline_version": "v1",
+  "meeting_context_mode": "assist",
+  "meeting_notes": "off",
+  "prompt_version": "v1-ledger-mutation-v1",
+  "model": "deterministic",
+  "reasoning_effort": "not_applicable",
+  "mode": "local",
+  "endpoint": "",
+  "completed_case_count": 1,
+  "expected_case_count": 1,
+  "metrics_are_partial": false,
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 1,
+    "unreviewed_ground_truth_count": 0,
+    "unreviewed_case_ids": [],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 1,
+    "passed_case_count": 0,
+    "failed_case_count": 1,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.8,
+    "task_identity_recall": 1.0,
+    "task_precision": 0.8,
+    "task_recall": 1.0,
+    "field_accuracy": 0.8333333333333334,
+    "assignee_accuracy": 1.0,
+    "due_date_accuracy": 1.0,
+    "due_date_text_exact_accuracy": 0.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "reviewed_metrics": {
+    "case_count": 1,
+    "passed_case_count": 0,
+    "failed_case_count": 1,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.8,
+    "task_identity_recall": 1.0,
+    "task_precision": 0.8,
+    "task_recall": 1.0,
+    "field_accuracy": 0.8333333333333334,
+    "assignee_accuracy": 1.0,
+    "due_date_accuracy": 1.0,
+    "due_date_text_exact_accuracy": 0.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "exploratory_metrics": {
+    "case_count": 0,
+    "passed_case_count": 0,
+    "failed_case_count": 0,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 1.0,
+    "task_identity_recall": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 19,
+    "rule_event_count": 5,
+    "ai_event_count": 0,
+    "ai_window_count": 5,
+    "ai_batch_count": 5,
+    "ai_context_clause_count": 112,
+    "unresolved_window_count": 5,
+    "event_count_before_deduplication": 5,
+    "event_count_after_deduplication": 5,
+    "terminal_replay_blocked_count": 0,
+    "ledger_task_created_count": 5,
+    "ledger_task_updated_count": 0,
+    "exact_id_link_count": 0,
+    "exact_alias_link_count": 0,
+    "semantic_link_count": 0,
+    "unresolved_mutation_count": 0,
+    "duplicate_task_merge_count": 0,
+    "provisional_task_created_count": 0,
+    "provisional_task_promoted_count": 0,
+    "provisional_promotion_blocked_count": 0,
+    "ambiguous_identity_mutation_blocked_count": 0,
+    "sibling_identity_split_count": 0,
+    "ai_contract_rejection_count": 0,
+    "ai_structural_contract_rejection_count": 0,
+    "ai_semantic_rejection_count": 0,
+    "ai_unknown_task_id_rejection_count": 0,
+    "ai_invalid_source_clause_rejection_count": 0,
+    "ai_invalid_anchor_clause_rejection_count": 0,
+    "ai_non_concrete_action_rejection_count": 0,
+    "ai_invalid_assignee_rejection_count": 0,
+    "ai_fallback_error_count": 0,
+    "unauthorized_creation_blocked_count": 0,
+    "ledger_unknown_task_id_rejection_count": 0,
+    "weighted_ai_call_rate": 0.2631578947368421,
+    "ai_clause_coverage": 0.1839080459770115
+  },
+  "fallback_metrics": {
+    "rule_only": 0,
+    "ai_fallback_not_configured": 1,
+    "ai_fallback_skipped_no_candidate": 0,
+    "ai_fallback_resolved": 0,
+    "ai_fallback_unresolved": 0,
+    "ai_fallback_failed": 0
+  },
+  "job_execution": [],
+  "execution_errors": [],
+  "case_execution": [
+    {
+      "case_id": "W4-LONG-C5-N1-PROD-STATE-003",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 5,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 5,
+      "unresolved_mutation_count": 0,
+      "provisional_task_created_count": 0,
+      "provisional_task_promoted_count": 0,
+      "provisional_promotion_blocked_count": 0,
+      "ambiguous_identity_mutation_blocked_count": 0,
+      "sibling_identity_split_count": 0,
+      "ai_contract_rejection_count": 0,
+      "ai_structural_contract_rejection_count": 0,
+      "ai_semantic_rejection_count": 0,
+      "ai_unknown_task_id_rejection_count": 0,
+      "ai_invalid_source_clause_rejection_count": 0,
+      "ai_invalid_anchor_clause_rejection_count": 0,
+      "ai_non_concrete_action_rejection_count": 0,
+      "ai_invalid_assignee_rejection_count": 0,
+      "unauthorized_creation_blocked_count": 0,
+      "ledger_unknown_task_id_rejection_count": 0
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "W4-LONG-C5-N1-PROD-STATE-003",
+      "passed": false,
+      "expected_task_count": 4,
+      "actual_task_count": 5,
+      "matched_task_count": 4,
+      "missing_tasks": [],
+      "unexpected_tasks": [
+        {
+          "task_name": "Lỗi login: chưa priority",
+          "assignee": "Ticket",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Tôi điểm qua: - Tài liệu triển khai hệ thống: Hùng, deadline 25/2. - Tài liệu triển khai test: Lan, deadline 27/2. - Kiểm tra config sandbox: Hùng & Minh, deadline 27/2. - Monitoring alert: Hùng, deadline 28/2. - Ticket lỗi login: chưa priority. - Các task khác hủy hoặc hoàn thành.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Viết tài liệu triển khai hệ thống",
+          "field": "due_date_text",
+          "expected": "25/2",
+          "actual": "deadline 25/2"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai test",
+          "field": "due_date_text",
+          "expected": "27/2",
+          "actual": "deadline 27/2"
+        },
+        {
+          "task_name": "Kiểm tra config sandbox",
+          "field": "due_date_text",
+          "expected": "27/2",
+          "actual": "deadline 27/2"
+        },
+        {
+          "task_name": "Cấu hình monitoring alert",
+          "field": "due_date_text",
+          "expected": "28/2",
+          "actual": "deadline 28/2"
+        }
+      ],
+      "checked_field_count": 24,
+      "correct_field_count": 20,
+      "field_counts": {
+        "assignee_accuracy": [
+          4,
+          4
+        ],
+        "due_date_accuracy": [
+          4,
+          4
+        ],
+        "due_date_text_exact_accuracy": [
+          4,
+          0
+        ],
+        "state_link_accuracy": [
+          4,
+          4
+        ]
+      }
+    }
+  ],
+  "case_diagnostics": {
+    "W4-LONG-C5-N1-PROD-STATE-003": {
+      "caption_count": 297,
+      "deduplicated_caption_count": 297,
+      "turn_count": 294,
+      "sentence_count": 595,
+      "clause_count": 609,
+      "candidate_window_count": 19,
+      "rule_event_count": 5,
+      "ai_event_count": 0,
+      "ai_window_count": 5,
+      "ai_provider_enabled": false,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 112,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 5,
+      "ai_call_rate": 0.2631578947368421,
+      "ai_clause_coverage": 0.1839080459770115,
+      "ai_batch_count": 5,
+      "event_count_before_deduplication": 5,
+      "event_count_after_deduplication": 5,
+      "terminal_replay_blocked_count": 0,
+      "ledger_task_created_count": 5,
+      "ledger_task_updated_count": 0,
+      "exact_id_link_count": 0,
+      "exact_alias_link_count": 0,
+      "semantic_link_count": 0,
+      "unresolved_mutation_count": 0,
+      "duplicate_task_merge_count": 0,
+      "provisional_task_created_count": 0,
+      "provisional_task_promoted_count": 0,
+      "provisional_promotion_blocked_count": 0,
+      "ambiguous_identity_mutation_blocked_count": 0,
+      "sibling_identity_split_count": 0,
+      "ai_contract_rejection_count": 0,
+      "ai_structural_contract_rejection_count": 0,
+      "ai_semantic_rejection_count": 0,
+      "ai_unknown_task_id_rejection_count": 0,
+      "ai_invalid_source_clause_rejection_count": 0,
+      "ai_invalid_anchor_clause_rejection_count": 0,
+      "ai_non_concrete_action_rejection_count": 0,
+      "ai_invalid_assignee_rejection_count": 0,
+      "unauthorized_creation_blocked_count": 0,
+      "ledger_unknown_task_id_rejection_count": 0,
+      "recap_scope": "AUTHORITATIVE",
+      "meeting_date_source": "REQUEST",
+      "effective_meeting_date": "2026-02-17",
+      "explicit_task_start_date_count": 0
+    }
+  }
+}

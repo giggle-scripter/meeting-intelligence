@@ -1,0 +1,14 @@
+minutes nháp
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / trien khai / staging / production / monitoring / database
+- Bây giờ tôi tổng kết lại các task chính trong part này: Thứ nhất, DevLead owner cập nhật database staging, dl thứ Tư
+* Một điểm nhỏ: task copy dữ liệu từ production, tôi cần quyền truy cập từ bên vận hành
+- Như vậy, unresolved review cho task debug lỗi đăng nhập
+1) Tôi quyết định: task fix lỗi đăng nhập cần được ưu tiên
+- Chúng ta tạm thời có ba task mới: fix lỗi đăng nhập, tạo dữ liệu test giả, + kiểm tra tương thích
+* Vậy task "Tài liệu hướng dẫn triển khai" sẽ có dl thứ Tư tuần sau, owner là Doc, với sự hỗ trợ từ DevLead
+- Vậy chúng ta chính thức hủy task "tạo dữ liệu test giả" do Tuấn owner
+1) Không cần làm nữa
+- Bây giờ tôi muốn điểm qua trạng thái cuối cùng của các task chính: - Copy dữ liệu: DevLead, dl thứ Năm
+* dl thứ Hai. - Tài liệu hướng dẫn triển khai: Doc (với hỗ trợ DevLead), dl thứ Tư. - Kiểm tra tương thích: Arch, dl thứ Sáu. - Lỗi đăng nhập: Tuấn và QA, chưa có…
+- Anh DevLead, tình hình môi trường test hiện tại thế nào? ? chưa chốt

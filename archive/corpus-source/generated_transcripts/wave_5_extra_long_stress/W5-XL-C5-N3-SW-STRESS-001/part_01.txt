@@ -1,0 +1,168 @@
+MEETING_ID: W5-XL-C5-N3-SW-STRESS-001
+PART: P01/10
+CASE_LABELS: extra_long_meeting,multi_step_handoff,multiple_deadline_corrections,long_distance_dependency,ambiguous_reference,heavy_recoverable_noise
+MEETING_DATE: 2026-02-25
+TITLE: Họp tổng hợp phát triển và vận hành sản phẩm
+
+T000001 [09:00:12] Hoàng: Chào mọi người, cảm ơn đã có mặt đúng giờ. Hôm nay chúng ta có rất nhiều nội dung cần thảo luận, từ phát triển cốt lõi cho tới vận hành hàng ngày. Mục tiêu là ra được lịch trình rõ ràng cho tháng 3. Tôi muốn bắt đầu với báo cáo nhanh từ các đầu mối.
+
+T000002 [09:00:52] Linh: Vâng, em xin phép bắt đầu từ phía Product. Hiện tại team đang hoàn thiện nốt module thanh toán quốc tế, dự kiến test xong trong tuần này. Nhưng còn vướng một số API partner chưa ổn định.
+
+T000003 [09:01:28] Minh: Em xin bổ sung, bên Dev đã fix xong lỗi timeout cho endpoint thanh toán hôm thứ Hai, nhưng cần QA verify lại. Ngoài ra, module báo cáo mới đang gặp issue về database indexing, phải điều chỉnh cấu trúc.
+
+T000004 [09:02:10] Trang: Bên QA đã bắt đầu test module thanh toán. Tuy nhiên có vài trường hợp edge case chưa có test data từ phía Business. Anh An, bên mình cần bộ data test cho các giao dịch cross-border.
+
+T000005 [09:02:48] An: Vâng, tôi sẽ chuẩn bị bộ data test cho các đồng tiền chính: USD, EUR, JPY. Thời gian cần khoảng hai ngày, tức thứ Năm tuần này có bàn giao cho QA.
+
+T000006 [09:03:24] Hoàng: Vậy hạn chót để có test data là thứ Năm. Còn issue indexing của Minh thì sao? Có ảnh hưởng đến timeline phát hành không?
+
+T000007 [09:04:05] Minh: Vấn đề indexing liên quan đến query báo cáo hàng tháng. Em đang thiết kế lại schema, dự tính hoàn thành trong ngày thứ Sáu, sớm nhất là cuối tuần này. Nhưng nếu chậm, deadline release module báo cáo sang ngày 10/3 có thể bị trượt.
+
+T000008 [09:04:49] Hòa: Về phía Ops, em có một vấn đề nhức nhối. Hệ thống CI/CD vừa upgrade lên phiên bản mới, nhưng một số job deploy tự động bị lỗi sync với Jenkins server. Hiện tại team Cấu hình chưa kịp rollback.
+
+T000009 [09:05:33] Hoàng: Mức độ ảnh hưởng thế nào? Ops cần dev hỗ trợ hay chạy độc lập?
+
+T000010 [09:06:10] Hòa: Em nghĩ cần dev phối hợp figure ra nguyên nhân, vì job script do team Dev viết trước đây. Có thể chỉ cần thay đổi tham số pipeline, nhưng cần Minh hoặc một bạn trong team xem qua.
+
+T000011 [09:06:53] Minh: Được, em sẽ assign một dev trong team – Thắng – hỗ trợ Hòa. Có thể check trace log vào chiều nay. Deadline fix lỗi này em propose trong vòng hai ngày, tức thứ Năm.
+
+T000012 [09:07:32] Hòa: Hai ngày là ổn. Nếu phức tạp hơn, chúng ta có thể extend thêm một ngày.
+
+T000013 [09:08:13] Hoàng: Tốt, ghi nhận task đó. Quay lại module báo cáo, Linh và An cần review mức độ ưu tiên. Tối nay 7h anh có meeting với đối tác về lịch release thử nghiệm.
+
+T000014 [09:08:57] Linh: Vâng, em sẽ chuẩn bị slide tóm tắt tình hình các module. Riêng module báo cáo, nếu chưa kịp, có thể tách ra release sau đợt chính.
+
+T000015 [09:09:35] Minh: Em đồng ý với ý tưởng release theo phase. Nhưng cần QA có sẵn test plan cho core modules trước. Trang, bên em có thể hoàn thành test case cho thanh toán quốc tế trước thứ Hai tuần sau không?
+
+T000016 [09:10:20] Trang: Nếu có test data từ thứ Năm, team em sẽ chạy toàn bộ regression trong ngày thứ Sáu và thứ Bảy. Kết quả test có thể báo cáo sáng thứ Hai. Như vậy deadline thứ Hai là khả thi.
+
+T000017 [09:11:01] Hoàng: Vậy lịch trình sơ bộ: test data bàn giao thứ Năm, QA test cuối tuần, báo cáo thứ Hai. Còn issue CI/CD thì fix trong thứ Năm. Module báo cáo gặp vấn đề indexing, dự tính fix xong thứ Sáu. Mọi người có điểm nào mâu thuẫn không?
+
+T000018 [09:11:45] An: Có một chút, em nghĩ test data cho cross-border cần bao gồm cả trường hợp chargeback và refund, mà team Finance chưa confirm format. Em sẽ liên hệ với bên Tài chính ngay sau meeting để xác nhận, nhưng có thể trễ thêm nửa ngày.
+
+T000019 [09:12:32] Trang: Nếu có chargeback, test case của em phải mở rộng. Vậy thời gian test có thể kéo dài thêm một buổi, tức đến Chủ Nhật. Liệu có chấp nhận được không?
+
+T000020 [09:13:14] Hoàng: Em nghĩ chấp nhận được, vì thứ Hai mới cần kết quả. Nhưng cố gắng không để trễ thêm. Hòa, bên Ops có thể hỗ trợ môi trường test 24/7 cuối tuần nếu cần?
+
+T000021 [09:13:59] Hòa: Hoàn toàn được. Em sẽ sắp xếp một pipeline riêng cho QA chạy ngoài giờ hành chính.
+
+T000022 [09:14:31] Hoàng: Bây giờ tôi muốn chuyển sang topic thứ hai: cải thiện tốc độ xử lý đơn hàng nội địa. An, em có số liệu phân tích gần đây không?
+
+T000023 [09:15:12] An: Dạ có. Theo phân tích của em, hiện tại trung bình một đơn hàng mất 12 phút từ lúc đặt đến lúc xác nhận tồn kho, với độ lệch chuẩn 4 phút. Ngưỡng mục tiêu là dưới 8 phút. Nguyên nhân chính do hệ thống kiểm tra tồn kho gửi request song song chưa tối ưu.
+
+T000024 [09:16:04] Minh: Phần này em đã có kế hoạch tái cấu trúc caching từ tháng trước, nhưng bị delay vì module thanh toán quốc tế ưu tiên hơn. Nếu team muốn, em có thể allocate một developer cho task này từ tuần sau.
+
+T000025 [09:16:47] Hoàng: Theo thứ tự ưu tiên, module thanh toán vẫn là chính, nhưng không thể lơ là đơn hàng nội địa. Linh, em nghĩ sao?
+
+T000026 [09:17:28] Linh: Em propose chúng ta assign task cải thiện performance cho một dev mới – bạn Dũng – vừa gia nhập và có kinh nghiệm về caching. Dũng sẽ làm dưới sự mentorship của Minh. Thời gian hoàn thành dự kiến hai tuần, tức tuần thứ hai của tháng 3.
+
+T000027 [09:18:15] Minh: Hợp lý. Dũng có background mạnh về Redis, em sẽ hướng dẫn bạn phương án kiến trúc. Tuy nhiên, cần có bản design doc chốt trước khi code. Em propose thứ Hai tuần sau Dũng trình bày solution.
+
+T000028 [09:19:00] Hoàng: Nhất trí. Vậy task cải thiện performance đơn hàng có deadline design doc vào thứ Hai tuần sau, và mục tiêu hoàn thiện code vào cuối tuần thứ hai tháng 3. Ghi nhận.
+
+T000029 [09:19:48] Trang: Em muốn hỏi một chút, module này có liên quan đến module báo cáo không? Nếu caching thay đổi, truy vấn báo cáo cũng phải cập nhật.
+
+T000030 [09:20:30] Minh: Đúng vậy, nhưng em nghĩ chúng ta có thể tách bạch. Module báo cáo đọc từ database chính, trong khi caching áp dụng cho read-heavy của đơn hàng. Tuy nhiên, nếu thay đổi schema indexing, cần đồng bộ.
+
+T000031 [09:21:09] Hoàng: Tức là có dependency giữa hai task này. Cần lưu ý khi lên lịch. Linh, hãy theo dõi và nhắc nhở các bên.
+
+T000032 [09:21:46] Linh: Vâng, em sẽ tạo một tracking issue trên Jira và liên kết các subtask. Cả team để ý cập nhật hàng ngày.
+
+T000033 [09:22:25] Hòa: Em có một ý, gần đây server caching có vấn đề về memory leak nhẹ, chưa xác định rõ nguyên nhân. Có thể task performance sẽ bao gồm cả fix memory leak này.
+
+T000034 [09:23:10] Minh: Được, em sẽ ghi vào scope của Dũng. Nhưng cần có log chi tiết từ Ops để phân tích. Hòa, bên em có thể export log memory server từ tuần trước không?
+
+T000035 [09:23:58] Hòa: Ngay trong chiều nay em sẽ gửi file log cho Minh. Khoảng 200MB dung lượng.
+
+T000036 [09:24:29] Hoàng: Mọi người lưu ý, sẽ có rất nhiều task trong các part sau, chúng ta cố gắng xử lý dứt điểm từng phần. Bây giờ, tôi muốn quay lại issue CI/CD. Hòa, đã có thông tin thêm từ Jenkins admin chưa?
+
+T000037 [09:25:18] Hòa: Em vừa check, admin nói rằng do upgrade plugin, script build máy chủ chưa được cập nhật token. Họ sẽ fix trong vòng 24h, tức trước trưa ngày mai.
+
+T000038 [09:26:04] Hoàng: Tin tốt. Vậy task của Hòa chỉ còn chờ bên kia fix, và sau đó dev cần verify lại các job. Minh, hãy assign Thắng kiểm tra sau khi được Hòa báo.
+
+T000039 [09:26:45] Minh: OK, Thắng sẽ làm sau khi có xác nhận từ Hòa. Em kỳ vọng tối thứ Năm mọi thứ hoạt động trở lại.
+
+T000040 [09:27:32] Hoàng: Tôi thấy chúng ta đã có vài mốc quan trọng. Để dễ theo dõi, Linh hãy ghi lại các task chính trong notes:
+
+- Thứ Năm (27/2): Bàn giao test data từ An cho Trang.
+- Thứ Năm (27/2): Fix CI/CD (Hòa, Minh phối hợp).
+- Thứ Sáu (28/2) – Chủ Nhật (1/3): QA test module thanh toán.
+- Thứ Hai (3/3): Báo cáo test module thanh toán.
+- Thứ Hai (3/3): Dũng trình bày design doc performance.
+- Cuối tuần thứ hai tháng 3: Hoàn thành code cải thiện đơn hàng.
+
+T000041 [09:28:21] Linh: Vâng, em sẽ ghi chép và gửi lại email tổng hợp sau meeting.
+
+T000042 [09:28:57] An: Một câu hỏi nhỏ, trong test data cross-border, tôi có thể thêm trường hợp giao dịch failed vì lỗi partner API không? Chuẩn bị cho edge case.
+
+T000043 [09:29:40] Trang: Rất tốt, như vậy test sẽ coverage hơn. Cảm ơn An.
+
+T000044 [09:30:12] Hòa: Anh Hoàng, bên Ops có một vấn đề khác: server Staging sắp hết disk, cần dọn dẹp log cũ. Em muốn xin phép thực hiện vào cuối tuần.
+
+T000045 [09:30:56] Hoàng: Được, nhưng phải backup và không ảnh hưởng đến QA test cuối tuần. Hòa, em dự tính bao lâu?
+
+T000046 [09:31:38] Hòa: Chưa đầy 2 tiếng. Em sẽ chạy script vào tối thứ Sáu trước khi QA bắt đầu.
+
+T000047 [09:32:14] Hoàng: OK, tôi approve. Linh, update vào lịch trình cuối tuần.
+
+T000048 [09:32:45] Minh: Anh Hoàng, em có một suggest về module thanh toán. Thay vì release full, có thể release beta cho một nhóm khách hàng nhỏ trước – canary deployment. Giảm rủi ro.
+
+T000049 [09:33:38] Linh: Ý hay. Em sẽ nghiên cứu thiết kế canary, cần sự hỗ trợ từ Hòa về hạ tầng. Nhưng đó có thể là phần của part sau.
+
+T000050 [09:34:20] Hoàng: Đồng ý, ghi nhận idea, nhưng chưa action ngay. Các part sau sẽ bàn kỹ.
+
+T000051 [09:35:02] Trang: Em muốn hỏi thêm, về test data chargeback, An bảo cần confirm từ Finance. Tôi có thể liên hệ trực tiếp với bên đó để đẩy nhanh không? Hay giữ theo quy trình?
+
+T000052 [09:35:46] An: Anh có thể giúp em liên hệ, họ sẽ respond nhanh hơn khi có QA trực tiếp. Em sẽ gửi email ngay sau meeting, cc Trang.
+
+T000053 [09:36:29] Trang: Cảm ơn.
+
+T000054 [09:36:56] Hoàng: Tôi thấy chúng ta đã đi được một đoạn. Còn khoảng 45 phút cho part này, tôi muốn chốt một số điểm trước khi chuyển topic. Mọi người có thắc mắc gì về timeline không?
+
+T000055 [09:37:42] Minh: Deadline test data thứ Năm là rõ, nhưng nếu bên Finance trễ, chúng ta có plan B không?
+
+T000056 [09:38:28] An: Plan B là tôi sẽ cắt bớt các case có chargeback, test sau. Nhưng QA sẽ phải chạy thêm một đợt riêng.
+
+T000057 [09:39:12] Trang: Được, nếu vậy tôi sẽ tách test plan thành hai phase: Phase 1 cho giao dịch standard, Phase 2 cho đặc thù. Deadline Phase 1 vẫn thứ Hai tuần sau.
+
+T000058 [09:39:57] Hoàng: Tốt, vậy ghi nhận phase 1 trước. Nếu có chargeback thì phase 2, và không ảnh hưởng release chính.
+
+T000059 [09:40:39] Linh: Em muốn làm rõ, release chính ở đây là module thanh toán quốc tế hay toàn bộ? Cần define milestone.
+
+T000060 [09:41:22] Hoàng: Rõ ràng, hôm nay chỉ chốt module thanh toán quốc tế là milestone 1. Module báo cáo, performance là milestone sau. Linh sẽ có văn bản milestones.
+
+T000061 [09:42:08] Minh: Em thấy có một dependency: test data của An ảnh hưởng đến test case của Trang, và kết quả test ảnh hưởng đến quyết định release. Vậy cần tracking chặt chẽ.
+
+T000062 [09:42:55] Linh: Yes, em sẽ tạo các subtask trong Jira với linked issue. Mỗi người cập nhật trạng thái hàng ngày.
+
+T000063 [09:43:30] Hòa: Bên Ops, em có một yêu cầu nhỏ: team Dev cần tag version build module thanh toán lên registry để Ops deploy thử trên staging trước khi QA test. Minh, có thể làm trong sáng thứ Sáu không?
+
+T000064 [09:44:18] Minh: Được, em sẽ giao cho bạn Thắng build và tag sáng thứ Sáu. Nếu không có vấn đề, deploy lên staging trước 10h.
+
+T000065 [09:45:04] Trang: Vậy QA sẽ bắt đầu test từ 10h thứ Sáu. Nếu build không ổn, tôi sẽ báo ngay để dev hotfix.
+
+T000066 [09:45:39] Hoàng: Chúng ta có một quy trình rõ ràng rồi. Bây giờ, tôi muốn thảo luận về một vấn đề cũ: tối ưu cache cho API order. Đây là task nền, nhưng cần bắt đầu để part sau có base.
+
+T000067 [09:46:25] Minh: Em nghĩ trước khi Dũng làm, cần review các endpoint đang dùng cache hiện tại. Em sẽ gửi list cho Dũng trong sáng mai.
+
+T000068 [09:47:10] An: Em có thể hỗ trợ phân tích traffic để quyết định endpoint nào cần cache nhất. Dữ liệu có sẵn từ dashboard monitoring.
+
+T000069 [09:47:56] Hoàng: Rất tốt, An gửi cho Dũng bản phân tích trước thứ Sáu. Dũng sẽ có material để design.
+
+T000070 [09:48:31] Trang: Liên quan đến caching, nếu cache thay đổi, có thể ảnh hưởng đến log audit, team mình cần thông báo cho Compliance.
+
+T000071 [09:49:16] Hoàng: Point tốt, Linh hãy note để thông báo sau khi design hoàn tất.
+
+T000072 [09:49:54] Linh: Vâng, em sẽ add Compliance vào stakeholder list.
+
+T000073 [09:50:28] Hoàng: Tôi thấy part 1 của meeting sắp kết thúc. Còn ai có vấn đề gì chưa được đề cập?
+
+T000074 [09:51:05] Minh: Còn một vấn đề nhỏ: server development gần đây có hiện tượng spike CPU vào buổi tối. Em cần Hòa hỗ trợ monitoring thêm.
+
+T000075 [09:51:48] Hòa: OK, em sẽ cấu hình alert trên Prometheus và gửi log cho team Dev. Không cần action ngay.
+
+T000076 [09:52:24] Linh: Em muốn nhấn mạnh: tất cả các task và deadline vừa nêu đều là tạm thời, sẽ được review trong part 2. Vậy mọi người chuẩn bị tinh thần update.
+
+T000077 [09:53:03] Hoàng: Đúng vậy, part 1 này chỉ là khởi động. Các part sau sẽ có nhiều chi tiết và thay đổi. Tôi cảm ơn mọi người vì sự tập trung. Kết thúc part 1 ở đây.
+
+--- END OF PART P01 ---

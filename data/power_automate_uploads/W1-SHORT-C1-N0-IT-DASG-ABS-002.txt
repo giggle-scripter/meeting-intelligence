@@ -1,0 +1,36 @@
+=== MEETING METADATA ===
+meeting_id: W1-SHORT-C1-N0-IT-DASG-ABS-002
+meeting_title: Theo dõi tiến độ tài liệu
+meeting_date: 2026-01-17
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:00] Anh Minh: Chào mọi người, hôm nay chúng ta họp nhanh để kiểm tra tiến độ tài liệu dự án.
+[09:00:15] Chị Lan: Chào anh Minh, em sẵn sàng.
+[09:00:22] Anh Tuấn: Em chào anh, em cũng có mặt.
+[09:00:30] Anh Minh: Tốt. Lan, phần tài liệu hướng dẫn sử dụng em làm đến đâu rồi?
+[09:00:40] Chị Lan: Em đã viết xong phần tổng quan và các chức năng chính, khoảng 70% ạ.
+[09:00:50] Anh Minh: Vậy phần còn lại dự kiến bao lâu nữa?
+[09:01:00] Chị Lan: Em nghĩ cần thêm ba ngày để hoàn thiện phần xử lý lỗi và câu hỏi thường gặp.
+[09:01:10] Anh Minh: Được, em cố gắng hoàn thành trước ngày 25 tháng 1 nhé. Đó là deadline cho tài liệu hướng dẫn sử dụng.
+[09:01:20] Chị Lan: Dạ, em sẽ hoàn thành đúng hạn.
+[09:01:28] Anh Minh: Tuấn, anh giao em viết báo cáo kiểm thử, em làm thế nào?
+[09:01:35] Anh Tuấn: Em mới bắt đầu, đang thu thập số liệu từ các test case.
+[09:01:45] Anh Minh: Em cần hoàn thành báo cáo vào ngày 20 tháng 1, trước deadline của Lan một chút.
+[09:01:55] Anh Tuấn: Dạ, em sẽ cố gắng. Anh cho em hỏi, báo cáo có cần bao gồm phần đề xuất cải tiến không?
+[09:02:05] Anh Minh: Có, em nhớ thêm mục đề xuất cải tiến dựa trên kết quả kiểm thử.
+[09:02:15] Anh Tuấn: Vâng, em hiểu rồi.
+[09:02:22] Chị Lan: Anh Minh, tài liệu hướng dẫn có cần em cập nhật thêm hình ảnh minh họa không?
+[09:02:30] Anh Minh: Cần, em chèn hình ảnh các giao diện chính vào nhé. Nếu thiếu hình, em bảo bên thiết kế gửi.
+[09:02:40] Chị Lan: Vâng, em sẽ liên hệ sau cuộc họp.
+[09:02:48] Anh Tuấn: Anh Minh, em thấy báo cáo kiểm thử có thể hơi dài, em có nên tóm tắt phần số liệu không?
+[09:02:58] Anh Minh: Em viết đầy đủ rồi tóm tắt ở cuối, ai cần chi tiết thì đọc trong phần phụ lục.
+[09:03:08] Anh Tuấn: Dạ vâng.
+[09:03:15] Anh Minh: Ngoài ra, cuối tuần này em nào có gặp khó khăn gì thì báo anh ngay.
+[09:03:23] Chị Lan: Dạ hiện tại em ổn, không có vấn đề gì lớn.
+[09:03:30] Anh Tuấn: Em cũng tạm ổn, nhưng nếu cần số liệu từ nhóm khác em sẽ báo sau.
+[09:03:38] Anh Minh: Tốt. Mọi người nhớ cập nhật tiến độ vào hệ thống hàng ngày.
+[09:03:45] Chị Lan: Vâng.
+[09:03:48] Anh Tuấn: Dạ.
+[09:03:52] Anh Minh: Vậy họp ngắn đến đây thôi. Cảm ơn mọi người.
+[09:04:00] Chị Lan: Cảm ơn anh.
+[09:04:05] Anh Tuấn: Em cảm ơn anh.

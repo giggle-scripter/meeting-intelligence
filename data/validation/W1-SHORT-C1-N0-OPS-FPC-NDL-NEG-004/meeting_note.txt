@@ -1,0 +1,8 @@
+ghi vội
+chủ đề: Chuẩn bị bản demo
+kw: moi truong / api / uat / slide / chuan / demo / truong
+- Lan, em owner phần kỹ thuật, chuẩn bị slide demo các API
+* Vậy em sẽ chuẩn bị môi trường + slide API
+- Lần này em sẽ test offline trước
+1) Vậy em sẽ bắt đầu làm slide API và môi trường
+- Mà Tuấn, anh soạn email gửi khách hàng trước demo

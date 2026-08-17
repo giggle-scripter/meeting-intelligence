@@ -1,0 +1,7 @@
+{
+  "meeting_title": "Chuẩn bị môi trường kiểm thử",
+  "tasks": [
+    {"task_name":"Chuẩn bị môi trường kiểm thử","assignee":"Bình","start_date":"2026-01-20","due_date":"2026-01-28","due_date_text":"thứ Tư tuần sau","status":"Proposed"},
+    {"task_name":"Cấp quyền truy cập server production","assignee":"An","start_date":"2026-01-20","due_date":"","due_date_text":"","status":"Proposed"}
+  ]
+}

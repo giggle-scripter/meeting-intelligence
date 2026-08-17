@@ -1,0 +1,122 @@
+MEETING_ID: W4-LONG-C4-N2-OPS-STATE-004
+PART: P05/5
+
+T000293 [10:47:00] Ms. Lan: Chúng ta vào part cuối của buổi họp hôm nay. Tôi muốn tổng kết lại toàn bộ trạng thái các task để tránh nhầm lẫn.
+
+T000294 [10:47:18] Anh Tuấn: Vâng, tôi cũng cần một cái nhìn tổng thể.
+
+T000295 [10:47:36] Hoa: Em đã ghi chép, nhưng sợ thiếu.
+
+T000296 [10:47:54] Minh: Em nghĩ nên review từng task một.
+
+T000297 [10:48:12] Ms. Lan: Bắt đầu với task đầu tiên: tài liệu triển khai hệ thống. Hiện tại ai là owner, deadline nào?
+
+T000298 [10:48:30] Anh Tuấn: Là tôi viết, deadline 05/03, Minh hỗ trợ review phần kỹ thuật, chị Lan review tổng thể.
+
+T000299 [10:48:48] Minh: Đúng vậy. Em đã gửi thông tin về cấu hình token cho anh Tuấn chiều qua.
+
+T000300 [10:49:06] Hoa: Vậy task đó đã được chốt owner.
+
+T000301 [10:49:24] Ms. Lan: Task thứ hai: khắc phục lỗi đăng nhập trên staging. Minh, deadline?
+
+T000302 [10:49:42] Minh: Deadline 25/02. Em đang fix phần secret key và refresh token. Dự kiến xong sớm.
+
+T000303 [10:50:00] Hoa: Em có thể test thử sau khi Minh fix.
+
+T000304 [10:50:18] Ms. Lan: Tốt. Task thứ ba: chuẩn bị dữ liệu test cho module đăng nhập. Hoa, em làm đến đâu?
+
+T000305 [10:50:36] Hoa: Em đã tạo script 100 user, đang thêm dữ liệu biên. Deadline 20/02, còn 2 ngày.
+
+T000306 [10:50:54] Anh Tuấn: Em có gửi cho tôi review chưa? Tôi cần xem trước.
+
+T000307 [10:51:12] Hoa: Em sẽ gửi bản nháp vào thứ Năm 19/02, tức ngày mai.
+
+T000308 [10:51:30] Anh Tuấn: Được. Tôi sẽ review trong thứ Sáu.
+
+T000309 [10:51:48] Ms. Lan: Vậy reviewer cho dữ liệu test là Anh Tuấn, đúng không? Hay còn ai nữa?
+
+T000310 [10:52:06] Anh Tuấn: Tôi review, nhưng nếu cần thêm, có thể nhờ Minh.
+
+T000311 [10:52:24] Minh: Em có thể, nhưng em chỉ check phần kỹ thuật.
+
+T000312 [10:52:42] Hoa: Vậy hiện tại reviewer chưa được assign chính thức? Lúc nãy chị Lan nói sẽ tự review.
+
+T000313 [10:53:00] Ms. Lan: Ừ, tôi nói thế nhưng giờ Anh Tuấn review được rồi. Vậy giao cho anh ấy. Nếu anh ấy không kịp, tôi sẽ vào.
+
+T000314 [10:53:18] Hoa: Rõ rồi. Nhưng em muốn có xác nhận cuối.
+
+T000315 [10:53:36] Anh Tuấn: Tôi xác nhận sẽ review dữ liệu test của Hoa.
+
+T000316 [10:53:54] Ms. Lan: Vậy là resolved nhé. Tiếp theo, task yêu cầu monitoring cho staging. Anh Tuấn, deadline?
+
+T000317 [10:54:12] Anh Tuấn: Deadline 28/02. Tôi đã liên hệ infra, họ hứa tuần sau.
+
+T000318 [10:54:30] Minh: Vậy chúng ta sẽ có monitoring trước release.
+
+T000319 [10:54:48] Ms. Lan: Task cuối: release plan. Minh viết, deadline 28/02, Hoa và Anh Tuấn review.
+
+T000320 [10:55:06] Minh: Vâng, em sẽ gửi draft trước 26/02.
+
+T000321 [10:55:24] Hoa: Em sẵn sàng review.
+
+T000322 [10:55:42] Anh Tuấn: Tôi cũng vậy.
+
+T000323 [10:56:00] Ms. Lan: Ngoài ra, còn task nào khác? Task staging đã hủy, không nhắc lại.
+
+T000324 [10:56:18] Minh: Hình như còn vấn đề về reviewer cho tài liệu? Chưa ai review tổng thể ngoài chị Lan.
+
+T000325 [10:56:36] Ms. Lan: Tôi làm review tổng thể. Nhưng hiện tôi bận, nên anh Tuấn có thể review sơ bộ trước.
+
+T000326 [10:56:54] Anh Tuấn: Được, tôi sẽ review sơ bộ, rồi chị Lan review lần cuối.
+
+T000327 [10:57:12] Hoa: Vậy tài liệu cũng có hai reviewer.
+
+T000328 [10:57:30] Ms. Lan: Đúng. Nhưng lưu ý: tài liệu deadline 05/03, không được trễ.
+
+T000329 [10:57:48] Minh: Em thấy các deadline khá gần nhau. Cần ưu tiên.
+
+T000330 [10:58:06] Anh Tuấn: Tôi lo nhất là login 25/02, vì nó ảnh hưởng release.
+
+T000331 [10:58:24] Hoa: Nếu login trễ, em có thể dùng dữ liệu test nhưng không test login được.
+
+T000332 [10:58:42] Ms. Lan: Đó là rủi ro. Minh cố gắng.
+
+T000333 [10:59:00] Minh: Em sẽ làm hết sức.
+
+T000334 [10:59:18] Hoa: Còn về release plan, em có ý kiến: nên thêm phần rủi ro nếu login trễ.
+
+T000335 [10:59:36] Ms. Lan: Tốt, Minh bổ sung.
+
+T000336 [10:59:54] Anh Tuấn: Tôi muốn hỏi: có cần test integration giữa login và data test không? Hay làm riêng?
+
+T000337 [11:00:12] Hoa: Em nghĩ nên test integration trước release.
+
+T000338 [11:00:30] Ms. Lan: Vậy Minh và Hoa phối hợp khi login xong.
+
+T000339 [11:00:48] Minh: Vâng, em sẽ báo khi hoàn thành.
+
+T000340 [11:01:06] Hoa: Em có một unresolved item: ai sẽ review dữ liệu test cuối cùng? Lúc nãy anh Tuấn nhận, nhưng chưa chắc.
+
+T000341 [11:01:24] Anh Tuấn: Tôi xác nhận lần nữa, tôi review.
+
+T000342 [11:01:42] Ms. Lan: Vậy là xong. Còn gì chưa chốt? Tôi thấy chỉ còn việc thực hiện.
+
+T000343 [11:02:00] Minh: Em nghĩ cần nhấn mạnh: deadline 20/02 là sắp tới, Hoa chú ý.
+
+T000344 [11:02:18] Hoa: Em biết, em đang làm.
+
+T000345 [11:02:36] Ms. Lan: Vậy tổng kết: tài liệu – Anh Tuấn, 05/03; login – Minh, 25/02; data test – Hoa, 20/02, reviewer Anh Tuấn; monitoring – Anh Tuấn, 28/02; release plan – Minh, 28/02. Mọi thứ rõ ràng.
+
+T000346 [11:02:54] Anh Tuấn: Nhắc lại, data test cần gửi trước 19/02.
+
+T000347 [11:03:12] Hoa: Vâng.
+
+T000348 [11:03:30] Ms. Lan: Cảm ơn mọi người đã làm việc tích cực. Buổi họp hôm nay kết thúc tại đây. Hẹn gặp lại 5 giờ chiều.
+
+T000349 [11:03:48] Minh: Cảm ơn chị.
+
+T000350 [11:04:06] Anh Tuấn: Chúc mọi người buổi chiều hiệu quả.
+
+T000351 [11:04:24] Hoa: Em cũng cảm ơn.
+
+--- END OF PART P05 ---

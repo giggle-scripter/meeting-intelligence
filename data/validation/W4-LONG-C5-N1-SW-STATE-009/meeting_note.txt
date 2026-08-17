@@ -1,0 +1,14 @@
+ghi vội
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / moi truong / trien khai / test / giao / hoan
+- Đầu tiên, mình sẽ giao task "Hoàn thiện môi trường test" cho Hà và Tuấn
+* Task thứ hai là "Hoàn thiện tài liệu triển khai" – Lan owner chính, nhưng tài liệu cần được review bởi cả team
+- À, mình vừa giao hai task có tên gần giống: "Hoàn thiện môi trường test" và "Hoàn thiện tài liệu triển khai"
+1) Mình sẽ update task list vào Jira ngay sau meeting
+- Vậy ta giao task "Tạo bộ dữ liệu test cho module đăng nhập" cho Tuấn, Hà review
+* Hôm nay tôi muốn quay lại vấn đề tài liệu triển khai + các task đã giao ở part 1
+- còn một điều: task "Hoàn thiện môi trường test" dl mới 05/03, cần được cập nhật trong Jira
+1) Vậy chính thức hủy task "Tạo dataset test đăng nhập"
+- Em đã hủy task "Tạo dataset test đăng nhập" trong Jira rồi, nhưng cần xác nhận chính thức
+* Task "Viết tài liệu triển khai chi tiết" – owner Tuấn và Hà, dl 14/03, reviewer Lan
+- Vậy tổng kết lại, meeting lần này đã giải quyết các vấn đề về môi trường test, tài liệu, handoff, thay đổi dl, và hủy task

@@ -1,0 +1,7 @@
+ghi vội
+chủ đề: Trao đổi kế hoạch tích hợp
+kw: giao / core / logic / kha / phuc / kinh / nghiem
+- Phần core logic khá phức tạp, cần người có kinh nghiệm về xử lý giao dịch
+* Tôi dự định giao module xử lý webhook cho Tuấn vì Tuấn đã từng làm tích hợp bên VNPay trước đây
+- Giao cho chị ấy không phù hợp
+1) Anh sẽ trao đổi riêng

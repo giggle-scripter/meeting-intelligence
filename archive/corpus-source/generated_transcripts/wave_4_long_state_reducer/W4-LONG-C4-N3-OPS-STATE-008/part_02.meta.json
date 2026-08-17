@@ -1,0 +1,29 @@
+{
+  "case": {
+    "wave": 4,
+    "case_index": 8,
+    "meeting_id": "W4-LONG-C4-N3-OPS-STATE-008",
+    "meeting_date": "2026-02-22",
+    "title": "Họp điều phối triển khai hệ thống",
+    "labels": "long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk",
+    "objective": "P01: Mở meeting, bàn môi trường test và tài liệu triển khai. Tạo hai task có tên gần giống nhau, đặt một deadline ban đầu và một task không deadline. | P02: Chuyển sang lỗi đăng nhập và dữ liệu test. Tạo thêm task, distractor và unresolved reviewer; chưa sửa task P01. | P03: Quay lại tài liệu P01. Handoff owner của một task và thay deadline của task còn lại; phải tham chiếu tự nhiên qua khoảng cách dài. | P04: Bàn release và monitoring. Hủy một task cũ, đặt một deadline gần lời bàn về task khác nhưng thuộc đúng antecedent cũ. | P05: Xử lý các điểm cuối, recap trạng thái cuối cùng, không tạo duplicate và giữ một unresolved item nếu chưa chốt."
+  },
+  "part_index": 2,
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 1636,
+    "turn_count": 84
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 150.82753009999578
+    }
+  ]
+}

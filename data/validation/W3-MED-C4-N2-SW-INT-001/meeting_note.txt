@@ -1,0 +1,11 @@
+ghi vội
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / trien khai / kiem thu / rollback / lai / duy / check
+- Để em check lại rule
+* vậy có 2 task: một là phần tài liệu hướng dẫn cài đặt do anh Khánh, hạn 11/02;
+- còn một task về "kiểm thử bảo mật" không thấy ai nhắc
+1) Như vậy ta đã có 3 task active
+- Vậy ta tổng kết: task 1 – fix lỗi đăng nhập (Duy, dl 7/02);
+* task 3 – script triển khai + rollback (Duy, dl 10/02)
+- Em muốn test xong trước thứ Sáu
+1) Chốt lại, em sẽ gửi meeting minutes sau 2 tiếng

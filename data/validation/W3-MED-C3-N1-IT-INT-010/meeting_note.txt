@@ -1,0 +1,11 @@
+chốt sơ bộ
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: bao cao / trien khai / api / khong / doi / tien / giao
+- Vậy em sẽ ưu tiên làm xong UI trước cuối tuần sau, nhưng không cần chốt mốc
+* Để tôi giao luôn: Minh chịu trách nhiệm tối ưu hiệu năng API, bao gồm cả caching, dl 01/03
+- dời sang 05/03 để thoải mái hơn
+1) còn phần xác thực định dạng tôi sẽ liên hệ lại với đầu mối đối tác vào chiều nay
+- Tôi chưa đưa vào task cho sprint này vì cần đánh giá phạm vi trước đã
+* Đầu tiên, Minh có hai task: một là hoàn thiện API integration, dl 28/02
+- Ngoài ra, task tổng hợp báo cáo giao dịch cho Lan đã bị hủy, không làm nữa
+1) Tôi chỉ lo task performance, vì dời dl sang 05/03 nhưng tôi sợ không đủ thời gian cho Huy làm quen code

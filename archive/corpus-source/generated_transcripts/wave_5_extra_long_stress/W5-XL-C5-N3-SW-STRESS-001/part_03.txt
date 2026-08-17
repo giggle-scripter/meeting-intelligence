@@ -1,0 +1,113 @@
+MEETING_ID: W5-XL-C5-N3-SW-STRESS-001
+PART: P03/10
+
+T000126 [10:29:05] Hoàng: Bây giờ chúng ta chuyển sang topic vận hành. Hòa, em có cập nhật gì về CI/CD hay server không?
+
+T000127 [10:29:50] Hòa: Có một số thay đổi. Admin đã thông báo họ fix token script trước 11h sáng nay, nhưng khi em thử build manually, vẫn còn lỗi authenticate. Có vẻ fix chưa hoàn toàn.
+
+T000128 [10:30:38] Minh: Vậy cần Thắng check lại? Em đã assign Thắng verification cho task này, nhưng Thắng đang bận với integration spec.
+
+T000129 [10:31:20] Hòa: Nếu Thắng bận, em có thể tự verify – chỉ cần dev cấp quyền access pipeline. Nhưng em chưa có quyền edit job script.
+
+T000130 [10:32:05] Minh: Để em cấp quyền cho Hòa, nhưng cần confirm với anh Hoàng. Hòa có thể chịu trách nhiệm verification luôn không?
+
+T000131 [10:32:48] Hoàng: Handoff luôn? Nếu Hòa đảm nhận verification, Thắng tập trung viết spec. Như vậy owner task CI/CD chuyển từ Thắng sang Hòa. Có vấn đề gì không?
+
+T000132 [10:33:35] Hòa: Em OK, nhưng deadline verification vẫn là cuối ngày thứ Năm? Em nghĩ cần thêm thời gian để retest sau khi admin fix thêm.
+
+T000133 [10:34:20] Minh: Em propose push deadline verification lên sáng thứ Sáu, vì admin có thể fix thêm chiều nay. Như vậy Hòa có cả tối nay và sáng mai.
+
+T000134 [10:35:06] Hoàng: Đó là deadline correction đầu tiên: verification CI/CD từ cuối thứ Năm sang 12h trưa thứ Sáu. Mọi người đồng ý?
+
+T000135 [10:35:55] Trang: OK với em. Nhưng nếu verification trễ, ảnh hưởng đến deploy staging cho QA vào sáng thứ Sáu? Minh đã nói build tag sáng thứ Sáu.
+
+T000136 [10:36:40] Minh: Nếu verification xong trước 10h sáng thứ Sáu, build vẫn kịp. Hòa, em có thể hoàn thành trước 10h không?
+
+T000137 [10:37:25] Hòa: Em sẽ cố gắng, nhưng admin fix chiều nay, em test tối nay và sáng mai. Nếu phát sinh lỗi cần dev, có thể Thắng hỗ trợ nhanh.
+
+T000138 [10:38:12] Hoàng: Vậy ghi nhận deadline correction: verification CI/CD trước 10h sáng thứ Sáu. Tiếp theo, về handoff: task CI/CD chính thức giao cho Hòa từ Thắng. Ghi lại.
+
+T000139 [10:39:00] An: Em có một vấn đề về dữ liệu test chargeback. Em liên hệ Finance, họ nói cần thêm một ngày để tổng hợp do có case đặc biệt. Vậy deadline thứ Năm có thể thành thứ Sáu không?
+
+T000140 [10:39:45] Hoàng: Đây là deadline correction thứ hai. Nhưng Trang đã lên kế hoạch phase 1/phase 2. Nếu chargeback data có thứ Sáu, phase 2 test sẽ bắt đầu tuần sau. Có ảnh hưởng gì lớn không?
+
+T000141 [10:40:32] Trang: Nếu phase 1 test thanh toán tiêu chuẩn vẫn diễn ra cuối tuần, phase 2 có thể bắt đầu thứ Hai hoặc thứ Ba. Không vấn đề.
+
+T000142 [10:41:18] Hoàng: Vậy correction deadline chargeback data từ thứ Năm lên thứ Sáu. An, em chịu trách nhiệm bàn giao cho Trang trước cuối ngày thứ Sáu.
+
+T000143 [10:42:02] An: OK.
+
+T000144 [10:42:45] Linh: Em muốn nói về spec integration. Thắng mới nhận task, nhưng Thắng còn phải học quy trình CRM. Có thể cần training 1 buổi.
+
+T000145 [10:43:28] Minh: Đúng, Thắng chưa làm việc với CRM API. Em sẽ dành 30 phút mai để hướng dẫn. Tuy nhiên, deadline spec thứ Hai tuần sau có thể hơi gấp.
+
+T000146 [10:44:15] Hoàng: Em propose deadline correction cho spec integration từ thứ Hai lên thứ Ba tuần sau. Thắng có thêm một ngày. Mọi người nghĩ sao?
+
+T000147 [10:45:03] Trang: Được, nếu thứ Ba, test case vẫn viết kịp từ thứ Ba sang thứ Tư. Không ảnh hưởng.
+
+T000148 [10:45:48] Hòa: Vậy em sẽ có spec để review bảo mật vào thứ Tư, thay vì thứ Ba? Deadline review bảo mật cũng phải đẩy.
+
+T000149 [10:46:30] Hoàng: Review bảo mật correction từ thứ Tư lên thứ Năm tuần sau. Đồng ý?
+
+T000150 [10:47:15] Hòa: OK.
+
+T000151 [10:47:55] Linh: Vậy chúng ta đã có hai deadline correction rõ ràng: spec integration thứ Ba, review bảo mật thứ Năm.
+
+T000152 [10:48:38] Minh: Em có một comment: Thắng viết spec, nhưng Dũng có thể hỗ trợ phần caching. Liệu có confusion không? Bởi vì Dũng còn task design doc performance.
+
+T000153 [10:49:25] Hoàng: Đây là ambiguous reference. Minh, em muốn nói đến spec nào? Integration spec hay design doc performance?
+
+T000154 [10:50:10] Minh: Ý em là integration spec. Dũng có thể giúp phần mapping data, vì Dũng có background về caching và dữ liệu.
+
+T000155 [10:50:55] Linh: Vậy handoff không thay đổi owner, nhưng Dũng hỗ trợ Thắng. Đó là support, không phải handoff.
+
+T000156 [10:51:35] Hoàng: Đúng, ghi nhận support. Chúng ta còn unresolved item gì từ part trước? Canary deployment chưa quyết định. Có nên đưa vào part này không?
+
+T000157 [10:52:20] Minh: Em nghĩ nên giữ unresolved, sẽ thảo luận ở part sau khi có thêm data.
+
+T000158 [10:53:02] Hoàng: Vậy chúng ta chuyển sang một topic mới: tối ưu chi phí server cho production. Hòa, em có số liệu không?
+
+T000159 [10:53:48] Hòa: Theo dõi từ dashboard, chi phí EC2 tháng 2 tăng 15% so với tháng 1. Nguyên nhân chính do scaling không đúng giờ cao điểm. Em propose schedule scaling dựa trên traffic dự báo.
+
+T000160 [10:54:35] Minh: Dev có thể hỗ trợ tinh chỉnh auto-scaling rule. Cần An cung cấp dữ liệu traffic theo giờ.
+
+T000161 [10:55:18] An: Dữ liệu traffic có sẵn từ tuần trước. Em sẽ gửi cho Hòa và Minh file CSV trong chiều nay.
+
+T000162 [10:56:05] Hoàng: Task tối ưu chi phí: assign Hòa làm lead, Minh support, An cung cấp data. Deadline cho proposal: thứ Hai tuần sau.
+
+T000163 [10:56:50] Hòa: Có thể cần thời gian phân tích, em muốn deadline proposal là thứ Ba tuần sau.
+
+T000164 [10:57:35] Hoàng: Correction: deadline proposal thứ Ba tuần sau. OK.
+
+T000165 [10:58:15] Trang: Em có một vấn đề hiện tại: trong quá trình test module thanh toán sớm, em phát hiện một lỗi hiển thị amount khi nhập số thập phân. Dev đã biết chưa?
+
+T000166 [10:59:00] Minh: Chưa, đây là bug mới. Em sẽ ghi nhận và assign cho Thắng sau khi spec xong. Nhưng priority có thể thấp.
+
+T000167 [10:59:40] Hoàng: Vậy bug tracking: Trang report bug, assign Thắng, nhưng không deadline vì là non-critical.
+
+T000168 [11:00:25] Linh: Em nghĩ chúng ta cần thảo luận về monitoring cho integration. Hòa, bên Ops có thể thiết lập alert cho API call không?
+
+T000169 [11:01:10] Hòa: Có thể, nhưng cần xác định threshold. Em propose chờ spec integration xong rồi setup.
+
+T000170 [11:01:55] Hoàng: Đó là dependency dài. Tạm thời ghi nhận.
+
+T000171 [11:02:30] An: Em muốn quay lại vấn đề mapping data. Nếu Dũng hỗ trợ, em có thể gửi mapping draft trước thứ Sáu.
+
+T000172 [11:03:15] Minh: Tốt, mapping draft sẽ giúp Thắng viết spec nhanh hơn.
+
+T000173 [11:04:00] Trang: Em có một clarification: test data phase 1 chỉ bao gồm USD và EUR, hay thêm JPY? An, em cần xác nhận.
+
+T000174 [11:04:45] An: Phase 1 bao gồm cả ba đồng tiền. Em đã confirm với Finance. JPY có trong chargeback data sẽ về sau.
+
+T000175 [11:05:30] Hoàng: Vậy rõ ràng. Part 3 sắp kết thúc. Tôi thấy chúng ta có nhiều correction và handoff. Tổng kết:
+
+- Handoff CI/CD verification từ Thắng sang Hòa.
+- Deadline correction: verification CI/CD -> 10h sáng thứ Sáu; chargeback data -> thứ Sáu; spec integration -> thứ Ba; review bảo mật -> thứ Năm; proposal chi phí -> thứ Ba.
+- Bug non-critical assign Thắng.
+- Còn unresolved: canary deployment, monitoring integration.
+
+T000176 [11:06:18] Linh: Em muốn bổ sung: Dũng sẽ hỗ trợ Thắng về mapping. Không phải handoff.
+
+T000177 [11:06:58] Hoàng: Đúng. Cảm ơn mọi người. Part 3 kết thúc.
+
+--- END OF PART P03 ---

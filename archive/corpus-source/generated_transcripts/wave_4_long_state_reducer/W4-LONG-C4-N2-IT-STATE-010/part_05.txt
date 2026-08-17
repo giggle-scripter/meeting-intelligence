@@ -1,0 +1,86 @@
+MEETING_ID: W4-LONG-C4-N2-IT-STATE-010
+PART: P05/5
+
+T000238 [10:32:30] Anh Minh: Bây giờ chúng ta bàn tiếp về tài liệu triển khai tổng thể. Hà, em có bản nháp chưa?
+
+T000239 [10:32:55] Chị Hà: Em có draft sơ bộ, nhưng còn thiếu phần môi trường test và monitoring. Em định hoàn thiện sau khi có thông tin từ Tuấn.
+
+T000240 [10:33:20] Anh Tuấn: Tôi sẽ gửi thông tin môi trường chi tiết vào chiều nay. Còn monitoring thì em cần thời gian để setup dashboard.
+
+T000241 [10:33:45] Chị Hà: Vậy tài liệu tổng thể có thể hoàn thành trong hai tuần tới, như em đã nói từ đầu meeting.
+
+T000242 [10:34:10] Anh Minh: Hai tuần hơi lâu, nhưng nếu phụ thuộc vào nhiều thứ thì chấp nhận được. Tuy nhiên, em cần cam kết deadline cụ thể.
+
+T000243 [10:34:35] Chị Hà: Em có thể đặt deadline là thứ Sáu tuần sau, ngày 6 tháng 3.
+
+T000244 [10:35:00] Anh Minh: Được. Vậy tài liệu triển khai tổng thể sẽ có deadline thứ Sáu tuần sau. Tuấn, em có feedback gì không?
+
+T000245 [10:35:25] Anh Tuấn: Em nghĩ nên sớm hơn, vì release cuối tuần sau đó. Nhưng nếu Hà làm được thì em không ý kiến.
+
+T000246 [10:35:50] Chị Lan: Em muốn hỏi: tài liệu này có cần bao gồm test case không?
+
+T000247 [10:36:15] Anh Minh: Không, test case em viết riêng. Tài liệu tổng thể tập trung vào hướng dẫn triển khai và vận hành.
+
+T000248 [10:36:40] Chị Hà: Vâng. Em sẽ không trùng lắp.
+
+T000249 [10:37:05] Anh Tuấn: Nhân tiện, về task tổng hợp task mà Hà được giao ở part trước, em thấy chưa thấy kết quả.
+
+T000250 [10:37:30] Chị Hà: Em chưa làm vì không có deadline và bận tài liệu. Em nghĩ không cần thiết nữa.
+
+T000251 [10:37:55] Anh Minh: Đồng ý. Task đó hủy luôn. Mỗi người tự theo dõi công việc của mình.
+
+T000252 [10:38:20] Anh Tuấn: Vậy confirm hủy task tổng hợp task. Nhưng em vẫn muốn có một email tổng kết từ part này.
+
+T000253 [10:38:45] Anh Minh: Tôi sẽ gửi email sau meeting. Bây giờ tổng kết lại trạng thái hiện tại.
+
+T000254 [10:39:10] Anh Tuấn: Em nhắc lại: Task môi trường test của em deadline thứ Sáu. Task tài liệu môi trường test của Hà deadline thứ Năm đã sửa. Task fix lỗi đăng nhập của Khoa deadline thứ Sáu.
+
+T000255 [10:39:35] Chị Lan: Task dữ liệu mẫu của em đã hủy, thay bằng test case deadline thứ Năm.
+
+T000256 [10:40:00] Anh Minh: Đúng. Thêm tài liệu triển khai tổng thể của Hà deadline thứ Sáu tuần sau. Task monitoring của Tuấn trước release.
+
+T000257 [10:40:25] Chị Hà: Em xác nhận. Còn task review của em và Tuấn chưa có deadline, nhưng em nghĩ sau khi tài liệu hoàn thành sẽ review.
+
+T000258 [10:40:50] Anh Tuấn: Review có thể làm song song, nhưng nếu không có deadline thì dễ bị quên.
+
+T000259 [10:41:15] Anh Minh: Vậy deadline review tài liệu môi trường test là thứ Năm, cùng lúc với deadline của tài liệu. Hà review sau khi Tuấn gửi thông tin.
+
+T000260 [10:41:40] Chị Hà: Em sẽ review ngay sau khi nhận thông tin, trước thứ Năm.
+
+T000261 [10:42:05] Anh Tuấn: Còn review test case của Lan, em nghĩ không cần deadline cứng, vì chỉ có ít test.
+
+T000262 [10:42:30] Anh Minh: Vậy để linh hoạt. Có ai thấy thiếu gì không?
+
+T000263 [10:42:55] Chị Lan: Em thấy task fix lỗi đăng nhập cần được ưu tiên cao, vì nếu không xong thì release khó.
+
+T000264 [10:43:20] Anh Minh: Khoa đã được giao. Lan em nhắc Khoa giúp.
+
+T000265 [10:43:45] Anh Tuấn: Về monitoring, em chưa có deadline cụ thể. Em nghĩ nên đặt trước release một tuần.
+
+T000266 [10:44:10] Anh Minh: Vậy deadline cho dashboard monitoring là thứ Sáu tuần sau, cùng với tài liệu tổng thể.
+
+T000267 [10:44:35] Anh Tuấn: Vâng. Em sẽ cố gắng.
+
+T000268 [10:45:00] Chị Hà: Tổng kết lại, em thấy vẫn còn một số task chưa có deadline rõ ràng, ví dụ review của Tuấn cho tài liệu môi trường test.
+
+T000269 [10:45:25] Anh Minh: Chúng ta vừa nói review sẽ làm sau khi có thông tin, không cần deadline riêng. Nếu thấy cần, em tự đặt.
+
+T000270 [10:45:50] Chị Hà: Vậy em để tự nhiên.
+
+T000271 [10:46:15] Anh Tuấn: Tôi có ý kiến: nên có buổi họp ngắn trước release để kiểm tra lần cuối, như Lan đề xuất từ part trước.
+
+T000272 [10:46:40] Anh Minh: Tốt. Để sau meeting này, tôi sẽ lên lịch họp vào thứ Tư tuần sau.
+
+T000273 [10:47:05] Chị Lan: Vậy em sẽ chuẩn bị test case cho lỗi đăng nhập trước đó.
+
+T000274 [10:47:30] Anh Minh: Cảm ơn mọi người. Hôm nay chúng ta đã bàn nhiều việc. Tóm lại, các task quan trọng: môi trường test, tài liệu môi trường test, fix lỗi đăng nhập, test case, tài liệu triển khai tổng thể, monitoring. Ai có thắc mắc cuối không?
+
+T000275 [10:48:00] Chị Hà: Không ạ.
+
+T000276 [10:48:20] Anh Tuấn: Không.
+
+T000277 [10:48:40] Chị Lan: Không.
+
+T000278 [10:49:00] Anh Minh: Vậy buổi họp kết thúc. Cảm ơn mọi người đã tham gia. Tôi sẽ gửi email tổng kết trước cuối ngày.
+
+--- END OF PART P05 ---

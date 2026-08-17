@@ -1,0 +1,11 @@
+ghi vội
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / moi truong / trien khai / test / loi / sang / tai
+- Tôi sẽ điểm qua tình hình môi trường test, lỗi đăng nhập, + tài liệu triển khai
+* Chuyển sang tài liệu triển khai
+- 23/02 hơi gấp, nhưng em sẽ cố
+1) correction dl
+- Sau deploy, em sẽ chạy lại bộ test login vào sáng mai
+* Việc đó không tạo task mới, follow-up thôi
+- Em sẽ xem cuối tuần sau khi fix lỗi
+1) Trong recap này, tôi thấy có nguy cơ duplicate task giữa "tài liệu hướng dẫn người dùng" + "tài liệu triển khai" vì cùng mảng tài liệu, nhưng đã phân biệt deliverable

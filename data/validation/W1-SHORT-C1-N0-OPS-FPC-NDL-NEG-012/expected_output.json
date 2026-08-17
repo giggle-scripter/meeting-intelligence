@@ -1,0 +1,7 @@
+{
+  "meeting_title": "Chuẩn bị bản demo",
+  "tasks": [
+    {"task_name":"Hoàn thành slide trình bày","assignee":"Lan","start_date":"2026-01-27","due_date":"","due_date_text":"","status":"Proposed"},
+    {"task_name":"Gửi mẫu infographic","assignee":"Tùng","start_date":"2026-01-27","due_date":"","due_date_text":"","status":"Proposed"}
+  ]
+}

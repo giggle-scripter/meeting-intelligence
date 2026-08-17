@@ -1,0 +1,34 @@
+MEETING_ID: W2-SHORT-C2-N2-OPS-DASG-020
+CASE_LABELS: direct_assignment,negative_context
+MEETING_DATE: 2026-02-14
+PRIMARY_FEATURE: direct assignment
+TITLE: Chuẩn bị bản phát hành nội bộ
+[09:00:05] Chị Linh: Chào mọi người, hôm nay chúng ta cần chuẩn bị gấp bản phát hành nội bộ để kịp demo thứ Hai đấy.
+[09:00:18] Chị Linh: Tuấn, em là dev chính, chị muốn em build một bản release từ nhánh release/v2.1, tích hợp đủ hotfix gần đây.
+[09:00:32] Anh Tuấn: Chị ơi, em đang mắc con bug nghiêm trọng bên module thanh toán, chưa fix xong. Làm build bây giờ thì sao kịp ạ?
+[09:00:47] Chị Hương: Đúng đó chị, em cũng đang test bug đó, nó ảnh hưởng nhiều luồng lắm. Tuấn đang bận túi bụi.
+[09:01:00] Chị Linh: Chị hiểu, nhưng bản build nội bộ cần có sớm để Hương test tổng thể. Tuấn, chị giao em làm build này, cố gắng xong trước 5 giờ chiều nay.
+[09:01:15] Anh Tuấn: Em chỉ có mình em, bug fix khẩn thì sao bỏ được? Em không thể ôm quá nhiều việc một lúc.
+[09:01:28] Anh Minh: Hay mình dùng bản CI nightly tối qua? Pipeline sẵn rồi, lấy ra dùng luôn cho nhanh.
+[09:01:40] Chị Linh: Bản nightly chưa ổn định, mình cần bản có kiểm tra thủ công đàng hoàng.
+[09:01:52] Chị Hương: Bản nightly hôm qua em xem qua, còn lỗi giao diện, chưa dùng demo được.
+[09:02:02] Anh Minh: Vậy chỉ cần merge các hotfix vào nhánh release rồi build tự động, mất vài phút thôi mà.
+[09:02:14] Chị Linh: Vẫn cần người kiểm tra trước build để tránh conflict, thiếu file. Tuấn, em rành mấy vụ này nhất.
+[09:02:27] Anh Tuấn: Rành thì rành, nhưng em không có thời gian. Hay chị giao cho Minh đi ạ?
+[09:02:38] Anh Minh: Máy mình cấu hình môi trường build khác, nhỡ ra bản không tương thích thì chết.
+[09:02:49] Chị Hương: Để em thử build được không? Nhưng em chỉ biết cơ bản thôi.
+[09:02:59] Chị Linh: Không, em cần tập trung test. Tuấn, chị đã giao cho em thì em làm nhé, chị tin em sắp xếp được.
+[09:03:13] Anh Tuấn: Thở dài... em sẽ cố, nhưng không hứa trước 5 giờ đâu. Bug fix vẫn đang gấp, bên kinh doanh réo suốt.
+[09:03:28] Chị Linh: Chị sẽ trao đổi với bên kinh doanh lùi bug đó sang thứ Hai, em yên tâm tập trung build trước.
+[09:03:40] Anh Tuấn: Nếu chị nói được với họ thì em cũng đỡ áp lực. Nhưng em lo build vội sẽ sót lỗi vặt.
+[09:03:53] Chị Hương: Vậy em hỗ trợ Tuấn check sơ bộ trước build nhé, em có checklist mấy bước cơ bản.
+[09:04:05] Chị Linh: Ý kiến hay đó. Vậy chốt: Tuấn chịu trách nhiệm chính build bản nội bộ, Hương hỗ trợ rà soát checklist. Cố gắng xong trước 5 giờ.
+[09:04:22] Anh Tuấn: Ok chị, nếu có phát sinh em sẽ báo ngay.
+[09:04:30] Chị Hương: Em sẽ gửi checklist qua chat cho Tuấn ngay.
+[09:04:38] Anh Minh: Còn đề xuất build tự động của em thì sao? Mình không thử à?
+[09:04:48] Chị Linh: Tạm thời chưa dùng cho đợt này, để cân nhắc sau. Minh ghi nhận lại để cải tiến pipeline cho lần sau nhé.
+[09:05:02] Anh Minh: Dạ, em note lại. Nhưng em vẫn nghĩ nên thử song song để có phương án dự phòng.
+[09:05:14] Chị Linh: Không cần thiết bây giờ, dành cho bản phát hành chính thức. Chị không muốn mất thời gian tranh luận thêm.
+[09:05:28] Chị Hương: Vậy em và Tuấn sẽ phối hợp luôn ạ.
+[09:05:36] Anh Tuấn: Ừ, mình làm chung cho kịp. Cảm ơn Hương.
+[09:05:45] Chị Linh: Cảm ơn mọi người. Kết thúc tại đây.

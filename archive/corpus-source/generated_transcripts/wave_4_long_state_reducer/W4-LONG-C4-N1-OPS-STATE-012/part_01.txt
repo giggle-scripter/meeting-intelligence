@@ -1,0 +1,149 @@
+MEETING_ID: W4-LONG-C4-N1-OPS-STATE-012
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-26
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:00:02] Linh: Chào mọi người, hôm nay chúng ta có cuộc họp dài để bàn về kế hoạch triển khai hệ thống mới. Tôi sẽ là người điều phối, và các bạn Linh, Minh, Huy, Trang đều có mặt. Mục tiêu hôm nay là khởi động các công việc cần thiết.
+
+T000002 [09:00:45] Minh: Chào chị, em có chuẩn bị một số ghi chú về môi trường test rồi ạ. Chúng ta cần quyết định dùng server nào trước.
+
+T000003 [09:01:12] Huy: Em nghĩ nên dùng server staging hiện tại, nhưng cần kiểm tra lại phiên bản database. Anh Trang có thể hỗ trợ phần tài liệu không?
+
+T000004 [09:01:48] Trang: Ừ, tài liệu triển khai đang được viết dở, em sẽ hoàn thiện sau khi có thông tin môi trường. Nhưng hiện tại em cần biết chúng ta dùng môi trường test nào: local, staging, hay production clone?
+
+T000005 [09:02:15] Linh: Tốt nhất là dùng staging, nhưng trước đó phải thiết lập môi trường test cho đợt này. Có ai từng làm việc với server đó chưa?
+
+T000006 [09:02:40] Minh: Em từng config một lần, nhưng lâu rồi. Có thể cần cập nhật lại. Em đề xuất tạo task “Chuẩn bị môi trường test” và giao cho em, deadline cuối tuần này.
+
+T000007 [09:03:05] Linh: Được, nhưng mà chúng ta cũng cần một task tương tự là “Thiết lập môi trường test” cho phần tài liệu? Hay là gộp lại?
+
+T000008 [09:03:28] Huy: Theo em, hai việc khác nhau: “Chuẩn bị môi trường test” là cài đặt cấu hình, còn “Thiết lập môi trường test” là viết hướng dẫn sử dụng cho team QA.
+
+T000009 [09:03:52] Trang: Em nghĩ Huy nói đúng, nên tách ra. Nhưng nếu vậy, task “Thiết lập môi trường test” không có deadline cụ thể, vì phụ thuộc vào việc chuẩn bị xong.
+
+T000010 [09:04:15] Linh: Ok, vậy ta có task A: “Chuẩn bị môi trường test” do Minh phụ trách, deadline 28/02. Task B: “Thiết lập môi trường test” do Trang phụ trách, chưa có deadline, sẽ xác định sau. Mọi người đồng ý không?
+
+T000011 [09:04:40] Minh: Em đồng ý, nhưng mà deadline 28/02 có kịp không? Em còn phải xin quyền truy cập từ bên IT.
+
+T000012 [09:05:02] Huy: Cái đó lâu lắm, thường mất 2 ngày làm việc. Nếu bắt đầu hôm nay thì 28/02 vẫn ổn.
+
+T000013 [09:05:28] Trang: Vậy task của em sẽ chờ task A xong mới làm. Em có thể bắt đầu soạn outline tài liệu trước.
+
+T000014 [09:05:50] Linh: Tốt. Chúng ta cũng cần bàn thêm về tài liệu triển khai. Hiện tại Trang đang viết, nhưng mà nội dung có gì cần thảo luận không?
+
+T000015 [09:06:15] Huy: Em thấy tài liệu lần trước thiếu phần rollback plan. Lần này nên bổ sung.
+
+T000016 [09:06:38] Trang: Đúng, em ghi chú rồi. Sẽ thêm vào mục “Quy trình khôi phục”.
+
+T000017 [09:07:00] Linh: Còn phần checklist triển khai, có ai kiểm tra với team vận hành chưa?
+
+T000018 [09:07:22] Minh: Em chưa, nhưng em nghĩ nên có cuộc họp riêng với anh An. Anh An có tham gia không?
+
+T000019 [09:07:45] Huy: Anh An bận, có thể gửi email trước. Nhưng để tiện, em sẽ tạo task nhỏ là “Gửi checklist cho anh An để review”. Để em đảm nhận, không deadline, chỉ cần trước khi triển khai.
+
+T000020 [09:08:08] Linh: Ok, nhưng mà nhớ cập nhật sau. Quay lại vấn đề môi trường test, Minh cần làm gì trước tiên?
+
+T000021 [09:08:30] Minh: Đầu tiên em cần access vào server staging, sau đó clone database từ production. Nhưng mà e ngại permission, em sẽ gửi ticket lên IT.
+
+T000022 [09:08:55] Trang: Ticketing system hiện tại có backlog, nên em nghĩ nên nói trực tiếp với anh Dũng bên IT.
+
+T000023 [09:09:18] Minh: Để em thử cách đó. Nếu không được thì em sẽ lên lịch meeting nhỏ.
+
+T000024 [09:09:40] Linh: Vậy tạm ổn. Chúng ta cần xác định các task rõ ràng. Em muốn ghi lại: Task C – “Gửi checklist cho anh An” do Huy, không deadline. Nhưng mà cần đặt tên chính xác, tránh nhầm với task khác.
+
+T000025 [09:10:02] Huy: Em đặt là “Review checklist triển khai với anh An”. Được không?
+
+T000026 [09:10:20] Linh: Được. Còn task nào khác cho phần mở đầu không?
+
+T000027 [09:10:40] Minh: Em nghĩ nên có task về cập nhật tài liệu kỹ thuật cho môi trường, nhưng mà đó là việc của Trang.
+
+T000028 [09:11:00] Trang: Việc đó em sẽ gộp vào task B, nhưng cần phân biệt rõ: task B là viết hướng dẫn thiết lập, còn tài liệu triển khai là một đầu ra riêng.
+
+T000029 [09:11:22] Linh: Đúng, vậy ta có task D – “Hoàn thiện tài liệu triển khai” do Trang, deadline dự kiến? Có thể dựa trên task A, B.
+
+T000030 [09:11:45] Huy: Nếu task A xong ngày 28/02, task B mất thêm 3 ngày, thì task D có thể cuối tuần sau.
+
+T000031 [09:12:05] Linh: Nhưng mà cần review, nên deadline chưa chốt. Để sau khi có kết quả task A. Bây giờ em muốn thảo luận về negative context: team mình có gặp rủi ro gì không?
+
+T000032 [09:12:28] Minh: Có rủi ro là IT không cấp quyền kịp, làm chậm task A. Khi đó task B và D cũng bị ảnh hưởng.
+
+T000033 [09:12:50] Huy: Thêm nữa là tài liệu có thể không đầy đủ nếu không có thông tin từ team vận hành. Em lo checklist chưa đủ.
+
+T000034 [09:13:12] Trang: Em cũng lo là có thể xảy ra xung đột lịch giữa các bên, nên cần sắp xếp meeting nhỏ.
+
+T000035 [09:13:35] Linh: Ok, tất cả những rủi ro đó sẽ được theo dõi. Bây giờ em muốn phân công rõ: Minh task A deadline 28/02, Trang task B không deadline nhưng cần theo dõi, Huy task C không deadline, và Trang task D tạm thời không deadline, sẽ cập nhật sau. Ai có thắc mắc gì không?
+
+T000036 [09:14:00] Minh: Em muốn hỏi là task A có cần thêm người hỗ trợ không? Nếu bị kẹt thì em nhờ Huy.
+
+T000037 [09:14:20] Huy: Em có thể support nếu Minh cần, nhưng em cũng bận với task C.
+
+T000038 [09:14:38] Linh: Tạm thời một mình Minh, nếu quá tải thì báo em. Chúng ta cũng cần nghĩ đến bước tiếp theo sau khi hoàn thành môi trường test. Nhưng đó là chuyện của part sau.
+
+T000039 [09:15:00] Trang: Em muốn biết là tài liệu triển khai có cần bao gồm user guide không? Hay chỉ dành cho team vận hành?
+
+T000040 [09:15:20] Linh: Chỉ dành cho team vận hành và developer thôi, không cần user guide. Nhưng mà cần ghi rõ quy trình.
+
+T000041 [09:15:40] Huy: Em đồng ý. Ngoài ra, em muốn đề xuất là nên có một buổi training nhỏ sau khi triển khai, nhưng không phải task bây giờ.
+
+T000042 [09:16:00] Linh: Tốt, ta sẽ để dành cho part sau. Hiện tại, em thấy các task đã ổn. Nhưng mà có một vấn đề: tên task A “Chuẩn bị môi trường test” và task B “Thiết lập môi trường test” hơi dễ nhầm. Có nên đổi tên không?
+
+T000043 [09:16:25] Minh: Em nghĩ là nên giữ nguyên vì đã quen, chỉ cần mô tả rõ trong ghi chú.
+
+T000044 [09:16:45] Trang: Em cũng thấy vậy, nhưng mà nếu nhầm thì gây confusion. Em đề xuất đặt tên cụ thể hơn: “Chuẩn bị môi trường test (cấu hình server)” và “Thiết lập môi trường test (viết hướng dẫn)”.
+
+T000045 [09:17:08] Linh: Ý hay, em sẽ cập nhật trong meeting notes. Vậy task A chính thức là “Chuẩn bị môi trường test (cấu hình)”, task B là “Thiết lập môi trường test (hướng dẫn)”. Nhưng deadline chỉ có task A thôi.
+
+T000046 [09:17:30] Huy: Nếu đổi tên thì task C cũng nên đổi thành “Review checklist triển khai với anh An” như em nói.
+
+T000047 [09:17:50] Linh: Rồi. Vậy ta có 4 task. Còn task D “Hoàn thiện tài liệu triển khai” có thể đổi thành “Viết và hoàn thiện tài liệu triển khai” để rõ hơn.
+
+T000048 [09:18:12] Minh: Ok, thống nhất. Bây giờ em muốn đi vào chi tiết task A: cần những bước nào?
+
+T000049 [09:18:35] Huy: Bước 1: liên hệ IT xin quyền. Bước 2: clone database. Bước 3: kiểm tra kết nối. Bước 4: báo cáo.
+
+T000050 [09:18:55] Trang: Em có thể giúp viết tài liệu cho bước 2 và 3 nếu Minh cần.
+
+T000051 [09:19:15] Minh: Cảm ơn Trang, để em làm xong bước 1 rồi nhờ. Ngay bây giờ em sẽ gửi email cho anh Dũng.
+
+T000052 [09:19:38] Linh: Tốt. Về task B, Trang có thể bắt đầu viết outline không? Cần những nội dung gì?
+
+T000053 [09:20:00] Trang: Em sẽ viết: mục đích, yêu cầu hệ thống, các bước cài đặt, kiểm tra, và rollback. Dự kiến khoảng 10 trang.
+
+T000054 [09:20:22] Huy: Có thể thêm phần troubleshooting để sau này dễ sửa.
+
+T000055 [09:20:42] Trang: Vâng, em sẽ thêm.
+
+T000056 [09:21:00] Linh: Vậy là mọi người đã nắm được công việc. Em muốn nhấn mạnh là task A có deadline cụ thể, các task còn lại không deadline nhưng cần tiến hành song song.
+
+T000057 [09:21:20] Minh: Em lo nếu IT chậm thì mình có kế hoạch B không?
+
+T000058 [09:21:40] Huy: Có thể dùng môi trường local của mình, nhưng không giống staging lắm.
+
+T000059 [09:22:00] Linh: Kế hoạch B là dùng máy chủ dự phòng của team, nhưng cần setup thêm. Để em xem xét, nếu cần thiết sẽ bàn ở part sau.
+
+T000060 [09:22:20] Trang: Ok, em cũng có một số thắc mắc về tài liệu: có cần bảng so sánh giữa các môi trường không?
+
+T000061 [09:22:40] Linh: Có thể thêm, nhưng không ưu tiên. Ưu tiên là hoàn thiện hướng dẫn thiết lập.
+
+T000062 [09:23:00] Huy: Em muốn nhấn mạnh là task C của em có thể làm ngay, em sẽ gửi checklist cho anh An chiều nay.
+
+T000063 [09:23:20] Linh: Tốt. Còn ai có ý kiến gì về các task vừa thiết lập không?
+
+T000064 [09:23:40] Minh: Em không có ý kiến.
+
+T000065 [09:23:55] Trang: Em cũng không.
+
+T000066 [09:24:12] Huy: Không.
+
+T000067 [09:24:30] Linh: Vậy chúng ta đã thống nhất 4 task chính. Em sẽ ghi chú lại. Bây giờ thời gian còn lại, mọi người có muốn thảo luận thêm về kế hoạch dài hạn không? Hay dừng ở đây?
+
+T000068 [09:24:55] Minh: Em nghĩ nên dừng, để bắt đầu làm luôn. Part sau chúng ta có thể bàn về testing phase.
+
+T000069 [09:25:15] Huy: Đồng ý.
+
+T000070 [09:25:35] Trang: Em cũng ok.
+
+T000071 [09:25:50] Linh: Cảm ơn mọi người. Phần một của cuộc họp kết thúc tại đây. Chúng ta sẽ tiếp tục ở part sau.
+
+--- END OF PART P01 ---

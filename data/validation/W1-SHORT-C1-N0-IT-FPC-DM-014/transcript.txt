@@ -1,0 +1,26 @@
+[00:00:00] Anh Minh: Chào mọi người, cảm ơn đã đến họp. Hôm nay chúng ta điểm lại tiến độ tài liệu dự án.
+[00:00:08] Chị Lan: Dạ, em có cập nhật về tài liệu kỹ thuật. Em đã làm gần xong bản thảo.
+[00:00:15] Anh Minh: Tốt. Còn phần hướng dẫn sử dụng, anh Tuấn?
+[00:00:20] Anh Tuấn: Em đang làm, nhưng còn thiếu hình ảnh minh họa. Chắc em xong trong tuần này.
+[00:00:28] Chị Lan: Anh Tuấn, em có thể hỗ trợ chụp màn hình. Em sẽ gửi anh vào ngày mai.
+[00:00:35] Anh Minh: Vậy chị Lan giúp anh Tuấn nhé. Anh Tuấn, deadline cho tài liệu hướng dẫn của em?
+[00:00:43] Anh Tuấn: Em nghĩ em sẽ hoàn thành vào 20/3.
+[00:00:49] Anh Minh: 20/3 là được. Ừm, nhớ gửi bản nháp trước để review.
+[00:00:57] Anh Tuấn: Vâng, em sẽ gửi bản nháp vào 15/3 để mọi người xem trước.
+[00:01:04] Anh Minh: Tốt. Còn tài liệu kỹ thuật, chị Lan dự kiến khi nào xong?
+[00:01:10] Chị Lan: Em dự định gửi vào ngày 15/3.
+[00:01:16] Anh Minh: 15/3, cũng phù hợp. Trùng với bản nháp của anh Tuấn, tiện cho review.
+[00:01:24] Anh Tuấn: Anh Minh, em muốn hỏi tài liệu kỹ thuật có cần mã nguồn không?
+[00:01:30] Chị Lan: À, theo em chỉ cần mô tả kiến trúc và sơ đồ, không cần mã nguồn.
+[00:01:37] Anh Minh: Ừ, chị Lan đúng. Chỉ cần sơ đồ luồng dữ liệu và giải thích.
+[00:01:44] Anh Tuấn: Rõ rồi ạ. Cảm ơn.
+[00:01:49] Chị Lan: Anh Minh, em muốn hỏi thêm, tài liệu kỹ thuật có cần phần giới thiệu dự án không?
+[00:01:56] Anh Minh: Có, nên viết một đoạn mở đầu ngắn, khoảng nửa trang.
+[00:02:02] Chị Lan: Vâng, em sẽ thêm vào.
+[00:02:06] Anh Tuấn: Em cũng sẽ thêm mục lục tự động cho phần hướng dẫn sử dụng.
+[00:02:12] Anh Minh: Tốt, mục lục tự động là cần thiết. Nhớ tạo bookmark cho các phần.
+[00:02:19] Anh Tuấn: Vâng, em sẽ làm.
+[00:02:23] Anh Minh: Vậy tổng kết: chị Lan hoàn thành tài liệu kỹ thuật và gửi vào 15/3, hỗ trợ hình ảnh cho anh Tuấn vào ngày mai. Anh Tuấn gửi bản nháp hướng dẫn sử dụng vào 15/3 và hoàn thành final vào 20/3.
+[00:02:36] Chị Lan: Dạ, em rõ.
+[00:02:39] Anh Tuấn: Em cũng rõ.
+[00:02:42] Anh Minh: Không còn vấn đề gì? Cảm ơn mọi người. Hẹn họp lần sau.

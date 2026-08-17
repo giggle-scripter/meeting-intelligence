@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["meeting_title", "summary", "tasks", "diagnostics", "unresolved_window_ids"],
+  "properties": {
+    "meeting_title": {"type": "string"},
+    "summary": {"type": "string"},
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["task_name", "assignee", "start_date", "due_date", "due_date_text", "evidence", "status"],
+        "properties": {
+          "task_name": {"type": "string"},
+          "assignee": {"type": "string"},
+          "start_date": {"type": "string"},
+          "due_date": {"type": "string"},
+          "due_date_text": {"type": "string"},
+          "evidence": {"type": "string"},
+          "status": {"const": "Proposed"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "diagnostics": {"type": "object"},
+    "unresolved_window_ids": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

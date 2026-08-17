@@ -1,0 +1,28 @@
+{
+  "case": {
+    "wave": 2,
+    "case_index": 22,
+    "meeting_id": "W2-SHORT-C2-N1-IT-NOOWN-022",
+    "meeting_date": "2026-02-16",
+    "title": "Trao đổi kế hoạch tích hợp",
+    "labels": "task_without_owner,unresolved_owner",
+    "objective": "{\"name\": \"task without owner\", \"code\": \"NOOWN\", \"labels\": \"task_without_owner,unresolved_owner\", \"requirements\": \"Một action được chốt là cần làm nhưng cuộc họp không chốt ai phụ trách.\"}"
+  },
+  "model": "deepseek-v4-pro",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 827,
+    "turn_count": 26
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 544.8674652000045
+    }
+  ]
+}

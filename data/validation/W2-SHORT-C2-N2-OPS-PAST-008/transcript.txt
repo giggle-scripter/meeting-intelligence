@@ -1,0 +1,38 @@
+[00:00:00] PM: Chào mọi người, hôm nay chúng ta họp để điểm lại các công việc đã hoàn thành cho bản phát hành nội bộ sắp tới. Đầu tiên, ai báo cáo về module tìm kiếm?
+[00:00:15] Dev: Module tìm kiếm đã hoàn thành. Tôi đã triển khai full-text search trên Elasticsearch.
+[00:00:30] QA: Tôi đã test module tìm kiếm, kết quả khả quan. Tuy nhiên, có một vấn đề nhỏ về tốc độ khi tìm kiếm với nhiều từ khóa.
+[00:00:45] Dev: Vấn đề đó tôi đã tối ưu bằng cách thêm index. Tôi đã kiểm tra và thấy cải thiện.
+[00:01:00] PM: Tốt. Vậy module tìm kiếm đã sẵn sàng. Còn module đăng nhập?
+[00:01:15] Dev: Module đăng nhập và phân quyền đã hoàn thành. Code đã được merge.
+[00:01:30] QA: Tôi đã test module đăng nhập, tìm thấy một lỗi nhỏ về hiển thị nhưng đã được fix.
+[00:01:45] PM: Cảm ơn. Module thanh toán?
+[00:02:00] Dev: Module thanh toán tôi đã làm xong từ tuần trước, hiện đang chờ QA test.
+[00:02:15] QA: Tôi chưa test module thanh toán vì còn phụ thuộc vào dữ liệu mẫu. Tôi đã yêu cầu dữ liệu nhưng chưa được cung cấp.
+[00:02:30] PM: Đây là vấn đề. Ai chịu trách nhiệm cung cấp dữ liệu?
+[00:02:45] Dev: Trước đây tôi đã cung cấp dữ liệu mẫu cho module khác, nhưng lần này tôi chưa làm vì không được yêu cầu.
+[00:03:00] PM: Vậy tuần trước tôi đã giao cho anh phụ trách dữ liệu, anh không nhớ?
+[00:03:15] Dev: Tôi nhớ là tôi đã hoàn thành việc tạo dữ liệu cho module người dùng, không phải thanh toán.
+[00:03:30] PM: Được rồi, chúng ta cần giải quyết việc này sau. Hiện tại, hãy tập trung vào những gì đã làm xong.
+[00:03:45] QA: Tôi đã hoàn thành test cho module thông báo, mọi thứ ổn.
+[00:04:00] Dev: Tôi cũng đã hoàn thành tích hợp API bên thứ ba cho dịch vụ email.
+[00:04:15] PO: Tôi muốn bổ sung: tôi đã xem xét các yêu cầu và xác nhận rằng tất cả các tính năng cho bản phát hành này đều đã được phát triển xong.
+[00:04:30] PM: Cảm ơn PO. Vậy những gì đã hoàn thành: module tìm kiếm, đăng nhập, phân quyền, thông báo, tích hợp email. Còn module thanh toán chưa được test.
+[00:04:45] Dev: Tôi xin nhắc lại, module thanh toán đã hoàn thành code, chỉ chờ test.
+[00:05:00] QA: Đúng vậy, code đã xong, nhưng chưa test được vì thiếu dữ liệu.
+[00:05:15] PM: Tôi đã có báo cáo rằng tất cả các module đều đã hoàn thành code, nhưng test chưa đầy đủ. Chúng ta cần đảm bảo chất lượng trước khi phát hành.
+[00:05:30] Dev: Ngoài ra, tôi đã viết tài liệu hướng dẫn sử dụng cho module đăng nhập và tìm kiếm.
+[00:05:45] QA: Tôi đã viết báo cáo test cho các module đã test.
+[00:06:00] PO: Tôi cũng đã chuẩn bị nội dung thông báo phát hành cho nội bộ.
+[00:06:15] PM: Cảm ơn. Còn việc cập nhật cơ sở dữ liệu? Ai đã làm?
+[00:06:30] Dev: Tôi đã chạy migration cho cơ sở dữ liệu, tất cả các bảng mới đã được tạo.
+[00:06:45] PM: Vậy là các công việc chính đã hoàn thành. Chúng ta có một số tồn đọng nhỏ.
+[00:07:00] QA: Tôi muốn báo cáo thêm: tôi đã kiểm tra hiệu năng của module đăng nhập và tìm kiếm, kết quả tốt, đáp ứng yêu cầu.
+[00:07:15] PM: Xuất sắc. Vậy tóm lại, chúng ta đã hoàn thành hầu hết các module cho bản phát hành nội bộ. Chỉ còn việc test module thanh toán và cung cấp dữ liệu.
+[00:07:30] Dev: Tôi có thể tự test module thanh toán nếu có dữ liệu.
+[00:07:45] PM: Nhưng trách nhiệm test thuộc về QA. Tôi sẽ đảm bảo dữ liệu được cung cấp trong hôm nay.
+[00:08:00] QA: Vậy tôi sẽ test module thanh toán ngay sau khi có dữ liệu.
+[00:08:15] PO: Tôi thấy việc này đã được lên kế hoạch, không phải task mới. Chúng ta chỉ cần thực hiện đúng tiến độ.
+[00:08:30] PM: Chính xác. Đây là những công việc đã được xác định trước. Chúng ta đã hoàn thành rất nhiều việc. Cảm ơn mọi người.
+[00:08:45] Dev: Vâng, tôi sẽ hỗ trợ nếu cần.
+[00:09:00] QA: Tôi sẽ cập nhật kết quả test sau khi hoàn thành.
+[00:09:15] PM: Kết thúc cuộc họp. Chúng ta sẽ tiếp tục theo dõi qua email.

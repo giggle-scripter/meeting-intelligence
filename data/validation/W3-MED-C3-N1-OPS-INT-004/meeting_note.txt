@@ -1,0 +1,11 @@
+note nhanh
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: trien khai / ticket / hoan / khong / thien / trong / dinh
+- Em sẽ hoàn thiện trong tuần này, không ấn định ngày cụ thể
+* QA mới báo ticket #142 – lỗi form không validate
+- Có ticket #145 mô tả xung đột giữa feature A và B
+1) Em thấy ticket #147 yêu cầu kiểm tra tích hợp module notification
+- Em sẽ ghi chi tiết vào ticket #145
+* Em sẽ hoàn thành trước thứ Tư tuần này, vì
+- dời sang sáng mai. (dl replacement)
+1) Chi, em đã cập nhật release notes đến đâu rồi? ? chưa chốt

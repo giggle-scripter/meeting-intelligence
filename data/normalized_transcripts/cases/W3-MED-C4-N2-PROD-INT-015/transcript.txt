@@ -1,0 +1,63 @@
+[00:00:05] An: Chào mọi người, hôm nay chúng ta họp để bàn về các đầu việc cho phase hiện tại. Trước hết, tôi muốn điểm lại flow summary meeting.
+[00:00:20] Bình: Vâng, em đang làm phần flow đó. Hiện tại em đã hoàn thành bản nháp, cần review lại một chút.
+[00:00:35] An: Được, Bình em hoàn thiện nốt bản nháp và gửi cho cả team review. Tôi giao việc đó cho em đấy nhé.
+[00:00:50] Chi: Em muốn hỏi rõ hơn về phần xử lý ngoại lệ trong flow. Có cần thêm bước kiểm tra dữ liệu đầu vào không?
+[00:01:10] Bình: Theo em thì nên có, vì dữ liệu từ parser đôi khi bị lỗi. Em sẽ bổ sung vào flow.
+[00:01:25] An: Tốt. Vậy Bình làm xong trước thứ Tư tuần sau được không?
+[00:01:35] Bình: Được ạ, em sẽ cố gắng.
+[00:01:45] Dũng: Tôi có một câu hỏi về phần hiển thị trên SP365. Có vẻ như giao diện hiện tại chưa tương thích với dữ liệu mới.
+[00:02:00] An: Ừ, phần đó tôi sẽ nói sau. Giờ ta sang topic parser transcript. Chi, em đã test parser chưa?
+[00:02:15] Chi: Em có test sơ qua, phát hiện lỗi khi parsing dòng timestamp có dấu cách. Cần sửa.
+[00:02:30] An: Tôi giao cho Chi sửa lỗi parser đó. Em cần bao lâu?
+[00:02:40] Chi: Em nghĩ khoảng 3 ngày, nhưng có thể nhanh hơn nếu tập trung.
+[00:02:55] An: Vậy deadline là cuối tuần này, thứ Sáu nhé.
+[00:03:10] Chi: Nhưng tuần sau mới có bản build, có thể đẩy lên không?
+[00:03:20] An: Thứ Sáu là hợp lý, vì tuần sau cần tích hợp. Tôi sửa deadline thành thứ Sáu, không thay đổi nữa.
+[00:03:35] Dũng: Tôi thấy phần việc này trước đây giao cho tôi, nhưng giờ Chi làm thì hợp lý hơn.
+[00:03:45] Chi: Vâng, em sẽ làm. Tôi còn cần hỗ trợ từ Dũng về định dạng log.
+[00:04:00] An: Dũng, em hỗ trợ Chi về phần đó nhé. Đó là công việc ngắn, không có deadline cứng.
+[00:04:15] Dũng: Vâng, tôi sẽ gửi tài liệu cho Chi trong chiều nay.
+[00:04:30] An: Tốt. Giờ chuyển sang SP365 display. Dũng, em đã xem yêu cầu cập nhật giao diện chưa?
+[00:04:45] Dũng: Rồi, em thấy cần thay đổi layout của bảng dữ liệu. Cũng phải thêm cột trạng thái.
+[00:05:00] An: Em update giao diện SP365, và thêm phần hiển thị lịch sử cập nhật. Việc đó giao cho em.
+[00:05:15] Dũng: Vâng. Em sẽ làm xong trước khi có build mới.
+[00:05:25] An: Không cần deadline cụ thể, nhưng cố gắng trong tuần này. Đây là task không có deadline ấn định.
+[00:05:40] Dũng: Em hiểu. Em cũng sẽ cập nhật luôn phần hiển thị dữ liệu tương tự như giao diện chính.
+[00:05:55] An: Ý em là hai việc giống nhau? Cẩn thận trùng lặp.
+[00:06:05] Dũng: Không, cập nhật giao diện là một, còn hiển thị dữ liệu là một phần khác. Em sẽ làm riêng.
+[00:06:20] Chi: Em thấy phần hiển thị dữ liệu rất giống với task của Bình về flow. Có cần phối hợp không?
+[00:06:35] Bình: Flow của em là tổng thể, còn Dũng làm giao diện cụ thể. Em nghĩ không trùng.
+[00:06:45] An: Được, vậy Dũng cứ làm. Lưu ý không duplicate công việc.
+[00:07:00] Dũng: Vâng.
+[00:07:10] An: Bây giờ nói về chi phí. Tôi muốn có báo cáo chi phí cho phase này, bao gồm cả phần developer và test.
+[00:07:25] Chi: Báo cáo đó em có thể làm, nhưng cần số liệu từ phòng kế toán. Em chưa có.
+[00:07:40] Dũng: Tôi có số liệu sơ bộ, có thể gửi cho Chi.
+[00:07:50] An: Tốt. Chi, em tổng hợp và gửi tôi trước thứ Hai tuần sau.
+[00:08:05] Chi: Vâng, em sẽ làm.
+[00:08:15] Dũng: Nhân tiện, tôi có ý tưởng cho phase sau: thêm tính năng cảnh báo khi transcript có vấn đề. Có thể xem xét.
+[00:08:30] An: Đó là ý hay, nhưng chưa phải việc ngay. Để dành cho buổi họp sau. Không giao task bây giờ.
+[00:08:45] Bình: Em muốn hỏi lại về deadline của flow. An nói thứ Tư tuần sau, nhưng em có thể làm xong sớm hơn, thứ Hai được không?
+[00:09:00] An: Thứ Hai cũng được, miễn là hoàn thiện. Vậy em tự chốt nhé. Đây là correction deadline so với lúc nãy.
+[00:09:15] Bình: Vâng, em sẽ cố gắng thứ Hai.
+[00:09:25] Chi: Phần parser của em nếu xong sớm, em sẽ báo trước.
+[00:09:35] An: OK. Tôi thấy còn vấn đề chưa giải quyết: tích hợp với hệ thống cũ. Hôm trước QA báo lỗi khi kết nối. Ai có ý kiến?
+[00:09:55] Dũng: Em đã kiểm tra và thấy lỗi từ phía hệ thống cũ, không phải code mình. Nhưng chưa có cách khắc phục.
+[00:10:10] An: Đây là unresolved item. Ta sẽ không tự xử lý hôm nay, cần bàn với team infra sau.
+[00:10:25] Bình: Vậy để em ghi lại vấn đề và đưa vào agenda họp tuần sau.
+[00:10:35] An: Đồng ý. Tạm thời không có task cho việc đó.
+[00:10:45] Dũng: Quay lại phần hiển thị, em muốn xác nhận: cập nhật giao diện SP365 là một việc, còn cập nhật hiển thị dữ liệu là việc khác, đúng không?
+[00:11:00] An: Đúng. Nhưng tôi thấy hai việc có tên gọi gần giống nhau, cẩn thận nhầm. Em phân biệt rõ trong tài liệu nhé.
+[00:11:15] Dũng: Vâng.
+[00:11:20] Chi: Em thấy phần đó có thể gọi là "Cập nhật giao diện SP365" và "Cập nhật hiển thị dữ liệu SP365". Rõ ràng.
+[00:11:35] An: Tốt. Giờ tổng kết lại các đầu việc đã bàn. Bình làm flow summary meeting, deadline thứ Hai tuần sau. Chi sửa parser transcript, deadline thứ Sáu tuần này. Dũng cập nhật giao diện SP365 và hiển thị dữ liệu, không deadline cứng. Chi cũng làm báo cáo chi phí, deadline thứ Hai tuần sau. Phần hỗ trợ Dũng cho Chi về log là việc nhỏ, không chính thức.
+[00:12:05] Bình: Em xác nhận flow.
+[00:12:10] Chi: Em xác nhận parser và báo cáo.
+[00:12:15] Dũng: Em xác nhận giao diện và hỗ trợ.
+[00:12:20] An: Còn ý tưởng phase sau của Dũng, ta sẽ bàn sau. Vấn đề tích hợp chưa giải quyết, để agenda họp với infra.
+[00:12:35] Dũng: Tôi muốn hỏi lại: hồi nãy An nói "phần đó" khi nhắc đến deadline của Bình, nhưng tôi chưa rõ phần nào.
+[00:12:50] An: À, phần deadline của flow. Bình em nói sẽ làm xong thứ Hai, tôi đồng ý. Đó là phần đó.
+[00:13:00] Bình: Vâng, phần đó em sẽ hoàn thành.
+[00:13:05] Chi: Em thấy có nguy cơ trùng lặp giữa flow của Bình và hiển thị của Dũng, nhưng đã trao đổi rồi.
+[00:13:15] An: Đúng, có nguy cơ duplicate nhưng đã phòng tránh. Recap là không thay đổi owner hay deadline.
+[00:13:25] Dũng: Vậy mọi thứ đã rõ. Cảm ơn mọi người.
+[00:13:35] An: Họp kết thúc. Mọi người làm việc và báo cáo tiến độ nhé.

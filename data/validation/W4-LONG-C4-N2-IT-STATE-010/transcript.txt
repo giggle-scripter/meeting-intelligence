@@ -1,0 +1,278 @@
+[09:00:00] Anh Minh: Chào mọi người, cảm ơn đã đến họp đúng giờ. Hôm nay chúng ta bàn về kế hoạch triển khai hệ thống, tập trung vào môi trường test và tài liệu.
+[09:00:20] Chị Lan: Em có chuẩn bị một số yêu cầu cho môi trường test, nhưng cần xác nhận rõ phạm vi.
+[09:00:38] Anh Tuấn: Bên em đang gấp, mong sớm có tài liệu để chạy thử.
+[09:01:00] Chị Hà: Tài liệu triển khai đã có bản nháp, nhưng cần review từ QA trước.
+[09:01:15] Anh Minh: Được, vậy bắt đầu từ môi trường test. Lan, em nói rõ hơn về các yêu cầu đó?
+[09:01:35] Chị Lan: Dạ, bọn em cần một môi trường riêng, có đầy đủ database và service giả lập. Phiên bản phần mềm phải khớp với production.
+[09:02:00] Anh Tuấn: Môi trường dev hiện tại đang dùng chung, không ổn định. Nếu có môi trường test riêng sẽ tốt hơn.
+[09:02:20] Chị Hà: Em nghĩ chúng ta cần viết tài liệu hướng dẫn thiết lập môi trường test, để ai cũng làm được.
+[09:02:40] Anh Minh: Ý hay. Tôi sẽ giao cho Tuấn việc chuẩn bị môi trường test. Còn Hà, em phụ trách tài liệu hướng dẫn môi trường test.
+[09:03:05] Anh Tuấn: Task chuẩn bị môi trường test có deadline là bao lâu ạ?
+[09:03:20] Anh Minh: Em cố gắng xong trong tuần này, tức là trước thứ Sáu. Còn Hà, tài liệu thì em không cần deadline gấp, cứ làm dần.
+[09:03:45] Chị Hà: Vâng. Nhưng tài liệu cần dựa trên môi trường thực tế, nên em chờ Tuấn setup xong mới viết chính xác được.
+[09:04:10] Anh Tuấn: Ừ, mình sẽ làm song song. Tôi có thể viết sơ bộ các bước, rồi Hà bổ sung.
+[09:04:30] Chị Lan: Em muốn góp ý: tài liệu nên có phần kiểm tra, validation. Vì nếu môi trường sai, tài liệu cũng vô dụng.
+[09:04:55] Anh Minh: Đúng. Vậy mình thống nhất: task “Chuẩn bị môi trường test” do Tuấn, deadline thứ Sáu. Task “Chuẩn bị tài liệu môi trường test” do Hà, không deadline cứng.
+[09:05:20] Chị Hà: Em sẽ bắt đầu ngay sau khi có thông tin từ Tuấn.
+[09:05:40] Anh Tuấn: Tôi sẽ gửi email cập nhật tiến độ hàng ngày.
+[09:06:00] Anh Minh: Tốt. Lan, em có yêu cầu gì thêm về môi trường test không?
+[09:06:20] Chị Lan: Có ạ. Em cần quyền truy cập database, và cũng muốn test thử load nhẹ.
+[09:06:45] Anh Tuấn: Quyền truy cập thì tôi sẽ cấp trong tuần. Load test cần công cụ, tôi chưa rõ ai lo.
+[09:07:10] Anh Minh: Khoản đó để sau, khi môi trường ổn định rồi tính. Bây giờ ưu tiên setup và tài liệu.
+[09:07:35] Chị Hà: Em thấy tên hai task hơi giống nhau, dễ nhầm. Có cần đặt tên khác không?
+[09:07:55] Anh Minh: Cũng được. Nhưng để đơn giản, cứ giữ nguyên. Khi nhắc đến “môi trường test” là biết ngay.
+[09:08:20] Anh Tuấn: Vậy tôi sẽ bắt đầu ngay. Còn tài liệu, Hà có cần mẫu không?
+[09:08:40] Chị Hà: Có, em sẽ dùng mẫu cũ của dự án trước, chỉnh sửa lại.
+[09:09:00] Anh Minh: Mọi người lưu ý: hai task này liên quan, nhưng không làm chậm nhau. Tuấn cứ làm trước.
+[09:09:25] Chị Lan: Em muốn biết thêm về tài liệu triển khai tổng thể. Hà đã có bản nháp chưa?
+[09:09:50] Chị Hà: Có, em gửi hôm qua rồi, nhưng thiếu phần môi trường test. Dự kiến cuối tuần này em update.
+[09:10:15] Anh Tuấn: Tài liệu triển khai tổng thể có cần gấp không? Vì bên em đang chờ để chạy thử.
+[09:10:40] Anh Minh: Tài liệu triển khai tổng thể chưa cần deadline, vì còn phụ thuộc nhiều thứ. Cứ tiến hành bình thường.
+[09:11:05] Chị Hà: Em sẽ hoàn thành trong vòng hai tuần tới.
+[09:11:25] Anh Tuấn: Hai tuần có vẻ lâu, nhưng nếu không gấp thì okay.
+[09:11:50] Anh Minh: Có vẻ mọi người đã rõ. Giờ sang phần khác: ai sẽ review tài liệu?
+[09:12:15] Chị Lan: Em có thể review phần liên quan đến test. Phần kỹ thuật thì Tuấn review.
+[09:12:40] Anh Tuấn: Đồng ý. Sau khi Hà có bản đầu, tôi sẽ review một lần.
+[09:13:00] Chị Hà: Em sẽ gửi bản nháp sớm nhất có thể.
+[09:13:20] Anh Minh: Vậy mình thống nhất: task review được phân bổ tự nhiên, không cần ghi rõ.
+[09:13:45] Anh Tuấn: Em thấy task “Chuẩn bị tài liệu môi trường test” thiếu deadline, nếu không có thì dễ bị trễ.
+[09:14:10] Anh Minh: Tôi đã nói là không deadline cứng, nhưng mong Hà làm nhanh vì liên quan đến môi trường.
+[09:14:30] Chị Hà: Em sẽ cố gắng hoàn thành trong vòng một tuần sau khi Tuấn setup xong.
+[09:14:55] Anh Tuấn: Vậy tôi cũng đẩy nhanh môi trường test, dự kiến xong thứ Năm.
+[09:15:20] Anh Minh: Tốt, vậy deadline cho môi trường test là thứ Năm, rồi Hà follow up.
+[09:15:45] Chị Lan: Em muốn hỏi: tài liệu môi trường test có cần bao gồm hướng dẫn deploy không?
+[09:16:05] Chị Hà: Có, em sẽ viết cả phần hướng dẫn deploy lên môi trường test.
+[09:16:25] Anh Tuấn: Hướng dẫn deploy thì tôi cũng có thể hỗ trợ.
+[09:16:50] Anh Minh: Vậy Hà viết, Tuấn review. Cứ làm bình thường.
+[09:17:10] Chị Hà: Vâng.
+[09:17:30] Anh Tuấn: Tôi có một vấn đề: môi trường test hiện tại chưa có dữ liệu mẫu, có cần chuẩn bị không?
+[09:17:55] Anh Minh: Cần. Lan, em có thể lo dữ liệu mẫu không?
+[09:18:15] Chị Lan: Để em tạo một bộ dữ liệu nhỏ, dùng cho test chức năng.
+[09:18:35] Anh Tuấn: Vậy task dữ liệu mẫu thuộc Lan, deadline cùng với môi trường test?
+[09:18:55] Anh Minh: Ừ, vậy thêm task “Chuẩn bị dữ liệu mẫu test” do Lan, deadline thứ Năm.
+[09:19:20] Chị Lan: Em sẽ cố gắng.
+[09:19:40] Chị Hà: Như vậy tổng cộng ba task liên quan đến môi trường test. Em thấy nếu gộp lại thì tốt hơn.
+[09:20:05] Anh Minh: Không, mỗi task riêng để dễ theo dõi. Nhưng nhớ liên lạc với nhau.
+[09:20:25] Anh Tuấn: Em đồng ý. Mọi người trao đổi qua email là được.
+[09:20:45] Chị Lan: Em sẽ tạo một thread email riêng cho vụ test này.
+[09:21:05] Anh Minh: OK. Có ai thắc mắc gì về môi trường test và tài liệu không?
+[09:21:25] Chị Hà: Em chỉ muốn chắc rằng tài liệu môi trường test và tài liệu triển khai tổng thể là hai việc khác nhau.
+[09:21:50] Anh Minh: Đúng. Tài liệu môi trường test là chi tiết cách setup. Tài liệu triển khai tổng thể là hướng dẫn cho toàn bộ hệ thống.
+[09:22:15] Chị Hà: Vậy em sẽ làm riêng.
+[09:22:35] Anh Tuấn: Tôi có một ý: liệu môi trường test có cần tích hợp CI/CD không?
+[09:23:00] Anh Minh: Có thể, nhưng chưa phải lúc. Cứ setup cơ bản trước.
+[09:23:20] Chị Lan: Em nghĩ nên có CI/CD ngay từ đầu để tránh việc manual.
+[09:23:45] Anh Tuấn: Cũng đúng, nhưng sẽ mất thêm thời gian.
+[09:24:05] Anh Minh: Vậy mình để sau, khi môi trường test chạy ổn rồi tích hợp CI/CD. Đó là task cho giai đoạn sau.
+[09:24:30] Chị Hà: Em ghi nhận.
+[09:24:50] Anh Tuấn: Vậy task của em là setup môi trường test cơ bản, không CI/CD.
+[09:25:10] Anh Minh: Đúng. Bây giờ em muốn kiểm tra lại danh sách task: Task A – Chuẩn bị môi trường test – Tuấn – deadline thứ Năm. Task B – Chuẩn bị tài liệu môi trường test – Hà – không deadline cứng. Task C – Chuẩn bị dữ liệu mẫu test – Lan – deadline thứ Năm.
+[09:25:45] Chị Lan: Em xác nhận.
+[09:26:00] Anh Tuấn: Xác nhận.
+[09:26:15] Chị Hà: Xác nhận.
+[09:26:30] Anh Minh: Vậy chúng ta chuyển sang topic khác? Hay còn vấn đề gì về môi trường test chưa?
+[09:26:55] Anh Tuấn: Em muốn hỏi: server test có được cấp riêng không, hay dùng chung với staging?
+[09:27:20] Chị Lan: Theo em nên dùng riêng, vì staging còn phục vụ demo.
+[09:27:40] Anh Minh: Được. Tuấn, em liên hệ bên infra để xin riêng một server.
+[09:28:00] Anh Tuấn: Vâng. Tôi sẽ mail cho anh Đức.
+[09:28:20] Chị Hà: Vậy tài liệu môi trường test phải cập nhật theo server cụ thể.
+[09:28:40] Anh Minh: Đúng. Vậy là mọi người đã nắm được. Tôi nghĩ đủ cho phần đầu.
+[09:29:00] Chị Lan: Em thấy mọi việc rõ ràng. Có thể chuyển sang bàn về tài liệu triển khai tổng thể?
+[09:29:25] Anh Minh: Ừ, nhưng tôi muốn dành phần đó cho part sau. Hôm nay chỉ tập trung môi trường test và tài liệu liên quan.
+[09:29:50] Anh Tuấn: Vậy tôi sẽ bắt tay vào việc.
+[09:30:10] Chị Hà: Em cũng chuẩn bị draft.
+[09:30:30] Anh Minh: Tốt. Mọi người nhớ cập nhật tiến độ qua email. Có gì khó khăn thì báo sớm.
+[09:30:55] Chị Lan: Em sẽ gửi dữ liệu mẫu trước thứ Năm.
+[09:31:15] Anh Tuấn: Tôi hy vọng không có trục trặc về hạ tầng.
+[09:31:35] Anh Minh: Nếu có, anh Đức sẽ hỗ trợ. Chúng ta kết thúc phần này. Cảm ơn mọi người.
+[09:31:55] Chị Hà: Vâng, em chờ tin.
+[09:32:10] Anh Tuấn: Tôi sẽ gửi mail tổng kết sau.
+[09:32:30] Anh Minh: OK. Part sau chúng ta sẽ bàn về tài liệu triển khai tổng thể và các vấn đề khác.
+[09:32:30] Anh Minh: Tiếp theo, chúng ta bàn về tài liệu triển khai tổng thể. Nhưng trước đó, có ai thấy vấn đề gì về lỗi đăng nhập từ đợt test trước không?
+[09:32:55] Chị Lan: Dạ, em có test thử vài chức năng, thấy lỗi đăng nhập xuất hiện khi dùng tài khoản mới. Hệ thống báo sai mật khẩu dù đã nhập đúng.
+[09:33:20] Anh Tuấn: Lỗi đó có thể do cấu hình session chưa đúng. Tôi đã thấy log ghi lỗi token.
+[09:33:45] Anh Minh: Vậy cần xử lý ngay. Tuấn, em có thể kiểm tra chi tiết và đưa ra giải pháp?
+[09:34:10] Anh Tuấn: Tôi sẽ xem lại code authentication. Nhưng cần truy cập repository của module đó.
+[09:34:35] Chị Hà: Em nhớ bên dev đã có bản fix tạm, nhưng chưa merge.
+[09:35:00] Anh Minh: Thế thì tốt. Tuấn, em phối hợp với dev để merge bản fix. Sau đó chạy thử trên môi trường test.
+[09:35:25] Anh Tuấn: Vậy tôi sẽ giao lại cho bạn Khoa bên dev. Nhưng em cần quyền review code.
+[09:35:50] Anh Minh: Được, em cứ làm. Nhưng ai sẽ chịu trách nhiệm review bản fix đó? Tôi nghĩ Hà có thể review.
+[09:36:15] Chị Hà: Em cũng được, nhưng cần thời gian vì đang làm tài liệu.
+[09:36:40] Anh Minh: Vậy Hà review tạm, nhưng chưa có deadline. Còn Tuấn, em giao cho Khoa sửa lỗi đăng nhập.
+[09:37:05] Anh Tuấn: Vâng. Tôi sẽ email Khoa ngay.
+[09:37:30] Chị Lan: Em muốn test lại sau khi fix, nên cần dữ liệu test phù hợp. Task dữ liệu mẫu của em có thể điều chỉnh để bao gồm các tài khoản test.
+[09:37:55] Anh Minh: Ý hay. Vậy Lan bổ sung dữ liệu test cho lỗi đăng nhập vào task của em.
+[09:38:20] Chị Hà: Vậy tài liệu môi trường test có cần ghi chú về lỗi này không?
+[09:38:45] Anh Minh: Viết luôn vào tài liệu, phần khắc phục sự cố. Nhưng đừng làm chậm tiến độ.
+[09:39:10] Anh Tuấn: Tôi có ý: nên tạo một task riêng cho việc fix lỗi đăng nhập, giao cho Khoa, deadline thứ Sáu.
+[09:39:35] Anh Minh: Ừ, vậy thêm task “Fix lỗi đăng nhập” do Khoa, deadline thứ Sáu. Nhưng Khoa có trong meeting này không?
+[09:40:00] Chị Lan: Không, Khoa bận. Em sẽ chuyển lời.
+[09:40:25] Anh Minh: Lan em nhắc Khoa. Còn ai review fix? Hà đã nhận.
+[09:40:50] Chị Hà: Vâng, nhưng em cần bản fix hoàn chỉnh mới review được.
+[09:41:15] Anh Tuấn: Tôi sẽ đảm bảo Khoa gửi pull request sớm.
+[09:41:40] Anh Minh: Tốt. Bây giờ chuyển sang dữ liệu test. Lan, task của em tiến triển sao?
+[09:42:05] Chị Lan: Em đã bắt đầu tạo dữ liệu mẫu, nhưng chưa xong. Cần thêm thông tin về các trường dữ liệu.
+[09:42:30] Anh Minh: Em cần thông tin gì?
+[09:42:55] Chị Lan: Ví dụ, dữ liệu người dùng test có cần mô phỏng nhiều vai trò không? Và có cần dữ liệu lỗi để test negative?
+[09:43:20] Anh Tuấn: Tôi nghĩ nên có cả hai. Vai trò admin và user thường. Dữ liệu lỗi thì để test login thất bại.
+[09:43:45] Anh Minh: Vậy Lan em thêm vào. Nhưng đừng quá nhiều, tránh mất thời gian.
+[09:44:10] Chị Lan: Vâng. Em sẽ hoàn thành trước thứ Năm như đã hẹn.
+[09:44:35] Chị Hà: Nhân tiện, em muốn hỏi về tài liệu triển khai tổng thể. Có cần bao gồm phần hướng dẫn cài đặt cho người dùng không?
+[09:45:00] Anh Minh: Có, nhưng phần đó để sau. Giờ tập trung vào môi trường test và dữ liệu.
+[09:45:25] Anh Tuấn: Em thấy có vẻ nhiều task quá. Ai sẽ tổng hợp để tránh chồng chéo?
+[09:45:50] Anh Minh: Hà có thể làm việc đó? Em viết một bảng tổng hợp task hiện tại.
+[09:46:15] Chị Hà: Em có thể, nhưng cần thời gian. Em sợ ảnh hưởng đến tài liệu.
+[09:46:40] Anh Minh: Không sao, em làm khi rảnh. Không có deadline.
+[09:47:05] Chị Lan: Vậy task tổng hợp này không có người chịu trách nhiệm rõ ràng.
+[09:47:30] Anh Minh: Tạm thời Hà nhận, nhưng không gấp. Nếu ai cần thì tự theo dõi.
+[09:47:55] Anh Tuấn: Tôi thấy khó kiểm soát. Nhưng thôi, cứ làm.
+[09:48:20] Anh Minh: Chúng ta cần thống nhất ai sẽ review dữ liệu test của Lan?
+[09:48:45] Chị Hà: Nếu em có thời gian, em có thể review.
+[09:49:10] Anh Tuấn: Tôi cũng có thể review phần kỹ thuật.
+[09:49:35] Anh Minh: Vậy Hà và Tuấn cùng review. Nhưng chưa có deadline cho review. Cứ sau khi Lan xong.
+[09:50:00] Chị Lan: Em sẽ gửi bản draft cho mọi người vào thứ Tư.
+[09:50:25] Anh Minh: Tốt. Vậy có ai thấy vấn đề gì với lỗi đăng nhập không?
+[09:50:50] Anh Tuấn: Tôi muốn chắc rằng Khoa sẽ ưu tiên fix này. Nếu không, có thể bị trễ.
+[09:51:15] Anh Minh: Lan nhắc Khoa gấp. Còn Hà, em đã bắt đầu review tài liệu chưa?
+[09:51:40] Chị Hà: Em chưa, vì còn chờ Tuấn setup môi trường.
+[09:52:05] Anh Tuấn: Tôi sẽ xong môi trường vào thứ Năm như đã nói.
+[09:52:30] Anh Minh: Vậy mọi thứ vẫn theo kế hoạch. Còn gì nữa không?
+[09:52:55] Chị Lan: Em có một đề xuất: nên viết test case cho lỗi đăng nhập để dễ dàng kiểm tra.
+[09:53:20] Anh Minh: Ai sẽ viết? Lan hay Tuấn?
+[09:53:45] Chị Lan: Em có thể viết, nhưng cần hướng dẫn kỹ thuật từ Tuấn.
+[09:54:10] Anh Tuấn: Tôi sẽ cung cấp các tình huống cần test. Lan viết test case.
+[09:54:35] Anh Minh: Vậy thêm task “Viết test case đăng nhập” do Lan, không deadline cứng. Nhưng nên hoàn thành trước thứ Sáu.
+[09:55:00] Chị Lan: Vâng. Em sẽ cố gắng.
+[09:55:25] Anh Tuấn: Tôi thấy task nhiều, nhưng chưa có ai chịu trách nhiệm tổng thể.
+[09:55:50] Anh Minh: Tôi sẽ là người theo dõi chung. Mọi người báo cáo tiến độ qua email hàng ngày.
+[09:56:15] Chị Hà: Em đồng ý.
+[09:56:40] Chị Lan: Vâng.
+[09:57:05] Anh Tuấn: Okay. Vậy chúng ta chuyển sang topic khác hay kết thúc part này?
+[09:57:30] Anh Minh: Chưa kết thúc meeting, nhưng tôi nghĩ đã đủ cho phần này. Part sau chúng ta sẽ nói về tài liệu triển khai và các vấn đề còn tồn đọng.
+[09:57:30] Anh Minh: Chúng ta quay lại vấn đề tài liệu từ đầu meeting. Như tôi đã nói hồi nãy, tài liệu môi trường test là một trong hai ưu tiên chính.
+[09:57:55] Chị Hà: Vâng, em đã bắt đầu phác thảo, nhưng vẫn chưa có thông tin cụ thể từ môi trường của Tuấn.
+[09:58:20] Anh Tuấn: Tôi đã setup xong phần cứng, nhưng còn chờ cấu hình database từ infra. Dự kiến thứ Năm mới xong.
+[09:58:45] Anh Minh: Thế thì lâu quá. Hồi đầu meeting tôi yêu cầu tài liệu phải song song với setup. Nhưng có vẻ chậm.
+[09:59:10] Chị Lan: Em thấy task tài liệu môi trường test không có deadline, nên Hà có thể bị cuốn vào việc khác.
+[09:59:35] Anh Minh: Đúng. Vậy tôi quyết định: chuyển chủ sở hữu task đó. Hà, em có thể tập trung vào review và tài liệu tổng thể. Còn tài liệu môi trường test, Tuấn em sẽ làm.
+[10:00:00] Anh Tuấn: Nhưng em đã có task setup môi trường, lại thêm tài liệu thì quá tải.
+[10:00:25] Anh Minh: Được thôi, vậy handoff cho Lan. Lan, em có thể viết tài liệu môi trường test không?
+[10:00:50] Chị Lan: Em cũng đang làm dữ liệu mẫu và test case. Nếu thêm tài liệu, em sợ không kịp.
+[10:01:15] Anh Minh: Vậy không handoff. Nhưng tôi vẫn muốn thay đổi: deadline cho task “Chuẩn bị môi trường test” của Tuấn từ thứ Năm lên thứ Sáu.
+[10:01:40] Anh Tuấn: Tại sao lại lùi? Em tưởng cần gấp?
+[10:02:05] Anh Minh: Vì có lỗi đăng nhập cần ưu tiên. Môi trường test có thể trễ một ngày. Nhưng tài liệu môi trường test cần hoàn thành trước thứ Sáu.
+[10:02:30] Chị Hà: Vậy task tài liệu môi trường test có deadline mới là thứ Sáu, nhưng ai làm?
+[10:02:55] Anh Minh: Em vẫn làm, Hà. Nhưng em phải hoàn thành đúng hạn.
+[10:03:20] Chị Hà: Em sẽ cố gắng, nhưng cần thông tin từ Tuấn về cấu hình sớm hơn.
+[10:03:45] Anh Tuấn: Tôi sẽ gửi thông tin sơ bộ cho Hà vào ngày mai. Còn phiên bản cuối thì thứ Năm.
+[10:04:10] Anh Minh: Vậy deadline cho tài liệu môi trường test là thứ Sáu, sau khi Tuấn xong môi trường. Điều chỉnh này có hiệu lực ngay.
+[10:04:35] Chị Lan: Như vậy task của em về dữ liệu mẫu vẫn giữ nguyên deadline thứ Năm?
+[10:05:00] Anh Minh: Đúng. Không thay đổi.
+[10:05:25] Anh Tuấn: Tôi nhắc lại: deadline mới của tôi là thứ Sáu, không phải thứ Năm như ban đầu.
+[10:05:50] Anh Minh: Chính xác. Vậy cần thông báo lại cho mọi người. Tôi sẽ ghi chú trong email tổng kết part này.
+[10:06:15] Chị Hà: Nhân tiện, em muốn hỏi về tài liệu triển khai tổng thể. Hồi đầu meeting em đã nói sẽ làm trong hai tuần. Có cần thay đổi không?
+[10:06:40] Anh Minh: Không. Giữ nguyên. Đây là task riêng, không ảnh hưởng đến tài liệu môi trường test.
+[10:07:05] Anh Tuấn: Vậy tổng kết lại: Task A – môi trường test – Tuấn – deadline thứ Sáu. Task B – tài liệu môi trường test – Hà – deadline thứ Sáu. Task C – dữ liệu mẫu – Lan – deadline thứ Năm.
+[10:07:30] Anh Minh: Thêm task fix lỗi đăng nhập – Khoa – deadline thứ Sáu và test case – Lan – không deadline cứng.
+[10:07:55] Chị Lan: Em có ý: test case nên có deadline sớm hơn để kịp chạy sau fix.
+[10:08:20] Anh Minh: Vậy em tự đặt deadline cho test case là thứ Năm, cùng với dữ liệu mẫu.
+[10:08:45] Chị Lan: Được ạ.
+[10:09:10] Anh Tuấn: Tôi muốn kiểm tra lại: task review tài liệu môi trường test và dữ liệu mẫu vẫn do Hà và tôi?
+[10:09:35] Anh Minh: Đúng. Nhưng review có thể diễn ra sau deadline, miễn là không chậm trễ.
+[10:10:00] Chị Hà: Vậy em sẽ review tài liệu môi trường test ngay khi Tuấn gửi thông tin, trước deadline.
+[10:10:25] Anh Tuấn: Tôi cũng sẽ review dữ liệu mẫu của Lan sau khi nhận.
+[10:10:50] Anh Minh: Tốt. Về tài liệu môi trường test, tôi thấy có vẻ nhiều việc. Hà, em cần hỗ trợ gì thêm không?
+[10:11:15] Chị Hà: Em muốn có một mẫu tài liệu chuẩn để tránh sai format. Anh Tuấn có thể cung cấp mẫu từ dự án trước không?
+[10:11:40] Anh Tuấn: Tôi có, sẽ gửi email ngay chiều nay.
+[10:12:05] Anh Minh: Vậy mọi thứ đã rõ. Nhắc lại: handoff tài liệu không xảy ra, nhưng deadline của môi trường test thay đổi. Mọi người ghi nhớ.
+[10:12:30] Chị Lan: Em có một thắc mắc: khi Hà viết tài liệu, có cần tham khảo tài liệu triển khai tổng thể không? Hay viết độc lập?
+[10:12:55] Chị Hà: Em nghĩ nên viết độc lập, vì hai tài liệu khác nhau.
+[10:13:20] Anh Minh: Đúng. Đừng chồng chéo. Cứ viết riêng.
+[10:13:45] Anh Tuấn: Vậy tôi sẽ tập trung vào môi trường test. Mọi việc khác để sau.
+[10:14:10] Anh Minh: Được. Kết thúc part này. Part sau chúng ta sẽ bàn về tài liệu triển khai và tổng kết tiến độ.
+[10:14:10] Anh Minh: Chúng ta chuyển sang phần release và monitoring. Tuấn, em đã có kế hoạch release bản đầu tiên chưa?
+[10:14:35] Anh Tuấn: Dạ, em dự kiến cuối tuần sau, sau khi môi trường test ổn định và fix lỗi đăng nhập hoàn tất.
+[10:15:00] Chị Hà: Release có cần tài liệu hướng dẫn cho người dùng không? Em có thể chuẩn bị.
+[10:15:25] Anh Minh: Cần, nhưng em tập trung vào tài liệu môi trường test trước. Release có thể trễ nếu thiếu tài liệu.
+[10:15:50] Chị Lan: Vậy ai sẽ monitor sau release? Em nghĩ cần người theo dõi lỗi phát sinh.
+[10:16:15] Anh Minh: Tôi giao cho Tuấn và Khoa. Nhưng Khoa đang fix lỗi đăng nhập, nên Tuấn sẽ là chính.
+[10:16:40] Anh Tuấn: Vâng. Em sẽ lập lịch monitor hàng ngày trong tuần đầu.
+[10:17:05] Chị Hà: Nhân tiện, về task dữ liệu mẫu của Lan, em thấy không cần thiết vì đã có dữ liệu từ fix lỗi đăng nhập.
+[10:17:30] Anh Minh: Đúng. Lan, em hủy task đó đi. Em tập trung vào test case và dữ liệu cho release.
+[10:17:55] Chị Lan: Vâng. Em sẽ hủy task dữ liệu mẫu và chuyển hướng sang test case cho đăng nhập.
+[10:18:20] Anh Tuấn: Vậy task dữ liệu mẫu chính thức bị hủy. Còn deadline cho tài liệu môi trường test, em nghĩ nên đặt sớm hơn để kịp release.
+[10:18:45] Anh Minh: Ý em là gì?
+[10:19:10] Anh Tuấn: Hiện tại deadline của tài liệu là thứ Sáu. Nhưng release dự kiến cuối tuần sau, nếu tài liệu có sớm, em có thể chạy thử trước.
+[10:19:35] Anh Minh: Vậy đẩy deadline lên thứ Năm? Hà có làm được không?
+[10:20:00] Chị Hà: Em sẽ cố gắng, nhưng cần thông tin từ Tuấn về cấu hình trong hôm nay.
+[10:20:25] Anh Tuấn: Tôi sẽ gửi thông tin sơ bộ trong chiều nay. Đến thứ Tư có bản chi tiết.
+[10:20:50] Anh Minh: Vậy deadline mới cho tài liệu môi trường test là thứ Năm, trước release một tuần.
+[10:21:15] Chị Hà: Vâng. Em sẽ hoàn thành đúng thứ Năm.
+[10:21:40] Anh Tuấn: Tốt. Về monitoring, em sẽ setup dashboard để theo dõi lỗi sau release.
+[10:22:05] Chị Lan: Dashboard có cần tích hợp với hệ thống log hiện tại không?
+[10:22:30] Anh Tuấn: Có, em sẽ dùng ELK stack để thu thập log.
+[10:22:55] Anh Minh: Vậy ai sẽ bảo trì dashboard đó?
+[10:23:20] Anh Tuấn: Em và Khoa. Nhưng Khoa bận fix lỗi, nên em lo phần đầu.
+[10:23:45] Anh Minh: Được. Vậy task monitoring này không có deadline cụ thể, nhưng em cần hoàn thành trước release.
+[10:24:10] Anh Tuấn: Vâng.
+[10:24:35] Chị Hà: Em muốn hỏi: tài liệu môi trường test có cần phần hướng dẫn monitoring không?
+[10:25:00] Anh Minh: Không, tài liệu đó chỉ tập trung vào setup môi trường. Monitoring sẽ có tài liệu riêng sau.
+[10:25:25] Chị Lan: Vậy test case của em có cần bao gồm kịch bản monitor không?
+[10:25:50] Anh Minh: Không, test case chỉ cho đăng nhập. Em cứ tập trung.
+[10:26:15] Anh Tuấn: Tôi có một vấn đề: ai sẽ phê duyệt release?
+[10:26:40] Anh Minh: Tôi và Hà. Hà sẽ review tài liệu, tôi review code fix.
+[10:27:05] Chị Hà: Vậy em cần bản tài liệu trước thứ Năm để kịp review.
+[10:27:30] Anh Minh: Ừ. Vậy deadline cho review tài liệu cũng là thứ Năm, nhưng của Hà tự đặt.
+[10:27:55] Anh Tuấn: Vậy tổng kết: task dữ liệu mẫu bị hủy. Deadline tài liệu môi trường test dời lên thứ Năm. Các task khác giữ nguyên.
+[10:28:20] Chị Lan: Em xác nhận hủy task của mình.
+[10:28:45] Chị Hà: Em xác nhận deadline mới.
+[10:29:10] Anh Minh: Tốt. Chúng ta có vẻ ổn. Còn gì về release và monitoring nữa không?
+[10:29:35] Anh Tuấn: Em muốn hỏi: sau release, ai sẽ chịu trách nhiệm sửa lỗi nếu có?
+[10:30:00] Anh Minh: Tạm thời em và Khoa. Nếu lỗi nghiêm trọng, tôi sẽ điều phối thêm.
+[10:30:25] Chị Hà: Vậy em sẽ ghi chú vào tài liệu triển khai tổng thể phần xử lý sự cố.
+[10:30:50] Anh Minh: Được. Còn ai muốn hỏi gì thêm không?
+[10:31:15] Chị Lan: Em nghĩ nên có buổi họp ngắn trước release để rà soát lần cuối.
+[10:31:40] Anh Minh: Ý hay. Để sau part này tính. Bây giờ tạm dừng ở đây.
+[10:32:05] Anh Tuấn: Vâng. Em sẽ chuẩn bị dashboard.
+[10:32:30] Anh Minh: Kết thúc part này. Part sau chúng ta sẽ bàn về tài liệu tổng thể và các vấn đề còn lại.
+[10:32:30] Anh Minh: Bây giờ chúng ta bàn tiếp về tài liệu triển khai tổng thể. Hà, em có bản nháp chưa?
+[10:32:55] Chị Hà: Em có draft sơ bộ, nhưng còn thiếu phần môi trường test và monitoring. Em định hoàn thiện sau khi có thông tin từ Tuấn.
+[10:33:20] Anh Tuấn: Tôi sẽ gửi thông tin môi trường chi tiết vào chiều nay. Còn monitoring thì em cần thời gian để setup dashboard.
+[10:33:45] Chị Hà: Vậy tài liệu tổng thể có thể hoàn thành trong hai tuần tới, như em đã nói từ đầu meeting.
+[10:34:10] Anh Minh: Hai tuần hơi lâu, nhưng nếu phụ thuộc vào nhiều thứ thì chấp nhận được. Tuy nhiên, em cần cam kết deadline cụ thể.
+[10:34:35] Chị Hà: Em có thể đặt deadline là thứ Sáu tuần sau, ngày 6 tháng 3.
+[10:35:00] Anh Minh: Được. Vậy tài liệu triển khai tổng thể sẽ có deadline thứ Sáu tuần sau. Tuấn, em có feedback gì không?
+[10:35:25] Anh Tuấn: Em nghĩ nên sớm hơn, vì release cuối tuần sau đó. Nhưng nếu Hà làm được thì em không ý kiến.
+[10:35:50] Chị Lan: Em muốn hỏi: tài liệu này có cần bao gồm test case không?
+[10:36:15] Anh Minh: Không, test case em viết riêng. Tài liệu tổng thể tập trung vào hướng dẫn triển khai và vận hành.
+[10:36:40] Chị Hà: Vâng. Em sẽ không trùng lắp.
+[10:37:05] Anh Tuấn: Nhân tiện, về task tổng hợp task mà Hà được giao ở part trước, em thấy chưa thấy kết quả.
+[10:37:30] Chị Hà: Em chưa làm vì không có deadline và bận tài liệu. Em nghĩ không cần thiết nữa.
+[10:37:55] Anh Minh: Đồng ý. Task đó hủy luôn. Mỗi người tự theo dõi công việc của mình.
+[10:38:20] Anh Tuấn: Vậy confirm hủy task tổng hợp task. Nhưng em vẫn muốn có một email tổng kết từ part này.
+[10:38:45] Anh Minh: Tôi sẽ gửi email sau meeting. Bây giờ tổng kết lại trạng thái hiện tại.
+[10:39:10] Anh Tuấn: Em nhắc lại: Task môi trường test của em deadline thứ Sáu. Task tài liệu môi trường test của Hà deadline thứ Năm đã sửa. Task fix lỗi đăng nhập của Khoa deadline thứ Sáu.
+[10:39:35] Chị Lan: Task dữ liệu mẫu của em đã hủy, thay bằng test case deadline thứ Năm.
+[10:40:00] Anh Minh: Đúng. Thêm tài liệu triển khai tổng thể của Hà deadline thứ Sáu tuần sau. Task monitoring của Tuấn trước release.
+[10:40:25] Chị Hà: Em xác nhận. Còn task review của em và Tuấn chưa có deadline, nhưng em nghĩ sau khi tài liệu hoàn thành sẽ review.
+[10:40:50] Anh Tuấn: Review có thể làm song song, nhưng nếu không có deadline thì dễ bị quên.
+[10:41:15] Anh Minh: Vậy deadline review tài liệu môi trường test là thứ Năm, cùng lúc với deadline của tài liệu. Hà review sau khi Tuấn gửi thông tin.
+[10:41:40] Chị Hà: Em sẽ review ngay sau khi nhận thông tin, trước thứ Năm.
+[10:42:05] Anh Tuấn: Còn review test case của Lan, em nghĩ không cần deadline cứng, vì chỉ có ít test.
+[10:42:30] Anh Minh: Vậy để linh hoạt. Có ai thấy thiếu gì không?
+[10:42:55] Chị Lan: Em thấy task fix lỗi đăng nhập cần được ưu tiên cao, vì nếu không xong thì release khó.
+[10:43:20] Anh Minh: Khoa đã được giao. Lan em nhắc Khoa giúp.
+[10:43:45] Anh Tuấn: Về monitoring, em chưa có deadline cụ thể. Em nghĩ nên đặt trước release một tuần.
+[10:44:10] Anh Minh: Vậy deadline cho dashboard monitoring là thứ Sáu tuần sau, cùng với tài liệu tổng thể.
+[10:44:35] Anh Tuấn: Vâng. Em sẽ cố gắng.
+[10:45:00] Chị Hà: Tổng kết lại, em thấy vẫn còn một số task chưa có deadline rõ ràng, ví dụ review của Tuấn cho tài liệu môi trường test.
+[10:45:25] Anh Minh: Chúng ta vừa nói review sẽ làm sau khi có thông tin, không cần deadline riêng. Nếu thấy cần, em tự đặt.
+[10:45:50] Chị Hà: Vậy em để tự nhiên.
+[10:46:15] Anh Tuấn: Tôi có ý kiến: nên có buổi họp ngắn trước release để kiểm tra lần cuối, như Lan đề xuất từ part trước.
+[10:46:40] Anh Minh: Tốt. Để sau meeting này, tôi sẽ lên lịch họp vào thứ Tư tuần sau.
+[10:47:05] Chị Lan: Vậy em sẽ chuẩn bị test case cho lỗi đăng nhập trước đó.
+[10:47:30] Anh Minh: Cảm ơn mọi người. Hôm nay chúng ta đã bàn nhiều việc. Tóm lại, các task quan trọng: môi trường test, tài liệu môi trường test, fix lỗi đăng nhập, test case, tài liệu triển khai tổng thể, monitoring. Ai có thắc mắc cuối không?
+[10:48:00] Chị Hà: Không ạ.
+[10:48:20] Anh Tuấn: Không.
+[10:48:40] Chị Lan: Không.
+[10:49:00] Anh Minh: Vậy buổi họp kết thúc. Cảm ơn mọi người đã tham gia. Tôi sẽ gửi email tổng kết trước cuối ngày.

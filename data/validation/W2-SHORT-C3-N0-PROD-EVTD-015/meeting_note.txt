@@ -1,0 +1,9 @@
+chốt sơ bộ
+chủ đề: Theo dõi lỗi và tài liệu
+kw: tai lieu / test case / staging / spec / khi / fix / yeu
+- Tôi sẽ yêu cầu CS gửi spec
+* Tôi sẽ update lịch
+- QA cần viết test case cho bản vá sau khi fix
+1) Tôi sẽ ghi vào ticket là: "Hoàn thành tài liệu sau 2 ngày làm việc kể từ khi bản vá được deploy lên staging."
+- Tôi sẽ gửi email kết quả kiểm tra ngay sau khi xong
+* Chốt lại: 1) Lan sẽ fix lỗi, dl 3 ngày làm việc sau khi nhận spec từ CS. 2) Hoàng viết tài liệu, dl 2 ngày làm việc sau khi bản vá lên staging

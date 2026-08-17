@@ -1,0 +1,29 @@
+{
+  "meeting_title": "Rà soát lỗi đăng nhập",
+  "tasks": [
+    {
+      "task_name": "Cập nhật cấu hình xác thực trên gateway",
+      "assignee": "DevOps",
+      "start_date": "2026-01-22",
+      "due_date": "2026-01-22",
+      "due_date_text": "trước thứ Sáu tuần này",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Review PR session management",
+      "assignee": "Lan",
+      "start_date": "2026-01-22",
+      "due_date": "2026-01-22",
+      "due_date_text": "trước cuối ngày hôm nay",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Thêm log refresh token",
+      "assignee": "Huy",
+      "start_date": "2026-01-22",
+      "due_date": "2026-01-22",
+      "due_date_text": "trong ngày hôm nay",
+      "status": "Proposed"
+    }
+  ]
+}

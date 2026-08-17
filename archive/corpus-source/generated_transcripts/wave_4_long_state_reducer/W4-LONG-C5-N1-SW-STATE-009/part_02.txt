@@ -1,0 +1,112 @@
+MEETING_ID: W4-LONG-C5-N1-SW-STATE-009
+PART: P02/5
+
+T000064 [09:31:00] Minh: Tiếp tục meeting, bây giờ chúng ta chuyển sang một vấn đề khác mà Hà đã nhắc đến cuối part trước – lỗi đăng nhập và dữ liệu test. Hà, em báo cáo cụ thể đi.
+
+T000065 [09:31:35] Hà: Dạ, sáng nay em thử test module đăng nhập trên staging, phát hiện lỗi xác thực token trả về 401 dù credential đúng. Em đã log chi tiết, có vẻ liên quan đến việc xử lý session trên backend.
+
+T000066 [09:32:10] Tuấn: Cái này có thể do bản fix authentication hôm trước em push chưa đúng. Em kiểm tra lại code, thấy middleware cũ chưa xóa, dẫn đến conflict.
+
+T000067 [09:32:40] Lan: Vậy tài liệu hướng dẫn đăng nhập em viết có cần cập nhật enum lỗi không? Hay fix xong mới update?
+
+T000068 [09:33:05] Minh: Tốt nhất là sửa lỗi trước, rồi Lan mới cập nhật tài liệu. Nhưng cần data test đa dạng để verify. Hà, em đã thử các case như sai password, user bị khóa chưa?
+
+T000069 [09:33:40] Hà: Em mới thử case cơ bản. Data test hiện tại chỉ có 2 user mẫu, chưa đủ. Em nghĩ cần tạo thêm bộ dữ liệu test cho module này.
+
+T000070 [09:34:10] Tuấn: Em có thể viết script insert thêm data vào database test. Khoảng 50 user với các trạng thái khác nhau. Mất tầm 1-2 tiếng.
+
+T000071 [09:34:35] Hà: Nhanh vậy? Nhưng cần đảm bảo data không ảnh hưởng đến business logic. Em muốn review schema trước.
+
+T000072 [09:35:00] Minh: Vậy ta giao task "Tạo bộ dữ liệu test cho module đăng nhập" cho Tuấn, Hà review. Nhưng chưa vội đặt deadline, vì còn phải chờ fix lỗi. Tuấn, em ước lượng fix xong lỗi đăng nhập khi nào?
+
+T000073 [09:35:35] Tuấn: Lỗi này em có thể fix trong chiều nay, nhưng cần test regression sau đó. Em nghĩ khoảng thứ Hai tuần sau là có bản ổn.
+
+T000074 [09:36:05] Hà: Thứ Hai hơi muộn, nhưng nếu Tuấn fix hôm nay, em có thể test ngay tối nay hoặc sáng mai.
+
+T000075 [09:36:30] Minh: Để em chốt: Tuấn fix lỗi đăng nhập trước 17h hôm nay; Hà test lại tối nay. Nếu OK, chuyển sang tạo dữ liệu test. Nếu không, bàn tiếp sáng mai. Đồng ý?
+
+T000076 [09:37:05] Tuấn: Em cố gắng. Nhưng nếu có vấn đề về database, em cần quyền access từ DevOps. Hôm qua Phúc chưa trả lời email.
+
+T000077 [09:37:30] Hà: Em có thể tạm cấp quyền bằng cách thêm Tuấn vào group local admin trên staging? Hay cần chờ Phúc?
+
+T000078 [09:38:00] Minh: Tốt nhất chờ Phúc, tránh rủi ro bảo mật. Em sẽ email Phúc nhắc lại. Còn về data test, Lan có cần gì từ bộ dữ liệu này cho tài liệu không?
+
+T000079 [09:38:35] Lan: Dạ, em cần biết các trường hợp lỗi đăng nhập để viết mục troubleshooting. Hiện tại em đã có danh sách lỗi từ Hà, nhưng chưa có data mẫu. Nếu Tuấn tạo data, em có thể tham khảo.
+
+T000080 [09:39:05] Tuấn: Em sẽ tạo data dạng CSV, bao gồm các case: user active, locked, expired, wrong password. Lan có thể lấy làm tài liệu.
+
+T000081 [09:39:30] Hà: Nhưng mà em thấy task tạo data test này hơi giống với task "Hoàn thiện môi trường test" của chúng ta ở part trước – task đó đã yêu cầu dữ liệu mẫu. Liệu có duplicate không?
+
+T000082 [09:40:00] Minh: Có sự chồng chéo, nhưng task cũ là cho toàn bộ môi trường, còn task mới chỉ cho module đăng nhập. Nếu merge cũng được, nhưng để riêng cho rõ.
+
+T000083 [09:40:30] Tuấn: Em đề xuất gom vào task cũ, vì dữ liệu test đăng nhập cũng nằm trong dataset tổng thể. Tiết kiệm công sức.
+
+T000084 [09:40:55] Hà: Nhưng task cũ chưa có deadline cụ thể cho phần dữ liệu, chỉ có verify. Nếu gộp, em sợ loãng.
+
+T000085 [09:41:20] Minh: Vậy tạm thời giữ task mới riêng. Để phần này unresolved, chúng ta sẽ quyết định sau khi có tiến độ part P01. Chốt vậy.
+
+T000086 [09:41:50] Lan: Em muốn hỏi thêm: tài liệu triển khai em viết có phần môi trường test, có cần nhắc đến lỗi đăng nhập này không? Hay chỉ đề cập sau khi fix?
+
+T000087 [09:42:20] Minh: Nên thêm dưới dạng known issue, nhưng không làm chậm bản draft. Em cứ viết với trạng thái hiện tại, sau đó update.
+
+T000088 [09:42:45] Hà: Em có một suggestion: thay vì tạo data test mới, có thể sử dụng data từ production đã anonymized? Nhưng cần check compliance.
+
+T000089 [09:43:10] Tuấn: Ý hay, nhưng chưa có quy trình anonymize. Có thể mất thời gian hơn là tự tạo data.
+
+T000090 [09:43:40] Minh: Distractor đó – tạm bỏ qua. Cứ theo hướng Tuấn tạo data mới.
+
+T000091 [09:44:05] Tuấn: Vậy em sẽ bắt đầu viết script. Nhưng cần xác nhận các bảng cần insert. Hà, em có thể cho em list bảng ngay bây giờ không?
+
+T000092 [09:44:30] Hà: Được, em gửi qua chat. Gồm users, sessions, và roles. Có thêm bảng logs nếu cần.
+
+T000093 [09:44:50] Minh: Tốt. Vậy task mới này gọi là "Tạo dataset test đăng nhập", owner Tuấn, reviewer Hà. Chưa có deadline cụ thể, sẽ update sau khi fix lỗi.
+
+T000094 [09:45:20] Lan: Em thấy mỗi lần sửa lỗi lại sinh ra nhiều việc. Có khi nên viết quy trình chuẩn cho việc tạo data test không?
+
+T000095 [09:45:50] Minh: Đó là một idea, nhưng chưa phải bây giờ. Em ghi nhận để bàn sau.
+
+T000096 [09:46:15] Hà: Quay lại lỗi đăng nhập, em vừa test thêm một case: login với user đã bị khóa, server trả về 403 nhưng message không rõ ràng. Tuấn có thể cải thiện error message không?
+
+T000097 [09:46:45] Tuấn: Được, em sẽ update message chi tiết hơn. Cũng nằm trong fix chiều nay.
+
+T000098 [09:47:10] Minh: Vậy note thêm. Còn ai có vấn đề gì về module đăng nhập nữa không?
+
+T000099 [09:47:35] Hà: Em còn một băn khoăn: khi tạo data test, liệu có cần simulate hành vi đăng nhập thất bại nhiều lần không? Vì có tính năng lock account sau 5 lần sai.
+
+T000100 [09:48:05] Tuấn: Cần chứ. Em sẽ tạo data với các trạng thái khác nhau, bao gồm cả số lần fail.
+
+T000101 [09:48:30] Minh: Được. Chúng ta đã có khá nhiều việc cho hôm nay. Tôi thấy tiến độ tốt.
+
+T000102 [09:48:55] Lan: Em muốn confirm lại: tài liệu triển khai của em vẫn giữ mục tiêu review 07/03, đúng không ạ?
+
+T000103 [09:49:20] Minh: Đúng, chưa thay đổi. Nhưng nếu fix lỗi đăng nhập xong, em có thể cập nhật sớm hơn.
+
+T000104 [09:49:45] Hà: Em có cảm giác task "Hoàn thiện môi trường test" đang bị chậm vì phụ thuộc vào lỗi đăng nhập. Có nên shift priority không?
+
+T000105 [09:50:10] Tuấn: Không cần shift. Vì lỗi đăng nhập là một phần của môi trường test. Khi fix xong, môi trường test sẽ ổn hơn.
+
+T000106 [09:50:40] Minh: Chính xác. Vậy chúng ta vẫn giữ nguyên task cũ. Task mới chỉ là bổ trợ.
+
+T000107 [09:51:05] Lan: Về tài liệu, em sẽ viết xong bản draft phần staging trước. Production phần em để note tạm. Em gửi bản thảo vào cuối ngày mai, các anh chị review giúp.
+
+T000108 [09:51:35] Hà: Em sẽ review phần liên quan đến test case.
+
+T000109 [09:51:55] Tuấn: Em review phần kỹ thuật.
+
+T000110 [09:52:15] Minh: Vậy có người review rồi. Nhưng lưu ý: reviewer chưa được assign chính thức. Hà và Tuấn tạm thời là reviewer, nhưng vẫn cần xác nhận sau.
+
+T000111 [09:52:40] Hà: Hiểu. Em sẽ review không chính thức, nếu có vấn đề sẽ feedback.
+
+T000112 [09:53:05] Tuấn: Em cũng vậy.
+
+T000113 [09:53:30] Minh: Tốt. Vậy part hôm nay cũng khá nhiều nội dung. Chúng ta tạm dừng ở đây. Part tiếp theo sẽ bàn về quy trình CI/CD và vai trò của DevOps.
+
+T000114 [09:54:00] Hà: Dạ, em không có thêm ý kiến.
+
+T000115 [09:54:20] Lan: Em cũng ổn.
+
+T000116 [09:54:40] Tuấn: Em không có thêm.
+
+T000117 [09:55:00] Minh: Vậy kết thúc part 2. Hẹn gặp lại.
+
+--- END OF PART P02 ---

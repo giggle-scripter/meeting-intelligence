@@ -1,0 +1,11 @@
+minutes nháp
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / moi truong / trien khai / fix / doi / khach / hang
+- Vậy task fix môi trường test – Anh owner, dl 28/02
+* dời sang 26/02 thì em có thêm thời gian, nhưng vẫn kịp cho khách hàng
+- Bây giờ em muốn điểm qua các task một lần nữa để chắc chắn. (recap) Task1 – Anh fix môi trường test, dl 28/02
+1) Task2 – Minh fix lỗi đăng nhập, dl 25/02
+- Task3 – Anh viết tài liệu nội bộ, dl 26/02
+* Task4 – Minh viết tài liệu khách hàng, dl 26/02
+- Lưu ý task1 có dl thay đổi từ 25/02 thành 28/02, task3 dl từ 24/02 thành 26/02
+1) Về dl cho task này, mình cần hoàn thành trước thứ Tư 25/02 được không? ? chưa chốt

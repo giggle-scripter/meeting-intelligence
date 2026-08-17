@@ -1,0 +1,150 @@
+MEETING_ID: W5-XL-C5-N2-OPS-STRESS-004
+PART: P05/10
+
+T000286 [10:07:30] Minh: Chúng ta quay lại vấn đề còn dang dở ở phần đầu. Cụ thể là task migration script cho database, đã handoff từ Tuấn sang An. Tiến độ sao rồi?
+
+T000287 [10:07:45] An: Em đã nhận doc hướng dẫn từ Tuấn. Tuy nhiên, em thấy logic migration phức tạp hơn dự kiến. Cần thêm thời gian nghiên cứu.
+
+T000288 [10:08:00] Minh: Anh hiểu. Vậy scope của task có thay đổi? Hay chỉ cần thêm bước phân tích?
+
+T000289 [10:08:15] An: Có thể cần thêm bước validation schema trước khi migration. Em nghĩ nên update scope.
+
+T000290 [10:08:30] Tuấn: Em đã viết doc nhưng chưa đề cập validation. An có thể bổ sung.
+
+T000291 [10:08:45] Minh: Vậy đồng ý scope update: thêm bước validation. Ai làm? An hay Tuấn?
+
+T000292 [10:09:00] An: Em có thể làm, nhưng deadline 14/3 có thể bị ảnh hưởng.
+
+T000293 [10:09:15] Minh: Chưa vội. Hiện tại deadline cũ 16/3. Em cần thêm bao lâu cho validation?
+
+T000294 [10:09:30] An: Khoảng 2 ngày.
+
+T000295 [10:09:45] Minh: Vậy deadline mới là 18/3. Đồng ý?
+
+T000296 [10:10:00] An: OK.
+
+T000297 [10:10:15] Lan: Ghi nhận deadline correction: migration script từ 16/3 lên 18/3, scope thêm validation.
+
+T000298 [10:10:30] Hà: Task đó có ảnh hưởng đến test plan không? Em cần biết schema mới.
+
+T000299 [10:10:45] An: Sau khi validation xong, em sẽ gửi schema.
+
+T000300 [10:11:00] Minh: Tốt. Chuyển sang task config staging. Tuấn đã sửa chưa?
+
+T000301 [10:11:15] Tuấn: Dạ, em đã bổ sung biến environment. An đã test chưa?
+
+T000302 [10:11:30] An: Em chưa, hôm nay em mới nhận file cuối. Sáng mai em sẽ test.
+
+T000303 [10:11:45] Minh: Vậy deadline config vẫn 5/3? Có kịp không?
+
+T000304 [10:12:00] Tuấn: Chiều nay em gửi bản hoàn chỉnh. An test ngày mai.
+
+T000305 [10:12:15] An: OK, nếu không lỗi thì deadline 5/3 vẫn ổn.
+
+T000306 [10:12:30] Lan: Em thấy task này đang tiến triển tốt.
+
+T000307 [10:12:45] Hà: Em muốn hỏi, test end-to-end cho payment đã có kịch bản chưa?
+
+T000308 [10:13:00] Minh: Chưa. Ai có thể viết?
+
+T000309 [10:13:15] Tuấn: Em có thể phác thảo, nhưng cần Hà review.
+
+T000310 [10:13:30] Hà: Em đồng ý. Viết test case cho luồng thanh toán cơ bản.
+
+T000311 [10:13:45] Minh: Vậy tạo task viết E2E test scenario, assign Tuấn, deadline 7/3. Hà review sau.
+
+T000312 [10:14:00] Lan: Nhưng Tuấn đã có nhiều task. Liệu có quá tải?
+
+T000313 [10:14:15] Tuấn: Em có thể đảm nhận thêm task này, vì nó liên quan trực tiếp đến code của em.
+
+T000314 [10:14:30] Minh: OK, ghi nhận. Còn task cũ như log spec, Tuấn đã gửi bản draft tối qua?
+
+T000315 [10:14:45] Tuấn: Dạ, em đã gửi. An nhận được chưa?
+
+T000316 [10:15:00] An: Có, em đã xem qua. Cần bổ sung thêm section về retry policy.
+
+T000317 [10:15:15] Tuấn: Em sẽ cập nhật trong bản cuối, dự kiến 3/3.
+
+T000318 [10:15:30] Minh: Lưu ý, log spec vẫn deadline 3/3, không thay đổi.
+
+T000319 [10:15:45] Hà: Em nhắc lại task review code payment. Anh Minh đã review chưa?
+
+T000320 [10:16:00] Minh: Anh chưa, sáng nay bận. Em review bao giờ?
+
+T000321 [10:16:15] Hà: Em đợi anh xong trước.
+
+T000322 [10:16:30] Minh: Vậy deadline review dev vẫn 5/3. Anh sẽ cố gắng.
+
+T000323 [10:16:45] Tuấn: Em có thắc mắc, task ETL data migration cho CRM vẫn chưa có owner, nhưng em thấy Lan nhắc lại nhiều lần. Có cần tạo task mới?
+
+T000324 [10:17:00] Lan: Đây là repeated mention, nhưng không cần tạo duplicate. Chúng ta đã có task cũ với owner unresolved.
+
+T000325 [10:17:15] Minh: Đúng, không tạo thêm. Ghi chú là đã đề cập lại.
+
+T000326 [10:17:30] An: Em có ý kiến, nếu task migration script database xong, thì ETL có thể dùng chung một phần logic.
+
+T000327 [10:17:45] Minh: Có thể, nhưng để sau. Chúng ta còn handoff bước hai cho task nào không?
+
+T000328 [10:18:00] Lan: Task viết unit test cho payment service, Tuấn đã làm chưa?
+
+T000329 [10:18:15] Tuấn: Em đã viết thêm, coverage lên 80%. Nhưng cần Hà review.
+
+T000330 [10:18:30] Hà: Em có thể review, nhưng cần Tuấn gửi branch.
+
+T000331 [10:18:45] Tuấn: Em sẽ push trong hôm nay.
+
+T000332 [10:19:00] Minh: Vậy handoff review unit test từ Tuấn sang Hà. Hà review xong deadline 6/3.
+
+T000333 [10:19:15] Hà: OK.
+
+T000334 [10:19:30] An: Em có vấn đề, môi trường staging vừa có sự cố. Cần Tuấn fix config lại.
+
+T000335 [10:19:45] Tuấn: Cụ thể là gì? Em tưởng config đã ổn.
+
+T000336 [10:20:00] An: Có một biến connection string sai port. Em cần sửa.
+
+T000337 [10:20:15] Tuấn: À, lỗi đó. Em sẽ update ngay.
+
+T000338 [10:20:30] Minh: Vậy sửa nhanh, không ảnh hưởng deadline 5/3.
+
+T000339 [10:20:45] Lan: Anh Minh, chúng ta cũng cần cập nhật board. Em thấy nhiều ticket outdated.
+
+T000340 [10:21:00] Minh: Lan lo việc đó. Deadline update board là cuối ngày hôm nay.
+
+T000341 [10:21:15] Hà: Em có thắc mắc, task migration script có liên quan đến payment deploy? Nếu script chưa xong, deploy có block?
+
+T000342 [10:21:30] An: Có, vì cần schema mới. Nhưng deadline script 18/3, deploy 15/3? Mâu thuẫn.
+
+T000343 [10:21:45] Minh: Anh nhầm. Payment deploy dự kiến 15/3, nhưng migration script cần trước 14/3. Nhưng vừa dời lên 18/3. Cần điều chỉnh.
+
+T000344 [10:22:00] Lan: Vậy phải dời payment deploy hay thu xếp migration sớm hơn?
+
+T000345 [10:22:15] Tuấn: Em nghĩ có thể chạy migration sau deploy, nếu backward compatible.
+
+T000346 [10:22:30] An: Không được, vì schema thay đổi không tương thích.
+
+T000347 [10:22:45] Minh: Vậy chúng ta cần dời payment deploy lên 20/3. Đồng ý không?
+
+T000348 [10:23:00] Hà: Ảnh hưởng đến QA schedule. Em sẽ dời test plan.
+
+T000349 [10:23:15] An: Em đồng ý, có thêm thời gian fix infra.
+
+T000350 [10:23:30] Tuấn: Em không vấn đề.
+
+T000351 [10:23:45] Lan: Vậy deadline correction: payment deploy từ 15/3 lên 20/3, và migration script 18/3 vẫn phù hợp.
+
+T000352 [10:24:00] Minh: Chốt vậy. Có ai thấy vấn đề gì không?
+
+T000353 [10:24:15] Hà: Em muốn hỏi, task workshop deploy vẫn 5/3? Hay cần dời theo?
+
+T000354 [10:24:30] Minh: Workshop vẫn 5/3, vì là training, không phụ thuộc.
+
+T000355 [10:24:45] An: Em đã chuẩn bị slide xong.
+
+T000356 [10:25:00] Tuấn: Em cũng sẵn sàng.
+
+T000357 [10:25:15] Lan: Vậy P05 kết thúc với các correction và handoff. Còn unresolved từ P02 vẫn giữ nguyên.
+
+T000358 [10:25:30] Minh: Đúng. Tiếp tục part sau.
+
+--- END OF PART P05 ---

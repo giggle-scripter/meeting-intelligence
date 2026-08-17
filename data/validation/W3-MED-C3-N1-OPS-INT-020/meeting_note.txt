@@ -1,0 +1,11 @@
+minutes nháp
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: trien khai / release / monitoring / dashboard / rieng / giao / update
+- Cái đó cần test kỹ trước khi release
+* Còn vụ xung đột em sẽ handle riêng
+- Em sẽ bắt đầu fix từ chiều nay
+1) Tiếp theo, em muốn recap lại các task đã giao
+- Em thấy task "update monitoring dashboard" đã được nhắc, nhưng chưa giao
+* Mà em thấy có task "update version" và "update monitoring" nhưng khác nhau
+- về dl, lúc nãy anh đã thay thế dl của task dependency logging từ thứ Sáu sang thứ Ba, nhưng đó là task riêng chứ
+1) À, em muốn hỏi thêm về việc update monitoring dashboard ? chưa chốt

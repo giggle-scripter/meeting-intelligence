@@ -1,0 +1,63 @@
+MEETING_ID: W4-LONG-C5-N1-PROD-STATE-003
+PART: P02/5
+
+T000096 [09:21:01] Hùng: À, mà em có vấn đề muốn nói. Hôm qua em test thử login trên sandbox mới thì bị lỗi 500. Không vào được.
+T000097 [09:21:14] Anh Tuấn: Lỗi gì thế? Có log không?
+T000098 [09:21:22] Hùng: Có, em check thì thấy lỗi kết nối database. Snapshot cũ bị corrupt như em nói lúc nãy.
+T000099 [09:21:34] Lan: Thế thì em không thể test login flow được nếu DB chưa restore.
+T000100 [09:21:46] Minh: Hay là em dùng DB local của em để test tạm? Em có instance chạy SQLite.
+T000101 [09:21:58] Hùng: Không được, sandbox dùng PostgreSQL, khác loại. Phải restore snapshot mới.
+T000102 [09:22:10] Anh Tuấn: Hùng, em có thể restore bản snapshot trước khi bị corrupt không? Bao giờ xong?
+T000103 [09:22:22] Hùng: Em có bản backup từ thứ 5 tuần trước. Restore mất khoảng 30 phút. Chiều nay em làm.
+T000104 [09:22:34] Lan: Vậy chiều nay em mới có thể test à? Em định viết tài liệu test dựa trên dữ liệu thực tế.
+T000105 [09:22:48] Anh Tuấn: Trước mắt Lan cứ viết dựa trên mô tả, sau khi có dữ liệu update. Hùng, em assign task restore DB này cho em nhé, hoàn thành trước 17h.
+T000106 [09:23:00] Hùng: Ok, em sẽ làm ngay sau meeting.
+T000107 [09:23:10] Minh: Ngoài lỗi login, em thấy API get user list trả về sai. Hình như do dữ liệu test bị duplicate ID.
+T000108 [09:23:24] Lan: Có thể do migration lỗi. Em nghĩ cần tạo script để xóa duplicate.
+T000109 [09:23:36] Hùng: Đúng, em thấy trong bảng accounts có nhiều row trùng email. Lỗi từ ETL job cũ.
+T000110 [09:23:48] Anh Tuấn: Cần làm sạch dữ liệu. Ai có thể viết script clean? Lan có rảnh không?
+T000111 [09:24:00] Lan: Em có thể viết, nhưng mà không rõ logic gộp duplicate thế nào. Có cần giữ row mới nhất không?
+T000112 [09:24:12] Hùng: Theo business rule, giữ row có updated_at gần nhất. Em sẽ gửi query mẫu.
+T000113 [09:24:24] Anh Tuấn: Lan viết script clean data, Hùng review. Thêm task này, không deadline nhưng làm ngay để test.
+T000114 [09:24:36] Lan: Vậy em sẽ làm sau khi xong tài liệu test. Có thể tối nay hoặc ngày mai.
+T000115 [09:24:48] Hùng: Mà này, em đã gửi log lỗi login cho Minh chưa? Minh check xem có liên quan đến config của tài liệu của Minh không.
+T000116 [09:25:00] Minh: Chưa, em mới nghe lỗi. Hùng gửi em stack trace nhé. Em sẽ xem có cần update tài liệu triển khai không.
+T000117 [09:25:12] Anh Tuấn: Tốt, phối hợp vậy. Còn vấn đề dữ liệu test, tôi thấy cần có một bộ dữ liệu chuẩn cho tất cả. Không ai làm cái này à?
+T000118 [09:25:24] Hùng: Trước em có tạo một bộ dữ liệu mẫu, nhưng hiện tại nó lỗi thời. Cần tạo lại.
+T000119 [09:25:36] Anh Tuấn: Ai có thể làm? Lan đã có task viết tài liệu test, Minh viết tài liệu hệ thống. Hùng bận CI/CD.
+T000120 [09:25:48] Minh: Hay em thuê ngoài? Không có budget.
+T000121 [09:26:00] Lan: Em có thể làm thêm nếu cần, nhưng sợ quá tải. Hay thuê thực tập sinh?
+T000122 [09:26:12] Hùng: Thực tập sinh mới vào tuần sau. Có thể giao cho bạn ấy.
+T000123 [09:26:24] Anh Tuấn: Được, tôi sẽ assign task "Tạo bộ dữ liệu test chuẩn" cho thực tập sinh, khi nào có người sẽ nói sau. Nhưng trước mắt, ai đó cần tạo dữ liệu tạm cho test login.
+T000124 [09:26:36] Hùng: Em sẽ tạo một vài user giả trong DB sau khi restore. Việc này mất 10 phút.
+T000125 [09:26:48] Anh Tuấn: Vậy Hùng restore DB và tạo dữ liệu tạm. Lan, em không cần đợi dữ liệu chuẩn, cứ viết tài liệu dựa trên dự kiến.
+T000126 [09:27:00] Lan: Nhưng nếu dữ liệu khác thì tài liệu không khớp. Em sợ phải sửa nhiều.
+T000127 [09:27:12] Hùng: Dữ liệu tạm em tạo sẽ giống với dữ liệu chuẩn cuối cùng. Em sẽ dùng script tạo user mẫu có sẵn.
+T000128 [09:27:24] Minh: Mà này, về lỗi đăng nhập, em thấy error message từ web hiện ra generic. Có nên sửa luôn không?
+T000129 [09:27:36] Anh Tuấn: Đó là vấn đề UX. Hiện tại MVP không yêu cầu, nhưng có thể đưa vào backlog. Có ai muốn nhận không?
+T000130 [09:27:48] Minh: Em có thể viết ticket, nhưng không implement.
+T000131 [09:28:00] Anh Tuấn: Được, Minh viết ticket mô tả lỗi, assign cho BA để phân tích sau.
+T000132 [09:28:12] Hùng: Còn em, em muốn hỏi về script restore DB – em có nên viết doc cho nó không? Hay chỉ chạy tay?
+T000133 [09:28:24] Anh Tuấn: Nếu là ad-hoc thì không cần. Nhưng nếu lặp lại thì nên document. Tôi nghĩ cho đợt này chạy tay.
+T000134 [09:28:36] Lan: Vậy tài liệu test của em có cần mention restore DB step không?
+T000135 [09:28:48] Anh Tuấn: Nếu Hùng làm thì em không cần. Chỉ cần nói dữ liệu test được cung cấp bởi infra.
+T000136 [09:29:00] Hùng: Ok, em sẽ ghi chú lại cho Lan.
+T000137 [09:29:10] Minh: Mà nãy em nói về lỗi login, có thể là do config của application.properties. Em sợ tài liệu triển khai của em chưa cập nhật cấu hình DB.
+T000138 [09:29:22] Hùng: Config DB hiện tại đã có trong file mẫu, nhưng chưa được kiểm thử trên sandbox.
+T000139 [09:29:34] Anh Tuấn: Vậy Hùng và Minh cùng kiểm tra config sau khi restore DB. Minh update tài liệu nếu cần.
+T000140 [09:29:46] Hùng: Em sẽ chạy thử deploy script sau restore. Nếu lỗi thì fix.
+T000141 [09:29:58] Anh Tuấn: Như vậy ta có thêm task: kiểm tra config trên sandbox. Hùng và Minh cùng làm.
+T000142 [09:30:10] Lan: Em có thể giúp verify login sau khi DB được restore và config sửa.
+T000143 [09:30:22] Anh Tuấn: Lan verify nhé, nhưng trước mắt em tập trung tài liệu. Có thể nhờ Hùng verify.
+T000144 [09:30:34] Hùng: Thôi để em tự verify, Lan cứ viết tài liệu.
+T000145 [09:30:46] Minh: Về task tài liệu triển khai hệ thống của em, em thấy cần thêm phần debug common errors. Ví dụ lỗi kết nối DB.
+T000146 [09:30:58] Anh Tuấn: Có thể thêm appendix. Nhưng đừng làm chậm deadline. Em có thể viết sau khi nộp bản draft.
+T000147 [09:31:10] Hùng: Em đồng ý. Tập trung ra bản chính trước.
+T000148 [09:31:22] Lan: Em thấy có nhiều task rồi. Có cần tổng hợp lại không?
+T000149 [09:31:34] Anh Tuấn: Tạm thời chưa cần. Tôi sẽ note lại. Còn ai có gì thêm về lỗi đăng nhập hay dữ liệu không?
+T000150 [09:31:46] Minh: Em có thêm một vấn đề: sandbox đang dùng chứng chỉ SSL tự ký, trình duyệt báo lỗi. Có nên mua chứng chỉ thật không?
+T000151 [09:31:58] Anh Tuấn: Không, test environment chấp nhận self-signed. Ai thấy phiền thì thêm ngoại lệ.
+T000152 [09:32:10] Hùng: Đúng, em đã thêm trong team policy.
+T000153 [09:32:20] Lan: Vậy em có thể viết trong tài liệu test là bỏ qua lỗi SSL.
+T000154 [09:32:32] Anh Tuấn: Được. Thế nhé, mọi người tiếp tục công việc. P02 tạm dừng ở đây, phần còn lại họp sau.
+--- END OF PART P02 ---

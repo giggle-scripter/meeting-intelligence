@@ -1,0 +1,29 @@
+[09:00:00] Lan: Chào mọi người, hôm nay chúng ta họp nhanh về việc chuẩn bị môi trường kiểm thử cho sprint tới. Minh, Hoa, có ai có cập nhật gì không?
+[09:00:15] Minh: Em có chút vấn đề. Server test hiện tại đang đầy bộ nhớ, không đủ chỗ cho bản build mới.
+[09:00:30] Hoa: Thế à? Vậy em không thể chạy regression trên môi trường đó được. Có plan nào khắc phục chưa?
+[09:00:45] Lan: Minh, em nghĩ mình có thể dọn dẹp hoặc nâng cấp không?
+[09:01:00] Minh: Em kiểm tra rồi, chủ yếu do log và dump file nhiều quá. Em có thể xử lý và tạo thêm ổ đĩa ảo.
+[09:01:15] Lan: Nghe được đấy. Em cần bao lâu?
+[09:01:30] Minh: Nếu không gặp trở ngại gì thêm, em sẽ làm xong trước thứ Tư. Chắc chắn là trước thứ Tư.
+[09:01:45] Lan: Rất tốt. Minh chủ động nhé. Ngoài ra, Hoa cần thêm gì để chuẩn bị test data không?
+[09:02:00] Hoa: Em đang chờ Minh fix xong mới generate dữ liệu kịch bản. Có thể em sẽ dùng script cũ nhưng sửa lại chút.
+[09:02:20] Lan: Vậy em tự sắp xếp nhé. Còn về pipeline CI/CD, em thấy có vài job đang fail, ai rảnh xem qua? À không, mình để sau.
+[09:02:40] Hoa: Em cũng thấy vậy. Hay mình ghi nhận và xử lý trong sprint planning?
+[09:02:55] Lan: Ừ, để đó đã. Bây giờ tập trung vào môi trường. Minh, em cần hỗ trợ gì từ Hoa hay anh?
+[09:03:10] Minh: Có thể Hoa cho em xin danh sách các folder test data hiện tại để em biết chỗ nào cần giữ nguyên.
+[09:03:25] Hoa: Được, em gửi sau cuộc họp. Nhân tiện, server đang chậm quá, có khi em cần restart dịch vụ.
+[09:03:40] Minh: Restart hả? Em sợ mất kết nối cho mọi người. Hay để em làm vào cuối giờ chiều?
+[09:03:55] Lan: Cứ làm vào tối nay nếu cần. Ưu tiên xong trước thứ Tư là được.
+[09:04:15] Hoa: Vậy em sẽ gửi file đến email công ty, Minh check giúp.
+[09:04:30] Minh: Ok, em sẽ xem. Còn vụ chứng thực SSL trên môi trường staging, hình như cũng hết hạn.
+[09:04:45] Lan: Cái đó để anh báo với infra, không nằm trong phần việc này.
+[09:05:00] Hoa: Đúng rồi, mình chỉ lo môi trường test thôi. Khi nào server ổn, em chạy thử một ca test nhanh.
+[09:05:15] Minh: Em cũng sẽ viết lại script dọn dẹp tự động để tránh bị lại.
+[09:05:30] Lan: Ý hay, nhưng để làm sau khi hoàn tất việc chính nhé.
+[09:05:45] Hoa: Ngoài ra, em có thắc mắc về version của công cụ test. Dùng lại bản cũ hay nâng lên?
+[09:06:00] Lan: Cứ giữ bản cũ cho đỡ rủi ro, đã được approve từ đầu dự án.
+[09:06:20] Hoa: Rồi, vậy thống nhất. Hết ý kiến của em.
+[09:06:35] Minh: Em cũng chỉ có thế.
+[09:06:50] Lan: Tốt. Tổng kết lại: Minh xử lý server và dọn dẹp, deadline trước thứ Tư. Hoa chuẩn bị test data và gửi danh sách folder. Các việc khác tạm gác lại. Cảm ơn mọi người, kết thúc họp.
+[09:07:10] Hoa: Ok, em làm!
+[09:07:20] Minh: Rõ, em sẽ update sau.

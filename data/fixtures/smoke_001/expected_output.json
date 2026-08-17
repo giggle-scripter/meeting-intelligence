@@ -1,0 +1,21 @@
+{
+  "meeting_title": "Weekly Sync",
+  "tasks": [
+    {
+      "task_name": "Chuẩn bị hồ sơ dự án",
+      "assignee": "Phương",
+      "start_date": "2026-07-27",
+      "due_date": "2026-07-30",
+      "due_date_text": "trước thứ Sáu",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Update the access matrix",
+      "assignee": "Linh",
+      "start_date": "2026-07-27",
+      "due_date": "2026-08-04",
+      "due_date_text": "by next Tuesday",
+      "status": "Proposed"
+    }
+  ]
+}

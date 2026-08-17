@@ -1,0 +1,173 @@
+MEETING_ID: W5-XL-C5-N2-IT-STRESS-002
+PART: P01/10
+CASE_LABELS: extra_long_meeting,multi_step_handoff,multiple_deadline_corrections,long_distance_dependency,ambiguous_reference,heavy_recoverable_noise
+MEETING_DATE: 2026-02-26
+TITLE: Họp tổng hợp phát triển và vận hành sản phẩm
+
+T000001 [09:00:00] Minh: Chào mọi người, bắt đầu cuộc họp tổng hợp tuần này. Hôm nay có đủ các anh chị chưa ạ? Lan, Hùng, Tuấn, Trang, Đức đều có mặt chứ?
+
+T000002 [09:00:06] Lan: Em có mặt rồi anh Minh.
+
+T000003 [09:00:09] Hùng: Có em.
+
+T000004 [09:00:12] Tuấn: Có.
+
+T000005 [09:00:14] Trang: Em đây.
+
+T000006 [09:00:16] Đức: Tôi đây.
+
+T000007 [09:00:19] Minh: Tốt. Mục tiêu cuộc họp hôm nay là review tiến độ sprint 14, bàn tiếp về vấn đề performance module thanh toán, và thống nhất hướng xử lý một số lỗi vận hành. Chúng ta bắt đầu từ phần dev nhé.
+
+T000008 [09:00:30] Lan: Vâng. Sprint này bọn em đã hoàn thành 3 story chính: thêm tính năng lọc đơn hàng, sửa lỗi validate email, và nâng cấp cache cho danh sách sản phẩm. Phần hiệu năng module thanh toán bọn em mới bắt đầu phân tích, chưa có kết quả cụ thể.
+
+T000009 [09:00:48] Hùng: Bên QA em test thấy 3 story kia pass, nhưng có một số fail về timeout ở môi trường staging khi tải lớn. Em nghĩ liên quan đến phần cache mà Lan vừa nói.
+
+T000010 [09:01:00] Tuấn: Đúng, cache layer bên em cấu hình hơi lỏng, dễ dẫn đến miss và phải query database. Để em xem lại config sau.
+
+T000011 [09:01:10] Đức: Vấn đề performance thanh toán là ưu tiên số một vì khách hàng phản ánh chậm. Thứ Năm tuần trước có một vụ order treo 5 phút, lead biz rất gấp. Lan, em đã nắm được nguyên nhân sơ bộ chưa?
+
+T000012 [09:01:28] Lan: Dạ em đã dump log từ ngày 20 đến 25/02, thấy có pattern lạ: các request thanh toán vào giờ cao điểm queue rất dài, có thể do service payment gọi sang third-party quá chậm. Nhưng cần phân tích sâu hơn.
+
+T000013 [09:01:48] Minh: OK. Em sẽ giao cho Lan một task: điều tra và báo cáo chi tiết root cause của chậm thanh toán. Trong bao lâu thì em có thể có kết quả sơ bộ?
+
+T000014 [09:01:57] Lan: Dạ nếu có data đầy đủ, cuối tuần này em có thể báo cáo sơ bộ, tức ngày 01/03.
+
+T000015 [09:02:06] Minh: Tốt. Hạn chốt báo cáo sơ bộ là 28/02 thứ Bảy, vì đầu tuần sau tôi phải báo cáo lead product. Lan cố gắng nhé.
+
+T000016 [09:02:18] Lan: Vâng anh, em sẽ cố gắng đẩy trước thứ Bảy. Nhưng em cần server log full từ staging mới có thể chạy phân tích chính xác. Tuấn có thể export log tuần vừa rồi cho em không?
+
+T000017 [09:02:32] Tuấn: Được, em sẽ xuất log payment trong thời gian 20/02 – 26/02 và gửi link bucket cho Lan trước 10h sáng mai. Có cần thêm request trace không?
+
+T000018 [09:02:43] Lan: Thêm cái đó nữa thì tốt, em muốn clear hơn.
+
+T000019 [09:02:48] Tuấn: OK, em làm luôn.
+
+T000020 [09:02:51] Hùng: Em cũng muốn data log để xem các test case fail do timeout. Tuấn share cho em với.
+
+T000021 [09:02:58] Tuấn: Ừ, em share chung một link cho cả team. Anh Hùng lấy file log payment và general net.
+
+T000022 [09:03:05] Minh: Rõ. Bây giờ chuyển qua vấn đề lỗi vận hành. Trang, em update tình hình từ bên support đi.
+
+T000023 [09:03:14] Trang: Dạ. Phòng support ghi nhận trong tuần có hai lỗi nghiêm trọng. Một là hiển thị giá sai ở trang chi tiết sản phẩm, hai là user không đăng nhập được sau khi reset mật khẩu. Em đã gửi ticket cho team dev, chưa thấy phản hồi.
+
+T000024 [09:03:30] Lan: Lỗi giá sai bên em đã sửa ở bản hotfix đêm qua rồi, chưa kịp deploy lên production. Hùng có test lại chưa?
+
+T000025 [09:03:38] Hùng: Em test xong sáng nay, pass rồi. Có thể triển khai sớm.
+
+T000026 [09:03:44] Tuấn: Vậy deploy giờ nào? Em cần chuẩn bị pipeline.
+
+T000027 [09:03:49] Minh: Chiều nay 15h deploy lên staging, nếu ổn thì cuối ngày push production. Đức có ý kiến gì không?
+
+T000028 [09:04:00] Đức: Ổn. Nhưng nhớ rolling update, không được dừng service. Anh Tuấn chú ý health check.
+
+T000029 [09:04:07] Tuấn: Rõ.
+
+T000030 [09:04:10] Minh: Còn lỗi reset mật khẩu thì sao? Lan em đã xem chưa?
+
+T000031 [09:04:15] Lan: Em chưa, vụ đó bên mới để Trang assign cho ai? Em nghĩ không phải module của em.
+
+T000032 [09:04:22] Trang: À, em mới gán cho Đức vì liên quan đến logic security. Anh Đức hôm qua em nhắn anh xem rồi.
+
+T000033 [09:04:29] Đức: Cái đó đơn giản, do bên auth service quên config redirect url. Anh fix rồi, đang test. Mai deploy được.
+
+T000034 [09:04:36] Trang: Tốt quá, em thông báo lại support.
+
+T000035 [09:04:40] Minh: Vậy bỏ qua lỗi đó. Chúng ta chuyển qua topic thứ hai: Product Placement – bố trí sản phẩm lại cho trang chủ. Trang, em có cập nhật feedback từ marketing không?
+
+T000036 [09:04:53] Trang: Dạ. Họ muốn điều chỉnh vị trí banner quảng cáo và box sản phẩm khuyến mãi để tăng conversion. Em đã vẽ wireframe mới, gửi anh Minh hôm qua.
+
+T000037 [09:05:05] Minh: Ừm, tôi có xem rồi. Cần dev ước lượng effort. Lan, em có người rảnh không?
+
+T000038 [09:05:14] Lan: Sprint này team em đang full, chỉ có thể handle hotfix và performance thanh toán. Có thể đẩy sang sprint 15.
+
+T000039 [09:05:22] Đức: Tôi thấy cũng chưa gấp. Nhưng cần chốt design sớm để tránh chậm. Trang em gửi figma cho tôi và Lan để review.
+
+T000040 [09:05:33] Trang: Em sẽ gửi trong chiều nay.
+
+T000041 [09:05:36] Minh: OK. Giao task review design cho Đức và Lan, deadline cuối tuần 01/03. Tuần sau sprint planning sẽ có quyết định.
+
+T000042 [09:05:50] Hùng: Anh Minh, em có một băn khoăn. Task phân tích thanh toán của Lan với task review design có overlap về thời gian không? Lan chỉ có một người.
+
+T000043 [09:06:00] Lan: Em có thể review design cuối ngày, không ảnh hưởng. Nhưng anh Minh, deadline 28/02 cho báo cáo performance hơi ngắn, em sợ không kịp nếu log chưa có.
+
+T000044 [09:06:14] Minh: Đã nói Tuấn cung cấp log sáng mai, em sẽ có sớm. Nếu khó khăn, tôi cho phép kéo dài đến 01/03, nhưng phải báo tôi ngay.
+
+T000045 [09:06:24] Lan: Vâng, em cố gắng.
+
+T000046 [09:06:27] Đức: Lan, em cần gì hỗ trợ thêm, cứ nói.
+
+T000047 [09:06:31] Lan: Dạ, nếu có thể nhờ Đức review output phân tích giúp em, vì em chưa từng deep dive vào payment service nhiều.
+
+T000048 [09:06:39] Đức: OK, cuối tuần em gửi draft, tôi review cho.
+
+T000049 [09:06:43] Minh: Tốt. Bây giờ quay lại vấn đề cache và timeout. Tuấn, em đã nói config lỏng, có plan fix chưa?
+
+T000050 [09:06:53] Tuấn: Em đã lên phương án: tăng TTL cho cache product list lên 30 phút, và tối ưu query active. Nhưng cần test kỹ. Em muốn chiều nay deploy thử trên staging.
+
+T000051 [09:07:08] Minh: Lịch deploy staging đã có hotfix lúc 15h, em gộp luôn cache tuning vào bản đó.
+
+T000052 [09:07:14] Tuấn: Vậy em sẽ chuẩn bị code, tag cùng hotfix.
+
+T000053 [09:07:19] Hùng: Em lo nếu TTL tăng quá thì data lỗi thời khi update sản phẩm. Cần cơ chế invalidate.
+
+T000054 [09:07:27] Tuấn: Đúng, em sẽ thêm webhook để purge cache khi có upsert. Code đã có sẵn, chỉ chưa test.
+
+T000055 [09:07:34] Đức: Cái này cần phối hợp với Lan vì module product list của em viết. Lan, em kiểm tra API upsert có gọi cache purge không?
+
+T000056 [09:07:42] Lan: Em sẽ check. Trong sprint này em đã thêm hook rồi, nhưng chưa triển khai.
+
+T000057 [09:07:47] Minh: Vậy Lan và Tuấn phối hợp để hoàn thiện cache trước cuối ngày mai. Nhưng không được làm trễ báo cáo performance. Tuấn có thể hỗ trợ Lan phần code cache?
+
+T000058 [09:08:00] Tuấn: Em có thể pair session với Lan chiều nay khi deploy xong.
+
+T000059 [09:08:05] Lan: OK, chiều em rảnh sau 16h.
+
+T000060 [09:08:10] Minh: Được. Chúng ta còn 10 phút, ai có thắc mắc gì thêm không?
+
+T000061 [09:08:16] Trang: Anh Minh, vụ wireframe product placement, em cần feedback từ bên anh và Đức trước 29/02 để kịp vào sprint planning.
+
+T000062 [09:08:27] Minh: Tôi sẽ feedback trong tối nay. Đức thì anh có ý kiến gì ngay bây giờ không?
+
+T000063 [09:08:33] Đức: Xem sơ qua thấy phần banner quá to, khả năng mobile bị che. Cần shrink 20%. Trang để tôi ghi chú cụ thể.
+
+T000064 [09:08:43] Trang: Vâng em sẽ chỉnh lại rồi gửi v2.
+
+T000065 [09:08:47] Minh: Nhớ gửi lại cho Lan và tôi.
+
+T000066 [09:08:50] Lan: Dạ.
+
+T000067 [09:08:52] Hùng: Anh Minh, em có một đề nghị. Sprint này ngoài performance, có thể dành một story nhỏ để xử lý các cảnh báo monitoring không? Số lượng alert tăng 30% từ đầu tháng.
+
+T000068 [09:09:04] Minh: Ý hay. Nhưng phải cân đối. Đức, anh thấy sao?
+
+T000069 [09:09:09] Đức: Có thể lọc bỏ các cảnh báo nhiễu trước, chứ mở story thì sợ không kịp sprint. Tôi assign cho Hùng việc phân loại alert, cuối sprint tổng hợp báo cáo.
+
+T000070 [09:09:21] Hùng: OK, em sẽ làm. Cần data từ Tuấn.
+
+T000071 [09:09:24] Tuấn: Em sẽ share dashboard để anh export.
+
+T000072 [09:09:27] Minh: Ghi nhận. Task phụ, không xung đột. Cuối cùng, tôi muốn nhấn mạnh: vụ log thanh toán là key. Trong case nhỡ Tuấn không kịp, Lan phải tự chạy script lấy log.
+
+T000073 [09:09:43] Lan: Em hiểu rồi.
+
+T000074 [09:09:46] Minh: Tôi tổng kết các task chính:
+- Task 1: Lan – phân tích log thanh toán, báo cáo sơ bộ hạn 28/02 (sau đó gia hạn khả năng 01/03).
+- Task 2: Tuấn – export log và trace cho Lan và Hùng, hạn 10h sáng mai (27/02).
+- Task 3: Tuấn & Lan – phối hợp deploy hotfix giá + cache tuning, staging 15h hôm nay.
+- Task 4: Đức & Lan – review design product placement, deadline 01/03.
+- Task 5: Hùng – phân loại alert monitoring, không deadline gấp, cuối sprint.
+Nhưng lưu ý task 1 sẽ cần hand-off sang Đức nếu Lan cần review, nhưng chưa cần chốt. Mọi người có ý kiến gì không?
+
+T000075 [09:10:35] Lan: Không ạ.
+
+T000076 [09:10:37] Hùng: OK.
+
+T000077 [09:10:39] Tuấn: Rõ.
+
+T000078 [09:10:41] Đức: Tôi ổn.
+
+T000079 [09:10:43] Trang: Em cũng rõ.
+
+T000080 [09:10:45] Minh: Cám ơn mọi người. Phần sau chúng ta sẽ bàn về kế hoạch vận hành cho quý 2, nhưng tôi muốn dành thời gian họp riêng với Đức và Lan sau. Tạm thời kết thúc phiên này, hẹn mọi người 15h deploy.
+
+--- END OF PART P01 ---

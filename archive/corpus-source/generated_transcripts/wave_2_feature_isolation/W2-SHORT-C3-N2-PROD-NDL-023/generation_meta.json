@@ -1,0 +1,28 @@
+{
+  "case": {
+    "wave": 2,
+    "case_index": 23,
+    "meeting_id": "W2-SHORT-C3-N2-PROD-NDL-023",
+    "meeting_date": "2026-02-17",
+    "title": "Theo dõi lỗi và tài liệu",
+    "labels": "task_without_deadline,first_person_commitment",
+    "objective": "{\"name\": \"task without deadline\", \"code\": \"NDL\", \"labels\": \"task_without_deadline,first_person_commitment\", \"requirements\": \"Task và assignee rõ ràng nhưng không có bất kỳ deadline nào.\"}"
+  },
+  "model": "deepseek-v4-pro",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 706,
+    "turn_count": 25
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 552.8818047000095
+    }
+  ]
+}

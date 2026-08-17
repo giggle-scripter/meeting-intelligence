@@ -1,0 +1,9 @@
+chốt sơ bộ
+chủ đề: Theo dõi lỗi và tài liệu
+kw: tai lieu / production / api / token / loi / sua / sang
+- Tình hình rất khẩn, sáng nay bên hỗ trợ báo lỗi nghiêm trọng trên production, khách hàng không thanh toán được qua ví điện tử, giao dịch thất bại hàng loạt từ 8h sáng
+* Tôi sẽ chịu trách nhiệm sửa lỗi này
+- Tôi sẽ code xong phần sửa lỗi token trước 12h trưa mai
+1) Chúng ta vừa cập nhật giao diện thanh toán, nhưng tài liệu người dùng vẫn mô tả luồng cũ, ví điện tử mới không có hướng dẫn nào cả
+- Tôi sẽ liên hệ với hỗ trợ để lấy danh sách đó ngay trong sáng nay, sau đó chuyển cho Lan
+* Sau khi sửa lỗi token, tôi sẽ dành 1-2 tiếng để cập nhật API docs cho phần thanh toán ví, bao gồm thêm ví dụ mẫu

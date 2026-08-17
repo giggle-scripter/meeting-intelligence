@@ -1,0 +1,52 @@
+=== MEETING METADATA ===
+meeting_id: W2-SHORT-C3-N2-PROD-HOFF-011
+meeting_title: Theo dõi lỗi và tài liệu
+meeting_date: 2026-02-05
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+note nhanh
+chủ đề: Theo dõi lỗi và tài liệu
+kw: tai lieu / viet / tai / lieu / binh / chuyen / tiet
+- Chúng ta cần viết tài liệu chi tiết
+* Tôi đã giao task viết tài liệu cho Tuấn từ tuần trước, nhưng anh ấy bận việc khác
+- Tôi sẽ chuyển task viết tài liệu hướng dẫn cho Bình
+1) Vậy task viết tài liệu hiện tại do Bình chịu trách nhiệm, hạn 14/02, và Châu review trước 12/02
+- Bình, bạn nhớ cập nhật luôn ticket trên Jira, chuyển owner từ Tuấn sang bạn
+* Hạn cũ là 10/02, nhưng vì đã muộn, tôi nghĩ nên dời xuống 14/02 ? chưa chốt
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[00:00:05] An: Chào mọi người, hôm nay chúng ta họp để điểm lại tình hình lỗi PROD-113 và tài liệu liên quan.
+[00:00:12] Bình: Tôi đã xem qua lỗi này. Có vẻ cần thêm tài liệu hướng dẫn khắc phục.
+[00:00:18] Châu: Theo tôi, lỗi này khá nghiêm trọng vì ảnh hưởng đến dữ liệu đầu vào. Chúng ta cần viết tài liệu chi tiết.
+[00:00:25] An: Đồng ý. Tôi đã giao task viết tài liệu cho Tuấn từ tuần trước, nhưng anh ấy bận việc khác.
+[00:00:32] Bình: Vậy ai sẽ là người thực hiện? Tôi có thể nhận việc này nếu cần.
+[00:00:38] An: Tốt. Tôi sẽ chuyển task viết tài liệu hướng dẫn cho Bình. Bình, bạn có thể nhận không?
+[00:00:45] Bình: Được, tôi nhận. Hạn chót là khi nào?
+[00:00:50] An: Hạn cũ là 10/02, nhưng vì đã muộn, tôi nghĩ nên dời xuống 14/02. Bạn thấy ok không?
+[00:00:57] Bình: 14/02 là phù hợp. Tôi sẽ cố gắng hoàn thành trước đó.
+[00:01:03] Châu: Nhưng mà tài liệu cần được review bởi bộ phận QA trước khi release. Ai sẽ review?
+[00:01:10] An: Tôi sẽ assign Châu làm reviewer. Châu, bạn ok chứ?
+[00:01:15] Châu: Được, tôi sẽ review. Nhưng mà tôi cần tài liệu trước 12/02 để có thời gian.
+[00:01:22] Bình: Tôi sẽ cố gắng gửi bản nháp trước 12/02 để Châu review.
+[00:01:28] Dũng: Tôi thấy có vẻ ổn. Nhưng lưu ý là lỗi này có thể phát sinh thêm ở môi trường staging. Cần kiểm tra kỹ.
+[00:01:36] Bình: Tôi sẽ viết tài liệu bao gồm cả các bước test sau fix.
+[00:01:42] An: Tốt. Vậy task viết tài liệu hiện tại do Bình chịu trách nhiệm, hạn 14/02, và Châu review trước 12/02. Mọi người confirm lại nhé.
+[00:01:50] Bình: Confirm.
+[00:01:52] Châu: Confirm.
+[00:01:55] An: Tuấn đã có draft tài liệu nào chưa? Hay tôi phải viết từ đầu?
+[00:02:00] Bình: Tôi cần thêm thông tin về các bước reproduce từ Châu.
+[00:02:05] Châu: Tôi sẽ gửi các bước reproduce cho bạn sau meeting.
+[00:02:10] Bình: Cảm ơn.
+[00:02:15] Dũng: Nhân tiện, hãy đảm bảo tài liệu bao gồm cả môi trường production và staging.
+[00:02:20] An: Bình, bạn nhớ cập nhật luôn ticket trên Jira, chuyển owner từ Tuấn sang bạn.
+[00:02:26] Bình: Rõ, tôi sẽ kiểm tra sau meeting và cập nhật.
+[00:02:31] Châu: Thêm một việc: tài liệu cần lưu ở folder Confluence mới, không phải folder cũ của Tuấn.
+[00:02:37] An: Bình, bạn xử lý việc đó nhé.
+[00:02:42] Bình: OK.
+[00:02:46] Dũng: Tôi chỉ muốn nhấn mạnh là các bước fix hiện tại đã được test trên staging chưa? Nếu chưa thì tài liệu cần ghi rõ trạng thái.
+[00:02:52] Bình: Tôi sẽ kiểm tra với team test để có thông tin chính xác.
+[00:02:57] An: Vậy chúng ta thống nhất các đầu việc: Bình viết tài liệu, hạn 14/02; Châu review trước 12/02; Bình cập nhật Jira và folder. Có ai còn thắc mắc không?
+[00:03:04] Bình: Không.
+[00:03:06] Châu: Không.
+[00:03:08] Dũng: Ổn.
+[00:03:10] An: Cảm ơn mọi người. Kết thúc meeting.

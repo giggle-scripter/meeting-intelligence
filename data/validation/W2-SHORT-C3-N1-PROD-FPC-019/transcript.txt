@@ -1,0 +1,26 @@
+[09:00:05] Minh: Cảm ơn mọi người đã tham gia. Tình hình rất khẩn, sáng nay bên hỗ trợ báo lỗi nghiêm trọng trên production, khách hàng không thanh toán được qua ví điện tử, giao dịch thất bại hàng loạt từ 8h sáng.
+[09:00:13] Tuấn: Tôi đã kiểm tra log, lỗi có vẻ từ service xác thực token. Mỗi lần thanh toán token không refresh được, dẫn đến timeout, khách chỉ thấy báo lỗi chung.
+[09:00:21] Lan: Tôi vừa thử trên môi trường staging, lỗi cũng xuất hiện. Nghĩa là bản build mới nhất đã có bug từ trước khi deploy. Rất nghiêm trọng, không phải lỗi phát sinh đột xuất.
+[09:00:28] Minh: Tôi vừa trao đổi với giám đốc, ông ấy rất lo vì khách hàng lớn đang đe dọa ngừng hợp đồng nếu không khắc phục trong 24h tới. Áp lực cực kỳ cao.
+[09:00:35] Tuấn: Tôi sẽ chịu trách nhiệm sửa lỗi này. Tôi bắt tay ngay bây giờ và dự kiến xong trong chiều nay, chậm nhất là sáng mai.
+[09:00:42] Hùng: Tôi mới vào, nghe tình hình căng quá. Bên DevOps nói rằng bản vá khẩn cấp sẽ được đóng gói vào tối mai nếu có code sẵn, nhưng cần phải test kỹ trước đó.
+[09:00:49] Minh: Vậy deadline cứng: code phải sẵn sàng trước 5h chiều mai để kịp test và đóng gói.
+[09:00:55] Tuấn: Tôi hiểu. Tôi sẽ code xong phần sửa lỗi token trước 12h trưa mai. Sau đó tôi có thể tự test unit và integration cơ bản.
+[09:01:02] Lan: Tôi cũng đang rất lo về tài liệu hướng dẫn. Chúng ta vừa cập nhật giao diện thanh toán, nhưng tài liệu người dùng vẫn mô tả luồng cũ, ví điện tử mới không có hướng dẫn nào cả. Khách hàng đọc tài liệu sẽ không biết dùng.
+[09:01:09] Minh: Vấn đề này cũng nghiêm trọng không kém. Chị Lan có thể cập nhật tài liệu kịp không?
+[09:01:15] Lan: Tôi sẽ viết lại toàn bộ phần hướng dẫn thanh toán, bổ sung ví điện tử. Tôi cam kết hoàn thành trước cuối ngày mai để kịp review trước khi phát hành.
+[09:01:21] Hùng: Nhưng tài liệu cũng cần tích hợp với FAQ mới. Bộ phận hỗ trợ sẽ cung cấp danh sách câu hỏi thường gặp vào sáng mai.
+[09:01:28] Minh: Tôi sẽ liên hệ với hỗ trợ để lấy danh sách đó ngay trong sáng nay, sau đó chuyển cho Lan.
+[09:01:34] Lan: Có danh sách đó tôi sẽ làm nhanh hơn. Nhưng tôi e rằng phần mô tả kỹ thuật cho developer tích hợp cũng cần cập nhật. Tuấn, anh có thể hỗ trợ tôi phần API docs không?
+[09:01:41] Tuấn: Để tôi xem. Sau khi sửa lỗi token, tôi sẽ dành 1-2 tiếng để cập nhật API docs cho phần thanh toán ví, bao gồm thêm ví dụ mẫu.
+[09:01:48] Minh: Được, vậy thống nhất: Tuấn tập trung sửa lỗi token trước, sau đó hỗ trợ API docs; Lan cập nhật tài liệu người dùng và FAQ; tôi lo lấy FAQ từ hỗ trợ.
+[09:01:55] Hùng: Tôi sẽ theo dõi tiến độ và báo cáo lên giám đốc mỗi 4 tiếng. Áp lực cao, nhưng tôi tin mọi người sẽ làm được.
+[09:02:02] Tuấn: Tôi đã bắt đầu pull code và tạo branch mới. Sẽ update trên Jira ngay khi có kết quả.
+[09:02:08] Lan: Tôi cũng mở file tài liệu và bắt đầu viết. Nếu cần thêm thông tin từ team kỹ thuật, tôi sẽ ping.
+[09:02:14] Minh: Lưu ý, bản vá khẩn sẽ được triển khai lên production vào 2h sáng thứ hai, nên mọi thứ phải sẵn sàng trước 10h tối chủ nhật.
+[09:02:21] Lan: Vậy là chúng ta có rất ít thời gian. Tôi sẽ cố gắng hoàn thành tài liệu sớm nhất có thể.
+[09:02:27] Hùng: Cần đảm bảo không có lỗi mới phát sinh sau khi sửa. Tôi đề nghị Lan test hồi quy toàn bộ luồng thanh toán vào chiều mai.
+[09:02:33] Lan: Tôi sẽ làm, nhưng có thể cần thêm người hỗ trợ test nếu khối lượng nhiều. Tôi sẽ nhờ một bạn từ team QA khác.
+[09:02:39] Minh: OK, tôi chấp nhận phương án đó. Giờ mọi người bắt tay vào việc nhé. Tôi sẽ gửi biên bản cuộc họp sau 10 phút nữa.
+[09:02:45] Tuấn: Tôi out để tập trung code đây. Cảm ơn mọi người.
+[09:02:50] Lan: Tôi cũng bắt đầu ngay. Kết thúc họp thôi.

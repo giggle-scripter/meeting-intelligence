@@ -1,0 +1,44 @@
+MEETING_ID: W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009
+CASE_LABELS: first_person_commitment,weekday_deadline,negative_context
+MEETING_DATE: 2026-01-24
+TITLE: Chuẩn bị môi trường kiểm thử
+
+[09:00:00] Minh: Chào mọi người, hôm nay mình họp nhanh để rà soát tình hình môi trường kiểm thử cho sprint tới. Lan, bên em đã xem xét chưa?
+
+[09:00:15] Lan: Dạ em có kiểm tra hôm qua, nhưng tình hình không ổn lắm anh ạ. Môi trường staging đang dùng dữ liệu cũ từ sprint trước, với lại một số API của cổng thanh toán bị timeout liên tục.
+
+[09:00:32] Minh: Timeout à? Có phải do load không em? Hay do cấu hình?
+
+[09:00:40] Lan: Em nghi ngờ do cấu hình proxy, nhưng cần thêm thời gian xác minh. Dữ liệu test cũng chưa đủ case cho luồng mới, phải tạo mới gần hết.
+
+[09:00:53] Tuấn: Đợt này bên anh cũng đang gỡ rối mấy con bug trên môi trường dev, nhưng chưa đụng đến staging. Có cần anh hỗ trợ không?
+
+[09:01:02] Lan: Dạ có thể lát nữa em nhờ anh vài thứ, nhưng trước mắt phần dữ liệu và kiểm tra API em tự làm được.
+
+[09:01:15] Minh: Ok. Vậy dữ liệu là một chuyện, còn vụ API kia thì cần ai từ team dev xem chứ.
+
+[09:01:24] Lan: Dạ đúng. Nhưng em nghĩ mình cứ song song. Để em dành cuối tuần này setup lại dữ liệu và xác định nguyên nhân API. Thứ Ba tuần sau em gửi báo cáo tổng thể và dữ liệu test mới cho cả nhóm nhé. Em cam kết đúng hạn.
+
+[09:01:45] Minh: Thứ Ba tuần sau là ngày 27 hả? Tốt, vậy em cứ triển khai. Còn API, Tuấn với Lan ngồi trao đổi sau meeting xem nhé.
+
+[09:02:02] Tuấn: Ok anh. Nhưng em còn task quan trọng đang làm dở, có thể phải đến thứ Năm mới xong để qua support phần API cho Lan.
+
+[09:02:18] Minh: Thứ Năm tuần sau luôn hả? Ngày 29 đó.
+
+[09:02:23] Tuấn: Đúng, thứ Năm tuần sau em sẽ xong task của mình và kiểm tra lại toàn bộ cấu hình proxy cho Lan.
+
+[09:02:33] Minh: Chốt vậy đi. Lan làm dữ liệu, báo cáo thứ Ba. Tuấn hỗ trợ API, xong trước thứ Năm.
+
+[09:02:45] Lan: Anh yên tâm, em sẽ chạy hết case tích hợp sau khi Tuấn sửa xong.
+
+[09:02:53] Minh: Ừ, còn vụ quota tài nguyên có thiếu không? Hôm trước anh thấy cảnh báo.
+
+[09:03:02] Lan: Dạ chắc chỉ thiếu chút dung lượng ổ đĩa, để em tự mở rộng, không đáng kể ạ.
+
+[09:03:15] Minh: Rồi, vậy mọi người bắt tay vào việc nhé. Có gì báo sớm.
+
+[09:03:24] Tuấn: Ok anh.
+
+[09:03:28] Lan: Em cảm ơn anh.
+
+[09:03:32] Minh: Bye mọi người, kết thúc họp.

@@ -1,0 +1,110 @@
+MEETING_ID: W4-LONG-C4-N3-OPS-STATE-008
+PART: P05/5
+
+T000304 [10:15:45] An: Mọi người, đây là part cuối của buổi họp. Chúng ta có một số điểm cần giải quyết trước khi kết thúc. Trước tiên, Dũng, em báo cáo tiến độ script dữ liệu và test UAT.
+
+T000305 [10:16:05] Dũng: Dạ, em đã gửi script dữ liệu cho Bình lúc 13h45, và Bình review xong. Bây giờ Bình đã import dữ liệu vào UAT và deploy token fix của Châu.
+
+T000306 [10:16:25] Bình: Đúng vậy, em vừa deploy xong. Môi trường UAT đang chạy ổn với phần token. Châu có test thử chưa?
+
+T000307 [10:16:40] Châu: Em mới test vài case, token hoạt động tốt. Em đang chuẩn bị viết logic khóa sau 16h.
+
+T000308 [10:16:55] An: Tốt. Vậy task fix lỗi đăng nhập vẫn còn phần logic khóa, deadline 19h hôm nay. Em nhớ nhé.
+
+T000309 [10:17:10] Châu: Vâng.
+
+T000310 [10:17:20] An: Còn vụ release plan, Bình và Dũng đã làm gì chưa?
+
+T000311 [10:17:35] Bình: Em mới sketched draft, sẽ hoàn thành end of day thứ 5 tuần sau.
+
+T000312 [10:17:50] Dũng: Em đã góp ý metric cho monitoring. Em nghĩ cần thêm alert threshold.
+
+T000313 [10:18:05] An: Vậy Dũng ghi nhận. Còn monitoring setup deadline 28/02, em có khó khăn gì không?
+
+T000314 [10:18:20] Dũng: Em cần Bình gửi script template để bắt đầu. Bình, anh gửi sớm nhé.
+
+T000315 [10:18:35] Bình: Em sẽ gửi trước 17h hôm nay.
+
+T000316 [10:18:45] An: OK. Bây giờ quay lại tài liệu production. Dũng, em viết đến đâu rồi?
+
+T000317 [10:19:00] Dũng: Em đã có draft từ Em, đang chỉnh sửa. Deadline 01/03, em tin làm kịp.
+
+T000318 [10:19:15] Em: Em đã gửi mail với diagram monitoring. Dũng kiểm tra giúp.
+
+T000319 [10:19:30] Dũng: Em nhận rồi.
+
+T000320 [10:19:40] An: Còn vụ release note, Em có tiến triển gì không?
+
+T000321 [10:19:55] Em: Em đợi changes từ Châu. Châu, khi nào em gửi?
+
+T000322 [10:20:05] Châu: Sau 19h hôm nay, sau khi fix xong logic khóa.
+
+T000323 [10:20:20] An: Vậy release note sẽ hoàn thành sau 19h, không deadline cứng.
+
+T000324 [10:20:35] Bình: Anh An, em có một vấn đề chưa giải quyết: ai sẽ review monitoring setup? Hay Dũng tự review?
+
+T000325 [10:20:50] An: Chưa có ai review. Để đó, nếu cần thì sau này assign. Tạm thời Dũng tự chịu trách nhiệm.
+
+T000326 [10:21:05] Dũng: OK.
+
+T000327 [10:21:15] Châu: Em cũng muốn hỏi về vụ training chiều nay. Em sẽ off từ 14h đến 16h, có ảnh hưởng gì không?
+
+T000328 [10:21:30] An: Vẫn OK như đã bàn. Em làm logic khóa sau 16h.
+
+T000329 [10:21:45] Em: Anh, em thấy chúng ta có nhiều task, nhưng chưa có ai chịu trách nhiệm cho việc tổng hợp kết quả cuối cùng. Ví dụ như báo cáo sau release.
+
+T000330 [10:22:00] An: Việc đó sẽ do PM làm, không phải team mình. Không cần trong meeting này.
+
+T000331 [10:22:15] Bình: Em thấy việc hủy tài liệu staging hồi nãy là quyết định đúng, nhưng có thể gây nhầm lẫn. Em đề nghị recap lại trạng thái các task cuối cùng để tránh duplicate.
+
+T000332 [10:22:35] An: Ý kiến hay. Em điểm qua:
+
+T000333 [10:22:50] An: Task 1: Châu fix lỗi đăng nhập (token đã xong, logic khóa deadline 19h hôm nay). Task 2: Dũng script dữ liệu (đã giao 14h, Bình đã import). Task 3: Bình reset DB (đã xong). Task 4: Tài liệu staging (đã hủy). Task 5: Tài liệu production, Dũng owner, deadline 01/03. Task 6: Monitoring setup, Dũng, deadline 28/02. Task 7: Release plan, Bình và Dũng, end of day thứ 5 tuần sau. Task 8: Release note, Em, không deadline. Task 9: Review script dữ liệu (Bình đã làm). Còn task nào quên?
+
+T000334 [10:23:25] Dũng: Còn task thống nhất template hồi đầu, em và Em đã làm rồi. Không cần nhắc.
+
+T000335 [10:23:40] An: Đúng. Vậy đó là tất cả.
+
+T000336 [10:23:50] Bình: Em thấy vụ review monitoring vẫn treo. Đó là unresolved item.
+
+T000337 [10:24:00] An: Đúng, chưa có ai review monitoring setup. Để nguyên như vậy, không chốt.
+
+T000338 [10:24:15] Châu: Em muốn báo cáo thêm: em vừa test token trên UAT và thấy có một lỗi nhỏ về session timeout. Em đã fix trong code token, hy vọng ổn.
+
+T000339 [10:24:35] An: Tốt.
+
+T000340 [10:24:45] Em: Anh, em có thể hỗ trợ viết một phần monitoring dashboard nếu Dũng bận.
+
+T000341 [10:25:00] An: Không, giữ nguyên assignment.
+
+T000342 [10:25:10] Dũng: Em cảm ơn, nhưng em tự làm được.
+
+T000343 [10:25:20] Bình: Có ai thắc mắc gì về release không?
+
+T000344 [10:25:30] Châu: Em không.
+
+T000345 [10:25:35] Em: Em không.
+
+T000346 [10:25:40] Dũng: Em không.
+
+T000347 [10:25:45] An: Vậy chúng ta đã recap xong. Lưu ý còn unresolved là review monitoring. Các task khác đã phân công. Không có duplicate nào được tạo ra từ việc nhắc lại.
+
+T000348 [10:26:05] Bình: Anh An, em có cần báo cáo kết quả buổi họp lên cho quản lý không?
+
+T000349 [10:26:20] An: Em sẽ tự làm. Không cần mọi người.
+
+T000350 [10:26:30] Châu: Vậy em chuẩn bị đi training đây.
+
+T000351 [10:26:40] An: OK. Nhớ cập nhật sau 16h.
+
+T000352 [10:26:50] Dũng: Em sẽ tiếp tục viết tài liệu production.
+
+T000353 [10:27:00] Em: Em đợi changes.
+
+T000354 [10:27:10] Bình: Em sẽ gửi script monitoring cho Dũng.
+
+T000355 [10:27:20] An: Cảm ơn mọi người đã tham gia đầy đủ. Buổi họp kết thúc tại đây. Hẹn gặp lại trong các phiên sau. Chúc mọi người làm việc hiệu quả.
+
+T000356 [10:27:40] Tất cả: Cảm ơn anh.
+
+--- END OF PART P05 ---

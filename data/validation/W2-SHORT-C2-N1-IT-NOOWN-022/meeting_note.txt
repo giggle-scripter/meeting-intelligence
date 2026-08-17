@@ -1,0 +1,9 @@
+ghi vội
+chủ đề: Trao đổi kế hoạch tích hợp
+kw: du lieu / huong / lieu / migrate / connector / them / quan
+- vậy Hương ghi vào action item giúp anh: “Xây dựng connector đồng bộ dữ liệu cũ - mới” – hiện chưa có owner
+* Sau đó anh sẽ trao đổi thêm với quản lý cấp trên để phân bổ nguồn lực
+- Em sẽ hoàn thành trước thứ Sáu tuần này và gửi cho Hương review
+1) chốt lại, việc migrate dữ liệu mẫu cũng chưa có người nhận
+- Hương note thêm task “Migrate dữ liệu mẫu từ DB cũ sang DB mới – chưa assignee”
+* Dạ, vậy là hiện tại chúng ta có hai task quan trọng nhưng chưa có owner: connector + migrate dữ liệu

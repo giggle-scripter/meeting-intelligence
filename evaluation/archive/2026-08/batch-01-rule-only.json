@@ -1,0 +1,1549 @@
+{
+  "mode": "local",
+  "endpoint": "",
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 0,
+    "unreviewed_ground_truth_count": 25,
+    "unreviewed_case_ids": [
+      "W1-SHORT-C1-N0-IT-DASG-ABS-002",
+      "W1-SHORT-C1-N0-IT-DASG-ABS-018",
+      "W1-SHORT-C1-N0-IT-FPC-DM-014",
+      "W1-SHORT-C1-N0-OPS-FPC-NDL-008",
+      "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012",
+      "W1-SHORT-C2-N1-PROD-NEG-QUNC-015",
+      "W1-SHORT-C2-N1-PROD-QACC-RDAY-011",
+      "W1-SHORT-C2-N1-PROD-QACC-RDAY-019",
+      "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013",
+      "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009",
+      "W2-SHORT-C2-N0-IT-BRST-006",
+      "W2-SHORT-C2-N1-IT-REJT-010",
+      "W2-SHORT-C2-N1-OPS-NOOWN-004",
+      "W2-SHORT-C2-N1-OPS-SEPD-016",
+      "W2-SHORT-C2-N2-IT-PAST-026",
+      "W2-SHORT-C2-N2-IT-WORK-014",
+      "W2-SHORT-C3-N0-PROD-CANC-027",
+      "W2-SHORT-C3-N0-PROD-EVTD-015",
+      "W2-SHORT-C3-N1-SW-RWKD-013",
+      "W2-SHORT-C3-N1-SW-SUGG-025",
+      "W2-SHORT-C3-N2-PROD-HOFF-011",
+      "W2-SHORT-C3-N2-SW-RECF-017",
+      "W3-MED-C3-N1-IT-INT-018",
+      "W4-LONG-C4-N3-IT-STATE-002",
+      "W5-XL-C5-N2-OPS-STRESS-004"
+    ],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 25,
+    "passed_case_count": 5,
+    "failed_case_count": 20,
+    "case_pass_rate": 0.2,
+    "task_precision": 0.18032786885245902,
+    "task_recall": 0.22448979591836735,
+    "field_accuracy": 0.9696969696969697
+  },
+  "reviewed_metrics": null,
+  "exploratory_metrics": {
+    "case_count": 25,
+    "passed_case_count": 5,
+    "failed_case_count": 20,
+    "case_pass_rate": 0.2,
+    "task_precision": 0.18032786885245902,
+    "task_recall": 0.22448979591836735,
+    "field_accuracy": 0.9696969696969697
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 114,
+    "rule_event_count": 135,
+    "ai_event_count": 0,
+    "ai_window_count": 85,
+    "ai_context_clause_count": 1839,
+    "unresolved_window_count": 85,
+    "weighted_ai_call_rate": 0.7456140350877193,
+    "ai_clause_coverage": 0.6363321799307958
+  },
+  "cases": [
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-002",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 1,
+      "matched_task_count": 1,
+      "missing_tasks": [
+        {
+          "task_name": "Hoàn thành tài liệu hướng dẫn sử dụng",
+          "assignee": "Lan",
+          "start_date": "2026-01-17",
+          "due_date": "2026-01-24",
+          "due_date_text": "trước ngày 25 tháng 1",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 6,
+      "correct_field_count": 6
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-018",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 3,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Hoàn thành bản thảo tài liệu CRM",
+          "assignee": "Minh",
+          "start_date": "2026-02-02",
+          "due_date": "2026-02-14",
+          "due_date_text": "trước ngày 15 tháng 2 năm 2026",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review bản thảo tài liệu CRM",
+          "assignee": "Hoa",
+          "start_date": "2026-02-02",
+          "due_date": "2026-02-09",
+          "due_date_text": "trước ngày 10/02",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Hoàn thành bản thảo đầy đủ",
+          "assignee": "Hoa",
+          "start_date": "2026-02-02",
+          "due_date": "2026-02-14",
+          "due_date_text": "trước ngày 15 tháng 2 năm 2026",
+          "evidence": "Lan: Em hoàn thành bản thảo đầy đủ trước ngày 15 tháng 2 năm 2026 nhé?",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi góp ý chi tiết cho Minh trong Vậy",
+          "assignee": "Hoa",
+          "start_date": "2026-02-02",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hoa: Vậy em sẽ gửi góp ý chi tiết cho Minh trong ngày mai để kịp chỉnh sửa.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thành bản thảo",
+          "assignee": "Minh",
+          "start_date": "2026-02-02",
+          "due_date": "2026-02-14",
+          "due_date_text": "trước 15/02/2026",
+          "evidence": "Minh: Em xác nhận sẽ hoàn thành bản thảo trước 15/02/2026.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-FPC-DM-014",
+      "passed": false,
+      "expected_task_count": 4,
+      "actual_task_count": 3,
+      "matched_task_count": 1,
+      "missing_tasks": [
+        {
+          "task_name": "Gửi tài liệu kỹ thuật",
+          "assignee": "Lan",
+          "start_date": "2026-01-29",
+          "due_date": "2026-03-15",
+          "due_date_text": "vào 15/3",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi hình ảnh minh họa",
+          "assignee": "Lan",
+          "start_date": "2026-01-29",
+          "due_date": "2026-01-30",
+          "due_date_text": "vào ngày mai",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thành hướng dẫn sử dụng",
+          "assignee": "Tuấn",
+          "start_date": "2026-01-29",
+          "due_date": "2026-03-20",
+          "due_date_text": "vào 20/3",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Hoàn thành tài liệu kỹ thuật và",
+          "assignee": "Lan",
+          "start_date": "2026-01-29",
+          "due_date": "2026-03-15",
+          "due_date_text": "vào 15/3",
+          "evidence": "Minh: Vậy tổng kết: chị Lan hoàn thành tài liệu kỹ thuật và gửi vào 15/3, hỗ trợ hình ảnh cho anh Tuấn vào ngày mai.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thành final",
+          "assignee": "Tuấn",
+          "start_date": "2026-01-29",
+          "due_date": "2026-03-20",
+          "due_date_text": "vào 20/3",
+          "evidence": "Minh: Anh Tuấn gửi bản nháp hướng dẫn sử dụng vào 15/3 và hoàn thành final vào 20/3.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 6,
+      "correct_field_count": 6
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-008",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 1,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Chuẩn bị nội dung demo",
+          "assignee": "Lan",
+          "start_date": "2026-01-23",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chuẩn bị môi trường test",
+          "assignee": "Tuấn",
+          "start_date": "2026-01-23",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Hoàn thiện trong vài ngày tới, cụ thể thì để em xem khối lượng công việc rồi báo lại anh sau",
+          "assignee": "Lan",
+          "start_date": "2026-01-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ cố gắng hoàn thiện trong vài ngày tới, cụ thể thì để em xem khối lượng công việc rồi báo lại anh sau.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 2,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Hoàn thành slide trình bày",
+          "assignee": "Lan",
+          "start_date": "2026-01-27",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi mẫu infographic",
+          "assignee": "Tùng",
+          "start_date": "2026-01-27",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Gửi mấy mẫu infographic dùng được cho phần biểu đồ",
+          "assignee": "Tùng",
+          "start_date": "2026-01-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tùng: Ok, tôi sẽ gửi mấy mẫu infographic dùng được cho phần biểu đồ.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm slide nhanh nhanh giúp cả team",
+          "assignee": "Lan",
+          "start_date": "2026-01-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Lan làm slide nhanh nhanh giúp cả team nhé.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-PROD-NEG-QUNC-015",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 3,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Phân tích lỗi đăng nhập Google",
+          "assignee": "Anh",
+          "start_date": "2026-01-30",
+          "due_date": "2026-01-31",
+          "due_date_text": "cuối ngày mai",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cập nhật tài liệu hướng dẫn đăng nhập",
+          "assignee": "Lan",
+          "start_date": "2026-01-30",
+          "due_date": "2026-01-30",
+          "due_date_text": "thứ Sáu tuần này",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Gửi request",
+          "assignee": "Anh",
+          "start_date": "2026-01-30",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Anh: Tôi sẽ gửi request.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Phân tích nguyên nhân lỗi",
+          "assignee": "Anh",
+          "start_date": "2026-01-30",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Vậy giao cho Anh task phân tích nguyên nhân lỗi, deadline cuối ngày mai.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Soạn sẵn test case cho việc sửa sau này Vậy",
+          "assignee": "Lan",
+          "start_date": "2026-01-30",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Vậy em sẽ soạn sẵn test case cho việc sửa sau này.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-011",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 2,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Fix lỗi đăng nhập",
+          "assignee": "Minh",
+          "start_date": "2026-01-26",
+          "due_date": "2026-01-27",
+          "due_date_text": "trong ngày mai",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Test bản fix đăng nhập",
+          "assignee": "An",
+          "start_date": "2026-01-26",
+          "due_date": "",
+          "due_date_text": "ngay khi có bản build",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Kiểm tra log production xem có khác biệt gì không",
+          "assignee": "Minh",
+          "start_date": "2026-01-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: OK, tôi sẽ kiểm tra log production xem có khác biệt gì không.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chuẩn bị test case cho bản fix đó luôn",
+          "assignee": "An",
+          "start_date": "2026-01-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: An chuẩn bị test case cho bản fix đó luôn nhé.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-019",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 2,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Fix lỗi đăng nhập sai khi đúng mật khẩu",
+          "assignee": "Minh",
+          "start_date": "2026-02-03",
+          "due_date": "2026-02-04",
+          "due_date_text": "ngày mai",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi tài liệu tái hiện lỗi",
+          "assignee": "Hoa",
+          "start_date": "2026-02-03",
+          "due_date": "2026-02-03",
+          "due_date_text": "trong 30 phút nữa",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Chuẩn bị test case và sẵn sàng test bản fix",
+          "assignee": "Hoa",
+          "start_date": "2026-02-03",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hoa: Mình sẽ chuẩn bị test case và sẵn sàng test bản fix.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi tài liệu tái hiện trong 30 phút nữa",
+          "assignee": "Hoa",
+          "start_date": "2026-02-03",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hoa: Mình sẽ gửi tài liệu tái hiện trong 30 phút nữa.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013",
+      "passed": false,
+      "expected_task_count": 1,
+      "actual_task_count": 2,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Cài đặt môi trường test",
+          "assignee": "Minh",
+          "start_date": "2026-01-28",
+          "due_date": "2026-02-04",
+          "due_date_text": "trước thứ Tư tuần sau",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Cài đặt môi trường test trên server 192.168.1.50",
+          "assignee": "Minh",
+          "start_date": "2026-01-28",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Minh, em sẽ chịu trách nhiệm chính việc cài đặt môi trường test trên server 192.168.1.50.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cài đặt hệ điều hành, cơ sở dữ liệu và application server",
+          "assignee": "Hùng",
+          "start_date": "2026-01-28",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em cần cài đặt hệ điều hành, cơ sở dữ liệu và application server.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009",
+      "passed": false,
+      "expected_task_count": 3,
+      "actual_task_count": 0,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Setup lại dữ liệu và xác định nguyên nhân API",
+          "assignee": "Lan",
+          "start_date": "2026-01-24",
+          "due_date": "2026-01-27",
+          "due_date_text": "Thứ Ba tuần sau",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi báo cáo tổng thể và dữ liệu test mới",
+          "assignee": "Lan",
+          "start_date": "2026-01-24",
+          "due_date": "2026-01-27",
+          "due_date_text": "Thứ Ba tuần sau",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Kiểm tra cấu hình proxy",
+          "assignee": "Tuấn",
+          "start_date": "2026-01-24",
+          "due_date": "2026-01-29",
+          "due_date_text": "trước thứ Năm tuần sau",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W2-SHORT-C2-N0-IT-BRST-006",
+      "passed": true,
+      "expected_task_count": 0,
+      "actual_task_count": 0,
+      "matched_task_count": 0,
+      "missing_tasks": [],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W2-SHORT-C2-N1-IT-REJT-010",
+      "passed": true,
+      "expected_task_count": 0,
+      "actual_task_count": 0,
+      "matched_task_count": 0,
+      "missing_tasks": [],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W2-SHORT-C2-N1-OPS-NOOWN-004",
+      "passed": false,
+      "expected_task_count": 3,
+      "actual_task_count": 3,
+      "matched_task_count": 1,
+      "missing_tasks": [
+        {
+          "task_name": "Kiểm tra tính năng thanh toán trên staging",
+          "assignee": "",
+          "start_date": "2026-01-29",
+          "due_date": "",
+          "due_date_text": "trước release",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Merge code",
+          "assignee": "Minh",
+          "start_date": "2026-01-29",
+          "due_date": "2026-01-30",
+          "due_date_text": "trước thứ Sáu 5 giờ",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Soạn bản tóm tắt các thay đổi",
+          "assignee": "Tuấn",
+          "start_date": "2026-01-29",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Vâng, em sẽ soạn bản tóm tắt các thay đổi.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi build khi xong",
+          "assignee": "Minh",
+          "start_date": "2026-01-29",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Ok, tôi sẽ gửi build khi xong.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 6,
+      "correct_field_count": 6
+    },
+    {
+      "case_id": "W2-SHORT-C2-N1-OPS-SEPD-016",
+      "passed": true,
+      "expected_task_count": 3,
+      "actual_task_count": 3,
+      "matched_task_count": 3,
+      "missing_tasks": [],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 18,
+      "correct_field_count": 18
+    },
+    {
+      "case_id": "W2-SHORT-C2-N2-IT-PAST-026",
+      "passed": true,
+      "expected_task_count": 0,
+      "actual_task_count": 0,
+      "matched_task_count": 0,
+      "missing_tasks": [],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W2-SHORT-C2-N2-IT-WORK-014",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 3,
+      "matched_task_count": 1,
+      "missing_tasks": [
+        {
+          "task_name": "Thiết kế API",
+          "assignee": "Bình",
+          "start_date": "2026-02-08",
+          "due_date": "2026-03-20",
+          "due_date_text": "25 ngày làm việc kể từ 17/2",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Làm việc",
+          "assignee": "Bình",
+          "start_date": "2026-02-08",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "An: Bình, cậu ước lượng phần backend mất bao nhiêu ngày làm việc?",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi email xác nhận với timeline chi tiết",
+          "assignee": "An",
+          "start_date": "2026-02-08",
+          "due_date": "2026-03-20",
+          "due_date_text": "ngày 20/3",
+          "evidence": "An: Tôi sẽ gửi email xác nhận với timeline chi tiết.\nAn: Vậy chốt: deadline là 25 ngày làm việc kể từ 17/2, tức là ngày 20/3.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Chuẩn bị test plan",
+          "field": "due_date_text",
+          "expected": "trong tuần này",
+          "actual": ""
+        }
+      ],
+      "checked_field_count": 6,
+      "correct_field_count": 5
+    },
+    {
+      "case_id": "W2-SHORT-C3-N0-PROD-CANC-027",
+      "passed": false,
+      "expected_task_count": 0,
+      "actual_task_count": 1,
+      "matched_task_count": 0,
+      "missing_tasks": [],
+      "unexpected_tasks": [
+        {
+          "task_name": "Update log và gửi biên bản ngắn",
+          "assignee": "Carol",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Carol: Tôi sẽ update log và gửi biên bản ngắn.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W2-SHORT-C3-N0-PROD-EVTD-015",
+      "passed": true,
+      "expected_task_count": 3,
+      "actual_task_count": 3,
+      "matched_task_count": 3,
+      "missing_tasks": [],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 18,
+      "correct_field_count": 18
+    },
+    {
+      "case_id": "W2-SHORT-C3-N1-SW-RWKD-013",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 1,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Hoàn thành task Y",
+          "assignee": "An",
+          "start_date": "2026-02-07",
+          "due_date": "2026-02-08",
+          "due_date_text": "trước thứ Hai",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm task Z",
+          "assignee": "Bình",
+          "start_date": "2026-02-07",
+          "due_date": "2026-02-08",
+          "due_date_text": "trước thứ Hai tuần sau",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Test nội bộ",
+          "assignee": "Bình",
+          "start_date": "2026-02-07",
+          "due_date": "2026-02-08",
+          "due_date_text": "trước thứ Hai",
+          "evidence": "PM: Task Z: Bình nhận, code và test nội bộ trước thứ Hai.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W2-SHORT-C3-N1-SW-SUGG-025",
+      "passed": false,
+      "expected_task_count": 1,
+      "actual_task_count": 0,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Viết unit test cho module đăng ký",
+          "assignee": "Linh",
+          "start_date": "2026-02-19",
+          "due_date": "2026-02-20",
+          "due_date_text": "mai",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-PROD-HOFF-011",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 3,
+      "matched_task_count": 1,
+      "missing_tasks": [
+        {
+          "task_name": "Review tài liệu",
+          "assignee": "Châu",
+          "start_date": "2026-02-05",
+          "due_date": "2026-02-12",
+          "due_date_text": "trước 12/02",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Gửi các bước reproduce cho bạn sau meeting",
+          "assignee": "Châu",
+          "start_date": "2026-02-05",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Châu: Tôi sẽ gửi các bước reproduce cho bạn sau meeting.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cập nhật Jira và folder",
+          "assignee": "Bình",
+          "start_date": "2026-02-05",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "An: Bình cập nhật Jira và folder.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Viết tài liệu",
+          "field": "due_date_text",
+          "expected": "hạn 14/02",
+          "actual": "14/02"
+        }
+      ],
+      "checked_field_count": 6,
+      "correct_field_count": 5
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-SW-RECF-017",
+      "passed": false,
+      "expected_task_count": 1,
+      "actual_task_count": 2,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Viết tài liệu API",
+          "assignee": "Lan",
+          "start_date": "2026-02-11",
+          "due_date": "2026-02-13",
+          "due_date_text": "trước thứ Sáu",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Làm tài liệu API, ưu tiên core xong",
+          "assignee": "Lan",
+          "start_date": "2026-02-11",
+          "due_date": "2026-02-12",
+          "due_date_text": "trước thứ Sáu",
+          "evidence": "Hùng: chốt lại: Lan làm tài liệu API, ưu tiên core xong trong tuần này, phần example để sang tuần sau.\nHùng: À mà để mình recap lại lần nữa cho chắc: Lan làm tài liệu API, core hoàn thành trước thứ Sáu, example sang tuần sau.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thành phần core API docs",
+          "assignee": "Lan",
+          "start_date": "2026-02-11",
+          "due_date": "2026-02-12",
+          "due_date_text": "trước thứ Sáu",
+          "evidence": "Minh: Mình recap lại: Lan sẽ hoàn thành phần core API docs trước thứ Sáu.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W3-MED-C3-N1-IT-INT-018",
+      "passed": false,
+      "expected_task_count": 5,
+      "actual_task_count": 5,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Hoàn thành OAuth",
+          "assignee": "Bình",
+          "start_date": "2026-02-22",
+          "due_date": "2026-02-27",
+          "due_date_text": "27/2",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chuẩn bị dữ liệu mẫu",
+          "assignee": "Chi",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Xác thực",
+          "assignee": "Dũng",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết test case",
+          "assignee": "Chi",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấu hình staging",
+          "assignee": "Bình",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Làm owner phần này",
+          "assignee": "An",
+          "start_date": "2026-02-22",
+          "due_date": "2026-02-27",
+          "due_date_text": "27/2",
+          "evidence": "An: Em sẽ làm owner phần này?\nAn: correction: deadline OAuth thay đổi từ 25/2 thành 27/2.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Xác thực –",
+          "assignee": "Chi",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Chi: Recap cuối: OAuth – Bình 27/2, dữ liệu mẫu – Chi, xác thực – Bình handoff Dũng, test case – Chi, staging – Bình, review – unresolved.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Test case –",
+          "assignee": "Dũng",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Chi: Recap cuối: OAuth – Bình 27/2, dữ liệu mẫu – Chi, xác thực – Bình handoff Dũng, test case – Chi, staging – Bình, review – unresolved.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review – unresolved",
+          "assignee": "Bình",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Chi: Recap cuối: OAuth – Bình 27/2, dữ liệu mẫu – Chi, xác thực – Bình handoff Dũng, test case – Chi, staging – Bình, review – unresolved.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi spec API cho Chi",
+          "assignee": "Bình",
+          "start_date": "2026-02-22",
+          "due_date": "2026-02-22",
+          "due_date_text": "chiều nay",
+          "evidence": "Bình: Em sẽ gửi spec API cho Chi chiều nay.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C4-N3-IT-STATE-002",
+      "passed": false,
+      "expected_task_count": 4,
+      "actual_task_count": 11,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Kiểm tra môi trường test staging",
+          "assignee": "Hùng",
+          "start_date": "2026-02-16",
+          "due_date": "2026-02-26",
+          "due_date_text": "26/02",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thiện tài liệu triển khai",
+          "assignee": "Hùng",
+          "start_date": "2026-02-16",
+          "due_date": "2026-02-27",
+          "due_date_text": "27/02",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Điều tra lỗi đăng nhập",
+          "assignee": "Hùng",
+          "start_date": "2026-02-16",
+          "due_date": "2026-02-28",
+          "due_date_text": "28/02",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấu hình monitoring",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-16",
+          "due_date": "2026-02-28",
+          "due_date_text": "28/02",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Cập nhật khi có quyền truy cập server",
+          "assignee": "Hùng",
+          "start_date": "2026-02-16",
+          "due_date": "2026-02-16",
+          "due_date_text": "chiều nay",
+          "evidence": "Hùng: Em sẽ cập nhật khi có quyền truy cập server.\nHùng: Vậy em sẽ bắt đầu điều tra lỗi đăng nhập từ chiều nay.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Sửa ngay trong draft",
+          "assignee": "Lan",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ sửa ngay trong draft.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi yêu cầu, tôi sẽ hỗ trợ",
+          "assignee": "Minh",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Em sẽ gửi yêu cầu, tôi sẽ hỗ trợ.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo một task tạm gọi là \"Điều tra lỗi đăng nhập\", owner Hùng, để follow Vậy",
+          "assignee": "Lan",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Vậy em sẽ tạo một task tạm gọi là \"Điều tra lỗi đăng nhập\", owner Hùng, để follow.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cập nhật danh sách task sau meeting",
+          "assignee": "Lan",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ cập nhật danh sách task sau meeting.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi email summary và các file draft ngay sau meeting",
+          "assignee": "Lan",
+          "start_date": "2026-02-16",
+          "due_date": "2026-02-27",
+          "due_date_text": "27/02",
+          "evidence": "Lan: Dạ, em sẽ gửi email summary và các file draft ngay sau meeting.\nMinh: Vậy deadline mới cho task tài liệu là 27/02.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cập nhật danh sách task",
+          "assignee": "Hùng",
+          "start_date": "2026-02-16",
+          "due_date": "2026-02-28",
+          "due_date_text": "28/02",
+          "evidence": "Hùng: Em sẽ cập nhật danh sách task.\nHùng: Em sẽ hoàn thành báo cáo trước deadline 26/02.\nMinh: Task \"Điều tra lỗi đăng nhập\" – deadline mới là 28/02.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Update priority",
+          "assignee": "Lan",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Tôi sẽ update priority.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm test môi trường Vậy",
+          "assignee": "Hùng",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Vậy em sẽ làm test môi trường trước, sau đó viết tài liệu, và xen kẽ điều tra lỗi.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Theo dõi sát Vậy",
+          "assignee": "Lan",
+          "start_date": "2026-02-16",
+          "due_date": "2026-02-26",
+          "due_date_text": "deadline 26/02",
+          "evidence": "Lan: Vậy em sẽ theo dõi sát.\nLan: Em sẽ recap: Task 1 – Kiểm tra môi trường test staging, owner Hùng, deadline 26/02, reviewer Lan (theo quyết định cũ).",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi meeting minutes",
+          "assignee": "Lan",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ gửi meeting minutes.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+      "passed": false,
+      "expected_task_count": 1,
+      "actual_task_count": 7,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Thực hiện task đã nhận",
+          "assignee": "An",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-18",
+          "due_date_text": "deadline 18/3",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Test), webhook registration endpoint (sẽ bổ sung), và ETL data migration (unresolved)",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-28",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Các task về integration gồm: API draft (Tuấn, chưa có deadline chính thức, nhưng cần trước khi CRM test), webhook registration endpoint (sẽ bổ sung), và ETL data migration (unresolved).",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi CRM",
+          "assignee": "Minh",
+          "start_date": "2026-02-28",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Anh sẽ review, sau đó gửi CRM.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Deploy API draft lên sandbox",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-09",
+          "due_date_text": "trước 10/3",
+          "evidence": "Tuấn: Em sẽ deploy API draft lên sandbox sau khi review.\nTuấn: Có rồi, em sẽ hoàn thành metric trước 10/3.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi ticket",
+          "assignee": "An",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-13",
+          "due_date_text": "13/3",
+          "evidence": "An: Em sẽ gửi ticket.\nMinh: correction log spec error codes lên 13/3, CI/CD lên 13/3;",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tổng hợp giúp anh",
+          "assignee": "Lan",
+          "start_date": "2026-02-28",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Lan, em tổng hợp giúp anh.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấp ngay sau cuộc họp",
+          "assignee": "Minh",
+          "start_date": "2026-02-28",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Anh sẽ cấp ngay sau cuộc họp.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi email cho product yêu cầu spec",
+          "assignee": "Minh",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-14",
+          "due_date_text": "trước 15/3",
+          "evidence": "Minh: Anh sẽ gửi email cho product yêu cầu spec trước 15/3.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    }
+  ],
+  "case_diagnostics": {
+    "W1-SHORT-C1-N0-IT-DASG-ABS-002": {
+      "caption_count": 30,
+      "deduplicated_caption_count": 30,
+      "turn_count": 30,
+      "sentence_count": 36,
+      "clause_count": 37,
+      "candidate_window_count": 1,
+      "rule_event_count": 2,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 28,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.7567567567567568
+    },
+    "W1-SHORT-C1-N0-IT-DASG-ABS-018": {
+      "caption_count": 25,
+      "deduplicated_caption_count": 25,
+      "turn_count": 25,
+      "sentence_count": 37,
+      "clause_count": 40,
+      "candidate_window_count": 1,
+      "rule_event_count": 4,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 30,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.75
+    },
+    "W1-SHORT-C1-N0-IT-FPC-DM-014": {
+      "caption_count": 26,
+      "deduplicated_caption_count": 26,
+      "turn_count": 26,
+      "sentence_count": 41,
+      "clause_count": 43,
+      "candidate_window_count": 3,
+      "rule_event_count": 1,
+      "ai_event_count": 0,
+      "ai_window_count": 2,
+      "ai_context_clause_count": 23,
+      "unresolved_window_count": 2,
+      "ai_call_rate": 0.6666666666666666,
+      "ai_clause_coverage": 0.5348837209302325
+    },
+    "W1-SHORT-C1-N0-OPS-FPC-NDL-008": {
+      "caption_count": 18,
+      "deduplicated_caption_count": 18,
+      "turn_count": 18,
+      "sentence_count": 31,
+      "clause_count": 32,
+      "candidate_window_count": 1,
+      "rule_event_count": 1,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 32,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 1.0
+    },
+    "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012": {
+      "caption_count": 22,
+      "deduplicated_caption_count": 22,
+      "turn_count": 22,
+      "sentence_count": 27,
+      "clause_count": 29,
+      "candidate_window_count": 1,
+      "rule_event_count": 2,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 28,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.9655172413793104
+    },
+    "W1-SHORT-C2-N1-PROD-NEG-QUNC-015": {
+      "caption_count": 23,
+      "deduplicated_caption_count": 23,
+      "turn_count": 22,
+      "sentence_count": 43,
+      "clause_count": 44,
+      "candidate_window_count": 1,
+      "rule_event_count": 3,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 37,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.8409090909090909
+    },
+    "W1-SHORT-C2-N1-PROD-QACC-RDAY-011": {
+      "caption_count": 23,
+      "deduplicated_caption_count": 23,
+      "turn_count": 23,
+      "sentence_count": 33,
+      "clause_count": 33,
+      "candidate_window_count": 1,
+      "rule_event_count": 3,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 26,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.7878787878787878
+    },
+    "W1-SHORT-C2-N1-PROD-QACC-RDAY-019": {
+      "caption_count": 23,
+      "deduplicated_caption_count": 23,
+      "turn_count": 23,
+      "sentence_count": 45,
+      "clause_count": 45,
+      "candidate_window_count": 1,
+      "rule_event_count": 4,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 33,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.7333333333333333
+    },
+    "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013": {
+      "caption_count": 21,
+      "deduplicated_caption_count": 21,
+      "turn_count": 21,
+      "sentence_count": 38,
+      "clause_count": 39,
+      "candidate_window_count": 1,
+      "rule_event_count": 2,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 35,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.8974358974358975
+    },
+    "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009": {
+      "caption_count": 20,
+      "deduplicated_caption_count": 20,
+      "turn_count": 20,
+      "sentence_count": 39,
+      "clause_count": 42,
+      "candidate_window_count": 3,
+      "rule_event_count": 1,
+      "ai_event_count": 0,
+      "ai_window_count": 2,
+      "ai_context_clause_count": 27,
+      "unresolved_window_count": 2,
+      "ai_call_rate": 0.6666666666666666,
+      "ai_clause_coverage": 0.6428571428571429
+    },
+    "W2-SHORT-C2-N0-IT-BRST-006": {
+      "caption_count": 25,
+      "deduplicated_caption_count": 25,
+      "turn_count": 25,
+      "sentence_count": 66,
+      "clause_count": 68,
+      "candidate_window_count": 1,
+      "rule_event_count": 0,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 19,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.27941176470588236
+    },
+    "W2-SHORT-C2-N1-IT-REJT-010": {
+      "caption_count": 26,
+      "deduplicated_caption_count": 26,
+      "turn_count": 26,
+      "sentence_count": 50,
+      "clause_count": 51,
+      "candidate_window_count": 2,
+      "rule_event_count": 0,
+      "ai_event_count": 0,
+      "ai_window_count": 2,
+      "ai_context_clause_count": 20,
+      "unresolved_window_count": 2,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.39215686274509803
+    },
+    "W2-SHORT-C2-N1-OPS-NOOWN-004": {
+      "caption_count": 29,
+      "deduplicated_caption_count": 29,
+      "turn_count": 26,
+      "sentence_count": 39,
+      "clause_count": 40,
+      "candidate_window_count": 2,
+      "rule_event_count": 4,
+      "ai_event_count": 0,
+      "ai_window_count": 2,
+      "ai_context_clause_count": 35,
+      "unresolved_window_count": 2,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.875
+    },
+    "W2-SHORT-C2-N1-OPS-SEPD-016": {
+      "caption_count": 26,
+      "deduplicated_caption_count": 26,
+      "turn_count": 26,
+      "sentence_count": 56,
+      "clause_count": 60,
+      "candidate_window_count": 2,
+      "rule_event_count": 1,
+      "ai_event_count": 0,
+      "ai_window_count": 2,
+      "ai_context_clause_count": 56,
+      "unresolved_window_count": 2,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.9333333333333333
+    },
+    "W2-SHORT-C2-N2-IT-PAST-026": {
+      "caption_count": 26,
+      "deduplicated_caption_count": 26,
+      "turn_count": 26,
+      "sentence_count": 64,
+      "clause_count": 71,
+      "candidate_window_count": 1,
+      "rule_event_count": 0,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 9,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.1267605633802817
+    },
+    "W2-SHORT-C2-N2-IT-WORK-014": {
+      "caption_count": 44,
+      "deduplicated_caption_count": 44,
+      "turn_count": 44,
+      "sentence_count": 76,
+      "clause_count": 76,
+      "candidate_window_count": 3,
+      "rule_event_count": 3,
+      "ai_event_count": 0,
+      "ai_window_count": 3,
+      "ai_context_clause_count": 40,
+      "unresolved_window_count": 3,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.5263157894736842
+    },
+    "W2-SHORT-C3-N0-PROD-CANC-027": {
+      "caption_count": 22,
+      "deduplicated_caption_count": 22,
+      "turn_count": 22,
+      "sentence_count": 44,
+      "clause_count": 45,
+      "candidate_window_count": 1,
+      "rule_event_count": 12,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 43,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.9555555555555556
+    },
+    "W2-SHORT-C3-N0-PROD-EVTD-015": {
+      "caption_count": 32,
+      "deduplicated_caption_count": 32,
+      "turn_count": 32,
+      "sentence_count": 65,
+      "clause_count": 65,
+      "candidate_window_count": 3,
+      "rule_event_count": 3,
+      "ai_event_count": 0,
+      "ai_window_count": 3,
+      "ai_context_clause_count": 55,
+      "unresolved_window_count": 3,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.8461538461538461
+    },
+    "W2-SHORT-C3-N1-SW-RWKD-013": {
+      "caption_count": 26,
+      "deduplicated_caption_count": 26,
+      "turn_count": 26,
+      "sentence_count": 69,
+      "clause_count": 72,
+      "candidate_window_count": 5,
+      "rule_event_count": 8,
+      "ai_event_count": 0,
+      "ai_window_count": 4,
+      "ai_context_clause_count": 62,
+      "unresolved_window_count": 4,
+      "ai_call_rate": 0.8,
+      "ai_clause_coverage": 0.8611111111111112
+    },
+    "W2-SHORT-C3-N1-SW-SUGG-025": {
+      "caption_count": 25,
+      "deduplicated_caption_count": 25,
+      "turn_count": 25,
+      "sentence_count": 44,
+      "clause_count": 46,
+      "candidate_window_count": 2,
+      "rule_event_count": 0,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 9,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 0.5,
+      "ai_clause_coverage": 0.1956521739130435
+    },
+    "W2-SHORT-C3-N2-PROD-HOFF-011": {
+      "caption_count": 35,
+      "deduplicated_caption_count": 35,
+      "turn_count": 35,
+      "sentence_count": 58,
+      "clause_count": 59,
+      "candidate_window_count": 1,
+      "rule_event_count": 1,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_context_clause_count": 53,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.8983050847457628
+    },
+    "W2-SHORT-C3-N2-SW-RECF-017": {
+      "caption_count": 30,
+      "deduplicated_caption_count": 30,
+      "turn_count": 30,
+      "sentence_count": 60,
+      "clause_count": 61,
+      "candidate_window_count": 3,
+      "rule_event_count": 1,
+      "ai_event_count": 0,
+      "ai_window_count": 2,
+      "ai_context_clause_count": 49,
+      "unresolved_window_count": 2,
+      "ai_call_rate": 0.6666666666666666,
+      "ai_clause_coverage": 0.8032786885245902
+    },
+    "W3-MED-C3-N1-IT-INT-018": {
+      "caption_count": 95,
+      "deduplicated_caption_count": 95,
+      "turn_count": 94,
+      "sentence_count": 151,
+      "clause_count": 151,
+      "candidate_window_count": 8,
+      "rule_event_count": 4,
+      "ai_event_count": 0,
+      "ai_window_count": 6,
+      "ai_context_clause_count": 87,
+      "unresolved_window_count": 6,
+      "ai_call_rate": 0.75,
+      "ai_clause_coverage": 0.5761589403973509
+    },
+    "W4-LONG-C4-N3-IT-STATE-002": {
+      "caption_count": 270,
+      "deduplicated_caption_count": 270,
+      "turn_count": 266,
+      "sentence_count": 504,
+      "clause_count": 518,
+      "candidate_window_count": 20,
+      "rule_event_count": 24,
+      "ai_event_count": 0,
+      "ai_window_count": 14,
+      "ai_context_clause_count": 340,
+      "unresolved_window_count": 14,
+      "ai_call_rate": 0.7,
+      "ai_clause_coverage": 0.6563706563706564
+    },
+    "W5-XL-C5-N2-OPS-STRESS-004": {
+      "caption_count": 620,
+      "deduplicated_caption_count": 620,
+      "turn_count": 609,
+      "sentence_count": 1096,
+      "clause_count": 1123,
+      "candidate_window_count": 46,
+      "rule_event_count": 51,
+      "ai_event_count": 0,
+      "ai_window_count": 30,
+      "ai_context_clause_count": 663,
+      "unresolved_window_count": 30,
+      "ai_call_rate": 0.6521739130434783,
+      "ai_clause_coverage": 0.5903829029385574
+    }
+  }
+}

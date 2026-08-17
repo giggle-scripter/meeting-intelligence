@@ -1,0 +1,17 @@
+{
+  "events": [
+    {
+      "event_type": "OWNER_ASSIGN",
+      "action_text": "Xác nhận phần tích hợp",
+      "assignee": "Minh",
+      "anchor_clause_id": "CLAUSE-0008",
+      "source_clause_ids": [
+        {"clause_id": "CLAUSE-0007"},
+        {"clause_id": "CLAUSE-0008"}
+      ],
+      "deadline_mention_id": "",
+      "related_task_hint": "",
+      "confidence": "HIGH"
+    }
+  ]
+}

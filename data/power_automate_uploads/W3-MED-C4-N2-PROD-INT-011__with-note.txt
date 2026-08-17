@@ -1,0 +1,105 @@
+=== MEETING METADATA ===
+meeting_id: W3-MED-C4-N2-PROD-INT-011
+meeting_title: Họp phối hợp triển khai và xử lý vấn đề
+meeting_date: 2026-02-15
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+minutes nháp
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: bao cao / trien khai / nhe / kip / sp365 / display / binh
+- An với Bình gửi giúp em log giờ làm nhé, dl nội bộ của em là 25/02 để kịp trình giám đốc
+* Em hiểu, em sẽ gom chung với task SP365 display
+- Chị ơi, thực tế phía vận hành cần chạy trước ngày 01/03 để kịp đối soát
+1) lùi sang 01/03 thì hơn
+- correction lại, SP365 display dl là 01/03
+* Nhưng mà lúc nãy em có task parser transcript không dl, giờ thêm phần này vẫn là một việc chứ không tạo task mới
+- Tổng kết một chút: Hiện tại có task meeting summary flow của An dl 20/02, báo cáo chi phí của em dl 25/02, SP365 display của An dl 01/03, + parser transcript của Bình không dl
+1) À Dũng, báo cáo chi phí cho phase này đến đâu rồi? ? chưa chốt
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[00:00:00] Lan: Chào mọi người, hôm nay mình họp gấp để xử lý vài điểm còn vướng trong tính năng mới. Trước hết An báo cáo nhanh tiến độ meeting summary flow nhé.
+[00:00:12] An: Dạ, bên em đã code xong phần backend, đang test với mock data. Giao diện cơ bản cũng ráp được rồi, nhưng còn lỗi nhỏ ở khâu parse transcript khi có speaker lặp.
+[00:00:25] Bình: Cái đó là phần của em mà. Em đang viết lại parser để xử lý speaker alias, chắc xong nội bộ tầm đầu tuần sau.
+[00:00:34] Chi: Em test sơ bộ thì thấy meeting summary hiển thị đúng, nhưng phần SP365 display chưa đồng bộ với cấu hình chi phí. Kéo xuống danh sách meeting lại bị mất trường cost estimate.
+[00:00:48] Lan: Vậy Chi liệt kê rõ bug đấy nhé, gửi sang cho Dũng để kiểm tra logic cost. À Dũng, báo cáo chi phí cho phase này đến đâu rồi?
+[00:01:00] Dũng: Em đang tổng hợp, cần thêm số liệu thực tế từ team dev. An với Bình gửi giúp em log giờ làm nhé, deadline nội bộ của em là 25/02 để kịp trình giám đốc.
+[00:01:12] An: Ok anh, em sẽ trích xuất log giờ và gửi trước 22/02 được không?
+[00:01:19] Dũng: Được, sớm thì càng tốt.
+[00:01:23] Hùng: Mọi người ơi, em có góp ý nhỏ cho giao diện SP365. Chỗ hiển thị cost estimate đang bị nhảy layout khi tên meeting dài. Em muốn sửa lại responsive, nhưng tài nguyên đồ họa đang thiếu trầm trọng, không đủ người vẽ icon mới.
+[00:01:40] Lan: Hùng cố gắng tối ưu bằng CSS thôi, hạn chế đụng đến asset mới vì ngân sách phase này không cho phép. Vụ đó mình bàn sau.
+[00:01:52] Hùng: Nhưng nếu không có icon, trải nghiệm người dùng kém lắm chị. Em không thể đảm bảo chất lượng nếu cứ phải vá víu mãi.
+[00:02:03] Lan: Chị hiểu, nhưng mình cần ưu tiên hoàn thiện tính năng cốt lõi trước. Sang phase 2 mình sẽ đề xuất thuê thêm designer.
+[00:02:14] Bình: Em xin phép quay lại vụ parser. Hiện tại mình có hai loại speaker: người thật và bot, em đang phân vân có nên phân biệt bằng tag riêng không?
+[00:02:26] Chi: Bot thì nên tag là system để phân tích sau này.
+[00:02:32] An: Ừ, nhưng nhớ phải giữ nguyên speaker gốc cho phần transcript chứ đừng merge.
+[00:02:39] Bình: Vậy em implement theo hướng đó. Không có deadline cụ thể hả chị?
+[00:02:45] Lan: Việc đó em cứ làm xong sớm nhất có thể, không cần set deadline cứng. Quan trọng là kỹ, vì nó ảnh hưởng đến output của cả hệ thống.
+[00:02:57] Bình: Ok chị, em sẽ ưu tiên nhưng không chạy theo deadline.
+[00:03:05] Dũng: Mình cần check lại SP365 display và cost estimate, vừa rồi em phát hiện một case cost bị âm khi meeting hủy. Phần này ai chịu trách nhiệm fix logic?
+[00:03:19] An: Để em. Lỗi này do code backend không validate meeting status. Em sẽ sửa trong phần meeting summary flow luôn, vì hai module liên quan chặt chẽ.
+[00:03:31] Lan: Vậy An ôm thêm phần validate cost estimate nhé. Nhưng nhớ là meeting summary flow phải xong trước 20/02, sát nút rồi.
+[00:03:43] An: Dạ, em sẽ xử lý. Vụ validate cost thì em làm xong trong tuần, không cần đợi đến 20/02.
+[00:03:53] Hùng: Em vừa nghĩ ra ý tưởng cho phase sau: tích hợp word cloud từ key phrase trong meeting. Mọi người thấy sao?
+[00:04:05] Chi: Hay đó, nhưng phase này chưa có requirement, chỉ cần giữ ý tưởng lại.
+[00:04:13] Lan: Đồng ý, ghi nhận để backlog. Hiện tại tập trung vào những gì đang có.
+[00:04:20] Bình: Em thấy ý tưởng word cloud hấp dẫn, có thể dùng để enhance meeting summary flow. Nhưng đó là phase sau, giờ em muốn hỏi về việc hiển thị SP365. Chỗ Chi nói lúc nãy, mình có cần làm thêm cột note không?
+[00:04:36] Chi: Cột note thì có, nhưng nó cần mapping đúng với cost code. Em sợ lẫn với trường cost estimate.
+[00:04:45] Dũng: Đừng lo, cost estimate là một trường riêng. Còn note là text tự do. Vậy ai sẽ làm phần mapping này?
+[00:04:54] Lan: An làm phần mapping cost code nhé, xem như một phần của công việc sửa SP365 display. Nhưng không phải task riêng đâu.
+[00:05:07] An: Em hiểu, em sẽ gom chung với task SP365 display. Mà chị ơi, task SP365 display deadline lúc nãy chị nói 28/02 phải không?
+[00:05:18] Lan: Ừ, tạm thời là 28/02.
+[00:05:22] Dũng: Chị ơi, thực tế phía vận hành cần chạy trước ngày 01/03 để kịp đối soát. Em nghĩ deadline nên lùi sang 01/03 thì hơn.
+[00:05:33] Lan: Ok, vậy correction lại, SP365 display deadline là 01/03 nhé. Cảm ơn Dũng.
+[00:05:41] Chi: Vậy em ghi nhận: SP365 display và mapping cost code sẽ hoàn thiện trước 01/03, đúng không ạ?
+[00:05:50] Lan: Đúng rồi. An, nhớ cập nhật lại timeline cá nhân.
+[00:05:55] An: Dạ, em điều chỉnh ngay.
+[00:06:00] Hùng: Mình quay lại chút về giao diện tổng thể. Trên SP365, meeting list summary đang hiển thị quá nhiều text, có thể collapse bớt không?
+[00:06:13] Bình: Em nghĩ chỉ collapse khi màn hình nhỏ, giữ hover để show full. Để em làm.
+[00:06:21] Lan: Cẩn thận, việc này liên quan đến parser chứ không đơn thuần CSS. Bình làm thì phải phối hợp với An phần summary text.
+[00:06:33] An: Ok, em sẽ cắt string summary nếu quá dài. Nhưng chuẩn bao nhiêu ký tự?
+[00:06:40] Hùng: Tầm 150 ký tự, sau đó thêm "...".
+[00:06:46] Bình: Vậy để em thêm logic truncate vào parser. Nhưng mà lúc nãy em có task parser transcript không deadline, giờ thêm phần này vẫn là một việc chứ không tạo task mới nhé.
+[00:06:58] Lan: Đúng, mình không tạo thêm task. Cứ gom chung vào việc parser.
+[00:07:06] Dũng: Tổng kết một chút: Hiện tại có task meeting summary flow của An deadline 20/02, báo cáo chi phí của em deadline 25/02, SP365 display của An deadline 01/03, và parser transcript của Bình không deadline. Còn vấn đề gì unresolved không?
+[00:07:24] Chi: Còn một vấn đề chưa có hướng giải quyết: tích hợp API nhận diện khuôn mặt cho meeting offline. Product manager bên khác có đề cập, nhưng mình chưa có phản hồi chính thức.
+[00:07:38] Lan: Cái đó để sau, vì đụng đến privacy và chi phí lớn. Hôm nay chưa quyết định được.
+[00:07:46] An: Mình cũng chưa có tài liệu kỹ thuật để đánh giá. Vậy unresolved.
+[00:07:53] Hùng: Mình note lại vấn đề API khuôn mặt, nhưng không đưa vào action item kỳ này.
+[00:08:02] Lan: Chuẩn, không phải task. Tiếp tục nhé. An còn gì khó khăn ở meeting summary flow không?
+[00:08:11] An: Dạ chỉ vướng mỗi phần sync real-time khi có speaker mới join. Nhưng em sẽ thử dùng websocket.
+[00:08:20] Bình: Cần em hỗ trợ không? WebSocket em làm được.
+[00:08:26] An: Cảm ơn, nếu kẹt em sẽ ping.
+[00:08:30] Lan: Ok. Chi, em kiểm tra lại toàn bộ test case cho SP365 display, nhớ thêm case cost âm mà Dũng nói nhé.
+[00:08:40] Chi: Dạ, em sẽ làm ngay trong hôm nay. Em không cần deadline chị nhé, vì nó là việc thường xuyên.
+[00:08:49] Lan: Ừ, không cần set deadline.
+[00:08:53] Dũng: Lưu ý thêm về báo cáo chi phí: Mình cần số từ developer, nhưng nếu log giờ thiếu thì em bị động. An với Bình nhớ gửi đầy đủ nha.
+[00:09:06] An: Em sẽ gửi log trước 22/02 mà.
+[00:09:10] Bình: Em cũng gửi trước 22/02, nhưng phần parser không có deadline nên em không log giờ à?
+[00:09:18] Lan: Vẫn log bình thường để Dũng tổng hợp, dù không có deadline thì cũng cần có effort.
+[00:09:25] Bình: Ok chị.
+[00:09:28] Hùng: Em muốn nhấn mạnh lại vụ tài nguyên đồ họa. Nếu mình không thuê ngoài, các icon mới sẽ delay ít nhất 2 tuần. Vậy tính sao?
+[00:09:40] Lan: Tạm thời dùng icon có sẵn, chấp nhận không đẹp. Đây là negative constraint mình phải sống chung.
+[00:09:49] Hùng: Vậy em không chịu trách nhiệm về mặt thẩm mỹ đâu.
+[00:09:54] Lan: Ghi nhận. Không ai blame em về khoản đó.
+[00:10:00] Chi: Quay lại phần meeting summary flow. Khi test em thấy có lúc summary bị duplicate tên speaker. Có phải do parser không?
+[00:10:12] Bình: Đúng rồi, lỗi đó em đang sửa. Nó nằm trong parser transcript, em sẽ fix dứt điểm.
+[00:10:20] An: Nếu parser chưa xong, meeting summary flow của em cũng bị ảnh hưởng. Chị Lan cho em ké deadline parser để em biết khi nào test được.
+[00:10:31] Lan: Bình, em ước lượng chừng nào xong phần fix duplicate đó?
+[00:10:38] Bình: Em nghĩ 2 ngày nữa, nhưng không hứa chắc vì còn phụ thuộc vào nhiều edge case.
+[00:10:46] Lan: Vậy An cứ dùng mock data để hoàn thiện summary flow trước 20/02. Khi parser xong, mình test tích hợp.
+[00:10:57] An: Dạ, vậy em không phụ thuộc parser nữa.
+[00:11:03] Dũng: Em nhắc lại một chút về recap các đầu việc: meeting summary flow - An - 20/02; báo cáo chi phí - Dũng - 25/02; SP365 display - An - 01/03; parser transcript - Bình - không deadline. Có thêm task nào không?
+[00:11:22] Chi: Việc của em là test và log bug, không phải task chính thức, nhưng em vẫn làm.
+[00:11:30] Lan: Ok, vậy đủ rồi. Mọi người còn thắc mắc gì không?
+[00:11:35] Hùng: Em chỉ muốn xác nhận lại, phase 2 mình có thực sự làm word cloud không?
+[00:11:41] Lan: Đó chỉ là ý tưởng, chưa có kế hoạch cụ thể. Đừng biến thành task bây giờ.
+[00:11:48] Hùng: Ok chị.
+[00:11:51] An: Một ý nhỏ: Em thấy việc hiển thị SP365 với meeting summary flow có nhiều điểm chung, có nên merge thành một epic không?
+[00:12:03] Lan: Ý kiến hay, nhưng merge sẽ làm phức tạp estimation. Tạm thời để riêng, cuối phase review lại.
+[00:12:12] Bình: Vậy em tiếp tục parser, hôm nay em sẽ push branch mới.
+[00:12:18] Lan: Nếu không còn gì, mình kết thúc. Cảm ơn mọi người.
+[00:12:23] Chi: Cảm ơn chị.
+[00:12:25] Dũng: Bye mọi người, nhớ gửi log giờ đúng hẹn.
+[00:12:29] An: Em nhớ rồi.
+[00:12:31] Hùng: Chào cả nhà.
+[00:12:33] Bình: Bye.

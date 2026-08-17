@@ -1,0 +1,29 @@
+{
+  "meeting_title": "Họp tổng hợp phát triển và vận hành sản phẩm",
+  "tasks": [
+    {
+      "task_name": "Hoàn thành UI prototype",
+      "assignee": "Linh",
+      "start_date": "2026-02-27",
+      "due_date": "2026-03-04",
+      "due_date_text": "deadline 04/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Hoàn thành integration test script",
+      "assignee": "Hùng",
+      "start_date": "2026-02-27",
+      "due_date": "2026-03-04",
+      "due_date_text": "deadline 04/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Xử lý container memory",
+      "assignee": "Linh",
+      "start_date": "2026-02-27",
+      "due_date": "2026-03-03",
+      "due_date_text": "deadline 03/03",
+      "status": "Proposed"
+    }
+  ]
+}

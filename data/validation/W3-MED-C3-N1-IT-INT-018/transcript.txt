@@ -1,0 +1,95 @@
+[09:00:00] An: Chào mọi người, hôm nay chúng ta họp về API integration, dữ liệu mẫu, quyền truy cập và rollout.
+[09:00:05] An: Có mặt đủ bốn người, chúng ta bắt đầu.
+[09:00:10] Bình: Vâng, em đã chuẩn bị.
+[09:00:15] Chi: Em có vài câu hỏi về dữ liệu mẫu.
+[09:00:20] Dũng: Em cũng có thắc mắc về quyền.
+[09:00:25] An: Tốt. Đầu tiên, phần API integration, Bình em làm đến đâu?
+[09:00:30] Bình: Em đã xong endpoint chính, nhưng OAuth chưa kết nối được.
+[09:00:35] An: Em cần deadline cho OAuth. Em dự tính bao lâu?
+[09:00:40] Bình: Khoảng 3 ngày, tới 25/2.
+[09:00:45] An: Được. Vậy em assign cho chính em, deadline 25/2. Đây là direct assignment.
+[09:00:50] Bình: Em nhận.
+[09:00:55] Chi: Tôi sẽ xây dựng bộ dữ liệu mẫu để test. Tôi không cần deadline cụ thể vì phụ thuộc vào API.
+[09:01:00] An: Chi em phụ trách dữ liệu mẫu. Cũng là direct assignment.
+[09:01:05] Chi: Vâng.
+[09:01:10] Bình: Nhưng tôi cần dữ liệu mẫu trước khi kiểm tra OAuth. Chi có thể hoàn thành trước 23/2 không?
+[09:01:15] Chi: Tôi cố gắng, nhưng phải chờ thông số từ đối tác. Tôi sẽ cập nhật sau.
+[09:01:20] An: Được, tạm thời chưa chốt deadline cho dữ liệu mẫu.
+[09:01:25] Dũng: Phần quyền truy cập, em nghĩ nên chia ba role: admin, user, viewer. Cần đồng bộ module cũ.
+[09:01:30] An: Em sẽ làm owner phần này? Anh muốn em chịu trách nhiệm.
+[09:01:35] Dũng: Vâng, em nhận. Em sẽ phân tích và đưa proposal cuối tuần. Deadline em đề xuất 27/2.
+[09:01:40] An: Ok. Tuy nhiên anh vừa có thông tin mới: dự án cần ưu tiên API, nên phần quyền tạm thời tạm dừng. Task này hủy nhé, Dũng.
+[09:01:45] Dũng: Hiểu, em dừng lại.
+[09:01:50] Chi: Nếu chưa có quyền, dữ liệu mẫu có truy cập được không?
+[09:01:55] Dũng: Hiện chỉ admin mới truy cập. Em nghĩ cần mở thêm.
+[09:02:00] An: Nhưng task quyền đã hủy, vấn đề chưa giải quyết. Để sau.
+[09:02:05] Bình: Về API, tôi muốn kiểm tra luồng dữ liệu. Ai sẽ review code?
+[09:02:10] An: Tôi nghĩ để Dũng review API integration.
+[09:02:15] Dũng: Em sẵn sàng, nhưng chưa rõ OAuth. Có cần training không?
+[09:02:20] An: Vậy chưa chốt reviewer. Đây là unresolved item.
+[09:02:25] Chi: Tôi đề xuất Bình tự review rồi tôi verify.
+[09:02:30] An: Bình vừa code vừa review không ổn. Để anh suy nghĩ.
+[09:02:35] Dũng: Vậy tôi làm reviewer? Cần hiểu code.
+[09:02:40] An: Chưa rõ. Để anh assign sau.
+[09:02:45] Bình: Em nghĩ nên test dữ liệu mẫu trước khi review.
+[09:02:50] An: Câu đó là gợi ý, không phải task. Distractor thôi.
+[09:02:55] Chi: Vậy tôi note lại.
+[09:03:00] An: Bây giờ nói về rollout. Khi nào dự kiến triển khai?
+[09:03:05] Dũng: Cần có dữ liệu mẫu và API xong mới rollout. Dự kiến tháng 3.
+[09:03:10] An: Đặt mục tiêu 10/3. Nhưng chưa có task cụ thể.
+[09:03:15] Bình: Cần chuẩn bị environment. Em có thể set up staging.
+[09:03:20] An: Tốt, em lo staging nhé. Task này không deadline vì phụ thuộc.
+[09:03:25] Bình: Vâng.
+[09:03:30] Chi: Tôi cũng cần test trên staging.
+[09:03:35] An: Rồi. Quay lại dữ liệu mẫu, Chi em chia sẻ tiến độ?
+[09:03:40] Chi: Em đã lên danh sách trường. Còn chờ API mapping.
+[09:03:45] An: Sau API xong em hoàn thiện. Đó là task “Tạo dữ liệu mẫu”.
+[09:03:50] Bình: Em cũng cần kiểm tra dữ liệu mẫu để xác thực API. Task đó là “Xác thực dữ liệu mẫu”.
+[09:03:55] An: Hai task tên gần giống: tạo và kiểm tra. Phân biệt rõ.
+[09:04:00] Chi: Vâng.
+[09:04:05] Dũng: OAuth khi nào xong? Bình?
+[09:04:10] Bình: Dự kiến 25/2.
+[09:04:15] An: Nhắc lại task OAuth, deadline cũ, không tạo duplicate.
+[09:04:20] Chi: Dữ liệu mẫu của tôi không deadline.
+[09:04:25] An: Vậy active tasks: OAuth – Bình 25/2, dữ liệu mẫu – Chi, xác thực dữ liệu mẫu – Bình, staging – Bình.
+[09:04:30] Bình: Tôi muốn đề xuất: deadline OAuth lùi xuống 27/2 vì spec đối tác thay đổi.
+[09:04:35] An: Thông tin này là negative context. Em chắc chắn?
+[09:04:40] Bình: Vâng, vừa nhận email. Cần thêm 2 ngày.
+[09:04:45] An: Vậy correction: deadline OAuth thay đổi từ 25/2 thành 27/2. Đây là correction, không tạo task mới.
+[09:04:50] Bình: Em đồng ý.
+[09:04:55] Dũng: Vậy review API vẫn cần?
+[09:05:00] An: Vẫn cần, reviewer chưa chốt. Unresolved.
+[09:05:05] Chi: Để tôi review sau khi có dữ liệu mẫu?
+[09:05:10] An: Cũng được, nhưng chưa assign chính thức.
+[09:05:15] Bình: Em cam kết hoàn thành API trước 27/2. First-person commitment.
+[09:05:20] An: Tốt. Có handoff owner cho phần xác thực dữ liệu mẫu không? Bình em có thể chuyển cho Dũng sau khi API xong?
+[09:05:25] Bình: Vâng, em handoff cho Dũng.
+[09:05:30] Dũng: Em nhận.
+[09:05:35] An: Vậy task “Xác thực dữ liệu mẫu” sau này sẽ do Dũng.
+[09:05:40] Chi: Tôi thấy có hai task giống nhau: dữ liệu mẫu và xác thực. Đã rõ.
+[09:05:45] An: Đúng. Giờ tôi muốn thêm task test case API. Chi em viết khi có dữ liệu mẫu.
+[09:05:50] Chi: Vâng, không deadline.
+[09:05:55] An: Task thứ sáu. Vậy tổng cộng sáu task.
+[09:06:00] Dũng: Còn topic rollout chưa có task nào.
+[09:06:05] An: Đúng, topic không tạo task.
+[09:06:10] Bình: Em xin hỏi: training OAuth có là task không? Em hướng dẫn Dũng.
+[09:06:15] An: Việc nhỏ, không cần task. Distractor thôi.
+[09:06:20] Chi: Recap cuối: OAuth – Bình 27/2, dữ liệu mẫu – Chi, xác thực – Bình handoff Dũng, test case – Chi, staging – Bình, review – unresolved.
+[09:06:25] An: Chính xác. Nhắc lại OAuth, recap không tạo duplicate.
+[09:06:30] Dũng: Em có một câu hỏi: module cũ dùng REST, module mới GraphQL. Cần transform.
+[09:06:35] An: Chưa có task, topic này bỏ qua.
+[09:06:40] Bình: Em sẽ gửi spec API cho Chi chiều nay.
+[09:06:45] Chi: Cảm ơn.
+[09:06:50] An: Việc đó không phải task, chỉ là reference.
+[09:06:55] Bình: Cũng có distractor: “Chúng ta nên họp lại sau khi có API.”
+[09:07:00] An: Đúng, đề xuất thôi.
+[09:07:05] Dũng: Tôi thấy vấn đề reviewer vẫn chưa xong. Unresolved.
+[09:07:10] An: Anh sẽ suy nghĩ và thông báo sau.
+[09:07:15] Chi: Vậy kết thúc meeting?
+[09:07:20] An: Đúng. Nhưng có một negative context khác: partner có thể thay đổi thêm.
+[09:07:25] Bình: Em đã biết, em sẽ cập nhật.
+[09:07:30] An: Ok. Mọi người nhớ cập nhật Jira.
+[09:07:35] Dũng: Rõ.
+[09:07:40] Chi: Vâng.
+[09:07:45] Bình: Em note lại.
+[09:07:50] An: Kết thúc họp.

@@ -1,0 +1,83 @@
+MEETING_ID: W4-LONG-C5-N3-PROD-STATE-011
+PART: P04/5
+
+T000193 [09:33:50] PM: Chúng ta bắt đầu part 4. Hôm nay tôi muốn tập trung vào kế hoạch release và monitoring cho hệ thống. Chúng ta đã có nhiều task từ các part trước, giờ cần xem xét tổng thể.
+T000194 [09:34:05] DevLead: Vâng, tôi nghĩ chúng ta cần một bản release plan cụ thể. Hiện tại staging chưa sẵn sàng, nhưng có thể bắt đầu lên kế hoạch từ bây giờ.
+T000195 [09:34:18] Arch: Tôi đồng ý. Việc monitoring cũng cần được thiết lập trước khi release. Chúng ta có hệ thống monitoring nào chưa?
+T000196 [09:34:28] QA: Em thấy hiện tại chỉ có log cơ bản, chưa có dashboard để theo dõi hiệu năng. Cần bổ sung.
+T000197 [09:34:38] PM: Vậy chúng ta cần task thiết lập monitoring. Ai sẽ phụ trách?
+T000198 [09:34:45] DevLead: Tôi có thể setup cơ bản, nhưng cần thêm thời gian vì đang bận nhiều việc.
+T000199 [09:34:55] Arch: Tôi có thể hỗ trợ phần cảnh báo và threshold. Nhưng cần xác định rõ yêu cầu.
+T000200 [09:35:05] PM: Trước mắt, tôi assign task thiết lập monitoring cho DevLead, với sự hỗ trợ từ Arch. Deadline? Chúng ta cần trước release. Release dự kiến khi nào?
+T000201 [09:35:18] DevLead: Nếu mọi chuyện suôn sẻ, có thể cuối tuần sau. Nhưng còn phụ thuộc vào nhiều yếu tố.
+T000202 [09:35:28] QA: Em nghĩ monitoring nên có trước khi staging đưa vào sử dụng, để theo dõi lỗi ngay.
+T000203 [09:35:38] PM: Vậy deadline cho monitoring là thứ Sáu tuần này, cùng với các task khác. Như vậy có nhiều việc cùng lúc.
+T000204 [09:35:48] Arch: Tôi lo rằng nếu quá nhiều task cùng deadline, chất lượng sẽ giảm. Có thể dời monitoring sang tuần sau?
+T000205 [09:35:58] DevLead: Tôi đồng ý với Arch. Hãy để monitoring sau khi staging ổn định. Deadline thứ Hai tuần sau.
+T000206 [09:36:08] PM: Ok, vậy monitoring deadline thứ Hai tuần sau. Ghi nhận.
+T000207 [09:36:16] QA: Em muốn hỏi về release plan: ai sẽ viết bản kế hoạch? Có cần tài liệu không?
+T000208 [09:36:26] PM: Tôi nghĩ anh DevLead nên viết release plan, vì anh nắm rõ các bước. Chị Doc hỗ trợ biên tập.
+T000209 [09:36:36] DevLead: Tôi có thể viết, nhưng cần thông tin từ Arch về bảo mật và từ QA về test criteria.
+T000210 [09:36:45] QA: Em có thể cung cấp test criteria sau khi có tài liệu triển khai.
+T000211 [09:36:55] Arch: Tôi sẽ gửi các yêu cầu bảo mật cần kiểm tra trước release.
+T000212 [09:37:03] PM: Vậy task release plan có owner là DevLead, hỗ trợ từ Doc, Arch, QA. Deadline? Trước release ít nhất 2 ngày, tức thứ Năm tuần sau.
+T000213 [09:37:15] DevLead: Nếu deadline thứ Năm, tôi cần các đầu vào trước thứ Ba. Mọi người có thể gửi đúng hạn không?
+T000214 [09:37:25] QA: Em sẽ cố gắng gửi test criteria trước thứ Ba.
+T000215 [09:37:33] Arch: Tôi cũng ok.
+T000216 [09:37:40] PM: Tốt. Bây giờ tôi muốn nói về một task cũ. Nhớ task tạo dữ liệu test giả từ part 2? Tôi thấy task đó không còn cần thiết nữa, vì chúng ta đã có dữ liệu từ production sau khi copy.
+T000217 [09:37:58] DevLead: Đúng vậy, nếu copy dữ liệu thành công, dữ liệu giả sẽ không dùng đến. Có thể hủy task đó.
+T000218 [09:38:06] QA: Nhưng em đã dựa vào dữ liệu giả để viết test case sơ bộ. Nếu hủy, em có thể dùng dữ liệu thật sau.
+T000219 [09:38:16] PM: Vậy chúng ta chính thức hủy task "tạo dữ liệu test giả" do Tuấn phụ trách. Không cần làm nữa.
+T000220 [09:38:26] DevLead: Ghi nhận. Tôi sẽ thông báo cho Tuấn.
+T000221 [09:38:33] Arch: Một điểm khác: task kiểm tra bảo mật của tôi có deadline thứ Sáu, nhưng tôi cần có dữ liệu thật để kiểm tra. Nếu copy dữ liệu bị trễ, tôi không thể hoàn thành.
+T000222 [09:38:48] PM: Vậy anh có đề xuất gì? Có thể dời deadline không?
+T000223 [09:38:55] Arch: Tôi đề nghị deadline thứ Hai tuần sau, cùng với monitoring. Như vậy tôi có thêm thời gian.
+T000224 [09:39:05] DevLead: Nhưng nếu dời deadline, toàn bộ kế hoạch release có thể bị ảnh hưởng. Tôi không muốn chậm trễ.
+T000225 [09:39:15] QA: Em thấy nên giữ deadline thứ Sáu cho bảo mật, vì nó là task then chốt. Nếu không kịp, chúng ta có thể release muộn hơn.
+T000226 [09:39:25] PM: Tôi quyết định: giữ deadline thứ Sáu cho bảo mật, nhưng Arch có thể làm việc với dữ liệu giả hiện có. Nếu không đủ, anh báo cáo và chúng ta sẽ điều chỉnh.
+T000227 [09:39:38] Arch: Vậy tôi sẽ cố gắng, nhưng cảnh báo trước rằng kết quả có thể không chính xác tuyệt đối.
+T000228 [09:39:48] PM: Hiểu. Chúng ta chấp nhận rủi ro đó.
+T000229 [09:39:55] DevLead: Về copy dữ liệu, tôi vẫn chưa có quyền truy cập. PM, tình hình thế nào?
+T000230 [09:40:03] PM: Tôi đã gửi email nhắc lại, nhưng chưa có hồi âm. Tôi sẽ gọi điện trực tiếp sau họp.
+T000231 [09:40:12] DevLead: Nếu không có quyền hôm nay, task copy sẽ trễ. Đây là vấn đề nghiêm trọng.
+T000232 [09:40:20] QA: Em lo rằng nếu copy trễ, toàn bộ test của em cũng bị ảnh hưởng.
+T000233 [09:40:28] PM: Tôi sẽ xử lý ngay. Anh DevLead, anh có thể chuẩn bị script trong lúc chờ không?
+T000234 [09:40:36] DevLead: Script đã sẵn sàng, chỉ cần chạy thôi.
+T000235 [09:40:42] Arch: Một ý kiến khác: chúng ta nên có kế hoạch dự phòng cho release, phòng khi staging chưa sẵn sàng. Ví dụ, dùng dev environment tạm thời.
+T000236 [09:40:55] PM: Đó là ý hay, nhưng cần bàn sau. Bây giờ tôi muốn quay lại monitoring.
+T000237 [09:41:03] DevLead: Tôi cần xác định các chỉ số cần monitor. Ai sẽ cung cấp danh sách?
+T000238 [09:41:11] QA: Em có thể đề xuất các chỉ số từ góc nhìn user: response time, error rate.
+T000239 [09:41:19] Arch: Tôi sẽ thêm các chỉ số bảo mật: số lần đăng nhập thất bại, truy cập bất thường.
+T000240 [09:41:28] PM: Tốt, vậy anh DevLead tổng hợp lại. Tôi nghĩ chúng ta nên có một buổi họp nhỏ về monitoring sau part này.
+T000241 [09:41:40] DevLead: Tôi đồng ý. Càng sớm càng tốt.
+T000242 [09:41:46] QA: Em muốn hỏi về release: chúng ta có cần thông báo cho các bên liên quan không?
+T000243 [09:41:55] PM: Tôi sẽ lo phần thông báo. Các anh chị chỉ cần hoàn thành task của mình.
+T000244 [09:42:03] Arch: Tôi thấy deadline cho bảo mật thứ Sáu, monitoring thứ Hai, release plan thứ Năm. Có vẻ ổn.
+T000245 [09:42:12] DevLead: Nhưng tôi lo lịch trình quá tải. Bản thân tôi có quá nhiều task: database, copy dữ liệu, bảo mật hỗ trợ, monitoring, release plan.
+T000246 [09:42:25] PM: Tôi hiểu. Có thể phân bổ lại. Anh có thể ủy quyền một số task cho người khác không?
+T000247 [09:42:33] DevLead: Monitoring có thể giao cho một Dev khác, nhưng cần đào tạo.
+T000248 [09:42:40] PM: Vậy tôi suggest: monitoring task sẽ do anh Nam (Dev) phụ trách, với sự hướng dẫn của anh. Anh DevLead vẫn là owner.
+T000249 [09:42:52] DevLead: Ok, tôi sẽ hướng dẫn Nam. Nhưng vẫn cần thời gian.
+T000250 [09:42:58] QA: Em thấy có một lỗ hổng: chưa có ai phụ trách kiểm tra tính tương thích database như Arch đề xuất ở part 2. Task đó vẫn unresolved.
+T000251 [09:43:10] Arch: Tôi vẫn có thể làm, nhưng cần spec từ DevLead. Anh đã gửi chưa?
+T000252 [09:43:18] DevLead: Chưa, tôi sẽ gửi chiều nay. Nhưng task đó có cần deadline không?
+T000253 [09:43:25] PM: Tôi nghĩ nên có deadline. Em QA, em có cần task đó cho test không?
+T000254 [09:43:33] QA: Có, em cần biết database mới có ảnh hưởng gì đến login không.
+T000255 [09:43:40] PM: Vậy deadline cho task kiểm tra tương thích là thứ Sáu, cùng với bảo mật. Arch làm, với spec từ DevLead.
+T000256 [09:43:52] Arch: Tôi ok, nhưng cần spec trước thứ Tư.
+T000257 [09:43:58] DevLead: Tôi sẽ gửi spec hôm nay.
+T000258 [09:44:05] PM: Vậy chúng ta đã có lịch trình rõ hơn. Bây giờ, tôi muốn nhấn mạnh: task bảo mật có deadline thứ Sáu, nhưng tôi thấy có một deadline khác gần đó là task tài liệu triển khai (thứ Hai). Đây là những deadline quan trọng.
+T000259 [09:44:22] Arch: Vâng, tôi sẽ cố gắng.
+T000260 [09:44:28] QA: Em có một vấn đề negative: nếu task bảo mật không kịp, release sẽ bị hoãn. Chúng ta có kế hoạch B không?
+T000261 [09:44:38] PM: Kế hoạch B là dùng dev environment tạm thời, nhưng cần bàn thêm. Có thể part sau.
+T000262 [09:44:48] DevLead: Tôi đề nghị chúng ta nên lập một biểu đồ Gantt cho các task. Nhưng không có thời gian làm ngay.
+T000263 [09:44:58] PM: Tôi sẽ ghi nhận và làm sau họp. Bây giờ, còn vấn đề gì khác không?
+T000264 [09:45:05] Arch: Tôi muốn nhắc lại task tài liệu triển khai đã handoff cho DevLead. Anh đã bắt đầu chưa?
+T000265 [09:45:13] DevLead: Tôi sẽ bắt đầu sau khi xong việc với staging. Có thể thứ Bảy.
+T000266 [09:45:20] PM: Nhưng deadline thứ Hai, anh cần làm sớm hơn.
+T000267 [09:45:26] DevLead: Tôi sẽ cố gắng làm vào cuối tuần.
+T000268 [09:45:32] QA: Em thấy mọi người đều quá tải. Liệu có cần thêm nhân lực không?
+T000269 [09:45:40] PM: Đó là vấn đề của dự án. Tôi sẽ báo cáo lên trên. Nhưng hiện tại, chúng ta phải tự xoay sở.
+T000270 [09:45:50] Arch: Tôi đồng ý. Cố gắng hết sức.
+T000271 [09:45:56] PM: Vậy tôi xin tạm kết thúc part 4 tại đây. Chúng ta đã hủy task dữ liệu test giả, đặt deadline cho bảo mật thứ Sáu, và thảo luận về monitoring. Còn nhiều việc, hẹn part cuối.
+--- END OF PART P04 ---

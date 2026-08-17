@@ -1,0 +1,183 @@
+{
+  "mode": "provider_free_candidate_identity_audit",
+  "case_count": 24,
+  "with_meeting_notes": true,
+  "ai_request_count": 102,
+  "candidate_entry_count": 849,
+  "conflicting_candidate_occurrence_count": 0,
+  "empty_candidate_request_count": 0,
+  "duplicate_task_id_request_count": 0,
+  "execution_error_count": 0,
+  "passed": true,
+  "execution_errors": [],
+  "cases": [
+    {
+      "case_id": "W4-LONG-C4-N1-IT-STATE-006",
+      "ai_request_count": 0,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C4-N1-OPS-STATE-012",
+      "ai_request_count": 0,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C4-N2-IT-STATE-010",
+      "ai_request_count": 7,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C4-N2-OPS-STATE-004",
+      "ai_request_count": 0,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C4-N3-IT-STATE-002",
+      "ai_request_count": 7,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C4-N3-OPS-STATE-008",
+      "ai_request_count": 2,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C5-N1-PROD-STATE-003",
+      "ai_request_count": 4,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C5-N1-SW-STATE-009",
+      "ai_request_count": 1,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C5-N2-PROD-STATE-007",
+      "ai_request_count": 5,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C5-N2-SW-STATE-001",
+      "ai_request_count": 5,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+      "ai_request_count": 6,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W4-LONG-C5-N3-SW-STATE-005",
+      "ai_request_count": 5,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W5-XL-C5-N2-IT-STRESS-002",
+      "ai_request_count": 17,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+      "ai_request_count": 20,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W5-XL-C5-N3-PROD-STRESS-003",
+      "ai_request_count": 13,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+      "ai_request_count": 9,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-002",
+      "ai_request_count": 0,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-010",
+      "ai_request_count": 0,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-018",
+      "ai_request_count": 0,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-FPC-DM-006",
+      "ai_request_count": 0,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-FPC-DM-014",
+      "ai_request_count": 0,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-008",
+      "ai_request_count": 0,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-016",
+      "ai_request_count": 1,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    },
+    {
+      "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004",
+      "ai_request_count": 0,
+      "conflicting_task_ids": [],
+      "empty_candidate_request_count": 0,
+      "duplicate_task_id_request_count": 0
+    }
+  ]
+}

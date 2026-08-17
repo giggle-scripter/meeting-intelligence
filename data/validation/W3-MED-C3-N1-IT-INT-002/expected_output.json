@@ -1,0 +1,45 @@
+{
+  "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+  "tasks": [
+    {
+      "task_name": "Fix connection error API",
+      "assignee": "Đức",
+      "start_date": "2026-02-06",
+      "due_date": "2026-02-11",
+      "due_date_text": "trước thứ Năm",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Hoàn thiện dữ liệu mẫu",
+      "assignee": "Lan",
+      "start_date": "2026-02-06",
+      "due_date": "2026-02-06",
+      "due_date_text": "cuối ngày hôm nay",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Review dữ liệu mẫu",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-06",
+      "due_date": "",
+      "due_date_text": "sau khi Lan bàn giao",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Xử lý adapter token",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-06",
+      "due_date": "",
+      "due_date_text": "",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Phân quyền truy cập",
+      "assignee": "Hoa",
+      "start_date": "2026-02-06",
+      "due_date": "",
+      "due_date_text": "cuối tuần này",
+      "status": "Proposed"
+    }
+  ]
+}

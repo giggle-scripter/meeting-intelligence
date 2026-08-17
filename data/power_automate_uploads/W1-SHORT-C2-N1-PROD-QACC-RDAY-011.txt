@@ -1,0 +1,29 @@
+=== MEETING METADATA ===
+meeting_id: W1-SHORT-C2-N1-PROD-QACC-RDAY-011
+meeting_title: Rà soát lỗi đăng nhập
+meeting_date: 2026-01-26
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:05] Lan: Chào mọi người, hôm nay mình họp nhanh về cái lỗi đăng nhập mà bên CS vừa báo cáo sáng qua.
+[09:00:12] An: Em đã thử tái hiện và thấy lỗi xảy ra khi dùng tài khoản admin cũ, sau khi nhập mật khẩu thì màn hình đứng yên ở bước xác thực hai lớp.
+[09:00:20] Minh: Tôi có xem sơ code phần xác thực, hình như session bị timeout trước khi redirect sang màn hình OTP.
+[09:00:28] Lan: Vậy là không phải lỗi từ phía người dùng mà do hệ thống xử lý session?
+[09:00:33] Minh: Đúng rồi, có thể do cấu hình session ngắn quá, hoặc có thay đổi gì đó trong bản cập nhật tối qua.
+[09:00:40] An: Em thấy trên môi trường test thì không bị, chỉ có trên production mới dính.
+[09:00:45] Lan: Lạ nhỉ. An có log lại chi tiết bước tái hiện chưa?
+[09:00:50] An: Dạ có, em đã chụp ảnh màn hình và lưu log, gửi trong ticket rồi.
+[09:00:55] Minh: OK, tôi sẽ kiểm tra log production xem có khác biệt gì không.
+[09:01:00] System: (Tiếng điện thoại rung nhẹ)
+[09:01:02] Lan: Xin lỗi, để tắt chuông đã. Rồi, tiếp tục nhé. Minh này, cậu có thể nhận sửa gấp lỗi này được không?
+[09:01:10] Minh: Được, để tôi làm. Tôi sẽ debug lại luôn.
+[09:01:14] Lan: Tốt. Vậy cậu cố gắng xong trong ngày mai nhé, vì bên CS đang phàn nàn nhiều.
+[09:01:21] Minh: OK, ngày mai tôi sẽ đẩy bản fix lên staging để An test.
+[09:01:26] Lan: Ừ, cảm ơn cậu. An chuẩn bị test case cho bản fix đó luôn nhé.
+[09:01:31] An: Anh yên tâm, em sẽ viết test case và test ngay khi có bản build.
+[09:01:36] Lan: OK. Còn ai có ý kiến gì thêm không?
+[09:01:40] Minh: Tôi chỉ lo là thay đổi cấu hình session có thể ảnh hưởng đến các chức năng khác, nhưng sẽ kiểm tra thêm.
+[09:01:47] Lan: Ừ, lưu ý vấn đề đó. Nếu cần thì nhờ thêm Dũng review code.
+[09:01:52] Minh: Được, tôi sẽ rủ Dũng nếu cần.
+[09:01:55] Lan: Vậy chốt nhé: Minh fix lỗi, deadline ngày mai, An test. Họp kết thúc ở đây, cảm ơn mọi người.
+[09:02:01] An: Cảm ơn anh.
+[09:02:03] Minh: OK.

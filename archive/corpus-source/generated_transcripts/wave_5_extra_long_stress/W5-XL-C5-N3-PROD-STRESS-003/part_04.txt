@@ -1,0 +1,170 @@
+MEETING_ID: W5-XL-C5-N3-PROD-STRESS-003
+PART: P04/10
+
+T000332 [00:45:05] Thảo: Chúng ta vào part 4. Hôm nay em muốn bàn về yêu cầu sản phẩm mới từ bên business. Vừa có một số feedback về tính năng search.
+
+T000333 [00:45:14] Hùng: Tính năng search liên quan tới module X hay module khác?
+
+T000334 [00:45:20] Thảo: Module X, nhưng mở rộng thêm. Họ muốn thêm filter theo ngày tháng và trạng thái.
+
+T000335 [00:45:28] Minh: Filter đó đã có trong spec gốc đâu. Hay là yêu cầu mới?
+
+T000336 [00:45:35] Thảo: Mới. Họ gửi email sáng nay. Em nghĩ cần đưa vào scope nếu kịp.
+
+T000337 [00:45:42] Anh: (tái xuất hiện) Xin lỗi, em vào lại được không? Em vừa out lúc nãy. Có chuyện gì mới?
+
+T000338 [00:45:50] Thảo: Có, bàn về filter mới. Anh có ý kiến?
+
+T000339 [00:45:56] Anh: Filter đó có liên quan tới database indexing. Cần thay đổi schema không?
+
+T000340 [00:46:03] Minh: Không, chỉ thêm field filter trên existing column. Nhưng cần API endpoint mới.
+
+T000341 [00:46:10] Hùng: Vậy ảnh hưởng tới test. Em phải cập nhật test case.
+
+T000342 [00:46:17] Thảo: Đúng. Chúng ta cần quyết định có implement trong sprint này không. Deadline cho bản demo là 05/03, nếu thêm filter thì có thể kịp?
+
+T000343 [00:46:26] Minh: Nếu endpoint đơn giản, em có thể thêm vào mock và code real sau. Nhưng phải ưu tiên.
+
+T000344 [00:46:34] Hùng: Em nghĩ nếu không làm, bên business sẽ không approve demo.
+
+T000345 [00:46:41] Thảo: Vậy thống nhất sẽ thêm. Nhưng cần define rõ task. Minh, em viết endpoint search với filter. Khi nào có thể xong?
+
+T000346 [00:46:50] Minh: Nếu chỉ thêm filter, em có thể hoàn thành code cho mock trong ngày 28/02, và real code trước 02/03.
+
+T000347 [00:46:58] Hùng: Nhưng mock core đã dời sang 02/03, giờ thêm việc nữa? Có quá tải không?
+
+T000348 [00:47:06] Thảo: Minh, em tự đánh giá?
+
+T000349 [00:47:11] Minh: Em nghĩ không vấn đề, vì filter là mở rộng nhỏ. Nhưng deadline cho mock core vẫn giữ 02/03, filter thêm sẽ trong cùng bản.
+
+T000350 [00:47:21] Thảo: Vậy task mới: Minh implement filter search, deadline 02/03. Hùng, test plan phải cập nhật.
+
+T000351 [00:47:29] Hùng: Vâng, em cập nhật test case cho filter. Deadline test plan vẫn 28/02, nhưng bổ sung phần filter.
+
+T000352 [00:47:38] Anh: Còn vấn đề performance. Nếu filter nhiều, có thể chậm. Ai sẽ làm review performance?
+
+T000353 [00:47:46] Thảo: Chưa có, nhưng em sẽ giao cho team infra sau. Đây là event-dependent: performance review chỉ khi có endpoint thật.
+
+T000354 [00:47:55] Linh: Em muốn hỏi: filter này có hiển thị trên UI không? Nếu có thì em cần cập nhật prototype.
+
+T000355 [00:48:03] Thảo: Có. Linh, em hỗ trợ cập nhật UI prototype cho filter? Deadline 03/03.
+
+T000356 [00:48:10] Linh: Vâng, em làm.
+
+T000357 [00:48:14] Minh: Em sẽ gửi API spec mới cho Linh.
+
+T000358 [00:48:19] Hùng: Vậy là có thêm một chuỗi phụ thuộc: filter spec -> UI prototype -> test.
+
+T000359 [00:48:27] Thảo: Đúng. Cần theo dõi. Bây giờ em muốn bàn về issue cũ: data mẫu của Huy. Huy đã gửi chưa?
+
+T000360 [00:48:36] Hùng: Em thấy Huy gửi email lúc trưa, có file đính kèm. Em chưa xem.
+
+T000361 [00:48:43] Thảo: Minh, em review schema như đã hứa.
+
+T000362 [00:48:48] Minh: Em sẽ xem trong ngày.
+
+T000363 [00:48:53] Linh: Em cũng sẽ test thử data đó vào cuối ngày.
+
+T000364 [00:48:59] Anh: Vậy deadline cho review data của Minh là 28/02, test data của Linh là 01/03.
+
+T000365 [00:49:07] Thảo: Nhất trí. Nhưng lưu ý data mẫu này dùng cho test, không phải demo.
+
+T000366 [00:49:14] Hùng: Em có câu hỏi: filter mới có cần dữ liệu đặc biệt không? Hay dùng dữ liệu từ Huy?
+
+T000367 [00:49:23] Minh: Dùng chung data, chỉ thêm filter field.
+
+T000368 [00:49:28] Thảo: Tốt.
+
+T000369 [00:49:32] Hùng: Còn vụ tool test script, họp 02/03 mới quyết. Nhưng nếu filter mới, có cần tool đặc biệt không?
+
+T000370 [00:49:41] Minh: Không, vẫn dùng tool tương tự.
+
+T000371 [00:49:46] Thảo: Vậy không ảnh hưởng.
+
+T000372 [00:49:50] Anh: Em muốn hỏi về risk của việc thay đổi scope. Cần có approval từ business.
+
+T000373 [00:49:58] Thảo: Em sẽ gửi email xác nhận với PO. Task đó em tự làm, deadline hôm nay.
+
+T000374 [00:50:05] Minh: Vâng.
+
+T000375 [00:50:09] Hùng: Em thấy có nhiều task mới, mà resource có hạn. Có thể cần ưu tiên.
+
+T000376 [00:50:17] Thảo: Đúng, em sẽ review priority.
+
+T000377 [00:50:22] Linh: Em muốn hỏi về việc demo: nếu filter chưa xong UI, có thể demo bằng API không?
+
+T000378 [00:50:30] Thảo: Có thể, nhưng PO muốn thấy UI. Vậy filter UI cần ưu tiên.
+
+T000379 [00:50:37] Linh: Em sẽ cố gắng hoàn thành UI prototype trước 03/03.
+
+T000380 [00:50:44] Thảo: Tốt.
+
+T000381 [00:50:48] Minh: Em vừa kiểm tra data mẫu của Huy. Có vài điểm không khớp với schema mới do filter. Cần Huy điều chỉnh.
+
+T000382 [00:50:57] Thảo: Huy không online. Em gửi comment vào mail, và chờ Huy phản hồi. Deadline adjust data là 01/03.
+
+T000383 [00:51:04] Minh: Vâng.
+
+T000384 [00:51:08] Anh: Vậy là có một unresolved: data mẫu chưa align với filter. Không thể giải quyết ngay.
+
+T000385 [00:51:16] Thảo: Đúng. Để nguyên.
+
+T000386 [00:51:20] Hùng: Em muốn nhắc về vụ firewall rules. Hôm qua Hùng đã gửi IP, Phong nói sẽ update 28/02. Nhưng chưa confirm.
+
+T000387 [00:51:30] Thảo: Hùng, em follow up với Phong.
+
+T000388 [00:51:35] Hùng: Vâng.
+
+T000389 [00:51:39] Linh: Em cần hỗ trợ gì cho UI prototype? Minh, em cần spec filter chi tiết.
+
+T000390 [00:51:47] Minh: Em gửi ngay bây giờ.
+
+T000391 [00:51:51] Thảo: Tốt.
+
+T000392 [00:51:55] Hùng: Về test plan, em đã cập nhật filter test case. Deadline 28/02 vẫn giữ.
+
+T000393 [00:52:03] Thảo: OK. Có ai có vấn đề gì về schedule không?
+
+T000394 [00:52:10] Minh: Em lo lịch họp 02/03 bị chồng. Em có meeting khác lúc 14h30, chỉ tham gia được 30 phút.
+
+T000395 [00:52:19] Thảo: Đủ rồi, vì họp chỉ 30 phút.
+
+T000396 [00:52:24] Hùng: Em ok.
+
+T000397 [00:52:28] Anh: Em nghĩ cần thêm một cuộc họp riêng về performance nếu filter được approve. Có thể sau 02/03.
+
+T000398 [00:52:37] Thảo: Để em lên lịch sau.
+
+T000399 [00:52:41] Linh: Em xin phép out để làm UI, vì deadline gần.
+
+T000400 [00:52:48] Thảo: OK, em đi đi. Còn ai cần hỏi gì nữa không?
+
+T000401 [00:52:54] Hùng: Em có thắc mắc về test environment: staging đã sẵn sàng cho filter chưa?
+
+T000402 [00:53:02] Minh: Staging vẫn dùng mock, nên filter sẽ được thêm vào mock.
+
+T000403 [00:53:09] Hùng: Vậy ok.
+
+T000404 [00:53:13] Anh: Em thấy vẫn còn vấn đề về owner cho deploy. Minh đã nhận, nhưng chưa có dự phòng.
+
+T000405 [00:53:21] Thảo: Đã assign Minh, nếu Minh bận thì Linh backup.
+
+T000406 [00:53:27] Minh: Em đồng ý.
+
+T000407 [00:53:31] Thảo: Vậy kết thúc topic sản phẩm. Chúng ta vừa tạo thêm các task: filter search (Minh 02/03), UI prototype (Linh 03/03), review data (Minh 28/02), approval từ business (Thảo hôm nay). Tất cả đều có dependency với nhau: filter spec -> UI, data adjust -> test.
+
+T000408 [00:53:48] Hùng: Tóm gọn.
+
+T000409 [00:53:52] Anh: Còn unresolved từ part 2 (tool test script) vẫn chưa giải quyết.
+
+T000410 [00:53:59] Thảo: Để dành cho họp 02/03.
+
+T000411 [00:54:04] Minh: Em xin phép chuẩn bị spec.
+
+T000412 [00:54:08] Thảo: Vậy part 4 dừng ở đây.
+
+T000413 [00:54:12] Hùng: Tạm biệt.
+
+T000414 [00:54:16] Anh: Bye.
+
+--- END OF PART P04 ---

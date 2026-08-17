@@ -1,0 +1,62 @@
+MEETING_ID: W4-LONG-C5-N2-SW-STATE-001
+PART: P03/5
+
+T000123 [10:01:00] Chị Lan: OK, cả team, sau 5 phút nghỉ chúng ta quay lại. Chị muốn bàn tiếp về phần tài liệu triển khai và kịch bản kiểm thử đã thảo luận từ đầu giờ. Anh Tuấn, tài liệu triển khai của em tiến độ thế nào?
+T000124 [10:01:30] Anh Tuấn: Em mới bắt đầu viết phần mở đầu, vẫn còn chờ thông tin cert từ chị. Nhưng em nghĩ có thể giao phần này cho người khác nếu cần, vì em cũng đang bận lo dữ liệu test.
+T000125 [10:02:00] Chị Lan: Chị đang định nói đến việc đó. Chị thấy anh Minh có thể đảm nhận tài liệu triển khai vì em ấy rõ technical hơn. Anh Tuấn, em có đồng ý chuyển task này cho anh Minh không?
+T000126 [10:02:30] Anh Tuấn: Dạ, em đồng ý. Anh Minh có thể viết phần triển khai tốt hơn. Em sẽ chuyển các ghi chú và template cho anh.
+T000127 [10:03:00] Anh Minh: Em cũng OK, nhưng em đang có spec integration và unit test. Em có thể nhận tài liệu triển khai, nhưng deadline có thể phải đẩy lùi.
+T000128 [10:03:30] Chị Lan: Vậy chị sẽ reassign task "Cập nhật tài liệu triển khai" từ anh Tuấn sang anh Minh. Anh Minh, em tự đặt deadline mới nhé, nhưng không quá trễ.
+T000129 [10:04:00] Anh Minh: Em nghĩ cuối tuần sau, tức 26/02, có thể có draft. Nhưng phụ thuộc vào cert và thông tin từ vận hành.
+T000130 [10:04:30] Chị Lan: OK, vậy deadline mới là 26/02. Anh Tuấn, em gửi template và lưu ý cho anh Minh sau meeting.
+T000131 [10:05:00] Anh Tuấn: Vâng. Em cũng có một số ghi chú về database migration, em sẽ chuyển luôn.
+T000132 [10:05:30] Chị Hoa: Vậy còn task của em, kịch bản kiểm thử triển khai, deadline 20/02 liệu có cần thay đổi không? Vì spec từ anh Minh sẽ đến sáng mai, nhưng tài liệu triển khai giờ lại do anh Minh viết, nếu anh ấy chậm thì em cũng bị ảnh hưởng.
+T000133 [10:06:00] Chị Lan: Chị nghĩ deadline của em vẫn giữ 20/02, vì em chỉ cần spec authentication, không cần toàn bộ tài liệu. Kịch bản test có thể viết độc lập phần lớn.
+T000134 [10:06:30] Anh Minh: Đúng, spec của em gửi sáng mai sẽ đủ để chị Hoa viết test case cho đăng nhập và lock account. Phần triển khai chung có thể bổ sung sau.
+T000135 [10:07:00] Chị Hoa: Nhưng nếu tài liệu triển khai thay đổi sau khi em viết kịch bản, em sẽ phải sửa lại. Có thể gây tốn công.
+T000136 [10:07:30] Chị Lan: Điều đó đúng, nhưng em vẫn nên bắt đầu. Phần lớn kịch bản test triển khai dựa trên quy trình chuẩn, không phụ thuộc nhiều vào tài liệu cụ thể. Anh Minh, em cố gắng viết tài liệu sớm để chị Hoa có thể review cross.
+T000137 [10:08:00] Anh Minh: Em sẽ cố. Nhưng vì mới nhận task, em cần thời gian để làm quen.
+T000138 [10:08:30] Anh Tuấn: Em có thể hỗ trợ anh Minh bằng cách cung cấp template cũ và các bước chính. Em đã có sẵn, chỉ cần copy.
+T000139 [10:09:00] Chị Lan: Tốt. Vậy task của chị Hoa vẫn 20/02, task của anh Minh 26/02. Nhưng cần lưu ý: nếu đến 20/02 chị Hoa chưa có spec, deadline có thể bị ảnh hưởng. Anh Minh, em cam kết gửi spec đúng hạn chứ?
+T000140 [10:09:30] Anh Minh: Em cam kết sáng mai 16/02, không thay đổi.
+T000141 [10:10:00] Chị Hoa: Vậy em yên tâm hơn. Em sẽ viết kịch bản dựa trên spec và template cũ.
+T000142 [10:10:30] Chị Lan: Nhân tiện, chị muốn hỏi lại về task tạo dữ liệu test. Anh Tuấn, em tiến hành chưa?
+T000143 [10:11:00] Anh Tuấn: Em chuẩn bị viết script, dự kiến cuối ngày mai. Nhưng em sẽ ưu tiên trước template cho anh Minh.
+T000144 [10:11:30] Chị Lan: OK, em tự sắp xếp. Còn việc review tài liệu, chị nghĩ anh Minh nên review phần kỹ thuật của tài liệu triển khai, còn chị Hoa review nghiệp vụ. Nhưng chưa có ai review công việc của chị Hoa?
+T000145 [10:12:00] Chị Hoa: Em có thể nhờ anh Minh review kịch bản test của em, vì có phần kỹ thuật.
+T000146 [10:12:30] Anh Minh: Em có thể, nhưng sau khi em viết xong tài liệu triển khai.
+T000147 [10:13:00] Chị Lan: Vậy vẫn chưa có reviewer chính thức. Để sau khi có draft, chị sẽ chỉ định. Có thể chị sẽ review tổng thể.
+T000148 [10:13:30] Anh Tuấn: Em thấy chúng ta đã thay đổi owner cho tài liệu triển khai và điều chỉnh deadline. Vậy task ban đầu của em giờ không còn nữa.
+T000149 [10:14:00] Chị Lan: Đúng, task của em đã được reassign. Em chỉ còn phụ trách dữ liệu test không chính thức.
+T000150 [10:14:30] Anh Tuấn: Vâng, em hiểu. Em sẽ tập trung vào dữ liệu test.
+T000151 [10:15:00] Chị Hoa: Chị Lan, em muốn hỏi về phần rollback trong kịch bản test. Anh Tuấn có nói sẽ viết vào tài liệu, nhưng giờ anh Tuấn không làm tài liệu nữa. Vậy em lấy thông tin từ đâu?
+T000152 [10:15:30] Anh Minh: Em sẽ đưa rollback vào tài liệu triển khai. Chị Hoa cứ tạm dùng template cũ, sau đó em sẽ cập nhật.
+T000153 [10:16:00] Chị Hoa: Nhưng nếu em viết kịch bản xong trước khi có tài liệu, em phải sửa lại. Có cách nào đồng bộ không?
+T000154 [10:16:30] Chị Lan: Chị nghĩ em nên viết sơ lược trước, đánh dấu các phần cần bổ sung. Khi có tài liệu, em chỉ cần điều chỉnh.
+T000155 [10:17:00] Anh Minh: Em sẽ cố gắng viết phần rollback trong tuần này để chị Hoa kịp deadline.
+T000156 [10:17:30] Chị Hoa: Vậy nếu anh Minh gửi phần rollback trước 19/02, em có thể tích hợp vào kịch bản.
+T000157 [10:18:00] Anh Minh: Em sẽ cố. Nhưng không hứa chắc vì còn phụ thuộc thông tin infra.
+T000158 [10:18:30] Chị Lan: Được, tạm thời vậy. Chúng ta cũng nên bàn về timeline triển khải tổng thể. Nhưng trước hết, chị muốn confirm lại trạng thái các task:
+- Task 1: "Cập nhật tài liệu triển khai" – owner mới là anh Minh, deadline 26/02.
+- Task 2: "Cập nhật kịch bản kiểm thử triển khai" – chị Hoa, deadline 20/02, phụ thuộc spec từ anh Minh.
+- Task 3: "Viết unit test authentication" – anh Minh, không deadline.
+- Task phụ: "Tạo dữ liệu test" – anh Tuấn, không chính thức.
+- Reviewer: chưa assign.
+Đúng không?
+T000159 [10:19:00] Anh Minh: Đúng.
+T000160 [10:19:30] Chị Hoa: Vâng.
+T000161 [10:20:00] Anh Tuấn: Dạ.
+T000162 [10:20:30] Chị Lan: Vậy còn vấn đề gì cần thảo luận thêm về tài liệu không? Hay chúng ta chuyển sang phần kiến trúc?
+T000163 [10:21:00] Anh Minh: Em có một thắc mắc về spec integration. Nếu tài liệu triển khai của em thay đổi, spec có cần cập nhật không? Hay spec độc lập?
+T000164 [10:21:30] Chị Lan: Spec nên độc lập, vì nó mô tả module kết nối, không phụ thuộc vào quy trình triển khai. Em cứ giữ nguyên.
+T000165 [10:22:00] Anh Minh: Vậy em yên tâm.
+T000166 [10:22:30] Chị Hoa: Em cũng muốn hỏi: kịch bản test của em có cần bao gồm test cho spec integration không? Hay chỉ test triển khai?
+T000167 [10:23:00] Chị Lan: Chỉ test triển khai, không test module. Việc test module sẽ do QA riêng.
+T000168 [10:23:30] Chị Hoa: Rõ.
+T000169 [10:24:00] Anh Tuấn: Em thấy mọi việc đã ổn. Chúng ta có thể chuyển sang phần tiếp theo.
+T000170 [10:24:30] Chị Lan: Chưa vội, chị muốn nhấn mạnh: deadline 20/02 của chị Hoa là quan trọng, vì staging dự kiến có trong tuần đó. Anh Minh, em cố gắng hỗ trợ spec và rollback sớm.
+T000171 [10:25:00] Anh Minh: Em sẽ cố gắng.
+T000172 [10:25:30] Chị Hoa: Em sẽ nỗ lực.
+T000173 [10:26:00] Chị Lan: Tốt. Vậy chúng ta tạm dừng phần tài liệu ở đây. Phần tiếp theo sẽ bàn về kiến trúc tổng thể và timeline.
+
+--- END OF PART P03 ---

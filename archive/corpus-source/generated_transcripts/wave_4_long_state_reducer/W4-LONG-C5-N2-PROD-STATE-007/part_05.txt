@@ -1,0 +1,116 @@
+MEETING_ID: W4-LONG-C5-N2-PROD-STATE-007
+PART: P05/5
+
+T000249 [11:25:10] Linh: Mọi người ổn cả chứ? Chúng ta bắt đầu phần cuối của meeting hôm nay. Tôi muốn điểm lại toàn bộ các task và xác nhận trạng thái cuối cùng.
+
+T000250 [11:25:48] Minh: Dạ, em sẵn sàng.
+
+T000251 [11:26:20] Hà: Vâng.
+
+T000252 [11:26:52] Duy: Em cũng vậy.
+
+T000253 [11:27:25] Linh: Vậy tôi sẽ recap từ đầu. Task A: "Triển khai môi trường test module payment", owner Minh, deadline đã điều chỉnh thành 23/02. Task này đang trong tiến trình, đúng không?
+
+T000254 [11:28:00] Minh: Đúng ạ. Em đã nhận được server tối qua, sáng nay em cài đặt cơ bản. Dự kiến 23/02 hoàn thành.
+
+T000255 [11:28:35] Hà: Em xác nhận. Minh đã gửi log cài đặt, em thấy ổn.
+
+T000256 [11:29:10] Linh: Tốt. Task B: "Triển khai môi trường test module sync" đã bị hủy trong part 4. Không còn hiệu lực.
+
+T000257 [11:29:45] Duy: Vâng.
+
+T000258 [11:30:15] Linh: Task C: "Tạo template tài liệu triển khai", owner chuyển từ Hà sang Duy trong part 3, deadline 26/02. Duy, em có bắt đầu chưa?
+
+T000259 [11:30:50] Duy: Dạ, em đã có bản mẫu từ Hà, đang bổ sung các mục. Em sẽ xong trước 26/02.
+
+T000260 [11:31:25] Hà: Em đã gửi bản mẫu cho Duy sau part 3.
+
+T000261 [11:32:00] Linh: Task D: "Xử lý lỗi đăng nhập staging", owner Hà, support Minh, deadline đã đặt lại thành 25/02. Hà, em đã capture log và tìm ra nguyên nhân là token expiry quá ngắn.
+
+T000262 [11:32:38] Hà: Đúng ạ. Em đã gửi config mới cho Minh, Minh sẽ apply.
+
+T000263 [11:33:10] Minh: Em sẽ apply trong ngày hôm nay.
+
+T000264 [11:33:45] Linh: Task E: "Seed dữ liệu test payment", script do Minh viết, chạy seed do Minh, review Hà. Script đã có, chạy sau khi môi trường sẵn sàng.
+
+T000265 [11:34:20] Minh: Em đã viết script, sẵn sàng chạy ngay khi task A xong.
+
+T000266 [11:34:55] Hà: Em đã review script sơ bộ, ok.
+
+T000267 [11:35:30] Linh: Và task monitoring: "Thiết lập monitoring dashboard cho payment", owner Minh, deadline 27/02. Minh đã bắt đầu chưa?
+
+T000268 [11:36:05] Minh: Em chưa, nhưng em sẽ bắt đầu sau khi task A hoàn tất. Vẫn kịp deadline.
+
+T000269 [11:36:40] Linh: Có vẻ mọi thứ đang đi đúng hướng. Tôi có một băn khoăn: task D có deadline 25/02, nhưng task monitoring là 27/02. Liệu có cần ưu tiên gì không?
+
+T000270 [11:37:18] Hà: Em nghĩ task D có thể xong sớm, ảnh hưởng gián tiếp đến monitoring vì service phải ổn định.
+
+T000271 [11:37:55] Duy: Em đồng ý. Nếu lỗi đăng nhập không được xử lý, dashboard sẽ hiển thị sai metric.
+
+T000272 [11:38:30] Linh: Vậy thứ tự ưu tiên vẫn là: task A, D, E, monitoring. Task C có thể làm song song.
+
+T000273 [11:39:05] Minh: Rõ.
+
+T000274 [11:39:38] Hà: Em muốn xác nhận lại: sau khi apply config cho task D, em có cần kiểm tra lại không?
+
+T000275 [11:40:10] Linh: Có, em và Minh cùng kiểm tra. Sau đó báo cáo kết quả trong meeting review cuối ngày mai.
+
+T000276 [11:40:45] Duy: Meeting review 4h chiều mai, đúng không?
+
+T000277 [11:41:15] Linh: Đúng. Vậy tôi ghi nhận.
+
+T000278 [11:41:48] Minh: Em có một vấn đề: task E seed dữ liệu có cần dữ liệu thật hay chỉ mock?
+
+T000279 [11:42:20] Hà: Mock là đủ, nhưng phải đúng cấu trúc.
+
+T000280 [11:42:52] Minh: Vậy script hiện tại đã đáp ứng.
+
+T000281 [11:43:25] Linh: Tôi muốn hỏi về monitoring data retention. Hồi nãy Minh nói 30 ngày, có ai thấy vấn đề gì không?
+
+T000282 [11:44:00] Duy: 30 ngày là phù hợp với yêu cầu lưu trữ.
+
+T000283 [11:44:35] Hà: Em nghĩ nên lưu 60 ngày để có dữ liệu so sánh xu hướng. Nhưng nếu server hạn chế, 30 ngày cũng được.
+
+T000284 [11:45:10] Linh: Vậy chưa chốt được? Có nên quyết định ngay không?
+
+T000285 [11:45:45] Minh: Em thiên về 30 ngày, vì server monitoring còn dùng chung.
+
+T000286 [11:46:20] Hà: Em ok với 30 ngày.
+
+T000287 [11:46:55] Duy: Em cũng ok.
+
+T000288 [11:47:25] Linh: Vậy thống nhất 30 ngày. Đó là một chi tiết của task monitoring.
+
+T000289 [11:48:00] Hà: Về unresolved item, em thấy còn vấn đề về việc ai sẽ deploy release chính thức ngày 28/02. Chưa được phân công.
+
+T000290 [11:48:38] Linh: Đúng. Tôi chưa giao cụ thể. Minh, em có thể deploy không?
+
+T000291 [11:49:10] Minh: Em có thể, nhưng em cần Hà verify trước.
+
+T000292 [11:49:45] Linh: Vậy để tôi giao: Minh deploy, Hà verify. Nhưng chưa có deadline cứng cho việc verify. Vậy tạm thời coi như unresolved cho đến khi có kế hoạch cụ thể.
+
+T000293 [11:50:20] Duy: Vâng, để sau release meeting.
+
+T000294 [11:50:55] Hà: Em đồng ý.
+
+T000295 [11:51:25] Linh: Vậy tổng kết: chúng ta có các task đã chốt, một task bị hủy, và một unresolved là việc phân công verify cho release. Không có recap toàn bộ gây duplicate.
+
+T000296 [11:52:00] Minh: Em muốn hỏi về meeting review mai. Có cần chuẩn bị gì không?
+
+T000297 [11:52:35] Hà: Em nghĩ mỗi người nên báo cáo tiến độ task của mình.
+
+T000298 [11:53:10] Linh: Đúng. Minh báo cáo task A, Hà task D, Duy task C. Có thể dùng slide nhanh.
+
+T000299 [11:53:45] Duy: Em sẽ chuẩn bị bản nháp template.
+
+T000300 [11:54:15] Hà: Em sẽ chuẩn bị log và config đã sửa.
+
+T000301 [11:54:48] Minh: Em sẽ chuẩn bị tiến độ môi trường.
+
+T000302 [11:55:20] Linh: Tốt. Vậy meeting hôm nay tạm thời kết thúc. Cảm ơn mọi người đã tham gia và đóng góp. Chúng ta sẽ gặp lại vào 4h chiều mai để review.
+
+T000303 [11:55:55] Minh: Cảm ơn anh.
+T000304 [11:56:20] Hà: Cảm ơn mọi người.
+T000305 [11:56:50] Duy: Hẹn mai.
+
+--- END OF PART P05 ---

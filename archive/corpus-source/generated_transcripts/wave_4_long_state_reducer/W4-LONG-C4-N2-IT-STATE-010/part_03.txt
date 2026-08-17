@@ -1,0 +1,86 @@
+MEETING_ID: W4-LONG-C4-N2-IT-STATE-010
+PART: P03/5
+
+T000152 [09:57:30] Anh Minh: Chúng ta quay lại vấn đề tài liệu từ đầu meeting. Như tôi đã nói hồi nãy, tài liệu môi trường test là một trong hai ưu tiên chính.
+
+T000153 [09:57:55] Chị Hà: Vâng, em đã bắt đầu phác thảo, nhưng vẫn chưa có thông tin cụ thể từ môi trường của Tuấn.
+
+T000154 [09:58:20] Anh Tuấn: Tôi đã setup xong phần cứng, nhưng còn chờ cấu hình database từ infra. Dự kiến thứ Năm mới xong.
+
+T000155 [09:58:45] Anh Minh: Thế thì lâu quá. Hồi đầu meeting tôi yêu cầu tài liệu phải song song với setup. Nhưng có vẻ chậm.
+
+T000156 [09:59:10] Chị Lan: Em thấy task tài liệu môi trường test không có deadline, nên Hà có thể bị cuốn vào việc khác.
+
+T000157 [09:59:35] Anh Minh: Đúng. Vậy tôi quyết định: chuyển chủ sở hữu task đó. Hà, em có thể tập trung vào review và tài liệu tổng thể. Còn tài liệu môi trường test, Tuấn em sẽ làm.
+
+T000158 [10:00:00] Anh Tuấn: Nhưng em đã có task setup môi trường, lại thêm tài liệu thì quá tải.
+
+T000159 [10:00:25] Anh Minh: Được thôi, vậy handoff cho Lan. Lan, em có thể viết tài liệu môi trường test không?
+
+T000160 [10:00:50] Chị Lan: Em cũng đang làm dữ liệu mẫu và test case. Nếu thêm tài liệu, em sợ không kịp.
+
+T000161 [10:01:15] Anh Minh: Vậy không handoff. Nhưng tôi vẫn muốn thay đổi: deadline cho task “Chuẩn bị môi trường test” của Tuấn từ thứ Năm lên thứ Sáu.
+
+T000162 [10:01:40] Anh Tuấn: Tại sao lại lùi? Em tưởng cần gấp?
+
+T000163 [10:02:05] Anh Minh: Vì có lỗi đăng nhập cần ưu tiên. Môi trường test có thể trễ một ngày. Nhưng tài liệu môi trường test cần hoàn thành trước thứ Sáu.
+
+T000164 [10:02:30] Chị Hà: Vậy task tài liệu môi trường test có deadline mới là thứ Sáu, nhưng ai làm?
+
+T000165 [10:02:55] Anh Minh: Em vẫn làm, Hà. Nhưng em phải hoàn thành đúng hạn.
+
+T000166 [10:03:20] Chị Hà: Em sẽ cố gắng, nhưng cần thông tin từ Tuấn về cấu hình sớm hơn.
+
+T000167 [10:03:45] Anh Tuấn: Tôi sẽ gửi thông tin sơ bộ cho Hà vào ngày mai. Còn phiên bản cuối thì thứ Năm.
+
+T000168 [10:04:10] Anh Minh: Vậy deadline cho tài liệu môi trường test là thứ Sáu, sau khi Tuấn xong môi trường. Điều chỉnh này có hiệu lực ngay.
+
+T000169 [10:04:35] Chị Lan: Như vậy task của em về dữ liệu mẫu vẫn giữ nguyên deadline thứ Năm?
+
+T000170 [10:05:00] Anh Minh: Đúng. Không thay đổi.
+
+T000171 [10:05:25] Anh Tuấn: Tôi nhắc lại: deadline mới của tôi là thứ Sáu, không phải thứ Năm như ban đầu.
+
+T000172 [10:05:50] Anh Minh: Chính xác. Vậy cần thông báo lại cho mọi người. Tôi sẽ ghi chú trong email tổng kết part này.
+
+T000173 [10:06:15] Chị Hà: Nhân tiện, em muốn hỏi về tài liệu triển khai tổng thể. Hồi đầu meeting em đã nói sẽ làm trong hai tuần. Có cần thay đổi không?
+
+T000174 [10:06:40] Anh Minh: Không. Giữ nguyên. Đây là task riêng, không ảnh hưởng đến tài liệu môi trường test.
+
+T000175 [10:07:05] Anh Tuấn: Vậy tổng kết lại: Task A – môi trường test – Tuấn – deadline thứ Sáu. Task B – tài liệu môi trường test – Hà – deadline thứ Sáu. Task C – dữ liệu mẫu – Lan – deadline thứ Năm.
+
+T000176 [10:07:30] Anh Minh: Thêm task fix lỗi đăng nhập – Khoa – deadline thứ Sáu và test case – Lan – không deadline cứng.
+
+T000177 [10:07:55] Chị Lan: Em có ý: test case nên có deadline sớm hơn để kịp chạy sau fix.
+
+T000178 [10:08:20] Anh Minh: Vậy em tự đặt deadline cho test case là thứ Năm, cùng với dữ liệu mẫu.
+
+T000179 [10:08:45] Chị Lan: Được ạ.
+
+T000180 [10:09:10] Anh Tuấn: Tôi muốn kiểm tra lại: task review tài liệu môi trường test và dữ liệu mẫu vẫn do Hà và tôi?
+
+T000181 [10:09:35] Anh Minh: Đúng. Nhưng review có thể diễn ra sau deadline, miễn là không chậm trễ.
+
+T000182 [10:10:00] Chị Hà: Vậy em sẽ review tài liệu môi trường test ngay khi Tuấn gửi thông tin, trước deadline.
+
+T000183 [10:10:25] Anh Tuấn: Tôi cũng sẽ review dữ liệu mẫu của Lan sau khi nhận.
+
+T000184 [10:10:50] Anh Minh: Tốt. Về tài liệu môi trường test, tôi thấy có vẻ nhiều việc. Hà, em cần hỗ trợ gì thêm không?
+
+T000185 [10:11:15] Chị Hà: Em muốn có một mẫu tài liệu chuẩn để tránh sai format. Anh Tuấn có thể cung cấp mẫu từ dự án trước không?
+
+T000186 [10:11:40] Anh Tuấn: Tôi có, sẽ gửi email ngay chiều nay.
+
+T000187 [10:12:05] Anh Minh: Vậy mọi thứ đã rõ. Nhắc lại: handoff tài liệu không xảy ra, nhưng deadline của môi trường test thay đổi. Mọi người ghi nhớ.
+
+T000188 [10:12:30] Chị Lan: Em có một thắc mắc: khi Hà viết tài liệu, có cần tham khảo tài liệu triển khai tổng thể không? Hay viết độc lập?
+
+T000189 [10:12:55] Chị Hà: Em nghĩ nên viết độc lập, vì hai tài liệu khác nhau.
+
+T000190 [10:13:20] Anh Minh: Đúng. Đừng chồng chéo. Cứ viết riêng.
+
+T000191 [10:13:45] Anh Tuấn: Vậy tôi sẽ tập trung vào môi trường test. Mọi việc khác để sau.
+
+T000192 [10:14:10] Anh Minh: Được. Kết thúc part này. Part sau chúng ta sẽ bàn về tài liệu triển khai và tổng kết tiến độ.
+
+--- END OF PART P03 ---

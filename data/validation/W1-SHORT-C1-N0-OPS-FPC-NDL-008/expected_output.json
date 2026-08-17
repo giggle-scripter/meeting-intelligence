@@ -1,0 +1,7 @@
+{
+  "meeting_title": "Chuẩn bị bản demo",
+  "tasks": [
+    {"task_name":"Chuẩn bị nội dung demo","assignee":"Lan","start_date":"2026-01-23","due_date":"","due_date_text":"","status":"Proposed"},
+    {"task_name":"Chuẩn bị môi trường test","assignee":"Tuấn","start_date":"2026-01-23","due_date":"","due_date_text":"","status":"Proposed"}
+  ]
+}

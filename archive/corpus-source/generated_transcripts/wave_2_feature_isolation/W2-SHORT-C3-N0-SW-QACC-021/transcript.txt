@@ -1,0 +1,30 @@
+MEETING_ID: W2-SHORT-C3-N0-SW-QACC-021
+CASE_LABELS: question_then_acceptance,task_confirmed_later
+MEETING_DATE: 2026-02-15
+PRIMARY_FEATURE: question then acceptance
+TITLE: Rà soát công việc sprint
+
+[09:00:00] Linh: Chào các bạn, hôm nay chúng ta sẽ rà soát công việc sprint và có một vài đầu việc mới. Bắt đầu với Minh, anh update tình hình module thanh toán đi.
+[09:00:07] Minh: Module thanh toán cơ bản đã code xong, còn một bug liên quan đến xác thực thẻ tín dụng khi test với môi trường sandbox. Tôi đang debug.
+[09:00:15] Linh: Bug đó có nghiêm trọng không? Có ảnh hưởng đến deadline không anh?
+[09:00:20] Minh: Không nghiêm trọng lắm, chỉ là hàm callback trả về sai mã lỗi. Tôi nghĩ chiều mai sẽ fix xong và đưa lên staging.
+[09:00:28] Hương: Vậy em có thể bắt đầu test từ chiều mai được không anh?
+[09:00:32] Minh: Chắc chắn rồi, tôi sẽ báo em ngay khi build sẵn sàng.
+[09:00:36] Hương: Tuyệt, em sẽ test kỹ phần luồng thanh toán với thẻ quốc tế. Còn phần đăng nhập thì em đã test xong, mọi thứ ok.
+[09:00:43] Linh: Tốt quá. Bây giờ mình có một yêu cầu mới từ khách hàng. Họ muốn chúng ta phân tích dữ liệu người dùng từ log truy cập trong 30 ngày qua để xem xu hướng sử dụng tính năng mới. Anh Minh thấy có thể đảm nhận task này không?
+[09:00:55] Minh: Hmm, phân tích dữ liệu... hiện tại tôi vẫn đang còn việc với thanh toán và còn một task bảo trì nhỏ. Tôi cần kiểm tra lại workload. Cho tôi ít phút nhé.
+[09:01:05] Linh: Ok, anh cứ check. Nhân tiện, ai có ý kiến gì về việc cải thiện giao diện tìm kiếm không? Bên thiết kế phàn nàn là nó quá rối.
+[09:01:12] Hương: Em thấy đúng là cần cải tiến, nhưng thay đổi giao diện cần thời gian thiết kế lại và test. Mình có thể lên kế hoạch cho sprint sau không?
+[09:01:20] Tuấn: Tôi có thể phác thảo một vài phương án cải tiến nhanh nếu cần, nhưng không cam kết trong tuần này.
+[09:01:27] Linh: Vậy mình ghi nhận ý tưởng cải tiến tìm kiếm, nhưng không đưa vào sprint này nhé. Sẽ đưa vào backlog để ưu tiên sau.
+[09:01:33] Hương: Ok, em sẽ note vào danh sách cải tiến.
+[09:01:36] Linh: Còn một vấn đề nhỏ: phần xuất báo cáo PDF bị lỗi font khi in, Tuấn xử lý được không?
+[09:01:42] Tuấn: Đã rõ nguyên nhân rồi, do thiếu font fallback. Tôi sẽ tự fix và push lên hôm nay, không cần tạo task riêng.
+[09:01:48] Linh: Cảm ơn Tuấn. Quay lại task phân tích dữ liệu, anh Minh đã check xong chưa?
+[09:01:52] Minh: Tôi vừa xem xong. Tôi có thể nhận task này. Tuy nhiên tôi cần có file log đầy đủ và mất khoảng 2 ngày làm việc để phân tích. Vậy deadline là thứ Sáu tuần này được không?
+[09:02:01] Linh: Được, thứ Sáu là 20/02, phù hợp với yêu cầu của khách. Anh tạo task với deadline đó nhé.
+[09:02:06] Minh: Ok, tôi sẽ tạo task ngay và cập nhật vào hệ thống.
+[09:02:09] Linh: Tốt. Vậy tổng kết: sprint này mình có thêm 1 task phân tích dữ liệu giao cho Minh, các đầu việc khác vẫn theo kế hoạch. Cảm ơn mọi người, họp kết thúc.
+[09:02:15] Hương: Cảm ơn Linh.
+[09:02:17] Minh: Bye.
+[09:02:18] Tuấn: Bye mọi người.

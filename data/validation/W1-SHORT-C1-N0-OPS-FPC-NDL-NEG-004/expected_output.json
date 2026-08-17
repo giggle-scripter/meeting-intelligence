@@ -1,0 +1,37 @@
+{
+  "meeting_title": "Chuẩn bị bản demo",
+  "tasks": [
+    {
+      "task_name": "Làm slide API",
+      "assignee": "Lan",
+      "start_date": "2026-01-19",
+      "due_date": "2026-01-23",
+      "due_date_text": "Chiều thứ Sáu",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Chuẩn bị môi trường demo",
+      "assignee": "Lan",
+      "start_date": "2026-01-19",
+      "due_date": "2026-01-23",
+      "due_date_text": "Chiều thứ Sáu",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết kịch bản demo",
+      "assignee": "Tuấn",
+      "start_date": "2026-01-19",
+      "due_date": "2026-01-23",
+      "due_date_text": "Chiều thứ Sáu",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Soạn email gửi khách hàng",
+      "assignee": "Tuấn",
+      "start_date": "2026-01-19",
+      "due_date": "",
+      "due_date_text": "trước demo",
+      "status": "Proposed"
+    }
+  ]
+}

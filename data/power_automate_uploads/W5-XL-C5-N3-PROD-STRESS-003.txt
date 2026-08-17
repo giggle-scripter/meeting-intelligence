@@ -1,0 +1,780 @@
+=== MEETING METADATA ===
+meeting_id: W5-XL-C5-N3-PROD-STRESS-003
+meeting_title: Họp tổng hợp phát triển và vận hành sản phẩm
+meeting_date: 2026-02-27
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[00:00:05] Thảo: Chào mọi người, họp tổng hợp phát triển và vận hành sản phẩm bắt đầu. Hôm nay chúng ta có nhiều việc cần bàn.
+[00:00:12] Minh: Vâng, em sẵn sàng.
+[00:00:15] Hùng: Có mặt.
+[00:00:18] Linh: Em cũng ở đây.
+[00:00:20] Anh: Ok, mình có mặt. Nhưng trước tiên, cho mình hỏi về timeline của module X? Tuần trước đã có bản update gì chưa?
+[00:00:28] Thảo: Tuần trước team dev đã merge xong core logic, còn chờ tích hợp API bên thứ ba. Minh, em cập nhật cụ thể đi.
+[00:00:37] Minh: Dạ, phần code của module X đã xong, nhưng còn phụ thuộc vào API của đối tác. Họ chưa gửi key và tài liệu đầy đủ.
+[00:00:45] Hùng: Vậy test của tụi em cũng chưa thể bắt đầu. Cần có môi trường thật hoặc mock data đã.
+[00:00:52] Linh: Em hỗ trợ cấu hình môi trồng staging, nhưng cần đầu vào API rõ ràng. Thông số endpoint là gì?
+[00:00:59] Minh: Bên họ chỉ nói "sẽ gửi sau" mà không nói rõ. Em nghĩ mình cần đẩy mạnh email recall lại.
+[00:01:07] Anh: Không được, deadline dự kiến cho bản demonstration là 05/03, mà giờ mới chỉ có hứa hẹn. Phải có kế hoạch backup.
+[00:01:15] Thảo: Đồng ý. Mình cần xác định rõ các bước tiếp theo. Trước hết, ai sẽ là đầu mối liên hệ với đối tác? Anh nghĩ Minh hay em?
+[00:01:24] Minh: Em đã gửi email hai lần rồi, nhưng bên họ chưa trả lời. Có thể cần một người khác gọi trực tiếp.
+[00:01:31] Linh: Em có quen người bên đó qua project cũ, nếu cần em hỗ trợ gọi điện thoại.
+[00:01:38] Thảo: Tốt, Linh giúp việc đó. Trước 17h chiều nay hãy gọi thử và báo lại kết quả.
+[00:01:46] Linh: Vâng, em sẽ làm ngay. Nếu họ hứa gửi trong tuần thì sao?
+[00:01:53] Thảo: Thì chúng ta phải có phương án dự phòng. Minh, em đã tìm hiểu cách mock API chưa? Có thể dùng Postman hoặc tạo server ảo.
+[00:02:02] Minh: Dạ, em đã nghiên cứu rồi. Có thể dùng Mockoon để mô phỏng các endpoint cơ bản. Nhưng cần biết response structure của họ.
+[00:02:12] Hùng: Nếu không có response thật, team QA sẽ khó validate đúng. Có rủi ro khi release.
+[00:02:18] Anh: Đúng, nhưng mình không thể dừng lại. Hãy làm mock tạm thời, sau đó update khi có thông tin thật. Như vậy vẫn giữ được tiến độ.
+[00:02:28] Thảo: Được, thống nhất vậy. Vậy task cho Minh: xây dựng mock server dựa trên tài liệu sơ bộ. Deadline đến thứ Hai tuần sau, tức 02/03.
+[00:02:38] Minh: Thứ Hai 02/03? Em nghĩ cần khảo sát thêm nên có thể cần thêm một ngày. Để chậm nhất 03/03 được không?
+[00:02:46] Thảo: 03/03 cũng ổn, nhưng vậy là sát quá. Tuy nhiên, em cố gắng trước 02/03 nhé, nếu không kịp thì báo.
+[00:02:55] Minh: Vâng, em sẽ cố.
+[00:03:00] Hùng: Còn phần test của em? Em cần mock server chạy được để viết test case.
+[00:03:08] Thảo: Hùng, em có thể chuẩn bị test plan và tạo dữ liệu mẫu dựa trên yêu cầu nghiệp vụ trước khi có mock. Deadline cho test plan là 28/02.
+[00:03:18] Hùng: OK, em làm. Nhưng dữ liệu mẫu thì phải thống nhất format với anh Minh. Hôm qua em hỏi thì chưa thấy trả lời.
+[00:03:26] Minh: Xin lỗi, do em bận việc khác. Bây giờ em gửi spec qua chat luôn. Mọi người check trong vài phút nữa.
+[00:03:34] Anh: (tiếng ồn) Alo, alo? Xin lỗi, loa em hơi rè. Em vừa nói gì thế?
+[00:03:40] Thảo: Anh, loa anh có vấn đề. Minh vừa nói sẽ gửi spec. Anh cần nói gì không?
+[00:03:48] Anh: Ừ, cám ơn. Em muốn nhắc thêm về phần user acceptance test. Bên PO cần môi trường sạch để demo trước 04/03.
+[00:03:57] Linh: Liên quan tới vấn đề API đó, nếu bên họ không gửi kịp, chúng ta có thể dùng mock để demo không?
+[00:04:05] Anh: Tạm được, nhưng phải đảm bảo UI flow đúng. Thảo chốt giúp timeline demo.
+[00:04:12] Thảo: Để sau khi có mock và test plan, mình sẽ review toàn bộ vào 02/03. Hùng, em xem có thể chạy thử nghiệm nhỏ trước 02/03 không?
+[00:04:22] Hùng: Em cần mock trước ít nhất 2 ngày. Nếu Minh gửi mock xong 01/03 thì em có thể test sớm.
+[00:04:30] Minh: Em sẽ cố gắng hoàn thành phần core mock trước 29/02, cuối tháng. Như vậy Hùng có thời gian.
+[00:04:38] Thảo: Chú ý 29/02 không tồn tại năm nay, năm 2026 là năm thường. Em nói 28/02 đúng không?
+[00:04:45] Minh: À, em nhầm. 28/02 – thứ Bảy tuần này. Vâng, em sẽ có bản mock cơ bản vào 28/02.
+[00:04:54] Thảo: Tốt. Hùng, em nhận được chưa? Test plan 28/02, mock core 28/02, sau đó tích hợp. Còn việc gọi đối tác của Linh thì báo ngay hôm nay.
+[00:05:03] Linh: Vâng, em sẽ gọi trong giờ làm việc chiều nay, sau đó update vào group.
+[00:05:10] Anh: Chuyện gì xảy ra với module Y? Hình như tuần trước có issue về database migration chưa giải quyết?
+[00:05:18] Thảo: Module Y là vấn đề của team khác, đã có assignee riêng. Nhưng hôm nay mình tập trung module X trước đã.
+[00:05:27] Anh: OK, nhưng em thấy rủi ro chồng chéo lịch. Có thể ảnh hưởng tới tài nguyên của team dev.
+[00:05:34] Minh: Em nghĩ bọn em xử lý đủ, nhưng nếu cần thêm người thì phải báo sớm.
+[00:05:41] Thảo: Để em review capacity sau cuộc họp. Hiện giờ cứ tập trung vào module X.
+[00:05:48] Hùng: Em có câu hỏi về endpoint cũ. Cái API GET /orders có thay đổi gì không? Hay mình dùng version cũ?
+[00:05:57] Minh: Bên đó nói sẽ update lên v2, nhưng chưa công bố changelog. Tạm thời mình dùng v1 với mock.
+[00:06:05] Hùng: Như thế có gây nhầm lẫn về schema không? Nếu v2 đổi response thì sau này sẽ phải sửa nhiều.
+[00:06:13] Thảo: Đúng, rủi ro đó. Nhưng mình không thể chờ. Linh, khi gọi điện hỏi thêm về version API và dự kiến release.
+[00:06:22] Linh: Em note lại. Hỏi thêm về version và thời gian.
+[00:06:28] Anh: Thảo ơi, còn vụ environment staging có config được chưa? Em cần truy cập để kiểm tra vài luồng.
+[00:06:36] Linh: Em đã tạo xong từ tuần trước, nhưng chưa cập nhật DNS. Ai có thể giúp cập nhật bản ghi?
+[00:06:44] Thảo: Cái đó thường do anh Dũng phụ trách. Anh Dũng có trong meeting không? Hình như vắng.
+[00:06:51] Minh: Dũng báo ốm từ sáng. Có thể nhờ admin system hỗ trợ.
+[00:06:57] Thảo: Linh, em liên hệ với admin trung tâm để cập nhật DNS trước 28/02 nhé. Việc này không mất nhiều thời gian.
+[00:07:05] Linh: Vâng, em làm.
+[00:07:10] Hùng: Em thấy còn một vấn đề nữa: cơ sở dữ liệu test cần dữ liệu mẫu giống production. Ai sẽ sinh data?
+[00:07:19] Thảo: Task đó có thể giao cho anh Huy (BA). Nhưng anh Huy không họp hôm nay. Em ghi note giao sau.
+[00:07:27] Hùng: Có thể em tự làm mẫu sơ bộ dựa trên requirement cũ, nhưng cần confirm.
+[00:07:34] Thảo: Cứ làm, nhưng dùng dữ liệu phi nhạy cảm. Nếu cần insight chi tiết thì chờ Huy.
+[00:07:42] Anh: Nghe nói bên vận hành sắp có maintenance vào cuối tuần. Có ảnh hưởng gì không?
+[00:07:49] Linh: Dạ, dự kiến 22h thứ Bảy 28/02 đến 02h Chủ Nhật, nhưng hệ thống staging không bị ảnh hưởng, chỉ production thôi.
+[00:07:58] Thảo: OK, vậy không sao. Mọi người chú ý không deploy gì vào thời điểm đó.
+[00:08:05] Hùng: Em vẫn chờ spec của Minh. Nếu không nhận được sớm em chưa thể viết test case.
+[00:08:12] Minh: Em gửi rồi, check chat đi. Vừa gửi liên kết Google Doc.
+[00:08:18] Hùng: À, được rồi. Em xem ngay.
+[00:08:23] Anh: Tiện thể, ai sẽ viết integration test cho API mock và real sau này? Đó là khoảng trống.
+[00:08:31] Thảo: Tốt, cần assign. Minh và Hùng cùng phối hợp? Hay mình giao chính cho Hùng?
+[00:08:38] Hùng: Em chỉ làm được phần test tự động cho UI, còn API test cần kiến thức của Minh.
+[00:08:46] Minh: Em có thể viết script test API, nhưng cần thời gian rảnh. Hiện em đang bận mock.
+[00:08:53] Thảo: Thế này nhé: Minh lo mock và script test API cơ bản, Hùng viết test UI và hỗ trợ chạy integration. Deadline cho toàn bộ test pass là 04/03. Nhưng Minh ưu tiên mock trước.
+[00:09:04] Minh: Vâng, rõ.
+[00:09:08] Hùng: Em ok, nhưng nếu script API chưa xong thì em làm UI trước.
+[00:09:15] Thảo: Được. Linh, em còn gì cần hỗ trợ không?
+[00:09:20] Linh: Liên quan đến môi trường, admin hứa sẽ cập nhật DNS trong ngày 27/02. Em sẽ theo dõi.
+[00:09:28] Thảo: Tốt. Anh, anh có yêu cầu gì từ phía PO?
+[00:09:33] Anh: Có, em muốn nhấn mạnh: tính năng thanh toán cần demo trước 05/03. Nếu mock không đủ tin cậy, có thể delay decision. Nhưng hôm nay chưa cần giải quyết.
+[00:09:44] Thảo: Đã ghi nhận. Chúng ta sẽ bàn chi tiết trong part tiếp theo. Còn việc gì nữa không?
+[00:09:51] Minh: Em có một thắc mắc nhỏ: bản mock có cần simulate lỗi từ API không? Hay chỉ response thành công?
+[00:09:59] Hùng: Tốt nhất nên có các case lỗi để test xử lý ngoại lệ.
+[00:10:05] Thảo: Ý hay. Minh thêm các scenario lỗi cơ bản vào mock. Việc đó không mất nhiều thời gian.
+[00:10:13] Minh: Em thêm, nhưng ưu tiên response đúng trước.
+[00:10:18] Anh: À, em nhớ ra còn một dependency với team SRE. Họ cần cập nhật firewall rules cho endpoint mới. Có ai đã nói chưa?
+[00:10:27] Thảo: Chưa, task đó sẽ được tạo và chuyển cho team SRE. Em note lại giao Linh liên hệ sau.
+[00:10:34] Linh: Em ok.
+[00:10:38] Hùng: Em thấy tracking issues trên board đang thiếu nhiều. Có nên cập nhật ngay?
+[00:10:45] Thảo: Cuối ngày em sẽ rà soát và cập nhật. Bây giờ cứ tập trung vào hành động.
+[00:10:52] Minh: Em sắp phải out sớm vì có họp khác. Còn gì cần em nữa không?
+[00:10:59] Thảo: Chờ một lát, sắp xong topic thứ nhất rồi. Mình sẽ chốt lại các task đã assign.
+[00:11:06] Thảo: Tổng kết: - Minh: mock server core (deadline 28/02), script test API cơ bản (deadline 02/03). - Hùng: test plan (28/02), test UI, hỗ trợ integration. - Linh: gọi đối tác (hôm nay), liên hệ admin DNS (28/02), sau này liên lạc SRE. - Anh: cập nhật requirement nếu có. - Em: review và điều phối.
+[00:11:22] Anh: Rõ ràng rồi. Còn về module Y, em thấy hơi lo.
+[00:11:28] Thảo: Module Y sẽ để topic khác. Hôm nay hết giờ rồi, chúng ta kết thúc phần đầu.
+[00:11:34] Minh: OK em đi đây.
+[00:11:37] Hùng: Em cũng chuẩn bị làm việc.
+[00:11:40] Linh: Em sẽ báo kết quả gọi điện vào group chiều nay.
+[00:11:46] Anh: Cảm ơn mọi người.
+[00:11:50] Thảo: Hẹn quay lại phần tiếp theo sau 15 phút.
+[00:15:05] Thảo: Chúng ta quay lại. Vừa rồi đã có 15 phút giải lao, tiếp tục với vấn đề tích hợp dữ liệu.
+[00:15:12] Hùng: Em có câu hỏi về dữ liệu mẫu cho test. Trong test plan em đã outline, nhưng chưa có data cụ thể.
+[00:15:20] Thảo: Task đó giao cho anh Huy, nhưng Huy chưa vào. Để xem Huy có online không.
+[00:15:27] Huy: Dạ em vào rồi, xin lỗi mọi người. Em bị lỗi mic lúc nãy. Chị Thảo gọi em ạ?
+[00:15:35] Thảo: Vâng, em cần Huy hỗ trợ chuẩn bị data mẫu cho test, dựa trên requirement module X. Deadline có thể đến 01/03.
+[00:15:44] Huy: 01/03? Em e là hơi ngắn, vì em cần thống nhất với bên business về format. Có thể đẩy lên 02/03?
+[00:15:52] Thảo: 02/03 cũng được, nhưng phải đảm bảo đủ sớm trước khi test. Vậy đồng ý 02/03.
+[00:15:59] Huy: Vâng, em note. Nhưng em cần input từ Minh về cấu trúc API response.
+[00:16:06] Minh: Em đã gửi spec, trong đó có schema dự kiến. Anh xem trong doc.
+[00:16:13] Huy: Được rồi, em sẽ dựa vào đó.
+[00:16:18] Anh: Nhớ là data phải bao gồm các edge case, vì demo sẽ có tình huống lỗi. Không chỉ happy path.
+[00:16:26] Huy: Vâng em để ý.
+[00:16:30] Hùng: Còn vụ mapping data từ table cũ? Có cần em hỗ trợ truy xuất DB không?
+[00:16:38] Huy: Có lẽ em cần view mẫu từ production staging. Nhưng hiện tại chưa có quyền. Ai có thể cấp quyền?
+[00:16:46] Thảo: Anh Dũng xử lý, nhưng Dũng ốm. Có thể nhờ admin tạm thời. Linh, em có thể liên hệ admin như đã nói?
+[00:16:54] Linh: Em sẽ làm luôn. Đã có ticket cho DNS, giờ em thêm request quyền DB view.
+[00:17:01] Thảo: Tốt. Vậy Linh gộp chung hai việc. Deadline cho DB access là 28/02.
+[00:17:09] Linh: Vâng.
+[00:17:13] Minh: Em vừa mới check lại mock server, phát hiện cần thêm vài endpoint nữa. Có thể deadline core mock bị trễ.
+[00:17:22] Thảo: Cụ thể thế nào? Em đã nói core mock xong 28/02.
+[00:17:28] Minh: Dạ, vì có thêm các yêu cầu về authentication flow, mà bên đối tác chưa trả lời. Em sợ chỉ có thể hoàn thành 30/02? À 28/02 không có ngày 30, ý em là 02/03.
+[00:17:38] Hùng: Như vậy là thay đổi lớn. Test của em phụ thuộc vào mock.
+[00:17:44] Thảo: Chưa chắc đã thay đổi. Linh, em gọi đối tác chưa?
+[00:17:50] Linh: Em gọi rồi, họ hứa gửi key và doc trong tuần, nhưng không chắc ngày. Có thể cuối tuần.
+[00:17:59] Thảo: Vậy vẫn mơ hồ. Mình cần quyết định: Nếu đến 28/02 không có thông tin, Minh có thể tự assume flow dựa trên tài liệu cũ.
+[00:18:08] Minh: Được, em sẽ làm vậy, và nếu sau có thay đổi thì sửa sau.
+[00:18:15] Hùng: Rủi ro lớn, nhưng không còn cách nào khác.
+[00:18:20] Anh: Em đề xuất thay vì gọi là mock core, hãy gọi là "provisional stub". Như vậy tâm lý thoải mái hơn.
+[00:18:29] Thảo: Ha ha, không cần, cứ gọi mock. Giữ deadline 28/02 cho core, nhưng nếu bất khả kháng thì báo.
+[00:18:38] Minh: OK em cố gắng.
+[00:18:43] Huy: Em có thắc mắc về dữ liệu mẫu: Cần bao nhiêu record cho mỗi endpoint?
+[00:18:51] Hùng: Ít nhất 5 record cho mỗi loại, và thêm các case đặc biệt.
+[00:18:58] Huy: 5 record, vậy em lấy từ production sampling. Nhưng cần permission.
+[00:19:05] Thảo: Linh đang lo permission. Em tạm thời tự tạo mock data bằng tay.
+[00:19:12] Huy: Vâng.
+[00:19:16] Anh: Vấn đề về module Y hình như cũng có overlapping với data này. Một số field chung.
+[00:19:24] Hùng: Nếu module Y dùng chung DB, có thể ảnh hưởng.
+[00:19:31] Thảo: Chưa bàn module Y bây giờ. Tập trung vào X.
+[00:19:36] (tiếng ồn nền) Minh: Alo, mất kết nối một lát. Xin lỗi, em vừa nghe thấy gì?
+[00:19:44] Thảo: Minh, em còn không? Chúng ta đang nói về data sample.
+[00:19:50] Minh: Vâng, em nghe lại. Huy sẽ tự tạo data. Em thấy ổn.
+[00:19:56] Linh: Em muốn hỏi về endpoint /auth: có cần đưa vào mock không? Hay bỏ qua vì dùng token giả?
+[00:20:03] Thảo: Hùng, theo em?
+[00:20:06] Hùng: Cần có mock /auth để test flow login. Nếu không, integration test bị thiếu.
+[00:20:13] Minh: Nhưng token giả có thể hardcode. Em thêm endpoint /auth trả về token fixed.
+[00:20:20] Thảo: Vậy thêm vào mock. Deadline có kịp không?
+[00:20:26] Minh: Có, thêm nhẹ. Vẫn 28/02.
+[00:20:31] Huy: Dữ liệu mẫu cho /auth thì cần gì? Chỉ cần username và role?
+[00:20:38] Hùng: Chủ yếu token, nhưng cũng nên có thông tin user để test permissions.
+[00:20:45] Huy: Em sẽ tạo 2 user: admin và user thường.
+[00:20:50] Thảo: Được.
+[00:20:55] Anh: Còn vụ demonstration: bên PO muốn xem bản demo vào 04/03. Nếu mock chưa hoàn chỉnh, có thể dùng UI prototype.
+[00:21:03] Thảo: UI prototype đã có từ team design chưa? Hùng, em biết không?
+[00:21:09] Hùng: Em nghĩ thiết kế đã done, chỉ chờ tích hợp.
+[00:21:15] Thảo: Tốt, để em xác nhận với design team sau.
+[00:21:20] Minh: Em thấy có một issue: ai sẽ là người chịu trách nhiệm cho việc deploy lên staging? Từ trước đến giờ chưa rõ.
+[00:21:28] Thảo: Đúng, owner chưa assign. Theo process, deploy thường do DevOps. Nhưng DevOps hiện có một người là anh Trung, nhưng Trung không họp.
+[00:21:37] Hùng: Vậy ai sẽ trigger build? Có thể Minh tự làm build test?
+[00:21:44] Minh: Em có thể chạy local, nhưng staging environment cần access.
+[00:21:51] Linh: Em có quyền access staging. Em có thể giúp deploy sau khi Minh build.
+[00:21:58] Thảo: Vậy tạm thời: Minh build artifact, Linh deploy lên staging. Nhưng owner chính thức vẫn cần xác định. Em sẽ assign cho Trung, nhưng Trung sẽ comment sau.
+[00:22:08] Anh: Owner không rõ là vấn đề. Có thể dẫn đến chậm trễ.
+[00:22:14] Thảo: Để em giải quyết offline. Tiếp theo, có ai có ý kiến về integration test strategy?
+[00:22:22] Hùng: Em có draft test strategy, nhưng cần review. Em gửi doc sau.
+[00:22:29] Thảo: Gửi trong group, hạn chót 28/02 để mọi người comment.
+[00:22:36] Hùng: Vâng.
+[00:22:39] Minh: Em nghĩ cần một buổi họp ngắn để align giữa mock và test script. Có thể tổ chức sáng 01/03?
+[00:22:48] Thảo: Sáng 01/03 chủ nhật? Có thể không ai rảnh. Chuyển sang 02/03, chiều.
+[00:22:56] Hùng: Chiều 02/03 em được.
+[00:23:00] Minh: Em cũng ok.
+[00:23:04] Thảo: Vậy 14h 02/03, họp ngắn 30 phút. Linh, Huy cũng tham gia.
+[00:23:12] Linh: Vâng.
+[00:23:15] Huy: Em cũng tham gia.
+[00:23:19] Anh: Em nghĩ mình cần thảo luận về risk mitigation plan trước khi kết thúc. Phần này chưa giải quyết.
+[00:23:27] Thảo: Có, nhưng em muốn để topic riêng. Hôm nay còn một số vấn đề về dữ liệu và integration. Anh cần nói thêm gì không?
+[00:23:36] Anh: Chỉ muốn nhấn mạnh rằng nếu đối tác không gửi kịp, deadline demo 04/03 có thể bị ảnh hưởng.
+[00:23:44] Thảo: Đã ghi nhận. Mình sẽ có plan B. Em sẽ yêu cầu Huy chuẩn bị slide mô phỏng để backup.
+[00:23:52] Huy: Vâng, em làm.
+[00:23:56] Linh: Em vừa check mail, đối tác gửi doc rồi! Em sẽ đọc và chuyển cho Minh.
+[00:24:05] Thảo: Tuyệt vời! Vậy mock có thể điều chỉnh theo doc thật. Minh, em nhận được chưa?
+[00:24:11] Minh: Chưa, chờ Linh gửi.
+[00:24:15] Linh: Em đang forward.
+[00:24:19] Thảo: Vậy mọi thứ có vẻ sáng sủa hơn. Nhưng vẫn giữ kế hoạch cũ. Bây giờ em muốn review lại các task một lần nữa.
+[00:24:28] Hùng: Em xin phép phát biểu. Về test script, em nghĩ cần thống nhất tool chung: dùng Jest hay Mocha.
+[00:24:37] Minh: Em thích Jest vì tích hợp sẵn.
+[00:24:42] Hùng: Nhưng team QA quen Mocha. Em nghĩ nên thảo luận.
+[00:24:49] Thảo: Chuyện đó để ở họp 02/03. Không chốt vội.
+[00:24:55] Anh: Có thể gây mất thời gian nếu không đồng bộ.
+[00:25:01] Thảo: Đúng, nhưng ta cần quyết định sớm. Em sẽ vote sau.
+[00:25:07] Hùng: Vậy em chờ.
+[00:25:11] Minh: Em cũng chờ.
+[00:25:15] Huy: Về data mẫu, em sẽ tạo theo spec cũ. Nếu doc mới khác, em update sau.
+[00:25:23] Thảo: Hợp lý.
+[00:25:27] Linh: Em hoàn thành việc DNS và DB access rồi. Admin đã confirm.
+[00:25:34] Thảo: Nhanh vậy? Tốt. Vậy Huy có thể truy cập DB từ giờ.
+[00:25:41] Huy: Em kiểm tra sau.
+[00:25:45] Hùng: Về test plan, em đã gửi draft. Mọi người feedback nhé.
+[00:25:52] Thảo: Em xem qua, ổn. Có thể bổ sung thêm mục test environment.
+[00:25:59] Hùng: Em sẽ cập nhật.
+[00:26:05] Anh: Hôm nay em có hội nghị khác sắp tới, em phải out. Cho em tổng kết nhanh.
+[00:26:13] Thảo: Vâng, anh đi đi. Mọi người nhìn chung đã có việc. Còn một số item unresolved: owner của deploy staging chưa chính thức, và họp 02/03 14h.
+[00:26:24] Anh: Tạm biệt mọi người.
+[00:26:28] Thảo: Vâng. Tiếp tục nào.
+[00:26:33] Hùng: Em thấy vẫn chưa có ai assign cho integration testing giữa mock và real API.
+[00:26:41] Thảo: Việc đó để sau khi có mock và test script. Sẽ assign sau.
+[00:26:48] Minh: Em nghĩ em và Hùng có thể cùng làm phần đó.
+[00:26:53] Hùng: Đồng ý.
+[00:26:56] Thảo: Tốt, ghi nhận.
+[00:27:00] Huy: Em còn việc phải làm data, em xin phép đi.
+[00:27:06] Thảo: OK, em đi đi. Chúng ta tạm dừng ở đây, phần sau sẽ bàn về risk mitigation và module Y.
+[00:27:14] Hùng: Vâng.
+[00:27:17] Linh: Em cũng chuẩn bị cho task khác.
+[00:27:21] Minh: Em sẽ update task board.
+[00:27:26] Thảo: Vậy kết thúc part 2.
+[00:30:05] Thảo: Chúng ta tiếp tục. Mọi người đã sẵn sàng? Bây giờ em muốn bàn về vận hành và các vấn đề môi trường.
+[00:30:12] Hùng: Vâng, em có một vấn đề về staging environment. Hôm qua em thử deploy bản build test, nhưng bị lỗi permission. Ai đang quản lý access đó?
+[00:30:22] Linh: Em nghĩ là admin system, nhưng họ mới cập nhật DNS cho em. Có lẽ cần kiểm tra lại.
+[00:30:30] Thảo: Linh, em xem lại ticket DNS – nếu họ đã làm xong thì việc deploy không liên quan.
+[00:30:38] Hùng: Lỗi cụ thể là "403 Forbidden" khi chạy CI/CD pipeline. Có thể token hết hạn.
+[00:30:46] Thảo: Token đó do ai cấp? Minh, em có biết không?
+[00:30:52] Minh: Dạ, token em tạo cho pipeline từ tuần trước, nhưng có thời hạn. Có thể hết hạn hôm qua.
+[00:30:59] Hùng: Vậy em cần refresh token. Ai có quyền đó?
+[00:31:05] Thảo: Minh, em refresh giúp Hùng được không? Và update vào CI/CD config luôn.
+[00:31:13] Minh: Được, em refresh token và push lên repo, Hùng pull về là xong. Deadline hết hôm nay nhé.
+[00:31:22] Hùng: OK, cảm ơn.
+[00:31:26] Linh: Em vừa check mail, SRE team vẫn chưa trả lời về việc firewall rules cho endpoint mới. Em đã gửi reminder.
+[00:31:35] Thảo: Việc đó cần gấp. deadline cho firewall rules là 02/03 mới? Nhưng nếu không có thì deploy staging bị chặn.
+[00:31:44] Linh: Vâng, em nghĩ cần người trực tiếp gặp bên SRE. Em chỉ gọi điện thôi, không đủ.
+[00:31:53] Hùng: Em quen một bạn trong team SRE, tên Phong. Có thể em hỗ trợ.
+[00:32:00] Thảo: Tốt quá. Linh, em chuyển việc này cho Hùng nhé. Hùng, em chịu trách nhiệm liên hệ Phong để lên lịch update rules.
+[00:32:09] Hùng: Vâng, em lo. Deadline mong muốn là 01/03 để kịp test.
+[00:32:16] Thảo: 01/03, được. Linh, em gửi lại toàn bộ thông tin cho Hùng.
+[00:32:22] Linh: Em sẽ gửi email lịch sử.
+[00:32:27] Minh: Về mock server, em đã nhận doc từ đối tác. Tuy nhiên doc hơi khác so với spec em tự xây. Có thể cần sửa core mock.
+[00:32:38] Thảo: Cụ thể khác gì?
+[00:32:42] Minh: Ở endpoint /orders, họ thêm field discount. Còn /auth trả về token khác format.
+[00:32:50] Hùng: Vậy ảnh hưởng tới test plan. Em vừa viết xong draft dựa trên spec cũ.
+[00:32:58] Minh: Em xin lỗi, do họ mới gửi. Em sẽ điều chỉnh mock theo doc mới.
+[00:33:04] Thảo: Deadline core mock vẫn là 28/02? Hay em cần thêm thời gian?
+[00:33:11] Minh: Em nghĩ nếu gấp quá, core mock có thể trễ. Em muốn dời sang 02/03.
+[00:33:19] Hùng: Nếu dời thì test của em cũng bị trễ. Em đã hứa test plan 28/02, còn test execution lùi sau.
+[00:33:28] Thảo: Hiểu. Nhưng nếu mock không chính xác, test cũng vô ích. Đồng ý, deadline mock core chính thức chuyển thành 02/03. Minh, em ghi nhớ.
+[00:33:38] Minh: Vâng, cảm ơn chị. Em sẽ cập nhật task board.
+[00:33:44] Hùng: Vậy em cũng điều chỉnh lịch test. Em sẽ có test plan 28/02, bắt đầu test chạy từ 02/03.
+[00:33:53] Thảo: Ổn. Như vậy deadline correction này ảnh hưởng tới cả Hùng. Chúng ta nhớ theo dõi.
+[00:34:00] Linh: Em vừa gửi mail cho Hùng về firewall. Có thêm thông tin: SRE yêu cầu thời gian bảo trì để update.
+[00:34:09] Hùng: Em sẽ gọi Phong ngay.
+[00:34:14] Thảo: Tốt. Bây giờ em muốn nhắc về task test script API. Minh, em đã bắt đầu chưa?
+[00:34:22] Minh: Em chưa, vì muốn có mock xong trước. Nhưng em có thể viết script skeleton.
+[00:34:30] Thảo: Vậy em viết skeleton trước deadline 28/02, phần body khi mock xong.
+[00:34:38] Minh: Vâng.
+[00:34:42] Hùng: Còn vụ tool cho test script, chúng ta chưa chốt. Họp 02/03 sẽ quyết.
+[00:34:50] Thảo: Đúng, vẫn để ở họp.
+[00:34:54] Linh: Em có thắc mắc: server staging có cần cấu hình thêm gì cho mock không? Hay mock chỉ chạy local?
+[00:35:02] Minh: Em dự định mock chạy container riêng trên staging, để tích hợp dễ.
+[00:35:09] Thảo: Vậy cần Linh hỗ trợ mở port cho container.
+[00:35:15] Linh: Em sẽ làm sau khi có yêu cầu cụ thể.
+[00:35:20] Hùng: Em lo về việc test trên nhiều môi trường. Nếu mock khác production, có rủi ro.
+[00:35:28] Thảo: Đã có plan B: sau khi có API thật, chúng ta chạy regression.
+[00:35:34] Minh: Đúng vậy.
+[00:35:38] Hùng: OK.
+[00:35:42] Thảo: Một vấn đề nữa: task data mẫu của Huy. Huy đã out rồi, nhưng em muốn xác nhận ai sẽ review data đó.
+[00:35:51] Minh: Em có thể review schema, nhưng nội dung thì cần Huy.
+[00:35:58] Thảo: Vậy khi Huy gửi, em xem qua format. Còn content để Huy chịu.
+[00:36:05] Linh: Em có thể test thử data sau khi có.
+[00:36:11] Thảo: Vậy assign Linh kiểm thử dữ liệu mẫu sau 02/03.
+[00:36:18] Linh: Vâng.
+[00:36:22] Hùng: Em đề xuất thêm: cần một document tổng hợp tất cả endpoint và dependency. Ai làm?
+[00:36:31] Thảo: Việc đó thuộc về BA. Huy sẽ làm, nhưng Huy bận. Có thể Minh hỗ trợ? Minh có spec rồi.
+[00:36:39] Minh: Em có thể tạo doc từ spec, nhưng cần ai đó approve.
+[00:36:46] Thảo: Tạm thời em làm, sau đó gửi Huy review. Deadline 02/03.
+[00:36:53] Minh: Vâng.
+[00:36:57] Linh: Em thấy có sự chồng chéo: task document endpoint giống với doc mock. Có thể gộp không?
+[00:37:04] Thảo: Không, mock doc là technical, còn endpoint doc cho BA và test. Giữ riêng.
+[00:37:11] Minh: OK.
+[00:37:15] Hùng: Về môi trường staging, em vừa deploy lại pipeline, token mới hoạt động. Cảm ơn Minh.
+[00:37:23] Minh: Không có gì.
+[00:37:27] Thảo: Tốt. Vậy vấn đề staging tạm ổn. Chuyển sang chủ đề khác? Em muốn bàn về risk mitigation cho demo.
+[00:37:36] Hùng: Em nghĩ mock chưa đủ để demo. Cần ít nhất một vài luồng real data.
+[00:37:44] Thảo: Đúng. Em dự định nếu mock không ổn, sẽ dùng UI prototype kết hợp manual script.
+[00:37:53] Minh: Em có thể chuẩn bị script chạy tay cho demo.
+[00:37:59] Thảo: Vậy giao cho Minh. Deadline 03/03.
+[00:38:04] Minh: Vâng.
+[00:38:08] Linh: Em muốn hỏi về việc backup dữ liệu cho demo. Có cần prepare data đặc biệt không?
+[00:38:16] Thảo: Cần, và đó là task của Huy. Nhưng Huy không ở đây, em sẽ note lại.
+[00:38:23] Hùng: Em thấy mất nhiều thời gian chờ Huy. Có thể giao tạm cho Linh, vì Linh có kiến thức.
+[00:38:31] Thảo: Linh, em có thể làm không? Tạo một bộ data demo nhỏ, 5–7 record.
+[00:38:39] Linh: Em có thể, nhưng cần biết cụ thể scenario.
+[00:38:45] Thảo: Em sẽ gửi scenario sau. Vậy tạm thời assign Linh, deadline 03/03.
+[00:38:53] Linh: Vâng.
+[00:38:57] Minh: Em thấy task này hơi giống task data mẫu của Huy. Có risk trùng lặp.
+[00:39:05] Thảo: Không sao, Huy làm cho test, Linh làm cho demo. Khác mục đích.
+[00:39:12] Hùng: Em muốn nhắc: vụ tool test script vẫn chưa chốt, cần có quyết định sớm.
+[00:39:20] Thảo: Đã hẹn họp 02/03, sẽ quyết.
+[00:39:25] Linh: Em thấy lịch họp 02/03 14h, có ai xung đột không?
+[00:39:31] Minh: Em có họp khác lúc 15h, nhưng 14h em rảnh.
+[00:39:37] Hùng: Em ổn.
+[00:39:41] Thảo: Vậy đúng.
+[00:39:45] Hùng: Em có một phát hiện: check log staging thấy có warning về memory. Có thể ảnh hưởng tới mock.
+[00:39:54] Thảo: Mức độ nghiêm trọng? Linh, em biết không?
+[00:39:59] Linh: Em chưa theo dõi. Để em kiểm tra resource.
+[00:40:05] Hùng: Warning từ container, chưa crash.
+[00:40:10] Thảo: Vậy Linh check và báo lại. Nếu cần tăng resource, liên hệ admin.
+[00:40:17] Linh: Vâng.
+[00:40:21] Minh: Em vừa nhắn với Huy, Huy bảo data mẫu xong sớm, có thể 01/03.
+[00:40:29] Thảo: Vậy tốt, deadline trước.
+[00:40:33] Hùng: Như vậy test của em có thể diễn ra sớm hơn.
+[00:40:39] Thảo: Hy vọng.
+[00:40:43] Linh: Em check resource staging xong. CPU 60%, memory 70%. Ổn, nhưng nếu chạy mock có thể tăng.
+[00:40:52] Thảo: Theo dõi thêm.
+[00:40:56] Minh: Có ai đã liên hệ với SRE về firewall chưa?
+[00:41:01] Hùng: Em gọi Phong rồi. Anh ấy nói sẽ update vào cuối tuần, 28/02.
+[00:41:08] Thảo: Tuyệt. Vậy deadline cho firewall rules là 28/02.
+[00:41:14] Hùng: Nhưng họ cần chúng ta gửi danh sách IP cụ thể.
+[00:41:20] Thảo: Ai có IP? Minh?
+[00:41:24] Minh: Em có IP staging. Em gửi cho Hùng.
+[00:41:29] Hùng: OK, em forward cho Phong.
+[00:41:35] Thảo: Vậy mọi việc đang tiến triển. Còn một vấn đề chưa giải quyết: owner chính thức cho deploy staging. Tạm thời Linh và Minh phối hợp, nhưng em muốn có người chịu trách nhiệm.
+[00:41:47] Hùng: Em đề cử Minh, vì Minh hiểu code nhất.
+[00:41:53] Minh: Em ok, nhưng nếu deploy vào giờ hành chính thì em có mặt.
+[00:41:59] Thảo: Vậy từ giờ, deploy staging task assign cho Minh. Linh hỗ trợ access.
+[00:42:06] Linh: Vâng.
+[00:42:10] Thảo: Như vậy chúng ta đã hoàn thành handoff cho task firewall và deploy. Cần note lại.
+[00:42:18] Hùng: Em thấy deadline mock mới 02/03, nhưng test của em bắt đầu từ 02/03, vậy có overlap ngay.
+[00:42:27] Thảo: Chúng ta sẽ điều chỉnh trong họp 02/03.
+[00:42:32] Linh: Em muốn hỏi về security review cho API mới. Ai sẽ làm?
+[00:42:39] Thảo: Đó là task của team security, chưa assign. Để em liên hệ.
+[00:42:45] Hùng: Có thể ảnh hưởng deadline.
+[00:42:49] Thảo: Sẽ bàn sau.
+[00:42:53] Minh: Em xin phép tập trung vào mock, còn gì không ạ?
+[00:42:59] Thảo: Hết. Cảm ơn mọi người.
+[00:43:03] Hùng: Bye.
+[00:43:06] Linh: Tạm biệt.
+[00:43:10] Thảo: Kết thúc part 3.
+[00:45:05] Thảo: Chúng ta vào part 4. Hôm nay em muốn bàn về yêu cầu sản phẩm mới từ bên business. Vừa có một số feedback về tính năng search.
+[00:45:14] Hùng: Tính năng search liên quan tới module X hay module khác?
+[00:45:20] Thảo: Module X, nhưng mở rộng thêm. Họ muốn thêm filter theo ngày tháng và trạng thái.
+[00:45:28] Minh: Filter đó đã có trong spec gốc đâu. Hay là yêu cầu mới?
+[00:45:35] Thảo: Mới. Họ gửi email sáng nay. Em nghĩ cần đưa vào scope nếu kịp.
+[00:45:42] Anh: (tái xuất hiện) Xin lỗi, em vào lại được không? Em vừa out lúc nãy. Có chuyện gì mới?
+[00:45:50] Thảo: Có, bàn về filter mới. Anh có ý kiến?
+[00:45:56] Anh: Filter đó có liên quan tới database indexing. Cần thay đổi schema không?
+[00:46:03] Minh: Không, chỉ thêm field filter trên existing column. Nhưng cần API endpoint mới.
+[00:46:10] Hùng: Vậy ảnh hưởng tới test. Em phải cập nhật test case.
+[00:46:17] Thảo: Đúng. Chúng ta cần quyết định có implement trong sprint này không. Deadline cho bản demo là 05/03, nếu thêm filter thì có thể kịp?
+[00:46:26] Minh: Nếu endpoint đơn giản, em có thể thêm vào mock và code real sau. Nhưng phải ưu tiên.
+[00:46:34] Hùng: Em nghĩ nếu không làm, bên business sẽ không approve demo.
+[00:46:41] Thảo: Vậy thống nhất sẽ thêm. Nhưng cần define rõ task. Minh, em viết endpoint search với filter. Khi nào có thể xong?
+[00:46:50] Minh: Nếu chỉ thêm filter, em có thể hoàn thành code cho mock trong ngày 28/02, và real code trước 02/03.
+[00:46:58] Hùng: Nhưng mock core đã dời sang 02/03, giờ thêm việc nữa? Có quá tải không?
+[00:47:06] Thảo: Minh, em tự đánh giá?
+[00:47:11] Minh: Em nghĩ không vấn đề, vì filter là mở rộng nhỏ. Nhưng deadline cho mock core vẫn giữ 02/03, filter thêm sẽ trong cùng bản.
+[00:47:21] Thảo: Vậy task mới: Minh implement filter search, deadline 02/03. Hùng, test plan phải cập nhật.
+[00:47:29] Hùng: Vâng, em cập nhật test case cho filter. Deadline test plan vẫn 28/02, nhưng bổ sung phần filter.
+[00:47:38] Anh: Còn vấn đề performance. Nếu filter nhiều, có thể chậm. Ai sẽ làm review performance?
+[00:47:46] Thảo: Chưa có, nhưng em sẽ giao cho team infra sau. Đây là event-dependent: performance review chỉ khi có endpoint thật.
+[00:47:55] Linh: Em muốn hỏi: filter này có hiển thị trên UI không? Nếu có thì em cần cập nhật prototype.
+[00:48:03] Thảo: Có. Linh, em hỗ trợ cập nhật UI prototype cho filter? Deadline 03/03.
+[00:48:10] Linh: Vâng, em làm.
+[00:48:14] Minh: Em sẽ gửi API spec mới cho Linh.
+[00:48:19] Hùng: Vậy là có thêm một chuỗi phụ thuộc: filter spec -> UI prototype -> test.
+[00:48:27] Thảo: Đúng. Cần theo dõi. Bây giờ em muốn bàn về issue cũ: data mẫu của Huy. Huy đã gửi chưa?
+[00:48:36] Hùng: Em thấy Huy gửi email lúc trưa, có file đính kèm. Em chưa xem.
+[00:48:43] Thảo: Minh, em review schema như đã hứa.
+[00:48:48] Minh: Em sẽ xem trong ngày.
+[00:48:53] Linh: Em cũng sẽ test thử data đó vào cuối ngày.
+[00:48:59] Anh: Vậy deadline cho review data của Minh là 28/02, test data của Linh là 01/03.
+[00:49:07] Thảo: Nhất trí. Nhưng lưu ý data mẫu này dùng cho test, không phải demo.
+[00:49:14] Hùng: Em có câu hỏi: filter mới có cần dữ liệu đặc biệt không? Hay dùng dữ liệu từ Huy?
+[00:49:23] Minh: Dùng chung data, chỉ thêm filter field.
+[00:49:28] Thảo: Tốt.
+[00:49:32] Hùng: Còn vụ tool test script, họp 02/03 mới quyết. Nhưng nếu filter mới, có cần tool đặc biệt không?
+[00:49:41] Minh: Không, vẫn dùng tool tương tự.
+[00:49:46] Thảo: Vậy không ảnh hưởng.
+[00:49:50] Anh: Em muốn hỏi về risk của việc thay đổi scope. Cần có approval từ business.
+[00:49:58] Thảo: Em sẽ gửi email xác nhận với PO. Task đó em tự làm, deadline hôm nay.
+[00:50:05] Minh: Vâng.
+[00:50:09] Hùng: Em thấy có nhiều task mới, mà resource có hạn. Có thể cần ưu tiên.
+[00:50:17] Thảo: Đúng, em sẽ review priority.
+[00:50:22] Linh: Em muốn hỏi về việc demo: nếu filter chưa xong UI, có thể demo bằng API không?
+[00:50:30] Thảo: Có thể, nhưng PO muốn thấy UI. Vậy filter UI cần ưu tiên.
+[00:50:37] Linh: Em sẽ cố gắng hoàn thành UI prototype trước 03/03.
+[00:50:44] Thảo: Tốt.
+[00:50:48] Minh: Em vừa kiểm tra data mẫu của Huy. Có vài điểm không khớp với schema mới do filter. Cần Huy điều chỉnh.
+[00:50:57] Thảo: Huy không online. Em gửi comment vào mail, và chờ Huy phản hồi. Deadline adjust data là 01/03.
+[00:51:04] Minh: Vâng.
+[00:51:08] Anh: Vậy là có một unresolved: data mẫu chưa align với filter. Không thể giải quyết ngay.
+[00:51:16] Thảo: Đúng. Để nguyên.
+[00:51:20] Hùng: Em muốn nhắc về vụ firewall rules. Hôm qua Hùng đã gửi IP, Phong nói sẽ update 28/02. Nhưng chưa confirm.
+[00:51:30] Thảo: Hùng, em follow up với Phong.
+[00:51:35] Hùng: Vâng.
+[00:51:39] Linh: Em cần hỗ trợ gì cho UI prototype? Minh, em cần spec filter chi tiết.
+[00:51:47] Minh: Em gửi ngay bây giờ.
+[00:51:51] Thảo: Tốt.
+[00:51:55] Hùng: Về test plan, em đã cập nhật filter test case. Deadline 28/02 vẫn giữ.
+[00:52:03] Thảo: OK. Có ai có vấn đề gì về schedule không?
+[00:52:10] Minh: Em lo lịch họp 02/03 bị chồng. Em có meeting khác lúc 14h30, chỉ tham gia được 30 phút.
+[00:52:19] Thảo: Đủ rồi, vì họp chỉ 30 phút.
+[00:52:24] Hùng: Em ok.
+[00:52:28] Anh: Em nghĩ cần thêm một cuộc họp riêng về performance nếu filter được approve. Có thể sau 02/03.
+[00:52:37] Thảo: Để em lên lịch sau.
+[00:52:41] Linh: Em xin phép out để làm UI, vì deadline gần.
+[00:52:48] Thảo: OK, em đi đi. Còn ai cần hỏi gì nữa không?
+[00:52:54] Hùng: Em có thắc mắc về test environment: staging đã sẵn sàng cho filter chưa?
+[00:53:02] Minh: Staging vẫn dùng mock, nên filter sẽ được thêm vào mock.
+[00:53:09] Hùng: Vậy ok.
+[00:53:13] Anh: Em thấy vẫn còn vấn đề về owner cho deploy. Minh đã nhận, nhưng chưa có dự phòng.
+[00:53:21] Thảo: Đã assign Minh, nếu Minh bận thì Linh backup.
+[00:53:27] Minh: Em đồng ý.
+[00:53:31] Thảo: Vậy kết thúc topic sản phẩm. Chúng ta vừa tạo thêm các task: filter search (Minh 02/03), UI prototype (Linh 03/03), review data (Minh 28/02), approval từ business (Thảo hôm nay). Tất cả đều có dependency với nhau: filter spec -> UI, data adjust -> test.
+[00:53:48] Hùng: Tóm gọn.
+[00:53:52] Anh: Còn unresolved từ part 2 (tool test script) vẫn chưa giải quyết.
+[00:53:59] Thảo: Để dành cho họp 02/03.
+[00:54:04] Minh: Em xin phép chuẩn bị spec.
+[00:54:08] Thảo: Vậy part 4 dừng ở đây.
+[00:54:12] Hùng: Tạm biệt.
+[00:54:16] Anh: Bye.
+[00:55:05] Thảo: Chúng ta quay lại topic từ part 1 về module X. Hôm qua có một số thay đổi về yêu cầu từ business. Chúng ta cần cập nhật scope.
+[00:55:14] Hùng: Em nhớ là filter search đã được thêm vào part 4. Còn gì mới không?
+[00:55:21] Thảo: Có. Họ yêu cầu thêm một trường "priority" trong kết quả search. Như vậy cần mở rộng endpoint.
+[00:55:29] Minh: Lại thay đổi. Em vừa điều chỉnh mock xong cho filter, giờ lại thêm priority. Điều này ảnh hưởng tới deadline.
+[00:55:38] Hùng: Thế thì test của em cũng phải sửa. Em vừa cập nhật test plan xong, giờ phải làm lại.
+[00:55:46] Thảo: Hiểu. Nhưng bên business nói đây là yêu cầu bắt buộc cho demo. Chúng ta phải xử lý.
+[00:55:53] Anh: Vậy scope đã thay đổi đáng kể. Cần xem lại toàn bộ kế hoạch.
+[00:56:00] Thảo: Đúng. Nhưng trước hết, ai sẽ implement priority? Minh vẫn là người lo phần backend.
+[00:56:08] Minh: Em có thể thêm, nhưng deadline 02/03 cho mock core và filter giờ phải kéo dài thêm. Có thể 03/03 mới xong.
+[00:56:17] Thảo: Không được, vì demo 05/03. Cần mock hoàn chỉnh trước 03/03 để Hùng test.
+[00:56:25] Minh: Nếu vậy, em cần ai đó hỗ trợ phần filter để em tập trung core và priority. Có thể handoff filter cho Hùng?
+[00:56:35] Hùng: Em không rành về API code. Em chỉ làm test thôi.
+[00:56:41] Linh: Em có thể viết filter API đơn giản không? Em có kiến thức Node.js cơ bản.
+[00:56:49] Thảo: Tốt. Vậy Linh sẽ nhận phần filter search, Minh lo core mock và priority. Handoff chính thức.
+[00:56:57] Minh: Đồng ý. Em sẽ chuyển spec filter cho Linh và hướng dẫn.
+[00:57:04] Linh: Em sẵn sàng. Nhưng em cần deadline rõ.
+[00:57:10] Thảo: Filter search của Linh: deadline 02/03, trễ nhất 03/03. Minh vẫn giữ core mock và priority, deadline 03/03.
+[00:57:19] Hùng: Vậy test của em sẽ bắt đầu từ 03/03 với toàn bộ mock. Nhưng nếu filter của Linh chưa xong thì test lẻ.
+[00:57:27] Thảo: Linh phải hoàn thành đúng hạn.
+[00:57:33] Anh: Scope update này có cần approval lại không? Hay ta tự quyết?
+[00:57:41] Thảo: Em sẽ báo PO. Không cần họp riêng.
+[00:57:47] Hùng: Như vậy là handoff bước hai: từ Minh sang Linh. Minh đã bàn giao spec.
+[00:57:55] Minh: Em gửi doc ngay.
+[00:58:00] Linh: Cảm ơn.
+[00:58:04] Thảo: Về repeated mention: Hùng vừa nhắc lại về data mẫu. Hôm qua Huy đã gửi, Minh review rồi. Chúng ta không cần tạo task mới, chỉ nhắc.
+[00:58:13] Hùng: Vâng, em chỉ confirm là đã nhận.
+[00:58:18] Thảo: Tốt. Không tạo duplicate.
+[00:58:22] Anh: Còn vụ firewall rules? Hùng đã follow up chưa?
+[00:58:28] Hùng: Em gọi Phong rồi. Anh ấy nói sẽ update 28/02. Chưa có response.
+[00:58:35] Thảo: Vẫn chưa confirm. Em theo dõi.
+[00:58:40] Minh: Về priority field, em cần thêm trường trong schema. Có thể ảnh hưởng tới UI prototype.
+[00:58:48] Linh: Nếu có thay đổi UI, em cập nhật sau khi có spec.
+[00:58:54] Thảo: Vậy Linh sẽ đợi spec priority từ Minh.
+[00:58:59] Hùng: Em muốn hỏi: test script tool đã có quyết định chưa? Hay vẫn chờ họp 02/03?
+[00:59:07] Thảo: Vẫn chờ. Họp 02/03 sẽ quyết.
+[00:59:12] Anh: Em thấy nhiều thay đổi, cần cập nhật risk log.
+[00:59:18] Thảo: Em sẽ ghi nhận.
+[00:59:23] Minh: Em có thắc mắc: handoff filter cho Linh, vậy ai sẽ review code của Linh?
+[00:59:31] Thảo: Minh review, vì Minh hiểu architecture. Linh gửi pull request.
+[00:59:38] Linh: Vâng.
+[00:59:42] Hùng: Em thấy lịch rất chặt. Có thể cần tăng ca.
+[00:59:48] Thảo: Có thể. Nhưng hãy cố gắng.
+[00:59:53] Anh: Vậy nhiệm vụ chính: Linh nhận filter, Minh core và priority, Hùng test, Thảo liên lạc PO.
+[01:00:00] Hùng: Đúng.
+[01:00:05] Linh: Em bắt đầu ngay.
+[01:00:09] Minh: Em cũng vậy.
+[01:00:13] Thảo: Nhắc lại, không giải quyết unresolved tool test script, để họp sau.
+[01:00:19] Anh: OK.
+[01:00:23] Hùng: Em có cảm giác scope đang phình to. Có cần cắt bớt?
+[01:00:30] Thảo: Không, vì business yêu cầu. Ta phải theo.
+[01:00:35] Minh: Em lo về deadline.
+[01:00:39] Thảo: Đã điều chỉnh. Cố gắng.
+[01:00:43] Linh: Em xin phép out để code.
+[01:00:47] Hùng: Em cũng chuẩn bị test.
+[01:00:51] Thảo: Kết thúc part 5.
+[01:05:05] Thảo: Chúng ta tiếp tục. Bây giờ em muốn bàn về kế hoạch release cho module X. Deadline demo 05/03 đang đến gần.
+[01:05:13] Hùng: Em nghĩ cần xác định rõ build nào sẽ được release. Hiện tại mock vẫn chưa hoàn chỉnh.
+[01:05:21] Minh: Em đang làm priority field, nhưng chưa xong. Mock core dự kiến 03/03.
+[01:05:28] Anh: Vậy release schedule rất căng. Có thể cần cắt bớt một vài task không thiết yếu.
+[01:05:36] Thảo: Đồng ý. Em thấy task "test script API" do Minh phụ trách có thể không cần thiết vì đã có test UI và integration manual.
+[01:05:45] Minh: Nhưng nếu không có test API tự động, rủi ro khi tích hợp thật sau này.
+[01:05:52] Hùng: Em nghĩ test API script quan trọng, nhưng có thể làm sau release. Trước mắt, test manual đủ.
+[01:06:00] Thảo: Vậy quyết định hủy task "test script API" của Minh. Thay vào đó, chúng ta cần một "integration test suite" tổng thể do Hùng phụ trách, dùng manual test case.
+[01:06:11] Hùng: Vâng, em nhận. Em sẽ xây dựng test suite dựa trên test plan đã có.
+[01:06:18] Thảo: Tốt. Task cũ hủy, task thay thế rõ ràng.
+[01:06:24] Anh: Như vậy scope giảm tải cho Minh.
+[01:06:29] Minh: Cảm ơn. Em tập trung vào core mock và priority.
+[01:06:35] Thảo: Tiếp theo, về deadline cho UI prototype của Linh. Hôm qua Linh nhận handoff filter, nhưng thời gian eo hẹp.
+[01:06:44] Linh: Dạ, em cũng đang lo. Filter có thể hoàn thành 03/03, nhưng prototype UI cần thêm thời gian.
+[01:06:52] Thảo: Vậy em điều chỉnh deadline UI prototype từ 03/03 lên 04/03. Đây là correction deadline thứ hai cho task đó.
+[01:07:00] Hùng: 04/03 là sát demo 05/03. Vẫn kịp nếu Linh làm gấp.
+[01:07:07] Linh: Em sẽ cố gắng.
+[01:07:11] Anh: Như vậy chúng ta có hai correction deadline: một cho mock core (từ 28/02 lên 02/03 rồi 03/03), và một cho UI prototype (từ 03/03 lên 04/03).
+[01:07:22] Thảo: Đúng. Cần ghi nhận.
+[01:07:27] Minh: Vậy lịch release dự kiến thế nào? Demo 05/03, release thật khi nào?
+[01:07:35] Thảo: Release thật dự kiến 10/03, sau khi có API thật từ đối tác.
+[01:07:42] Hùng: Như vậy còn thời gian fix bug sau demo.
+[01:07:48] Anh: Về vụ firewall rules, Hùng đã confirm chưa?
+[01:07:54] Hùng: Phong nói đã update, nhưng em chưa verify. Sẽ kiểm tra chiều nay.
+[01:08:01] Thảo: OK. Cần verify trước 28/02.
+[01:08:06] Linh: Em có thắc mắc về priority field: nó có ảnh hưởng tới filter không? Hay độc lập?
+[01:08:14] Minh: Độc lập. Filter không liên quan priority.
+[01:08:19] Thảo: Vậy Linh yên tâm.
+[01:08:23] Hùng: Em muốn hỏi về integration test suite: em cần access DB? Hiện tại DB view đã có chưa?
+[01:08:31] Linh: Admin đã cấp quyền, nhưng chưa active. Em sẽ kích hoạt.
+[01:08:37] Hùng: Cần trước 02/03.
+[01:08:41] Linh: Vâng.
+[01:08:45] Thảo: Có vấn đề gì về release khác không?
+[01:08:50] Anh: Em muốn nhấn mạnh rằng tất cả task đã điều chỉnh, nhưng vẫn còn unresolved: tool test script. Chưa quyết.
+[01:08:59] Thảo: Đúng, để họp 02/03.
+[01:09:04] Minh: Em xin phép hỏi: vậy task "test script API" bị hủy, nhưng code em viết skeleton thì sao? Có ai dùng không?
+[01:09:14] Thảo: Skeleton có thể dùng cho integration test sau. Hùng sẽ tham khảo.
+[01:09:20] Hùng: OK, em sẽ xem.
+[01:09:25] Thảo: Vậy mọi thứ đã rõ. Tiếp tục part 7.
+[01:09:30] Hùng: Chờ một lát, em có issue về staging memory. Hôm qua warning, hôm nay vẫn.
+[01:09:38] Thảo: Nghiêm trọng không?
+[01:09:42] Hùng: Chưa, nhưng cần xem.
+[01:09:47] Linh: Em check thì resource bình thường. Có thể do container cũ.
+[01:09:53] Thảo: Minh, em restart container?
+[01:09:58] Minh: Em sẽ restart sau khi push code mới.
+[01:10:03] Hùng: OK.
+[01:10:07] Anh: Vậy còn vụ communication với business? Em đã gửi mail chưa?
+[01:10:14] Thảo: Em gửi rồi, họ ok.
+[01:10:19] Hùng: Vậy ổn.
+[01:10:23] Minh: Em có một clarification: task "integration test suite" của Hùng, ai review?
+[01:10:31] Thảo: Anh review, vì anh hiểu requirement.
+[01:10:36] Anh: OK.
+[01:10:40] Linh: Em xin phép out để làm prototype.
+[01:10:45] Thảo: Ok.
+[01:10:49] Hùng: Em cũng chuẩn bị test suite.
+[01:10:53] Thảo: Kết thúc part 6.
+[01:15:05] Thảo: Chúng ta bắt đầu part 7. Hôm nay em muốn thảo luận về việc monitoring staging và support cho team dev.
+[01:15:13] Hùng: Em có feedback về performance staging. Dù đã restart container, nhưng vẫn có latency khi gọi endpoint.
+[01:15:21] Minh: Latency đó em cũng thấy. Có thể do mock server chưa tối ưu. Em sẽ kiểm tra log.
+[01:15:29] Anh: Nhắc đến monitoring, hồi part 1 chúng ta có thống nhất về mock core, giờ tiến độ thế nào rồi?
+[01:15:37] Thảo: Đã hủy task test script API và chuyển integration test cho Hùng. Bây giờ mock core của Minh dự kiến 03/03. Anh, cần follow.
+[01:15:46] Minh: Em đang làm priority field, cơ bản xong 80%. Còn chờ Linh filter.
+[01:15:53] Linh: Filter của em đã chạy thử, nhưng có bug nhỏ về pagination. Sẽ fix trong chiều nay.
+[01:16:00] Thảo: Tốt. Vậy deadline cho filter của Linh vẫn 03/03, không đổi.
+[01:16:06] Hùng: Em cần hỏi về vụ support từ DevOps. Hồi part 3 đã handoff firewall rules cho em. Bây giờ rules chưa verify, ai follow?
+[01:16:15] Thảo: Hùng tiếp tục, vì em đã nhận. Cần verify với Phong trước 28/02.
+[01:16:22] Hùng: Vâng, em sẽ làm.
+[01:16:26] Anh: Còn vụ monitor log? Ai là người check daily? Em thấy không ai được assign.
+[01:16:34] Thảo: Đó là long-distance reference từ part 1? Lúc đó mình giao Minh mock, nhưng không có task monitor riêng. Bây giờ cần assign.
+[01:16:43] Linh: Em có thể check log hàng ngày đến khi demo.
+[01:16:49] Thảo: Vậy giao Linh. Deadline bắt đầu từ 28/02, kết thúc 05/03.
+[01:16:56] Linh: Vâng.
+[01:17:00] Minh: Em có một issue: deadlinemock core và priority của em là 03/03, trong khi đó deadline filter của Linh cũng 03/03. Gần nhau, nhưng không conflict.
+[01:17:11] Thảo: Đúng, ta có thể integration cùng ngày. Chú ý phối hợp.
+[01:17:17] Hùng: Về integration test suite, em đã bắt đầu viết manual cases. Tuy nhiên, cần spec từ Minh về priority.
+[01:17:26] Minh: Em gửi spec priority vào cuối ngày.
+[01:17:31] Thảo: Vậy Linh, em đã nhận spec filter chưa? Hay vẫn dựa trên doc cũ?
+[01:17:38] Linh: Em dựa trên doc từ đối tác và update từ Minh hồi part 5. Đã có.
+[01:17:45] Anh: Em lo rằng long-distance dependency từ part 3 về data mẫu của Huy vẫn chưa resolved. Huy chưa adjust theo schema mới.
+[01:17:55] Thảo: Đúng, Huy vắng. Em sẽ email thúc. Nhưng không tạo task mới, chỉ nhắc.
+[01:18:01] Minh: Em đã comment vào data, chờ Huy update.
+[01:18:06] Hùng: Em thấy có repeated mention về tool test script. Chúng ta có giải quyết không?
+[01:18:14] Thảo: Không, để họp 02/03.
+[01:18:19] Anh: Vậy tạm ổn. Còn vụ support từ SRE? Hùng gọi Phong chưa?
+[01:18:26] Hùng: Gọi rồi, họ hẹn 28/02. Nhưng chưa confirm.
+[01:18:32] Thảo: Theo dõi.
+[01:18:36] Linh: Em xin phép đi verify firewall rules với Hùng.
+[01:18:42] Hùng: OK, em sẽ làm cùng.
+[01:18:47] Thảo: Vậy có tiến triển. Nhưng cần lưu ý: deadline gần nhau không ảnh hưởng.
+[01:18:54] Minh: Em có một thắc mắc: task monitoring log của Linh, có cần báo cáo hàng ngày không?
+[01:19:01] Thảo: Có, Linh gửi brief vào group cuối ngày.
+[01:19:07] Linh: Vâng.
+[01:19:11] Anh: Vậy chúng ta đang có các deadline chính: 28/02 (firewall verify, check data), 02/03 (họp tool), 03/03 (mock, filter), 04/03 (UI prototype), 05/03 (demo). Khá khít.
+[01:19:23] Thảo: Đúng, mọi người cố gắng.
+[01:19:28] Hùng: Em có noise về mạng, mọi người nghe rõ không?
+[01:19:34] Thảo: Có, nhưng tạm ổn. Tiếp tục.
+[01:19:39] Minh: Em muốn hỏi: priority field có cần chỉnh UI prototype? Nếu có, Linh cần updated spec.
+[01:19:48] Linh: Em cần spec mới, nếu không thì prototype hiện tại không có priority.
+[01:19:55] Thảo: Minh gửi spec priority cho Linh, để kịp update UI trước 04/03.
+[01:20:01] Minh: Vâng, em gửi trong 2 tiếng.
+[01:20:06] Anh: Vậy long-distance dependency từ spec priority tới UI đã được nối.
+[01:20:13] Hùng: Em có câu hỏi về integration test: khi nào có thể bắt đầu test toàn bộ?
+[01:20:20] Thảo: Sau 03/03, khi mock hoàn chỉnh và filter ổn.
+[01:20:26] Linh: Em sẽ update filter xong trước 03/03.
+[01:20:31] Minh: Em cũng vậy.
+[01:20:35] Thảo: Vậy clear.
+[01:20:39] Anh: Còn unresolved duy nhất là tool test script. Hẹn 02/03.
+[01:20:45] Hùng: Vâng.
+[01:20:49] Thảo: Kết thúc part 7. Mọi người ghi nhớ deadline 28/02, 02/03, 03/03, 04/03.
+[01:20:56] Minh: OK.
+[01:20:59] Linh: Tạm biệt.
+[01:21:03] Hùng: Bye.
+[01:25:05] Thảo: Chúng ta quay lại với topic integration. Mọi người có cập nhật gì từ hôm qua không? Hôm nay là 28/02, deadline cho firewall verify và check data.
+[01:25:14] Hùng: Em đã verify firewall rules với Phong. Đã hoạt động. Cảm ơn Linh đã hỗ trợ.
+[01:25:21] Linh: Không có gì.
+[01:25:25] Thảo: Tốt. Còn vụ data mẫu của Huy? Minh, em review chưa?
+[01:25:32] Minh: Em review rồi. Có một ambiguity: trong data, field "status" có giá trị "pending" và "approved", nhưng trong schema mới có thêm "rejected". Huy chưa update.
+[01:25:42] Thảo: Đây là ambiguity cần xử lý. Huy đã được thông báo? Em nghĩ ai sẽ quyết định?
+[01:25:50] Minh: Em có thể tự thêm "rejected" vào data, vì nó là giá trị hợp lý.
+[01:25:57] Hùng: Nhưng nếu không đúng với requirement? Có thể gây lỗi test.
+[01:26:04] Thảo: Vậy em quyết định: Minh thêm "rejected" vào data mẫu, nhưng note lại để Huy review sau. Đây là giải pháp tạm thời.
+[01:26:13] Minh: Vâng.
+[01:26:17] Anh: Như vậy ambiguity đã được xử lý. Nhưng vẫn còn một unresolved reference khác: tool test script chưa quyết.
+[01:26:25] Thảo: Đúng, unresolved reference đó vẫn giữ. Không giải quyết bây giờ.
+[01:26:31] Hùng: Em muốn hỏi: integration test suite của em, khi nào cần spec từ Minh? Em đã bắt đầu viết case dựa trên requirement cũ.
+[01:26:40] Minh: Em gửi spec priority chiều qua rồi. Hùng đã check chưa?
+[01:26:46] Hùng: Chưa, em sẽ xem ngay.
+[01:26:50] Linh: Về UI prototype, em đã cập nhật filter theo spec mới. Còn priority thì chưa, vì chờ spec.
+[01:26:58] Minh: Spec priority em gửi rồi, Linh kiểm tra hộ.
+[01:27:03] Linh: OK, em xem sau.
+[01:27:07] Thảo: Bây giờ em muốn recap cục bộ về tiến độ integration:
+[01:27:13] Thảo: Mock core (Minh) đang tiến triển, filter (Linh) gần xong, UI prototype (Linh) chờ priority. Firewall rules đã verify. Data mẫu đang được adjust. Họp tool test script vẫn để 02/03. Đây chỉ là recap, không tạo task mới.
+[01:27:30] Hùng: Rõ.
+[01:27:33] Anh: Em có thắc mắc về dependency giữa filter và priority: chúng có ảnh hưởng lẫn nhau không? Hay hoàn toàn độc lập?
+[01:27:42] Minh: Độc lập.
+[01:27:46] Thảo: Vậy không có vấn đề.
+[01:27:50] Hùng: Em có phát hiện một bug: trong staging, endpoint /orders trả về status code 500 khi gọi với param sai. Có thể do mock chưa handle.
+[01:27:59] Minh: Em sẽ fix, nhưng không phải lỗi nghiêm trọng.
+[01:28:04] Thảo: Ghi nhận.
+[01:28:08] Linh: Em cần hỏi: UI prototype có cần hiển thị field priority không? Nếu có, em phải thiết kế thêm.
+[01:28:16] Anh: Cần, vì business muốn thấy filter và priority.
+[01:28:21] Thảo: Vậy Linh thêm priority vào UI, deadline vẫn 04/03.
+[01:28:27] Linh: Vâng.
+[01:28:31] Minh: Em xin phép báo: mock core của em có thể chậm một chút do fix bug 500, nhưng vẫn kịp 03/03.
+[01:28:40] Hùng: Vậy em sẽ test core trước, filter sau.
+[01:28:46] Thảo: Tốt.
+[01:28:50] Hùng: Có ai hỗ trợ em viết test case cho priority? Vì em chưa rõ logic.
+[01:28:58] Minh: Em sẽ hướng dẫn nhanh sau meeting.
+[01:29:03] Thảo: Vậy ok.
+[01:29:07] Anh: Em muốn nhấn mạnh rằng deadline 03/03 là cực kỳ quan trọng.
+[01:29:14] Minh: Em hiểu.
+[01:29:17] Linh: Em vừa kiểm tra, filter của em chạy ổn trên local. Sẽ deploy lên staging cuối ngày.
+[01:29:24] Thảo: Tuyệt.
+[01:29:28] Hùng: Em có noise về âm thanh, mọi người nghe rõ không?
+[01:29:34] Thảo: Có, hơi rè nhưng tạm được.
+[01:29:39] Minh: Em cũng bị.
+[01:29:43] Hùng: Em sẽ tắt mic rồi bật lại.
+[01:29:47] Hùng: Ok, rõ hơn.
+[01:29:51] Thảo: Tiếp tục. Còn vấn đề gì về integration không?
+[01:29:56] Linh: Em muốn hỏi: khi nào có thể integration filter với core mock? Cần phối hợp.
+[01:30:03] Minh: Sau 02/03, khi cả hai hoàn chỉnh.
+[01:30:08] Thảo: Vậy lên lịch integration chiều 03/03.
+[01:30:13] Hùng: Em sẽ tham gia.
+[01:30:17] Anh: Vậy part này đã rõ.
+[01:30:21] Thảo: Recap: đã xử lý ambiguity về data (thêm rejected), giữ unresolved tool test script.
+[01:30:29] Hùng: Vâng.
+[01:30:33] Minh: Em xin phép làm việc.
+[01:30:37] Linh: Em cũng vậy.
+[01:30:41] Thảo: Kết thúc part 8.
+[01:35:05] Thảo: Chúng ta bắt đầu part 9. Hôm nay là 02/03, chúng ta có họp về tool test script, nhưng trước đó em muốn cập nhật vài state transition.
+[01:35:15] Hùng: Em sẵn sàng.
+[01:35:19] Minh: Có mặt.
+[01:35:23] Linh: Em đây.
+[01:35:27] Anh: Vâng.
+[01:35:31] Thảo: Trước hết, về task “endpoint documentation” mà Minh được giao ở part 7. Em thấy chưa có tiến triển. Có cần tiếp tục không?
+[01:35:40] Minh: Em chưa làm vì bận mock. Em nghĩ không cần thiết cho demo. Có thể hủy.
+[01:35:48] Hùng: Đồng ý. Documentation có thể làm sau.
+[01:35:54] Anh: Nhưng nếu hủy, sau này sẽ thiếu tài liệu.
+[01:36:00] Thảo: Ta hủy task này, nhưng thay bằng ghi chú trong meeting notes. Sau demo sẽ làm lại.
+[01:36:07] Minh: Vậy task cũ bị hủy, không có thay thế.
+[01:36:13] Thảo: Đúng. Tiếp theo, về correction chain cho mock core. Lần đầu deadline 28/02, sửa thành 02/03, rồi 03/03. Hôm nay là 02/03, Minh đã xong chưa?
+[01:36:24] Minh: Em đã hoàn thành core mock và priority. Còn filter của Linh chưa tích hợp.
+[01:36:32] Linh: Em vừa fix xong bug pagination. Sẽ deploy lên staging chiều nay.
+[01:36:39] Thảo: Vậy state của mock core đã hoàn thành, nhưng chưa tích hợp filter. Đây là transition.
+[01:36:47] Hùng: Vậy thứ tự: core mock xong 02/03, filter xong 03/03, tích hợp 03/03 chiều.
+[01:36:55] Thảo: Chính xác. Về UI prototype, deadline 04/03 vẫn giữ. Linh, em có cần hỗ trợ gì không?
+[01:37:03] Linh: Em cần spec priority đã có, nhưng thiết kế UI mất thời gian. Em lo không kịp.
+[01:37:11] Thảo: Vậy em có thể postpone sang 04/03 tối? Nhưng demo sáng 05/03. Có thể chấp nhận trễ vài giờ.
+[01:37:20] Linh: Em sẽ cố gắng xong trước 05/03 8h sáng.
+[01:37:26] Thảo: Được, đó là correction không chính thức, nhưng vẫn ghi nhận.
+[01:37:33] Anh: Vậy chúng ta có cancellation muộn cho task mock documentation.
+[01:37:39] Thảo: Đúng.
+[01:37:43] Hùng: Bây giờ về họp tool test script. Chúng ta cần quyết định.
+[01:37:50] Thảo: Vâng, em mở topic. Mọi người propose tool.
+[01:37:55] Minh: Em vẫn đề xuất Jest.
+[01:37:59] Hùng: Em thích Mocha vì team QA quen.
+[01:38:04] Anh: Có thể dùng cả hai? Nhưng sẽ phức tạp.
+[01:38:10] Thảo: Không, chọn một. Em nghiêng về Jest vì tích hợp sẵn với React. Nhưng Hùng, team QA có thể học nhanh không?
+[01:38:20] Hùng: Có thể, nhưng cần thời gian. Demo gần, nếu dùng Mocha thì không cần training.
+[01:38:28] Linh: Em thấy Jest đơn giản hơn cho test API.
+[01:38:34] Thảo: Vậy vote: ai chọn Jest? Minh, Linh, Thảo. Ai chọn Mocha? Hùng. Anh chưa quyết.
+[01:38:42] Anh: Em nghiêng Jest vì future proof.
+[01:38:47] Thảo: Đa số chọn Jest. Vậy quyết định: dùng Jest cho test script. Hùng, em có thể làm quen nhanh?
+[01:38:56] Hùng: Em sẽ xem tutorial, ok.
+[01:38:59] Thảo: Vậy unresolved item từ part 2 đã giải quyết.
+[01:39:05] Minh: Tốt.
+[01:39:09] Hùng: Em có một ambiguity về việc ai viết test script bây giờ? Task cũ đã hủy.
+[01:39:17] Thảo: Task mới: Hùng viết integration test script dùng Jest, deadline 04/03. Có hỗ trợ từ Minh.
+[01:39:25] Minh: Em giúp setup Jest.
+[01:39:29] Hùng: Vâng.
+[01:39:33] Linh: Về firewall rules, em đã verify cùng Hùng. OK.
+[01:39:39] Thảo: Tốt. Vậy state transition cho firewall là done.
+[01:39:44] Anh: Còn vụ data mẫu? Huy đã adjust chưa?
+[01:39:49] Minh: Huy gửi bản mới sáng nay, em đã review, thêm rejected rồi. OK.
+[01:39:56] Thảo: Vậy hoàn thành.
+[01:40:00] Hùng: Em có noise – hình như ai đó mở mic.
+[01:40:05] Linh: Xin lỗi, em vô tình bật.
+[01:40:10] Thảo: Không sao. Tiếp tục.
+[01:40:14] Anh: Chúng ta cần bàn về risk log. Có một risk mới: nếu filter chưa kịp test, demo có thể lỗi.
+[01:40:23] Thảo: Đã có plan B: dùng manual script. Minh, em đã chuẩn bị script tay chưa?
+[01:40:30] Minh: Em có script demo từ tuần trước, chỉ cần update.
+[01:40:36] Thảo: Vậy risk đã giảm.
+[01:40:40] Hùng: Em muốn hỏi: tool test script vừa quyết, nhưng thời gian đào tạo có ảnh hưởng deadline không?
+[01:40:49] Thảo: Hùng tự đánh giá.
+[01:40:53] Hùng: Em nghĩ không, vì em có thể viết test đơn giản trước.
+[01:40:58] Thảo: Vậy ổn.
+[01:41:02] Linh: Em muốn báo: UI prototype đã có filter, chờ priority. Em sẽ cập nhật priority chiều nay.
+[01:41:10] Minh: Em gửi mock endpoint priority rồi.
+[01:41:14] Linh: Cảm ơn.
+[01:41:18] Thảo: Vậy state transition cho UI prototype là đang progress.
+[01:41:24] Anh: Còn unresolved cũ từ part 1 về owner deploy? Đã assign Minh, vẫn ổn.
+[01:41:32] Thảo: Đúng.
+[01:41:36] Hùng: Em có một phát hiện: trên staging, container memory vẫn cao dù đã restart. Có thể cần tăng limit.
+[01:41:45] Linh: Em sẽ điều chỉnh cấu hình container.
+[01:41:50] Thảo: Giao Linh, deadline 03/03.
+[01:41:55] Linh: Vâng.
+[01:41:59] Minh: Em xin phép báo: task mock core đã hoàn thành, có thể deploy thử.
+[01:42:06] Thảo: Tốt. Vậy chúng ta có thể bắt đầu integration sớm.
+[01:42:11] Hùng: Em sẽ chuẩn bị test suite ngay.
+[01:42:15] Thảo: Recap lại các state transition: - Mock core: từ 28/02 lên 02/03, nay hoàn thành. - Filter: đang progress, deadline 03/03. - UI prototype: deadline 04/03, Linh sẽ cố 05/03 sáng. - Firewall: done. - Data mẫu: done after adjust. - Tool test script: resolved, chọn Jest. - Task documentation: cancelled, không thay thế. - Container memory: task mới cho Linh.
+[01:42:38] Hùng: Rõ.
+[01:42:41] Anh: Vậy còn vụ performance review? Chưa có.
+[01:42:46] Thảo: Để sau demo.
+[01:42:50] Linh: Em xin phép out để cấu hình container.
+[01:42:55] Hùng: Em cũng đi viết test.
+[01:42:59] Thảo: Kết thúc part 9. Part 10 sẽ là tổng kết và closing.
+[01:45:05] Thảo: Chúng ta bắt đầu part cuối. Mục tiêu là recap toàn bộ meeting và chốt trạng thái. Không tạo task mới.
+[01:45:13] Hùng: Vâng, em sẵn sàng.
+[01:45:17] Minh: Có mặt.
+[01:45:21] Linh: Em đây.
+[01:45:25] Anh: OK.
+[01:45:29] Thảo: Recap tổng thể: Meeting bắt đầu với module X, tiến triển qua nhiều correction chain và handoff. Dưới đây là trạng thái cuối của từng task chính.
+[01:45:39] Thảo: Task 1 – Mock server core (Minh): deadline đã correction từ 28/02 lên 02/03, rồi 03/03. Hiện tại đã hoàn thành tích hợp filter. Đã deploy lên staging.
+[01:45:50] Minh: Đúng vậy.
+[01:45:54] Hùng: Em đã test core, ok.
+[01:45:58] Thảo: Task 2 – Filter search (Linh): nhận handoff từ Minh ở part 5, deadline 03/03. Đã hoàn thành, đang tích hợp.
+[01:46:07] Linh: Yes, filter đã chạy staging.
+[01:46:12] Thảo: Task 3 – UI prototype (Linh): deadline correction từ 03/03 lên 04/03, và gia hạn không chính thức tới sáng 05/03. Hiện tại đã có filter và priority.
+[01:46:23] Linh: Chỉ còn chút chỉnh giao diện.
+[01:46:27] Thảo: Task 4 – Integration test script (Hùng): task mới ở part 9, dùng Jest, deadline 04/03. Đang tiến hành.
+[01:46:36] Hùng: Em đã viết xong case cơ bản.
+[01:46:40] Thảo: Task 5 – Firewall rules (Hùng sau handoff từ Linh): deadline 28/02, đã verify và hoàn thành.
+[01:46:48] Hùng: Done.
+[01:46:51] Thảo: Task 6 – Data mẫu (Huy, với review của Minh): deadline adjustment 01/03, đã hoàn thành, đã thêm field rejected.
+[01:46:59] Minh: Dữ liệu đã sẵn sàng.
+[01:47:03] Thảo: Task 7 – Deploy staging owner (Minh, Linh backup): đã assign, hoạt động.
+[01:47:10] Anh: Còn vụ container memory?
+[01:47:14] Thảo: Task 8 – Container memory (Linh): deadline 03/03, đang configure.
+[01:47:20] Linh: Em đã tăng limit.
+[01:47:24] Thảo: Task 9 – Endpoint documentation: đã hủy ở part 9, không thay thế.
+[01:47:31] Minh: Ghi nhận.
+[01:47:35] Thảo: Task 10 – Test script API (Minh): hủy ở part 6, thay bằng integration test suite.
+[01:47:42] Hùng: Vậy còn các unresolved thật sự.
+[01:47:46] Thảo: Đúng. Unresolved thứ nhất: Performance review cho module X. Chưa assign, dự kiến sau demo.
+[01:47:55] Anh: Cần lưu ý.
+[01:47:59] Thảo: Unresolved thứ hai: Module Y vẫn có overlapping, chưa giải quyết.
+[01:48:06] Hùng: Em thấy risk.
+[01:48:10] Thảo: Unresolved thứ ba: Security review cho API mới, chưa có assignee.
+[01:48:17] Linh: Có thể cần họp riêng.
+[01:48:21] Thảo: Unresolved thứ tư: Tool test script đã resolved ở part 9, nhưng training chưa hoàn tất. Đó là pending.
+[01:48:30] Hùng: Em đang học Jest.
+[01:48:34] Thảo: Vậy đây là pending, không phải unresolved hoàn toàn.
+[01:48:39] Minh: Em muốn nhắc về long-distance dependency từ part 1: API đối tác. Họ đã gửi doc, nhưng chưa test thực tế.
+[01:48:48] Thảo: Đúng, việc đó vẫn còn pending sau demo.
+[01:48:53] Anh: Recap này đã nêu đầy đủ.
+[01:48:57] Hùng: Em có câu hỏi: có cần update task board không?
+[01:49:02] Thảo: Em sẽ cập nhật sau meeting. Không tạo task mới ở đây.
+[01:49:08] Linh: Về vụ container memory, em đã cấu hình xong, không cần thêm.
+[01:49:15] Thảo: Ghi nhận.
+[01:49:19] Anh: Vậy tổng thể các correction chain đã hoàn tất. Chúng ta có 3 unresolved chính.
+[01:49:27] Thảo: Đúng. Còn một ambiguous reference hồi part 1: "ai là người liên hệ đối tác?" Đã giao Linh và handoff qua Hùng, resolve.
+[01:49:36] Minh: Vậy không còn ambiguity.
+[01:49:40] Hùng: Em có noise – loa hơi rè, nhưng nghe được.
+[01:49:46] Thảo: Cố gắng.
+[01:49:50] Linh: Em muốn confirm: deadline demo 05/03 vẫn giữ, dù có risk.
+[01:49:57] Thảo: Đúng, chúng ta sẽ demo bằng mock và script tay nếu cần.
+[01:50:03] Anh: Vậy chốt.
+[01:50:07] Thảo: Recap cuối: Các task hoàn thành: mock core, filter, firewall, data mẫu, deploy owner. Các task đang progress: UI prototype, integration test, container memory. Hủy: endpoint doc, test script API. Unresolved: performance review, module Y, security review. Pending: training Jest, API đối tác thật.
+[01:50:24] Hùng: Rõ ràng.
+[01:50:28] Minh: Cảm ơn chị.
+[01:50:32] Thảo: Không có task mới. Chúng ta kết thúc meeting tại đây. Hẹn gặp lại trong buổi demo.
+[01:50:39] Anh: Bye.
+[01:50:43] Linh: Tạm biệt.
+[01:50:47] Hùng: Chúc mọi người ngày tốt lành.
+[01:50:51] Minh: Thanks.

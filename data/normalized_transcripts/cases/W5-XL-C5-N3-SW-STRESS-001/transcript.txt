@@ -1,0 +1,536 @@
+[09:00:12] Hoàng: Chào mọi người, cảm ơn đã có mặt đúng giờ. Hôm nay chúng ta có rất nhiều nội dung cần thảo luận, từ phát triển cốt lõi cho tới vận hành hàng ngày. Mục tiêu là ra được lịch trình rõ ràng cho tháng 3. Tôi muốn bắt đầu với báo cáo nhanh từ các đầu mối.
+[09:00:52] Linh: Vâng, em xin phép bắt đầu từ phía Product. Hiện tại team đang hoàn thiện nốt module thanh toán quốc tế, dự kiến test xong trong tuần này. Nhưng còn vướng một số API partner chưa ổn định.
+[09:01:28] Minh: Em xin bổ sung, bên Dev đã fix xong lỗi timeout cho endpoint thanh toán hôm thứ Hai, nhưng cần QA verify lại. Ngoài ra, module báo cáo mới đang gặp issue về database indexing, phải điều chỉnh cấu trúc.
+[09:02:10] Trang: Bên QA đã bắt đầu test module thanh toán. Tuy nhiên có vài trường hợp edge case chưa có test data từ phía Business. Anh An, bên mình cần bộ data test cho các giao dịch cross-border.
+[09:02:48] An: Vâng, tôi sẽ chuẩn bị bộ data test cho các đồng tiền chính: USD, EUR, JPY. Thời gian cần khoảng hai ngày, tức thứ Năm tuần này có bàn giao cho QA.
+[09:03:24] Hoàng: Vậy hạn chót để có test data là thứ Năm. Còn issue indexing của Minh thì sao? Có ảnh hưởng đến timeline phát hành không?
+[09:04:05] Minh: Vấn đề indexing liên quan đến query báo cáo hàng tháng. Em đang thiết kế lại schema, dự tính hoàn thành trong ngày thứ Sáu, sớm nhất là cuối tuần này. Nhưng nếu chậm, deadline release module báo cáo sang ngày 10/3 có thể bị trượt.
+[09:04:49] Hòa: Về phía Ops, em có một vấn đề nhức nhối. Hệ thống CI/CD vừa upgrade lên phiên bản mới, nhưng một số job deploy tự động bị lỗi sync với Jenkins server. Hiện tại team Cấu hình chưa kịp rollback.
+[09:05:33] Hoàng: Mức độ ảnh hưởng thế nào? Ops cần dev hỗ trợ hay chạy độc lập?
+[09:06:10] Hòa: Em nghĩ cần dev phối hợp figure ra nguyên nhân, vì job script do team Dev viết trước đây. Có thể chỉ cần thay đổi tham số pipeline, nhưng cần Minh hoặc một bạn trong team xem qua.
+[09:06:53] Minh: Được, em sẽ assign một dev trong team – Thắng – hỗ trợ Hòa. Có thể check trace log vào chiều nay. Deadline fix lỗi này em propose trong vòng hai ngày, tức thứ Năm.
+[09:07:32] Hòa: Hai ngày là ổn. Nếu phức tạp hơn, chúng ta có thể extend thêm một ngày.
+[09:08:13] Hoàng: Tốt, ghi nhận task đó. Quay lại module báo cáo, Linh và An cần review mức độ ưu tiên. Tối nay 7h anh có meeting với đối tác về lịch release thử nghiệm.
+[09:08:57] Linh: Vâng, em sẽ chuẩn bị slide tóm tắt tình hình các module. Riêng module báo cáo, nếu chưa kịp, có thể tách ra release sau đợt chính.
+[09:09:35] Minh: Em đồng ý với ý tưởng release theo phase. Nhưng cần QA có sẵn test plan cho core modules trước. Trang, bên em có thể hoàn thành test case cho thanh toán quốc tế trước thứ Hai tuần sau không?
+[09:10:20] Trang: Nếu có test data từ thứ Năm, team em sẽ chạy toàn bộ regression trong ngày thứ Sáu và thứ Bảy. Kết quả test có thể báo cáo sáng thứ Hai. Như vậy deadline thứ Hai là khả thi.
+[09:11:01] Hoàng: Vậy lịch trình sơ bộ: test data bàn giao thứ Năm, QA test cuối tuần, báo cáo thứ Hai. Còn issue CI/CD thì fix trong thứ Năm. Module báo cáo gặp vấn đề indexing, dự tính fix xong thứ Sáu. Mọi người có điểm nào mâu thuẫn không?
+[09:11:45] An: Có một chút, em nghĩ test data cho cross-border cần bao gồm cả trường hợp chargeback và refund, mà team Finance chưa confirm format. Em sẽ liên hệ với bên Tài chính ngay sau meeting để xác nhận, nhưng có thể trễ thêm nửa ngày.
+[09:12:32] Trang: Nếu có chargeback, test case của em phải mở rộng. Vậy thời gian test có thể kéo dài thêm một buổi, tức đến Chủ Nhật. Liệu có chấp nhận được không?
+[09:13:14] Hoàng: Em nghĩ chấp nhận được, vì thứ Hai mới cần kết quả. Nhưng cố gắng không để trễ thêm. Hòa, bên Ops có thể hỗ trợ môi trường test 24/7 cuối tuần nếu cần?
+[09:13:59] Hòa: Hoàn toàn được. Em sẽ sắp xếp một pipeline riêng cho QA chạy ngoài giờ hành chính.
+[09:14:31] Hoàng: Bây giờ tôi muốn chuyển sang topic thứ hai: cải thiện tốc độ xử lý đơn hàng nội địa. An, em có số liệu phân tích gần đây không?
+[09:15:12] An: Dạ có. Theo phân tích của em, hiện tại trung bình một đơn hàng mất 12 phút từ lúc đặt đến lúc xác nhận tồn kho, với độ lệch chuẩn 4 phút. Ngưỡng mục tiêu là dưới 8 phút. Nguyên nhân chính do hệ thống kiểm tra tồn kho gửi request song song chưa tối ưu.
+[09:16:04] Minh: Phần này em đã có kế hoạch tái cấu trúc caching từ tháng trước, nhưng bị delay vì module thanh toán quốc tế ưu tiên hơn. Nếu team muốn, em có thể allocate một developer cho task này từ tuần sau.
+[09:16:47] Hoàng: Theo thứ tự ưu tiên, module thanh toán vẫn là chính, nhưng không thể lơ là đơn hàng nội địa. Linh, em nghĩ sao?
+[09:17:28] Linh: Em propose chúng ta assign task cải thiện performance cho một dev mới – bạn Dũng – vừa gia nhập và có kinh nghiệm về caching. Dũng sẽ làm dưới sự mentorship của Minh. Thời gian hoàn thành dự kiến hai tuần, tức tuần thứ hai của tháng 3.
+[09:18:15] Minh: Hợp lý. Dũng có background mạnh về Redis, em sẽ hướng dẫn bạn phương án kiến trúc. Tuy nhiên, cần có bản design doc chốt trước khi code. Em propose thứ Hai tuần sau Dũng trình bày solution.
+[09:19:00] Hoàng: Nhất trí. Vậy task cải thiện performance đơn hàng có deadline design doc vào thứ Hai tuần sau, và mục tiêu hoàn thiện code vào cuối tuần thứ hai tháng 3. Ghi nhận.
+[09:19:48] Trang: Em muốn hỏi một chút, module này có liên quan đến module báo cáo không? Nếu caching thay đổi, truy vấn báo cáo cũng phải cập nhật.
+[09:20:30] Minh: Đúng vậy, nhưng em nghĩ chúng ta có thể tách bạch. Module báo cáo đọc từ database chính, trong khi caching áp dụng cho read-heavy của đơn hàng. Tuy nhiên, nếu thay đổi schema indexing, cần đồng bộ.
+[09:21:09] Hoàng: Tức là có dependency giữa hai task này. Cần lưu ý khi lên lịch. Linh, hãy theo dõi và nhắc nhở các bên.
+[09:21:46] Linh: Vâng, em sẽ tạo một tracking issue trên Jira và liên kết các subtask. Cả team để ý cập nhật hàng ngày.
+[09:22:25] Hòa: Em có một ý, gần đây server caching có vấn đề về memory leak nhẹ, chưa xác định rõ nguyên nhân. Có thể task performance sẽ bao gồm cả fix memory leak này.
+[09:23:10] Minh: Được, em sẽ ghi vào scope của Dũng. Nhưng cần có log chi tiết từ Ops để phân tích. Hòa, bên em có thể export log memory server từ tuần trước không?
+[09:23:58] Hòa: Ngay trong chiều nay em sẽ gửi file log cho Minh. Khoảng 200MB dung lượng.
+[09:24:29] Hoàng: Mọi người lưu ý, sẽ có rất nhiều task trong các part sau, chúng ta cố gắng xử lý dứt điểm từng phần. Bây giờ, tôi muốn quay lại issue CI/CD. Hòa, đã có thông tin thêm từ Jenkins admin chưa?
+[09:25:18] Hòa: Em vừa check, admin nói rằng do upgrade plugin, script build máy chủ chưa được cập nhật token. Họ sẽ fix trong vòng 24h, tức trước trưa ngày mai.
+[09:26:04] Hoàng: Tin tốt. Vậy task của Hòa chỉ còn chờ bên kia fix, và sau đó dev cần verify lại các job. Minh, hãy assign Thắng kiểm tra sau khi được Hòa báo.
+[09:26:45] Minh: OK, Thắng sẽ làm sau khi có xác nhận từ Hòa. Em kỳ vọng tối thứ Năm mọi thứ hoạt động trở lại.
+[09:27:32] Hoàng: Tôi thấy chúng ta đã có vài mốc quan trọng. Để dễ theo dõi, Linh hãy ghi lại các task chính trong notes: - Thứ Năm (27/2): Bàn giao test data từ An cho Trang. - Thứ Năm (27/2): Fix CI/CD (Hòa, Minh phối hợp). - Thứ Sáu (28/2) – Chủ Nhật (1/3): QA test module thanh toán. - Thứ Hai (3/3): Báo cáo test module thanh toán. - Thứ Hai (3/3): Dũng trình bày design doc performance. - Cuối tuần thứ hai tháng 3: Hoàn thành code cải thiện đơn hàng.
+[09:28:21] Linh: Vâng, em sẽ ghi chép và gửi lại email tổng hợp sau meeting.
+[09:28:57] An: Một câu hỏi nhỏ, trong test data cross-border, tôi có thể thêm trường hợp giao dịch failed vì lỗi partner API không? Chuẩn bị cho edge case.
+[09:29:40] Trang: Rất tốt, như vậy test sẽ coverage hơn. Cảm ơn An.
+[09:30:12] Hòa: Anh Hoàng, bên Ops có một vấn đề khác: server Staging sắp hết disk, cần dọn dẹp log cũ. Em muốn xin phép thực hiện vào cuối tuần.
+[09:30:56] Hoàng: Được, nhưng phải backup và không ảnh hưởng đến QA test cuối tuần. Hòa, em dự tính bao lâu?
+[09:31:38] Hòa: Chưa đầy 2 tiếng. Em sẽ chạy script vào tối thứ Sáu trước khi QA bắt đầu.
+[09:32:14] Hoàng: OK, tôi approve. Linh, update vào lịch trình cuối tuần.
+[09:32:45] Minh: Anh Hoàng, em có một suggest về module thanh toán. Thay vì release full, có thể release beta cho một nhóm khách hàng nhỏ trước – canary deployment. Giảm rủi ro.
+[09:33:38] Linh: Ý hay. Em sẽ nghiên cứu thiết kế canary, cần sự hỗ trợ từ Hòa về hạ tầng. Nhưng đó có thể là phần của part sau.
+[09:34:20] Hoàng: Đồng ý, ghi nhận idea, nhưng chưa action ngay. Các part sau sẽ bàn kỹ.
+[09:35:02] Trang: Em muốn hỏi thêm, về test data chargeback, An bảo cần confirm từ Finance. Tôi có thể liên hệ trực tiếp với bên đó để đẩy nhanh không? Hay giữ theo quy trình?
+[09:35:46] An: Anh có thể giúp em liên hệ, họ sẽ respond nhanh hơn khi có QA trực tiếp. Em sẽ gửi email ngay sau meeting, cc Trang.
+[09:36:29] Trang: Cảm ơn.
+[09:36:56] Hoàng: Tôi thấy chúng ta đã đi được một đoạn. Còn khoảng 45 phút cho part này, tôi muốn chốt một số điểm trước khi chuyển topic. Mọi người có thắc mắc gì về timeline không?
+[09:37:42] Minh: Deadline test data thứ Năm là rõ, nhưng nếu bên Finance trễ, chúng ta có plan B không?
+[09:38:28] An: Plan B là tôi sẽ cắt bớt các case có chargeback, test sau. Nhưng QA sẽ phải chạy thêm một đợt riêng.
+[09:39:12] Trang: Được, nếu vậy tôi sẽ tách test plan thành hai phase: Phase 1 cho giao dịch standard, Phase 2 cho đặc thù. Deadline Phase 1 vẫn thứ Hai tuần sau.
+[09:39:57] Hoàng: Tốt, vậy ghi nhận phase 1 trước. Nếu có chargeback thì phase 2, và không ảnh hưởng release chính.
+[09:40:39] Linh: Em muốn làm rõ, release chính ở đây là module thanh toán quốc tế hay toàn bộ? Cần define milestone.
+[09:41:22] Hoàng: Rõ ràng, hôm nay chỉ chốt module thanh toán quốc tế là milestone 1. Module báo cáo, performance là milestone sau. Linh sẽ có văn bản milestones.
+[09:42:08] Minh: Em thấy có một dependency: test data của An ảnh hưởng đến test case của Trang, và kết quả test ảnh hưởng đến quyết định release. Vậy cần tracking chặt chẽ.
+[09:42:55] Linh: Yes, em sẽ tạo các subtask trong Jira với linked issue. Mỗi người cập nhật trạng thái hàng ngày.
+[09:43:30] Hòa: Bên Ops, em có một yêu cầu nhỏ: team Dev cần tag version build module thanh toán lên registry để Ops deploy thử trên staging trước khi QA test. Minh, có thể làm trong sáng thứ Sáu không?
+[09:44:18] Minh: Được, em sẽ giao cho bạn Thắng build và tag sáng thứ Sáu. Nếu không có vấn đề, deploy lên staging trước 10h.
+[09:45:04] Trang: Vậy QA sẽ bắt đầu test từ 10h thứ Sáu. Nếu build không ổn, tôi sẽ báo ngay để dev hotfix.
+[09:45:39] Hoàng: Chúng ta có một quy trình rõ ràng rồi. Bây giờ, tôi muốn thảo luận về một vấn đề cũ: tối ưu cache cho API order. Đây là task nền, nhưng cần bắt đầu để part sau có base.
+[09:46:25] Minh: Em nghĩ trước khi Dũng làm, cần review các endpoint đang dùng cache hiện tại. Em sẽ gửi list cho Dũng trong sáng mai.
+[09:47:10] An: Em có thể hỗ trợ phân tích traffic để quyết định endpoint nào cần cache nhất. Dữ liệu có sẵn từ dashboard monitoring.
+[09:47:56] Hoàng: Rất tốt, An gửi cho Dũng bản phân tích trước thứ Sáu. Dũng sẽ có material để design.
+[09:48:31] Trang: Liên quan đến caching, nếu cache thay đổi, có thể ảnh hưởng đến log audit, team mình cần thông báo cho Compliance.
+[09:49:16] Hoàng: Point tốt, Linh hãy note để thông báo sau khi design hoàn tất.
+[09:49:54] Linh: Vâng, em sẽ add Compliance vào stakeholder list.
+[09:50:28] Hoàng: Tôi thấy part 1 của meeting sắp kết thúc. Còn ai có vấn đề gì chưa được đề cập?
+[09:51:05] Minh: Còn một vấn đề nhỏ: server development gần đây có hiện tượng spike CPU vào buổi tối. Em cần Hòa hỗ trợ monitoring thêm.
+[09:51:48] Hòa: OK, em sẽ cấu hình alert trên Prometheus và gửi log cho team Dev. Không cần action ngay.
+[09:52:24] Linh: Em muốn nhấn mạnh: tất cả các task và deadline vừa nêu đều là tạm thời, sẽ được review trong part 2. Vậy mọi người chuẩn bị tinh thần update.
+[09:53:03] Hoàng: Đúng vậy, part 1 này chỉ là khởi động. Các part sau sẽ có nhiều chi tiết và thay đổi. Tôi cảm ơn mọi người vì sự tập trung. Kết thúc part 1 ở đây.
+[09:53:40] Hoàng: Vậy chúng ta tiếp tục part 2. Tôi muốn chuyển sang chủ đề tích hợp dữ liệu giữa module thanh toán mới và hệ thống CRM hiện tại. Đây là yêu cầu từ phía Sales để đồng bộ lịch sử giao dịch.
+[09:54:25] Linh: Em có một báo cáo về integration này. Bên CRM đang dùng API cũ, cần nâng cấp giao thức. Nếu không, dữ liệu thanh toán sẽ không được ghi nhận real-time.
+[09:55:12] Minh: Bên Dev đã có mock API để test, nhưng chưa được approval từ đội CRM. Họ cần bản thiết kế chi tiết.
+[09:55:58] Trang: QA cũng cần test case cho integration testing, nhưng hiện chưa có tài liệu.
+[09:56:41] Hoàng: Ai sẽ chịu trách nhiệm viết tài liệu thiết kế? Linh, bên Product có thể làm không?
+[09:57:20] Linh: Thực ra tài liệu này nên do Dev lead viết, vì nó liên quan đến technical specification. Minh, em có thể nhờ bạn nào viết không?
+[09:58:03] Minh: Em nghĩ Thắng có khả năng, nhưng Thắng đang bận với issue CI/CD. Có thể đẩy sang tuần sau. Deadline dự kiến cho spec: thứ Hai tuần sau.
+[09:58:44] Hoàng: Vậy assignment chưa rõ. An, bên Business có yêu cầu gì thêm cho integration này? Có thể giúp xác định scope.
+[09:59:28] An: Bên em cần các field: order_id, amount, currency, status, timestamp, và customer_id. Ngoài ra cần mapping giữa hệ thống thanh toán và CRM. Em có thể cung cấp mapping data mẫu.
+[10:00:15] Minh: Vậy spec sẽ bao gồm mapping data và API endpoint. Em sẽ assign Thắng viết spec vào thứ Hai. Nhưng có thể cần thêm thời gian nếu Thắng bận.
+[10:01:00] Hòa: Bên Ops cũng lo ngại về bảo mật khi đồng bộ dữ liệu. Cần có encryption plan.
+[10:01:42] Hoàng: Điều đó cần đưa vào spec. Chúng ta có một unresolved item ở đây: ai sẽ review bảo mật? Hòa, em có thể làm việc đó sau khi có spec không?
+[10:02:28] Hòa: Được, em sẽ review phần bảo mật sau khi nhận được spec. Nhưng cần có timeline.
+[10:03:12] Linh: Em đề xuất deadline cho spec là thứ Hai tuần sau, và review bảo mật hoàn thành trong hai ngày sau đó.
+[10:03:57] Minh: Một vấn đề khác: integration này có liên quan đến module báo cáo. Nếu đồng bộ dữ liệu, CRM có thể query báo cáo giao dịch. Nhưng như đã nói, báo cáo có issue indexing. Có thể ảnh hưởng.
+[10:04:45] Hoàng: Tức là có long-distance dependency tới task của module báo cáo. Cần lưu ý.
+[10:05:30] Trang: Em có một đề xuất: tạm thời integration testing có thể thực hiện với dữ liệu giả, không cần phụ thuộc vào module báo cáo hoàn chỉnh. Giảm rủi ro.
+[10:06:18] Linh: Hợp lý. QA có thể bắt đầu viết test case dựa trên mock data. Trang, em cần bao lâu?
+[10:07:02] Trang: Nếu có spec tối thứ Hai, em có thể viết test case trong ngày thứ Ba, sẵn sàng test thứ Tư.
+[10:07:48] Hoàng: Vậy một task mới: Viết spec integration (Thắng, deadline thứ Hai), review bảo mật (Hòa, deadline thứ Tư), viết test case (Trang, deadline thứ Ba), integration test bắt đầu thứ Tư.
+[10:08:36] Minh: Anh Hoàng, em muốn nói về task phân tích traffic cho caching. An đã gửi data chưa? Có thể có overlap với integration.
+[10:09:18] An: Em chưa gửi, vì em đang chờ dữ liệu từ monitoring team. Họ sẽ gửi trưa nay.
+[10:10:00] Hoàng: Vậy hãy đẩy deadline phân tích traffic lên thứ Sáu tuần này, để Dũng có material cho design vào thứ Hai.
+[10:10:46] An: Em sẽ cố gắng, nhưng có thể trễ. Tôi có một xung đột: em cũng phải chuẩn bị test data chargeback cho Trang. Cả hai task đều cần dữ liệu từ bên ngoài.
+[10:11:35] Hoàng: Đây là negative block: hai task cạnh tranh nguồn lực. Ai có thể hỗ trợ An? Linh, Product có thể giúp thu thập data chargeback từ Finance?
+[10:12:20] Linh: Em có thể liên hệ Finance, nhưng họ thường cần approval từ manager. Em sẽ gửi email và cc An. Tuy nhiên, không thể hứa thời gian.
+[10:13:05] An: Vậy em vẫn sẽ phụ trách chargeback data, còn phân tích traffic em có thể nhờ support từ một dev mới? Dũng có thể tự phân tích dựa trên dashboard không?
+[10:13:55] Minh: Dũng có thể access dashboard, nhưng cần guidance. Em sẽ hướng dẫn bạn lấy metrics trong buổi standup mai. Không cần chờ data từ An.
+[10:14:40] Hoàng: Tốt, vậy task phân tích traffic được tách ra: Dũng tự làm với sự hướng dẫn của Minh, không phụ thuộc vào An. An tập trung vào chargeback data.
+[10:15:28] Trang: Như vậy test data chargeback vẫn theo deadline thứ Năm? Nếu Finance chậm, kế hoạch phase 2 sẽ ảnh hưởng.
+[10:16:12] An: Em sẽ cố gắng có kết quả trước thứ Sáu. Nếu thứ Sáu chưa xong, tôi sẽ báo ngay.
+[10:16:58] Hoàng: Mọi người lưu ý, deadline chargeback data vẫn là thứ Năm, nhưng có thể linh động đến thứ Sáu. Cần tracking.
+[10:17:40] Hòa: Em có một unresolved item: ai là owner của việc cập nhật token cho script deploy? Bên admin sẽ fix, nhưng cần dev verify. Minh, đã assign Thắng chưa?
+[10:18:26] Minh: Chưa chính thức, nhưng em sẽ assign trong Jira ngay sau meeting. Thắng sẽ verify sau khi Hòa báo fix.
+[10:19:12] Hoàng: Tốt, vậy owner là Thắng, nhưng chưa có deadline rõ ràng. Hòa, em có thể ước tính khi nào admin fix xong?
+[10:19:58] Hòa: Admin nói trước trưa mai, tức thứ Năm. Thắng có thể verify sau đó, deadline verification là trước cuối ngày thứ Năm.
+[10:20:45] Minh: OK, Thắng sẽ verify trước 5h chiều thứ Năm.
+[10:21:28] Linh: Quay lại module thanh toán, em có một concern: việc sử dụng canary deployment có thể tạo thêm complexity cho integration. Liệu có nên giữ nguyên full release?
+[10:22:14] Hoàng: Đó là một negative block. Có thể chúng ta sẽ bàn kỹ ở part sau, nhưng hãy ghi nhận ý kiến. Hiện tại, chưa có consensus.
+[10:23:00] Minh: Em vẫn ủng hộ canary, nhưng cần Hòa confirm infra support.
+[10:23:45] Hòa: Infra của staging có thể support, nhưng production cần load balancer config thêm. Không vấn đề, nhưng cần thời gian.
+[10:24:30] Hoàng: Unresolved: canary deployment có được áp dụng không? Chờ quyết định sau. Chuyển sang vấn đề khác.
+[10:25:12] An: Em có một topic nhỏ: dữ liệu log từ server test đang bị thiếu do rotation. Hòa, bên em có thể cấu hình log retention lâu hơn cho module thanh toán?
+[10:26:00] Hòa: Được, em sẽ set retention 30 ngày cho log thanh toán. Làm ngay trong chiều nay.
+[10:26:38] Hoàng: Task đó assign Hòa, deadline hôm nay. Vậy chúng ta gần kết thúc part 2. Tôi muốn nhắc lại vài unresolved items: - Owner cho viết integration spec chưa rõ? Minh vừa assign Thắng, nhưng chưa confirm. - Canary deployment chưa quyết định. - Deadline chargeback data có thể bị trượt. - Bảo mật review chưa có deadline cụ thể.
+[10:27:30] Linh: Em cũng muốn nói thêm về task phân tích traffic: Dũng sẽ tự làm, nhưng vẫn cần output từ dashboard. Minh sẽ hướng dẫn.
+[10:28:15] Minh: Em confirm trong standup mai.
+[10:28:55] Hoàng: Cảm ơn mọi người. Part 2 kết thúc, chúng ta sẽ tiếp tục ở part 3 với các chủ đề còn lại.
+[10:29:05] Hoàng: Bây giờ chúng ta chuyển sang topic vận hành. Hòa, em có cập nhật gì về CI/CD hay server không?
+[10:29:50] Hòa: Có một số thay đổi. Admin đã thông báo họ fix token script trước 11h sáng nay, nhưng khi em thử build manually, vẫn còn lỗi authenticate. Có vẻ fix chưa hoàn toàn.
+[10:30:38] Minh: Vậy cần Thắng check lại? Em đã assign Thắng verification cho task này, nhưng Thắng đang bận với integration spec.
+[10:31:20] Hòa: Nếu Thắng bận, em có thể tự verify – chỉ cần dev cấp quyền access pipeline. Nhưng em chưa có quyền edit job script.
+[10:32:05] Minh: Để em cấp quyền cho Hòa, nhưng cần confirm với anh Hoàng. Hòa có thể chịu trách nhiệm verification luôn không?
+[10:32:48] Hoàng: Handoff luôn? Nếu Hòa đảm nhận verification, Thắng tập trung viết spec. Như vậy owner task CI/CD chuyển từ Thắng sang Hòa. Có vấn đề gì không?
+[10:33:35] Hòa: Em OK, nhưng deadline verification vẫn là cuối ngày thứ Năm? Em nghĩ cần thêm thời gian để retest sau khi admin fix thêm.
+[10:34:20] Minh: Em propose push deadline verification lên sáng thứ Sáu, vì admin có thể fix thêm chiều nay. Như vậy Hòa có cả tối nay và sáng mai.
+[10:35:06] Hoàng: Đó là deadline correction đầu tiên: verification CI/CD từ cuối thứ Năm sang 12h trưa thứ Sáu. Mọi người đồng ý?
+[10:35:55] Trang: OK với em. Nhưng nếu verification trễ, ảnh hưởng đến deploy staging cho QA vào sáng thứ Sáu? Minh đã nói build tag sáng thứ Sáu.
+[10:36:40] Minh: Nếu verification xong trước 10h sáng thứ Sáu, build vẫn kịp. Hòa, em có thể hoàn thành trước 10h không?
+[10:37:25] Hòa: Em sẽ cố gắng, nhưng admin fix chiều nay, em test tối nay và sáng mai. Nếu phát sinh lỗi cần dev, có thể Thắng hỗ trợ nhanh.
+[10:38:12] Hoàng: Vậy ghi nhận deadline correction: verification CI/CD trước 10h sáng thứ Sáu. Tiếp theo, về handoff: task CI/CD chính thức giao cho Hòa từ Thắng. Ghi lại.
+[10:39:00] An: Em có một vấn đề về dữ liệu test chargeback. Em liên hệ Finance, họ nói cần thêm một ngày để tổng hợp do có case đặc biệt. Vậy deadline thứ Năm có thể thành thứ Sáu không?
+[10:39:45] Hoàng: Đây là deadline correction thứ hai. Nhưng Trang đã lên kế hoạch phase 1/phase 2. Nếu chargeback data có thứ Sáu, phase 2 test sẽ bắt đầu tuần sau. Có ảnh hưởng gì lớn không?
+[10:40:32] Trang: Nếu phase 1 test thanh toán tiêu chuẩn vẫn diễn ra cuối tuần, phase 2 có thể bắt đầu thứ Hai hoặc thứ Ba. Không vấn đề.
+[10:41:18] Hoàng: Vậy correction deadline chargeback data từ thứ Năm lên thứ Sáu. An, em chịu trách nhiệm bàn giao cho Trang trước cuối ngày thứ Sáu.
+[10:42:02] An: OK.
+[10:42:45] Linh: Em muốn nói về spec integration. Thắng mới nhận task, nhưng Thắng còn phải học quy trình CRM. Có thể cần training 1 buổi.
+[10:43:28] Minh: Đúng, Thắng chưa làm việc với CRM API. Em sẽ dành 30 phút mai để hướng dẫn. Tuy nhiên, deadline spec thứ Hai tuần sau có thể hơi gấp.
+[10:44:15] Hoàng: Em propose deadline correction cho spec integration từ thứ Hai lên thứ Ba tuần sau. Thắng có thêm một ngày. Mọi người nghĩ sao?
+[10:45:03] Trang: Được, nếu thứ Ba, test case vẫn viết kịp từ thứ Ba sang thứ Tư. Không ảnh hưởng.
+[10:45:48] Hòa: Vậy em sẽ có spec để review bảo mật vào thứ Tư, thay vì thứ Ba? Deadline review bảo mật cũng phải đẩy.
+[10:46:30] Hoàng: Review bảo mật correction từ thứ Tư lên thứ Năm tuần sau. Đồng ý?
+[10:47:15] Hòa: OK.
+[10:47:55] Linh: Vậy chúng ta đã có hai deadline correction rõ ràng: spec integration thứ Ba, review bảo mật thứ Năm.
+[10:48:38] Minh: Em có một comment: Thắng viết spec, nhưng Dũng có thể hỗ trợ phần caching. Liệu có confusion không? Bởi vì Dũng còn task design doc performance.
+[10:49:25] Hoàng: Đây là ambiguous reference. Minh, em muốn nói đến spec nào? Integration spec hay design doc performance?
+[10:50:10] Minh: Ý em là integration spec. Dũng có thể giúp phần mapping data, vì Dũng có background về caching và dữ liệu.
+[10:50:55] Linh: Vậy handoff không thay đổi owner, nhưng Dũng hỗ trợ Thắng. Đó là support, không phải handoff.
+[10:51:35] Hoàng: Đúng, ghi nhận support. Chúng ta còn unresolved item gì từ part trước? Canary deployment chưa quyết định. Có nên đưa vào part này không?
+[10:52:20] Minh: Em nghĩ nên giữ unresolved, sẽ thảo luận ở part sau khi có thêm data.
+[10:53:02] Hoàng: Vậy chúng ta chuyển sang một topic mới: tối ưu chi phí server cho production. Hòa, em có số liệu không?
+[10:53:48] Hòa: Theo dõi từ dashboard, chi phí EC2 tháng 2 tăng 15% so với tháng 1. Nguyên nhân chính do scaling không đúng giờ cao điểm. Em propose schedule scaling dựa trên traffic dự báo.
+[10:54:35] Minh: Dev có thể hỗ trợ tinh chỉnh auto-scaling rule. Cần An cung cấp dữ liệu traffic theo giờ.
+[10:55:18] An: Dữ liệu traffic có sẵn từ tuần trước. Em sẽ gửi cho Hòa và Minh file CSV trong chiều nay.
+[10:56:05] Hoàng: Task tối ưu chi phí: assign Hòa làm lead, Minh support, An cung cấp data. Deadline cho proposal: thứ Hai tuần sau.
+[10:56:50] Hòa: Có thể cần thời gian phân tích, em muốn deadline proposal là thứ Ba tuần sau.
+[10:57:35] Hoàng: Correction: deadline proposal thứ Ba tuần sau. OK.
+[10:58:15] Trang: Em có một vấn đề hiện tại: trong quá trình test module thanh toán sớm, em phát hiện một lỗi hiển thị amount khi nhập số thập phân. Dev đã biết chưa?
+[10:59:00] Minh: Chưa, đây là bug mới. Em sẽ ghi nhận và assign cho Thắng sau khi spec xong. Nhưng priority có thể thấp.
+[10:59:40] Hoàng: Vậy bug tracking: Trang report bug, assign Thắng, nhưng không deadline vì là non-critical.
+[11:00:25] Linh: Em nghĩ chúng ta cần thảo luận về monitoring cho integration. Hòa, bên Ops có thể thiết lập alert cho API call không?
+[11:01:10] Hòa: Có thể, nhưng cần xác định threshold. Em propose chờ spec integration xong rồi setup.
+[11:01:55] Hoàng: Đó là dependency dài. Tạm thời ghi nhận.
+[11:02:30] An: Em muốn quay lại vấn đề mapping data. Nếu Dũng hỗ trợ, em có thể gửi mapping draft trước thứ Sáu.
+[11:03:15] Minh: Tốt, mapping draft sẽ giúp Thắng viết spec nhanh hơn.
+[11:04:00] Trang: Em có một clarification: test data phase 1 chỉ bao gồm USD và EUR, hay thêm JPY? An, em cần xác nhận.
+[11:04:45] An: Phase 1 bao gồm cả ba đồng tiền. Em đã confirm với Finance. JPY có trong chargeback data sẽ về sau.
+[11:05:30] Hoàng: Vậy rõ ràng. Part 3 sắp kết thúc. Tôi thấy chúng ta có nhiều correction và handoff. Tổng kết: - Handoff CI/CD verification từ Thắng sang Hòa. - Deadline correction: verification CI/CD -> 10h sáng thứ Sáu; chargeback data -> thứ Sáu; spec integration -> thứ Ba; review bảo mật -> thứ Năm; proposal chi phí -> thứ Ba. - Bug non-critical assign Thắng. - Còn unresolved: canary deployment, monitoring integration.
+[11:06:18] Linh: Em muốn bổ sung: Dũng sẽ hỗ trợ Thắng về mapping. Không phải handoff.
+[11:06:58] Hoàng: Đúng. Cảm ơn mọi người. Part 3 kết thúc.
+[11:06:40] Hoàng: Bây giờ tôi muốn chuyển sang chủ đề sản phẩm. Linh, em có thể giới thiệu về yêu cầu mới từ đối tác cho module thanh toán không?
+[11:07:20] Linh: Vâng. Hôm qua bên đối tác gửi yêu cầu bổ sung: hỗ trợ thanh toán bằng tiền điện tử cho một số giao dịch thử nghiệm. Họ muốn có tính năng này trong đợt release tháng 3.
+[11:08:05] Minh: Em xin hỏi: đây là yêu cầu hard hay chỉ là wishlist? Vì module hiện tại chưa có gateway cho crypto.
+[11:08:50] Linh: Họ nói là ưu tiên cao, nhưng chưa có timeline cụ thể từ họ. Tuy nhiên, họ muốn chúng ta bắt đầu khảo sát kỹ thuật trong tuần này.
+[11:09:35] Hoàng: Vậy chúng ta cần một task khảo sát tính khả thi. Minh, ai có thể làm?
+[11:10:15] Minh: Dũng có kinh nghiệm về blockchain, em nghĩ Dũng phù hợp. Nhưng Dũng đang hỗ trợ Thắng integration spec. Có thể giao thêm nếu không ảnh hưởng deadline.
+[11:11:00] Linh: Deadline cho khảo sát này là bao lâu? Bên đối tác muốn có báo cáo sơ bộ trước cuộc họp tuần sau.
+[11:11:45] Hoàng: Vậy deadline cho khảo sát là thứ Hai tuần sau, trước 2h chiều. Dũng sẽ trình bày kết quả trong meeting với partner.
+[11:12:30] Minh: Em sẽ assign Dũng task này. Nhưng cần lưu ý: task design doc performance cho caching cũng có deadline thứ Hai. Hai task độc lập?
+[11:13:15] Linh: Thứ Hai có design doc performance và khảo sát crypto. Dũng có thể làm cả hai, nhưng cần sắp xếp thời gian. Có thể design doc viết vào cuối tuần, khảo sát vào sáng thứ Hai.
+[11:14:00] Hoàng: Event-dependent deadline: task khảo sát crypto phải hoàn thành trước meeting 2h chiều thứ Hai, còn design doc performance có deadline cuối ngày thứ Hai. Vậy khảo sát ưu tiên trước.
+[11:14:45] Minh: Rõ. Em sẽ inform Dũng về priority.
+[11:15:25] Trang: Liên quan đến crypto, QA cũng cần test case mới. Nhưng chưa có spec, nên em chưa thể bắt đầu. Vậy task này sẽ có trigger từ khảo sát.
+[11:16:10] Hoàng: Correct. Task QA crypto sẽ phụ thuộc vào kết quả khảo sát. Tạm thời chưa assign.
+[11:16:55] An: Em muốn hỏi: khảo sát này có cần dữ liệu thị trường về crypto không? Bên em có thể cung cấp.
+[11:17:35] Dũng (mới tham gia): Em xin phép. Về khảo sát, em cần access vào API của vài sàn lớn và tài liệu compliance. Anh An có thể share contact không ạ?
+[11:18:15] An: Em sẽ gửi danh sách API và contact cho Dũng vào cuối ngày.
+[11:18:55] Linh: Ngoài crypto, em có một feature khác: cải tiến giao diện quản lý đơn hàng cho admin. Hiện tại UI chưa thân thiện, cần redesign.
+[11:19:40] Minh: Feature này do ai design? Product hay Dev?
+[11:20:20] Linh: Product sẽ làm wireframe. Em sẽ assign cho bạn Huyền – designer. Deadline wireframe: thứ Năm tuần sau.
+[11:21:00] Hoàng: Task mới: wireframe admin UI, assign Huyền, deadline thứ Năm tuần sau. Có dependecy với module thanh toán không?
+[11:21:45] Linh: Không trực tiếp, nhưng sau khi có wireframe, dev sẽ estimate effort. Có thể ảnh hưởng timeline release.
+[11:22:30] Hòa: Bên Ops có một yêu cầu cho admin UI: cần responsive trên mobile, vì team vận hành hay dùng tablet.
+[11:23:10] Linh: OK, em sẽ ghi chú responsive trong requirement.
+[11:23:55] Trang: Testing cho admin UI sẽ cần môi trường staging riêng? Em có thể dùng same environment với module thanh toán?
+[11:24:40] Hòa: Nên dùng riêng để tránh ảnh hưởng. Em sẽ tạo một stack mới cho admin UI test.
+[11:25:20] Hoàng: Tạo môi trường test admin UI là task cho Ops. Hòa, deadline khi nào?
+[11:26:00] Hòa: Em có thể làm trước khi wireframe hoàn thành, nhưng cần spec sơ bộ. Deadline: khi nào có requirement spec.
+[11:26:45] Linh: Product sẽ release requirement spec cho admin UI vào thứ Ba tuần sau. Vậy Hòa có thể bắt đầu từ thứ Ba.
+[11:27:30] Hoàng: Event-dependent: Ops task phụ thuộc vào requirement spec. Vậy deadline Ops task là sau thứ Ba, nhưng chưa có ngày hoàn thành.
+[11:28:15] Trang: Em muốn clarification: yêu cầu responsive có ảnh hưởng đến test case không? Nếu có, em cần update test plan.
+[11:29:00] Linh: Huyền sẽ đảm bảo responsive, QA chỉ cần test theo wireframe.
+[11:29:40] Hoàng: Vậy chúng ta có nhiều task mới. Nhưng tôi thấy có vấn đề: resource allocation – Dũng đã có hai task (design doc performance và khảo sát crypto). Thắng integration spec. Huyền wireframe. Cần tracking.
+[11:30:25] Minh: Em đề xuất tạo một tracker riêng cho Dũng, vì có thể bị overload. Nếu cần, em có thể support.
+[11:31:10] Linh: Em có thể giúp Dũng một phần về business requirement cho crypto.
+[11:31:55] Hoàng: Đó là support, không phải handoff. Ghi nhận.
+[11:32:35] An: Quay lại vấn đề test data phase 1, em đã gửi file cho Trang sáng nay. Trang đã nhận chưa?
+[11:33:15] Trang: Em nhận rồi, cảm ơn An. Phase 1 sẽ bắt đầu test từ sáng thứ Sáu như kế hoạch.
+[11:33:55] Hòa: Nhân tiện, em đã cập nhật retention log cho thanh toán. Script chạy lúc 10h sáng nay.
+[11:34:35] Hoàng: Task đó hoàn thành. Tốt. Bây giờ tôi muốn thảo luận về vấn đề monitor integration unresolved từ part 2. Ở đây chúng ta chưa quyết định ai làm, nhưng có thể đưa vào part này?
+[11:35:20] Linh: Em nghĩ nên chờ spec integration xong để biết scope.
+[11:36:00] Hoàng: Vậy vẫn unresolved. Chúng ta chuyển sang topic khác.
+[11:36:45] Minh: Em có một đề xuất nhỏ: trong design doc performance, Dũng nên đề cập đến khả năng mở rộng cho crypto. Phòng xa.
+[11:37:30] Linh: Ý hay, nhưng crypto mới là khảo sát, chưa chính thức. Có thể chỉ là note.
+[11:38:10] Hoàng: Ghi nhận suggestion. Không tạo task.
+[11:38:50] Trang: Em muốn báo cáo: bug hiển thị amount decimal đã được Thắng fix provisional, em sẽ test lại vào chiều nay.
+[11:39:30] Minh: Tốt, nếu fix rồi thì update bug status.
+[11:40:10] An: Về chargeback data, em đã gửi email cho Finance, họ hứa cuối ngày mai. Deadline thứ Sáu vẫn ổn.
+[11:40:55] Hòa: Em có một vấn đề nữa: trên server staging có một số log error về SSL certificate sắp hết hạn. Cần renew trước khi QA test.
+[11:41:40] Hoàng: Task: renew SSL cho staging, assign Hòa, deadline: trước 8h sáng thứ Sáu để kịp deploy.
+[11:42:20] Hòa: OK.
+[11:43:00] Minh: Liên quan đến SSL, bên production cũng sắp hết hạn vào cuối tháng 3. Cần plan.
+[11:43:45] Hoàng: Task riêng cho production SSL, chưa có deadline. Ghi nhận.
+[11:44:25] Linh: Em cảm thấy có quá nhiều task phát sinh. Có thể chúng ta cần review lại priority sau part này.
+[11:45:10] Hoàng: Đồng ý. Các part sau sẽ có recap và điều chỉnh. Part 4 gần hết, tôi muốn tổng kết nhanh: - Task khảo sát crypto: Dũng, deadline 2h chiều thứ Hai. - Wireframe admin UI: Huyền, deadline thứ Năm tuần sau. - Requirement spec admin UI: Linh, deadline thứ Ba tuần sau. - Renew SSL staging: Hòa, deadline sáng thứ Sáu. - Các task cũ vẫn giữ deadline.
+[11:46:00] Minh: Còn task design doc performance của Dũng vẫn deadline cuối ngày thứ Hai, nhưng ưu tiên khảo sát hơn.
+[11:46:40] Trang: Em confirm phase 1 test start sáng thứ Sáu.
+[11:47:20] Hoàng: Tốt. Part 4 kết thúc, không giải quyết unresolved items cũ. Cảm ơn mọi người.
+[11:47:30] Hoàng: Chúng ta quay trở lại topic từ part 1, về module thanh toán quốc tế. Tôi muốn cập nhật tình hình sau khi có một số thay đổi.
+[11:48:15] Linh: Vâng. Như đã thảo luận, test data phase 1 đã sẵn sàng, QA bắt đầu sáng thứ Sáu. Tuy nhiên, có một vấn đề mới từ bên đối tác: họ yêu cầu thêm tính năng hỗ trợ multi-currency settlement, nghĩa là thanh toán bằng nhiều loại tiền trong một giao dịch.
+[11:49:05] Minh: Đây là scope update lớn. Nếu thêm tính năng này, module thanh toán sẽ phải mở rộng logic xử lý. Em cần estimate lại effort.
+[11:49:50] Hoàng: Mức độ ưu tiên thế nào? Có ảnh hưởng đến deadline release tháng 3 không?
+[11:50:35] Linh: Đối tác nói đây là yêu cầu bắt buộc cho đợt release chính thức. Vậy chúng ta phải integrate.
+[11:51:20] Trang: Nếu thêm tính năng mới, test case hiện tại phải mở rộng rất nhiều. Em cần thời gian.
+[11:52:05] An: Bên Business cũng cần cập nhật mapping data cho multi-currency. Em sẽ làm việc với Finance.
+[11:52:50] Hoàng: Scope update này tác động đến nhiều task cũ. Chúng ta cần handoff một số trách nhiệm. Minh, em nghĩ ai sẽ lead phần multi-currency?
+[11:53:35] Minh: Em propose Thắng lead, nhưng Thắng đang viết integration spec. Có thể Thắng sẽ overload.
+[11:54:20] Hoàng: Vậy handoff bước hai: task integration spec vẫn do Thắng, nhưng phần multi-currency settlement sẽ do Dũng lead, vì Dũng có kinh nghiệm về xử lý tiền tệ.
+[11:55:05] Minh: Đồng ý. Dũng sẽ làm việc với Linh để clarify requirement.
+[11:55:50] Linh: Vậy scope update: thêm tính năng multi-currency settlement vào module thanh toán. Dũng lead, Thắng support. Deadline cho spec multi-currency: thứ Năm tuần sau.
+[11:56:35] Hoàng: Đây là deadline mới, chưa correction. Ghi nhận.
+[11:57:20] Trang: Liệu multi-currency có ảnh hưởng đến test data chargeback không? Vì chargeback cũng liên quan đến tiền tệ.
+[11:58:05] An: Có thể, nhưng chargeback data hiện tại chỉ gồm USD, EUR, JPY. Nếu thêm multi-currency, chargeback test sẽ phức tạp hơn.
+[11:58:50] Hoàng: Tạm thời chargeback vẫn giữ nguyên scope cũ. Multi-currency là scope mới, sẽ được test riêng.
+[11:59:35] Dũng: Em xin clarify: multi-currency settlement có yêu cầu real-time conversion rate không? Hay chỉ lưu giá trị gốc?
+[12:00:20] Linh: Họ muốn real-time rate từ bên thứ ba. Em sẽ gửi API reference cho Dũng.
+[12:01:05] Minh: Vậy Dũng cần integrate third-party rate API. Đây là task non-trivial.
+[12:01:50] Hòa: Bên Ops cần biết nếu có third-party API, cần whitelist domain và setup proxy.
+[12:02:35] Hoàng: Task cho Ops: support third-party API integration. Hòa, em cần làm việc với Dũng.
+[12:03:20] Hòa: OK, deadline? Có thể sau khi spec multi-currency xong.
+[12:04:05] Minh: Spec multi-currency deadline thứ Năm tuần sau, vậy Ops task deadline thứ Sáu tuần sau.
+[12:04:50] Hoàng: Ghi nhận deadline.
+[12:05:35] Trang: Em có một repeated mention: về test phase 1 cho module thanh toán. Em xin nhắc lại là đã chuẩn bị xong test environment. Nhưng do scope update, có cần thay đổi gì không?
+[12:06:25] Hoàng: Phase 1 giữ nguyên, không thay đổi. Đây không phải task mới, chỉ là confirmation.
+[12:07:10] Linh: Correct. Phase 1 test vẫn bắt đầu sáng thứ Sáu.
+[12:07:55] An: Em có vấn đề về chargeback data. Do Finance delay, deadline thứ Sáu có thể bị trễ thêm. Em propose correction: chargeback data bàn giao thứ Hai tuần sau.
+[12:08:45] Hoàng: Deadlin correction correction: từ thứ Sáu lên thứ Hai tuần sau. Có ảnh hưởng đến phase 2 test?
+[12:09:30] Trang: Nếu thứ Hai, phase 2 có thể bắt đầu thứ Ba, vẫn kịp.
+[12:10:15] Hoàng: Vậy correction approved.
+[12:11:00] Minh: Quay lại handoff: task integration spec vẫn do Thắng, nhưng scope đã thay đổi do multi-currency. Liệu Thắng có cần update spec không?
+[12:11:50] Linh: Integration spec cần bao gồm multi-currency. Vậy Thắng phải mở rộng spec.
+[12:12:35] Hoàng: Đây là handoff bước hai: Thắng giữ task nhưng mở rộng scope. Deadline spec integration correction từ thứ Ba lên thứ Năm tuần sau (do thêm scope).
+[12:13:25] Trang: Vậy test case integration cũng phải delay. Em sẽ viết test case sau khi spec completed.
+[12:14:10] Hòa: Review bảo mật cũng phải delay theo.
+[12:14:55] Hoàng: Tất cả các task liên quan đều bị đẩy: spec integration → thứ Năm, test case → thứ Sáu, review bảo mật → thứ Hai tuần sau.
+[12:15:40] Linh: Vậy chúng ta có một chain correction dài. Cần tracking kỹ.
+[12:16:25] Minh: Em có một repeated mention: về task performance caching của Dũng. Design doc deadline vẫn thứ Hai, nhưng Dũng giờ có multi-currency task. Liệu có conflict?
+[12:17:15] Hoàng: Dũng có hai task: design doc performance (deadline thứ Hai) và multi-currency spec (deadline thứ Năm). Không conflict vì thời gian khác nhau. Nhưng Dũng cần quản lý thời gian.
+[12:18:05] Dũng: Em sẽ hoàn thành design doc trước thứ Hai, sau đó focus multi-currency.
+[12:18:50] An: Em có một clarification: mapping data cho multi-currency có cần bao gồm tỷ giá? Em có thể cung cấp mẫu.
+[12:19:35] Dũng: Cần, em sẽ lấy từ API, nhưng mẫu mapping giúp em test.
+[12:20:20] Trang: Vậy em sẽ chuẩn bị test case cho multi-currency sau khi có spec.
+[12:21:05] Hoàng: Tôi thấy part này có nhiều correction và handoff. Tổng kết nhanh: - Scope update: thêm multi-currency settlement. - Handoff: Dũng lead multi-currency task. - Deadlin correction: chargeback data → thứ Hai; spec integration → thứ Năm; test case → thứ Sáu; review bảo mật → thứ Hai tuần sau. - Repeated mention: test phase 1 giữ nguyên, design doc performance giữ nguyên.
+[12:21:55] Linh: Còn unresolved item về canary deployment vẫn chưa giải quyết.
+[12:22:40] Hoàng: Đúng, vẫn unresolved. Chúng ta không giải quyết tất cả trong part này.
+[12:23:25] Minh: Em muốn nhấn mạnh: task multi-currency cần resource từ Dũng, nên task performance caching có thể bị ảnh hưởng nếu quá tải.
+[12:24:10] Hoàng: Nếu quá tải, chúng ta có thể support từ Thắng hoặc em. Sẽ xem xét ở part sau.
+[12:24:55] Trang: Em xin xác nhận: môi trường test staging cho module thanh toán đã sẵn sàng.
+[12:25:40] Hòa: SSL staging đã renew sáng nay. OK.
+[12:26:25] Hoàng: Tốt. Part 5 kết thúc. Cảm ơn.
+[12:26:30] Hoàng: Chúng ta chuyển sang chủ đề release. Tôi muốn thảo luận về kế hoạch phát hành module thanh toán quốc tế sau khi có scope update.
+[12:27:15] Linh: Vâng. Hiện tại chúng ta có hai phiên bản: release chính và bản canary. Tuy nhiên, do thêm multi-currency, tôi đề xuất release chính vào ngày 15/3 thay vì 10/3.
+[12:28:05] Minh: Em đồng ý lùi lại, nhưng cần có milestone rõ ràng. Task design doc performance của Dũng có còn phù hợp không? Vì caching giờ phải tính đến multi-currency.
+[12:28:55] Hoàng: Task design doc performance có thể không cần thiết nữa, vì scope đã thay đổi. Tôi propose hủy task đó và thay bằng task mới: "Phân tích hiệu năng cho multi-currency settlement".
+[12:29:45] Linh: Em đồng ý. Design doc performance cũ tập trung vào đơn hàng nội địa, giờ ưu tiên multi-currency. Vậy hủy task cũ, tạo task mới.
+[12:30:35] Minh: Task mới này do ai lead? Dũng vẫn phù hợp, vì bạn đã có background về caching.
+[12:31:25] Dũng: Em sẵn sàng nhận. Nhưng cần clarification: task mới này có bao gồm viết design doc hay chỉ phân tích?
+[12:32:15] Linh: Cần design doc cho multi-currency performance. Deadline? Tôi propose một tuần, tức thứ Sáu tuần sau.
+[12:33:00] Hoàng: Deadline cho task mới là thứ Sáu tuần sau. Ghi nhận hủy task design doc performance cũ.
+[12:33:50] Trang: Liên quan đến test data chargeback, em thấy task này đã bị correction nhiều. Có thể hủy luôn và thay bằng test data cho multi-currency?
+[12:34:40] An: Bên Finance vẫn chưa gửi chargeback. Nếu hủy, chúng ta không cần chờ nữa. Em đồng ý hủy task chargeback data cũ, thay bằng "Chuẩn bị test data cho multi-currency".
+[12:35:30] Hoàng: Đây là hủy task thứ hai. Vậy task chargeback data bị hủy, task mới: "Chuẩn bị test data multi-currency", assign An, deadline? An em cần bao lâu?
+[12:36:20] An: Cần khoảng 3 ngày sau khi có spec multi-currency. Spec multi-currency deadline thứ Năm, vậy test data deadline thứ Hai tuần sau.
+[12:37:10] Hoàng: Correction deadline thứ hai: test data multi-currency deadline thứ Hai tuần sau. Nhưng đây là deadline mới, không phải correction của task cũ.
+[12:38:00] Linh: Vậy chúng ta có hai task mới thay thế: performance analysis cho multi-currency (Dũng) và test data multi-currency (An).
+[12:38:50] Minh: Em có một vấn đề: task integration spec của Thắng cũng bị ảnh hưởng. Liệu có cần hủy luôn spec cũ và viết spec mới cho multi-currency?
+[12:39:40] Hoàng: Không, spec integration đã được mở rộng bao gồm multi-currency. Không hủy, chỉ correction deadline.
+[12:40:30] Hòa: Bên Ops cần hỗ trợ Dũng trong task mới. Em có thể setup môi trường benchmark.
+[12:41:20] Dũng: Cảm ơn Hòa. Em sẽ gửi yêu cầu cụ thể sau khi có outline.
+[12:42:10] Trang: QA cũng cần test case cho multi-currency. Nhưng task này phụ thuộc vào spec, nên chưa assign. Em sẽ chờ.
+[12:43:00] Hoàng: Đó là event-dependent. Chúng ta cần correction deadline cho các task phụ thuộc sau spec.
+[12:43:50] Linh: Em thấy có nhiều thay đổi. Tôi muốn recap: hủy task design doc performance và chargeback data, thay bằng hai task mới. Correction deadline: spec integration từ thứ Ba lên thứ Năm (đã có), bổ sung deadline cho task mới.
+[12:44:40] Minh: Liệu có negative impact nào không? Dũng hiện có task multi-currency spec deadline thứ Năm, thêm task performance analysis deadline thứ Sáu tuần sau. Có thể quá tải.
+[12:45:30] Hoàng: Đúng, đây là negative block. Chúng ta có thể hỗ trợ Dũng: Thắng có thể giúp phân tích số liệu.
+[12:46:20] Dũng: Nếu Thắng support, em có thể chia workload. Thắng làm phần kiến trúc caching, em làm phần multi-currency logic.
+[12:47:10] Minh: Thắng vẫn có integration spec. Nhưng integration spec đã mở rộng scope, cần Thắng tập trung. Có thể tìm người khác.
+[12:48:00] Linh: Bạn Huyền designer có thể hỗ trợ phân tích không? Huyền có background về số liệu.
+[12:48:50] Hoàng: Huyền đang làm wireframe admin UI. Có thể support một phần. Nhưng wireframe deadline thứ Năm tuần sau, nếu support thì ảnh hưởng.
+[12:49:40] Trang: Em thấy chúng ta đang tạo thêm complexity. Tôi propose giữ nguyên Dũng lead, và nếu quá tải, sẽ delay performance analysis thêm một ngày.
+[12:50:30] Hoàng: Đó là correction: deadline performance analysis từ thứ Sáu lên thứ Hai tuần sau (thêm 3 ngày). Mọi người đồng ý?
+[12:51:20] Minh: Đồng ý, nhưng cần confirm với Dũng.
+[12:52:10] Dũng: Em OK với thứ Hai tuần sau. Như vậy em có thêm cuối tuần.
+[12:53:00] An: Về test data multi-currency, deadline thứ Hai tuần sau cũng ổn. Nhưng cần spec trước.
+[12:53:50] Hoàng: Vậy correction thứ hai cho task performance analysis (thay vì thứ Sáu, thành thứ Hai tuần sau). Đã có hai correction trong part này: deadline test data (mới) và deadline performance analysis (correction).
+[12:54:40] Linh: Chúng ta cũng cần xem xét lại release date. Tôi propose milestone: release module thanh toán (bao gồm multi-currency) vào ngày 20/3 thay vì 15/3.
+[12:55:30] Hoàng: Correction release date từ 15/3 lên 20/3. Đây là correction thứ ba, nhưng không phải task deadline.
+[12:56:20] Minh: Như vậy timeline bị đẩy lùi 10 ngày so với kế hoạch gốc. Cần approve từ management.
+[12:57:10] Hoàng: Tôi sẽ báo cáo. Bây giờ, chúng ta có một unresolved item: ai sẽ làm test case cho multi-currency? Trang chưa có assign.
+[12:58:00] Trang: Em chờ spec, nhưng nếu spec trễ, em vẫn có thể viết test case skeleton dựa trên requirement. Tôi propose bắt đầu từ thứ Bảy.
+[12:58:50] Linh: Tốt, vậy task test case multi-currency assign Trang, deadline: thứ Hai tuần sau (sau spec thứ Năm). Nhưng là ước lượng.
+[12:59:40] Hoàng: Task mới: test case multi-currency, Trang, deadline thứ Hai tuần sau. Nhưng cần confirmation khi spec xong.
+[13:00:30] Hòa: Em có issue về CI/CD: verification đã xong sáng nay, pipeline hoạt động. Task đó closed.
+[13:01:20] Minh: Tốt, vậy task CI/CD closed.
+[13:02:10] Trang: Em báo cáo test phase 1 module thanh toán đã chạy xong sáng nay, kết quả pass 95% test case. Còn 5% lỗi nhỏ về UI, đã log bug.
+[13:03:00] Hoàng: Phase 1 pass tốt. Bug nhỏ assign Thắng hoặc Minh.
+[13:03:50] An: Em muốn hỏi: task chargeback data đã hủy, vậy dữ liệu chargeback cũ có được dùng cho gì không?
+[13:04:40] Linh: Không, có thể archive. Không cần action.
+[13:05:30] Minh: Em có một request: cần tài liệu về kiến trúc multi-currency từ Linh để Dũng làm việc.
+[13:06:20] Linh: Em sẽ gửi document trong chiều nay.
+[13:07:10] Dũng: Cảm ơn.
+[13:08:00] Hoàng: Part 6 sắp kết thúc. Tổng kết: - Hủy task: design doc performance, chargeback data. - Task mới: performance analysis (Dũng, deadline thứ Hai tuần sau), test data multi-currency (An, deadline thứ Hai tuần sau), test case multi-currency (Trang, deadline thứ Hai tuần sau). - Correction deadline: performance analysis từ thứ Sáu lên thứ Hai. - Release date correction: 15/3 → 20/3. - Unresolved: canary deployment, monitoring integration, support cho Dũng.
+[13:08:50] Linh: Còn task wireframe admin UI vẫn giữ deadline thứ Năm tuần sau.
+[13:09:40] Trang: Em xác nhận phase 1 test completed.
+[13:10:30] Hoàng: Cảm ơn. Part 6 kết thúc.
+[13:11:00] Hoàng: Bây giờ chúng ta chuyển sang chủ đề monitoring và support. Hòa, em có cập nhật về monitoring integration cho module thanh toán không?
+[13:11:45] Hòa: Vâng. Em đã thiết lập một số alert cơ bản cho API thanh toán dựa trên log từ staging. Tuy nhiên, để monitoring real-time production, cần tích hợp với hệ thống central logging.
+[13:12:35] Linh: Đây là yêu cầu từ part 2, chúng ta cần thảo luận kỹ hơn. Ai sẽ là owner? Có thể giao cho Hòa, nhưng cần support từ Minh về format log.
+[13:13:25] Minh: Bên Dev có thể define log format chuẩn. Nhưng task này phụ thuộc vào spec integration, vì log cần ghi đúng trường của CRM.
+[13:14:15] Hoàng: Đúng là long-distance dependency: từ spec integration (Thắng, deadline thứ Năm) đến log format. Vậy task monitoring integration chưa thể giao ngay.
+[13:15:05] Hòa: Em có thể bắt đầu thiết lập dashboard sơ bộ dựa trên log hiện tại, sau đó tinh chỉnh khi có format. Điều này không cần chờ spec hoàn toàn.
+[13:15:55] Linh: Em đồng ý. Vậy task monitoring integration assign Hòa, nhưng deadline mềm: trước khi release production (ngày 20/3). Có thể làm song song.
+[13:16:45] Trang: Liên quan đến monitoring, QA cũng cần access vào dashboard để theo dõi test. Hòa có thể share quyền không?
+[13:17:35] Hòa: Được, em sẽ tạo một view riêng cho QA. Làm trong chiều nay.
+[13:18:25] An: Tôi có một thắc mắc: monitoring có bao gồm cả multi-currency không? Nếu có, cần thêm metric.
+[13:19:15] Hòa: Chưa rõ. Em sẽ đợi spec multi-currency từ Dũng để biết thêm endpoint.
+[13:20:05] Dũng: Spec multi-currency em đang viết, dự kiến có thứ Năm. Trong đó có liệt kê các API cần monitor.
+[13:20:55] Hoàng: Vậy chúng ta có một long-distance reference: từ task multi-currency spec (Dũng) đến monitoring integration (Hòa). Nhưng không phải task mới.
+[13:21:45] Minh: Em nhắc lại một antecedent: task performance analysis của Dũng (deadline thứ Hai tuần sau) cần data từ monitoring. Hòa có thể cung cấp log server từ tuần trước?
+[13:22:35] Hòa: Em đã gửi log cho Minh từ hôm kia. Nhưng nếu Dũng cần, em có thể export lại.
+[13:23:25] Dũng: Em cần log về query performance. Hòa gửi em file CSV được không?
+[13:24:15] Hòa: OK, em gửi vào cuối ngày.
+[13:25:05] Trang: Em có một clarification: test phase 1 đã pass, nhưng bug UI vẫn chưa fix. Bug đó có liên quan đến monitoring không? Vì UI lỗi có thể ảnh hưởng đến view log.
+[13:25:55] Minh: Bug UI nhỏ, không ảnh hưởng monitoring. Thắng sẽ fix sau.
+[13:26:45] Linh: Em thấy chúng ta đang phân tán. Tôi muốn focus vào support cho Dũng. Ai có thể hỗ trợ Dũng analyze log? Trang? Hòa? Hay An?
+[13:27:35] An: Bên em có thể phân tích business impact dựa trên log, nhưng technical em không rành.
+[13:28:25] Hòa: Em có thể support kỹ thuật, nhưng em đang có task monitoring và SSL. Có thể dành 2 tiếng vào thứ Sáu.
+[13:29:15] Minh: Em có thể hướng dẫn Dũng cách đọc log, nhưng không có thời gian chạy script. Thắng đang bận spec integration.
+[13:30:05] Hoàng: Vậy có một negative block: thiếu resource support. Tôi propose Dũng tự phân tích, nếu khó thì nhờ Hòa hướng dẫn từ xa.
+[13:30:55] Dũng: Em có thể tự làm, nhưng cần mẫu query. Hòa gửi em sample được không?
+[13:31:45] Hòa: Được, em gửi kèm file log.
+[13:32:35] Trang: Em có một đề xuất: deadline performance analysis thứ Hai tuần sau, nhưng Dũng cũng có test case multi-currency deadline cùng ngày. Đây là deadline gần nhau, có thể gây conflict. Cần correction không?
+[13:33:25] Hoàng: Đó là deadline gần task khác, nhưng không trùng. Dũng có thể ưu tiên test case trước. Nếu không kịp, có thể correction performance analysis thêm một ngày.
+[13:34:15] Linh: Em không muốn correction thêm, vì đã nhiều lần. Hãy giữ nguyên deadline.
+[13:35:05] Minh: Vậy Dũng cần quản lý thời gian tốt. Nếu cần, em có thể giúp review test case.
+[13:35:55] Dũng: Cảm ơn, em sẽ cố gắng.
+[13:36:45] Hòa: Em có một vấn đề về support: team Ops cần một dev để config alert cho CI/CD pipeline mới. Minh, ai có thể?
+[13:37:35] Minh: Thắng đã xong verification CI/CD, có thể assign Thắng. Nhưng Thắng có spec integration deadline thứ Năm. Có thể làm thêm?
+[13:38:25] Hoàng: Task support CI/CD assign Thắng, deadline? Cần trước release production.
+[13:39:15] Hòa: Không gấp, có thể làm sau spec integration. Deadline mềm: cuối tuần sau.
+[13:40:05] Linh: Vậy task đó không tạo thêm áp lực.
+[13:40:55] Trang: Em muốn hỏi về môi trường test cho multi-currency. Hòa, staging có đủ resource không?
+[13:41:45] Hòa: Hiện tại staging còn ổn, nhưng nếu chạy benchmark performance, có thể cần thêm node. Em sẽ kiểm tra.
+[13:42:35] An: Business có thể cung cấp data test mẫu cho multi-currency. Em sẽ gửi Dũng tham khảo.
+[13:43:25] Dũng: Tốt, em cần mẫu giao dịch.
+[13:44:15] Hoàng: Chúng ta có một repeated mention về canary deployment. Vẫn chưa quyết định. Có nên thảo luận lại không?
+[13:45:05] Linh: Chưa cần, vì canary phụ thuộc vào multi-currency spec. Để sau part này.
+[13:45:55] Minh: Vậy unresolved vẫn giữ.
+[13:46:45] Hòa: Em thấy có một số task deadline gần nhau: Dũng hai task cùng thứ Hai, Trang test case thứ Hai, An test data thứ Hai. Có thể sắp xếp lệch?
+[13:47:35] Hoàng: Lịch là do các bên tự điều chỉnh. Không cần correction.
+[13:48:25] Trang: Em confirm test case multi-currency có thể viết xong thứ Hai, nhưng nếu spec trễ, em báo.
+[13:49:15] An: Em cũng vậy, test data phụ thuộc spec.
+[13:50:05] Linh: Vậy chúng ta có một chuỗi phụ thuộc dài.
+[13:50:55] Hoàng: Part 7 sắp kết thúc. Tổng kết: - Task monitoring integration assign Hòa, deadline mềm trước release. - Support CI/CD assign Thắng, deadline cuối tuần sau. - Long-distance reference: multi-currency spec ảnh hưởng monitoring. - Deadline gần: Dũng, Trang, An cùng thứ Hai, không correction. - Unresolved: canary deployment, support resource cho Dũng.
+[13:51:45] Minh: Còn task wireframe admin UI vẫn tiến triển.
+[13:52:35] Trang: Em có một comment: monitoring integration nên bắt đầu sớm để kịp production.
+[13:53:25] Hòa: Em sẽ làm trong tuần này.
+[13:54:15] Hoàng: Cảm ơn. Part 7 kết thúc.
+[13:55:00] Hoàng: Chúng ta quay lại chủ đề integration. Tôi muốn xem xét kỹ hơn về spec integration và sự chồng chéo với multi-currency.
+[13:55:45] Linh: Vâng. Hiện tại có hai spec: integration spec do Thắng viết, bao gồm CRM và thanh toán cơ bản; multi-currency spec do Dũng viết. Có thể có ambiguity về scope.
+[13:56:35] Minh: Em nhận thấy vấn đề: spec integration đã được mở rộng sang multi-currency, nhưng Dũng lại viết spec riêng. Vậy ai là người chịu trách nhiệm cuối cùng?
+[13:57:25] Hoàng: Đây là ambiguous reference. Cần làm rõ. Linh, em là Product, em nghĩ sao?
+[13:58:15] Linh: Spec integration nên là tài liệu tổng thể, multi-currency là một phần. Vậy Thắng nên consolidate spec của Dũng vào spec integration. Tuy nhiên, Dũng có thể viết phần chi tiết.
+[13:59:05] Minh: Như vậy handoff không đổi, nhưng cần có coordination giữa Thắng và Dũng. Em đề xuất Thắng lead spec integration, Dũng cung cấp input, và Thắng merge.
+[13:59:55] Dũng: Em đồng ý. Em sẽ gửi phần multi-currency cho Thắng sau khi viết xong.
+[14:00:45] Thắng: OK, em sẽ tích hợp. Nhưng deadline spec integration vẫn là thứ Năm? Nếu nhận input từ Dũng vào thứ Năm, e khó kịp.
+[14:01:35] Hoàng: Có thể correction: Thắng nhận input từ Dũng trước thứ Tư, và spec integration deadline thứ Sáu? Mọi người đồng ý không?
+[14:02:25] Linh: Em không muốn correction thêm, vì đã nhiều. Tôi propose Dũng gửi input vào thứ Ba để Thắng có thời gian. Thứ Năm vẫn là deadline.
+[14:03:15] Dũng: Em sẽ cố gắng gửi vào thứ Ba. Nhưng thứ Ba em có meeting khác.
+[14:04:05] Minh: Vậy thứ Ba tối là kịp.
+[14:04:55] Trang: Liên quan đến test case integration, em cũng cần spec hoàn chỉnh. Vậy test case deadline sẽ phụ thuộc.
+[14:05:45] Hoàng: Đây là dependency đã biết. Chúng ta đã có correction trước. Bây giờ tôi muốn giải quyết ambiguity: spec integration sẽ do Thắng lead, Dũng support. Không handoff.
+[14:06:35] Hòa: Bên Ops có một thắc mắc: monitoring integration có nên là một phần của spec integration không? Hiện tại em đang làm riêng.
+[14:07:25] Linh: Nên là một phần. Thắng, em hãy thêm section monitoring vào spec.
+[14:08:15] Thắng: Vâng, em sẽ thêm. Nhưng cần input từ Hòa.
+[14:09:05] Hòa: Em gửi yêu cầu monitoring sau meeting.
+[14:10:00] Trang: Em có một câu hỏi khác: test case multi-currency đã assign em, nhưng chưa có spec chi tiết. Liệu có thể bắt đầu viết skeleton không?
+[14:10:50] Minh: Có thể, dựa trên requirement từ Linh. Em đề xuất Trang làm phần base, sau đó adjust.
+[14:11:40] Linh: Em sẽ gửi requirement tóm tắt cho Trang trong chiều nay.
+[14:12:30] Hoàng: Vậy chúng ta đã clear ambiguity về spec. Tuy nhiên, còn một unresolved reference khác: ai sẽ support Dũng cho performance analysis? Part trước chưa giải quyết.
+[14:13:20] Minh: Vẫn chưa có quyết định. Em nghĩ Hòa có thể support, nhưng Hòa đã có nhiều task.
+[14:14:10] Hòa: Em có thể dành 2 tiếng vào thứ Sáu, như đã nói.
+[14:15:00] Dũng: Vậy em nhận support từ Hòa. Tạm thời unresolved vần đề resource, nhưng có phương án.
+[14:15:50] Hoàng: Giữ unresolved, nhưng có hướng. Tiếp theo, tôi muốn recap cục bộ các task liên quan đến integration: - Spec integration: Thắng (lead), Dũng (input), deadline thứ Năm. - Test case integration: Trang, phụ thuộc spec. - Multi-currency input: Dũng gửi Thắng trước thứ Ba. - Monitoring section: Thắng thêm, Hòa input. - Test case multi-currency: Trang, deadline thứ Hai tuần sau. - Performance analysis: Dũng, deadline thứ Hai tuần sau. - Monitoring integration: Hòa, deadline mềm trước release.
+[14:16:40] Linh: Recap này không tạo task mới, chỉ là tổng hợp.
+[14:17:30] An: Em muốn hỏi về test data multi-currency: đã assign em, em sẽ gửi sau spec. Không thay đổi.
+[14:18:20] Trang: Em xác nhận test case multi-currency sẽ viết skeleton từ chiều nay.
+[14:19:10] Hoàng: Tốt. Có vấn đề gì khác về integration?
+[14:20:00] Minh: Em có một small issue: trong spec integration, cần quyết định dùng REST hay GraphQL cho CRM. Chưa có consensus.
+[14:20:50] Linh: Em propose REST, vì đơn giản. Nhưng nếu CRM team yêu cầu GraphQL, có thể change.
+[14:21:40] Hoàng: Đây là decision cần chốt. Nhưng có thể để part sau.
+[14:22:30] Trang: Nếu là GraphQL, test case của em sẽ khác.
+[14:23:20] Linh: Vậy em sẽ hỏi CRM và trả lời trong ngày mai.
+[14:24:10] Hòa: Liên quan đến REST, Ops có thể setup nhanh hơn.
+[14:25:00] Hoàng: Giữ unresolved decision về protocol. Chúng ta không giải quyết tất cả.
+[14:25:50] Dũng: Em có một clarification về multi-currency: có cần support real-time rate từ third-party trong spec không? Hay để sau?
+[14:26:40] Linh: Cần, vì đó là yêu cầu từ partner. Hãy đưa vào spec.
+[14:27:30] Thắng: OK, em sẽ thêm.
+[14:28:20] Trang: Vậy test case multi-currency cũng cần mock third-party API.
+[14:29:10] Hòa: Ops có thể setup mock server.
+[14:30:00] Linh: Task mock server assign Hòa, deadline? Có thể sau spec.
+[14:30:50] Hòa: Em làm trong tuần sau, deadline thứ Hai tuần sau.
+[14:31:40] Hoàng: Task mới: mock server for third-party API, Hòa, deadline thứ Hai tuần sau. Đây không phải correction, mà task mới.
+[14:32:30] Minh: Vậy chúng ta có thêm task. Recap cục bộ không tạo duplicate, nhưng lưu ý.
+[14:33:20] Trang: Em muốn nói thêm: test phase 2 chargeback đã hủy, nên em tập trung vào multi-currency.
+[14:34:10] Hoàng: Đúng. Tôi thấy part này xử lý được ambiguity về spec ownership. Nhưng unresolved protocol và support resource vẫn còn.
+[14:35:00] An: Em có một vấn đề nhỏ: data mapping cho CRM cần field cho multi-currency. Em sẽ gửi bổ sung.
+[14:35:50] Thắng: Em cần mapping đó để viết spec.
+[14:36:40] Hoàng: Vậy An gửi mapping trong sáng mai.
+[14:37:30] Linh: Em thấy chúng ta ổn. Part này gần hết.
+[14:38:20] Hoàng: Kết thúc part 8. Recap không tạo task mới. Cảm ơn.
+[14:38:30] Hoàng: Chúng ta bước vào part 9. Tôi muốn chốt một số state transition còn dang dở. Đầu tiên, về quyết định protocol REST hay GraphQL cho CRM. Linh, em đã hỏi CRM team chưa?
+[14:39:20] Linh: Dạ rồi, họ nói REST là ổn, nhưng có thể support GraphQL trong tương lai. Vậy chúng ta chốt REST.
+[14:40:10] Trang: Tốt, test case integration sẽ dùng REST.
+[14:40:55] Hòa: Ops sẽ setup REST endpoints.
+[14:41:45] Hoàng: Vậy state transition: protocol decision resolved.
+[14:42:35] Minh: Tiếp theo, về canary deployment. Chúng ta có thể chốt không? Tôi propose chấp nhận canary cho production.
+[14:43:25] Linh: Em đồng ý, nhưng cần Hòa confirm infra sẵn sàng.
+[14:44:15] Hòa: Infra production có thể support, nhưng cần thêm 2 ngày setup.
+[14:45:05] Hoàng: Vậy canary được chấp thuận. Task setup canary assign Hòa, deadline? Để kịp release 20/3, cần hoàn thành trước 15/3.
+[14:46:00] Hòa: OK, deadline 15/3.
+[14:46:50] Trang: Như vậy là resolved unresolved item từ lâu.
+[14:47:40] An: Tôi có một thông tin: chargeback data từ Finance cuối cùng đã gửi vào sáng nay dù task đã hủy. Có nên dùng cho gì không?
+[14:48:30] Linh: Task chargeback data đã hủy, nhưng data có thể archive. Không tạo task mới.
+[14:49:20] Hoàng: Đây là cancellation muộn – dữ liệu đến nhưng không dùng.
+[14:50:10] Minh: Liên quan đến performance analysis của Dũng, em muốn hỏi Hòa đã gửi log chưa?
+[14:51:00] Hòa: Em gửi rồi, từ chiều qua. Dũng nhận chưa?
+[14:51:50] Dũng: Em nhận rồi, đang phân tích.
+[14:52:40] Trang: Về test case multi-currency, em đã viết skeleton. Tuy nhiên, do spec integration bị delay, em cần correction deadline test case từ thứ Hai lên thứ Ba tuần sau.
+[14:53:30] Hoàng: Đây là correction chain cuối. Deadline test case integration đã từ thứ Sáu tuần trước? Nhưng part này chúng ta chưa có correction cụ thể. Em muốn correction test case integration sang thứ Ba.
+[14:54:20] Linh: Em approve. Vậy test case integration deadline thứ Ba tuần sau.
+[14:55:10] Hoàng: Ghi nhận. Còn task mock server cho third-party API của Hòa, deadline thứ Hai tuần sau. Liệu có cần correction không?
+[14:56:00] Hòa: Không, em vẫn kịp.
+[14:56:50] Minh: Em có một đề xuất: hủy task support CI/CD cho Thắng, vì CI/CD đã ổn. Task đó không cần thiết.
+[14:57:40] Hoàng: Hủy task support CI/CD. Ghi nhận cancellation.
+[14:58:30] Linh: Vậy chúng ta có một cancellation khác.
+[14:59:20] Trang: Sau khi có spec integration vào thứ Năm, em sẽ cần 2 ngày để viết test case full. Vậy deadline test case integration thứ Ba là khả thi.
+[15:00:10] An: Em đã gửi mapping data cho Thắng. Thắng nhận chưa?
+[15:01:00] Thắng: Dạ, em đã có. Em sẽ integrate vào spec.
+[15:01:50] Hoàng: Tốt. Bây giờ tôi muốn recap trạng thái các task chính trước part cuối: - Spec integration: Thắng lead, deadline thứ Năm. - Test case integration: Trang, deadline thứ Ba tuần sau. - Multi-currency spec: Dũng, deadline thứ Năm (input cho Thắng thứ Ba). - Performance analysis: Dũng, deadline thứ Hai tuần sau (đã correction). - Test data multi-currency: An, deadline thứ Hai tuần sau. - Mock server: Hòa, deadline thứ Hai tuần sau. - Monitoring integration: Hòa, deadline mềm. - Setup canary: Hòa, deadline 15/3. - Wireframe admin UI: Huyền (không có trong meeting), deadline thứ Năm tuần sau.
+[15:02:40] Linh: Recap này không tạo duplicate, chỉ tổng hợp.
+[15:03:30] Minh: Còn unresolved về resource support cho Dũng. Tôi propose dùng Hòa support 2 tiếng thứ Sáu.
+[15:04:20] Hòa: OK.
+[15:05:10] Hoàng: Vậy solved.
+[15:06:00] Dũng: Em cảm ơn.
+[15:06:50] Trang: Em muốn hỏi: bug UI từ phase 1 đã fix chưa?
+[15:07:40] Minh: Em assign Thắng fix, Thắng đã commit chiều qua. Sẽ deploy cùng bản build.
+[15:08:30] Trang: OK.
+[15:09:20] An: Em có một vague issue: data mapping cho multi-currency có thể thay đổi nếu partner yêu cầu thêm field. Nhưng chưa rõ.
+[15:10:10] Linh: Để chúng ta xử lý khi có thông tin mới. Không tạo task.
+[15:11:00] Hoàng: Part 9 gần kết thúc. Chúng ta đã có nhiều transition: protocol resolved, canary approved, cancellation của support CI/CD và chargeback data, correction chain cho test case integration. Một số unresolved đã được giải quyết.
+[15:11:50] Minh: Còn vấn đề Crypto khảo sát? Đã assign Dũng deadline thứ Hai, nhưng chưa update.
+[15:12:40] Hoàng: Khảo sát crypto vẫn giữ nguyên.
+[15:13:30] Trang: Em thấy timeline đã rõ.
+[15:14:20] Hòa: Em confirm SSL staging đã renew.
+[15:15:10] Linh: Tốt.
+[15:16:00] Hoàng: Part 9 kết thúc, chưa closing. Cảm ơn mọi người.
+[15:16:15] Hoàng: Chúng ta bước vào part cuối cùng. Tôi muốn tổng kết toàn bộ trạng thái meeting, điểm lại các quyết định và unresolved items. Đây là recap chính thức, không tạo task mới.
+[15:17:05] Linh: Vâng. Em có danh sách các task chính đã được xác nhận. Trước hết, module thanh toán quốc tế với multi-currency settlement.
+[15:17:55] Minh: Các task cụ thể: spec integration do Thắng lead với deadline thứ Năm tuần này, input từ Dũng (multi-currency spec) gửi trước thứ Ba.
+[15:18:45] Trang: Test case integration do em phụ trách, deadline đã correction thành thứ Ba tuần sau.
+[15:19:35] An: Test data multi-currency do em chuẩn bị, deadline thứ Hai tuần sau, phụ thuộc spec từ Thắng.
+[15:20:25] Dũng: Em còn task performance analysis deadline thứ Hai tuần sau (đã correction từ thứ Sáu), và khảo sát crypto deadline 2h chiều thứ Hai.
+[15:21:15] Hòa: Task của em: monitoring integration (deadline mềm trước release), setup canary deadline 15/3, mock server deadline thứ Hai tuần sau, và SSL staging đã hoàn thành.
+[15:22:05] Minh: Ngoài ra, bug UI phase 1 đã được Thắng fix. Task support CI/CD đã hủy. Chargeback data đã hủy, dữ liệu đến muộn không dùng.
+[15:22:55] Linh: Về timeline release: chốt ngày 20/3 cho module thanh toán, bao gồm multi-currency. Canary deployment được chấp thuận, setup trước 15/3.
+[15:23:45] Trang: Phase 1 test completed 95% pass. Phase 2 chargeback đã hủy, nhưng có phase test multi-currency sau spec.
+[15:24:35] An: Protocol REST cho CRM đã chốt. Mapping data đã gửi cho Thắng.
+[15:25:25] Hòa: Mock server cho third-party API sẽ được setup sau spec.
+[15:26:15] Hoàng: Bây giờ tôi muốn điểm lại các unresolved items còn tồn đọng. Những vấn đề chưa được giải quyết triệt để.
+[15:27:05] Linh: Thứ nhất, quy trình review code cho multi-currency module. Chưa có consensus về người review. Dev Lead hay Product?
+[15:27:55] Minh: Em đề xuất review chéo: Thắng review Dũng và ngược lại. Nhưng chưa được approve.
+[15:28:45] Hoàng: Đây là unresolved. Tạm thời chưa quyết định, để sau khi spec hoàn thành.
+[15:29:35] Trang: Thứ hai, môi trường test cho admin UI. Hòa đã nói sẽ tạo stack riêng, nhưng chưa có deadline cụ thể.
+[15:30:25] Hòa: Em sẽ làm sau khi có requirement spec từ Linh. Requirement spec admin UI deadline thứ Ba tuần sau, vậy stack sẽ xong trước thứ Sáu tuần sau.
+[15:31:15] Linh: Vậy stack admin UI deadline thứ Sáu tuần sau. Nhưng chưa chốt.
+[15:32:05] Hoàng: Vẫn unresolved vì thiếu deadline chính thức. Nhưng tạm ghi nhận.
+[15:32:55] An: Thứ ba, vấn đề hỗ trợ Dũng cho performance analysis. Hòa đã đồng ý support 2 tiếng thứ Sáu, nhưng chưa confirm cụ thể.
+[15:33:45] Hòa: Em confirm support thứ Sáu từ 2-4h chiều.
+[15:34:35] Dũng: OK, em sẽ chuẩn bị câu hỏi.
+[15:35:25] Hoàng: Như vậy resolved.
+[15:36:15] Minh: Còn một unresolved: quy trình deploy cho canary. Ai sẽ approval? Có cần testing trước không?
+[15:37:05] Linh: Em propose QA approve trước khi deploy canary. Trang, em có thể làm không?
+[15:37:55] Trang: Có thể, nhưng cần test case cho canary. Chưa có.
+[15:38:45] Hoàng: Vậy unresolved: cần test case canary. Không tạo task mới, nhưng ghi nhận.
+[15:39:35] Linh: Tôi muốn nhấn mạnh: không tạo task mới trong recap. Đây chỉ là liệt kê.
+[15:40:25] Hòa: Em có một clarification: monitoring integration có cần thiết lập alert cho canary không?
+[15:41:15] Minh: Cần, nhưng chưa có spec. Để sau.
+[15:42:05] Trang: Tôi thấy chúng ta có khá nhiều unresolved, nhưng đa số đã có hướng.
+[15:42:55] Hoàng: Đúng. Bây giờ tôi sẽ recap tổng quát: meeting hôm nay đã thiết lập lộ trình cho tháng 3. Các milestone chính: test data phase 1 (xong), spec integration (thứ Năm), test phase multi-currency (từ thứ Ba tuần sau), release production (20/3). Có nhiều correction chain và handoff. Một số task bị hủy, thay thế. Còn vài unresolved sẽ được giải quyết trong các meeting tiếp theo.
+[15:43:45] Linh: Em xin phép gửi biên bản tổng hợp sau.
+[15:44:35] Minh: Cảm ơn mọi người vì sự kiên nhẫn.
+[15:45:25] Trang: Tôi chỉ muốn confirm lại: test case integration deadline thứ Ba, spec integration thứ Năm, không thay đổi.
+[15:46:15] An: OK.
+[15:47:05] Dũng: Em sẽ gửi multi-currency input trước thứ Ba.
+[15:47:55] Hòa: Em có một thông tin cuối: CI/CD pipeline đã hoạt động ổn định từ sáng.
+[15:48:45] Hoàng: Tốt. Có ai còn vấn đề gì trước khi kết thúc?
+[15:49:35] Minh: Em muốn hỏi về lịch meeting tiếp theo. Có cần sớm không?
+[15:50:25] Linh: Tôi propose tổ chức vào thứ Hai tuần sau để review spec integration.
+[15:51:15] Hoàng: Đồng ý. Sẽ gửi invitation. Cảm ơn tất cả. Meeting kết thúc.

@@ -1,0 +1,77 @@
+[09:00:02] Quang: Chào mọi người, hôm nay mình họp về API integration, dữ liệu mẫu, quyền truy cập và kế hoạch rollout. Đầu tiên, Hùng cho biết tiến độ tích hợp API đối tác nhé.
+[09:00:15] Hùng: Chào anh, hiện tại em đã hoàn thành phần xác thực và gọi thử được một số endpoint cơ bản. Tuy nhiên vẫn còn lỗi khi mapping response sang model của chúng ta. Em dự kiến sẽ xong phần mapping trước thứ Sáu tuần này.
+[09:00:28] Quang: Ok, vậy em cứ tập trung hoàn thành tích hợp API, deadline là thứ Sáu nhé.
+[09:00:33] Hùng: Vâng ạ, em sẽ cố gắng. Nhưng em lo có thể phát sinh thêm khi kiểm thử với dữ liệu thực tế. Có thể cần thêm thời gian chạy integration test.
+[09:00:46] Linh: Nếu có vấn đề thì mình nên ưu tiên xử lý sớm. Em thấy API này có nhiều field mới, liên quan đến dữ liệu mẫu của Mai đang làm. Hai bên có tương tác gì không Hùng?
+[09:00:57] Hùng: Có chị, response của API chứa các trường dữ liệu mà bên Mai sẽ phải hiển thị. Nếu cấu trúc thay đổi, bên Mai phải cập nhật lại dữ liệu mẫu.
+[09:01:08] Mai: Vậy à, thế thì cần đồng bộ. Hiện em đang dùng bộ dữ liệu cũ để test giao diện. Nếu API thay đổi thì em phải làm lại từ đầu mất.
+[09:01:18] Quang: Thế thì Mai cần chuẩn bị một bộ dữ liệu mẫu mới dựa trên response thực tế của API. Mai làm được chứ?
+[09:01:25] Mai: Em sẽ làm, nhưng cần dữ liệu thô từ Hùng. Hiện tại em không có dữ liệu thực tế từ API mới.
+[09:01:32] Hùng: Anh sẽ cung cấp dữ liệu thô từ các lần gọi thử. Khoảng thứ Tư anh gửi được không?
+[09:01:39] Quang: Vậy chốt: Hùng chuẩn bị dữ liệu thô gửi Mai trước thứ Tư. Mai tạo bộ dữ liệu mẫu mới, nhưng cái này không cần deadline cứng, miễn là sẵn sàng trước khi rollout.
+[09:01:51] Mai: Em sẽ bắt tay vào làm ngay khi có dữ liệu thô. Nhưng không hứa trước được thời gian hoàn thành vì còn phụ thuộc vào khối lượng.
+[09:02:00] Quang: Ok, Mai cứ linh hoạt. Còn việc quyền truy cập thì sao? Tuấn đã kiểm tra chưa?
+[09:02:08] Tuấn: Em chưa, em đang đợi danh sách endpoint đầy đủ từ Hùng để kiểm tra từng API cần quyền gì. Mà em cũng đang vướng dự án khác, không biết có kịp không.
+[09:02:20] Linh: Tuấn nên ưu tiên việc này, vì liên quan đến bảo mật. Nếu không kịp thì báo sớm để có phương án.
+[09:02:27] Quang: Em cố gắng kiểm tra xong quyền truy cập trước thứ Tư nhé, để kịp cho đợt kiểm thử tổng.
+[09:02:33] Tuấn: Em thấy hơi khó, vì em còn phải test mấy tính năng khác. Nhưng em sẽ cố. Nếu không xong thì chắc phải lùi lại thứ Sáu.
+[09:02:44] Quang: Tạm thời cứ deadline thứ Tư đã, nếu khó khăn thì báo lại. Còn Hùng, nhớ là dữ liệu thô cũng thứ Tư nhé, đừng trễ.
+[09:02:52] Hùng: Vâng, em sẽ gửi.
+[09:02:56] Linh: Em có ý này, hay là mình làm thêm một tài liệu hướng dẫn chi tiết cách dùng API, vì nhiều team khác cũng sẽ dùng. Mình có nên assign ai đó không?
+[09:03:08] Quang: Thực ra tài liệu cũ đã có từ đợt trước, chỉ cần cập nhật một số phần mới thôi. Mình không cần viết lại từ đầu. Hùng, em thấy sao?
+[09:03:17] Hùng: Em nghĩ cũng chỉ cần cập nhật vài chỗ. Nhưng hiện em đang bận tích hợp, sợ không kịp. Có thể nhờ chị Linh cập nhật giúp không ạ?
+[09:03:26] Linh: Ừ, chị có thể làm. Nhưng chị cần biết những thay đổi cụ thể. Hùng gửi diff các endpoint mới cho chị nhé.
+[09:03:33] Hùng: Ok, em sẽ gửi trước ngày mai.
+[09:03:37] Quang: Vậy Linh nhận việc cập nhật tài liệu API nhé. Deadline cho việc này là thứ Năm. Còn Hùng tập trung integration.
+[09:03:45] Linh: Vâng, em sẽ làm. Mà còn một việc nữa, khi em cập nhật tài liệu thì cần ai đó review trước khi publish. Ai sẽ review ạ?
+[09:03:53] Quang: À, cần người review am hiểu API. Hiện tại chưa biết ai phù hợp. Để anh tìm sau. Có lẽ cần một người từ team kiến trúc.
+[09:04:02] Linh: Vậy em cứ viết xong rồi gửi anh, anh tìm reviewer nhé. Nhưng mà phải sớm, không thì tài liệu bị trễ so với rollout.
+[09:04:08] Quang: Được, em hoàn thành bản draft trước thứ Năm, anh sẽ lo reviewer.
+[09:04:15] Tuấn: Em cũng cần tài liệu đó để viết test case. Nếu có muộn quá thì em không kịp viết test cho API.
+[09:04:23] Quang: Linh cố gắng xong sớm nhất có thể. Còn bây giờ quay lại vấn đề dữ liệu mẫu, Mai có cần hỗ trợ gì không?
+[09:04:31] Mai: Em cần một số mẫu response thực tế có cả lỗi, để test giao diện trong các tình huống khác nhau. Hùng có thể cung cấp thêm không?
+[09:04:40] Hùng: Được, anh sẽ gửi kèm khi gửi dữ liệu thô. Em cứ yên tâm.
+[09:04:46] Quang: Nhắc lại là Hùng gửi dữ liệu thô và mẫu response cho Mai trước thứ Tư. Mai chủ động làm dữ liệu mẫu, không có deadline cứng nhưng cần xong trước khi test tổng.
+[09:04:57] Linh: Về việc kiểm thử tổng, mình có cần viết script kiểm thử tự động cho API không? Hay là chỉ test tay?
+[09:05:05] Tuấn: Em nhớ là đã có script cũ từ đợt trước rồi. Để em kiểm tra lại, nếu còn dùng được thì chỉ cần chỉnh sửa. Viết mới thì mất thời gian lắm.
+[09:05:15] Quang: Vậy Tuấn kiểm tra script cũ, nếu cần thì cập nhật. Nhưng anh nghĩ việc này không cần gấp, mình làm sau khi API ổn định cũng được.
+[09:05:24] Tuấn: Dạ, vậy em sẽ tranh thủ. Coi như đây là việc phát sinh thêm.
+[09:05:30] Quang: Nhưng việc kiểm tra quyền vẫn là ưu tiên cao nhất đối với Tuấn nhé. Đừng để delay.
+[09:05:36] Tuấn: Vâng, em hiểu rồi ạ.
+[09:05:41] Linh: Em vừa nghĩ ra, có một vấn đề là khi Mai tạo dữ liệu mẫu mới, liệu có ảnh hưởng đến các màn hình cũ đang hoạt động không? Cần kiểm tra kỹ.
+[09:05:51] Mai: Đúng là có thể xảy ra nếu mình thay đổi cấu trúc dữ liệu mẫu. Nhưng em sẽ cố gắng giữ backward compatibility. Nếu cần thay đổi lớn thì em sẽ thông báo.
+[09:06:03] Quang: Ok, nếu có vấn đề thì báo lại ngay. Còn bây giờ chuyển sang kế hoạch rollout. Linh, em dự kiến thế nào?
+[09:06:11] Linh: Em nghĩ khi API hoàn thành và kiểm thử xong, mình sẽ triển khai theo từng giai đoạn. Trước mắt là môi trường staging vào thứ Sáu tuần sau, rồi production vào thứ Hai tuần kế tiếp.
+[09:06:24] Quang: Vậy Linh lập kế hoạch rollout chi tiết, bao gồm các bước và thời gian cụ thể, deadline thứ Sáu tuần này nhé.
+[09:06:32] Linh: Vâng, em sẽ làm. Nhưng em cần confirm ngày chính xác Hùng hoàn thành API để lên timeline.
+[09:06:39] Hùng: Hiện tại em vẫn target thứ Sáu, nhưng như đã nói, có thể cần thêm thời gian để kiểm thử kỹ. Em đề xuất dời deadline API sang thứ Hai tuần sau, để có cuối tuần chạy test.
+[09:06:53] Quang: Ừ, để đảm bảo chất lượng, anh đồng ý dời deadline API sang thứ Hai tuần sau. Hùng cập nhật lại kế hoạch nhé.
+[09:07:01] Hùng: Cảm ơn anh. Vậy em sẽ gửi bản cập nhật vào chiều nay.
+[09:07:07] Linh: Như thế thì kế hoạch rollout của em cũng phải điều chỉnh. Staging có thể lùi sang thứ Ba, production vào thứ Năm. Em sẽ đưa vào bản kế hoạch rollout.
+[09:07:17] Quang: Ok, Linh cứ cập nhật theo deadline mới. Còn Tuấn, việc kiểm tra quyền vẫn giữ deadline thứ Tư nhé, không thay đổi.
+[09:07:26] Tuấn: Vâng, em đã note. Em sẽ cố gắng hoàn thành.
+[09:07:31] Quang: Tóm lại, chúng ta có các đầu việc chính: Hùng hoàn thành tích hợp API, deadline thứ Hai tuần sau. Hùng cung cấp dữ liệu thô cho Mai, deadline thứ Tư. Mai chuẩn bị dữ liệu mẫu, không có deadline cứng. Tuấn kiểm tra quyền, deadline thứ Tư. Linh cập nhật tài liệu API, deadline thứ Năm. Linh lập kế hoạch rollout, deadline thứ Sáu. Ai có thắc mắc gì không?
+[09:07:52] Hùng: Em chỉ muốn xác nhận lại, việc dữ liệu thô của em với dữ liệu mẫu của Mai là hai việc riêng, và em chỉ cần gửi thô thôi phải không? Mai sẽ tự xử lý?
+[09:08:01] Quang: Đúng rồi. Dữ liệu thô là việc của Hùng, còn dữ liệu mẫu là việc của Mai. Không nhầm lẫn nhé.
+[09:08:08] Mai: Em nhận việc dữ liệu mẫu. Mà anh Quang ơi, nếu em cần thêm một số sample edge case thì em có thể tự tạo không, hay phải lấy từ Hùng?
+[09:08:17] Hùng: Em có thể tự tạo nếu biết cấu trúc, nhưng tốt nhất là anh cung cấp để đảm bảo đúng thực tế. Anh sẽ gửi nhiều case cho em.
+[09:08:25] Mai: Ok anh.
+[09:08:28] Tuấn: Em vừa nhớ ra, có một vấn đề chưa giải quyết: Ai sẽ là người chịu trách nhiệm chính nếu API bị lỗi sau rollout? Mình chưa có quy trình cụ thể.
+[09:08:38] Quang: Đúng là vấn đề này cần rõ ràng. Nhưng hôm nay chưa có đủ thông tin để quyết định. Để anh trao đổi thêm với quản lý cấp trên rồi thông báo sau.
+[09:08:48] Linh: Em nghĩ mình nên có một người đầu mối, nhưng bây giờ chưa chốt được.
+[09:08:54] Quang: Ừ, coi như đây là một unresolved item, sẽ được xử lý ở meeting sau.
+[09:09:00] Mai: Còn một điều nữa, em thấy cấu trúc response API có vẻ phức tạp, có thể cần thay đổi cả phần model bên frontend. Việc đó có nằm trong scope không?
+[09:09:11] Linh: Nếu thay đổi model thì cần có sự đồng bộ với backend. Nhưng việc đó chưa được lên kế hoạch.
+[09:09:17] Quang: Mai cứ note lại, nếu cần thì mình sẽ bàn sau. Còn trong cuộc họp này, mình tập trung vào những task đã nêu.
+[09:09:25] Mai: Vâng.
+[09:09:28] Quang: Ok, vậy ai còn câu hỏi gì nữa không?
+[09:09:33] Linh: Em muốn recap lại một chút cho chắc: Hùng có hai việc là API integration (deadline thứ Hai) và dữ liệu thô (deadline thứ Tư). Em có việc cập nhật tài liệu (thứ Năm) và kế hoạch rollout (thứ Sáu). Tuấn có kiểm tra quyền (thứ Tư). Mai có dữ liệu mẫu (không deadline). Đúng không ạ?
+[09:09:51] Quang: Đúng. Nhưng lưu ý, việc dữ liệu thô của Hùng với việc dữ liệu mẫu của Mai là hai đầu việc khác nhau, mặc dù liên quan. Đừng gộp lại.
+[09:10:01] Linh: Vậy recap không có gì thay đổi về người hay deadline phải không anh?
+[09:10:06] Quang: Đúng, chỉ là xác nhận lại thôi. À, còn việc viết script test tự động cho API thì hiện tại chưa cần, Tuấn chỉ kiểm tra script cũ thôi, không tính là task mới nhé.
+[09:10:18] Tuấn: Dạ, em chỉ coi là việc nhỏ, không cần đưa vào danh sách task chính.
+[09:10:25] Quang: Vậy còn task nào không? Tôi nghĩ hết rồi. Cảm ơn mọi người. Tan họp.
+[09:10:33] Hùng: Cảm ơn anh Quang.
+[09:10:36] Mai: Bye mọi người.
+[09:10:39] Linh: Chào mọi người.
+[09:10:43] Tuấn: Bye.

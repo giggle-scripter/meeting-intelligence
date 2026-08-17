@@ -1,0 +1,59 @@
+MEETING_ID: W4-LONG-C5-N1-PROD-STATE-003
+PART: P04/5
+
+T000197 [09:41:00] Anh Tuấn: Chuyển sang vấn đề release sắp tới. Chúng ta cần bàn về timeline và monitoring.
+T000198 [09:41:12] Hùng: Em thấy release 2.1 dự kiến ngày 1/3. Còn 2 tuần nữa, khá gấp.
+T000199 [09:41:24] Minh: Nhưng staging chưa sẵn sàng, liệu có kịp không?
+T000200 [09:41:36] Anh Tuấn: Staging phải có trong tuần này. Tôi đã đôn đốc infra. Còn monitoring, Hùng, em đã chuẩn bị gì chưa?
+T000201 [09:41:48] Hùng: Em có script check health cơ bản, nhưng chưa tích hợp alert. Cần thêm time.
+T000202 [09:42:00] Lan: Vậy trước mắt có thể dùng email notification. Nhưng mà phải cấu hình SMTP.
+T000203 [09:42:12] Anh Tuấn: Để tôi assign task "Setup monitoring alert" cho Hùng, deadline 28/2. Được không?
+T000204 [09:42:24] Hùng: 28/2 hơi sát release, nhưng em cố được. Cần Minh hỗ trợ phần log.
+T000205 [09:42:36] Minh: Em có thể cấu hình log aggregation. Tuy nhiên em thấy task clean data hồi trước có vẻ không còn cần thiết nữa.
+T000206 [09:42:48] Hùng: Tại sao? Em tưởng Lan đang viết script clean?
+T000207 [09:43:00] Lan: Sau khi Hùng restore snapshot mới, dữ liệu đã được làm sạch rồi. Bảng accounts không còn duplicate.
+T000208 [09:43:12] Anh Tuấn: Thế thì hủy task clean data của Lan nhé. Lan, em không cần viết script đó nữa.
+T000209 [09:43:24] Lan: Vâng, em sẽ xóa task đó khỏi list. Tập trung vào tài liệu test.
+T000210 [09:43:36] Hùng: Nhưng mà em nhớ task clean data được tạo ra để xử lý duplicate. Nếu snapshot mới sạch rồi thì ok.
+T000211 [09:43:48] Minh: Tuy nhiên em vẫn thấy trong DB có vài row lỗi encoding. Có nên làm sạch triệt để?
+T000212 [09:44:00] Anh Tuấn: Không, release gần tới, ưu tiên core chức năng. Encoding lỗi để bản sau.
+T000213 [09:44:12] Hùng: Về monitoring, em cần biết các chỉ số nào cần alert. Anh Tuấn có yêu cầu gì?
+T000214 [09:44:24] Anh Tuấn: Chủ yếu uptime API, response time > 500ms, error rate > 1%. Em setup threshold đó.
+T000215 [09:44:36] Minh: Em có thể viết script warning qua Slack.
+T000216 [09:44:48] Hùng: Slack thì dễ, nhưng cần webhook. Em sẽ tạo channel riêng.
+T000217 [09:45:00] Lan: Còn tài liệu test, em dự kiến nộp bản draft vào 28/2 để kịp review trước release.
+T000218 [09:45:12] Anh Tuấn: 28/2 là deadline của monitoring task rồi. Lan đặt deadline 28/2 có sát không?
+T000219 [09:45:24] Lan: Em nghĩ kịp, vì tài liệu đã gần xong, chỉ cần update phần staging khi có server.
+T000220 [09:45:36] Hùng: Nhưng em đã nhắc, staging có thể chưa có đến cuối tuần. Em sợ Lan không có data để test.
+T000221 [09:45:48] Anh Tuấn: Đã bàn, Lan viết dựa trên sandbox. Nếu staging trễ, update sau. Vậy deadline tài liệu test 28/2 là được.
+T000222 [09:46:00] Minh: Vậy task tài liệu test có deadline 28/2, còn task monitoring alert cũng 28/2. Hai task này cùng ngày.
+T000223 [09:46:12] Anh Tuấn: Đúng, nhưng không vấn đề. Hùng và Lan tự điều phối.
+T000224 [09:46:24] Hùng: Vâng. Nhân tiện, về task "Kiểm tra config trên sandbox", em thấy cần đặt deadline để tránh quên. Đề xuất 27/2.
+T000225 [09:46:36] Minh: 27/2 sát release, nhưng em nghĩ làm được. Anh Tuấn thấy sao?
+T000226 [09:46:48] Anh Tuấn: Được, set deadline 27/2 cho task đó. Nhưng mà hồi đầu ta còn task "Tạo bộ dữ liệu test chuẩn" cho intern, giờ intern chưa vào, có nên hủy luôn?
+T000227 [09:47:00] Lan: Em thấy chưa cần, vì dữ liệu tạm của Hùng đủ dùng.
+T000228 [09:47:12] Hùng: Đồng ý, hủy task đó. Không cần dữ liệu chuẩn lúc này.
+T000229 [09:47:24] Anh Tuấn: Quyết định hủy task "Tạo bộ dữ liệu test chuẩn". Vậy summary: hủy clean data và bộ dữ liệu chuẩn. Còn task khác giữ nguyên.
+T000230 [09:47:36] Minh: Rõ.
+T000231 [09:47:42] Lan: Em cũng rõ.
+T000232 [09:47:48] Hùng: Ok.
+T000233 [09:48:00] Anh Tuấn: Bây giờ về monitoring, Hùng cần thêm thông tin gì từ team không?
+T000234 [09:48:12] Hùng: Em cần list các service cần monitor. Minh, em có thể cung cấp danh sách endpoint không?
+T000235 [09:48:24] Minh: Có, em gửi sau. Gồm 5 API chính: login, user, order, payment, notification.
+T000236 [09:48:36] Hùng: Tốt. Em sẽ setup health check cho từng cái.
+T000237 [09:48:48] Anh Tuấn: Chú ý không monitor staging nếu chưa có. Chỉ sandbox trước.
+T000238 [09:49:00] Hùng: Vâng.
+T000239 [09:49:10] Lan: Em thấy task "Restore DB" đã xong chiều hôm qua. Hùng confirm?
+T000240 [09:49:22] Hùng: Đã xong, em restore snapshot lúc 15h. DB sandbox hoạt động bình thường.
+T000241 [09:49:34] Anh Tuấn: Vậy task đó hoàn thành. Còn ticket lỗi login, Minh viết chưa?
+T000242 [09:49:46] Minh: Em viết xong rồi, assign cho BA. Nhưng BA bảo không có priority.
+T000243 [09:49:58] Anh Tuấn: Tạm thời để đó. Có ai cần thảo luận thêm về release?
+T000244 [09:50:10] Hùng: Em không có.
+T000245 [09:50:18] Lan: Em chỉ muốn nhắc: tài liệu test deadline 28/2, cần review từ Hùng trước 27/2.
+T000246 [09:50:30] Anh Tuấn: Hùng sắp xếp nhé. Vậy nội dung hôm nay tàm tạm. Còn vấn đề gì không?
+T000247 [09:50:42] Minh: Em có một lo ngại: deadline monitoring 28/2 và tài liệu test 28/2 có thể chồng chéo nhân lực review. Nhưng mà thôi.
+T000248 [09:50:54] Anh Tuấn: Hùng sẽ review tài liệu test trước, sau đó làm monitoring. Ưu tiên tài liệu.
+T000249 [09:51:06] Hùng: Ok, em sẽ review tài liệu test vào 26/2 để Lan kịp sửa.
+T000250 [09:51:18] Lan: Cảm ơn Hùng.
+T000251 [09:51:28] Anh Tuấn: Phần còn lại họp sau. Kết thúc P04.
+--- END OF PART P04 ---

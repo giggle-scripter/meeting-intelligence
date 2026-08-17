@@ -1,0 +1,78 @@
+MEETING_ID: W2-SHORT-C2-N0-OPS-BRST-024
+CASE_LABELS: brainstorm_only,no_active_task
+MEETING_DATE: 2026-02-18
+TITLE: Chuẩn bị bản phát hành nội bộ
+
+[00:00:05] Thái: Chào mọi người, hôm nay chúng ta họp để bàn về bản phát hành nội bộ sắp tới. Mình mở ra để mọi người cùng đưa ra ý tưởng, chưa cần quyết định gì luôn.
+
+[00:00:15] Lan: Ok, em nghĩ đầu tiên là cần chốt danh sách tính năng sẽ đưa vào. Theo em, module báo cáo mới đã gần ổn, có thể cho internal team test thử.
+
+[00:00:28] Huy: Module đó em mới review sơ qua, còn vài vấn đề về hiệu năng khi load dữ liệu lớn. Có nên chờ fix xong rồi mới build bản phát hành hay không?
+
+[00:00:42] Thái: Đúng, đây là vấn đề mình cần bàn. Ai có ý tưởng gì về cách tích hợp bản sửa lỗi hiệu năng vào release này không? Hay nên dời sang đợt sau?
+
+[00:00:58] Lan: Em nghĩ nếu fix nhanh thì vẫn kịp, vì tuần sau mới build. Nhưng chưa ai chịu trách nhiệm fix, mà cũng chưa thảo luận chi tiết.
+
+[00:01:10] Huy: Có thể làm bản hotfix riêng sau release nếu cần. Còn về phía test, em muốn có thêm môi trường sandbox cho nhóm QA thử nghiệm đồng thời.
+
+[00:01:25] Thái: Ý tưởng sandbox hay đấy. Minh, anh nghĩ sao về việc có sandbox? Bên em cần allocate resources gì không?
+
+[00:01:38] Minh: Sandbox trên đám mây có thể dùng tài nguyên sẵn, không tốn thêm chi phí. Em chỉ lo việc sync dữ liệu giữa sandbox và production hơi rườm rà.
+
+[00:01:52] Lan: Nếu chỉ dùng cho internal release thì em nghĩ không cần sync dữ liệu production, chỉ cần fake data là đủ.
+
+[00:02:05] Huy: Fake data cũng được, nhưng cần đảm bảo kịch bản test đủ coverage. Em sợ team dễ bỏ sót bug vì thiếu dữ liệu thực.
+
+[00:02:18] Thái: Có ai có ý tưởng khác về cách xử lý dữ liệu test không? Ví dụ dùng anonymized data từ production chẳng hạn.
+
+[00:02:32] Minh: Ý hay, nhưng phải check compliance PCI DSS nếu có dữ liệu nhạy cảm. Em chưa nắm chắc.
+
+[00:02:45] Lan: Bên em có quy trình mask data, có thể áp dụng được. Nhưng cần ai đó đứng ra implement. Hiện tại nobody có capacity.
+
+[00:02:58] Thái: Cứ ghi nhận ý tưởng để sau bàn. Còn vấn đề thứ hai là lịch trình build và deploy. Mình dự kiến ngày 25/02, nhưng chưa có timeline chi tiết.
+
+[00:03:12] Huy: Theo em, nên có ít nhất 3 ngày làm việc cho regression test sau build. Nếu build vào 25/02 thì test sẽ từ 26 đến 28/02.
+
+[00:03:28] Lan: Em muốn có thêm một buổi code freeze trước đó 2 ngày, để tránh trường hợp dev vẫn push code vào giờ chót.
+
+[00:03:42] Minh: Code freeze có vẻ cần nhưng chưa chắc team dev đồng ý. Hay chỉ tạm thời đóng branch release và cho phép cherry-pick nếu bug critical?
+
+[00:03:56] Thái: Mỗi người có góc nhìn khác nhau. Mình ghi nhận tất cả. Lan đề nghị freeze trước 2 ngày, Huy đề nghị 3 ngày làm việc test, Minh đề nghị branch release linh hoạt.
+
+[00:04:10] Huy: Em cũng muốn thử nghiệm khả năng rollback tự động nếu phát hiện lỗi ngay trong internal test. Có script rollback sẵn không?
+
+[00:04:25] Lan: Trước có dùng scaled-down script, nhưng chưa chuẩn hoá. Nếu build internal release thì nên dùng kịch bản đó để test cả rollback.
+
+[00:04:38] Thái: Đề xuất đó hay, nhưng ai sẽ viết script? Chưa assign.
+
+[00:04:50] Minh: Có thể nhờ DevOps, nhưng họ cũng bận project khác. Tạm thời ghi nhận idea.
+
+[00:05:02] Thái: Tiếp theo, về communication plan với internal stakeholders. Mình nên gửi email thông báo trước hay chỉ share trên Slack?
+
+[00:05:16] Lan: Em nghĩ nên có email formal, kèm release notes draft. Nhưng release notes cần ai đó viết.
+
+[00:05:30] Huy: QA có thể viết phần test result, dev phần features, còn PO phụ trách summary. Nhưng hiện tại chưa ai làm.
+
+[00:05:42] Minh: Để em thử phác thảo outline release notes rồi gửi mọi người review. Có thể tuần sau.
+
+[00:05:55] Thái: Ok, nhưng chưa chốt. Còn ý tưởng nào về việc tổ chức demo cho internal team sau release không?
+
+[00:06:10] Huy: Nên có buổi demo online 30 phút, team nào quan tâm thì tham gia. Nhưng chưa nhất thiết phải tổ chức ngay.
+
+[00:06:24] Lan: Em ủng hộ demo, có thể record lại cho ai không xem được. Thời gian demo có thể sáng thứ Hai sau release.
+
+[00:06:38] Thái: Ghi nhận. Có vẻ mọi người đều có nhiều ý tưởng, nhưng hôm nay mình chỉ brainstorm, chưa commit làm gì cả. Vậy mình tổng hợp lại các ý chính.
+
+[00:06:52] Minh: Em muốn nói thêm về việc nên tích hợp CI/CD cho internal release. Hiện tại đang làm thủ công, có thể improve.
+
+[00:07:06] Huy: CI/CD là dài hạn, không trong scope internal release này. Nhưng để sau này.
+
+[00:07:18] Thái: Đồng ý. Các ý tưởng hôm nay sẽ được document lại. Mình không giao việc cho ai, mỗi người tự suy nghĩ thêm. Hẹn họp finalization vào tuần sau.
+
+[00:07:32] Lan: Ok.
+
+[00:07:35] Huy: Đồng ý.
+
+[00:07:38] Minh: Rõ anh.
+
+[00:07:40] Thái: Cảm ơn mọi người. Kết thúc meeting.

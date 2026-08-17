@@ -1,0 +1,158 @@
+MEETING_ID: W5-XL-C5-N2-IT-STRESS-002
+PART: P02/10
+
+T000081 [09:10:50] Minh: Tiếp theo, tôi muốn bàn về tích hợp với đối tác vận chuyển mới. Trang, em có thông tin gì từ phía business không?
+
+T000082 [09:11:00] Trang: Dạ, bên sales đã ký MOU với một đơn vị logistics mới tên là FastShip. Họ yêu cầu tích hợp API để đồng bộ đơn hàng và tracking. Dự kiến go-live cuối tháng 3.
+
+T000083 [09:11:15] Minh: OK. Dev cần ước lượng. Lan, em có thể review tài liệu API của họ không? Tôi sẽ giao task này cho em.
+
+T000084 [09:11:22] Lan: Em sẵn sàng, nhưng hiện tại em đang tập trung thanh toán và cache. Nếu được, để sang sprint 15, vì sprint 14 gần kết thúc.
+
+T000085 [09:11:32] Minh: Ý tôi là em chỉ review, không code. Có thể làm song song. Tuy nhiên nếu em quá tải thì để Hùng làm.
+
+T000086 [09:11:40] Hùng: Em cũng có thể review, nhưng em chưa rõ yêu cầu kỹ thuật. Cần Đức support.
+
+T000087 [09:11:48] Đức: Tôi rảnh sau buổi họp riêng với Minh và Lan. Có thể review cùng Hùng, nhưng phải có deadline.
+
+T000088 [09:11:55] Minh: Tôi đặt deadline review API là cuối tuần sau, 07/03. Nhưng trước đó, cần có một buổi workshop với bên FastShip. Trang lo lịch.
+
+T000089 [09:12:08] Trang: Em sẽ sắp xếp với họ, dự kiến thứ Tư hoặc thứ Năm tuần tới.
+
+T000090 [09:12:16] Lan: Anh Minh, em vẫn thấy hơi phân tâm. Task thanh toán deadline 28/02/01/03, cache phối hợp với Tuấn, review design placement, giờ thêm integration nữa. Không biết có quá tải không.
+
+T000091 [09:12:30] Minh: Em chỉ review ban đầu, không phải code. Nếu không kịp, em nói ngay. Tôi có thể chuyển sang Hùng.
+
+T000092 [09:12:37] Hùng: Em đang có task monitoring. Cũng ok.
+
+T000093 [09:12:42] Đức: Nhưng Hùng không rõ business logic, review có thể thiếu. Tôi nghĩ cùng nhau làm.
+
+T000094 [09:12:50] Minh: Vậy assign task review API cho cả Hùng và Đức, Lan chỉ hỗ trợ khi cần. Deadline 07/03. Nhưng tôi muốn Lan lấy API spec từ FastShip, gửi team trước 28/02.
+
+T000095 [09:13:05] Lan: Vâng, em sẽ liên hệ Trang để lấy.
+
+T000096 [09:13:08] Trang: Em gửi link doc ngay bây giờ trong chat.
+
+T000097 [09:13:13] Tuấn: Tôi cũng cần spec để chuẩn bị pipeline cho tích hợp.
+
+T000098 [09:13:18] Trang: Rồi, em share rồi.
+
+T000099 [09:13:22] Đức: Tôi vừa xem qua. API có vẻ dùng OAuth2, cần tạo endpoint auth. Hùng, cái này mày rành.
+
+T000100 [09:13:30] Hùng: Ừ, OAuth của họ khác normal, cần token refresh periodic. Nhưng em sợ deadline 07/03 không đủ để phân tích chi tiết.
+
+T000101 [09:13:40] Minh: Vậy điều chỉnh: deadline review API sơ bộ là 07/03, nhưng nếu phức tạp thì extended đến 10/03. Tôi muốn có báo cáo trước meeting tuần sau.
+
+T000102 [09:13:54] Lan: Vậy em cũng sẽ góp ý trong báo cáo.
+
+T000103 [09:13:58] Đức: OK. Nhưng cần thống nhất ai nhận task cuối cùng. Tôi hiểu là Hùng review content chính, tôi hỗ trợ kỹ thuật.
+
+T000104 [09:14:07] Minh: Đúng. Hùng làm owner, Đức review. Có gì khó khăn thì báo.
+
+T000105 [09:14:14] Hùng: Rõ.
+
+T000106 [09:14:17] Trang: Anh Minh, em thấy business cũng gấp. Họ muốn tích hợp xong trước 20/03 để kịp campaign.
+
+T000107 [09:14:26] Minh: Đó là mốc sau, chúng ta sẽ tính dần. Không cần vội.
+
+T000108 [09:14:32] Tuấn: Tôi có ý: ngoài API review, chúng ta cần test connection môi trường. Có thể lập một task test integration riêng.
+
+T000109 [09:14:40] Minh: Đúng, nhưng chưa phải bây giờ. Sau review mới.
+
+T000110 [09:14:45] Lan: Em muốn hỏi, task phân tích log thanh toán hạn 28/02, em vẫn phải báo cáo dù chưa đầy đủ? Vì log Tuấn chưa gửi mà hạn gần đến.
+
+T000111 [09:14:58] Tuấn: Em đang export, sáng mai chắc chắn có. Nếu chậm quá thì em push sớm hơn.
+
+T000112 [09:15:05] Minh: Được. Nhưng nếu không có log thì em báo tôi, không tự kéo dài.
+
+T000113 [09:15:10] Lan: Vâng.
+
+T000114 [09:15:13] Minh: Bây giờ, có một vấn đề khác: dữ liệu vận hành. Hùng, em thấy các cảnh báo monitoring gồm những gì?
+
+T000115 [09:15:24] Hùng: Chủ yếu là latency cao, lỗi 503, và memory leak ở một số pod. Em đã tổng hợp sơ bộ, chưa điều chỉnh.
+
+T000116 [09:15:34] Minh: Tôi muốn em phân loại mức độ nghiêm trọng, để tuần sau đưa vào backlog. Có thể làm báo cáo nhỏ, deadline giữa tuần sau 04/03.
+
+T000117 [09:15:46] Hùng: Em sẽ làm. Nhưng cần số liệu từ Tuấn về resource usage.
+
+T000118 [09:15:52] Tuấn: Em export dashboard và gửi trước cuối ngày.
+
+T000119 [09:15:58] Minh: Vậy hai task riêng: task phân loại alert của Hùng, deadline 04/03. Và task export metric của Tuấn, deadline hôm nay.
+
+T000120 [09:16:10] Đức: Khoan, tôi thấy có sự trùng lặp. Phân loại alert và phân tích log thanh toán đều đòi hỏi dữ liệu từ Tuấn, và cả hai đều có deadline sát nhau. Liệu có cần ưu tiên không?
+
+T000121 [09:16:22] Minh: Tôi hiểu. Nhưng thanh toán đang gấp hơn. Hùng, em có thể dời deadline phân loại sang 06/03 không?
+
+T000122 [09:16:30] Hùng: Được, ngày 06/03 em trả.
+
+T000123 [09:16:34] Minh: OK, điều chỉnh. Không có thay đổi deadline thanh toán.
+
+T000124 [09:16:39] Tuấn: Vậy em sẽ ưu tiên export log thanh toán trước, metric sau.
+
+T000125 [09:16:44] Minh: Tốt.
+
+T000126 [09:16:47] Trang: Anh Minh, em cần confirm ai là người follow hợp đồng FastShip? Bên sales hỏi em.
+
+T000127 [09:16:54] Minh: Chưa có owner rõ. Tôi sẽ hỏi lead product. Tạm thời em giữ liên lạc.
+
+T000128 [09:17:02] Trang: Vậy em ghi là unresolved, chờ anh trả lời.
+
+T000129 [09:17:07] Minh: Ừ.
+
+T000130 [09:17:10] Lan: Em vẫn lo về khối lượng. Có thể tôi không kịp review design placement vì bận integration không?
+
+T000131 [09:17:20] Minh: Em vừa nói sẽ review cuối ngày, mà giờ lại lo. Task đó vẫn giữ, deadline 01/03. Nếu không kịp thì báo sớm.
+
+T000132 [09:17:28] Lan: Dạ.
+
+T000133 [09:17:31] Đức: Tôi thấy Hùng có task mới, còn Hùng đang có task monitoring nhẹ, không sao. Nhưng tôi không muốn phân tán quá.
+
+T000134 [09:17:40] Hùng: Em vẫn handle được, nhưng cần Tuấn support số liệu đúng hạn.
+
+T000135 [09:17:46] Tuấn: OK.
+
+T000136 [09:17:49] Minh: Mọi người, chúng ta cần thống nhất một số deadline đã điều chỉnh. Tôi sẽ recap nhanh:
+- Task phân tích log thanh toán (Lan): deadline 28/02, có thể 01/03 nếu cần, nhưng phải báo.
+- Task export log (Tuấn): sáng 27/02.
+- Task deploy hotfix+cache (Tuấn & Lan): chiều 26/02 (hôm nay) 15h.
+- Task review design placement (Đức & Lan): 01/03.
+- Task review API FastShip (Hùng & Đức): 07/03, có extension 10/03.
+- Task phân loại alert (Hùng): deadline 06/03 (đã điều chỉnh từ 04/03).
+- Task export metric (Tuấn): cuối ngày 26/02.
+- Task liên hệ FastShip (Trang): unresolved owner, chờ.
+
+T000137 [09:18:30] Đức: Còn task thanh toán có cần hand-off cho tôi review không? Như anh nói lúc trước.
+
+T000138 [09:18:38] Minh: Chưa, vì Lan mới bắt đầu. Khi có draft, em gửi tôi và Đức. Nhưng chưa giao task review riêng.
+
+T000139 [09:18:47] Lan: Em sẽ gửi trước 28/02.
+
+T000140 [09:18:51] Hùng: Anh Minh, em thấy task phân loại alert và review API đều yêu cầu thời gian. Nếu cả hai cùng deadline cuối tuần sau, e rằng em overload.
+
+T000141 [09:19:02] Minh: Em vừa đồng ý 06/03 cho alert, 07/03 cho API. Cách nhau một ngày. Nếu quá sức, em có thể xin điều chỉnh.
+
+T000142 [09:19:12] Hùng: Để em xem. Em sẽ báo trước 03/03 nếu cần hỗ trợ.
+
+T000143 [09:19:20] Minh: Đồng ý. Đây là negative block: nhiều task gần nhau. Cố gắng.
+
+T000144 [09:19:27] Trang: Anh Minh, bên support còn ghi nhận một lỗi hiển thị thời gian giao hàng trên mobile. Có cần đưa vào không?
+
+T000145 [09:19:36] Minh: Mức độ?
+
+T000146 [09:19:38] Trang: Medium. Không ảnh hưởng đến thanh toán.
+
+T000147 [09:19:42] Minh: Đưa vào backlog, không tạo task ngay. Tuần sau bàn.
+
+T000148 [09:19:46] Trang: Vâng.
+
+T000149 [09:19:48] Đức: Tôi đề nghị kết thúc topic integration ở đây, chuyển sang phần riêng với Minh và Lan về payment.
+
+T000150 [09:19:56] Minh: OK, mọi người có thể out, chỉ giữ Lan và Đức ở lại.
+
+T000151 [09:20:02] Hùng: Em out trước, lo export metric.
+
+T000152 [09:20:05] Tuấn: Em cũng chuẩn bị pipeline.
+
+T000153 [09:20:08] Trang: Em sẽ gửi link spec.
+
+--- END OF PART P02 ---

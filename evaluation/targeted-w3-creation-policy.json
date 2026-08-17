@@ -1,0 +1,292 @@
+{
+  "pipeline_version": "v1",
+  "meeting_context_mode": "assist",
+  "meeting_notes": "sidecar_if_present",
+  "prompt_version": "v1-ledger-mutation-v1",
+  "model": "deterministic",
+  "mode": "local",
+  "endpoint": "",
+  "completed_case_count": 1,
+  "expected_case_count": 1,
+  "metrics_are_partial": false,
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 1,
+    "unreviewed_ground_truth_count": 0,
+    "unreviewed_case_ids": [],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 1,
+    "passed_case_count": 0,
+    "failed_case_count": 1,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.1,
+    "task_identity_recall": 0.3333333333333333,
+    "task_precision": 0.1,
+    "task_recall": 0.3333333333333333,
+    "field_accuracy": 0.5,
+    "assignee_accuracy": 0.0,
+    "due_date_accuracy": 0.0,
+    "due_date_text_exact_accuracy": 0.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "reviewed_metrics": {
+    "case_count": 1,
+    "passed_case_count": 0,
+    "failed_case_count": 1,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.1,
+    "task_identity_recall": 0.3333333333333333,
+    "task_precision": 0.1,
+    "task_recall": 0.3333333333333333,
+    "field_accuracy": 0.5,
+    "assignee_accuracy": 0.0,
+    "due_date_accuracy": 0.0,
+    "due_date_text_exact_accuracy": 0.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "exploratory_metrics": {
+    "case_count": 0,
+    "passed_case_count": 0,
+    "failed_case_count": 0,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 1.0,
+    "task_identity_recall": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 5,
+    "rule_event_count": 13,
+    "ai_event_count": 0,
+    "ai_window_count": 2,
+    "ai_batch_count": 2,
+    "ai_context_clause_count": 77,
+    "unresolved_window_count": 2,
+    "event_count_before_deduplication": 14,
+    "event_count_after_deduplication": 14,
+    "terminal_replay_blocked_count": 0,
+    "ledger_task_created_count": 10,
+    "ledger_task_updated_count": 0,
+    "exact_id_link_count": 0,
+    "exact_alias_link_count": 0,
+    "semantic_link_count": 0,
+    "unresolved_mutation_count": 2,
+    "duplicate_task_merge_count": 0,
+    "weighted_ai_call_rate": 0.4,
+    "ai_clause_coverage": 0.4476744186046512
+  },
+  "fallback_metrics": {
+    "rule_only": 0,
+    "ai_fallback_not_configured": 1,
+    "ai_fallback_resolved": 0,
+    "ai_fallback_unresolved": 0,
+    "ai_fallback_failed": 0
+  },
+  "job_execution": [],
+  "execution_errors": [],
+  "case_execution": [
+    {
+      "case_id": "W3-MED-C4-N2-PROD-INT-003",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 2,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 2
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "W3-MED-C4-N2-PROD-INT-003",
+      "passed": false,
+      "expected_task_count": 3,
+      "actual_task_count": 10,
+      "matched_task_count": 1,
+      "missing_tasks": [
+        {
+          "task_name": "Hoàn thiện meeting summary flow",
+          "assignee": "Lan",
+          "start_date": "2026-02-07",
+          "due_date": "2026-02-13",
+          "due_date_text": "deadline 13/02",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thiện SP365 display cơ bản",
+          "assignee": "Hoa",
+          "start_date": "2026-02-07",
+          "due_date": "",
+          "due_date_text": "sau khi parser xong",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Làm display",
+          "assignee": "Hoa",
+          "start_date": "2026-02-07",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hoa: Vâng, em sẽ làm display.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm parser dựa trên spec flow",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-07",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Tôi sẽ làm parser dựa trên spec flow.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Bổ sung speaker_id",
+          "assignee": "Lan",
+          "start_date": "2026-02-07",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ bổ sung speaker_id vào flow template.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thành trong thời gian đó",
+          "assignee": "Lan",
+          "start_date": "2026-02-07",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Vâng, em sẽ hoàn thành trong thời gian đó.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review template",
+          "assignee": "Minh",
+          "start_date": "2026-02-07",
+          "due_date": "2026-02-11",
+          "due_date_text": "vào ngày 11/02",
+          "evidence": "Minh: OK, tôi sẽ gửi template vào ngày 11/02.\nLan: Recap lại sau khi thảo luận: flow (Minh review template, Lan làm flow, deadline 13/02), parser (Tuấn làm, deadline 18/02), display (Hoa làm, không deadline).",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm flow",
+          "assignee": "Lan",
+          "start_date": "2026-02-07",
+          "due_date": "2026-02-13",
+          "due_date_text": "deadline 13/02",
+          "evidence": "Lan: Recap lại sau khi thảo luận: flow (Minh review template, Lan làm flow, deadline 13/02), parser (Tuấn làm, deadline 18/02), display (Hoa làm, không deadline).",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Test nếu cần",
+          "assignee": "Lan",
+          "start_date": "2026-02-07",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Hoa support Lan phần test nếu cần.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Thiết kế parser có cơ chế xử lý batch",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-07",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Tôi sẽ thiết kế parser có cơ chế xử lý batch.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cập nhật doc",
+          "assignee": "Lan",
+          "start_date": "2026-02-07",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ cập nhật doc.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Xây dựng parser transcript",
+          "field": "assignee",
+          "expected": "Tuấn",
+          "actual": ""
+        },
+        {
+          "task_name": "Xây dựng parser transcript",
+          "field": "due_date",
+          "expected": "2026-02-18",
+          "actual": ""
+        },
+        {
+          "task_name": "Xây dựng parser transcript",
+          "field": "due_date_text",
+          "expected": "deadline 18/02",
+          "actual": ""
+        }
+      ],
+      "checked_field_count": 6,
+      "correct_field_count": 3,
+      "field_counts": {
+        "assignee_accuracy": [
+          1,
+          0
+        ],
+        "due_date_accuracy": [
+          1,
+          0
+        ],
+        "due_date_text_exact_accuracy": [
+          1,
+          0
+        ],
+        "state_link_accuracy": [
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "case_diagnostics": {
+    "W3-MED-C4-N2-PROD-INT-003": {
+      "caption_count": 78,
+      "deduplicated_caption_count": 78,
+      "turn_count": 78,
+      "sentence_count": 171,
+      "clause_count": 172,
+      "candidate_window_count": 5,
+      "rule_event_count": 13,
+      "ai_event_count": 0,
+      "ai_window_count": 2,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 77,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 2,
+      "ai_call_rate": 0.4,
+      "ai_clause_coverage": 0.4476744186046512,
+      "ai_batch_count": 2,
+      "event_count_before_deduplication": 14,
+      "event_count_after_deduplication": 14,
+      "terminal_replay_blocked_count": 0,
+      "ledger_task_created_count": 10,
+      "ledger_task_updated_count": 0,
+      "exact_id_link_count": 0,
+      "exact_alias_link_count": 0,
+      "semantic_link_count": 0,
+      "unresolved_mutation_count": 2,
+      "duplicate_task_merge_count": 0,
+      "recap_scope": "PARTIAL"
+    }
+  }
+}

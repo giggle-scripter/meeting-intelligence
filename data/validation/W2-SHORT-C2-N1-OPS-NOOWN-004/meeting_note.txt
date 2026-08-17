@@ -1,0 +1,9 @@
+note nhanh
+chủ đề: Chuẩn bị bản phát hành nội bộ
+kw: release / nhan / nhe / bat / hai / mat / khoang
+- Minh, anh nhận
+* tôi sẽ bắt đầu từ thứ Hai tuần sau, mất khoảng hai ba ngày làm việc
+- Vậy giờ mình chốt các việc đã có owner
+1) tôi sẽ gửi build khi xong
+- Em sẽ gửi bản nháp release note vào thứ Tư cho mọi người xem
+* Được, tôi sẽ làm, dự kiến xong trước thứ Sáu ? chưa chốt

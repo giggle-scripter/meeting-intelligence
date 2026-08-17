@@ -1,0 +1,37 @@
+{
+  "meeting_title": "Họp điều phối triển khai hệ thống",
+  "tasks": [
+    {
+      "task_name": "Hoàn thiện môi trường test",
+      "assignee": "Hà; Tuấn",
+      "start_date": "2026-02-23",
+      "due_date": "2026-03-05",
+      "due_date_text": "deadline 05/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết tài liệu triển khai chi tiết",
+      "assignee": "Tuấn; Hà",
+      "start_date": "2026-02-23",
+      "due_date": "2026-03-14",
+      "due_date_text": "deadline 14/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Cấu hình monitoring cho staging",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-23",
+      "due_date": "2026-03-03",
+      "due_date_text": "deadline 03/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Hoàn thiện release plan chi tiết",
+      "assignee": "Hà",
+      "start_date": "2026-02-23",
+      "due_date": "2026-03-21",
+      "due_date_text": "deadline cho release plan chi tiết là 21/03",
+      "status": "Proposed"
+    }
+  ]
+}

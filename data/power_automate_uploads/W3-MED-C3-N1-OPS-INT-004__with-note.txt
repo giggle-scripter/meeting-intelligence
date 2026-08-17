@@ -1,0 +1,95 @@
+=== MEETING METADATA ===
+meeting_id: W3-MED-C3-N1-OPS-INT-004
+meeting_title: Họp phối hợp triển khai và xử lý vấn đề
+meeting_date: 2026-02-08
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+note nhanh
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: trien khai / ticket / hoan / khong / thien / trong / dinh
+- Em sẽ hoàn thiện trong tuần này, không ấn định ngày cụ thể
+* QA mới báo ticket #142 – lỗi form không validate
+- Có ticket #145 mô tả xung đột giữa feature A và B
+1) Em thấy ticket #147 yêu cầu kiểm tra tích hợp module notification
+- Em sẽ ghi chi tiết vào ticket #145
+* Em sẽ hoàn thành trước thứ Tư tuần này, vì
+- dời sang sáng mai. (dl replacement)
+1) Chi, em đã cập nhật release notes đến đâu rồi? ? chưa chốt
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:00:00] An: Chào mọi người, bắt đầu buổi họp triển khai tuần này. Mục tiêu hôm nay là điểm lại các đầu việc trước release, xử lý bug, giám sát và tài liệu. Chúng ta cũng có một số vấn đề chưa ngã ngũ.
+[09:00:15] Bình: Vâng, em sẵn sàng. Có gì mới không anh An?
+[09:00:22] An: Trước hết, về release preparation. Chi, em đã cập nhật release notes đến đâu rồi?
+[09:00:32] Chi: Dạ chưa anh ạ, em đợi merge mấy commit cuối của feature C. Em sẽ hoàn thiện trong tuần này, không ấn định ngày cụ thể.
+[09:00:44] An: Được, em cứ làm. Còn phần monitoring? Dũng, dashboard và alert config sao rồi?
+[09:00:55] Dũng: Tôi mới dựng được dashboard cơ bản, alert thì đang triển khai. Dự kiến xong hết trước thứ Sáu tuần sau, 13/2.
+[09:01:10] An: OK, deadline thứ Sáu tuần sau. Chốt.
+[09:01:18] Em: Em xin phép hỏi chút: release notes có cần bao gồm API changes không? Em thấy có vài endpoint thay đổi.
+[09:01:30] An: Có, Chi nhớ ghi hết vào. Còn việc viết tài liệu API thì chưa có ai làm, để sau.
+[09:01:40] Chi: Dạ, em sẽ tổng hợp.
+[09:01:48] An: Tiếp theo, bug triage. QA mới báo ticket #142 – lỗi form không validate. Bình, em check chưa?
+[09:02:00] Bình: Em xem rồi. Lỗi ở phía client, em fix xong rồi build. Deadline em định cuối giờ chiều nay.
+[09:02:12] An: Nhanh thế. Nhưng em xem lại ticket, nó còn ảnh hưởng đến module payment. Em sửa luôn cả bên server validation nhé.
+[09:02:25] Bình: À, vậy em phải mở rộng scope. Thế deadline sáng mai 9/2 được không anh? Em cần thêm thời gian test.
+[09:02:38] An: Ừ, được. Sửa deadline thành sáng mai. Có gì báo lại.
+[09:02:48] Bình: Dạ.
+[09:02:54] An: Chuyển sang feature interaction. Có ticket #145 mô tả xung đột giữa feature A và B. An, em kiểm tra giúp anh.
+[09:03:08] An: Dạ, nhưng em đang ngập việc module kia. Hay anh Dũng làm giúp?
+[09:03:20] Dũng: Tôi cũng không quen phần này. Tốt nhất giao Chi, cô ấy từng liên quan.
+[09:03:32] Chi: Em có thể nhận. Em sẽ xem conflict ở đâu và báo cáo. Không cần deadline gấp.
+[09:03:44] An: Vậy Chi làm, Dũng tập trung monitoring. Em báo kết quả trong ngày mai.
+[09:03:52] Chi: Rõ.
+[09:04:00] Em: Em thấy ticket #147 yêu cầu kiểm tra tích hợp module notification. Nó hơi giống feature interaction, có nên gộp không?
+[09:04:12] An: Không, mỗi việc khác module. Notification để Dũng sau khi xong monitoring. Dũng, anh bổ sung việc đó nhé.
+[09:04:25] Dũng: Được, tôi ghi vào list. Deadline nào?
+[09:04:32] An: Chưa cần, làm xong monitoring rồi tính.
+[09:04:40] Dũng: OK.
+[09:04:48] An: Còn nữa, chúng ta có vấn đề database migration chưa quyết định. (unresolved) Anh có đề xuất rolling update, nhưng mọi người chưa đồng thuận.
+[09:05:00] Bình: Em thấy rolling update an toàn, nhưng cần thêm script.
+[09:05:10] Chi: Em sợ downtime ngắn có thể chấp nhận được.
+[09:05:18] An: Vậy tuần sau bàn tiếp. Còn việc monitoring, Dũng nói rõ hơn về hạn chế server?
+[09:05:30] Dũng: Ừ, server hiện tại limit log frequency, không ghi được response time chi tiết. (negative context) Phải nâng cấp hoặc dùng cache layer.
+[09:05:42] An: Việc đó để sau release. Giờ ta cần đủ metric.
+[09:05:50] Bình: Em có ý này: viết script test tự động cho phần form validation, nhưng chắc chưa cần. (distractor)
+[09:06:00] An: Ừ, để sau. Giờ tập trung bug và release.
+[09:06:08] Chi: Anh An, em vừa check feature interaction sơ bộ. Hình như conflict ở session handler giữa feature A và B. Em sẽ ghi chi tiết vào ticket #145.
+[09:06:22] An: Tốt, giữ tiến độ.
+[09:06:30] Dũng: Nhân tiện, tôi cũng đã bắt đầu rà soát feature interaction module notification, nhưng chưa sâu. (potential duplicate risk with Chi's task?)
+[09:06:42] Chi: Khoan, em đang lo feature interaction phần kia, notification em chưa đụng. Dũng anh kiểm tra notification là đúng.
+[09:06:52] An: Đúng, mỗi người một việc. Dũng check notification, Chi check A-B conflict. Đừng overlap.
+[09:07:04] Dũng: OK.
+[09:07:12] Bình: Em fix xong lỗi payment, đang kiểm tra lại. Có thêm lỗi upload file nhỏ, em sửa luôn.
+[09:07:24] An: Vậy em update task của em nhé. Đó là sửa lỗi payment và upload, deadline sáng mai.
+[09:07:36] Bình: Vâng.
+[09:07:44] Em: Anh An, em có thể hỗ trợ gì không? Em rảnh.
+[09:07:52] An: Em test thử các ticket đã fix giúp anh.
+[09:08:00] Em: Dạ, em sẽ test form và payment.
+[09:08:08] An: Tốt. Vậy quay lại release notes: Chi, em định viết xong khi nào?
+[09:08:18] Chi: Em sẽ hoàn thành trước thứ Tư tuần này, vì còn chờ merge.
+[09:08:28] An: Không có deadline cứng, nhưng càng sớm càng tốt.
+[09:08:38] Dũng: Tôi muốn hỏi về config alert: ngưỡng error rate 5% trong 5 phút có ổn không?
+[09:08:50] An: Tạm, sau tinh chỉnh. Cứ làm vậy.
+[09:08:58] Bình: Ồ, em vừa thấy có bug #148 – lỗi log không ghi được từ server. Có nên fix luôn không?
+[09:09:10] An: Bug đó cần nâng cấp server, không có nhân sự. (negative context) Để tuần sau.
+[09:09:20] Chi: Em đề nghị viết documentation API song song, nhưng chúng ta chưa assign ai. (topic without task)
+[09:09:30] An: Ừ, chưa quyết định. Để release xong đã.
+[09:09:38] Dũng: Tôi cần xác nhận deadline monitoring: thứ Sáu 13/2, đúng không?
+[09:09:48] An: Đúng.
+[09:09:56] An: Bây giờ tổng kết nhanh: (recap) – Bình fix bug payment + upload, deadline sáng mai 9/2. – Em test các bug đã fix. – Chi viết release notes (xong thứ Tư) và kiểm tra feature interaction A-B (báo cáo trong ngày). – Dũng config monitoring (alert + dashboard) deadline 13/2, và sau đó kiểm tra notification integration (chưa deadline). – Còn database migration chưa chốt, bug log server để tuần sau.
+[09:10:30] Bình: Anh ơi, trong recap em thấy nhắc lại hai lần việc kiểm tra feature interaction: Chi làm A-B, Dũng làm notification. Có khả năng trùng không? (recap_duplicate_risk)
+[09:10:44] An: Không, khác module. Nhưng Dũng, anh nhớ chỉ làm notification, phần A-B là của Chi.
+[09:10:55] Dũng: Tôi hiểu, không overlap.
+[09:11:02] Chi: Em xác nhận.
+[09:11:08] Em: Em test xong form, chưa thấy lỗi. Payment em sắp test.
+[09:11:16] An: Tốt. Có ai cần hỏi gì thêm?
+[09:11:24] Bình: Em muốn confirm deadline cũ của em là cuối chiều nay, nhưng giờ được dời sang sáng mai. (deadline replacement)
+[09:11:36] An: Đúng, do mở rộng scope.
+[09:11:44] Chi: Anh An, phần release notes em sẽ đính kèm link ticket.
+[09:11:52] An: Được.
+[09:12:00] Dũng: Tôi có một lo ngại: nếu server không nâng cấp, monitoring sẽ thiếu dữ liệu. (negative context)
+[09:12:10] An: Biết rồi, sẽ bàn sau release.
+[09:12:18] An: Vậy họp kết thúc. Mọi người theo dõi tiến độ trên board. Cảm ơn.
+[09:12:26] Bình: Vâng, em sẽ cố gắng.
+[09:12:34] Chi: Em chào anh.
+[09:12:40] Dũng: Tôi out nhé.
+[09:12:46] Em: Em chào mọi người.

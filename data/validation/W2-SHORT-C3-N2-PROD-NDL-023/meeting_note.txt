@@ -1,0 +1,9 @@
+ghi vội
+chủ đề: Theo dõi lỗi và tài liệu
+kw: tai lieu / trien khai / loi / nhe / theo / linh / lai
+- Em sẽ tổng hợp lại toàn bộ danh sách lỗi đang mở, phân loại và ghi rõ trạng thái
+* Vậy em cứ triển khai
+- Mọi người sẽ gửi thông tin cho em để cập nhật
+1) Vậy em sẽ theo đó, cần gì em bổ sung cho Linh
+- Tuấn fix mấy lỗi medium đó trước thứ Sáu
+* Vậy mình chốt: Linh owner duy trì tài liệu theo dõi lỗi, không có dl cứng, Tuấn fix lỗi mới trước cuối tuần

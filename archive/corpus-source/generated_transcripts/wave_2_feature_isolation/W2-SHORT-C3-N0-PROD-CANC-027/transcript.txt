@@ -1,0 +1,48 @@
+MEETING_ID: W2-SHORT-C3-N0-PROD-CANC-027
+CASE_LABELS: task_cancellation,cancelled_not_output
+MEETING_DATE: 2026-02-21
+TITLE: Theo dõi lỗi và tài liệu
+
+[00:00:05] Alice: Chào mọi người, hôm nay họp về tiến độ theo dõi lỗi và tài liệu. Bob, anh đã xử lý lỗi API authentication chưa?
+
+[00:00:12] Bob: Tôi đã fix xong, nhưng phát hiện unit test không đủ. Tuần trước tôi tạo task “Viết unit test cho module auth” nhưng sau đó thấy test hiện tại đã cover nên tôi đã hủy task đó rồi.
+
+[00:00:20] Carol: Vậy là không cần test thêm? Tôi vừa check lại test coverage cũng thấy ổn.
+
+[00:00:25] Alice: OK, vậy task đó cancelled. Còn task viết tài liệu hướng dẫn sử dụng API cho version 2.1? Tuần trước chúng ta đã tạo task đó.
+
+[00:00:32] Bob: Đúng, task “Viết tài liệu API v2.1” đang ở trạng thái Open, assignee là tôi. Nhưng như đã trao đổi, API còn thay đổi, chưa nên viết tài liệu ngay.
+
+[00:00:40] Alice: Tôi đồng ý. Vì vậy tôi quyết định hủy task đó. Bob, anh làm thủ tục hủy trên Jira nhé, ghi lý do “Chưa cần thiết do API chưa ổn định”.
+
+[00:00:48] Bob: Vâng, tôi sẽ chuyển trạng thái thành “Cancelled” ngay. Vậy toàn bộ task liên quan đến tài liệu đều hủy.
+
+[00:00:53] Carol: Như vậy bây giờ chúng ta không có task active nào cho hướng dẫn API hay test phải không?
+
+[00:00:58] Alice: Đúng, ưu tiên hiện tại là fix lỗi và kiểm tra thực tế, không tạo thêm task mới. Có lỗi nào khác đang theo dõi không?
+
+[00:01:05] Carol: Bên QA vừa ghi nhận lỗi hiển thị trên mobile, nhưng chưa có task chính thức. Tôi nghĩ chúng ta nên thảo luận trước khi tạo task.
+
+[00:01:12] Bob: Lỗi đó có nghiêm trọng không? Nếu cần fix sớm thì tôi có thể tạo task.
+
+[00:01:18] Alice: Khoan, tôi vừa nhận mail từ product rằng tính năng mobile có thể bị delay, nên lỗi này chưa cần xử lý ngay. Chúng ta ghi nhận vào backlog thôi, không tạo task.
+
+[00:01:25] Carol: Vậy tôi sẽ ghi vào ghi chú, không tạo task active.
+
+[00:01:30] Bob: Như vậy không có task mới nào được tạo hôm nay, chỉ có hủy task cũ. Tôi đã hủy task “Viết unit test” và sắp hủy task “Viết tài liệu API”.
+
+[00:01:36] Alice: Chính xác. Mọi người có ý kiến gì về việc hủy task tài liệu không? Carol, chị thấy ổn chứ?
+
+[00:01:42] Carol: Tôi chỉ lo sau này thiếu tài liệu, nhưng nếu đã có kế hoạch viết sau thì OK. Tôi đồng ý hủy.
+
+[00:01:48] Alice: Tốt. Bob, anh đã hủy xong chưa?
+
+[00:01:52] Bob: Tôi vừa thao tác trên Jira, task “Viết tài liệu API v2.1” hiện trạng thái “Cancelled”. Task kia đã cancelled từ trước.
+
+[00:01:58] Alice: Cảm ơn. Vậy meeting hôm nay không có output nào, chỉ có hủy task. Chúng ta kết thúc ở đây.
+
+[00:02:03] Carol: Tôi sẽ update log và gửi biên bản ngắn.
+
+[00:02:07] Bob: OK, tôi tiếp tục fix các lỗi khác.
+
+[00:02:11] Alice: Hẹn gặp lại vào buổi họp tiếp theo.

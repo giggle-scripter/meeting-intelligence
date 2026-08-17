@@ -1,0 +1,8 @@
+note nhanh
+chủ đề: Trao đổi kế hoạch tích hợp
+kw: giao / dich / quan / trong / real / time / note
+- Những giao dịch quan trọng thì real-time
+* Ừ, mình sẽ note lại: cần người tìm hiểu webhook
+- Hiện tại tạm thời chưa có đầu việc cụ thể nào được giao
+1) Mình sẽ tiếp tục suy nghĩ thêm về mặt kiến trúc
+- Vậy thì có thể dùng trigger trên database CRM, mỗi khi có insert thì push một event sang ERP ? chưa chốt

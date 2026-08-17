@@ -1,0 +1,213 @@
+MEETING_ID: W5-XL-C5-N2-OPS-STRESS-004
+PART: P01/10
+CASE_LABELS: extra_long_meeting,multi_step_handoff,multiple_deadline_corrections,long_distance_dependency,ambiguous_reference,heavy_recoverable_noise
+MEETING_DATE: 2026-02-28
+TITLE: Họp tổng hợp phát triển và vận hành sản phẩm
+
+T000001 [09:00:00] Minh: Chào mọi người, bắt đầu buổi họp tổng hợp. Hôm nay chúng ta có nhiều việc, tập trung vào tiến độ thanh toán mới và kế hoạch vận hành. Có mặt đủ chưa?
+
+T000002 [09:00:12] Lan: Có Lan, Tuấn, Hà và An. Giang báo ốm, Huy đang làm việc với bên đối tác nên vắng.
+
+T000003 [09:00:22] Minh: OK. Chúng ta sẽ dành khoảng 30 phút cho phần phát triển, sau đó chuyển sang vận hành. Mọi người chuẩn bị gì chưa?
+
+T000004 [09:00:35] Tuấn: Em có cập nhật về API payment. Đã xong logic cơ bản, đang chờ review từ phía Hà.
+
+T000005 [09:00:45] Hà: QA team đang viết test cho module đó. Dự kiến cuối tuần này có kết quả.
+
+T000006 [09:00:55] An: Em muốn hỏi về môi trường staging, hiện tại đang có vấn đề với container orchestration.
+
+T000007 [09:01:08] Minh: Cụ thể là gì? Ảnh hưởng đến tiến độ triển khai không?
+
+T000008 [09:01:18] An: Có, pod không start được vì thiếu config cho secret. Em cần team dev cập nhật giá trị mới.
+
+T000009 [09:01:30] Tuấn: À, cái đó do bên em chưa push file env mẫu. Em sẽ gửi trong chiều nay.
+
+T000010 [09:01:40] Minh: Vậy đặt deadline sửa config trước ngày 3/3 nhé. An, em check và confirm.
+
+T000011 [09:01:52] An: OK, em sẽ kiểm tra sau khi Tuấn cập nhật. Nhưng mà...
+
+T000012 [09:02:05] Hà: Anh Minh, em thấy trong spec có phần xử lý refund chưa rõ. Tuấn đã implement chưa?
+
+T000013 [09:02:18] Tuấn: Chưa, em đang chờ clarification từ phía product. Trong tài liệu ghi là "sẽ có sau".
+
+T000014 [09:02:30] Minh: Đúng, phần đó tạm thời để sau phiên bản đầu. Chỉ tập trung vào payment chính.
+
+T000015 [09:02:42] Lan: Vậy deadline cho API payment là ngày 5/3? Em cần để phối hợp với QA.
+
+T000016 [09:02:55] Minh: Theo kế hoạch gốc là 5/3, nhưng nếu có vấn đề gì thì cần báo sớm.
+
+T000017 [09:03:08] Tuấn: Dạ, em có thể hoàn thành sớm hơn, khoảng 3/3. Nhưng chờ Hà review xong.
+
+T000018 [09:03:20] Hà: Em sẽ review ngay khi Tuấn gửi. Có thể cuối ngày 3/3 em có feedback.
+
+T000019 [09:03:32] Minh: Tốt. Thế thì deadline cho code complete là 3/3, QA review xong 5/3. Anh ghi nhận.
+
+T000020 [09:03:45] An: Em muốn nhấn mạnh lại, môi trường staging cần fix trước 3/3 để test được.
+
+T000021 [09:03:58] Tuấn: Em sẽ ưu tiên gửi config file chiều nay.
+
+T000022 [09:04:10] Minh: OK, chuyển sang phần vận hành. Anh thấy bên ops có đề xuất thay đổi lịch deploy?
+
+T000023 [09:04:25] An: Vâng, ban đầu lịch deploy cho release 2.0 là 10/3. Nhưng do phần cơ sở hạ tầng chưa ổn, em đề nghị dời sang 15/3.
+
+T000024 [09:04:40] Lan: Dời thì ảnh hưởng đến các milestone khác. Team dev đã điều chỉnh theo lịch cũ rồi.
+
+T000025 [09:04:55] Minh: Phải cân nhắc. An, em cần thêm thời gian bao lâu và lý do cụ thể?
+
+T000026 [09:05:08] An: Thực tế là cluster chưa được nâng cấp, cần bảo trì database scaling. Em nghĩ thêm 5 ngày là tối thiểu.
+
+T000027 [09:05:22] Hà: Nếu dời deploy thì QA schedule cũng phải dời. Bọn em đã lên test plan cho tuần từ 8/3 đến 10/3.
+
+T000028 [09:05:36] Tuấn: Em thấy vẫn có thể chạy song song, vừa fix infra vừa test trên staging cũ.
+
+T000029 [09:05:50] An: Không được, staging cũ đã tắt để tiết kiệm chi phí. Giờ chỉ có một môi trường dev.
+
+T000030 [09:06:02] Minh: Vậy giải pháp là gì? Mọi người brainstorm nhanh.
+
+T000031 [09:06:15] Lan: Có thể dùng tạm môi trường của team data, nhưng Huy vắng, cần hỏi lại.
+
+T000032 [09:06:28] Minh: Để sau, mai anh sẽ nói chuyện với Huy. Còn hiện tại, tạm giữ lịch deploy cũ, và An chuẩn bị plan dự phòng cho 15/3.
+
+T000033 [09:06:42] An: Vậy em sẽ viết memo chi tiết gửi mọi người trước cuối ngày hôm nay.
+
+T000034 [09:06:55] Hà: Anh Minh, có vấn đề về test automation. Em cần Tuấn thêm mock data cho một số endpoint.
+
+T000035 [09:07:08] Tuấn: Em tưởng mock data đã có sẵn trong repo? Hay Hà muốn endpoint mới?
+
+T000036 [09:07:20] Hà: Endpoint cũ nhưng response thay đổi do schema mới. Em cần cập nhật lại.
+
+T000037 [09:07:32] Tuấn: OK, em sẽ update schema trong ngày mai và gửi lại.
+
+T000038 [09:07:45] Minh: Chú ý, đừng để việc này ảnh hưởng deadline 3/3.
+
+T000039 [09:07:58] Tuấn: Dạ, em sẽ làm song song.
+
+T000040 [09:08:10] Lan: Anh Minh, em muốn hỏi về dependency giữa payment và module notification. Khi nào có API notification?
+
+T000041 [09:08:25] Minh: Notification đang giao cho team khác, dự kiến cuối tháng 3. Nhưng payment không phải chờ.
+
+T000042 [09:08:38] Lan: Vậy luồng thanh toán hiện tại có gửi email confirm không? Hay tạm thời bỏ qua?
+
+T000043 [09:08:52] Minh: Bỏ qua, chỉ lưu log. Sau này tích hợp notification.
+
+T000044 [09:09:05] Hà: Như vậy thì manual test khó kiểm tra, em sẽ viết test case dựa trên log.
+
+T000045 [09:09:18] An: Em có cập nhật, bên DevOps vừa phát hiện lỗi SSL cho payment gateway. Cần team dev fix.
+
+T000046 [09:09:32] Tuấn: Cái đó liên quan đến config, em đã để placeholder. Cần ops update cert.
+
+T000047 [09:09:45] An: Cert sẽ có trong thứ Tư tuần sau. Tạm thời dùng self-signed để test.
+
+T000048 [09:09:58] Minh: OK, Tuấn và An phối hợp, deadline update cert là 4/3.
+
+T000049 [09:10:12] Lan: Em thấy có nhiều việc nhỏ lẻ, cần hệ thống lại. Anh Minh, cuối tuần này có review milestone không?
+
+T000050 [09:10:25] Minh: Có, thứ Sáu tuần này. Mọi người chuẩn bị báo cáo nhé.
+
+T000051 [09:10:38] Hà: Em xin phép hỏi, test plan cho payment có cần bao gồm stress test không? Spec có đề cập.
+
+T000052 [09:10:52] Tuấn: Tạm thời chưa, vì chúng ta mới chỉ ở giai đoạn MVP.
+
+T000053 [09:11:05] Minh: Đồng ý, stress test để sau. Hà tập trung vào functional test.
+
+T000054 [09:11:18] An: Em có một vấn đề nữa, database production đang chạy với cấu hình cũ. Khi deploy payment, cần migrate schema. Em sợ downtime.
+
+T000055 [09:11:32] Minh: Có kế hoạch zero-downtime không?
+
+T000056 [09:11:45] An: Có, nhưng cần Tuấn viết migration script và kiểm tra rolling update.
+
+T000057 [09:11:58] Tuấn: Em chưa làm migration bao giờ. Có tài liệu hướng dẫn không?
+
+T000058 [09:12:10] An: Em sẽ gửi link cho Tuấn, khá chi tiết. Deadline script là trước 6/3.
+
+T000059 [09:12:25] Minh: Vậy assign: Tuấn viết migration script, An review và test trên staging. OK?
+
+T000060 [09:12:38] Tuấn: OK, em sẽ xem tài liệu chiều nay.
+
+T000061 [09:12:50] Lan: Em nhắc lại, team dev còn task viết unit test cho payment service. Tuấn có làm chưa?
+
+T000062 [09:13:03] Tuấn: Em đã viết một phần, còn coverage tầm 70%. Em sẽ bổ sung trong tuần này.
+
+T000063 [09:13:15] Hà: QA sẽ review unit test sau khi Tuấn push. Có thể phối hợp.
+
+T000064 [09:13:28] Minh: Tất cả task đều tracking trên board nhé. Em thấy ticket payment API còn chưa update trạng thái.
+
+T000065 [09:13:42] Lan: Để em nhắc Tuấn cập nhật sau cuộc họp.
+
+T000066 [09:13:55] Tuấn: Dạ, em sẽ update ngay.
+
+T000067 [09:14:08] An: Em muốn hỏi về monitoring cho payment, team ops cần biết log format. Tuấn có doc không?
+
+T000068 [09:14:20] Tuấn: Chưa, nhưng em sẽ viết nhanh và gửi trong ngày mai.
+
+T000069 [09:14:33] Minh: Thêm task cho Tuấn: viết log spec, deadline 2/3.
+
+T000070 [09:14:45] Hà: Anh Minh, em thấy có nhiều task quá, liệu Tuấn có quá tải không?
+
+T000071 [09:14:58] Minh: Cũng đúng. Tuấn, em thấy sao? Cần hỗ trợ gì không?
+
+T000072 [09:15:10] Tuấn: Em vẫn ổn, nhưng ưu tiên config và API chính trước. Log spec em làm sau.
+
+T000073 [09:15:22] Minh: OK, vậy deadline log spec đẩy lên 4/3. Điều chỉnh nhé.
+
+T000074 [09:15:35] An: Em cũng có task chuẩn bị tài liệu runbook cho payment. Em sẽ làm sau khi Tuấn có log spec.
+
+T000075 [09:15:48] Minh: Ghi nhận. Task runbook giao An, deadline 8/3.
+
+T000076 [09:16:00] Lan: Em thấy còn nhiều vấn đề về dependency, nhưng hết giờ cho phần phát triển rồi. Chúng ta chuyển sang vận hành?
+
+T000077 [09:16:14] Minh: Ừ, vận hành. Anh có vài điểm cần thảo luận về quy trình deploy và rollback.
+
+T000078 [09:16:28] An: Vâng. Hiện tại team ops đã thống nhất quy trình blue-green, nhưng cần xác nhận từ phía dev.
+
+T000079 [09:16:42] Tuấn: Blue-green là gì? Em chưa nghe.
+
+T000080 [09:16:55] An: Là chiến lược deploy với hai môi trường giống hệt nhau, một live, một staging. Khi deploy mới, chuyển traffic.
+
+T000081 [09:17:08] Minh: Ok, Tuấn có thể tìm hiểu thêm. Anh thấy phương án này khả thi. Có vấn đề gì không?
+
+T000082 [09:17:22] An: Cần đồng bộ database, nếu schema thay đổi có thể gây conflict.
+
+T000083 [09:17:35] Lan: Vậy migration script phải hỗ trợ backward compatible.
+
+T000084 [09:17:48] Tuấn: Em sẽ chú ý.
+
+T000085 [09:18:00] Hà: Em có câu hỏi, rollback plan nếu deploy lỗi? Có script tự động không?
+
+T000086 [09:18:13] An: Có, nhưng chưa test trên môi trường thật. Em sẽ viết và test vào tuần sau.
+
+T000087 [09:18:26] Minh: Vậy for now, chưa có rollback tự động. Khi deploy production đầu tiên, chúng ta sẽ manual.
+
+T000088 [09:18:40] An: Được, em sẽ chuẩn bị quy trình manual.
+
+T000089 [09:18:52] Lan: Em nghĩ chúng ta nên có buổi workshop về deploy flow cho cả team. Khi nào sắp xếp?
+
+T000090 [09:19:05] Minh: Tuần sau, đề nghị An và Tuấn tổ chức. Deadline 8/3.
+
+T000091 [09:19:18] Tuấn: OK, em sẽ chuẩn bị nội dung.
+
+T000092 [09:19:30] An: Em sẽ hỗ trợ slide.
+
+T000093 [09:19:42] Hà: Workshop có cần QA tham gia không?
+
+T000094 [09:19:55] Minh: Cần, Hà và cả team dev. Mọi người đều phải hiểu.
+
+T000095 [09:20:08] Lan: Vậy ghi vào lịch, thứ Tư 3/3 lúc 14h?
+
+T000096 [09:20:20] Minh: OK, Lan tổ chức lịch nhé. Chúng ta gần hết giờ rồi, còn issue gì cấp bách không?
+
+T000097 [09:20:33] An: Em có một vấn đề kỹ thuật: endpoint health check của payment service bị timeout. Cần dev fix.
+
+T000098 [09:20:46] Tuấn: Đã có ticket, em đang xử lý. Dự kiến xong chiều nay.
+
+T000099 [09:20:58] Hà: Còn bug UI nhỏ trên trang thanh toán, nhưng không block.
+
+T000100 [09:21:10] Minh: Bỏ qua, focus vào core logic. Vậy tổng kết: các task đã assign, deadline như đã nói. Ai có góp ý thêm?
+
+T000101 [09:21:23] Lan: Em chỉ muốn nhấn mạnh, cần đẩy nhanh config staging vì dependency nhiều.
+
+T000102 [09:21:35] Tuấn: Vâng, em sẽ là ưu tiên số một.
+
+T000103 [09:21:47] Minh: OK, hết phần P01. Hẹn mọi người part sau tiếp tục các vấn đề còn lại. Cảm ơn.
+
+--- END OF PART P01 ---

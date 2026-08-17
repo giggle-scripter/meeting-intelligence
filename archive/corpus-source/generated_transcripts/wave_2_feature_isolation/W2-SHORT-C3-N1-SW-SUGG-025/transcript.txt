@@ -1,0 +1,30 @@
+MEETING_ID: W2-SHORT-C3-N1-SW-SUGG-025
+CASE_LABELS: suggestion_not_committed,no_active_task
+MEETING_DATE: 2026-02-19
+PRIMARY_FEATURE: suggestion not committed
+TITLE: Rà soát công việc sprint
+[09:00:02] Tuấn: Chào mọi người, hôm nay 19/02/2026 mình họp rà soát nhanh tiến độ sprint. Linh, bug đăng nhập sao rồi em?
+[09:00:07] Linh: Dạ, em vừa fix xong, code đã lên review. Đang chạy integration test, chiều nay xong ạ.
+[09:00:12] Tuấn: Ok. Hùng, module thanh toán thế nào?
+[09:00:17] Hùng: Em đang code dở phần tích hợp với cổng MOMO. Cần thêm 2 ngày làm việc nữa ạ.
+[09:00:21] Tuấn: Cố gắng nhé. Còn Mai, có cập nhật gì từ phía nghiệp vụ không?
+[09:00:26] Mai: Bên mình vừa có yêu cầu nhỏ: tăng giới hạn số lần nhập sai OTP lên 5 thay vì 3. Em thêm vào task của Hùng được không?
+[09:00:31] Hùng: Dễ mà, em làm luôn trong hôm nay.
+[09:00:36] Tuấn: Vậy Hùng cập nhật task thanh toán thêm mô tả đó nhé.
+[09:00:41] Hùng: Ok anh.
+[09:00:46] Tuấn: Linh, ngoài bug ra, còn vướng mắc gì không?
+[09:00:50] Linh: À, trong lúc test em thấy form đặt hàng chưa có chức năng lưu tạm. Người dùng hay thoát giữa chừng, mất hết dữ liệu. Em nghĩ nên bổ sung nút “Lưu nháp”, để chị Hương thiết kế giao diện cho nó. Làm cũng nhanh thôi, chắc 1 ngày ạ.
+[09:00:55] Mai: Ừ, ý tưởng hay đấy. Nhưng chị Hương đang nghỉ phép hết tuần này, với lại sprint hiện tại đang gấp, ưu tiên hoàn tất bug và thanh toán trước.
+[09:01:00] Linh: Dạ, em cũng chỉ gợi ý vậy thôi. Để sprint sau cũng được ạ.
+[09:01:05] Tuấn: Anh ghi nhận vào backlog, họp sprint planning sau mình bàn lại. Giờ tập trung hoàn thành task hiện tại.
+[09:01:10] Hùng: Em thấy nút lưu nháp cần thiết đấy, nhưng đúng là chưa gấp. Khi nào chị Hương quay lại, mình làm sau.
+[09:01:15] Mai: Ok, tạm thời không đưa vào sprint này. Chuyển qua vấn đề khác: Tuấn ơi, dev môi trường staging hôm qua bị lỗi 500, ai check chưa?
+[09:01:20] Tuấn: Anh đã báo ops sáng nay, họ đang kiểm tra. Mình không bị ảnh hưởng tiến độ đâu.
+[09:01:25] Linh: Vậy thì tốt. Em chỉ còn mỗi việc viết unit test cho module đăng ký, dự kiến mai xong.
+[09:01:30] Tuấn: Nhắc mới nhớ, task viết unit test đăng ký em assign cho ai? Linh, em đang cầm à?
+[09:01:35] Linh: Dạ, em đang làm, trong sprint này có assign em mà anh.
+[09:01:40] Tuấn: Ok, tốt. Còn Hùng, bên thanh toán có cần hỗ trợ gì không?
+[09:01:45] Hùng: Dạ không, em tự xoay được ạ.
+[09:01:50] Tuấn: Vậy meeting hôm nay đến đây thôi. Mai có blocker gì thì ping mọi người nhé.
+[09:01:55] Linh: Ok anh!
+[09:01:58] Hùng: Em cũng ok, cảm ơn anh.

@@ -1,0 +1,13 @@
+{
+  "meeting_title": "Rà soát công việc sprint",
+  "tasks": [
+    {
+      "task_name": "Viết tài liệu API",
+      "assignee": "Lan",
+      "start_date": "2026-02-11",
+      "due_date": "2026-02-12",
+      "due_date_text": "trước thứ Sáu",
+      "status": "Proposed"
+    }
+  ]
+}
