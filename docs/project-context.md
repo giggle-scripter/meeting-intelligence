@@ -105,6 +105,7 @@ meeting-intelligent/
 │   │   ├── preprocessing/           Caption, speaker, turn, sentence, clause
 │   │   ├── annotation/              Cue flags và date mentions
 │   │   ├── candidate/               Candidate routing, compaction, batching
+│   │   ├── ml/                      Embedding interface/registry; chưa nối V1
 │   │   ├── ai/                      Rule extractors và provider clients
 │   │   ├── reduction/               Task ledger, linking, reducer, reconciliation
 │   │   ├── dates/                   Meeting/start/deadline resolution
@@ -812,6 +813,11 @@ call thành công nhưng không tạo accepted event không phải quality impro
 | `TOPIC_LIKELY_THRESHOLD` | `0.45` |
 | `MAX_MEETING_TOPICS` | `12` |
 | `MAX_TOPIC_KEYWORDS` | `8` |
+| `EMBEDDING_MODEL_NAME` | Multilingual model name; infrastructure only |
+| `EMBEDDING_DEVICE` | `cpu` |
+| `EMBEDDING_FALLBACK_ENABLED` | `true`; deterministic hashing fallback |
+| `EMBEDDING_FALLBACK_DIMENSION` | `384` |
+| `ACTION_CLASSIFIER_MODEL_PATH` | Empty; classifier not active yet |
 
 Optional pricing inputs only estimate trace cost:
 
