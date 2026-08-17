@@ -46,7 +46,7 @@ thật cho người dùng.
 | Backend | FastAPI `backend.app.main:app` |
 | Chế độ kiểm chứng chính | Local deterministic/rule-only |
 | Corpus | 86 reviewed cases, W1-W5 |
-| Automated tests | 236 tests |
+| Automated tests | 253 tests |
 | OpenAI model mặc định khi bật | `gpt-5-mini` |
 | AI role | Optional mutation resolver |
 | Job storage | In-memory |
@@ -120,6 +120,7 @@ meeting-intelligent/
 ├── data/
 │   ├── validation/                  Ground truth của 86 cases
 │   ├── fixtures/                    Automated-test fixtures
+│   ├── ml/action-classifier/        Generated clause dataset và grouped folds
 │   └── power_automate_uploads/      Self-contained A/B upload packages
 ├── evaluation/
 │   ├── runtime/                     Reports/traces của các lần chạy hiện tại
@@ -691,9 +692,23 @@ lý do audit.
 .\.venv\Scripts\python.exe -m pytest backend\tests -q
 ```
 
-Trạng thái hiện tại: **236 tests passed**.
+Trạng thái hiện tại: **253 tests passed**.
 
-### 16.2 Một transcript local, rule-only
+### 16.2 Action-classifier dataset
+
+```powershell
+.\.venv\Scripts\python.exe scripts\build_action_classifier_dataset.py `
+  data\validation `
+  --output-dir data\ml\action-classifier
+```
+
+Builder không sửa `data/validation`. Positive mapping ưu tiên reviewed evidence;
+vì corpus hiện chưa lưu `tasks[*].evidence`, task-name fallback chỉ được nhận khi
+vượt threshold và unique margin cùng owner/date/cue support. Mapping chưa chắc
+chắn có `manual_review_required=true`, `label=null` và không eligible để train.
+`folds.json` group toàn bộ record theo `meeting_id` để tránh leakage.
+
+### 16.3 Một transcript local, rule-only
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\run_pipeline.py meeting.txt `
@@ -702,7 +717,7 @@ Trạng thái hiện tại: **236 tests passed**.
   --date 2026-08-17
 ```
 
-### 16.3 Inspect preprocessing và candidates
+### 16.4 Inspect preprocessing và candidates
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\preprocess_transcript.py meeting.txt `
@@ -712,7 +727,7 @@ Trạng thái hiện tại: **236 tests passed**.
   --date 2026-08-17
 ```
 
-### 16.4 Targeted case
+### 16.5 Targeted case
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\evaluate_dataset.py data\validation `
@@ -723,7 +738,7 @@ Trạng thái hiện tại: **236 tests passed**.
   --report evaluation\runtime\targeted.json
 ```
 
-### 16.5 Full rule-only A/B
+### 16.6 Full rule-only A/B
 
 ```powershell
 # Without notes
@@ -743,7 +758,7 @@ Trạng thái hiện tại: **236 tests passed**.
 Evaluator ghi report trước khi trả exit code. Exit code khác 0 là bình thường
 khi còn case mismatch; phải đọc report thay vì coi đó là execution failure.
 
-### 16.6 Local OpenAI smoke
+### 16.7 Local OpenAI smoke
 
 Không cần Uvicorn hoặc Power Automate:
 
@@ -762,7 +777,7 @@ Script chạy automated tests, sau đó A/B without/with notes bằng
 đạt expected output, dùng `-AllowQualityFailures`; provider/contract errors vẫn
 phải fail.
 
-### 16.7 File-package smoke trước Power Automate
+### 16.8 File-package smoke trước Power Automate
 
 Chỉ chạy sau khi backend local đã sẵn sàng:
 

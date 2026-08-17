@@ -3,10 +3,20 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from enum import Enum
 from typing import Protocol, Sequence, runtime_checkable
 
 
 EmbeddingVector = list[float]
+
+
+class ActionLabel(str, Enum):
+    """Initial clause-level labels for the local action classifier."""
+
+    CLEAR_ACTION = "CLEAR_ACTION"
+    POSSIBLE_ACTION = "POSSIBLE_ACTION"
+    UPDATE_ONLY = "UPDATE_ONLY"
+    NON_ACTION = "NON_ACTION"
 
 
 @dataclass(frozen=True, slots=True)
