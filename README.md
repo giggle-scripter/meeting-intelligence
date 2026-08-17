@@ -364,3 +364,20 @@ task output.
   --action-classifier-model-path data\ml\action-classifier\model\action-clf-v1.json `
   --report evaluation\action-classifier-shadow.json
 ```
+
+Candidate evidence router cũng chỉ chạy shadow và yêu cầu classifier shadow:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\evaluate_dataset.py data\validation `
+  --reviewed-only `
+  --action-classifier-mode shadow `
+  --candidate-router-mode shadow `
+  --action-clear-threshold 0.82 `
+  --action-ai-threshold 0.45 `
+  --candidate-threshold-version candidate-router-thresholds-v1 `
+  --report evaluation\candidate-router-shadow.json
+```
+
+Router hợp nhất rule/classifier/note evidence thành route có reasons, nhưng PR4
+không execute bất kỳ route nào. `AI_CREATE_CHECK` chỉ tăng suppressed diagnostics;
+AI create vẫn tắt và final task output vẫn do pipeline hiện tại quyết định.
