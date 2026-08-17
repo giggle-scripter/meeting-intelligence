@@ -335,6 +335,18 @@ def main() -> None:
         help="Minimum task recall for the V2 quality gate.",
     )
     parser.add_argument("--context-mode", choices=("off", "assist", "shadow"), default="assist")
+    parser.add_argument(
+        "--action-classifier-mode",
+        choices=("off", "shadow"),
+        default="off",
+        help="Local mode only; API modes use server configuration.",
+    )
+    parser.add_argument(
+        "--action-classifier-model-path",
+        type=Path,
+        default=Path("data/ml/action-classifier/model/action-clf-v1.json"),
+        help="Portable classifier artifact used by local shadow evaluation.",
+    )
     parser.add_argument("--without-meeting-notes", action="store_true")
     parser.add_argument(
         "--reviewed-only",
@@ -455,6 +467,10 @@ def main() -> None:
                             _local_openai_client() if args.local_openai else None
                         ),
                         meeting_context_mode=args.context_mode,
+                        action_classifier_mode=args.action_classifier_mode,
+                        action_classifier_model_path=str(
+                            args.action_classifier_model_path
+                        ),
                     )
                 )
         except FatalBenchmarkError as exc:
@@ -652,6 +668,14 @@ def main() -> None:
         "ai_fallback_error_count",
         "unauthorized_creation_blocked_count",
         "ledger_unknown_task_id_rejection_count",
+        "action_classifier_clause_count",
+        "action_classifier_would_create_count",
+        "action_classifier_would_review_count",
+        "action_classifier_would_update_count",
+        "action_classifier_rule_action_clause_count",
+        "action_classifier_rule_agreement_count",
+        "action_classifier_rule_disagreement_count",
+        "action_classifier_error_count",
     ):
         pipeline_diagnostics[name] = sum(
             int(item.get(name, 0)) for item in diagnostic_values
@@ -669,6 +693,27 @@ def main() -> None:
     )
     total_clause_count = sum(
         int(item.get("clause_count", 0)) for item in diagnostic_values
+    )
+    prediction_counts: dict[str, int] = {}
+    for item in diagnostic_values:
+        for label, count in item.get(
+            "action_classifier_prediction_counts", {}
+        ).items():
+            prediction_counts[label] = prediction_counts.get(label, 0) + int(count)
+    pipeline_diagnostics["action_classifier_prediction_counts"] = dict(
+        sorted(prediction_counts.items())
+    )
+    pipeline_diagnostics["action_classifier_versions"] = sorted(
+        {
+            str(item.get("action_classifier_version", "disabled"))
+            for item in diagnostic_values
+        }
+    )
+    pipeline_diagnostics["embedding_model_versions"] = sorted(
+        {
+            str(item.get("embedding_model_version", "disabled"))
+            for item in diagnostic_values
+        }
     )
     pipeline_diagnostics["ai_clause_coverage"] = (
         pipeline_diagnostics["ai_context_clause_count"] / total_clause_count
@@ -726,6 +771,8 @@ def main() -> None:
         report = {
             "pipeline_version": args.pipeline_version,
             "meeting_context_mode": args.context_mode,
+            "action_classifier_mode": args.action_classifier_mode,
+            "action_classifier_model_path": str(args.action_classifier_model_path),
             "meeting_notes": "off" if args.without_meeting_notes else "sidecar_if_present",
             "prompt_version": PROMPT_VERSION,
             "model": MODEL_VERSION,

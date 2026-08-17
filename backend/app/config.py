@@ -33,6 +33,7 @@ class Settings:
     embedding_device: str = "cpu"
     embedding_fallback_enabled: bool = True
     embedding_fallback_dimension: int = 384
+    action_classifier_mode: str = "off"
     action_classifier_model_path: str | None = None
     openai_api_key: str | None = None
     openai_model: str = "gpt-5-mini"
@@ -123,6 +124,11 @@ class Settings:
             raise RuntimeError(
                 "EMBEDDING_FALLBACK_DIMENSION must be greater than zero"
             )
+        action_classifier_mode = os.getenv(
+            "ACTION_CLASSIFIER_MODE", "off"
+        ).lower()
+        if action_classifier_mode not in {"off", "shadow"}:
+            raise RuntimeError("ACTION_CLASSIFIER_MODE must be off or shadow")
 
         return cls(
             power_automate_api_key=os.getenv("POWER_AUTOMATE_API_KEY") or None,
@@ -149,6 +155,7 @@ class Settings:
                 "EMBEDDING_FALLBACK_ENABLED", True
             ),
             embedding_fallback_dimension=embedding_fallback_dimension,
+            action_classifier_mode=action_classifier_mode,
             action_classifier_model_path=(
                 os.getenv("ACTION_CLASSIFIER_MODEL_PATH") or ""
             ).strip()

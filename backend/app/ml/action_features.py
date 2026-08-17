@@ -12,6 +12,26 @@ from backend.app.models import Clause, ClauseAnnotation
 
 FeatureValue: TypeAlias = bool | int | float
 
+ACTION_FEATURE_NAMES = (
+    "has_commitment",
+    "has_assignment",
+    "has_correction",
+    "has_cancel",
+    "has_rejection",
+    "has_date",
+    "has_owner_name",
+    "is_question",
+    "is_hypothetical",
+    "is_suggestion",
+    "is_past_completed",
+    "is_progress_only",
+    "speaker_changed",
+    "first_person",
+    "second_person",
+    "note_supported",
+    "rule_score",
+)
+
 _FIRST_PERSON_RE = re.compile(
     r"\b(?:toi|mình|minh|em|anh|chi|chung toi|chung mình|chung minh|i|we)\b",
     re.IGNORECASE,
@@ -78,3 +98,30 @@ def build_action_features(
         "note_supported": note_supported,
         "rule_score": annotation.score,
     }
+
+
+def action_feature_vector(features: dict[str, FeatureValue]) -> list[float]:
+    """Convert named features to the stable training/inference column order."""
+
+    missing = [name for name in ACTION_FEATURE_NAMES if name not in features]
+    if missing:
+        raise ValueError(f"missing action features: {', '.join(missing)}")
+    return [float(features[name]) for name in ACTION_FEATURE_NAMES]
+
+
+def build_action_semantic_text(
+    clause: Clause,
+    *,
+    previous_clauses: Iterable[str] = (),
+    next_clauses: Iterable[str] = (),
+) -> str:
+    """Build the versioned local context representation used by the model."""
+
+    previous = "\n".join(previous_clauses)
+    following = "\n".join(next_clauses)
+    focus = (
+        f"{clause.speaker_name}: {clause.text_raw}"
+        if clause.speaker_name
+        else clause.text_raw
+    )
+    return f"[PREV]\n{previous}\n\n[FOCUS]\n{focus}\n\n[NEXT]\n{following}"

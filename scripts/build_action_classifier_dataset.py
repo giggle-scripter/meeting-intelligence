@@ -24,7 +24,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from backend.app.ai import DisabledAiClient
 from backend.app.annotation import annotate_clauses, extract_date_mentions
 from backend.app.evaluation import compare_case
-from backend.app.ml.action_features import build_action_features
+from backend.app.ml.action_features import (
+    build_action_features,
+    build_action_semantic_text,
+)
 from backend.app.ml.contracts import ActionLabel
 from backend.app.models import Clause, ClauseAnnotation, MeetingInput
 from backend.app.pipeline import preprocess_meeting, process_meeting
@@ -404,17 +407,6 @@ def _false_create_clause_ids(case: CaseData) -> set[str]:
     return clause_ids
 
 
-def _semantic_text(
-    clause: Clause,
-    previous_clauses: list[str],
-    next_clauses: list[str],
-) -> str:
-    previous = "\n".join(previous_clauses)
-    following = "\n".join(next_clauses)
-    focus = f"{clause.speaker_name}: {clause.text_raw}" if clause.speaker_name else clause.text_raw
-    return f"[PREV]\n{previous}\n\n[FOCUS]\n{focus}\n\n[NEXT]\n{following}"
-
-
 def _record_for_clause(
     case: CaseData,
     clause_index: int,
@@ -457,7 +449,11 @@ def _record_for_clause(
             speaker_names=case.speaker_names,
             note_supported=_note_supported(clause, case.note_text),
         ),
-        "semantic_text": _semantic_text(clause, previous_texts, next_texts),
+        "semantic_text": build_action_semantic_text(
+            clause,
+            previous_clauses=previous_texts,
+            next_clauses=next_texts,
+        ),
         "selection_reasons": sorted(reasons),
         "task_mappings": mapping_payloads,
     }

@@ -46,7 +46,7 @@ thật cho người dùng.
 | Backend | FastAPI `backend.app.main:app` |
 | Chế độ kiểm chứng chính | Local deterministic/rule-only |
 | Corpus | 86 reviewed cases, W1-W5 |
-| Automated tests | 253 tests |
+| Automated tests | 259 tests |
 | OpenAI model mặc định khi bật | `gpt-5-mini` |
 | AI role | Optional mutation resolver |
 | Job storage | In-memory |
@@ -692,7 +692,7 @@ lý do audit.
 .\.venv\Scripts\python.exe -m pytest backend\tests -q
 ```
 
-Trạng thái hiện tại: **253 tests passed**.
+Trạng thái hiện tại: **259 tests passed**.
 
 ### 16.2 Action-classifier dataset
 
@@ -832,7 +832,8 @@ call thành công nhưng không tạo accepted event không phải quality impro
 | `EMBEDDING_DEVICE` | `cpu` |
 | `EMBEDDING_FALLBACK_ENABLED` | `true`; deterministic hashing fallback |
 | `EMBEDDING_FALLBACK_DIMENSION` | `384` |
-| `ACTION_CLASSIFIER_MODEL_PATH` | Empty; classifier not active yet |
+| `ACTION_CLASSIFIER_MODE` | `off`; chỉ cho phép `off` hoặc `shadow` |
+| `ACTION_CLASSIFIER_MODEL_PATH` | Portable JSON artifact; bắt buộc khi chạy shadow |
 
 Optional pricing inputs only estimate trace cost:
 
@@ -872,7 +873,40 @@ evidence và final tasks. Dù không chứa credential, đây vẫn là dữ li�
 7. Power Automate chưa nên bật AI hoặc rollout tiếp trước khi local gates đạt.
 8. Trace có thể chứa dữ liệu cuộc họp nhạy cảm.
 
-## 21. Quy tắc khi thay đổi project
+9. `action-clf-v1` đang dùng multilingual MiniLM embedding: grouped 5-fold
+   macro-F1 `0.5671`, binary action F1 `0.3272`. Dataset còn 177 task mapping
+   chờ review, nên model chỉ được chạy shadow và chưa được tune threshold
+   production.
+
+## 21. Action classifier shadow baseline
+
+PR3 thêm Logistic Regression trên multilingual MiniLM embedding cùng 17 feature
+deterministic. Artifact nằm tại
+`data/ml/action-classifier/model/action-clf-v1.json`; linear head inference
+thuần Python, còn MiniLM dùng optional `sentence-transformers`. Registry chỉ
+load model một lần trong mỗi process.
+
+5-fold group theo meeting trên 5,854 eligible records:
+
+- mean macro-F1: `0.5671`;
+- mean binary action F1: `0.3272`;
+- production threshold tuning: `false`.
+
+Full shadow run trên 86 meeting không đổi task output so với baseline:
+
+- without note: 16/86, precision `0.4074`, recall `0.5560`, field accuracy `0.8604`;
+- with note: 15/86, precision `0.4271`, recall `0.6029`, field accuracy `0.8573`;
+- 17,706 clause được score mỗi run, classifier error count `0`.
+
+Trên máy dev hiện tại, full 86-case shadow mất khoảng 644 giây ở cold run và
+278 giây ở warm run. Đây là telemetry shadow, chưa phải latency production;
+PR router sau phải benchmark batching/cache trước khi bật rộng hơn.
+
+`ACTION_CLASSIFIER_MODE=shadow` chỉ bổ sung diagnostics gồm model/embedding
+version, label counts, would-create/review/update và disagreement với rule cues.
+Không prediction nào được phép tạo event hoặc thay đổi final task trong PR này.
+
+## 22. Quy tắc khi thay đổi project
 
 - Không hardcode case ID hoặc nguyên văn transcript vào runtime rule.
 - Chỉ thêm rule cho một semantic group có thể mô tả tổng quát.
@@ -889,7 +923,7 @@ evidence và final tasks. Dù không chứa credential, đây vẫn là dữ li�
 - Khi báo metric, ghi pipeline, context mode, note mode, provider/model/prompt
   và local/API/job mode.
 
-## 22. Gate trước khi tiếp tục Power Automate
+## 23. Gate trước khi tiếp tục Power Automate
 
 1. `pytest backend/tests -q` pass toàn bộ.
 2. Targeted positive và negative cases pass theo mục tiêu thay đổi.
@@ -900,7 +934,7 @@ evidence và final tasks. Dù không chứa credential, đây vẫn là dữ li�
 7. File-package smoke local pass.
 8. Sau đó mới test submit/poll/upsert trên Power Automate.
 
-## 23. Prompt cho phiên làm việc mới
+## 24. Prompt cho phiên làm việc mới
 
 ```text
 Bạn đang làm việc trong repo meeting-intelligent.

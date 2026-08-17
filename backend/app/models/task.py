@@ -78,6 +78,18 @@ class PipelineDiagnostics:
     meeting_date_source: str = "REQUEST"
     effective_meeting_date: str = ""
     explicit_task_start_date_count: int = 0
+    action_classifier_mode: str = "off"
+    action_classifier_version: str = "disabled"
+    embedding_model_version: str = "disabled"
+    action_classifier_clause_count: int = 0
+    action_classifier_prediction_counts: dict[str, int] = field(default_factory=dict)
+    action_classifier_would_create_count: int = 0
+    action_classifier_would_review_count: int = 0
+    action_classifier_would_update_count: int = 0
+    action_classifier_rule_action_clause_count: int = 0
+    action_classifier_rule_agreement_count: int = 0
+    action_classifier_rule_disagreement_count: int = 0
+    action_classifier_error_count: int = 0
 
 
 @dataclass

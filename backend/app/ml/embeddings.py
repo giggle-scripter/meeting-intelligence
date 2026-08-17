@@ -86,7 +86,10 @@ class SentenceTransformerEmbeddingModel:
             module = importlib.import_module("sentence_transformers")
             model_type = getattr(module, "SentenceTransformer")
             model = model_type(model_name, device=device)
-            dimension = int(model.get_sentence_embedding_dimension())
+            dimension_getter = getattr(model, "get_embedding_dimension", None)
+            if dimension_getter is None:
+                dimension_getter = getattr(model, "get_sentence_embedding_dimension")
+            dimension = int(dimension_getter())
         except Exception as exc:
             raise EmbeddingModelLoadError(
                 f"Unable to load embedding model {model_name!r}."

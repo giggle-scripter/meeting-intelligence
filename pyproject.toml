@@ -17,6 +17,11 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
 azure = ["azure-functions>=1.21"]
+ml-train = [
+  "numpy>=2.0",
+  "scikit-learn>=1.5",
+  "sentence-transformers>=5.0",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["backend/tests"]
