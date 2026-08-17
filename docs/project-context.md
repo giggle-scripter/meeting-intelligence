@@ -413,7 +413,7 @@ Provider priority:
 3. `AI_FALLBACK_ENDPOINT` → generic HTTP extractor;
 4. không có provider → `DisabledAiClient`.
 
-OpenAI và Foundry dùng `backend/app/ai/prompt.txt`.
+OpenAI và Foundry dùng prompt theo mode trong `backend/app/ai/prompts/`.
 
 AI schema chỉ cho phép:
 
@@ -832,9 +832,12 @@ call thành công nhưng không tạo accepted event không phải quality impro
 | `EMBEDDING_DEVICE` | `cpu` |
 | `EMBEDDING_FALLBACK_ENABLED` | `true`; deterministic hashing fallback |
 | `EMBEDDING_FALLBACK_DIMENSION` | `384` |
-| `ACTION_CLASSIFIER_MODE` | `off`; chỉ cho phép `off` hoặc `shadow` |
-| `ACTION_CLASSIFIER_MODEL_PATH` | Portable JSON artifact; bắt buộc khi chạy shadow |
-| `CANDIDATE_ROUTER_MODE` | `off`; `shadow` yêu cầu classifier cũng là `shadow` |
+| `ACTION_CLASSIFIER_MODE` | `off`; `shadow` chỉ telemetry, `assist` cho proposal path |
+| `ACTION_CLASSIFIER_MODEL_PATH` | Portable JSON artifact; bắt buộc khi chạy shadow/assist |
+| `CANDIDATE_ROUTER_MODE` | `off`; phải cùng non-off mode với classifier |
+| `TASK_CREATE_PROPOSAL_ENABLED` | `false`; master gate cho create-proposal path |
+| `AI_CREATE_PROPOSAL_ENABLED` | `false`; cho phép provider xử lý `AI_CREATE_CHECK` |
+| `AI_CREATE_MAX_PROPOSALS_PER_MEETING` | `3`; chặn fan-out/cost ngoài ý muốn |
 | `ACTION_CLEAR_THRESHOLD` | `0.82`; router config, không hardcode trong logic |
 | `ACTION_AI_THRESHOLD` | `0.45`; router config, không hardcode trong logic |
 | `CANDIDATE_THRESHOLD_VERSION` | `candidate-router-thresholds-v1` |
@@ -943,6 +946,34 @@ Full 86-case shadow, có Meeting Note:
 Route volume còn lớn so với 92 positive training records và 177 task mapping chờ
 review. Không được dùng distribution này để bật AI create hoặc tune production
 threshold trước khi ground-truth mapping được xử lý và PR5 có proposal validator.
+
+### 21.2 Grounded task-create proposal
+
+Create AI và mutation AI dùng hai prompt/contract độc lập trong
+`backend/app/ai/prompts/`. Create path không nhận full task ledger và provider chỉ
+được trả `TaskCreateProposal`: source clause IDs, action span, owner span,
+deadline mention ID, commitment type và confidence. Contract không có task ID,
+resolved date, final status hay canonical action.
+
+Python validator kiểm tra theo thứ tự: source thuộc bounded context, action là
+span gần nguyên văn, owner xuất hiện trong source (đại từ ngôi thứ nhất resolve
+bằng speaker), deadline ID thuộc parsed mention, rồi các negative guard. Chỉ
+proposal pass toàn bộ mới được promote thành `TASK_CREATE`; chronology lấy từ
+source clause, không lấy thời điểm provider trả lời. Provider/schema/grounding
+failure đều fail-closed thành unresolved, không có heuristic promotion.
+
+Mặc định ba gate vẫn an toàn: classifier/router `off`, hai proposal flag
+`false`. Muốn targeted assist phải đặt classifier và router cùng `assist`, bật
+cả `TASK_CREATE_PROPOSAL_ENABLED` và `AI_CREATE_PROPOSAL_ENABLED`. Mỗi meeting
+chỉ gọi tối đa `AI_CREATE_MAX_PROPOSALS_PER_MEETING` candidate thuộc uncertain
+band `AI_CREATE_CHECK`. Chưa bật production hoặc chạy paid full corpus trước khi
+177 task mapping được review và paired evaluation chứng minh recall uplift.
+
+Verification tại PR này: 289 backend tests pass; targeted assist test chứng minh
+grounded proposal được promote và provider failure không tạo heuristic task.
+Full default-off 86-case giữ nguyên baseline: without note 16/86 (precision
+`0.4074`, recall `0.5560`, field accuracy `0.8604`), with note 15/86 (precision
+`0.4271`, recall `0.6029`, field accuracy `0.8573`). Chưa gọi paid provider.
 
 ## 22. Quy tắc khi thay đổi project
 

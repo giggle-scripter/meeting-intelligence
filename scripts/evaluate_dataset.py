@@ -23,7 +23,7 @@ from backend.app.pipeline import process_meeting_by_version
 
 
 PIPELINE_VERSION = os.getenv("PIPELINE_VERSION", "v1")
-PROMPT_VERSION = os.getenv("PROMPT_VERSION", "v1-ledger-mutation-v1")
+PROMPT_VERSION = os.getenv("PROMPT_VERSION", "v1-ledger-proposal-v1")
 MODEL_VERSION = os.getenv("OPENAI_MODEL", "deterministic")
 REASONING_EFFORT_VERSION = os.getenv("OPENAI_REASONING_EFFORT", "not_applicable")
 RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
@@ -337,7 +337,7 @@ def main() -> None:
     parser.add_argument("--context-mode", choices=("off", "assist", "shadow"), default="assist")
     parser.add_argument(
         "--action-classifier-mode",
-        choices=("off", "shadow"),
+        choices=("off", "shadow", "assist"),
         default="off",
         help="Local mode only; API modes use server configuration.",
     )
@@ -349,10 +349,13 @@ def main() -> None:
     )
     parser.add_argument(
         "--candidate-router-mode",
-        choices=("off", "shadow"),
+        choices=("off", "shadow", "assist"),
         default="off",
-        help="Local shadow router; requires --action-classifier-mode shadow.",
+        help="Local router; its non-off mode must match the classifier mode.",
     )
+    parser.add_argument("--task-create-proposal", action="store_true")
+    parser.add_argument("--ai-create-proposal", action="store_true")
+    parser.add_argument("--ai-create-max-proposals", type=int, default=3)
     parser.add_argument("--action-clear-threshold", type=float, default=0.82)
     parser.add_argument("--action-ai-threshold", type=float, default=0.45)
     parser.add_argument(
@@ -378,13 +381,16 @@ def main() -> None:
     )
     args = parser.parse_args()
     if (
-        args.candidate_router_mode == "shadow"
-        and args.action_classifier_mode != "shadow"
+        args.candidate_router_mode != "off"
+        and args.action_classifier_mode != args.candidate_router_mode
     ):
         parser.error(
-            "--candidate-router-mode shadow requires "
-            "--action-classifier-mode shadow"
+            "non-off candidate router and action classifier modes must match"
         )
+    if args.task_create_proposal and args.candidate_router_mode != "assist":
+        parser.error("--task-create-proposal requires --candidate-router-mode assist")
+    if args.ai_create_proposal and not args.task_create_proposal:
+        parser.error("--ai-create-proposal requires --task-create-proposal")
     checkpoint_path = (
         args.report.with_suffix(args.report.suffix + ".checkpoint.json")
         if args.report
@@ -495,6 +501,11 @@ def main() -> None:
                         action_clear_threshold=args.action_clear_threshold,
                         action_ai_threshold=args.action_ai_threshold,
                         candidate_threshold_version=args.candidate_threshold_version,
+                        task_create_proposal_enabled=args.task_create_proposal,
+                        ai_create_proposal_enabled=args.ai_create_proposal,
+                        ai_create_max_proposals_per_meeting=(
+                            args.ai_create_max_proposals
+                        ),
                     )
                 )
         except FatalBenchmarkError as exc:
@@ -704,6 +715,11 @@ def main() -> None:
         "candidate_decision_count",
         "candidate_ai_create_check_suppressed_count",
         "candidate_router_error_count",
+        "task_create_proposal_call_count",
+        "task_create_proposal_accepted_count",
+        "task_create_proposal_no_action_count",
+        "task_create_proposal_unresolved_count",
+        "task_create_proposal_rejected_count",
     ):
         pipeline_diagnostics[name] = sum(
             int(item.get(name, 0)) for item in diagnostic_values
@@ -751,6 +767,17 @@ def main() -> None:
             ) + int(count)
     pipeline_diagnostics["candidate_route_counts"] = dict(
         sorted(candidate_route_counts.items())
+    )
+    proposal_rejection_reasons: dict[str, int] = {}
+    for item in diagnostic_values:
+        for reason, count in item.get(
+            "task_create_proposal_rejection_reasons", {}
+        ).items():
+            proposal_rejection_reasons[reason] = (
+                proposal_rejection_reasons.get(reason, 0) + int(count)
+            )
+    pipeline_diagnostics["task_create_proposal_rejection_reasons"] = dict(
+        sorted(proposal_rejection_reasons.items())
     )
     pipeline_diagnostics["candidate_router_versions"] = sorted(
         {
@@ -823,6 +850,9 @@ def main() -> None:
             "action_classifier_mode": args.action_classifier_mode,
             "action_classifier_model_path": str(args.action_classifier_model_path),
             "candidate_router_mode": args.candidate_router_mode,
+            "task_create_proposal_enabled": args.task_create_proposal,
+            "ai_create_proposal_enabled": args.ai_create_proposal,
+            "ai_create_max_proposals_per_meeting": args.ai_create_max_proposals,
             "action_clear_threshold": args.action_clear_threshold,
             "action_ai_threshold": args.action_ai_threshold,
             "candidate_threshold_version": args.candidate_threshold_version,

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 import logging
+from collections import Counter
 from dataclasses import asdict, replace
 
 import httpx
@@ -20,6 +21,7 @@ from .ai import (
 from .annotation import annotate_clauses, extract_date_mentions
 from .dates import resolve_date_mention
 from .candidate import (
+    CandidateRoute,
     batch_ai_windows,
     build_candidate_windows,
     choose_extraction_strategy,
@@ -41,6 +43,7 @@ from .reduction import (
 from .preprocessing.unicode_normalizer import normalize_for_match
 from .utils.text_similarity import similarity, token_overlap
 from .trace import write_pipeline_trace
+from .verification import validate_task_create_proposal
 
 
 POSITIVE_TASK_EVENTS = {"TASK_CREATE", "TASK_COMMITMENT", "OWNER_ASSIGN"}
@@ -107,6 +110,64 @@ LONG_CONTEXT_COMMUNICATION_RE = re.compile(
 )
 
 
+def _task_create_proposal_payload(
+    meeting: MeetingInput,
+    focus_clause_id: str,
+    clauses: list,
+    annotations: dict,
+    mentions: dict,
+    *,
+    context_radius: int = 2,
+) -> dict:
+    """Build bounded, ledger-free evidence for one uncertain create candidate."""
+
+    focus_position = next(
+        index for index, clause in enumerate(clauses)
+        if clause.clause_id == focus_clause_id
+    )
+    bounded = clauses[
+        max(0, focus_position - context_radius):
+        min(len(clauses), focus_position + context_radius + 1)
+    ]
+
+    def clause_payload(clause) -> dict:
+        return {
+            "clause_id": clause.clause_id,
+            "speaker_id": clause.speaker_id,
+            "speaker_name": clause.speaker_name,
+            "order_index": clause.order_index,
+            "text": clause.text_raw,
+            "semantic_flags": sorted(annotations[clause.clause_id].flags),
+        }
+
+    bounded_ids = {clause.clause_id for clause in bounded}
+    return {
+        "mode": "CREATE_PROPOSAL",
+        "meeting": {
+            "meeting_id": meeting.meeting_id,
+            "meeting_title": meeting.meeting_title,
+            "meeting_date": meeting.meeting_date,
+        },
+        "primary_clauses": [
+            clause_payload(clause)
+            for clause in bounded if clause.clause_id == focus_clause_id
+        ],
+        "context_clauses": [
+            clause_payload(clause)
+            for clause in bounded if clause.clause_id != focus_clause_id
+        ],
+        "known_date_mentions": [
+            {
+                "deadline_mention_id": mention.date_mention_id,
+                "clause_id": mention.clause_id,
+                "raw_text": mention.raw_text,
+            }
+            for mention in mentions.values()
+            if mention.clause_id in bounded_ids and mention.purpose != "MEETING_DATE"
+        ],
+    }
+
+
 def _ai_usage_trace(ai_client: AiClient) -> dict | None:
     """Return provider telemetry when the selected client exposes it.
 
@@ -126,6 +187,8 @@ def _event_reason(event) -> str:
 
     if event.extraction_source == "AI":
         return "AI_AMBIGUOUS"
+    if event.extraction_source == "AI_CREATE_PROPOSAL":
+        return "AI_GROUNDED_CREATE_PROPOSAL"
     if event.extraction_source == "HUMAN_NOTE":
         return "TRUSTED_HUMAN_NOTE_POSITIVE"
     if event.extraction_source == "RULE_CONTEXT":
@@ -704,6 +767,9 @@ def process_meeting(
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
     candidate_threshold_version: str = "candidate-router-thresholds-v1",
+    task_create_proposal_enabled: bool = False,
+    ai_create_proposal_enabled: bool = False,
+    ai_create_max_proposals_per_meeting: int = 3,
 ) -> PipelineResult:
     ai_client = ai_client or DisabledAiClient()
     stages = preprocess_meeting(meeting, speaker_aliases)
@@ -719,14 +785,25 @@ def process_meeting(
     )
     if meeting_context_mode not in {"off", "assist", "shadow"}:
         raise ValueError("meeting_context_mode must be off, assist, or shadow")
-    if action_classifier_mode not in {"off", "shadow"}:
-        raise ValueError("action_classifier_mode must be off or shadow")
-    if candidate_router_mode not in {"off", "shadow"}:
-        raise ValueError("candidate_router_mode must be off or shadow")
-    if candidate_router_mode == "shadow" and action_classifier_mode != "shadow":
+    if action_classifier_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("action_classifier_mode must be off, shadow, or assist")
+    if candidate_router_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("candidate_router_mode must be off, shadow, or assist")
+    if candidate_router_mode != "off" and action_classifier_mode != candidate_router_mode:
         raise ValueError(
-            "candidate_router_mode=shadow requires action_classifier_mode=shadow"
+            f"candidate_router_mode={candidate_router_mode} requires "
+            f"action_classifier_mode={candidate_router_mode}"
         )
+    if task_create_proposal_enabled and candidate_router_mode != "assist":
+        raise ValueError(
+            "task_create_proposal_enabled requires candidate_router_mode=assist"
+        )
+    if ai_create_proposal_enabled and not task_create_proposal_enabled:
+        raise ValueError(
+            "ai_create_proposal_enabled requires task_create_proposal_enabled"
+        )
+    if ai_create_max_proposals_per_meeting <= 0:
+        raise ValueError("ai_create_max_proposals_per_meeting must be positive")
     meeting_context = None
     note_cues_by_clause = {}
     if meeting_context_mode != "off":
@@ -755,7 +832,7 @@ def process_meeting(
     action_classifier_shadow = None
     action_predictions_by_clause = {}
     action_classifier_error_count = 0
-    if action_classifier_mode == "shadow":
+    if action_classifier_mode != "off":
         try:
             from .ml.action_classifier import (
                 predict_clause_actions,
@@ -785,7 +862,7 @@ def process_meeting(
     candidate_decisions_shadow = []
     candidate_router_shadow = None
     candidate_router_error_count = 0
-    if candidate_router_mode == "shadow":
+    if candidate_router_mode != "off":
         if action_classifier_shadow is None:
             candidate_router_error_count = 1
         else:
@@ -838,9 +915,91 @@ def process_meeting(
     events.extend(
         extract_provisional_task_references(clauses, start_sequence=len(events))
     )
+    proposal_rejection_reasons: Counter[str] = Counter()
+    task_create_proposal_call_count = 0
+    task_create_proposal_accepted_count = 0
+    task_create_proposal_no_action_count = 0
+    task_create_proposal_unresolved_count = 0
+    task_create_proposal_rejected_count = 0
+    ai_create_decisions = [
+        decision
+        for decision in candidate_decisions_shadow
+        if decision.route == CandidateRoute.AI_CREATE_CHECK
+    ]
+    candidate_order = {
+        item.candidate_id: clauses_by_id[item.focus_clause_id].order_index
+        for item in candidate_evidence_shadow
+    }
+    selected_create_decisions = sorted(
+        ai_create_decisions,
+        key=lambda item: (-item.confidence, candidate_order.get(item.candidate_id, 0)),
+    )[:ai_create_max_proposals_per_meeting]
+    proposal_method = getattr(ai_client, "propose_task", None)
+    if (
+        task_create_proposal_enabled
+        and ai_create_proposal_enabled
+        and ai_client.enabled
+        and callable(proposal_method)
+    ):
+        evidence_by_candidate = {
+            item.candidate_id: item for item in candidate_evidence_shadow
+        }
+        for decision in selected_create_decisions:
+            evidence = evidence_by_candidate[decision.candidate_id]
+            payload = _task_create_proposal_payload(
+                meeting,
+                evidence.focus_clause_id,
+                clauses,
+                annotations,
+                mentions,
+            )
+            bounded_ids = {
+                item["clause_id"]
+                for key in ("primary_clauses", "context_clauses")
+                for item in payload[key]
+            }
+            task_create_proposal_call_count += 1
+            try:
+                response = proposal_method(payload)
+                proposal = response.to_proposal()
+                if response.decision == "NO_ACTION":
+                    task_create_proposal_no_action_count += 1
+                    continue
+                if response.decision == "UNRESOLVED" or proposal is None:
+                    task_create_proposal_unresolved_count += 1
+                    continue
+                validation = validate_task_create_proposal(
+                    proposal,
+                    clauses_by_id=clauses_by_id,
+                    annotations=annotations,
+                    mentions=mentions,
+                    start_sequence=len(events),
+                    allowed_source_clause_ids=bounded_ids,
+                    required_primary_clause_ids={evidence.focus_clause_id},
+                )
+                if validation.accepted and validation.event is not None:
+                    events.append(validation.event)
+                    task_create_proposal_accepted_count += 1
+                else:
+                    task_create_proposal_rejected_count += 1
+                    proposal_rejection_reasons.update(validation.reasons)
+            except httpx.HTTPStatusError as exc:
+                LOGGER.warning(
+                    "AI create proposal rejected candidate %s: status=%s",
+                    decision.candidate_id,
+                    exc.response.status_code,
+                )
+                task_create_proposal_unresolved_count += 1
+            except (httpx.HTTPError, ValueError) as exc:
+                LOGGER.warning(
+                    "AI create proposal failed candidate %s: %s",
+                    decision.candidate_id,
+                    exc,
+                )
+                task_create_proposal_unresolved_count += 1
     unresolved: list[str] = []
     ai_window_count = 0
-    ai_provider_call_count = 0
+    ai_provider_call_count = task_create_proposal_call_count
     ai_context_clause_ids: set[str] = set()
     ai_context_clause_count_before_pruning = 0
     ai_fallback_error_count = 0
@@ -1049,7 +1208,10 @@ def process_meeting(
         rule_event_count=sum(
             event.extraction_source.startswith("RULE") for event in events
         ),
-        ai_event_count=sum(event.extraction_source == "AI" for event in events),
+        ai_event_count=sum(
+            event.extraction_source in {"AI", "AI_CREATE_PROPOSAL"}
+            for event in events
+        ),
         ai_window_count=ai_window_count,
         ai_provider_enabled=ai_client.enabled,
         ai_provider_call_count=ai_provider_call_count,
@@ -1133,12 +1295,12 @@ def process_meeting(
         action_classifier_version=(
             action_classifier_shadow.classifier_version
             if action_classifier_shadow
-            else ("unavailable" if action_classifier_mode == "shadow" else "disabled")
+            else ("unavailable" if action_classifier_mode != "off" else "disabled")
         ),
         embedding_model_version=(
             action_classifier_shadow.embedding_model_version
             if action_classifier_shadow
-            else ("unavailable" if action_classifier_mode == "shadow" else "disabled")
+            else ("unavailable" if action_classifier_mode != "off" else "disabled")
         ),
         action_classifier_clause_count=(
             action_classifier_shadow.clause_count if action_classifier_shadow else 0
@@ -1183,14 +1345,14 @@ def process_meeting(
         candidate_router_version=(
             candidate_router_shadow.router_version
             if candidate_router_shadow
-            else ("unavailable" if candidate_router_mode == "shadow" else "disabled")
+            else ("unavailable" if candidate_router_mode != "off" else "disabled")
         ),
         candidate_threshold_version=(
             candidate_router_shadow.threshold_version
             if candidate_router_shadow
             else (
                 candidate_threshold_version
-                if candidate_router_mode == "shadow"
+                if candidate_router_mode != "off"
                 else "disabled"
             )
         ),
@@ -1204,11 +1366,17 @@ def process_meeting(
             candidate_router_shadow.route_counts if candidate_router_shadow else {}
         ),
         candidate_ai_create_check_suppressed_count=(
-            candidate_router_shadow.ai_create_check_suppressed_count
-            if candidate_router_shadow
-            else 0
+            max(0, len(ai_create_decisions) - task_create_proposal_call_count)
         ),
         candidate_router_error_count=candidate_router_error_count,
+        task_create_proposal_call_count=task_create_proposal_call_count,
+        task_create_proposal_accepted_count=task_create_proposal_accepted_count,
+        task_create_proposal_no_action_count=task_create_proposal_no_action_count,
+        task_create_proposal_unresolved_count=task_create_proposal_unresolved_count,
+        task_create_proposal_rejected_count=task_create_proposal_rejected_count,
+        task_create_proposal_rejection_reasons=dict(
+            sorted(proposal_rejection_reasons.items())
+        ),
     )
     result = build_pipeline_result(
         meeting.meeting_title,
@@ -1258,7 +1426,17 @@ def process_meeting(
                     item.model_dump(mode="json")
                     for item in candidate_decisions_shadow
                 ],
-                "executed": False,
+                "executed": candidate_router_mode == "assist",
+            },
+            "task_create_proposals": {
+                "enabled": task_create_proposal_enabled,
+                "ai_enabled": ai_create_proposal_enabled,
+                "call_count": task_create_proposal_call_count,
+                "accepted_count": task_create_proposal_accepted_count,
+                "no_action_count": task_create_proposal_no_action_count,
+                "unresolved_count": task_create_proposal_unresolved_count,
+                "rejected_count": task_create_proposal_rejected_count,
+                "rejection_reasons": dict(sorted(proposal_rejection_reasons.items())),
             },
             "context_compaction": {
                 "before_clause_count": ai_context_clause_count_before_pruning,
@@ -1305,6 +1483,9 @@ def process_meeting_by_version(
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
     candidate_threshold_version: str = "candidate-router-thresholds-v1",
+    task_create_proposal_enabled: bool = False,
+    ai_create_proposal_enabled: bool = False,
+    ai_create_max_proposals_per_meeting: int = 3,
 ) -> PipelineResult:
     """Select V1/V2 or run V2 in shadow while returning V1's public result."""
 
@@ -1327,6 +1508,9 @@ def process_meeting_by_version(
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,
             candidate_threshold_version=candidate_threshold_version,
+            task_create_proposal_enabled=task_create_proposal_enabled,
+            ai_create_proposal_enabled=ai_create_proposal_enabled,
+            ai_create_max_proposals_per_meeting=ai_create_max_proposals_per_meeting,
         )
     if pipeline_version == "v1":
         assert v1_result is not None

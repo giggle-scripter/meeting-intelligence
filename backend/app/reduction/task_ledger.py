@@ -27,6 +27,9 @@ CREATION_ALLOWED_SOURCES = {
     "RULE_PENDING_CONFIRMATION",
     "RULE_RECAP",
     "RULE_FINAL_RECAP",
+    # Provider creation is authorized only after the Python grounding gate
+    # emits this distinct source. Raw AI mutation output remains update-only.
+    "AI_CREATE_PROPOSAL",
 }
 UPDATE_ONLY_SOURCES = {"RULE_CONTEXT", "AI"}
 
