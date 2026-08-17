@@ -331,3 +331,15 @@ sp365/             SharePoint List contracts
 clients/csharp/    client C# gửi transcript file vào API
 docs/              API, deployment và integration documentation
 ```
+
+Tạo lại clause-level action-classifier dataset từ reviewed corpus:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\build_action_classifier_dataset.py `
+  data\validation `
+  --output-dir data\ml\action-classifier
+```
+
+Builder khai thác task mapping chắc chắn, false-create và semantic hard
+negatives; các mapping mơ hồ có `manual_review_required=true` và không đủ điều
+kiện train. Fold luôn group theo `meeting_id` để tránh leakage giữa các clause.

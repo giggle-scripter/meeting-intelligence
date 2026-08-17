@@ -1,0 +1,4154 @@
+{
+  "builder_version": "action-dataset-builder-v1",
+  "case_count": 86,
+  "clause_count": 17706,
+  "dataset_version": "action-dataset-builder-v1-3998af3b2284",
+  "eligible_non_positive_record_count": 5762,
+  "eligible_positive_record_count": 92,
+  "eligible_training_record_count": 5854,
+  "expected_task_count": 277,
+  "features_version": "action-features-v1",
+  "fold_count": 5,
+  "fold_group_key": "meeting_id",
+  "hard_negative_policy": {
+    "adjacent_to_positive": true,
+    "mutation_only": true,
+    "pipeline_false_creates": true,
+    "random_easy_negatives": false,
+    "recap_or_task_reference": true,
+    "rejected_assignment": true,
+    "semantic_negative_cues": [
+      "ADMIN_FOLLOWUP",
+      "BRAINSTORM",
+      "FUTURE_DISCUSSION",
+      "HYPOTHETICAL",
+      "PAST_COMPLETED",
+      "PROGRESS_UPDATE",
+      "ROOT_QUESTION",
+      "SUGGESTION_ONLY"
+    ]
+  },
+  "label_counts": {
+    "CLEAR_ACTION": 36,
+    "NON_ACTION": 4753,
+    "POSSIBLE_ACTION": 56,
+    "UPDATE_ONLY": 1009
+  },
+  "manual_review_record_count": 165,
+  "mapping": {
+    "accepted_task_count": 100,
+    "manual_review": [
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000011",
+          "CLAUSE-000015",
+          "CLAUSE-000002"
+        ],
+        "candidate_scores": [
+          0.539489,
+          0.526316,
+          0.51129
+        ],
+        "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.013173,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.539489,
+        "selected_clause_id": "CLAUSE-000011",
+        "task_index": 0,
+        "task_name": "Hoàn thành tài liệu hướng dẫn sử dụng"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000008",
+          "CLAUSE-000015",
+          "CLAUSE-000014"
+        ],
+        "candidate_scores": [
+          0.45283,
+          0.45,
+          0.414865
+        ],
+        "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.00283,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.45283,
+        "selected_clause_id": "CLAUSE-000008",
+        "task_index": 0,
+        "task_name": "Gửi tài liệu module báo cáo"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000032",
+          "CLAUSE-000001",
+          "CLAUSE-000030"
+        ],
+        "candidate_scores": [
+          0.575301,
+          0.433784,
+          0.426923
+        ],
+        "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.141517,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.575301,
+        "selected_clause_id": "CLAUSE-000032",
+        "task_index": 1,
+        "task_name": "Hoàn thành tài liệu module quản lý người dùng"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000036",
+          "CLAUSE-000014",
+          "CLAUSE-000020"
+        ],
+        "candidate_scores": [
+          0.565663,
+          0.55625,
+          0.413889
+        ],
+        "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-018",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.009413,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.565663,
+        "selected_clause_id": "CLAUSE-000036",
+        "task_index": 0,
+        "task_name": "Hoàn thành bản thảo tài liệu CRM"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000037",
+          "CLAUSE-000035",
+          "CLAUSE-000025"
+        ],
+        "candidate_scores": [
+          0.554688,
+          0.522727,
+          0.45
+        ],
+        "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-018",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.031961,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.554688,
+        "selected_clause_id": "CLAUSE-000037",
+        "task_index": 1,
+        "task_name": "Review bản thảo tài liệu CRM"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000008",
+          "CLAUSE-000036",
+          "CLAUSE-000011"
+        ],
+        "candidate_scores": [
+          0.59375,
+          0.578977,
+          0.569149
+        ],
+        "case_id": "W1-SHORT-C1-N0-IT-FPC-DM-014",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.014773,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.59375,
+        "selected_clause_id": "CLAUSE-000008",
+        "task_index": 1,
+        "task_name": "Gửi hình ảnh minh họa"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000010",
+          "CLAUSE-000026",
+          "CLAUSE-000011"
+        ],
+        "candidate_scores": [
+          0.607627,
+          0.468421,
+          0.464815
+        ],
+        "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-008",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.139206,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.607627,
+        "selected_clause_id": "CLAUSE-000010",
+        "task_index": 0,
+        "task_name": "Chuẩn bị nội dung demo"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000011",
+          "CLAUSE-000021",
+          "CLAUSE-000022"
+        ],
+        "candidate_scores": [
+          0.556607,
+          0.406818,
+          0.39375
+        ],
+        "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-008",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.149789,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.556607,
+        "selected_clause_id": "CLAUSE-000011",
+        "task_index": 1,
+        "task_name": "Chuẩn bị môi trường test"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000014",
+          "CLAUSE-000051",
+          "CLAUSE-000028"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.6
+        ],
+        "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000014",
+        "task_index": 0,
+        "task_name": "Làm slide API"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000028",
+          "CLAUSE-000026",
+          "CLAUSE-000001"
+        ],
+        "candidate_scores": [
+          0.71,
+          0.59375,
+          0.583684
+        ],
+        "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.11625,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.71,
+        "selected_clause_id": "CLAUSE-000028",
+        "task_index": 1,
+        "task_name": "Chuẩn bị môi trường demo"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000020",
+          "CLAUSE-000031",
+          "CLAUSE-000021"
+        ],
+        "candidate_scores": [
+          0.632143,
+          0.38301,
+          0.371311
+        ],
+        "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.249133,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.632143,
+        "selected_clause_id": "CLAUSE-000020",
+        "task_index": 1,
+        "task_name": "Rà soát giao diện responsive trên tablet"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000020",
+          "CLAUSE-000018",
+          "CLAUSE-000033"
+        ],
+        "candidate_scores": [
+          0.58125,
+          0.549219,
+          0.48125
+        ],
+        "case_id": "W1-SHORT-C2-N1-PROD-NEG-QUNC-007",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.032031,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.58125,
+        "selected_clause_id": "CLAUSE-000020",
+        "task_index": 1,
+        "task_name": "Review PR session management"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000025",
+          "CLAUSE-000003",
+          "CLAUSE-000024"
+        ],
+        "candidate_scores": [
+          0.5875,
+          0.545888,
+          0.396154
+        ],
+        "case_id": "W1-SHORT-C2-N1-PROD-NEG-QUNC-007",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.041612,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.5875,
+        "selected_clause_id": "CLAUSE-000025",
+        "task_index": 2,
+        "task_name": "Thêm log refresh token"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000042",
+          "CLAUSE-000010",
+          "CLAUSE-000004"
+        ],
+        "candidate_scores": [
+          0.7,
+          0.525,
+          0.441071
+        ],
+        "case_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-003",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.175,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.7,
+        "selected_clause_id": "CLAUSE-000042",
+        "task_index": 0,
+        "task_name": "Phân tích lỗi timeout"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000001",
+          "CLAUSE-000030",
+          "CLAUSE-000013"
+        ],
+        "candidate_scores": [
+          0.593466,
+          0.4875,
+          0.439024
+        ],
+        "case_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.105966,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.593466,
+        "selected_clause_id": "CLAUSE-000001",
+        "task_index": 0,
+        "task_name": "Fix lỗi đăng nhập"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000022",
+          "CLAUSE-000020",
+          "CLAUSE-000023"
+        ],
+        "candidate_scores": [
+          0.563182,
+          0.556607,
+          0.521071
+        ],
+        "case_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.006575,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.563182,
+        "selected_clause_id": "CLAUSE-000022",
+        "task_index": 1,
+        "task_name": "Test bản fix đăng nhập"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000010",
+          "CLAUSE-000040",
+          "CLAUSE-000001"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.821429,
+          0.8
+        ],
+        "case_id": "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.078571,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000010",
+        "task_index": 0,
+        "task_name": "Chuẩn bị môi trường kiểm thử"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000034",
+          "CLAUSE-000035",
+          "CLAUSE-000006"
+        ],
+        "candidate_scores": [
+          0.49375,
+          0.425455,
+          0.421277
+        ],
+        "case_id": "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.068295,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.49375,
+        "selected_clause_id": "CLAUSE-000034",
+        "task_index": 1,
+        "task_name": "Cấp quyền truy cập server production"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000022",
+          "CLAUSE-000052",
+          "CLAUSE-000001"
+        ],
+        "candidate_scores": [
+          0.683594,
+          0.597561,
+          0.512903
+        ],
+        "case_id": "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.086033,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.683594,
+        "selected_clause_id": "CLAUSE-000022",
+        "task_index": 0,
+        "task_name": "Cài đặt máy ảo môi trường kiểm thử"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000004",
+          "CLAUSE-000008",
+          "CLAUSE-000043"
+        ],
+        "candidate_scores": [
+          0.8,
+          0.8,
+          0.75
+        ],
+        "case_id": "W2-SHORT-C2-N0-IT-DREP-030",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.8,
+        "selected_clause_id": "CLAUSE-000004",
+        "task_index": 0,
+        "task_name": "Tích hợp module thanh toán"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000029",
+          "CLAUSE-000040",
+          "CLAUSE-000030"
+        ],
+        "candidate_scores": [
+          0.5,
+          0.5,
+          0.492537
+        ],
+        "case_id": "W2-SHORT-C2-N0-IT-DREP-030",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.5,
+        "selected_clause_id": "CLAUSE-000029",
+        "task_index": 1,
+        "task_name": "Thông báo deadline mới cho khách hàng"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000037",
+          "CLAUSE-000002",
+          "CLAUSE-000033"
+        ],
+        "candidate_scores": [
+          0.7,
+          0.395455,
+          0.381985
+        ],
+        "case_id": "W2-SHORT-C2-N0-IT-DUPR-018",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.304545,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.7,
+        "selected_clause_id": "CLAUSE-000037",
+        "task_index": 0,
+        "task_name": "Tích hợp payment gateway"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000008",
+          "CLAUSE-000014",
+          "CLAUSE-000007"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.5975
+        ],
+        "case_id": "W2-SHORT-C2-N0-OPS-DREP-012",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000008",
+        "task_index": 0,
+        "task_name": "Viết release note"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000021",
+          "CLAUSE-000002",
+          "CLAUSE-000004"
+        ],
+        "candidate_scores": [
+          0.8,
+          0.74375,
+          0.390244
+        ],
+        "case_id": "W2-SHORT-C2-N1-IT-NOOWN-022",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.05625,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.8,
+        "selected_clause_id": "CLAUSE-000021",
+        "task_index": 0,
+        "task_name": "Xây dựng connector đồng bộ dữ liệu cũ - mới"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000025",
+          "CLAUSE-000010",
+          "CLAUSE-000033"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.82663,
+          0.388315
+        ],
+        "case_id": "W2-SHORT-C2-N1-OPS-NOOWN-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.07337,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000025",
+        "task_index": 0,
+        "task_name": "Kiểm tra tính năng thanh toán trên staging"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000054",
+          "CLAUSE-000010",
+          "CLAUSE-000044"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.9
+        ],
+        "case_id": "W2-SHORT-C2-N1-OPS-REJT-028",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000054",
+        "task_index": 1,
+        "task_name": "Fix bug"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000050",
+          "CLAUSE-000026",
+          "CLAUSE-000047"
+        ],
+        "candidate_scores": [
+          0.6825,
+          0.67875,
+          0.663182
+        ],
+        "case_id": "W2-SHORT-C2-N1-OPS-SEPD-016",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.00375,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.6825,
+        "selected_clause_id": "CLAUSE-000050",
+        "task_index": 1,
+        "task_name": "Soạn tài liệu hướng dẫn"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000051",
+          "CLAUSE-000018",
+          "CLAUSE-000044"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.807353
+        ],
+        "case_id": "W2-SHORT-C2-N1-OPS-SEPD-016",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000051",
+        "task_index": 2,
+        "task_name": "Test hồi quy"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000027",
+          "CLAUSE-000021",
+          "CLAUSE-000015"
+        ],
+        "candidate_scores": [
+          0.687736,
+          0.4875,
+          0.481985
+        ],
+        "case_id": "W2-SHORT-C2-N2-IT-DASG-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.200236,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.687736,
+        "selected_clause_id": "CLAUSE-000027",
+        "task_index": 0,
+        "task_name": "Hoàn thành test script"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000035",
+          "CLAUSE-000015",
+          "CLAUSE-000036"
+        ],
+        "candidate_scores": [
+          0.577679,
+          0.452353,
+          0.385955
+        ],
+        "case_id": "W2-SHORT-C2-N2-IT-DASG-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.125326,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.577679,
+        "selected_clause_id": "CLAUSE-000035",
+        "task_index": 2,
+        "task_name": "Hoàn thiện mapping dữ liệu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000033",
+          "CLAUSE-000031",
+          "CLAUSE-000036"
+        ],
+        "candidate_scores": [
+          0.685,
+          0.552353,
+          0.488028
+        ],
+        "case_id": "W2-SHORT-C2-N2-OPS-DASG-020",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.132647,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.685,
+        "selected_clause_id": "CLAUSE-000033",
+        "task_index": 1,
+        "task_name": "Rà soát checklist trước build"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000018",
+          "CLAUSE-000045",
+          "CLAUSE-000016"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.8
+        ],
+        "case_id": "W2-SHORT-C3-N0-SW-QACC-021",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000018",
+        "task_index": 0,
+        "task_name": "Phân tích dữ liệu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000017",
+          "CLAUSE-000033",
+          "CLAUSE-000034"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.9
+        ],
+        "case_id": "W2-SHORT-C3-N1-PROD-FPC-019",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000017",
+        "task_index": 0,
+        "task_name": "Sửa lỗi token"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000056",
+          "CLAUSE-000029",
+          "CLAUSE-000007"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.815625,
+          0.6
+        ],
+        "case_id": "W2-SHORT-C3-N1-SW-RWKD-013",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.084375,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000056",
+        "task_index": 0,
+        "task_name": "Hoàn thành task Y"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000057",
+          "CLAUSE-000044",
+          "CLAUSE-000036"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.8,
+          0.5
+        ],
+        "case_id": "W2-SHORT-C3-N1-SW-RWKD-013",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000057",
+        "task_index": 1,
+        "task_name": "Làm task Z"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000031",
+          "CLAUSE-000050",
+          "CLAUSE-000011"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.9
+        ],
+        "case_id": "W2-SHORT-C3-N2-PROD-HOFF-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000031",
+        "task_index": 0,
+        "task_name": "Viết tài liệu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000031",
+          "CLAUSE-000019",
+          "CLAUSE-000024"
+        ],
+        "candidate_scores": [
+          0.907353,
+          0.813462,
+          0.641071
+        ],
+        "case_id": "W2-SHORT-C3-N2-PROD-HOFF-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.093891,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.907353,
+        "selected_clause_id": "CLAUSE-000031",
+        "task_index": 1,
+        "task_name": "Review tài liệu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000048",
+          "CLAUSE-000041",
+          "CLAUSE-000042"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.818182,
+          0.69375
+        ],
+        "case_id": "W2-SHORT-C3-N2-PROD-NDL-023",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.081818,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000048",
+        "task_index": 1,
+        "task_name": "Fix lỗi mới"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000040",
+          "CLAUSE-000051",
+          "CLAUSE-000036"
+        ],
+        "candidate_scores": [
+          0.514286,
+          0.394186,
+          0.386842
+        ],
+        "case_id": "W2-SHORT-C3-N2-SW-HOFF-029",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1201,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.514286,
+        "selected_clause_id": "CLAUSE-000040",
+        "task_index": 0,
+        "task_name": "Thực hiện PROJ-101"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000050",
+          "CLAUSE-000032",
+          "CLAUSE-000024"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.8,
+          0.592157
+        ],
+        "case_id": "W2-SHORT-C3-N2-SW-NDL-005",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000050",
+        "task_index": 0,
+        "task_name": "Tối ưu hiệu năng module báo cáo tổng hợp"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000046",
+          "CLAUSE-000048",
+          "CLAUSE-000024"
+        ],
+        "candidate_scores": [
+          0.692157,
+          0.439323,
+          0.433772
+        ],
+        "case_id": "W2-SHORT-C3-N2-SW-NDL-005",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.252834,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.692157,
+        "selected_clause_id": "CLAUSE-000046",
+        "task_index": 1,
+        "task_name": "Chuẩn bị dữ liệu mẫu lớn để load test"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000045",
+          "CLAUSE-000021",
+          "CLAUSE-000055"
+        ],
+        "candidate_scores": [
+          0.743466,
+          0.645888,
+          0.504087
+        ],
+        "case_id": "W2-SHORT-C3-N2-SW-RECF-017",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.097578,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.743466,
+        "selected_clause_id": "CLAUSE-000045",
+        "task_index": 0,
+        "task_name": "Viết tài liệu API"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000087",
+          "CLAUSE-000117",
+          "CLAUSE-000082"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.8,
+          0.7
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000087",
+        "task_index": 1,
+        "task_name": "Hoàn thiện dữ liệu mẫu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000038",
+          "CLAUSE-000076",
+          "CLAUSE-000134"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.9
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000038",
+        "task_index": 3,
+        "task_name": "Xử lý adapter token"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000029",
+          "CLAUSE-000032",
+          "CLAUSE-000165"
+        ],
+        "candidate_scores": [
+          0.85,
+          0.834375,
+          0.822656
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-006",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.015625,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.85,
+        "selected_clause_id": "CLAUSE-000029",
+        "task_index": 1,
+        "task_name": "Viết script dữ liệu mẫu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000178",
+          "CLAUSE-000158",
+          "CLAUSE-000027"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.830769
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-006",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000178",
+        "task_index": 2,
+        "task_name": "Kiểm tra dữ liệu mẫu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000166",
+          "CLAUSE-000181",
+          "CLAUSE-000050"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.927679
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-006",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000166",
+        "task_index": 3,
+        "task_name": "Kiểm tra quyền truy cập"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000101",
+          "CLAUSE-000059",
+          "CLAUSE-000054"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.652232
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-006",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000101",
+        "task_index": 4,
+        "task_name": "Setup môi trường staging"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000181",
+          "CLAUSE-000013",
+          "CLAUSE-000036"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.58913
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000181",
+        "task_index": 0,
+        "task_name": "Hoàn thiện API integration"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000043",
+          "CLAUSE-000034",
+          "CLAUSE-000182"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.9
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000043",
+        "task_index": 1,
+        "task_name": "Tối ưu hiệu năng API"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000065",
+          "CLAUSE-000187",
+          "CLAUSE-000051"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.9
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000065",
+        "task_index": 2,
+        "task_name": "Chuẩn bị dữ liệu mẫu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000189",
+          "CLAUSE-000144",
+          "CLAUSE-000142"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.930769,
+          0.686471
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.069231,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000189",
+        "task_index": 4,
+        "task_name": "Viết tài liệu API guide"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000190",
+          "CLAUSE-000101",
+          "CLAUSE-000195"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.9
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000190",
+        "task_index": 5,
+        "task_name": "Tạo môi trường test"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000126",
+          "CLAUSE-000157",
+          "CLAUSE-000057"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.9
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-014",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000126",
+        "task_index": 2,
+        "task_name": "Cập nhật tài liệu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000105",
+          "CLAUSE-000127",
+          "CLAUSE-000157"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.75625
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-014",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000105",
+        "task_index": 3,
+        "task_name": "Lập kế hoạch rollout"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000125",
+          "CLAUSE-000158",
+          "CLAUSE-000091"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.9
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-014",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000125",
+        "task_index": 4,
+        "task_name": "Kiểm tra quyền"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000124",
+          "CLAUSE-000019",
+          "CLAUSE-000135"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.81875,
+          0.729545
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-014",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.08125,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000124",
+        "task_index": 5,
+        "task_name": "Chuẩn bị dữ liệu mẫu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000105",
+          "CLAUSE-000096",
+          "CLAUSE-000067"
+        ],
+        "candidate_scores": [
+          0.7,
+          0.545455,
+          0.4875
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-018",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.154545,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.7,
+        "selected_clause_id": "CLAUSE-000105",
+        "task_index": 0,
+        "task_name": "Hoàn thành OAuth"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000018",
+          "CLAUSE-000117",
+          "CLAUSE-000016"
+        ],
+        "candidate_scores": [
+          0.65,
+          0.63,
+          0.563793
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-018",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.02,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.65,
+        "selected_clause_id": "CLAUSE-000018",
+        "task_index": 1,
+        "task_name": "Chuẩn bị dữ liệu mẫu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000112",
+          "CLAUSE-000127",
+          "CLAUSE-000079"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.8
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-018",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000112",
+        "task_index": 2,
+        "task_name": "Xác thực"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000127",
+          "CLAUSE-000116",
+          "CLAUSE-000024"
+        ],
+        "candidate_scores": [
+          0.586842,
+          0.503125,
+          0.422727
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-018",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.083717,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.586842,
+        "selected_clause_id": "CLAUSE-000127",
+        "task_index": 3,
+        "task_name": "Viết test case"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000094",
+          "CLAUSE-000015",
+          "CLAUSE-000093"
+        ],
+        "candidate_scores": [
+          0.48871,
+          0.476087,
+          0.442857
+        ],
+        "case_id": "W3-MED-C3-N1-IT-INT-018",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.012623,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.48871,
+        "selected_clause_id": "CLAUSE-000094",
+        "task_index": 4,
+        "task_name": "Cấu hình staging"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000055",
+          "CLAUSE-000106",
+          "CLAUSE-000049"
+        ],
+        "candidate_scores": [
+          0.578571,
+          0.572785,
+          0.551786
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.005786,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.578571,
+        "selected_clause_id": "CLAUSE-000055",
+        "task_index": 3,
+        "task_name": "Cấu hình monitoring"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000115",
+          "CLAUSE-000031",
+          "CLAUSE-000048"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.670312
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-008",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000115",
+        "task_index": 1,
+        "task_name": "Viết deployment rollback script"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000117",
+          "CLAUSE-000058",
+          "CLAUSE-000055"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.84375
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-008",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000117",
+        "task_index": 3,
+        "task_name": "Review release notes"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000082",
+          "CLAUSE-000134",
+          "CLAUSE-000138"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.75
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-012",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000082",
+        "task_index": 0,
+        "task_name": "Review feature A"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000020",
+          "CLAUSE-000060",
+          "CLAUSE-000135"
+        ],
+        "candidate_scores": [
+          0.507143,
+          0.507143,
+          0.503521
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-012",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.507143,
+        "selected_clause_id": "CLAUSE-000020",
+        "task_index": 2,
+        "task_name": "Cập nhật monitoring"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000088",
+          "CLAUSE-000135",
+          "CLAUSE-000103"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.477404
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-012",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000088",
+        "task_index": 3,
+        "task_name": "Backup config"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000136",
+          "CLAUSE-000008",
+          "CLAUSE-000110"
+        ],
+        "candidate_scores": [
+          0.691071,
+          0.603125,
+          0.420492
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-012",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.087946,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.691071,
+        "selected_clause_id": "CLAUSE-000136",
+        "task_index": 4,
+        "task_name": "Chạy regression test"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000136",
+          "CLAUSE-000070",
+          "CLAUSE-000114"
+        ],
+        "candidate_scores": [
+          0.692143,
+          0.592143,
+          0.59
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-012",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.692143,
+        "selected_clause_id": "CLAUSE-000136",
+        "task_index": 6,
+        "task_name": "Viết tài liệu kỹ thuật"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000075",
+          "CLAUSE-000121",
+          "CLAUSE-000171"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-016",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000075",
+        "task_index": 0,
+        "task_name": "Fix bug #234"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000075",
+          "CLAUSE-000171",
+          "CLAUSE-000018"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.9
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-016",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000075",
+        "task_index": 1,
+        "task_name": "Cập nhật dashboard"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000030",
+          "CLAUSE-000075",
+          "CLAUSE-000121"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.9
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-016",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000030",
+        "task_index": 2,
+        "task_name": "Viết release notes"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000075",
+          "CLAUSE-000029",
+          "CLAUSE-000121"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.838636,
+          0.800581
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-016",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.061364,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000075",
+        "task_index": 3,
+        "task_name": "Viết hướng dẫn sử dụng"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000075",
+          "CLAUSE-000121",
+          "CLAUSE-000035"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.735714
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-016",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000075",
+        "task_index": 4,
+        "task_name": "Chuẩn bị staging"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000075",
+          "CLAUSE-000173",
+          "CLAUSE-000046"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.95,
+          0.9
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-016",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.05,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000075",
+        "task_index": 5,
+        "task_name": "Test load"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000038",
+          "CLAUSE-000106",
+          "CLAUSE-000035"
+        ],
+        "candidate_scores": [
+          0.721429,
+          0.675,
+          0.603125
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-020",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.046429,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.721429,
+        "selected_clause_id": "CLAUSE-000038",
+        "task_index": 3,
+        "task_name": "Giám sát release từ thứ Năm"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000038",
+          "CLAUSE-000035",
+          "CLAUSE-000108"
+        ],
+        "candidate_scores": [
+          0.821429,
+          0.81875,
+          0.775
+        ],
+        "case_id": "W3-MED-C3-N1-OPS-INT-020",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.002679,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.821429,
+        "selected_clause_id": "CLAUSE-000038",
+        "task_index": 4,
+        "task_name": "Giám sát release đến thứ Tư"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000002",
+          "CLAUSE-000098",
+          "CLAUSE-000086"
+        ],
+        "candidate_scores": [
+          0.537952,
+          0.488028,
+          0.46625
+        ],
+        "case_id": "W3-MED-C4-N2-PROD-INT-003",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.049924,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.537952,
+        "selected_clause_id": "CLAUSE-000002",
+        "task_index": 0,
+        "task_name": "Hoàn thiện meeting summary flow"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000046",
+          "CLAUSE-000055",
+          "CLAUSE-000116"
+        ],
+        "candidate_scores": [
+          0.65625,
+          0.588372,
+          0.562903
+        ],
+        "case_id": "W3-MED-C4-N2-PROD-INT-007",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.067878,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.65625,
+        "selected_clause_id": "CLAUSE-000046",
+        "task_index": 2,
+        "task_name": "Hoàn thiện spec SP365"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000005",
+          "CLAUSE-000050",
+          "CLAUSE-000117"
+        ],
+        "candidate_scores": [
+          0.700909,
+          0.686471,
+          0.613182
+        ],
+        "case_id": "W3-MED-C4-N2-PROD-INT-007",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.014438,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.700909,
+        "selected_clause_id": "CLAUSE-000005",
+        "task_index": 3,
+        "task_name": "Cập nhật UI flow summary"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000087",
+          "CLAUSE-000139",
+          "CLAUSE-000037"
+        ],
+        "candidate_scores": [
+          0.740625,
+          0.726339,
+          0.465789
+        ],
+        "case_id": "W3-MED-C4-N2-PROD-INT-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.014286,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.740625,
+        "selected_clause_id": "CLAUSE-000087",
+        "task_index": 1,
+        "task_name": "Làm báo cáo chi phí"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000009",
+          "CLAUSE-000087",
+          "CLAUSE-000152"
+        ],
+        "candidate_scores": [
+          0.70625,
+          0.683333,
+          0.6
+        ],
+        "case_id": "W3-MED-C4-N2-PROD-INT-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.022917,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.70625,
+        "selected_clause_id": "CLAUSE-000009",
+        "task_index": 2,
+        "task_name": "Hiển thị SP365"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000129",
+          "CLAUSE-000084",
+          "CLAUSE-000087"
+        ],
+        "candidate_scores": [
+          0.5975,
+          0.586842,
+          0.583333
+        ],
+        "case_id": "W3-MED-C4-N2-PROD-INT-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.010658,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.5975,
+        "selected_clause_id": "CLAUSE-000129",
+        "task_index": 3,
+        "task_name": "Sửa parser transcript"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000097",
+          "CLAUSE-000109",
+          "CLAUSE-000041"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.738636
+        ],
+        "case_id": "W3-MED-C4-N2-PROD-INT-015",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000097",
+        "task_index": 2,
+        "task_name": "Cập nhật giao diện SP365"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000109",
+          "CLAUSE-000048",
+          "CLAUSE-000097"
+        ],
+        "candidate_scores": [
+          0.848077,
+          0.738616,
+          0.640513
+        ],
+        "case_id": "W3-MED-C4-N2-PROD-INT-015",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.109461,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.848077,
+        "selected_clause_id": "CLAUSE-000109",
+        "task_index": 3,
+        "task_name": "Cập nhật hiển thị dữ liệu SP365"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000144",
+          "CLAUSE-000027",
+          "CLAUSE-000114"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.75
+        ],
+        "case_id": "W3-MED-C4-N2-PROD-INT-019",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000144",
+        "task_index": 1,
+        "task_name": "Cải tiến parser"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000102",
+          "CLAUSE-000084",
+          "CLAUSE-000068"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9125,
+          0.828409
+        ],
+        "case_id": "W3-MED-C4-N2-SW-INT-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0875,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000102",
+        "task_index": 0,
+        "task_name": "Fix lỗi đăng nhập"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000085",
+          "CLAUSE-000103",
+          "CLAUSE-000040"
+        ],
+        "candidate_scores": [
+          0.953125,
+          0.852679,
+          0.833929
+        ],
+        "case_id": "W3-MED-C4-N2-SW-INT-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.100446,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.953125,
+        "selected_clause_id": "CLAUSE-000085",
+        "task_index": 1,
+        "task_name": "Viết tài liệu hướng dẫn cài đặt"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000034",
+          "CLAUSE-000141",
+          "CLAUSE-000006"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.554087
+        ],
+        "case_id": "W3-MED-C4-N2-SW-INT-005",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000034",
+        "task_index": 0,
+        "task_name": "Fix lỗi đăng nhập"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000119",
+          "CLAUSE-000043",
+          "CLAUSE-000045"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.6
+        ],
+        "case_id": "W3-MED-C4-N2-SW-INT-009",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000119",
+        "task_index": 2,
+        "task_name": "Viết hướng dẫn triển khai"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000129",
+          "CLAUSE-000119",
+          "CLAUSE-000094"
+        ],
+        "candidate_scores": [
+          0.650263,
+          0.641875,
+          0.587838
+        ],
+        "case_id": "W3-MED-C4-N2-SW-INT-009",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.008388,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.650263,
+        "selected_clause_id": "CLAUSE-000129",
+        "task_index": 3,
+        "task_name": "Cập nhật tài liệu troubleshooting"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000151",
+          "CLAUSE-000082",
+          "CLAUSE-000149"
+        ],
+        "candidate_scores": [
+          0.61625,
+          0.55,
+          0.534375
+        ],
+        "case_id": "W3-MED-C4-N2-SW-INT-013",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.06625,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.61625,
+        "selected_clause_id": "CLAUSE-000151",
+        "task_index": 1,
+        "task_name": "Merge export và deploy lên staging"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000111",
+          "CLAUSE-000032",
+          "CLAUSE-000038"
+        ],
+        "candidate_scores": [
+          0.853125,
+          0.738616,
+          0.736134
+        ],
+        "case_id": "W3-MED-C4-N2-SW-INT-013",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.114509,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.853125,
+        "selected_clause_id": "CLAUSE-000111",
+        "task_index": 2,
+        "task_name": "Viết tài liệu hướng dẫn người dùng"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000067",
+          "CLAUSE-000117",
+          "CLAUSE-000143"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.9
+        ],
+        "case_id": "W3-MED-C4-N2-SW-INT-013",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000067",
+        "task_index": 4,
+        "task_name": "Test export"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000025",
+          "CLAUSE-000110",
+          "CLAUSE-000010"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.658807
+        ],
+        "case_id": "W3-MED-C4-N2-SW-INT-017",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000025",
+        "task_index": 0,
+        "task_name": "Fix môi trường test"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000111",
+          "CLAUSE-000034",
+          "CLAUSE-000039"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.715625
+        ],
+        "case_id": "W3-MED-C4-N2-SW-INT-017",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000111",
+        "task_index": 1,
+        "task_name": "Fix lỗi đăng nhập"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000112",
+          "CLAUSE-000065",
+          "CLAUSE-000067"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.9
+        ],
+        "case_id": "W3-MED-C4-N2-SW-INT-017",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000112",
+        "task_index": 2,
+        "task_name": "Viết tài liệu nội bộ"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000032",
+          "CLAUSE-000083",
+          "CLAUSE-000116"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.9
+        ],
+        "case_id": "W4-LONG-C4-N1-IT-STATE-006",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000032",
+        "task_index": 0,
+        "task_name": "Thiết lập môi trường staging"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000324",
+          "CLAUSE-000332",
+          "CLAUSE-000432"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.9
+        ],
+        "case_id": "W4-LONG-C4-N1-IT-STATE-006",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000324",
+        "task_index": 1,
+        "task_name": "Soạn tài liệu hướng dẫn triển khai"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000256",
+          "CLAUSE-000191",
+          "CLAUSE-000181"
+        ],
+        "candidate_scores": [
+          0.928409,
+          0.925,
+          0.815625
+        ],
+        "case_id": "W4-LONG-C4-N1-IT-STATE-006",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.003409,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.928409,
+        "selected_clause_id": "CLAUSE-000256",
+        "task_index": 2,
+        "task_name": "Xử lý lỗi LDAP"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000192",
+          "CLAUSE-000257",
+          "CLAUSE-000382"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "case_id": "W4-LONG-C4-N1-IT-STATE-006",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000192",
+        "task_index": 3,
+        "task_name": "Soạn hướng dẫn cấu hình LDAP"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000425",
+          "CLAUSE-000503",
+          "CLAUSE-000455"
+        ],
+        "candidate_scores": [
+          0.62,
+          0.584783,
+          0.55
+        ],
+        "case_id": "W4-LONG-C4-N1-IT-STATE-006",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.035217,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.62,
+        "selected_clause_id": "CLAUSE-000425",
+        "task_index": 5,
+        "task_name": "Cấu hình monitoring"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000445",
+          "CLAUSE-000096",
+          "CLAUSE-000098"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.8,
+          0.8
+        ],
+        "case_id": "W4-LONG-C4-N1-OPS-STATE-012",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000445",
+        "task_index": 0,
+        "task_name": "Chuẩn bị môi trường test cấu hình"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000452",
+          "CLAUSE-000264",
+          "CLAUSE-000017"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.820312
+        ],
+        "case_id": "W4-LONG-C4-N1-OPS-STATE-012",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000452",
+        "task_index": 1,
+        "task_name": "Thiết lập môi trường test hướng dẫn"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000055",
+          "CLAUSE-000300",
+          "CLAUSE-000459"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.9
+        ],
+        "case_id": "W4-LONG-C4-N1-OPS-STATE-012",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000055",
+        "task_index": 2,
+        "task_name": "Review checklist triển khai với anh An"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000491",
+          "CLAUSE-000173",
+          "CLAUSE-000375"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.8
+        ],
+        "case_id": "W4-LONG-C4-N1-OPS-STATE-012",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000491",
+        "task_index": 5,
+        "task_name": "Chuẩn bị dữ liệu test cho login"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000027",
+          "CLAUSE-000288",
+          "CLAUSE-000015"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.9
+        ],
+        "case_id": "W4-LONG-C4-N2-IT-STATE-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000027",
+        "task_index": 0,
+        "task_name": "Chuẩn bị môi trường test"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000317",
+          "CLAUSE-000457",
+          "CLAUSE-000013"
+        ],
+        "candidate_scores": [
+          0.832386,
+          0.824519,
+          0.823026
+        ],
+        "case_id": "W4-LONG-C4-N2-IT-STATE-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.007867,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.832386,
+        "selected_clause_id": "CLAUSE-000317",
+        "task_index": 1,
+        "task_name": "Viết tài liệu môi trường test"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000186",
+          "CLAUSE-000187",
+          "CLAUSE-000319"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "case_id": "W4-LONG-C4-N2-IT-STATE-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000186",
+        "task_index": 2,
+        "task_name": "Fix lỗi đăng nhập"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000253",
+          "CLAUSE-000247",
+          "CLAUSE-000488"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.830769,
+          0.6975
+        ],
+        "case_id": "W4-LONG-C4-N2-IT-STATE-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.069231,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000253",
+        "task_index": 3,
+        "task_name": "Viết test case đăng nhập"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000461",
+          "CLAUSE-000437",
+          "CLAUSE-000414"
+        ],
+        "candidate_scores": [
+          0.824519,
+          0.724519,
+          0.71875
+        ],
+        "case_id": "W4-LONG-C4-N2-IT-STATE-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.824519,
+        "selected_clause_id": "CLAUSE-000461",
+        "task_index": 4,
+        "task_name": "Viết tài liệu triển khai tổng thể"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000272",
+          "CLAUSE-000297",
+          "CLAUSE-000375"
+        ],
+        "candidate_scores": [
+          0.607143,
+          0.59,
+          0.589063
+        ],
+        "case_id": "W4-LONG-C4-N2-IT-STATE-010",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.017143,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.607143,
+        "selected_clause_id": "CLAUSE-000272",
+        "task_index": 5,
+        "task_name": "Cấu hình monitoring"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000504",
+          "CLAUSE-000322",
+          "CLAUSE-000392"
+        ],
+        "candidate_scores": [
+          0.925,
+          0.9,
+          0.68625
+        ],
+        "case_id": "W4-LONG-C4-N2-OPS-STATE-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.025,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.925,
+        "selected_clause_id": "CLAUSE-000504",
+        "task_index": 0,
+        "task_name": "Viết tài liệu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000307",
+          "CLAUSE-000224",
+          "CLAUSE-000240"
+        ],
+        "candidate_scores": [
+          0.603125,
+          0.59375,
+          0.59375
+        ],
+        "case_id": "W4-LONG-C4-N2-OPS-STATE-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.009375,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.603125,
+        "selected_clause_id": "CLAUSE-000307",
+        "task_index": 1,
+        "task_name": "Fix lỗi login"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000200",
+          "CLAUSE-000534",
+          "CLAUSE-000426"
+        ],
+        "candidate_scores": [
+          0.654087,
+          0.558807,
+          0.538372
+        ],
+        "case_id": "W4-LONG-C4-N2-OPS-STATE-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.09528,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.654087,
+        "selected_clause_id": "CLAUSE-000200",
+        "task_index": 2,
+        "task_name": "Chuẩn bị data test"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000476",
+          "CLAUSE-000464",
+          "CLAUSE-000403"
+        ],
+        "candidate_scores": [
+          0.671053,
+          0.603125,
+          0.6
+        ],
+        "case_id": "W4-LONG-C4-N2-OPS-STATE-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.067928,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.671053,
+        "selected_clause_id": "CLAUSE-000476",
+        "task_index": 3,
+        "task_name": "Cấu hình monitoring"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000607",
+          "CLAUSE-000477",
+          "CLAUSE-000452"
+        ],
+        "candidate_scores": [
+          0.6625,
+          0.595455,
+          0.557143
+        ],
+        "case_id": "W4-LONG-C4-N2-OPS-STATE-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.067045,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.6625,
+        "selected_clause_id": "CLAUSE-000607",
+        "task_index": 4,
+        "task_name": "Lập release plan"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000500",
+          "CLAUSE-000021",
+          "CLAUSE-000052"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.9
+        ],
+        "case_id": "W4-LONG-C4-N3-IT-STATE-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000500",
+        "task_index": 0,
+        "task_name": "Kiểm tra môi trường test staging"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000437",
+          "CLAUSE-000501",
+          "CLAUSE-000250"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.9
+        ],
+        "case_id": "W4-LONG-C4-N3-IT-STATE-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000437",
+        "task_index": 1,
+        "task_name": "Hoàn thiện tài liệu triển khai"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000361",
+          "CLAUSE-000161",
+          "CLAUSE-000165"
+        ],
+        "candidate_scores": [
+          0.95,
+          0.9,
+          0.9
+        ],
+        "case_id": "W4-LONG-C4-N3-IT-STATE-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.05,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.95,
+        "selected_clause_id": "CLAUSE-000361",
+        "task_index": 2,
+        "task_name": "Điều tra lỗi đăng nhập"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000503",
+          "CLAUSE-000329",
+          "CLAUSE-000461"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.9
+        ],
+        "case_id": "W4-LONG-C4-N3-IT-STATE-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000503",
+        "task_index": 3,
+        "task_name": "Cấu hình monitoring"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000589",
+          "CLAUSE-000563",
+          "CLAUSE-000566"
+        ],
+        "candidate_scores": [
+          0.614865,
+          0.593662,
+          0.585915
+        ],
+        "case_id": "W4-LONG-C4-N3-OPS-STATE-008",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.021203,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.614865,
+        "selected_clause_id": "CLAUSE-000589",
+        "task_index": 0,
+        "task_name": "Hoàn thiện logic khóa đăng nhập"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000648",
+          "CLAUSE-000139",
+          "CLAUSE-000429"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.8,
+          0.752232
+        ],
+        "case_id": "W4-LONG-C4-N3-OPS-STATE-008",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000648",
+        "task_index": 1,
+        "task_name": "Viết tài liệu production"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000614",
+          "CLAUSE-000485",
+          "CLAUSE-000521"
+        ],
+        "candidate_scores": [
+          0.919643,
+          0.9,
+          0.899342
+        ],
+        "case_id": "W4-LONG-C4-N3-OPS-STATE-008",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.019643,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.919643,
+        "selected_clause_id": "CLAUSE-000614",
+        "task_index": 2,
+        "task_name": "Setup monitoring"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000500",
+          "CLAUSE-000503",
+          "CLAUSE-000528"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.825
+        ],
+        "case_id": "W4-LONG-C4-N3-OPS-STATE-008",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000500",
+        "task_index": 4,
+        "task_name": "Viết release note"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000030",
+          "CLAUSE-000599",
+          "CLAUSE-000019"
+        ],
+        "candidate_scores": [
+          0.819643,
+          0.797321,
+          0.728125
+        ],
+        "case_id": "W4-LONG-C5-N1-PROD-STATE-003",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.022322,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.819643,
+        "selected_clause_id": "CLAUSE-000030",
+        "task_index": 1,
+        "task_name": "Viết tài liệu triển khai test"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000599",
+          "CLAUSE-000536",
+          "CLAUSE-000459"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.8175
+        ],
+        "case_id": "W4-LONG-C5-N1-PROD-STATE-003",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000599",
+        "task_index": 2,
+        "task_name": "Kiểm tra config sandbox"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000557",
+          "CLAUSE-000454",
+          "CLAUSE-000416"
+        ],
+        "candidate_scores": [
+          0.65678,
+          0.625,
+          0.5875
+        ],
+        "case_id": "W4-LONG-C5-N1-PROD-STATE-003",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.03178,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.65678,
+        "selected_clause_id": "CLAUSE-000557",
+        "task_index": 3,
+        "task_name": "Cấu hình monitoring alert"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000550",
+          "CLAUSE-000029",
+          "CLAUSE-000103"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.9
+        ],
+        "case_id": "W4-LONG-C5-N1-SW-STATE-009",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000550",
+        "task_index": 0,
+        "task_name": "Hoàn thiện môi trường test"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000551",
+          "CLAUSE-000308",
+          "CLAUSE-000344"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.9
+        ],
+        "case_id": "W4-LONG-C5-N1-SW-STATE-009",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000551",
+        "task_index": 1,
+        "task_name": "Viết tài liệu triển khai chi tiết"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000467",
+          "CLAUSE-000552",
+          "CLAUSE-000415"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.8
+        ],
+        "case_id": "W4-LONG-C5-N1-SW-STATE-009",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000467",
+        "task_index": 2,
+        "task_name": "Cấu hình monitoring cho staging"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000546",
+          "CLAUSE-000448",
+          "CLAUSE-000188"
+        ],
+        "candidate_scores": [
+          0.655,
+          0.613636,
+          0.502941
+        ],
+        "case_id": "W4-LONG-C5-N1-SW-STATE-009",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.041364,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.655,
+        "selected_clause_id": "CLAUSE-000546",
+        "task_index": 3,
+        "task_name": "Hoàn thiện release plan chi tiết"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000545",
+          "CLAUSE-000087",
+          "CLAUSE-000018"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.652679
+        ],
+        "case_id": "W4-LONG-C5-N2-PROD-STATE-007",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000545",
+        "task_index": 0,
+        "task_name": "Triển khai môi trường test module payment"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000562",
+          "CLAUSE-000248",
+          "CLAUSE-000323"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.9
+        ],
+        "case_id": "W4-LONG-C5-N2-PROD-STATE-007",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000562",
+        "task_index": 2,
+        "task_name": "Xử lý lỗi đăng nhập staging"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000249",
+          "CLAUSE-000323",
+          "CLAUSE-000567"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.9
+        ],
+        "case_id": "W4-LONG-C5-N2-PROD-STATE-007",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000249",
+        "task_index": 3,
+        "task_name": "Seed dữ liệu test payment"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000342",
+          "CLAUSE-000511",
+          "CLAUSE-000273"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.9
+        ],
+        "case_id": "W4-LONG-C5-N2-SW-STATE-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000342",
+        "task_index": 0,
+        "task_name": "Cập nhật tài liệu triển khai"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000025",
+          "CLAUSE-000134",
+          "CLAUSE-000342"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "case_id": "W4-LONG-C5-N2-SW-STATE-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000025",
+        "task_index": 1,
+        "task_name": "Cập nhật kịch bản kiểm thử triển khai"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000406",
+          "CLAUSE-000481",
+          "CLAUSE-000512"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "case_id": "W4-LONG-C5-N2-SW-STATE-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000406",
+        "task_index": 2,
+        "task_name": "Tạo dữ liệu test"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000527",
+          "CLAUSE-000380",
+          "CLAUSE-000450"
+        ],
+        "candidate_scores": [
+          0.547059,
+          0.48913,
+          0.466901
+        ],
+        "case_id": "W4-LONG-C5-N2-SW-STATE-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.057929,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.547059,
+        "selected_clause_id": "CLAUSE-000527",
+        "task_index": 3,
+        "task_name": "Lập kế hoạch monitoring"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000234",
+          "CLAUSE-000604",
+          "CLAUSE-000079"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.9
+        ],
+        "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000234",
+        "task_index": 0,
+        "task_name": "Copy dữ liệu"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000095",
+          "CLAUSE-000443",
+          "CLAUSE-000604"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000095",
+        "task_index": 1,
+        "task_name": "Kiểm tra bảo mật"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000192",
+          "CLAUSE-000472",
+          "CLAUSE-000121"
+        ],
+        "candidate_scores": [
+          0.589063,
+          0.512069,
+          0.4975
+        ],
+        "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.076994,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.589063,
+        "selected_clause_id": "CLAUSE-000192",
+        "task_index": 2,
+        "task_name": "Cấu hình monitoring"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000604",
+          "CLAUSE-000096",
+          "CLAUSE-000301"
+        ],
+        "candidate_scores": [
+          0.814672,
+          0.8,
+          0.733929
+        ],
+        "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.014672,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.814672,
+        "selected_clause_id": "CLAUSE-000604",
+        "task_index": 3,
+        "task_name": "Viết tài liệu triển khai hệ thống"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000324",
+          "CLAUSE-000605",
+          "CLAUSE-000096"
+        ],
+        "candidate_scores": [
+          0.825776,
+          0.815714,
+          0.745536
+        ],
+        "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.010062,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.825776,
+        "selected_clause_id": "CLAUSE-000324",
+        "task_index": 4,
+        "task_name": "Viết tài liệu hướng dẫn triển khai"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000579",
+          "CLAUSE-000605",
+          "CLAUSE-000504"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.9
+        ],
+        "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000579",
+        "task_index": 5,
+        "task_name": "Kiểm tra tương thích"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000605",
+          "CLAUSE-000159",
+          "CLAUSE-000287"
+        ],
+        "candidate_scores": [
+          0.541875,
+          0.500263,
+          0.5
+        ],
+        "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.041612,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.541875,
+        "selected_clause_id": "CLAUSE-000605",
+        "task_index": 6,
+        "task_name": "Xử lý lỗi đăng nhập"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000021",
+          "CLAUSE-000089",
+          "CLAUSE-000350"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.9
+        ],
+        "case_id": "W4-LONG-C5-N3-SW-STATE-005",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000021",
+        "task_index": 0,
+        "task_name": "Hoàn thiện môi trường test staging"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000090",
+          "CLAUSE-000383",
+          "CLAUSE-000627"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.7
+        ],
+        "case_id": "W4-LONG-C5-N3-SW-STATE-005",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000090",
+        "task_index": 1,
+        "task_name": "Hoàn thiện tài liệu hướng dẫn triển khai staging"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000212",
+          "CLAUSE-000258",
+          "CLAUSE-000628"
+        ],
+        "candidate_scores": [
+          0.64875,
+          0.62775,
+          0.500909
+        ],
+        "case_id": "W4-LONG-C5-N3-SW-STATE-005",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.021,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.64875,
+        "selected_clause_id": "CLAUSE-000212",
+        "task_index": 2,
+        "task_name": "Xử lý lỗi lock tài khoản staging và cấu hình monitoring"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000600",
+          "CLAUSE-000629",
+          "CLAUSE-000595"
+        ],
+        "candidate_scores": [
+          0.8,
+          0.761875,
+          0.528409
+        ],
+        "case_id": "W4-LONG-C5-N3-SW-STATE-005",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.038125,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.8,
+        "selected_clause_id": "CLAUSE-000600",
+        "task_index": 3,
+        "task_name": "Viết rollback plan cho release"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000150",
+          "CLAUSE-001006",
+          "CLAUSE-000247"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.8
+        ],
+        "case_id": "W5-XL-C5-N2-IT-STRESS-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000150",
+        "task_index": 0,
+        "task_name": "Phân tích log thanh toán"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000694",
+          "CLAUSE-000255",
+          "CLAUSE-001015"
+        ],
+        "candidate_scores": [
+          0.705,
+          0.6975,
+          0.662963
+        ],
+        "case_id": "W5-XL-C5-N2-IT-STRESS-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0075,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.705,
+        "selected_clause_id": "CLAUSE-000694",
+        "task_index": 1,
+        "task_name": "Xuất log và metric thanh toán"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000947",
+          "CLAUSE-000657",
+          "CLAUSE-000950"
+        ],
+        "candidate_scores": [
+          0.95,
+          0.911607,
+          0.9
+        ],
+        "case_id": "W5-XL-C5-N2-IT-STRESS-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.038393,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.95,
+        "selected_clause_id": "CLAUSE-000947",
+        "task_index": 4,
+        "task_name": "Code review payment"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-001029",
+          "CLAUSE-000835",
+          "CLAUSE-000276"
+        ],
+        "candidate_scores": [
+          1.0,
+          0.9,
+          0.75
+        ],
+        "case_id": "W5-XL-C5-N2-IT-STRESS-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.1,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-001029",
+        "task_index": 5,
+        "task_name": "Review API FastShip"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000650",
+          "CLAUSE-001035",
+          "CLAUSE-000921"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          0.754087
+        ],
+        "case_id": "W5-XL-C5-N2-IT-STRESS-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000650",
+        "task_index": 6,
+        "task_name": "Tối ưu image mobile"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-001039",
+          "CLAUSE-000657",
+          "CLAUSE-000725"
+        ],
+        "candidate_scores": [
+          0.615385,
+          0.582812,
+          0.548837
+        ],
+        "case_id": "W5-XL-C5-N2-IT-STRESS-002",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.032573,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.615385,
+        "selected_clause_id": "CLAUSE-001039",
+        "task_index": 7,
+        "task_name": "Đánh giá capacity payment"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000674",
+          "CLAUSE-000680",
+          "CLAUSE-001052"
+        ],
+        "candidate_scores": [
+          0.8,
+          0.728125,
+          0.576982
+        ],
+        "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.071875,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.8,
+        "selected_clause_id": "CLAUSE-000674",
+        "task_index": 0,
+        "task_name": "Thiết lập CI/CD pipeline cho payment"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000102",
+          "CLAUSE-000770",
+          "CLAUSE-001037"
+        ],
+        "candidate_scores": [
+          0.591071,
+          0.55625,
+          0.54375
+        ],
+        "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.034821,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.591071,
+        "selected_clause_id": "CLAUSE-000102",
+        "task_index": 1,
+        "task_name": "Cấu hình alerting"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000777",
+          "CLAUSE-000447",
+          "CLAUSE-001079"
+        ],
+        "candidate_scores": [
+          0.579121,
+          0.540323,
+          0.503521
+        ],
+        "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.038798,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.579121,
+        "selected_clause_id": "CLAUSE-000777",
+        "task_index": 2,
+        "task_name": "Định nghĩa metric và threshold"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-001089",
+          "CLAUSE-001052",
+          "CLAUSE-000959"
+        ],
+        "candidate_scores": [
+          0.701471,
+          0.68625,
+          0.628169
+        ],
+        "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.015221,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.701471,
+        "selected_clause_id": "CLAUSE-001089",
+        "task_index": 3,
+        "task_name": "Cập nhật log spec error codes"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000574",
+          "CLAUSE-000754",
+          "CLAUSE-001052"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.736779
+        ],
+        "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000574",
+        "task_index": 4,
+        "task_name": "Viết E2E test scenario"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-001027",
+          "CLAUSE-000847",
+          "CLAUSE-001052"
+        ],
+        "candidate_scores": [
+          0.7,
+          0.579464,
+          0.574375
+        ],
+        "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.120536,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.7,
+        "selected_clause_id": "CLAUSE-001027",
+        "task_index": 5,
+        "task_name": "Thiết lập support process"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-001052",
+          "CLAUSE-000207",
+          "CLAUSE-000879"
+        ],
+        "candidate_scores": [
+          0.736779,
+          0.654087,
+          0.640179
+        ],
+        "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.082692,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.736779,
+        "selected_clause_id": "CLAUSE-001052",
+        "task_index": 6,
+        "task_name": "Viết API draft cho CRM"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000106",
+          "CLAUSE-000111",
+          "CLAUSE-000240"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.9,
+          0.715625
+        ],
+        "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000106",
+        "task_index": 7,
+        "task_name": "Viết migration script"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000637",
+          "CLAUSE-001053",
+          "CLAUSE-000662"
+        ],
+        "candidate_scores": [
+          0.81,
+          0.81,
+          0.804808
+        ],
+        "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.81,
+        "selected_clause_id": "CLAUSE-000637",
+        "task_index": 8,
+        "task_name": "Deploy payment"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000707",
+          "CLAUSE-001245",
+          "CLAUSE-000948"
+        ],
+        "candidate_scores": [
+          0.9,
+          0.84875,
+          0.531818
+        ],
+        "case_id": "W5-XL-C5-N3-PROD-STRESS-003",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.05125,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.9,
+        "selected_clause_id": "CLAUSE-000707",
+        "task_index": 0,
+        "task_name": "Hoàn thành UI prototype"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-001201",
+          "CLAUSE-001280",
+          "CLAUSE-001245"
+        ],
+        "candidate_scores": [
+          0.665842,
+          0.653594,
+          0.620976
+        ],
+        "case_id": "W5-XL-C5-N3-PROD-STRESS-003",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.012248,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.665842,
+        "selected_clause_id": "CLAUSE-001201",
+        "task_index": 1,
+        "task_name": "Hoàn thành integration test script"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-001289",
+          "CLAUSE-001327",
+          "CLAUSE-001239"
+        ],
+        "candidate_scores": [
+          0.59125,
+          0.526316,
+          0.51087
+        ],
+        "case_id": "W5-XL-C5-N3-PROD-STRESS-003",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.064934,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.59125,
+        "selected_clause_id": "CLAUSE-001289",
+        "task_index": 2,
+        "task_name": "Xử lý container memory"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000917",
+          "CLAUSE-000855",
+          "CLAUSE-000510"
+        ],
+        "candidate_scores": [
+          0.649219,
+          0.643103,
+          0.589796
+        ],
+        "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.006116,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.649219,
+        "selected_clause_id": "CLAUSE-000917",
+        "task_index": 0,
+        "task_name": "Hoàn thành spec integration"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-001114",
+          "CLAUSE-000974",
+          "CLAUSE-000648"
+        ],
+        "candidate_scores": [
+          0.91,
+          0.901136,
+          0.754087
+        ],
+        "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.008864,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.91,
+        "selected_clause_id": "CLAUSE-001114",
+        "task_index": 1,
+        "task_name": "Gửi multi-currency spec"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000945",
+          "CLAUSE-001029",
+          "CLAUSE-001080"
+        ],
+        "candidate_scores": [
+          0.6975,
+          0.664286,
+          0.642727
+        ],
+        "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.033214,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.6975,
+        "selected_clause_id": "CLAUSE-000945",
+        "task_index": 2,
+        "task_name": "Hoàn thành test case integration"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000734",
+          "CLAUSE-000975",
+          "CLAUSE-000833"
+        ],
+        "candidate_scores": [
+          0.57625,
+          0.57625,
+          0.575
+        ],
+        "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.57625,
+        "selected_clause_id": "CLAUSE-000734",
+        "task_index": 3,
+        "task_name": "Phân tích performance"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000557",
+          "CLAUSE-001120",
+          "CLAUSE-000462"
+        ],
+        "candidate_scores": [
+          0.95,
+          0.95,
+          0.9
+        ],
+        "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.95,
+        "selected_clause_id": "CLAUSE-000557",
+        "task_index": 4,
+        "task_name": "Khảo sát crypto"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-001003",
+          "CLAUSE-001064",
+          "CLAUSE-001131"
+        ],
+        "candidate_scores": [
+          0.774519,
+          0.771429,
+          0.732386
+        ],
+        "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.00309,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 0.774519,
+        "selected_clause_id": "CLAUSE-001003",
+        "task_index": 6,
+        "task_name": "Tạo mock server cho third-party API"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000817",
+          "CLAUSE-000907",
+          "CLAUSE-000975"
+        ],
+        "candidate_scores": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.0,
+        "method": "task_name_fallback",
+        "reason": "insufficient_unique_margin",
+        "score": 1.0,
+        "selected_clause_id": "CLAUSE-000817",
+        "task_index": 7,
+        "task_name": "Monitoring integration"
+      },
+      {
+        "accepted": false,
+        "candidate_clause_ids": [
+          "CLAUSE-000486",
+          "CLAUSE-001081",
+          "CLAUSE-000557"
+        ],
+        "candidate_scores": [
+          0.608462,
+          0.593387,
+          0.591154
+        ],
+        "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+        "label": null,
+        "manual_review_required": true,
+        "margin": 0.015075,
+        "method": "task_name_fallback",
+        "reason": "below_threshold",
+        "score": 0.608462,
+        "selected_clause_id": "CLAUSE-000486",
+        "task_index": 9,
+        "task_name": "Hoàn thành wireframe admin UI"
+      }
+    ],
+    "manual_review_task_count": 177,
+    "margin": 0.12,
+    "method_counts": {
+      "task_name_fallback": 277
+    },
+    "reason_counts": {
+      "below_threshold": 65,
+      "insufficient_unique_margin": 112,
+      "unique_supported_match": 100
+    },
+    "threshold": 0.72
+  },
+  "record_count": 6019,
+  "schema_version": "action-dataset-v1",
+  "seed": 20260817,
+  "selection_reason_counts": {
+    "adjacent_to_positive": 135,
+    "admin_followup": 99,
+    "brainstorm": 1921,
+    "current_pipeline_false_create": 171,
+    "future_discussion": 39,
+    "ground_truth_task_match": 92,
+    "hypothetical": 823,
+    "mutation_only": 327,
+    "past_completed": 261,
+    "progress_update": 98,
+    "question_punctuation": 2479,
+    "recap_or_task_reference": 717,
+    "rejected_assignment": 4,
+    "root_question": 399,
+    "suggestion_only": 1766,
+    "uncertain_ground_truth_mapping": 165
+  },
+  "source": "data/validation",
+  "source_corpus_sha256": "3998af3b2284d45e91310aefb04d0e49bab8e8dfaa1e42b9c95b8776de0aeaeb",
+  "training_readiness": {
+    "blocking_manual_review_task_count": 177,
+    "note": "Only records with eligible_for_training=true may be trained. Resolve manual mappings before production threshold tuning.",
+    "production_threshold_tuning_allowed": false,
+    "shadow_training_allowed": true
+  }
+}
