@@ -24,3 +24,4 @@ build/
 backend/local.settings.json
 clients/**/bin/
 clients/**/obj/
+artifacts/models/

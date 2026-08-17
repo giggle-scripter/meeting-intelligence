@@ -120,6 +120,13 @@ nhau luôn thành request riêng để tránh coreference xuyên đoạn; đổi
 dài có thể cần nhiều provider call hơn. `AI_TIMEOUT_SECONDS=3600` chỉ là timeout **giữa backend và
 OpenAI**; Power Automate phải dùng job API bên dưới để không chờ quá giới hạn HTTP.
 
+Hạ tầng embedding local nằm trong `backend/app/ml/` và load model lazily, tối đa
+một lần cho mỗi cấu hình trong một process. Có thể đặt `EMBEDDING_MODEL_NAME`,
+`EMBEDDING_DEVICE` và `EMBEDDING_FALLBACK_DIMENSION`; nếu backend semantic không
+khả dụng, registry đánh dấu rõ và dùng hashing embedding deterministic. Hạ tầng
+này chưa được nối vào quyết định task của V1 nên không thay đổi output hiện tại.
+Model artifact lớn phải đặt trong `artifacts/models/`, không commit vào Git.
+
 Khi debug fallback trên máy local, đặt `AI_FALLBACK_DEBUG=true`. Terminal sẽ log
 JSON event thô từ model và lý do event bị Python từ chối. Không bật cờ này ở môi
 trường có transcript thật vì log có thể chứa nội dung meeting.
