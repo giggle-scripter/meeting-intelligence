@@ -1,0 +1,2240 @@
+{
+  "pipeline_version": "v1",
+  "meeting_context_mode": "assist",
+  "meeting_notes": "sidecar_if_present",
+  "prompt_version": "v1-selective-fallback",
+  "model": "deterministic",
+  "mode": "local",
+  "endpoint": "",
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 12,
+    "unreviewed_ground_truth_count": 0,
+    "unreviewed_case_ids": [],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 12,
+    "passed_case_count": 1,
+    "failed_case_count": 11,
+    "case_pass_rate": 0.08333333333333333,
+    "task_identity_precision": 0.2751677852348993,
+    "task_identity_recall": 0.6833333333333333,
+    "task_precision": 0.2751677852348993,
+    "task_recall": 0.6833333333333333,
+    "field_accuracy": 0.7804878048780488,
+    "assignee_accuracy": 0.6585365853658537,
+    "due_date_accuracy": 0.6097560975609756,
+    "due_date_text_exact_accuracy": 0.4146341463414634,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "reviewed_metrics": {
+    "case_count": 12,
+    "passed_case_count": 1,
+    "failed_case_count": 11,
+    "case_pass_rate": 0.08333333333333333,
+    "task_identity_precision": 0.2751677852348993,
+    "task_identity_recall": 0.6833333333333333,
+    "task_precision": 0.2751677852348993,
+    "task_recall": 0.6833333333333333,
+    "field_accuracy": 0.7804878048780488,
+    "assignee_accuracy": 0.6585365853658537,
+    "due_date_accuracy": 0.6097560975609756,
+    "due_date_text_exact_accuracy": 0.4146341463414634,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "exploratory_metrics": {
+    "case_count": 0,
+    "passed_case_count": 0,
+    "failed_case_count": 0,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 1.0,
+    "task_identity_recall": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 317,
+    "rule_event_count": 241,
+    "ai_event_count": 0,
+    "ai_window_count": 209,
+    "ai_context_clause_count": 4490,
+    "unresolved_window_count": 209,
+    "weighted_ai_call_rate": 0.6593059936908517,
+    "ai_clause_coverage": 0.6355272469922152
+  },
+  "fallback_metrics": {
+    "rule_only": 0,
+    "ai_fallback_not_configured": 12,
+    "ai_fallback_resolved": 0,
+    "ai_fallback_unresolved": 0,
+    "ai_fallback_failed": 0
+  },
+  "job_execution": [],
+  "execution_errors": [],
+  "case_execution": [
+    {
+      "case_id": "W4-LONG-C4-N1-IT-STATE-006",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 21,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 21
+    },
+    {
+      "case_id": "W4-LONG-C4-N1-OPS-STATE-012",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 17,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 17
+    },
+    {
+      "case_id": "W4-LONG-C4-N2-IT-STATE-010",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 15,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 15
+    },
+    {
+      "case_id": "W4-LONG-C4-N2-OPS-STATE-004",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 16,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 16
+    },
+    {
+      "case_id": "W4-LONG-C4-N3-IT-STATE-002",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 14,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 14
+    },
+    {
+      "case_id": "W4-LONG-C4-N3-OPS-STATE-008",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 18,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 18
+    },
+    {
+      "case_id": "W4-LONG-C5-N1-PROD-STATE-003",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 13,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 13
+    },
+    {
+      "case_id": "W4-LONG-C5-N1-SW-STATE-009",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 17,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 17
+    },
+    {
+      "case_id": "W4-LONG-C5-N2-PROD-STATE-007",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 19,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 19
+    },
+    {
+      "case_id": "W4-LONG-C5-N2-SW-STATE-001",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 18,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 18
+    },
+    {
+      "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 18,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 18
+    },
+    {
+      "case_id": "W4-LONG-C5-N3-SW-STATE-005",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 23,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 23
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "W4-LONG-C4-N1-IT-STATE-006",
+      "passed": false,
+      "expected_task_count": 6,
+      "actual_task_count": 6,
+      "matched_task_count": 5,
+      "missing_tasks": [
+        {
+          "task_name": "Ẩn danh dữ liệu test",
+          "assignee": "Dung",
+          "start_date": "2026-02-20",
+          "due_date": "2026-02-28",
+          "due_date_text": "deadline 28/02",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Chuẩn bị dữ liệu test cho staging",
+          "assignee": "Dung",
+          "start_date": "2026-02-20",
+          "due_date": "2026-02-28",
+          "due_date_text": "deadline 28/02",
+          "evidence": "An: Task 6 – Dung, dữ liệu test – đang ẩn danh, deadline 28/02, reviewer Cường.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 30,
+      "correct_field_count": 30,
+      "field_counts": {
+        "assignee_accuracy": [
+          5,
+          5
+        ],
+        "due_date_accuracy": [
+          5,
+          5
+        ],
+        "due_date_text_exact_accuracy": [
+          5,
+          5
+        ],
+        "state_link_accuracy": [
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "case_id": "W4-LONG-C4-N1-OPS-STATE-012",
+      "passed": true,
+      "expected_task_count": 6,
+      "actual_task_count": 6,
+      "matched_task_count": 6,
+      "missing_tasks": [],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 36,
+      "correct_field_count": 36,
+      "field_counts": {
+        "assignee_accuracy": [
+          6,
+          6
+        ],
+        "due_date_accuracy": [
+          6,
+          6
+        ],
+        "due_date_text_exact_accuracy": [
+          6,
+          6
+        ],
+        "state_link_accuracy": [
+          6,
+          6
+        ]
+      }
+    },
+    {
+      "case_id": "W4-LONG-C4-N2-IT-STATE-010",
+      "passed": false,
+      "expected_task_count": 6,
+      "actual_task_count": 3,
+      "matched_task_count": 2,
+      "missing_tasks": [
+        {
+          "task_name": "Fix lỗi đăng nhập",
+          "assignee": "Khoa",
+          "start_date": "2026-02-24",
+          "due_date": "2026-02-27",
+          "due_date_text": "deadline thứ Sáu",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết test case đăng nhập",
+          "assignee": "Lan",
+          "start_date": "2026-02-24",
+          "due_date": "2026-02-26",
+          "due_date_text": "deadline thứ Năm",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai tổng thể",
+          "assignee": "Hà",
+          "start_date": "2026-02-24",
+          "due_date": "2026-03-06",
+          "due_date_text": "thứ Sáu tuần sau",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấu hình monitoring",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-24",
+          "due_date": "2026-03-06",
+          "due_date_text": "thứ Sáu tuần sau",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "C – dữ liệu mẫu",
+          "assignee": "Lan",
+          "start_date": "2026-02-24",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Vậy tổng kết lại: Task A – môi trường test – Tuấn – deadline thứ Sáu.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Chuẩn bị môi trường test",
+          "field": "due_date",
+          "expected": "2026-02-27",
+          "actual": ""
+        },
+        {
+          "task_name": "Chuẩn bị môi trường test",
+          "field": "due_date_text",
+          "expected": "deadline thứ Sáu",
+          "actual": ""
+        },
+        {
+          "task_name": "Viết tài liệu môi trường test",
+          "field": "due_date",
+          "expected": "2026-02-26",
+          "actual": ""
+        },
+        {
+          "task_name": "Viết tài liệu môi trường test",
+          "field": "due_date_text",
+          "expected": "deadline mới cho tài liệu môi trường test là thứ Năm",
+          "actual": ""
+        }
+      ],
+      "checked_field_count": 12,
+      "correct_field_count": 8,
+      "field_counts": {
+        "assignee_accuracy": [
+          2,
+          2
+        ],
+        "due_date_accuracy": [
+          2,
+          0
+        ],
+        "due_date_text_exact_accuracy": [
+          2,
+          0
+        ],
+        "state_link_accuracy": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "case_id": "W4-LONG-C4-N2-OPS-STATE-004",
+      "passed": false,
+      "expected_task_count": 5,
+      "actual_task_count": 5,
+      "matched_task_count": 5,
+      "missing_tasks": [],
+      "unexpected_tasks": [],
+      "field_errors": [
+        {
+          "task_name": "Chuẩn bị data test",
+          "field": "due_date_text",
+          "expected": "Deadline 20/02",
+          "actual": "20/02"
+        }
+      ],
+      "checked_field_count": 30,
+      "correct_field_count": 29,
+      "field_counts": {
+        "assignee_accuracy": [
+          5,
+          5
+        ],
+        "due_date_accuracy": [
+          5,
+          5
+        ],
+        "due_date_text_exact_accuracy": [
+          5,
+          4
+        ],
+        "state_link_accuracy": [
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "case_id": "W4-LONG-C4-N3-IT-STATE-002",
+      "passed": false,
+      "expected_task_count": 4,
+      "actual_task_count": 13,
+      "matched_task_count": 4,
+      "missing_tasks": [],
+      "unexpected_tasks": [
+        {
+          "task_name": "Cập nhật khi có quyền truy cập server",
+          "assignee": "Hùng",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Em sẽ cập nhật khi có quyền truy cập server.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Sửa ngay trong draft",
+          "assignee": "Lan",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ sửa ngay trong draft.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi yêu cầu, tôi sẽ hỗ trợ",
+          "assignee": "Minh",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Em sẽ gửi yêu cầu, tôi sẽ hỗ trợ.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Bổ sung sau meeting",
+          "assignee": "Minh",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Tôi sẽ bổ sung sau meeting.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cập nhật danh sách task",
+          "assignee": "Hùng",
+          "start_date": "2026-02-16",
+          "due_date": "2026-02-26",
+          "due_date_text": "deadline 26/02",
+          "evidence": "Hùng: Em sẽ cập nhật danh sách task.\nHùng: Em sẽ hoàn thành báo cáo trước deadline 26/02.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi email hướng dẫn",
+          "assignee": "Minh",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Tôi sẽ gửi email hướng dẫn.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Update priority",
+          "assignee": "Lan",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Tôi sẽ update priority.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm test môi trường",
+          "assignee": "Hùng",
+          "start_date": "2026-02-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Vậy em sẽ làm test môi trường trước, sau đó viết tài liệu, và xen kẽ điều tra lỗi.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Theo dõi sát",
+          "assignee": "Lan",
+          "start_date": "2026-02-16",
+          "due_date": "2026-02-26",
+          "due_date_text": "deadline 26/02",
+          "evidence": "Lan: Vậy em sẽ theo dõi sát.\nLan: Em sẽ recap: Task 1 – Kiểm tra môi trường test staging, owner Hùng, deadline 26/02, reviewer Lan (theo quyết định cũ).",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Điều tra lỗi đăng nhập",
+          "field": "assignee",
+          "expected": "Hùng",
+          "actual": "Lan"
+        },
+        {
+          "task_name": "Điều tra lỗi đăng nhập",
+          "field": "due_date",
+          "expected": "2026-02-28",
+          "actual": ""
+        },
+        {
+          "task_name": "Điều tra lỗi đăng nhập",
+          "field": "due_date_text",
+          "expected": "28/02",
+          "actual": ""
+        },
+        {
+          "task_name": "Cấu hình monitoring",
+          "field": "assignee",
+          "expected": "Tuấn",
+          "actual": ""
+        },
+        {
+          "task_name": "Cấu hình monitoring",
+          "field": "due_date",
+          "expected": "2026-02-28",
+          "actual": "2026-03-05"
+        },
+        {
+          "task_name": "Cấu hình monitoring",
+          "field": "due_date_text",
+          "expected": "28/02",
+          "actual": "05/03"
+        }
+      ],
+      "checked_field_count": 24,
+      "correct_field_count": 18,
+      "field_counts": {
+        "assignee_accuracy": [
+          4,
+          2
+        ],
+        "due_date_accuracy": [
+          4,
+          2
+        ],
+        "due_date_text_exact_accuracy": [
+          4,
+          2
+        ],
+        "state_link_accuracy": [
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "case_id": "W4-LONG-C4-N3-OPS-STATE-008",
+      "passed": false,
+      "expected_task_count": 5,
+      "actual_task_count": 16,
+      "matched_task_count": 2,
+      "missing_tasks": [
+        {
+          "task_name": "Hoàn thiện logic khóa đăng nhập",
+          "assignee": "Châu",
+          "start_date": "2026-02-22",
+          "due_date": "2026-02-22",
+          "due_date_text": "19h hôm nay",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Lập release plan",
+          "assignee": "Bình; Dũng",
+          "start_date": "2026-02-22",
+          "due_date": "2026-02-26",
+          "due_date_text": "end of day thứ 5 tuần sau",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết release note",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Fix lỗi đăng nhập",
+          "assignee": "Châu",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "An: Task 1: Châu fix lỗi đăng nhập, deadline 17h hôm nay.\nAn: Ừ, em có thể tổng kết nhanh: Task A: Châu fix lỗi đăng nhập và thêm logic khóa – deadline 19h.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Deploy UAT",
+          "assignee": "Bình",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "An: Task 2: Bình deploy UAT, không deadline.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấp VPN cho em trong sáng nay",
+          "assignee": "Bình",
+          "start_date": "2026-02-22",
+          "due_date": "2026-02-22",
+          "due_date_text": "trong sáng nay",
+          "evidence": "Bình: Em sẽ cấp VPN cho em trong sáng nay.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết xong, em sẽ bắt đầu làm ngay",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Dũng: Em chưa viết xong, em sẽ bắt đầu làm ngay.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Thêm logic khóa",
+          "assignee": "Châu",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "An: Ừ, em có thể tổng kết nhanh: Task A: Châu fix lỗi đăng nhập và thêm logic khóa – deadline 19h.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo dữ liệu test",
+          "assignee": "Dũng",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "An: Task B: Dũng tạo dữ liệu test – deadline 14h.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Test suite cũ, em sẽ update thêm dựa trên dữ liệu mới",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Dũng: Em có test suite cũ, em sẽ update thêm dựa trên dữ liệu mới.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi draft production cho Dũng thôi",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "An: Em chỉ cần gửi draft production cho Dũng thôi.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Deploy phần token lên UAT",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Bình: Em sẽ reset DB xong rồi deploy phần token lên UAT trước 15h.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi script",
+          "assignee": "Dũng",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "sau khi reset",
+          "evidence": "Dũng: Em sẽ gửi script trước 14h, Bình import sau khi reset.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Test thử token",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Châu: Em cần test thử token trước khi deploy lên UAT.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi code token fix cho Bình",
+          "assignee": "Châu",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Châu: Em sẽ gửi code token fix cho Bình trước 14h.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấp list changes",
+          "assignee": "Em",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "sau khi fix xong",
+          "evidence": "Châu: Em sẽ cung cấp list changes sau khi fix xong.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi script monitoring cho Dũng",
+          "assignee": "Bình",
+          "start_date": "2026-02-22",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Bình: Em sẽ gửi script monitoring cho Dũng.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Viết tài liệu production",
+          "field": "assignee",
+          "expected": "Dũng",
+          "actual": "Em"
+        },
+        {
+          "task_name": "Viết tài liệu production",
+          "field": "due_date",
+          "expected": "2026-03-01",
+          "actual": ""
+        },
+        {
+          "task_name": "Viết tài liệu production",
+          "field": "due_date_text",
+          "expected": "deadline 01/03",
+          "actual": ""
+        },
+        {
+          "task_name": "Setup monitoring",
+          "field": "assignee",
+          "expected": "Dũng",
+          "actual": "Em"
+        },
+        {
+          "task_name": "Setup monitoring",
+          "field": "due_date_text",
+          "expected": "deadline 28/02",
+          "actual": "28/02"
+        }
+      ],
+      "checked_field_count": 12,
+      "correct_field_count": 7,
+      "field_counts": {
+        "assignee_accuracy": [
+          2,
+          0
+        ],
+        "due_date_accuracy": [
+          2,
+          1
+        ],
+        "due_date_text_exact_accuracy": [
+          2,
+          0
+        ],
+        "state_link_accuracy": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "case_id": "W4-LONG-C5-N1-PROD-STATE-003",
+      "passed": false,
+      "expected_task_count": 4,
+      "actual_task_count": 16,
+      "matched_task_count": 3,
+      "missing_tasks": [
+        {
+          "task_name": "Kiểm tra config sandbox",
+          "assignee": "Hùng; Minh",
+          "start_date": "2026-02-17",
+          "due_date": "2026-02-27",
+          "due_date_text": "27/2",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Thêm mục \"Rollback procedure\"",
+          "assignee": "Minh",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Vâng, em sẽ thêm mục \"Rollback procedure\".",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo nhé, em có quyền truy cập DB sandbox",
+          "assignee": "Lan",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Lan, em tự tạo nhé, em có quyền truy cập DB sandbox.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết tổng quát, Lan viết cụ thể sandbox",
+          "assignee": "Minh",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Em sẽ viết tổng quát, Lan viết cụ thể sandbox.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm ngay sau meeting",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Ok, em sẽ làm ngay sau meeting.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi query mẫu",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Em sẽ gửi query mẫu.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi em stack trace",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Hùng gửi em stack trace nhé.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo một vài user giả trong DB",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "sau khi restore",
+          "evidence": "Hùng: Em sẽ tạo một vài user giả trong DB sau khi restore.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chạy thử deploy script sau restore",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Em sẽ chạy thử deploy script sau restore.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Add một mục \"Maintenance tasks\" nhỏ",
+          "assignee": "Lan",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ add một mục \"Maintenance tasks\" nhỏ.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo channel riêng",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Em sẽ tạo channel riêng.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Setup health check cho từng cái",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Em sẽ setup health check cho từng cái.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review tài liệu test",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "2026-02-26",
+          "due_date_text": "vào 26/2",
+          "evidence": "Hùng: Ok, em sẽ review tài liệu test vào 26/2 để Lan kịp sửa.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm, không cần task mới",
+          "assignee": "Hùng",
+          "start_date": "2026-02-17",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Em sẽ làm, không cần task mới.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Viết tài liệu triển khai hệ thống",
+          "field": "assignee",
+          "expected": "Hùng",
+          "actual": "Minh"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai hệ thống",
+          "field": "due_date",
+          "expected": "2026-02-25",
+          "actual": "2026-02-17"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai hệ thống",
+          "field": "due_date_text",
+          "expected": "25/2",
+          "actual": "trong chiều nay"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai test",
+          "field": "assignee",
+          "expected": "Lan",
+          "actual": "Hùng"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai test",
+          "field": "due_date",
+          "expected": "2026-02-27",
+          "actual": "2026-02-17"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai test",
+          "field": "due_date_text",
+          "expected": "27/2",
+          "actual": "trong chiều nay"
+        },
+        {
+          "task_name": "Cấu hình monitoring alert",
+          "field": "assignee",
+          "expected": "Hùng",
+          "actual": ""
+        },
+        {
+          "task_name": "Cấu hình monitoring alert",
+          "field": "due_date_text",
+          "expected": "28/2",
+          "actual": "deadline 28/2"
+        }
+      ],
+      "checked_field_count": 18,
+      "correct_field_count": 10,
+      "field_counts": {
+        "assignee_accuracy": [
+          3,
+          0
+        ],
+        "due_date_accuracy": [
+          3,
+          1
+        ],
+        "due_date_text_exact_accuracy": [
+          3,
+          0
+        ],
+        "state_link_accuracy": [
+          3,
+          3
+        ]
+      }
+    },
+    {
+      "case_id": "W4-LONG-C5-N1-SW-STATE-009",
+      "passed": false,
+      "expected_task_count": 4,
+      "actual_task_count": 19,
+      "matched_task_count": 2,
+      "missing_tasks": [
+        {
+          "task_name": "Cấu hình monitoring cho staging",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-23",
+          "due_date": "2026-03-03",
+          "due_date_text": "deadline 03/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thiện release plan chi tiết",
+          "assignee": "Hà",
+          "start_date": "2026-02-23",
+          "due_date": "2026-03-21",
+          "due_date_text": "deadline cho release plan chi tiết là 21/03",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Tạo bộ dữ liệu test cho module đăng nhập",
+          "assignee": "",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Meeting Note (Thư ký): Vậy ta giao task \"Tạo bộ dữ liệu test cho module đăng nhập\" cho Tuấn, Hà review\nMinh: Vậy ta giao task \"Tạo bộ dữ liệu test cho module đăng nhập\" cho Tuấn, Hà review.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi list test case cho Tuấn",
+          "assignee": "Hà",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "sau khi monitoring xong",
+          "evidence": "Hà: Em sẽ gửi list test case cho Tuấn trước 10h sáng mai.\nHà: Em sẽ viết phần test case và error handling trong tuần này, sau khi monitoring xong.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Bổ sung mục FAQ và các lỗi thường gặp dựa trên feedback",
+          "assignee": "Lan",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ bổ sung mục FAQ và các lỗi thường gặp dựa trên feedback từ team.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Sửa luôn trong bản draft này",
+          "assignee": "Lan",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Lan, em sửa luôn trong bản draft này nhé.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Update và gửi lại bản mới",
+          "assignee": "Lan",
+          "start_date": "2026-02-23",
+          "due_date": "2026-02-24",
+          "due_date_text": "cuối ngày mai",
+          "evidence": "Lan: Em sẽ update và gửi lại bản mới vào cuối ngày mai.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi file SQL mẫu kèm data mẫu",
+          "assignee": "Hà",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hà: Em sẽ gửi file SQL mẫu kèm data mẫu.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Check và thêm log cho các endpoint còn thiếu",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Vâng, em sẽ check và thêm log cho các endpoint còn thiếu.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo data dạng CSV, bao gồm các case: user active, locked, expired, wrong password",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Em sẽ tạo data dạng CSV, bao gồm các case: user active, locked, expired, wrong password.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo data với các trạng thái khác nhau, bao gồm cả số lần fail",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Em sẽ tạo data với các trạng thái khác nhau, bao gồm cả số lần fail.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review phần liên quan",
+          "assignee": "Hà",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hà: Em sẽ review phần liên quan đến test case.\nHà: Em sẽ viết phần liên quan đến test case và error handling.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Xác nhận, em sẽ hỗ trợ review",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em xác nhận, em sẽ hỗ trợ review.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi yêu cầu chính thức",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Em sẽ gửi yêu cầu chính thức.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấu hình log thành JSON để dễ parse",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Em sẽ cấu hình log thành JSON để dễ parse.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết script alert đơn giản, trigger khi 5xx > 5% trong 5 phút",
+          "assignee": "Hà",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hà: Vậy em sẽ viết script alert đơn giản, trigger khi 5xx > 5% trong 5 phút.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết này unresolved, chúng ta sẽ quyết định",
+          "assignee": "Hà",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "sau khi monitoring xong",
+          "evidence": "Hà: Vậy em sẽ viết script alert đơn giản, trigger khi 5xx > 5% trong 5 phút.\nHà: Em sẽ viết phần test case và error handling trong tuần này, sau khi monitoring xong.\nHà: Em sẽ cập nhật vào draft của Lan và gửi mọi người review.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review dựa trên bản draft cuối cùng",
+          "assignee": "Lan",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Vậy em sẽ review dựa trên bản draft cuối cùng từ Tuấn và Hà.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Test monitoring ngay",
+          "assignee": "Hà",
+          "start_date": "2026-02-23",
+          "due_date": "",
+          "due_date_text": "sau khi Tuấn cấu hình xong",
+          "evidence": "Hà: Em sẽ test monitoring ngay sau khi Tuấn cấu hình xong.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Hoàn thiện môi trường test",
+          "field": "assignee",
+          "expected": "Hà; Tuấn",
+          "actual": ""
+        },
+        {
+          "task_name": "Hoàn thiện môi trường test",
+          "field": "due_date_text",
+          "expected": "deadline 05/03",
+          "actual": "05/03"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai chi tiết",
+          "field": "assignee",
+          "expected": "Tuấn; Hà",
+          "actual": "Tuấn"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai chi tiết",
+          "field": "due_date_text",
+          "expected": "deadline 14/03",
+          "actual": "14/03"
+        }
+      ],
+      "checked_field_count": 12,
+      "correct_field_count": 8,
+      "field_counts": {
+        "assignee_accuracy": [
+          2,
+          0
+        ],
+        "due_date_accuracy": [
+          2,
+          2
+        ],
+        "due_date_text_exact_accuracy": [
+          2,
+          0
+        ],
+        "state_link_accuracy": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "case_id": "W4-LONG-C5-N2-PROD-STATE-007",
+      "passed": false,
+      "expected_task_count": 5,
+      "actual_task_count": 19,
+      "matched_task_count": 4,
+      "missing_tasks": [
+        {
+          "task_name": "Thiết lập monitoring dashboard cho payment",
+          "assignee": "Minh",
+          "start_date": "2026-02-21",
+          "due_date": "2026-02-27",
+          "due_date_text": "deadline 27/02",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Làm owner",
+          "assignee": "Hà",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Linh: Hà làm owner, không có deadline nhưng cần hoàn thành trước khi bắt đầu viết doc payment.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Thêm Cái đó",
+          "assignee": "Hà",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hà: Cái đó em sẽ thêm vào template.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi invite cho tất cả, dài 30 phút",
+          "assignee": "Linh",
+          "start_date": "2026-02-21",
+          "due_date": "2026-02-22",
+          "due_date_text": "chiều mai",
+          "evidence": "Linh: Tôi sẽ gửi invite cho tất cả, dài 30 phút, vào 4h chiều mai.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review cuối ngày",
+          "assignee": "Linh",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Linh: Tôi sẽ review cuối ngày.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Kiểm tra config access token expiry",
+          "assignee": "Hà",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hà: Ok, em sẽ kiểm tra config access token expiry.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết script",
+          "assignee": "Minh",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Linh: Tôi sẽ tổng kết nhanh các task trong phần này: - Task D: Xử lý lỗi đăng nhập staging, owner Hà, support Minh, deadline tham khảo 27/02. - Task E: Seed dữ liệu test payment, Minh viết script, Duy chạy, Hà review, deadline script trước 10h sáng mai, chạy trước 4h chiều mai.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết một bản nháp cấu trúc cơ bản, rồi chuyển cho Duy hoàn chỉnh",
+          "assignee": "Hà",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hà: Em sẽ viết một bản nháp cấu trúc cơ bản, rồi chuyển cho Duy hoàn chỉnh.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Liên hệ Hà sau meeting để lấy mẫu",
+          "assignee": "Duy",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Duy: Vâng, em sẽ liên hệ Hà sau meeting để lấy mẫu.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi em thay đổi, em sẽ apply",
+          "assignee": "Hà",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Hà gửi em thay đổi, em sẽ apply.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi config mới qua chat cho Minh",
+          "assignee": "Hà",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hà: Em sẽ gửi config mới qua chat cho Minh.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm task D",
+          "assignee": "Hà",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "sau khi task D và task E hoàn thành",
+          "evidence": "Hà: Vâng, em sẽ làm task D trước.\nHà: Em sẽ verify sau khi task D và task E hoàn thành.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Điều chỉnh thành 23/02",
+          "assignee": "Minh",
+          "start_date": "2026-02-21",
+          "due_date": "2026-02-23",
+          "due_date_text": "23/02",
+          "evidence": "Linh: Task A: \"Triển khai môi trường test module payment\", owner Minh, deadline đã điều chỉnh thành 23/02.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chuẩn bị bản nháp template",
+          "assignee": "Duy",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Duy: Em sẽ chuẩn bị bản nháp template.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chuẩn bị log và config đã sửa",
+          "assignee": "Hà",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hà: Em sẽ chuẩn bị log và config đã sửa.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chuẩn bị tiến độ môi trường",
+          "assignee": "Minh",
+          "start_date": "2026-02-21",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Em sẽ chuẩn bị tiến độ môi trường.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Triển khai môi trường test module payment",
+          "field": "due_date",
+          "expected": "2026-02-23",
+          "actual": "2026-02-22"
+        },
+        {
+          "task_name": "Triển khai môi trường test module payment",
+          "field": "due_date_text",
+          "expected": "deadline đã điều chỉnh thành 23/02",
+          "actual": "22/02"
+        },
+        {
+          "task_name": "Tạo template tài liệu triển khai",
+          "field": "assignee",
+          "expected": "Duy",
+          "actual": "Minh"
+        },
+        {
+          "task_name": "Tạo template tài liệu triển khai",
+          "field": "due_date",
+          "expected": "2026-02-26",
+          "actual": ""
+        },
+        {
+          "task_name": "Tạo template tài liệu triển khai",
+          "field": "due_date_text",
+          "expected": "deadline 26/02",
+          "actual": ""
+        },
+        {
+          "task_name": "Xử lý lỗi đăng nhập staging",
+          "field": "due_date",
+          "expected": "2026-02-25",
+          "actual": "2026-02-27"
+        },
+        {
+          "task_name": "Xử lý lỗi đăng nhập staging",
+          "field": "due_date_text",
+          "expected": "deadline đã đặt lại thành 25/02",
+          "actual": "27/02"
+        },
+        {
+          "task_name": "Seed dữ liệu test payment",
+          "field": "due_date",
+          "expected": "",
+          "actual": "2026-02-22"
+        },
+        {
+          "task_name": "Seed dữ liệu test payment",
+          "field": "due_date_text",
+          "expected": "sau khi môi trường sẵn sàng",
+          "actual": "22/02"
+        }
+      ],
+      "checked_field_count": 24,
+      "correct_field_count": 15,
+      "field_counts": {
+        "assignee_accuracy": [
+          4,
+          3
+        ],
+        "due_date_accuracy": [
+          4,
+          0
+        ],
+        "due_date_text_exact_accuracy": [
+          4,
+          0
+        ],
+        "state_link_accuracy": [
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "case_id": "W4-LONG-C5-N2-SW-STATE-001",
+      "passed": false,
+      "expected_task_count": 4,
+      "actual_task_count": 15,
+      "matched_task_count": 2,
+      "missing_tasks": [
+        {
+          "task_name": "Cập nhật tài liệu triển khai",
+          "assignee": "Minh",
+          "start_date": "2026-02-15",
+          "due_date": "2026-02-26",
+          "due_date_text": "deadline 26/02",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Lập kế hoạch monitoring",
+          "assignee": "Hùng",
+          "start_date": "2026-02-15",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Gửi email và cc em",
+          "assignee": "Lan",
+          "start_date": "2026-02-15",
+          "due_date": "2026-02-15",
+          "due_date_text": "trong chiều nay",
+          "evidence": "Lan: OK, chị sẽ gửi email và cc em.\nLan: Chị sẽ gửi email trong chiều nay, cc toàn bộ team.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo script để refresh",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-15",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Em sẽ tạo script để refresh.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi spec",
+          "assignee": "Minh",
+          "start_date": "2026-02-15",
+          "due_date": "2026-02-16",
+          "due_date_text": "sáng mai",
+          "evidence": "Lan: Anh Minh sẽ gửi spec trước 9h sáng mai.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết luôn phần này trong spec gửi chị Hoa",
+          "assignee": "Minh",
+          "start_date": "2026-02-15",
+          "due_date": "2026-02-16",
+          "due_date_text": "sáng mai",
+          "evidence": "Minh: Em sẽ viết luôn phần này trong spec gửi chị Hoa sáng mai.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi code snippet cho em, em xem buổi chiều",
+          "assignee": "Minh",
+          "start_date": "2026-02-15",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Anh Minh gửi code snippet cho em, em xem buổi chiều.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết tài liệu và gửi cho cả team, ai rảnh thì review",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-15",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Vậy em sẽ viết tài liệu và gửi cho cả team, ai rảnh thì review.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết kịch bản dựa trên spec và template cũ",
+          "assignee": "Hoa",
+          "start_date": "2026-02-15",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hoa: Em sẽ viết kịch bản dựa trên spec và template cũ.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thành script và dữ liệu",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-15",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Vâng, em sẽ hoàn thành script và dữ liệu trước ngày đó.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi tài liệu monitoring draft cho anh Hùng",
+          "assignee": "Minh",
+          "start_date": "2026-02-15",
+          "due_date": "2026-02-18",
+          "due_date_text": "trước 19/02",
+          "evidence": "Minh: Em sẽ gửi tài liệu monitoring draft cho anh Hùng.\nMinh: Em sẽ gửi tài liệu monitoring draft cho anh Hùng trong tuần này, trước 19/02.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Monitoring (chưa chính thức). - Reviewer: chưa assign",
+          "assignee": "Hùng",
+          "start_date": "2026-02-15",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Chị muốn recap: - Anh Minh: tài liệu triển khai deadline 26/02. - Chị Hoa: kịch bản test deadline 20/02, phụ thuộc spec. - Anh Tuấn: dữ liệu test deadline 19/02. - Anh Hùng: monitoring (chưa chính thức). - Reviewer: chưa assign.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chuẩn bị script dữ liệu test trên local",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-15",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Em sẽ chuẩn bị script dữ liệu test trên local trước, để khi có staging chỉ việc import.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết script linh hoạt",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-15",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Vâng, em sẽ viết script linh hoạt.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi dữ liệu test cho chị Hoa ngay khi có",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-15",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Em sẽ gửi dữ liệu test cho chị Hoa ngay khi có.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Cập nhật kịch bản kiểm thử triển khai",
+          "field": "assignee",
+          "expected": "Hoa",
+          "actual": ""
+        },
+        {
+          "task_name": "Cập nhật kịch bản kiểm thử triển khai",
+          "field": "due_date_text",
+          "expected": "deadline 20/02",
+          "actual": "20/02"
+        },
+        {
+          "task_name": "Tạo dữ liệu test",
+          "field": "due_date",
+          "expected": "2026-02-19",
+          "actual": "2026-02-18"
+        },
+        {
+          "task_name": "Tạo dữ liệu test",
+          "field": "due_date_text",
+          "expected": "deadline 19/02",
+          "actual": "trước 19/02"
+        }
+      ],
+      "checked_field_count": 12,
+      "correct_field_count": 8,
+      "field_counts": {
+        "assignee_accuracy": [
+          2,
+          1
+        ],
+        "due_date_accuracy": [
+          2,
+          1
+        ],
+        "due_date_text_exact_accuracy": [
+          2,
+          0
+        ],
+        "state_link_accuracy": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+      "passed": false,
+      "expected_task_count": 7,
+      "actual_task_count": 12,
+      "matched_task_count": 2,
+      "missing_tasks": [
+        {
+          "task_name": "Copy dữ liệu",
+          "assignee": "DevLead",
+          "start_date": "2026-02-25",
+          "due_date": "2026-02-26",
+          "due_date_text": "thứ Năm",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấu hình monitoring",
+          "assignee": "DevLead; Nam",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-02",
+          "due_date_text": "thứ Hai",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết tài liệu hướng dẫn triển khai",
+          "assignee": "Doc",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-04",
+          "due_date_text": "thứ Tư",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Kiểm tra tương thích",
+          "assignee": "Arch",
+          "start_date": "2026-02-25",
+          "due_date": "2026-02-27",
+          "due_date_text": "thứ Sáu",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Xử lý lỗi đăng nhập",
+          "assignee": "Tuấn; QA",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Cập nhật database staging",
+          "assignee": "DevLead",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-04",
+          "due_date_text": "deadline thứ Tư",
+          "evidence": "PM: Bây giờ tôi tổng kết lại các task chính trong part này: Thứ nhất, DevLead phụ trách cập nhật database staging, deadline thứ Tư.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Liên hệ với anh Quản trị hệ thống, xin access",
+          "assignee": "PM",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "PM: Tôi sẽ liên hệ với anh Quản trị hệ thống, xin access.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi danh sách trong email",
+          "assignee": "Doc",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Doc: Tôi sẽ gửi danh sách trong email hôm nay.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi spec qua email",
+          "assignee": "DevLead",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "sau khi xong việc với staging",
+          "evidence": "DevLead: Tôi sẽ gửi spec qua email chiều nay.\nDevLead: Tôi sẽ gửi spec hôm nay.\nDevLead: Tôi sẽ bắt đầu sau khi xong việc với staging.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi bản nháp và các ghi chú cho anh DevLead ngay sau họp",
+          "assignee": "Doc",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Doc: Tôi sẽ gửi bản nháp và các ghi chú cho anh DevLead ngay sau họp.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi các yêu cầu bảo mật cần kiểm tra",
+          "assignee": "Arch",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Arch: Tôi sẽ gửi các yêu cầu bảo mật cần kiểm tra trước release.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Thông báo cho Tuấn",
+          "assignee": "DevLead",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "DevLead: Tôi sẽ thông báo cho Tuấn.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Thêm các chỉ số bảo mật: số lần đăng nhập thất bại, truy cập bất thường",
+          "assignee": "Arch",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Arch: Tôi sẽ thêm các chỉ số bảo mật: số lần đăng nhập thất bại, truy cập bất thường.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Lo phần thông báo",
+          "assignee": "PM",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "PM: Tôi sẽ lo phần thông báo.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi phần mô tả các bước triển khai",
+          "assignee": "DevLead",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "sau khi hoàn thành tài liệu chính",
+          "evidence": "DevLead: Tôi sẽ gửi phần mô tả các bước triển khai vào thứ Hai, sau khi hoàn thành tài liệu chính.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Kiểm tra bảo mật",
+          "field": "due_date_text",
+          "expected": "thứ Sáu",
+          "actual": "deadline thứ Sáu"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai hệ thống",
+          "field": "assignee",
+          "expected": "DevLead",
+          "actual": "Doc"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai hệ thống",
+          "field": "due_date",
+          "expected": "2026-03-02",
+          "actual": "2026-02-27"
+        },
+        {
+          "task_name": "Viết tài liệu triển khai hệ thống",
+          "field": "due_date_text",
+          "expected": "thứ Hai",
+          "actual": "deadline thứ Sáu"
+        }
+      ],
+      "checked_field_count": 12,
+      "correct_field_count": 8,
+      "field_counts": {
+        "assignee_accuracy": [
+          2,
+          1
+        ],
+        "due_date_accuracy": [
+          2,
+          1
+        ],
+        "due_date_text_exact_accuracy": [
+          2,
+          0
+        ],
+        "state_link_accuracy": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "case_id": "W4-LONG-C5-N3-SW-STATE-005",
+      "passed": false,
+      "expected_task_count": 4,
+      "actual_task_count": 19,
+      "matched_task_count": 4,
+      "missing_tasks": [],
+      "unexpected_tasks": [
+        {
+          "task_name": "Check và báo lại sau",
+          "assignee": "Lan",
+          "start_date": "2026-02-19",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ check và báo lại sau.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Theo dõi qua mail",
+          "assignee": "Lan",
+          "start_date": "2026-02-19",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ theo dõi qua mail.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi báo giá và kế hoạch nâng cấp",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-19",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Anh Tuấn sẽ gửi báo giá và kế hoạch nâng cấp.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Soạn tài liệu",
+          "assignee": "Hà",
+          "start_date": "2026-02-19",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Chị Hà sẽ bắt đầu soạn tài liệu.\nHà: Tài liệu em sẽ viết song song.\nHà: Vậy em sẽ chuẩn bị tài liệu kịp trước release.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi bản cuối cho mọi người review",
+          "assignee": "Hà",
+          "start_date": "2026-02-19",
+          "due_date": "2026-03-04",
+          "due_date_text": "Trước 5/3",
+          "evidence": "Hà: Trước 5/3 em sẽ gửi bản cuối cho mọi người review.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết kế hoạch",
+          "assignee": "Lan",
+          "start_date": "2026-02-19",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ viết kế hoạch.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Setup monitoring",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-19",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Anh Tuấn, em gộp việc setup monitoring vào task C.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi lịch",
+          "assignee": "Lan",
+          "start_date": "2026-02-19",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Vâng, em sẽ gửi lịch.\nLan: Em sẽ gửi lịch.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cập nhật và hoàn thiện",
+          "assignee": "Hà",
+          "start_date": "2026-02-19",
+          "due_date": "2026-03-04",
+          "due_date_text": "trước 5/3",
+          "evidence": "Hà: Em sẽ cập nhật và hoàn thiện trước 5/3.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thành script",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-19",
+          "due_date": "2026-02-20",
+          "due_date_text": "cuối ngày mai",
+          "evidence": "Minh: Anh Tuấn, hôm nay là ngày em hẹn hoàn thành script.\nTuấn: Anh sẽ gửi thông số chi tiết vào cuối ngày mai.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Deploy lên sandbox",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-19",
+          "due_date": "2026-02-19",
+          "due_date_text": "Chiều nay",
+          "evidence": "Tuấn: Chiều nay em sẽ deploy lên sandbox",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thiện phần dashboard Grafana trong",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-19",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tuấn: Dạ, em sẽ hoàn thiện phần dashboard Grafana trong ngày mai, kịp deadline.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm và gửi anh Minh",
+          "assignee": "Lan",
+          "start_date": "2026-02-19",
+          "due_date": "2026-02-22",
+          "due_date_text": "trong vòng 3 ngày",
+          "evidence": "Lan: Em sẽ làm và gửi anh Minh trong vòng 3 ngày, tức trước ngày 22/2.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi bản nháp cho anh Tuấn review",
+          "assignee": "Lan",
+          "start_date": "2026-02-19",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ gửi bản nháp cho anh Tuấn review trước khi nộp.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cập nhật trong tài liệu triển khai",
+          "assignee": "Hà",
+          "start_date": "2026-02-19",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Em nhớ cập nhật trong tài liệu triển khai.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Hoàn thiện môi trường test staging",
+          "field": "assignee",
+          "expected": "Lan",
+          "actual": "Tuấn"
+        },
+        {
+          "task_name": "Hoàn thiện môi trường test staging",
+          "field": "due_date",
+          "expected": "2026-02-26",
+          "actual": "2026-02-25"
+        },
+        {
+          "task_name": "Hoàn thiện môi trường test staging",
+          "field": "due_date_text",
+          "expected": "deadline 26/2",
+          "actual": "deadline 25/2"
+        },
+        {
+          "task_name": "Hoàn thiện tài liệu hướng dẫn triển khai staging",
+          "field": "due_date",
+          "expected": "2026-03-05",
+          "actual": ""
+        },
+        {
+          "task_name": "Hoàn thiện tài liệu hướng dẫn triển khai staging",
+          "field": "due_date_text",
+          "expected": "deadline 5/3",
+          "actual": ""
+        },
+        {
+          "task_name": "Xử lý lỗi lock tài khoản staging và cấu hình monitoring",
+          "field": "due_date",
+          "expected": "2026-02-22",
+          "actual": ""
+        },
+        {
+          "task_name": "Xử lý lỗi lock tài khoản staging và cấu hình monitoring",
+          "field": "due_date_text",
+          "expected": "monitoring deadline 22/2",
+          "actual": "sau khi xong script chính"
+        },
+        {
+          "task_name": "Viết rollback plan cho release",
+          "field": "assignee",
+          "expected": "Lan",
+          "actual": ""
+        },
+        {
+          "task_name": "Viết rollback plan cho release",
+          "field": "due_date_text",
+          "expected": "deadline 22/2",
+          "actual": "22/2"
+        }
+      ],
+      "checked_field_count": 24,
+      "correct_field_count": 15,
+      "field_counts": {
+        "assignee_accuracy": [
+          4,
+          2
+        ],
+        "due_date_accuracy": [
+          4,
+          1
+        ],
+        "due_date_text_exact_accuracy": [
+          4,
+          0
+        ],
+        "state_link_accuracy": [
+          4,
+          4
+        ]
+      }
+    }
+  ],
+  "case_diagnostics": {
+    "W4-LONG-C4-N1-IT-STATE-006": {
+      "caption_count": 304,
+      "deduplicated_caption_count": 304,
+      "turn_count": 290,
+      "sentence_count": 571,
+      "clause_count": 584,
+      "candidate_window_count": 33,
+      "rule_event_count": 6,
+      "ai_event_count": 0,
+      "ai_window_count": 21,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 329,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 21,
+      "ai_call_rate": 0.6363636363636364,
+      "ai_clause_coverage": 0.5633561643835616
+    },
+    "W4-LONG-C4-N1-OPS-STATE-012": {
+      "caption_count": 281,
+      "deduplicated_caption_count": 281,
+      "turn_count": 277,
+      "sentence_count": 521,
+      "clause_count": 532,
+      "candidate_window_count": 30,
+      "rule_event_count": 6,
+      "ai_event_count": 0,
+      "ai_window_count": 17,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 351,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 17,
+      "ai_call_rate": 0.5666666666666667,
+      "ai_clause_coverage": 0.6597744360902256
+    },
+    "W4-LONG-C4-N2-IT-STATE-010": {
+      "caption_count": 278,
+      "deduplicated_caption_count": 278,
+      "turn_count": 274,
+      "sentence_count": 485,
+      "clause_count": 498,
+      "candidate_window_count": 27,
+      "rule_event_count": 3,
+      "ai_event_count": 0,
+      "ai_window_count": 15,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 378,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 15,
+      "ai_call_rate": 0.5555555555555556,
+      "ai_clause_coverage": 0.7590361445783133
+    },
+    "W4-LONG-C4-N2-OPS-STATE-004": {
+      "caption_count": 351,
+      "deduplicated_caption_count": 351,
+      "turn_count": 348,
+      "sentence_count": 594,
+      "clause_count": 616,
+      "candidate_window_count": 25,
+      "rule_event_count": 5,
+      "ai_event_count": 0,
+      "ai_window_count": 16,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 387,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 16,
+      "ai_call_rate": 0.64,
+      "ai_clause_coverage": 0.6282467532467533
+    },
+    "W4-LONG-C4-N3-IT-STATE-002": {
+      "caption_count": 270,
+      "deduplicated_caption_count": 270,
+      "turn_count": 266,
+      "sentence_count": 504,
+      "clause_count": 518,
+      "candidate_window_count": 23,
+      "rule_event_count": 21,
+      "ai_event_count": 0,
+      "ai_window_count": 14,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 310,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 14,
+      "ai_call_rate": 0.6086956521739131,
+      "ai_clause_coverage": 0.5984555984555985
+    },
+    "W4-LONG-C4-N3-OPS-STATE-008": {
+      "caption_count": 356,
+      "deduplicated_caption_count": 356,
+      "turn_count": 353,
+      "sentence_count": 638,
+      "clause_count": 655,
+      "candidate_window_count": 28,
+      "rule_event_count": 20,
+      "ai_event_count": 0,
+      "ai_window_count": 18,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 339,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 18,
+      "ai_call_rate": 0.6428571428571429,
+      "ai_clause_coverage": 0.517557251908397
+    },
+    "W4-LONG-C5-N1-PROD-STATE-003": {
+      "caption_count": 297,
+      "deduplicated_caption_count": 297,
+      "turn_count": 294,
+      "sentence_count": 595,
+      "clause_count": 609,
+      "candidate_window_count": 22,
+      "rule_event_count": 27,
+      "ai_event_count": 0,
+      "ai_window_count": 13,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 360,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 13,
+      "ai_call_rate": 0.5909090909090909,
+      "ai_clause_coverage": 0.5911330049261084
+    },
+    "W4-LONG-C5-N1-SW-STATE-009": {
+      "caption_count": 259,
+      "deduplicated_caption_count": 259,
+      "turn_count": 255,
+      "sentence_count": 561,
+      "clause_count": 585,
+      "candidate_window_count": 19,
+      "rule_event_count": 31,
+      "ai_event_count": 0,
+      "ai_window_count": 17,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 440,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 17,
+      "ai_call_rate": 0.8947368421052632,
+      "ai_clause_coverage": 0.7521367521367521
+    },
+    "W4-LONG-C5-N2-PROD-STATE-007": {
+      "caption_count": 305,
+      "deduplicated_caption_count": 305,
+      "turn_count": 302,
+      "sentence_count": 621,
+      "clause_count": 635,
+      "candidate_window_count": 29,
+      "rule_event_count": 28,
+      "ai_event_count": 0,
+      "ai_window_count": 19,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 291,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 19,
+      "ai_call_rate": 0.6551724137931034,
+      "ai_clause_coverage": 0.4582677165354331
+    },
+    "W4-LONG-C5-N2-SW-STATE-001": {
+      "caption_count": 275,
+      "deduplicated_caption_count": 275,
+      "turn_count": 271,
+      "sentence_count": 535,
+      "clause_count": 554,
+      "candidate_window_count": 23,
+      "rule_event_count": 33,
+      "ai_event_count": 0,
+      "ai_window_count": 18,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 433,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 18,
+      "ai_call_rate": 0.782608695652174,
+      "ai_clause_coverage": 0.7815884476534296
+    },
+    "W4-LONG-C5-N3-PROD-STATE-011": {
+      "caption_count": 314,
+      "deduplicated_caption_count": 314,
+      "turn_count": 310,
+      "sentence_count": 607,
+      "clause_count": 622,
+      "candidate_window_count": 26,
+      "rule_event_count": 25,
+      "ai_event_count": 0,
+      "ai_window_count": 18,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 412,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 18,
+      "ai_call_rate": 0.6923076923076923,
+      "ai_clause_coverage": 0.662379421221865
+    },
+    "W4-LONG-C5-N3-SW-STATE-005": {
+      "caption_count": 268,
+      "deduplicated_caption_count": 268,
+      "turn_count": 263,
+      "sentence_count": 639,
+      "clause_count": 657,
+      "candidate_window_count": 32,
+      "rule_event_count": 36,
+      "ai_event_count": 0,
+      "ai_window_count": 23,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 460,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 23,
+      "ai_call_rate": 0.71875,
+      "ai_clause_coverage": 0.700152207001522
+    }
+  }
+}

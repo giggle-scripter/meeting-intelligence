@@ -1,0 +1,29 @@
+MEETING_ID: W2-SHORT-C3-N0-PROD-QACC-003
+CASE_LABELS: question_then_acceptance,task_confirmed_later
+MEETING_DATE: 2026-01-28
+PRIMARY_FEATURE: question then acceptance
+TITLE: Theo dõi lỗi và tài liệu
+[00:00:02] Quang: Chào mọi người, hôm nay mình tập trung vào quy trình theo dõi lỗi nhé. Tôi thấy tuần rồi có ba ticket quan trọng bị bỏ lỡ cập nhật trạng thái, gây chậm phản hồi cho khách hàng.
+[00:00:12] Minh: Đúng rồi anh, đặc biệt là ticket P1 trên hệ thống thanh toán. Em thấy nó nằm im từ thứ Ba, không ai chuyển sang In Progress, đến thứ Năm mới có người nhận.
+[00:00:22] Linh: Em nghĩ một phần do hướng dẫn hiện tại đã cũ. Tài liệu mô tả workflow trên Jira của mình từ hồi version 8.x, giờ mình lên 9.x rồi, giao diện khác nhiều nên người mới bị lúng túng.
+[00:00:33] Hùng: Tôi đồng ý với Linh. Hôm qua tôi phải chỉ tay cho một bạn tester cách reopen bug mà mất 15 phút. Nếu có tài liệu mới thì đỡ hẳn.
+[00:00:42] Quang: Vậy vấn đề rõ rồi. Linh này, em có thể đảm nhận viết lại bộ tài liệu hướng dẫn theo dõi lỗi trên Jira mới không? Mình cần có screenshot từng bước, từ lúc tạo ticket, assign, cập nhật trạng thái, đến lúc đóng. Em thấy thế nào?
+[00:00:57] Linh: Dạ, để em xem lại lịch làm việc đã. Hiện em đang ôm hai bug P2 cho bản release giữa tháng sau, với lại còn hỗ trợ team front-end nữa. Anh cho em ít phút suy nghĩ nhé.
+[00:01:08] Minh: Nhân tiện, em có ý tưởng: hay mình thử dùng Linear thay Jira? Bên team B đang thử nghiệm, dashboard trực quan, dễ dùng hơn, có khi không cần tài liệu phức tạp.
+[00:01:17] Quang: Linear à? Nhưng hợp đồng Jira của mình còn đến cuối năm, chi phí migrate cao, lại phải train lại toàn bộ. Anh nghĩ chưa đáng để đổi, mình cứ tối ưu trên nền tảng hiện tại đã.
+[00:01:28] Hùng: Em cũng thấy Jira vẫn đáp ứng đủ. Cái thiếu là quy trình nội bộ rõ ràng, chứ không phải công cụ.
+[00:01:34] Minh: Ok, em chỉ đề xuất vậy thôi. Vậy tập trung vào tài liệu đi ạ.
+[00:01:40] Linh: Em đã xem nhanh lịch tuần sau. Nếu sắp xếp được, em có thể dành hai buổi chiều thứ Hai và thứ Tư để làm. Em đồng ý nhận việc viết tài liệu hướng dẫn mới ạ. Dự kiến cần khoảng ba ngày làm việc để hoàn thành bản nháp có screenshot.
+[00:01:55] Quang: Tốt, cảm ơn em. Vậy mình chốt task: Linh viết tài liệu hướng dẫn quy trình theo dõi lỗi, bám sát giao diện Jira hiện tại. Deadline cuối ngày thứ Sáu tuần sau nhé, tức là có năm ngày làm việc. Anh sẽ review vào đầu tuần kế tiếp.
+[00:02:08] Linh: Dạ rõ ràng, em sẽ cập nhật task vào hệ thống chung.
+[00:02:12] Quang: Còn một điểm nữa. Hùng, em thấy chất lượng bug report gần đây có cải thiện không?
+[00:02:19] Hùng: Cũng có nhưng chưa đồng đều anh ạ. Nhiều bạn vẫn mô tả lỗi chung chung, thiếu bước tái hiện, gây khó cho dev. Em định đề xuất mình chuẩn hóa một template báo lỗi bắt buộc, nhưng chưa có thời gian soạn.
+[00:02:32] Quang: Vậy em có thể đứng ra soạn template bug report chuẩn cho team mình không? Mình cần một mẫu dễ điền, gồm tiêu đề, môi trường, các bước, kết quả thực tế, kết quả mong đợi, và mức độ nghiêm trọng.
+[00:02:46] Hùng: Để em kiểm tra xem có tài liệu tham khảo nào từ bên QA không đã. Em muốn nó phù hợp với chuẩn chung của công ty. Em sẽ trả lời anh trong vài phút.
+[00:02:57] Quang: Ừ, em cứ suy nghĩ. Mình không vội, nhưng tốt nhất có trước đợt release tháng sau.
+[00:03:04] Hùng: Em vừa lướt qua thư viện quy trình, có template của công ty rồi, nhưng hơi dài. Em sẽ rút gọn và điều chỉnh cho team mình. Em đồng ý làm ạ. Chắc mất khoảng một ngày làm việc để xong bản draft.
+[00:03:17] Quang: Hay quá. Vậy task thứ hai: Hùng soạn template bug report chuẩn cho team, dựa trên mẫu công ty nhưng tinh gọn hơn. Deadline anh muốn là trước thứ Tư tuần sau, để kịp phổ biến trước release. Em làm được chứ?
+[00:03:30] Hùng: Em làm được anh ạ. Em sẽ đặt deadline thứ Ba cuối ngày để có buffer.
+[00:03:36] Quang: Ok, vậy chốt nhé. Cảm ơn cả hai. Minh, em không có task mới nhưng nhớ rà soát toàn bộ ticket đang open, báo cáo lại cho anh trước giờ tan làm hôm nay nhé.
+[00:03:46] Minh: Ok anh, em sẽ gửi mail tổng hợp trước 5 giờ chiều.
+[00:03:51] Quang: Tốt. Vậy meeting kết thúc ở đây. Cảm ơn mọi người.

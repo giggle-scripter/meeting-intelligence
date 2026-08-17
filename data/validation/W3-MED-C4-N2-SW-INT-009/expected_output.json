@@ -1,0 +1,45 @@
+{
+  "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+  "tasks": [
+    {
+      "task_name": "Fix môi trường test",
+      "assignee": "Huy",
+      "start_date": "2026-02-13",
+      "due_date": "2026-02-13",
+      "due_date_text": "18h hôm nay",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Fix lỗi đăng nhập",
+      "assignee": "Huy",
+      "start_date": "2026-02-13",
+      "due_date": "2026-02-20",
+      "due_date_text": "deadline 20/2",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết hướng dẫn triển khai",
+      "assignee": "Huy",
+      "start_date": "2026-02-13",
+      "due_date": "2026-02-17",
+      "due_date_text": "deadline 17/2",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Cập nhật tài liệu troubleshooting",
+      "assignee": "Hà",
+      "start_date": "2026-02-13",
+      "due_date": "2026-02-17",
+      "due_date_text": "deadline 17/2",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết test case interaction",
+      "assignee": "Huy",
+      "start_date": "2026-02-13",
+      "due_date": "2026-02-17",
+      "due_date_text": "deadline 17/2",
+      "status": "Proposed"
+    }
+  ]
+}

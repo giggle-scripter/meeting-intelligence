@@ -1,0 +1,31 @@
+=== MEETING METADATA ===
+meeting_id: W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001
+meeting_title: Chuẩn bị môi trường kiểm thử
+meeting_date: 2026-01-16
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:00] Quân: Chào mọi người, hôm nay mình họp nhanh về việc chuẩn bị môi trường kiểm thử cho dự án Alpha. Minh, cậu cập nhật tình hình giúp mình nhé.
+[09:00:15] Minh: Chào anh Quân. Tình hình hơi xấu anh ạ. Môi trường staging mình định dùng đang bị lỗi ổ cứng, bên IT thông báo có thể mất cả tuần để thay thế.
+[09:00:28] Quân: Ôi, tệ thế. Vậy là không kịp cho đợt test tuần tới rồi.
+[09:00:35] Lan: Anh Minh ơi, thế môi trường ảo backup của mình thì sao? Em nhớ hồi trước có dựng một cái để thử nghiệm.
+[09:00:45] Minh: Đúng rồi Lan, nhưng cái đó cấu hình thấp, chưa cài đầy đủ service. Với lại nó dùng data cũ từ đợt test trước, không phù hợp cho Alpha.
+[09:01:00] Quân: Vậy chúng ta cần một giải pháp tạm. Minh, cậu có cách nào không?
+[09:01:08] Minh: Em đang tính sẽ tận dụng máy ảo đó, nâng cấp RAM và ổ cứng ảo, rồi cài lại toàn bộ stack. Vấn đề là thời gian, em phải làm gấp.
+[09:01:22] Lan: Nhưng dữ liệu test thì sao ạ? Bọn em cần bộ data mới từ phòng kinh doanh, chứ data mẫu cũ không có các case khuyến mãi đặc biệt.
+[09:01:34] Quân: Chị sẽ liên hệ với bên BA để xin trích xuất dữ liệu. Chắc đầu tuần sau mới có. Nhưng môi trường phải sẵn sàng trước đã.
+[09:01:46] Minh: Vậy để em lo phần môi trường. Em cam kết sẽ cài đặt xong máy ảo vào thứ Ba tuần sau. Mình sẽ có đầy đủ service, chỉ chờ data.
+[09:01:58] Quân: Tốt quá. Thứ Ba là 20 rồi, vậy cũng kịp. Cậu chú ý cài đúng phiên bản database nhé, bản mới nhất bên dev vừa update hôm qua.
+[09:02:10] Minh: Em nắm được. Để em kiểm tra lại script triển khai. À mà anh Quân, còn phần network policy cho môi trường ảo, mình có cần mở thêm port cho tool giám sát không?
+[09:02:24] Quân: Có, mình cần mở port 9090 cho Prometheus. Cậu cập nhật luôn nhé.
+[09:02:32] Minh: Ok anh, em sẽ thêm vào checklist.
+[09:02:38] Lan: Em hỏi ngu chút, môi trường ảo này có giới hạn bao nhiêu user concurrent không anh Minh? Vì đợt tới tụi em test load có thể lên đến 200 user ảo.
+[09:02:52] Minh: Cấu hình sau nâng cấp sẽ chịu được khoảng 300 user, không lo đâu. Nhưng em cần phải tinh chỉnh connection pool, sẽ làm trong lúc cài.
+[09:03:06] Lan: Dạ vậy em yên tâm rồi. Mà sao bên IT lại để ổ cứng staging lỗi lâu thế nhỉ, mình có thể đẩy nhanh được không anh Quân?
+[09:03:18] Quân: Họ đang quá tải công việc, mình thúc cũng không nhanh hơn được. Thôi thì phương án của Minh là khả thi nhất lúc này. Mình sẽ theo dõi tiến độ.
+[09:03:31] Minh: Em sẽ update vào group chat mỗi ngày. Đến thứ Ba mà có vấn đề gì em sẽ báo ngay.
+[09:03:40] Quân: Rõ ràng nhé. Cảm ơn Minh. Lan có cần gì thêm không?
+[09:03:47] Lan: Dạ em hết ạ. Em sẽ tranh thủ viết test case trong lúc chờ môi trường.
+[09:03:55] Quân: Ok. Vậy mình kết thúc ở đây. Minh lo phần môi trường, deadline thứ Ba tuần sau. Các bạn nắm được hết chưa?
+[09:04:05] Minh: Nắm rõ.
+[09:04:08] Lan: Rõ ạ.
+[09:04:12] Quân: Cảm ơn mọi người, giải tán nhé.

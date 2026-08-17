@@ -1,0 +1,28 @@
+{
+  "case": {
+    "wave": 2,
+    "case_index": 30,
+    "meeting_id": "W2-SHORT-C2-N0-IT-DREP-030",
+    "meeting_date": "2026-02-24",
+    "title": "Trao đổi kế hoạch tích hợp",
+    "labels": "deadline_replacement,deadline_in_separate_sentence",
+    "objective": "{\"name\": \"deadline replacement\", \"code\": \"DREP\", \"labels\": \"deadline_replacement,deadline_in_separate_sentence\", \"requirements\": \"Task có deadline ban đầu, sau một số lượt được sửa sang deadline mới; deadline cũ không còn hiệu lực.\"}"
+  },
+  "model": "deepseek-v4-pro",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 590,
+    "turn_count": 38
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 626.8100944000034
+    }
+  ]
+}

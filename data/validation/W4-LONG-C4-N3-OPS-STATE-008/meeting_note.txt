@@ -1,0 +1,14 @@
+ghi vội
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / moi truong / trien khai / release / production / monitoring
+- Còn task deploy UAT của em, chưa có dl cụ thể vì phụ thuộc môi trường
+* Task 4: Em viết tài liệu production, dl 27/02
+- Task 5: Em và Dũng thống nhất template, dl 24/02
+1) Task 6: Bình review tài liệu, sau 24/02
+- Task C: Bình reset DB trưa nay
+* Vậy tôi sẽ cắt bớt task cho em
+- dời sang 16h, nhưng bây giờ đã 10h, em cần gửi sớm để em kịp review
+1) Task mới: release note (Em, không dl), release plan (Bình và Dũng, end of day thứ 5 tuần sau), monitoring setup (Dũng, dl 28/02)
+- Task 2: Dũng script dữ liệu (đã giao 14h, Bình đã import)
+* Task 5: Tài liệu production, Dũng owner, dl 01/03
+- Task 6: Monitoring setup, Dũng, dl 28/02

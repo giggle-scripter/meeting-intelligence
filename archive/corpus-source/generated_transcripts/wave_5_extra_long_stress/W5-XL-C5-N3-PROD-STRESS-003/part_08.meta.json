@@ -1,0 +1,29 @@
+{
+  "case": {
+    "wave": 5,
+    "case_index": 3,
+    "meeting_id": "W5-XL-C5-N3-PROD-STRESS-003",
+    "meeting_date": "2026-02-27",
+    "title": "Họp tổng hợp phát triển và vận hành sản phẩm",
+    "labels": "extra_long_meeting,multi_step_handoff,multiple_deadline_corrections,long_distance_dependency,ambiguous_reference,heavy_recoverable_noise",
+    "objective": "P01: Mở meeting, thiết lập 5–8 speaker, hai topic đầu, vài task nền và deadline ban đầu; tạo antecedent cho chain sau. | P02: Thêm topic integration và dữ liệu; tạo task gần giống nhau, negative block và unresolved owner. | P03: Topic vận hành; handoff bước một cho một task cũ, deadline correction đầu tiên cho task khác. | P04: Topic sản phẩm; tạo thêm task và event-dependent deadline; không giải quyết unresolved từ P02. | P05: Quay lại topic P01; handoff bước hai và scope update; một repeated mention không tạo duplicate. | P06: Topic release; hủy một task, mở task thay thế khác rõ ràng, correction deadline thứ hai. | P07: Topic monitoring và support; long-distance reference, deadline gần task khác nhưng đúng antecedent. | P08: Quay lại integration; xử lý một ambiguity nhưng giữ một unresolved reference khác; recap cục bộ không tạo task mới. | P09: Chốt các state transition cuối, correction chain cuối và cancellation muộn; chưa closing. | P10: Recap trạng thái cuối toàn meeting, giữ unresolved thật sự, không tạo duplicate, closing ngắn."
+  },
+  "part_index": 8,
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 902,
+    "turn_count": 57
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 20.782408800005214
+    }
+  ]
+}

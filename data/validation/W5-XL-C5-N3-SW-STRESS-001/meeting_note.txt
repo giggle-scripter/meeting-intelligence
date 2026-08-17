@@ -1,0 +1,16 @@
+note nhanh
+chủ đề: Họp tổng hợp phát triển và vận hành sản phẩm
+kw: test case / release / staging / monitoring / uat / spec / huy
+- Để dễ theo dõi, Linh hãy ghi lại các task chính trong notes: - Thứ Năm (27/2): Bàn giao test data từ An cho Trang. - Thứ Năm (27/2): Fix CI/CD (Hòa
+* Part 4 gần hết, tôi muốn tổng kết nhanh: - Task khảo sát crypto: Dũng, dl 2h chiều thứ Hai
+- Tổng kết nhanh: - Scope update: thêm multi-currency settlement. - Handoff: Dũng lead multi-currency task. - Deadlin
+1) Tôi propose hủy task đó + thay bằng task mới: "Phân tích hiệu năng cho multi-currency settlement"
+- Em đồng ý hủy task chargeback data cũ, thay bằng "Chuẩn bị test data cho multi-currency"
+* Tôi muốn recap: hủy task design doc performance và chargeback data, thay bằng hai task mới
+- correction thứ hai cho task performance analysis (thay vì thứ Sáu, thành thứ Hai tuần sau)
+1) Tổng kết: - Hủy task: design doc performance, chargeback data
+- Tổng kết: - Task monitoring integration assign Hòa, dl mềm trước release
+* Tiếp theo, tôi muốn recap cục bộ các task liên quan đến integration: - Spec integration: Thắng (lead), Dũng (input), dl thứ Năm
+- Em có một đề xuất: hủy task support CI/CD cho Thắng, vì CI/CD đã ổn
+1) Bây giờ tôi muốn recap trạng thái các task chính trước part cuối: - Spec integration: Thắng lead, dl thứ Năm
+- Hiện tại team đang hoàn thiện nốt module thanh toán quốc tế, dự kiến test xong trong tuần này ? chưa chốt

@@ -1,0 +1,270 @@
+[09:00:00] Minh (PM): Chào mọi người, cảm ơn đã tham gia meeting hôm nay. Chúng ta bắt đầu phiên thảo luận về triển khai hệ thống mới. Trước tiên, tôi muốn điểm qua agenda: hôm nay chúng ta sẽ tập trung vào môi trường test và tài liệu triển khai. Sau đó phân bổ công việc cụ thể.
+[09:00:15] Lan (Tech Lead): Dạ, em sẵn sàng. Bên em đã chuẩn bị một số tài liệu sơ bộ, nhưng còn vài phần chưa review kỹ.
+[09:00:28] Minh: Tốt. Đầu tiên, về môi trường test – Hùng, anh có cập nhật gì về tình hình server staging không?
+[09:00:42] Hùng (Dev): Hiện tại server staging đã được cấp, nhưng chưa config đầy đủ. Em đang chờ team infra bàn giao quyền truy cập. Dự kiến trong tuần này xong.
+[09:00:55] Minh: Okay. Vậy chúng ta cần một task để kiểm tra và xác nhận môi trường test hoạt động ổn định. Tôi muốn giao cho Hùng, nhưng chưa có deadline cụ thể vì còn phụ thuộc vào infra. Chúng ta sẽ ghi nhận task này để theo dõi.
+[09:01:10] Lan: Em nghĩ cũng nên có thời hạn tham khảo, ví dụ cuối tháng 2.
+[09:01:18] Minh: Ừm, nhưng tôi sợ sẽ gây áp lực không cần thiết nếu infra chưa kịp. Thôi, tạm thời để mở, khi nào có tiến triển thì cập nhật sau.
+[09:01:31] Hùng: Vậy em sẽ note lại: "Kiểm tra môi trường test staging" – không deadline.
+[09:01:40] Minh: Chính xác. Tiếp theo, về tài liệu triển khai. Lan, bên em có bản hướng dẫn deploy chưa?
+[09:01:52] Lan: Dạ, có một bản draft, nhưng còn thiếu phần cấu hình database và script rollback. Em đã phân công bạn Tuấn viết thêm.
+[09:02:05] Minh: Tốt. Tôi muốn một task riêng để "Hoàn thiện tài liệu triển khai", giao cho Lan. Deadline đặt vào ngày 25/02 nhé, vì sau đó chúng ta cần review toàn bộ.
+[09:02:18] Lan: Em nhận. Nhưng mà tài liệu này có nhiều phần liên quan đến môi trường test, nếu test chưa ổn thì khó viết chính xác.
+[09:02:30] Minh: Đúng, vậy nên task "Kiểm tra môi trường test" nên xong trước. Nhưng tôi không muốn đặt chồng chéo deadline. Cứ để hai task song song, đến khi có thông tin thì cập nhật.
+[09:02:44] Hùng: Em có một thắc mắc: task tài liệu triển khai có cần bao gồm cả hướng dẫn cho team Ops không? Hay chỉ dành cho dev?
+[09:02:57] Lan: Theo ý Minh, ban đầu nên viết cho dev, sau đó mở rộng cho Ops. Nhưng để em hỏi lại sau.
+[09:03:08] Minh: Ừ, nội dung chính là cho dev, nhưng cần ghi chú những điểm Ops cần biết. Lan, chị ghi nhận ý này vào task nhé.
+[09:03:20] Lan: Vâng.
+[09:03:25] Minh: Còn ai có vấn đề gì về môi trường test hay muốn phản ánh khó khăn không?
+[09:03:35] Hùng: Thực ra em thấy môi trường staging hiện tại không có monitoring, nếu test mà có lỗi thì khó phát hiện sớm.
+[09:03:47] Minh: Đó là một vấn đề. Nhưng phạm vi meeting hôm nay chỉ gói gọn trong môi trường test và tài liệu. Monitoring sẽ bàn sau. Em cứ ghi nhận để tuần sau thảo luận.
+[09:04:01] Lan: Vậy tôi xin phép chốt task thứ hai: "Hoàn thiện tài liệu triển khai", deadline 25/02, owner Lan.
+[09:04:12] Minh: Chính xác. Và task thứ nhất: "Kiểm tra môi trường test staging", owner Hùng, không deadline cố định.
+[09:04:25] Hùng: Em đã note lại. Em sẽ cập nhật khi có quyền truy cập server.
+[09:04:32] Minh: Tốt. Bây giờ tôi muốn chuyển sang chi tiết tài liệu. Lan, chị trình bày sơ lược cấu trúc tài liệu đang dự kiến nhé.
+[09:04:45] Lan: Hiện tại tài liệu gồm 3 phần: yêu cầu hệ thống, các bước cài đặt, và cấu hình sau deploy. Phần cấu hình database mới chỉ có skeleton. Tuấn đang viết nốt.
+[09:05:00] Minh: Có phần rollback không?
+[09:05:07] Lan: Chưa có. Em định thêm sau khi Tuấn xong phần chính.
+[09:05:14] Minh: Tôi nghĩ rollback là quan trọng, nên đưa vào task luôn. Nhưng thôi, để lần sau review.
+[09:05:25] Hùng: Về yêu cầu hệ thống, em thấy tài liệu đang ghi cần Java 11, nhưng môi trường mới của chúng ta đã nâng lên Java 17. Liệu có cập nhật không?
+[09:05:38] Lan: Ồ, cảm ơn Hùng. Đúng là em chưa cập nhật. Em sẽ sửa ngay trong draft.
+[09:05:47] Minh: Như vậy cần bổ sung task phụ là "Cập nhật yêu cầu hệ thống trong tài liệu". Nhưng để tránh trùng, chúng ta gộp vào task "Hoàn thiện tài liệu triển khai" nhé, Lan.
+[09:06:00] Lan: Vâng, em sẽ đưa nội dung đó vào.
+[09:06:07] Minh: Còn vấn đề nào khác không? Hùng, anh có câu hỏi gì về tiến độ tài liệu không?
+[09:06:17] Hùng: Dạ không. Nhưng em muốn hỏi về quy trình test: sau khi môi trường test sẵn sàng, ai sẽ là người chạy test chính?
+[09:06:30] Minh: Tạm thời chưa phân công cụ thể. Lúc đó chúng ta sẽ họp lại. Hôm nay chỉ thiết lập nền tảng thôi.
+[09:06:42] Lan: Em nghĩ nếu môi trường test ổn, em sẽ assign task test cho đợt sau.
+[09:06:50] Minh: Được. Bây giờ tôi muốn kiểm tra schedule tổng thể. Ai thấy có rủi ro về timeline không?
+[09:07:00] Hùng: Em lo là nếu infra giao muộn, task test sẽ bị trễ, ảnh hưởng đến tài liệu vì phải điều chỉnh.
+[09:07:12] Minh: Đúng, đó là negative. Chúng ta sẽ theo dõi sát, nếu quá ngày 20/02 mà chưa có quyền, tôi sẽ lên tiếng với team infra.
+[09:07:25] Lan: Vậy em đề xuất checkpoint: nếu đến 20/02 chưa có thông tin về staging, chúng ta review risk.
+[09:07:34] Minh: Đồng ý, mặc dù chưa phải task chính thức, nhưng hãy ghi nhận lại.
+[09:07:42] Hùng: Vậy em sẽ nhắc trong daily meeting.
+[09:07:50] Minh: Okay. Quay lại chủ đề tài liệu, Lan, khi nào chị có bản draft hoàn chỉnh để team xem trước?
+[09:08:02] Lan: Em dự định cuối tuần này gửi bản nháp, nhưng deadline task là 25/02 nên có thể sớm hơn nếu Tuấn kịp.
+[09:08:14] Minh: Tốt. Tôi muốn mọi người xem qua draft sớm để góp ý.
+[09:08:22] Lan: Dạ. Em sẽ cố gắng.
+[09:08:29] Minh: Còn Hùng, về task test môi trường, em có cần ai support không?
+[09:08:38] Hùng: Có lẽ em cần bạn Tuấn hỗ trợ phần script kiểm tra kết nối database, vì Tuấn rành hơn.
+[09:08:48] Minh: Vậy em sẽ nhắn Tuấn sau meeting. Nhưng Tuấn hiện đang viết tài liệu, liệu có quá tải không?
+[09:08:59] Hùng: Em nghĩ không, vì việc script kết nối chỉ mất vài tiếng.
+[09:09:06] Minh: Được. Vậy tôi sẽ đề nghị Tuấn hỗ trợ Hùng phần đó. Tuy nhiên vẫn ưu tiên tài liệu trước.
+[09:09:18] Lan: Em thấy ok. Em sẽ điều phối Tuấn.
+[09:09:25] Minh: Vâng. Bây giờ tôi muốn lưu ý một điểm: task "Kiểm tra môi trường test staging" và "Hoàn thiện tài liệu triển khai" có nội dung hơi giống nhau ở chỗ đều liên quan đến môi trường. Cần phân biệt rõ.
+[09:09:40] Lan: Đúng, task của em về tài liệu, còn task của Hùng về kiểm tra thực tế. Không bị chồng.
+[09:09:48] Minh: Tốt. Tôi không muốn sau này có nhầm lẫn. Em cũng cảm thấy task test không có deadline nên dễ bị lơ là, nhưng cứ để như vậy.
+[09:10:00] Hùng: Em sẽ báo cáo tiến độ hàng tuần để không bị quên.
+[09:10:08] Minh: Ừ. Ok. Chúng ta có vẻ đã đi qua phần chính. Có ai muốn thảo luận thêm về tài liệu không?
+[09:10:18] Lan: Em muốn hỏi về format tài liệu: nên viết theo mẫu cũ hay dùng template mới?
+[09:10:27] Minh: Dùng template mới, cái mà team UX đã soạn. Em nhé?
+[09:10:34] Lan: Vâng. Em sẽ theo.
+[09:10:39] Hùng: Em có một câu hỏi nhỏ: Khi nào có meeting tiếp theo để review tài liệu?
+[09:10:48] Minh: Dự kiến cuối tháng 2, sau khi tài liệu gần xong. Nhưng hôm nay chưa đặt lịch.
+[09:10:57] Lan: Ok. Em sẽ báo khi nào bản draft sẵn sàng.
+[09:11:04] Minh: Tốt. Như vậy, chúng ta tạm thời kết thúc nội dung hôm nay. Cảm ơn mọi người đã đóng góp. Chúng ta sẽ tiếp tục ở part sau.
+[09:11:15] Minh: Rồi, sau phần thảo luận về môi trường test và tài liệu, tôi muốn chuyển sang một vấn đề khác. Có báo cáo từ team test về lỗi đăng nhập trên hệ thống mới. Lan, em có thông tin gì không?
+[09:11:30] Lan: Dạ, tuần trước team test phát hiện một số tài khoản không thể đăng nhập do lỗi xác thực. Họ đã log lại, nhưng chưa xác định nguyên nhân chính xác.
+[09:11:42] Minh: Có mẫu cụ thể không? Ví dụ là lỗi trên môi trường nào?
+[09:11:52] Lan: Theo báo cáo, lỗi xảy ra trên môi trường staging và cả local của một số dev. Có vẻ liên quan đến token service.
+[09:12:05] Hùng: Em có tình cờ thấy log lỗi, hình như token bị hết hạn quá sớm. Nhưng em chưa có thời gian đào sâu.
+[09:12:17] Minh: Được rồi. Chúng ta cần một task để điều tra và sửa lỗi đăng nhập. Tôi muốn giao cho Hùng và Tuấn cùng xem, vì Tuấn có kinh nghiệm về authentication.
+[09:12:30] Lan: Nhưng Tuấn đang bận viết tài liệu. Liệu có nên chờ không?
+[09:12:39] Minh: Tạm thời cứ giao cho Hùng chính, Tuấn hỗ trợ khi cần. Task này không có deadline ngay, nhưng cần ưu tiên.
+[09:12:50] Hùng: Em ok, nhưng em muốn có quyền truy cập server production để xem log chi tiết. Hiện tại chỉ có staging.
+[09:13:00] Minh: Việc đó cần phê duyệt từ Ops. Em sẽ gửi yêu cầu, tôi sẽ hỗ trợ.
+[09:13:10] Lan: Vậy em sẽ tạo một task tạm gọi là "Điều tra lỗi đăng nhập", owner Hùng, để follow.
+[09:13:20] Minh: Đúng. Nhưng chú ý đừng nhầm với task "Kiểm tra môi trường test" vì tên hơi giống. Ghi rõ nội dung.
+[09:13:30] Hùng: Em sẽ ghi: "Điều tra lỗi đăng nhập trên staging và production", khác hẳn.
+[09:13:40] Minh: Tốt. Ngoài ra, chúng ta cũng cần dữ liệu test cho việc kiểm tra đăng nhập. Có ai có sẵn không?
+[09:13:52] Lan: Team test có một bộ dữ liệu mẫu, nhưng chưa được cập nhật cho phiên bản mới. Cần tạo lại.
+[09:14:02] Minh: Vậy cần một task nữa: "Cập nhật dữ liệu test đăng nhập". Giao cho ai đây?
+[09:14:10] Hùng: Em nghĩ nên giao cho bạn Khang bên QA, vì Khang phụ trách test data.
+[09:14:20] Minh: Khang có trong meeting không? Tôi thấy vắng. Tôi sẽ nhắn riêng sau.
+[09:14:28] Lan: Nhưng nếu giao Khang, task này có thể bị delay vì Khang đang bận viết test case cho module khác.
+[09:14:38] Minh: Vậy chúng ta tạm thời unresolved reviewer. Ai sẽ review kết quả sau? Lan, em có thể không?
+[09:14:48] Lan: Em có thể review dữ liệu test nếu cần, nhưng không phải chuyên sâu.
+[09:14:57] Minh: Tạm thời ghi là "Chưa có reviewer xác nhận". Chúng ta sẽ quyết định sau.
+[09:15:07] Hùng: Em muốn hỏi rõ: lỗi đăng nhập này có liên quan đến việc migration dữ liệu từ hệ thống cũ không? Nếu có thì cần xem xét thêm.
+[09:15:20] Lan: Chưa rõ lắm, em nghĩ nên test trước trên môi trường isolated.
+[09:15:28] Minh: Đồng ý. Việc migration sẽ để part sau thảo luận.
+[09:15:37] Lan: Vậy task "Điều tra lỗi đăng nhập" sẽ bao gồm việc kiểm tra token service và các dependency.
+[09:15:48] Minh: Đúng. Còn task "Cập nhật dữ liệu test đăng nhập", tôi sẽ assign tạm cho Khang và ghi chú chờ reviewer.
+[09:16:00] Hùng: Em có thể hỗ trợ Khang nếu cần script tạo dữ liệu.
+[09:16:08] Lan: Tốt. Vậy chúng ta có thêm hai task mới. Nhưng tôi muốn nhấn mạnh: đừng quên task tài liệu triển khai vẫn còn đó.
+[09:16:20] Minh: Yên tâm, tôi vẫn nhớ. Tôi sẽ không để lẫn.
+[09:16:28] Hùng: Em cũng muốn nói thêm: nếu lỗi đăng nhập là do môi trường, thì task test staging sẽ cần ưu tiên hơn.
+[09:16:40] Minh: Có lý. Nhưng hôm nay ta chưa thay đổi deadline hay ưu tiên gì cả.
+[09:16:50] Lan: Em thấy đang có nhiều task cùng lúc. Liệu có nhiều quá không? Cần tập trung.
+[09:16:58] Minh: Đây là negative cần lưu ý. Nhưng scope hôm nay chỉ thiết lập, chưa chốt execution.
+[09:17:08] Hùng: Vậy em sẽ bắt đầu điều tra lỗi đăng nhập từ chiều nay. Cần access production sớm.
+[09:17:18] Minh: Tôi sẽ gửi email tới Ops ngay sau meeting.
+[09:17:26] Lan: Em muốn hỏi về mức độ ưu tiên: nếu lỗi đăng nhập nghiêm trọng, có nên halt các task khác không?
+[09:17:36] Minh: Chưa tới mức đó. Cứ tiến hành song song. Sau khi có kết quả điều tra sẽ quyết định.
+[09:17:46] Hùng: Em lo rằng nếu không có dữ liệu test mới, việc reproduce lỗi sẽ khó khăn.
+[09:17:55] Lan: Vậy task dữ liệu test cũng quan trọng. Nhưng Khang chưa được assign rõ.
+[09:18:04] Minh: Tôi sẽ bổ sung sau meeting. Giờ cứ ghi nhận.
+[09:18:12] Hùng: Em thấy cần thêm một buổi họp riêng với Khang và Ops để bàn về dữ liệu.
+[09:18:20] Lan: Có thể, nhưng chưa phải lúc này.
+[09:18:28] Minh: Đồng ý. Tạm thời chúng ta dừng ở đây. Tôi tổng kết: có thêm task "Điều tra lỗi đăng nhập" (Hùng) và task "Cập nhật dữ liệu test đăng nhập" (Khang tạm thời, chưa reviewer). Các task cũ vẫn nguyên.
+[09:18:42] Lan: Rõ. Em sẽ cập nhật danh sách task sau meeting.
+[09:18:50] Minh: Cảm ơn mọi người. Chúng ta sẽ tiếp tục ở part sau với những vấn đề tồn đọng.
+[09:19:00] Minh: Tiếp tục meeting, tôi muốn quay lại vấn đề tài liệu triển khai mà chúng ta đã thảo luận ở đầu buổi. Lan, tiến độ của task đó thế nào?
+[09:19:12] Lan: Dạ, em đã viết xong phần yêu cầu hệ thống và các bước cài đặt. Phần cấu hình database và rollback đang chờ Tuấn. Tuy nhiên, em đang gặp khó khăn về thời gian vì có nhiều việc khác.
+[09:19:25] Minh: Cụ thể em bận những gì? Có thể ưu tiên tài liệu hơn không?
+[09:19:35] Lan: Em còn phải review code cho team và chuẩn bị cho sprint review. Em sợ không kịp deadline 25/02.
+[09:19:46] Minh: Vậy em có đề xuất gì không?
+[09:19:53] Lan: Em nghĩ nên chuyển task tài liệu cho Hùng, vì Hùng am hiểu môi trường và có thể viết chính xác hơn. Em sẽ hỗ trợ review.
+[09:20:05] Hùng: Ầy, em cũng đang ôm task kiểm tra môi trường test và điều tra lỗi đăng nhập. Liệu có quá tải không?
+[09:20:15] Minh: Tôi thấy ý Lan hợp lý. Hùng, em đã có kiến thức về hệ thống, lại đang làm việc với staging. Việc viết tài liệu triển khai sẽ bổ trợ cho công việc hiện tại.
+[09:20:27] Hùng: Nếu vậy, em nhận, nhưng cần Lan chuyển giao những phần đã viết và hướng dẫn cụ thể.
+[09:20:37] Lan: Dạ, em sẽ gửi email summary và các file draft ngay sau meeting.
+[09:20:47] Minh: Vậy tôi chính thức handoff task "Hoàn thiện tài liệu triển khai" từ Lan sang Hùng. Deadline vẫn giữ nguyên 25/02 nhé.
+[09:20:58] Hùng: Khoan, em muốn hỏi: deadline 25/02 có khả thi không nếu em mới bắt đầu? Em còn phải xử lý lỗi đăng nhập.
+[09:21:08] Lan: Em nghĩ nên đẩy deadline lên 28/02 để Hùng có thời gian. Công việc hiện tại của em cũng bớt.
+[09:21:18] Minh: 28/02 là thứ bảy. Liệu có ổn không? Tốt nhất là 27/02, thứ sáu.
+[09:21:27] Hùng: 27/02 cũng được, nhưng em cần Lan và Tuấn hỗ trợ phần cấu hình database sớm.
+[09:21:36] Lan: Tuấn sẽ gửi phần đó vào ngày mai. Em sẽ đôn đốc.
+[09:21:45] Minh: Đồng ý. Vậy deadline mới cho task tài liệu là 27/02. Điều chỉnh này được ghi nhận.
+[09:21:55] Hùng: Còn task "Kiểm tra môi trường test staging" của em, ban đầu không deadline. Giờ em thấy nên đặt deadline để tránh trễ.
+[09:22:05] Minh: Đúng, lúc trước tôi để mở vì phụ thuộc infra. Nhưng giờ có tiến triển gì chưa?
+[09:22:14] Hùng: Em vừa nhận được quyền truy cập sáng nay. Có thể bắt đầu test ngay.
+[09:22:23] Minh: Vậy em đề xuất deadline cho task test là bao lâu?
+[09:22:31] Hùng: Em nghĩ 26/02 là hợp lý, vì còn phải viết báo cáo.
+[09:22:40] Lan: 26/02 gần với deadline tài liệu 27/02, có thể gây áp lực. Nhưng nếu em làm song song thì ok.
+[09:22:50] Minh: Được, tôi approve deadline 26/02 cho task "Kiểm tra môi trường test staging". Như vậy task cũ từ P01 giờ có deadline rõ ràng.
+[09:23:00] Hùng: Rõ. Em sẽ cập nhật danh sách task.
+[09:23:08] Minh: Vậy chúng ta đã có hai thay đổi: handoff task tài liệu từ Lan sang Hùng, và thêm deadline cho task test môi trường. Còn gì cần thảo luận không?
+[09:23:20] Lan: Em muốn hỏi về chất lượng tài liệu sau handoff: Hùng có cần em review bản cuối không?
+[09:23:30] Hùng: Có, em muốn Lan review trước khi gửi Minh. Vì em không rành phần bảo mật.
+[09:23:40] Minh: Tốt. Vậy Lan sẽ là reviewer cho task tài liệu. Ghi nhận điều đó.
+[09:23:49] Lan: Em ok.
+[09:23:56] Hùng: Như vậy task test môi trường có cần ai review không?
+[09:24:04] Minh: Có thể để Lan xem báo cáo test, nhưng chưa chốt. Tạm thời chưa cần reviewer.
+[09:24:14] Lan: Em thấy nên có, vì kết quả test ảnh hưởng đến tài liệu.
+[09:24:22] Minh: Vậy chúng ta sẽ assign Lan làm reviewer cho cả hai task. Có ý kiến gì không?
+[09:24:30] Hùng: Em ok.
+[09:24:37] Minh: Tốt.
+[09:24:45] Hùng: Em cũng muốn lưu ý: tài liệu triển khai cần đề cập đến lỗi đăng nhập mới phát hiện, liệu có nên đưa vào không?
+[09:24:55] Lan: Nếu lỗi chưa được fix, tài liệu không nên include vì sẽ lỗi thời. Chỉ ghi chú.
+[09:25:03] Minh: Đúng, chỉ ghi chú rằng đang có investigation. Đừng đưa vào hướng dẫn chính thức.
+[09:25:12] Hùng: Vâng.
+[09:25:19] Lan: Em muốn hỏi thêm về nội dung migration trong tài liệu: có cần không? Hay để riêng?
+[09:25:28] Minh: Migration chưa có quyết định, nên tạm thời bỏ qua. Tập trung vào deploy từ đầu.
+[09:25:37] Hùng: Em đồng ý.
+[09:25:44] Minh: Vậy chúng ta khép lại phần này. Có ai có câu hỏi nào khác về tài liệu không?
+[09:25:53] Lan: Dạ không.
+[09:25:59] Minh: Tốt. Chúng ta sẽ chuyển sang các vấn đề khác ở part tiếp theo.
+[09:26:05] Minh: Chúng ta chuyển sang vấn đề release và monitoring. Tuần sau có một bản release nhỏ, cần chuẩn bị monitoring trước đó. Lan, em có kế hoạch gì chưa?
+[09:26:18] Lan: Dạ, em đã xem lịch release dự kiến là ngày 05/03. Nhưng monitoring hiện tại chưa được cấu hình cho hệ thống mới. Cần setup từ bây giờ.
+[09:26:30] Minh: Ai sẽ làm việc này? Hùng đang bận nhiều, hay giao cho Tuấn?
+[09:26:40] Hùng: Em nghĩ nên giao cho bạn Tuấn, vì Tuấn rành về DevOps. Nhưng Tuấn đang viết tài liệu, liệu có kịp không?
+[09:26:52] Lan: Em có thể giảm bớt phần việc cho Tuấn trong tài liệu, để Tuấn tập trung cho monitoring.
+[09:27:02] Minh: Được. Vậy tôi sẽ assign task "Cấu hình monitoring cho release 05/03" cho Tuấn. Deadline đặt vào 28/02 để kịp test trước khi release.
+[09:27:15] Hùng: 28/02 gần với deadline task kiểm tra môi trường test của em là 26/02. Hai task này có liên quan, vì cần môi trường ổn mới monitor được.
+[09:27:28] Minh: Đúng, nên deadline task test vẫn là 26/02, còn monitoring sau đó. Nhưng mà tôi muốn bàn về task cũ "Cập nhật dữ liệu test đăng nhập". Task đó giờ thấy không còn cần thiết nữa vì chúng ta sẽ dùng dữ liệu thật sau release.
+[09:27:42] Lan: Ý anh là hủy task đó? Nhưng Khang đã bắt đầu làm rồi.
+[09:27:52] Minh: Vậy hãy hủy để tránh lãng phí. Khang có thể tập trung vào việc khác.
+[09:28:03] Hùng: Em đồng ý. Task đó không có reviewer và không rõ mục đích.
+[09:28:12] Minh: Chính thức hủy task "Cập nhật dữ liệu test đăng nhập". Ghi nhận điều này.
+[09:28:23] Lan: Vâng. Vậy chúng ta có task mới về monitoring cho Tuấn, deadline 28/02.
+[09:28:35] Hùng: Em muốn hỏi về release: có cần xem xét lại lỗi đăng nhập trước khi release không? Nếu chưa fix thì release có rủi ro.
+[09:28:48] Minh: Tốt, đó là negative. Ta chưa biết kết quả điều tra lỗi đăng nhập của Hùng. Cần chốt trước release.
+[09:29:00] Lan: Em đề xuất nếu đến 28/02 chưa fix được lỗi, thì delay release.
+[09:29:10] Minh: Hợp lý. Vậy tôi muốn đặt deadline cho task điều tra lỗi đăng nhập: 28/02. Như vậy nó trùng với deadline monitoring, nhưng đó là cố ý.
+[09:29:22] Hùng: 28/02 là thứ bảy, em có thể làm xong trong tuần. Em sẽ cố gắng.
+[09:29:33] Minh: Nhưng nhớ, deadline này thuộc về antecedent cũ, tức là task từ P02. Đã lâu rồi.
+[09:29:45] Lan: Vậy deadline cho task điều tra lỗi đăng nhập là 28/02, owner Hùng.
+[09:29:55] Hùng: Em nhận. Nhưng vậy em có ba task: test môi trường (26/02), tài liệu (27/02), và lỗi đăng nhập (28/02). Rất sát nhau.
+[09:30:07] Minh: Căng đấy. Có cần hỗ trợ gì không?
+[09:30:16] Hùng: Có thể nhờ Lan review nhanh các báo cáo để em đỡ mất thời gian.
+[09:30:26] Lan: Em sẵn sàng. Nhưng em cũng có việc riêng.
+[09:30:35] Minh: Vậy sắp xếp hỗ trợ lẫn nhau.
+[09:30:45] Hùng: Bây giờ bàn về monitoring chi tiết hơn. Cần cài đặt Prometheus và Grafana, hay dùng công cụ khác?
+[09:30:57] Lan: Team Ops đã có sẵn Stackdriver, dùng luôn cho đồng bộ.
+[09:31:07] Minh: Tuấn sẽ biết. Tôi sẽ gửi email hướng dẫn.
+[09:31:17] Hùng: Em lo là monitoring sẽ ảnh hưởng hiệu năng nếu không tối ưu. Cần test trước.
+[09:31:28] Minh: Đúng, đó là rủi ro. Nên monitoring cũng cần được test trên staging trước.
+[09:31:39] Lan: Vậy task monitoring của Tuấn nên bao gồm cả test trên staging.
+[09:31:49] Minh: Ghi nhận. Bất kỳ ai có ý kiến về monitoring không?
+[09:31:58] Hùng: Em nghĩ nên có một buổi họp riêng với Tuấn và Ops để bàn kỹ thuật.
+[09:32:08] Lan: Có thể, nhưng chưa cần ngay. Khi Tuấn bắt đầu sẽ rõ.
+[09:32:18] Minh: Đồng ý. Quay lại vấn đề deadline, tôi thấy deadline 28/02 cho monitoring gần với deadline task tài liệu cũ, nhưng thuộc antecedent mới.
+[09:32:30] Hùng: Vậy task nào bị hủy? Chỉ có task dữ liệu test là bị hủy thôi, đúng không?
+[09:32:40] Minh: Đúng. Các task khác vẫn giữ nguyên.
+[09:32:49] Lan: Tôi sẽ cập nhật danh sách task mới: hủy task dữ liệu test, thêm monitoring, thêm deadline cho lỗi đăng nhập.
+[09:33:00] Hùng: Em muốn hỏi về release plan: có cần tài liệu release notes không? Ai viết?
+[09:33:10] Minh: Thường thì Tuấn viết. Nhưng hôm nay chưa bàn.
+[09:33:19] Lan: Vậy có nên tạo task release notes không? Hay để sau?
+[09:33:28] Minh: Để sau. Nguy cơ quá tải.
+[09:33:37] Hùng: Vậy tạm thời chưa có task mới.
+[09:33:46] Minh: Đúng.
+[09:33:54] Lan: Em muốn lưu ý: deadline 28/02 cho lỗi đăng nhập cần được thông báo cho team Ops, vì họ cấp quyền truy cập.
+[09:34:04] Hùng: Em đã gửi email, đang chờ phản hồi.
+[09:34:13] Minh: Nếu không có access, deadline sẽ trễ. Cần dự phòng.
+[09:34:22] Lan: Vậy nên có một checkpoint: nếu đến 25/02 chưa có access, thì cần escalate.
+[09:34:32] Minh: Đồng ý. Ghi nhận checkpoint.
+[09:34:41] Hùng: Em thấy có nhiều task cùng thời điểm, cần ưu tiên rõ.
+[09:34:50] Minh: Ưu tiên như sau: test môi trường là gốc, sau đó tài liệu, rồi lỗi đăng nhập, cuối cùng là monitoring.
+[09:35:00] Lan: Rõ. Tôi sẽ update priority.
+[09:35:08] Hùng: Vậy em sẽ làm test môi trường trước, sau đó viết tài liệu, và xen kẽ điều tra lỗi.
+[09:35:18] Minh: Hợp lý.
+[09:35:26] Lan: Có ai cần hỏi thêm về release không?
+[09:35:34] Hùng: Em muốn biết release 05/03 có bao gồm các bản vá không? Hay chỉ feature mới?
+[09:35:44] Minh: Đa phần là feature mới, có một vài bug fix nhỏ.
+[09:35:53] Lan: Vậy cần test regression.
+[09:36:02] Minh: Đúng, nhưng không phải hôm nay bàn.
+[09:36:10] Hùng: Vậy tạm thời mọi thứ đã rõ.
+[09:36:18] Minh: Tốt. Chúng ta dừng ở đây.
+[09:36:25] Minh: Bây giờ chúng ta vào phần cuối cùng của buổi họp. Tôi muốn điểm qua toàn bộ trạng thái các task và đưa ra một số quyết định.
+[09:36:38] Lan: Em đã tổng hợp danh sách task hiện tại. Có thể bắt đầu.
+[09:36:48] Minh: Đầu tiên, task "Kiểm tra môi trường test staging" – Hùng, tiến độ thế nào?
+[09:36:59] Hùng: Em đã có quyền truy cập từ sáng. Đã chạy một số kiểm tra cơ bản, hệ thống hoạt động. Em sẽ hoàn thành báo cáo trước deadline 26/02.
+[09:37:12] Minh: Tốt. Vậy task này đang on track.
+[09:37:20] Lan: Tiếp theo, task "Hoàn thiện tài liệu triển khai" đã handoff sang Hùng, deadline 27/02. Hùng, em có cần hỗ trợ gì thêm?
+[09:37:32] Hùng: Em đã nhận draft từ Lan. Sẽ viết tiếp phần cấu hình sau khi Tuấn gửi. Dự kiến hoàn thành sớm hơn deadline.
+[09:37:44] Minh: Lưu ý: Lan vẫn là reviewer cho task này. Khi nào xong, gửi Lan review trước 25/02 để kịp.
+[09:37:55] Lan: Dạ.
+[09:38:04] Minh: Task "Điều tra lỗi đăng nhập" – deadline mới là 28/02. Hùng, em có khả năng đáp ứng không?
+[09:38:15] Hùng: Em đang phân tích log staging. Cần access production mới xác định nguyên nhân. Em đã gửi yêu cầu, nhưng chưa có phản hồi. Đây là unresolved item.
+[09:38:28] Minh: Nếu đến 26/02 chưa có access, ta sẽ escalate lên Ops manager. Tôi sẽ ghi nhận điều này.
+[09:38:40] Lan: Vậy task điều tra lỗi vẫn còn phụ thuộc.
+[09:38:49] Hùng: Đúng vậy. Nếu không có access, deadline 28/02 khó đảm bảo.
+[09:38:59] Minh: Chúng ta có thể xem xét delay deadline. Nhưng chưa quyết định ngay.
+[09:39:08] Lan: Em đề xuất giữ nguyên deadline, nếu có trễ thì báo cáo sau.
+[09:39:17] Minh: Đồng ý.
+[09:39:25] Hùng: Tiếp theo, task "Cấu hình monitoring cho release 05/03" – Tuấn mới nhận. Em có biết Tuấn bắt đầu chưa?
+[09:39:37] Lan: Em nói chuyện với Tuấn sáng nay, Tuấn sẽ bắt đầu từ ngày mai.
+[09:39:47] Minh: Deadline 28/02 cho monitoring. Lưu ý rằng Tuấn cần môi trường test ổn định để cấu hình.
+[09:39:58] Hùng: Task test môi trường của em xong ngày 26/02, vậy kịp cho Tuấn.
+[09:40:08] Minh: Tốt.
+[09:40:16] Lan: Còn task bị hủy: "Cập nhật dữ liệu test đăng nhập". Đã xóa khỏi danh sách.
+[09:40:26] Minh: Đúng. Tôi xác nhận hủy.
+[09:40:35] Hùng: Tôi muốn nhắc lại vấn đề reviewer cho task monitoring: ai sẽ review kết quả của Tuấn? Chưa có.
+[09:40:47] Lan: Em có thể review, nhưng không chuyên sâu về monitoring.
+[09:40:56] Minh: Vậy ta tạm thời để unresolved. Tuấn có thể tự review với Ops.
+[09:41:06] Hùng: Vậy mục này chưa được chốt.
+[09:41:14] Minh: Đúng. Ghi nhận unresolved item: reviewer cho monitoring chưa được assign.
+[09:41:25] Lan: Vậy tổng kết các task hiện tại: 4 task active (test môi trường, tài liệu, lỗi đăng nhập, monitoring) và 1 task bị hủy.
+[09:41:37] Minh: Chính xác.
+[09:41:45] Hùng: Em muốn hỏi về release plan chi tiết: sau khi monitoring xong, có cần dry-run không?
+[09:41:57] Lan: Thường có dry-run trước 1-2 ngày. Nếu release 05/03, dry-run có thể 03/03.
+[09:42:07] Minh: Việc đó chưa cần quyết định hôm nay. Tôi sẽ bàn riêng với Tuấn.
+[09:42:17] Hùng: Vậy không có task mới về dry-run.
+[09:42:25] Minh: Đúng.
+[09:42:33] Lan: Em thấy có một rủi ro: deadline 28/02 cho monitoring và lỗi đăng nhập trùng nhau. Nếu Tuấn và Hùng cùng cần hỗ trợ, có thể quá tải.
+[09:42:46] Minh: Đó là negative. Ta cần phân bổ hợp lý. Hùng, em có thể hỗ trợ Tuấn nếu cần?
+[09:42:57] Hùng: Em có thể, nhưng nếu lỗi đăng nhập chưa xong, em khó hỗ trợ.
+[09:43:07] Lan: Vậy em sẽ theo dõi sát.
+[09:43:15] Minh: Tôi lưu ý: nếu có xung đột, ưu tiên lỗi đăng nhập vì ảnh hưởng release.
+[09:43:26] Hùng: Rõ.
+[09:43:34] Minh: Bây giờ tôi muốn recap nhanh toàn bộ trạng thái cuối cùng, tránh nhầm lẫn.
+[09:43:44] Lan: Em sẽ recap: Task 1 – Kiểm tra môi trường test staging, owner Hùng, deadline 26/02, reviewer Lan (theo quyết định cũ). Task 2 – Hoàn thiện tài liệu triển khai, owner Hùng, deadline 27/02, reviewer Lan. Task 3 – Điều tra lỗi đăng nhập, owner Hùng, deadline 28/02, chưa có reviewer (Lan có thể review sau). Task 4 – Cấu hình monitoring, owner Tuấn, deadline 28/02, reviewer chưa có. Và task hủy: Cập nhật dữ liệu test đăng nhập.
+[09:44:05] Minh: Chính xác. Tôi không muốn tạo duplicate, vì vậy chỉ nhắc một lần.
+[09:44:14] Hùng: Em đồng ý.
+[09:44:22] Lan: Unresolved item: reviewer cho monitoring, và access production cho lỗi đăng nhập.
+[09:44:32] Minh: Đúng. Chúng ta sẽ giải quyết trong các buổi họp sau.
+[09:44:42] Hùng: Vậy meeting hôm nay đến đây kết thúc?
+[09:44:50] Minh: Đúng. Cảm ơn mọi người đã tham gia. Các task rõ ràng. Chúng ta sẽ update qua email nếu cần.
+[09:45:00] Lan: Em sẽ gửi meeting minutes.
+[09:45:08] Hùng: Cảm ơn mọi người.
+[09:45:15] Minh: Kết thúc cuộc họp.

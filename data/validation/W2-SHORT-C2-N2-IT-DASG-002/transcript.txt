@@ -1,0 +1,26 @@
+[00:00:00] Minh: Được rồi, hôm nay chúng ta tập trung vào mốc tích hợp hệ thống OMS với cổng thanh toán mới.
+[00:00:06] Hương: Bên mình đã sẵn sàng tài liệu API từ phía đối tác chưa anh?
+[00:00:11] Minh: Có rồi, họ gửi spec cuối tuần trước. Tôi đã rà sơ bộ, thấy có vài điểm cần kiểm tra kỹ phần xác thực hai chiều.
+[00:00:20] Tùng: Phần đó em có thể bắt tay vào viết test script, nhưng em cần môi trường staging ổn định.
+[00:00:27] Hùng: Nói đến môi trường staging thì không ổn chút nào đâu. Hôm qua mình vừa phát hiện lỗi mất gói tin khi gọi từ nội bộ sang endpoint sandbox.
+[00:00:36] Minh: Nghiêm trọng vậy à? Có log cụ thể không?
+[00:00:40] Hùng: Có, em đã mở ticket với bên infra, nhưng họ báo tới thứ năm mới xếp người xử lý. Nên giai đoạn này team mình khó lòng test được phần đồng bộ trạng thái.
+[00:00:51] Hương: Hay mình đề xuất tạm dùng môi trường staging của đối tác trực tiếp? Họ có mở sẵn sandbox, có thể test xác thực ngay mà không phụ thuộc infrast nội bộ.
+[00:01:03] Tùng: Cũng được, nhưng như thế mình phải xin thêm token bảo mật, thủ tục hơi lâu. Với lại dữ liệu test không khớp hoàn toàn với kịch bản thực tế của mình.
+[00:01:13] Minh: Đúng. Giải pháp đó tôi chưa chốt ngay được vì liên quan đến bảo mật và compliance. Để tôi trao đổi với anh Kiên bên Security đã.
+[00:01:22] Hùng: Em hiểu, nhưng tiến độ thì đang căng. Cứ thế này tới cuối tuần dễ bị trễ tích hợp lắm.
+[00:01:29] Minh: Tùng, em tập trung viết test script cho phần xác thực trước đi. Còn môi trường thì ta xoay xở sau, đừng để block công việc của em.
+[00:01:38] Tùng: Anh giao em cái đó thì em làm được, nhưng nếu môi trường vẫn lỗi thì cũng không verify được đâu.
+[00:01:44] Minh: Anh biết, nên em cứ viết và chuẩn bị kịch bản test cho đầy đủ. Khi môi trường staging sống lại là chạy ngay, không phải mất thêm thời gian soạn lại.
+[00:01:55] Tùng: OK, vậy em nhận phần test script. Deadline anh muốn là khi nào?
+[00:02:00] Minh: Em cố gắng xong bản nháp trước chiều thứ tư nhé, để thứ năm mình có thể review trước khi bên infra sửa xong.
+[00:02:08] Hùng: Còn em thì sao anh? Em đang mắc chỗ điều tra lỗi mất gói tin, chắc không kịp nhận thêm gì đâu.
+[00:02:14] Minh: Em cứ xử lý dứt điểm sự cố staging với bên infra, đó là ưu tiên số một. Cái đó mà không xong thì mọi thứ đều đứng.
+[00:02:21] Hùng: Rõ, em sẽ bám sát họ hàng ngày.
+[00:02:24] Hương: Vậy phần mapping dữ liệu thì em tiếp tục hoàn thiện theo spec cũ đúng không anh? Em thấy có một số field thay đổi so với tài liệu họ gửi hôm qua.
+[00:02:33] Minh: Đúng rồi, em cứ bám bản spec mới nhất. Còn về đề xuất dùng staging của đối tác, tôi sẽ xin ý kiến anh Kiên rồi thông báo lại sau, chưa áp dụng vội.
+[00:02:44] Hương: Vâng, vậy giữa tuần mình họp nhanh một lần nữa để cập nhật tình hình không anh?
+[00:02:50] Minh: Tốt, thứ tư sau 3h chiều tôi sẽ gửi invite. Ai có thắc mắc gì nữa không?
+[00:02:56] Tùng: Em không, có gì em ping anh trên chat.
+[00:03:00] Hùng: Em cũng thế, em tập trung sự cố staging trước.
+[00:03:03] Minh: OK, vậy kết thúc ở đây. Cảm ơn anh em.

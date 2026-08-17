@@ -1,0 +1,99 @@
+=== MEETING METADATA ===
+meeting_id: W3-MED-C4-N2-SW-INT-009
+meeting_title: Họp phối hợp triển khai và xử lý vấn đề
+meeting_date: 2026-02-13
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:00] Minh: Chào mọi người, bắt đầu họp. Hôm nay có nhiều vấn đề cần xử lý. Đầu tiên, về môi trường test stg, Hà báo sao?
+[09:00:12] Hà: Dạ, môi trường test không truy cập được từ sáng. Em kiểm tra thấy service authentication báo lỗi `Connection refused` ở cổng 8080.
+[09:00:25] Lan: Có log cụ thể không em?
+[09:00:29] Hà: Em có log yêu cầu. Lỗi xuất hiện sau lần deploy build 2.3.1 hôm qua.
+[09:00:42] Huy: Để anh xem. Có thể do docker-compose bị missing volume. Anh sẽ check lại.
+[09:00:55] Minh: Huy, em xử lý vấn đề này. Cần xong trong hôm nay để QA kịp test regression.
+[09:01:08] Huy: Vâng, em fix và deploy lại. Deadline em đặt 17h00 chiều nay.
+[09:01:18] Minh: Ok, 17h nhé. Nếu gặp khó khăn thì báo sớm.
+[09:01:30] Huy: Dạ. (first-person commitment)
+[09:01:35] Minh: Tiếp theo, lỗi đăng nhập trên production. Tuấn báo có khoảng mười user không vào được.
+[09:01:50] Tuấn: Đúng vậy. Sai mật khẩu ảo, dù nhập đúng vẫn báo lỗi. Có vẻ liên quan session store.
+[09:02:05] Lan: Em nghĩ do update thư viện session tuần trước. Cần kiểm tra logic set cookie.
+[09:02:18] Minh: Ai đảm nhận? Lan hay Huy?
+[09:02:22] Lan: Em đang bận task khác, assign cho Huy được không?
+[09:02:35] Huy: Dạ được. Em cần quyền truy cập log production.
+[09:02:50] Minh: Anh sẽ gửi credential riêng. Huy, deadline cho lỗi này?
+[09:03:00] Huy: Thứ Sáu 17/2 em nghĩ khả thi.
+[09:03:20] Minh: Nhưng môi trường test ưu tiên hơn. Task đăng nhập có thể dời, đổi deadline sang thứ Hai 20/2 nhé.
+[09:03:40] Huy: Vâng, 20/2. (deadline replacement)
+[09:03:45] Hà: Vậy là Huy có hai task: môi trường hôm nay và đăng nhập tuần sau.
+[09:03:52] Minh: Đúng. Chuyển qua tài liệu triển khai. Anh cần hai tài liệu: hướng dẫn triển khai môi trường mới và tài liệu troubleshooting lỗi thường gặp. Ai làm?
+[09:04:15] Lan: Hà viết troubleshooting dựa trên các ticket cũ. Huy viết hướng dẫn triển khai.
+[09:04:25] Hà: Em nhận troubleshooting, cần template của anh Minh.
+[09:04:35] Huy: Em viết hướng dẫn, cũng cần template.
+[09:04:55] Minh: Anh sẽ gửi template trước 10h. Hạn nộp cả hai là thứ Sáu 17/2.
+[09:05:05] Hà: Dạ.
+[09:05:10] Huy: OK.
+[09:05:15] Minh: Lưu ý hai tài liệu này khác deliverable nhưng đều về deployment. (two tasks with similar object)
+[09:05:25] Tuấn: Có cần tài liệu cho support team không?
+[09:05:32] Minh: Chưa, tập trung hai tài liệu kia.
+[09:05:38] Hà: Em thấy Huy nhiều task quá. Môi trường hôm nay, đăng nhập, hướng dẫn. Có thể cần hỗ trợ?
+[09:05:50] Huy: Em vẫn ổn, nhưng nếu quá tải em sẽ báo.
+[09:06:00] Minh: Ok. Bây giờ thảo luận feature interaction giữa tính năng A và B. Lan, em thấy gì?
+[09:06:12] Lan: Khi chạy hai tính năng cùng lúc, session bị conflict. Đây có thể là nguyên nhân lỗi đăng nhập. Em đề xuất viết test case interaction.
+[09:06:28] Minh: Giao cho ai?
+[09:06:32] Lan: Huy nếu được. Em sẽ gửi spec chiều nay.
+[09:06:38] Huy: Em nhận, nhưng cần spec trước 15h.
+[09:06:48] Minh: Vậy Huy làm test case interaction, deadline cùng 17/2.
+[09:07:00] Huy: Dạ.
+[09:07:08] Hà: Nhưng mà Huy chưa rõ nguyên nhân lỗi đăng nhập, viết test case dễ thiếu.
+[09:07:18] Minh: Đúng, cần kết luận trước. Huy, em có thể xác định nguyên nhân không?
+[09:07:25] Huy: Em chưa chắc. Em đang debug, phụ thuộc vào log production. Tuấn gửi log mới nhất chưa?
+[09:07:35] Tuấn: Em chưa gửi, để em gửi ngay sau họp.
+[09:07:42] Minh: Vậy còn vấn đề chưa giải quyết: Huy cần kết luận nguyên nhân đăng nhập. Đây là unresolved item, không có deadline cụ thể. (unresolved item)
+[09:07:55] Huy: Em sẽ cập nhật sau.
+[09:08:00] Minh: Quay lại task môi trường test. Huy, tiến độ thế nào?
+[09:08:08] Huy: Em đang check docker, thấy thiếu volume. Em sẽ rebuild, dự kiến 30 phút nữa xong.
+[09:08:20] Minh: Tốt. Nhưng mà Huy nói deadline 17h, em nghĩ 17h có kịp không nếu rebuild rồi deploy?
+[09:08:30] Huy: À, em quên mất pipeline CI mất thêm 20 phút. Vậy em đặt 17h khó. Có thể dời sang 18h được không?
+[09:08:45] Minh: 18h cũng được, nhưng cần hoàn thành trong ngày. Vậy sửa deadline môi trường test thành 18h. (correction)
+[09:09:00] Huy: Vâng, em ghi nhận.
+[09:09:10] Lan: Em có câu hỏi về tài liệu troubleshooting. Hà định viết theo cấu trúc nào?
+[09:09:18] Hà: Em dựa theo template cũ, thêm phần log và giải pháp.
+[09:09:25] Lan: Nên thêm phần nguyên nhân chưa xác định. Huy vẫn chưa chốt.
+[09:09:32] Hà: Vậy em để placeholder, chờ kết quả từ Huy.
+[09:09:40] Minh: Ok, vậy Hà viết trước những phần đã rõ, phần chưa thì ghi "đang điều tra".
+[09:09:50] Huy: Em có idea: thay vì viết test case interaction riêng, có thể tích hợp vào test regression hiện tại.
+[09:10:00] Lan: Nhưng spec đã có, em sẽ gửi. Huy cứ theo spec làm.
+[09:10:08] Huy: Dạ, vậy em làm riêng.
+[09:10:15] Minh: Đầu việc lúc nãy về tài liệu triển khai, Huy đã nhận template chưa?
+[09:10:22] Huy: Em chưa, đang chờ anh Minh.
+[09:10:28] Minh: Anh gửi ngay sau họp, link Shared Drive.
+[09:10:35] Huy: OK.
+[09:10:40] Tuấn: Ngoài ra, support còn thấy lỗi tương tự trên mobile. Có cần tạo task riêng?
+[09:10:50] Minh: Chưa, gộp vào investigation của Huy. Khi nào rõ hãy bàn. (distractor - suggestion not task)
+[09:11:00] Hà: Em thấy task viết tài liệu troubleshooting và test case interaction có deadline giống nhau, dễ nhầm.
+[09:11:10] Minh: Không nhầm đâu, hai việc khác nhau. Huy ghi chú rõ.
+[09:11:20] Huy: Em sẽ note.
+[09:11:28] Minh: Bây giờ recap lại toàn bộ task. Anh điểm danh: - Huy fix môi trường test, deadline 18h hôm nay. - Huy fix lỗi đăng nhập, deadline 20/2. - Huy viết hướng dẫn triển khai, deadline 17/2. - Hà viết tài liệu troubleshooting, deadline 17/2. - Huy viết test case interaction, deadline 17/2. - Unresolved: xác định nguyên nhân đăng nhập, không deadline.
+[09:12:00] Minh: Có điều chỉnh gì không?
+[09:12:05] Lan: Em thấy Huy có quá nhiều task cùng lúc, có thể bỏ bớt?
+[09:12:12] Minh: Anh hiểu. Nhưng đây là priority hiện tại. Huy, em có đề xuất gì?
+[09:12:20] Huy: Em nghĩ em vẫn xoay sở được. Nhưng nếu có vấn đề em sẽ báo ngay.
+[09:12:30] Minh: Tốt. Có ai có ý kiến về các deadline không?
+[09:12:38] Hà: Em muốn xác nhận deadline tài liệu troubleshooting là 17/2, nhưng template anh Minh gửi chậm thì sao?
+[09:12:50] Minh: Anh sẽ gửi template ngay bây giờ trong meeting, link ở chat. Em check nhé.
+[09:12:58] Hà: Em thấy rồi. Vậy deadline vẫn 17/2.
+[09:13:05] Huy: Hình như em thấy Hà nhận được template, em cũng vào link đó.
+[09:13:12] Minh: Đúng, cùng một link.
+[09:13:18] Lan: Vậy các em nhớ bắt đầu ngay. Môi trường test là critical.
+[09:13:25] Huy: Dạ, em đang làm.
+[09:13:30] Minh: Bây giờ bàn về kế hoạch release tháng sau. Mặc dù chưa đủ thông tin, nhưng có thể thảo luận sơ qua? (topic không tạo task)
+[09:13:42] Lan: Em nghĩ nên tập trung vào việc hôm nay, để release họp riêng.
+[09:13:50] Hà: Em đồng ý.
+[09:13:55] Minh: Vậy dời sang meeting khác. Còn gì nữa không?
+[09:14:02] Tuấn: Về mobile session, em có nên gửi thêm log không?
+[09:14:08] Minh: Gửi cho Huy, để Huy phân tích. Nhưng không tạo task mới.
+[09:14:15] Huy: Vâng, em sẽ xem.
+[09:14:20] Minh: Cuối cùng, nhắc lại: Huy, em order priority: môi trường > đăng nhập > hướng dẫn > test case.
+[09:14:30] Huy: Rõ.
+[09:14:35] Lan: Em cũng sẽ gửi spec test case interaction trước 15h.
+[09:14:40] Huy: Cảm ơn chị.
+[09:14:45] Minh: Kết thúc họp. Cảm ơn mọi người, cố gắng hoàn thành deadline.

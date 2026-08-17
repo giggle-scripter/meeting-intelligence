@@ -1,0 +1,114 @@
+MEETING_ID: W3-MED-C3-N1-IT-INT-010
+CASE_LABELS: feature_interaction,deadline_replacement,recap_duplicate_risk,unresolved_item,negative_context
+MEETING_DATE: 2026-02-14
+TITLE: Họp phối hợp triển khai và xử lý vấn đề
+[00:00:00] Trang: Chào các bạn, hôm nay chúng ta cần giải quyết một số tồn tại trong dự án tích hợp API thanh toán mới, đồng thời rà soát lại kế hoạch rollout. Tôi thấy có mặt Minh, Huy, Lan, Tùng, còn Thảo chưa vào nhỉ?
+[00:00:12] Minh: Chắc Thảo đang xử lý sự cố trên cluster staging, tầm này cậu ấy hay bận lắm.
+[00:00:18] Trang: Ừ, mình cứ bắt đầu trước. Việc đầu tiên, mảng API integration, Minh báo cáo tình hình nhé.
+[00:00:26] Minh: Tình hình chung là phần routing và logic đã xong, nhưng đang kẹt cứng ở khâu xác thực. Bên đối tác yêu cầu phải dùng OAuth 2.0 với client secret tự động thay đổi mỗi 30 ngày. Hiện tại backend của mình chưa có cơ chế hot-reload secret, cứ deploy là phải cập nhật tay.
+[00:00:48] Huy: Thế thì phức tạp nhỉ. Em cũng đang chờ API để tích hợp bên frontend.
+[00:00:53] Trang: Vậy việc này cần ưu tiên. Minh, tôi giao cho cậu nhiệm vụ hoàn thiện API integration, bao gồm cả phần xác thực tự động. Tạm thời deadline là ngày 25/02.
+[00:01:06] Minh: Tôi nhận. Nhưng tôi thấy cần thêm thời gian để test với sandbox của họ, vì thường phát sinh thêm config. Tôi muốn xin dời deadline sang 28/02, có được không?
+[00:01:18] Trang: Ok, tôi chấp nhận. Vậy final deadline cho phần tích hợp API của Minh là 28/02. Còn Huy, cậu có thể làm gì trong lúc chờ API?
+[00:01:28] Huy: Em đã phác thảo xong màn hình thanh toán, nhưng đang thiếu luồng xử lý lỗi từ API. Hiện tại chỉ là UI tĩnh thôi.
+[00:01:36] Trang: Vậy cậu cứ hoàn thiện giao diện trước đi. Khi nào Minh có bản API nháp thì hai bên tích hợp. Task này không cần deadline cứng vội, cậu tự cân đối nhé.
+[00:01:47] Huy: Vậy em sẽ ưu tiên làm xong UI trước cuối tuần sau, nhưng không cần chốt mốc nhé. Để em còn support Minh nếu cần.
+[00:01:53] Trang: Đồng ý, cứ thế đi.
+[00:01:56] Minh: À, tôi cũng muốn bổ sung. Phần caching cho API call cũng cần tối ưu, nếu không sẽ chậm khi có nhiều người dùng. Tôi tính dùng Redis.
+[00:02:06] Trang: Vụ đó quan trọng, nhưng tôi thấy không gấp bằng xác thực. Để tôi giao luôn: Minh chịu trách nhiệm tối ưu hiệu năng API, bao gồm cả caching, deadline 01/03.
+[00:02:18] Minh: Ok, nhưng deadline 01/03 hơi gấp, vì tôi còn phần integration.
+[00:02:22] Trang: Vậy để tôi giao thêm Huy hỗ trợ phần cache. Huy, cậu giúp Minh nhé. Và deadline tôi dời sang 05/03 để thoải mái hơn.
+[00:02:31] Huy: Em ok, có gì Minh chỉ việc assign task cụ thể cho em.
+[00:02:35] Minh: Tốt, vậy tôi sẽ chia việc cho Huy.
+[00:02:40] Trang: Như vậy, chốt: task tối ưu hiệu năng API, Minh chủ trì, Huy hỗ trợ, deadline 05/03. (Lưu ý đây chỉ là sửa đổi, không phải task mới)
+[00:02:50] Tùng: Cho tôi hỏi, khi nào thì mình có môi trường staging ổn định để tôi bắt đầu test?
+[00:02:55] Trang: Đúng rồi, phần operation. Thảo chưa vào, nhưng tôi biết hôm qua môi trường staging bị lỗi container.
+[00:03:03] Minh: Đúng, tôi cũng thấy báo lỗi kết nối database.
+[00:03:07] Trang: Tạm thời gác việc đó vì Thảo chưa có mặt. Khi nào Thảo vào, tôi sẽ hỏi trực tiếp.
+[00:03:13] Lan: Trong lúc chờ, tôi muốn báo cáo về việc chuẩn bị dữ liệu mẫu cho testing.
+[00:03:18] Trang: Chị nói đi.
+[00:03:20] Lan: Tôi đã thu thập được dữ liệu giao dịch từ hệ thống cũ, nhưng cần bên đối tác xác nhận định dạng cuối cùng. Hiện tại phía họ vẫn im lặng, dù tôi đã gửi mail ba ngày trước.
+[00:03:32] Trang: Đây là rủi ro. Nếu không có mẫu chuẩn, dữ liệu mình tạo ra có thể không khớp với API của họ.
+[00:03:38] Lan: Chính xác. Tôi muốn hỏi ý kiến có nên tự giả định định dạng để làm tiếp không?
+[00:03:44] Minh: Không nên, làm vậy dễ phải chỉnh lại nhiều. Chị cứ chờ phản hồi từ họ.
+[00:03:49] Lan: Nhưng tôi lo trễ tiến độ. Nếu họ không phản hồi trước 27/02 thì phần dữ liệu mẫu sẽ bị đình trệ.
+[00:03:57] Trang: Chị cứ chuẩn bị phần dữ liệu thô và mapping có thể, còn phần xác thực định dạng tôi sẽ liên hệ lại với đầu mối đối tác vào chiều nay. Vậy tôi giao cho Lan task chuẩn bị dữ liệu mẫu, bao gồm làm sạch và transform, deadline là 03/03, nhưng với điều kiện có xác nhận định dạng trước 28/02. Nếu quá 28/02 mà chưa có, chị báo lại tôi ngay.
+[00:04:18] Lan: Được, tôi hiểu. Tôi cũng cần Tùng cung cấp cho tôi bộ tiêu chí chất lượng dữ liệu để tôi lọc giao dịch lỗi.
+[00:04:24] Tùng: Tôi sẽ gửi chị vào sáng thứ hai. Cũng liên quan, tôi muốn hỏi ai sẽ chuẩn bị môi trường test cho tôi? Hiện tại chưa có ai đứng ra cấu hình.
+[00:04:34] Trang: À, phần này tôi tính giao cho Thảo, nhưng do Thảo vắng mặt, tôi tạm assign cho Minh phối hợp. Minh, cậu giúp Tùng cấu hình môi trường test nhé.
+[00:04:43] Minh: Nhưng tôi đang quá tải. Hay là Lan hỗ trợ?
+[00:04:47] Lan: Tôi không rành hệ thống, chỉ làm được dữ liệu thôi.
+[00:04:52] Trang: Thôi được, tôi sẽ giao thẳng cho Thảo sau. Việc này chưa chốt, coi như pencilled. Tùng, cậu cần môi trường test khi nào?
+[00:05:01] Tùng: Chậm nhất là 25/02 để tôi kịp viết script tự động.
+[00:05:05] Trang: Ghi nhận. Tôi sẽ báo Thảo ngay khi cậu ấy vào. Còn nữa, Tùng, nhiệm vụ chạy test toàn bộ luồng tích hợp, tôi giao deadline 05/03, sau khi có môi trường và dữ liệu mẫu từ Lan. Cậu làm được chứ?
+[00:05:19] Tùng: Tôi làm được, miễn là môi trường ổn và dữ liệu đạt chuẩn. Tôi sẽ chuẩn bị test case trước.
+[00:05:26] Trang: Tốt. Vậy là các đầu việc chính đã có người nhận.
+[00:05:30] Thảo: Xin lỗi cả nhà, tôi vào muộn. Bên production có cảnh báo memory leak phải xử lý gấp.
+[00:05:36] Trang: Không sao. Đang bàn đến phần của Thảo. Môi trường staging đang lỗi, cần cậu kiểm tra và khôi phục. Với cả cần thiết lập môi trường test riêng cho Tùng trước 25/02.
+[00:05:47] Thảo: Ok, tôi sẽ ưu tiên. Staging thì tôi quen rồi, chắc liên quan đến phiên bản image mới. Còn môi trường test, tôi sẽ tạo một namespace riêng, đảm bảo tách biệt với staging.
+[00:05:57] Minh: Tôi có thể giúp cậu phần config container, vì tôi mới chỉnh file deployment hôm qua.
+[00:06:02] Thảo: Tốt quá, lát họp xong tôi ping cậu.
+[00:06:05] Trang: Vậy xem như việc khôi phục staging và tạo môi trường test là việc của Thảo, Minh chỉ hỗ trợ. Đây là việc cần làm, nhưng tôi chưa đặt deadline cho Thảo vì còn tùy tình hình. Thảo tự ước lượng nhé.
+[00:06:18] Thảo: Tôi sẽ cố gắng xong trước 24/02 để Tùng có thời gian.
+[00:06:22] Trang: Coi như cam kết. Tôi không ép, nhưng đây là điều kiện cần cho các việc khác.
+[00:06:28] Tùng: Cảm ơn Thảo.
+[00:06:30] Trang: Chuyển sang vấn đề phân quyền truy cập hệ thống mới. Tôi muốn nghe ý kiến từ mọi người.
+[00:06:37] Lan: Theo tôi, nên có ít nhất ba cấp: admin, operator và viewer. Admin toàn quyền, operator chỉ truy cập vào module vận hành, viewer chỉ xem báo cáo.
+[00:06:47] Minh: Nhưng hiện tại kiến trúc chưa hỗ trợ role-based access control. Cần phải code thêm một middleware authorization.
+[00:06:53] Trang: Đây là việc lớn. Tôi chưa đưa vào task cho sprint này vì cần đánh giá phạm vi trước đã. Các bạn cho ý kiến xem có nên dùng giải pháp có sẵn không?
+[00:07:03] Thảo: Mình có thể tận dụng IAM của cloud provider, không cần tự code nhiều.
+[00:07:08] Minh: Nhưng tích hợp IAM cũng mất thời gian config policy.
+[00:07:12] Huy: Em thấy cũng cần thiết, vì tháng sau có audit, nếu không phân quyền rõ ràng sẽ bị đánh giá không đạt.
+[00:07:19] Trang: Rồi, mình ghi nhận. Tôi cần một bạn research giải pháp và ước lượng effort. Ai tình nguyện?
+[00:07:25] Minh: Tôi có thể đọc tài liệu, nhưng không hứa sẽ xong sớm vì còn task chính.
+[00:07:30] Trang: Vậy chưa assign vội. Cứ coi đây là một item đang mở, tôi sẽ đưa vào backlog và cân nhắc sau khi có báo cáo từ Minh (nếu Minh làm).
+[00:07:40] Minh: Tôi sẽ đọc vào cuối tuần.
+[00:07:44] Trang: Như vậy, topic phân quyền chưa có action item chính thức, chỉ là research thăm dò. Cả nhà lưu ý để không nhầm là task bắt buộc.
+[00:07:52] Lan: Vậy còn phân quyền cho dữ liệu mẫu? Tôi cần biết ai được phép xem dữ liệu test.
+[00:07:57] Trang: Cái đó thì cứ theo quy định hiện tại: chỉ những ai trong dự án mới được truy cập, không cần thay đổi. Không cần tạo task riêng.
+[00:08:04] Lan: Rõ.
+[00:08:07] Trang: Quay lại với rollout. Chúng ta cần một bộ tài liệu hướng dẫn tích hợp cho đối tác. Ban đầu tôi định giao cho Minh, nhưng Minh đã nhiều việc.
+[00:08:17] Minh: Đúng, tôi không kham nổi. Có thể Huy làm được không? Vì Huy cũng cần hiểu sâu API để làm frontend, viết tài liệu cũng là cách học.
+[00:08:26] Huy: Em không ngại, nhưng phải có đặc tả API từ Minh.
+[00:08:31] Trang: Vậy tôi assign Huy viết tài liệu API integration guide, deadline 10/03. Minh sẽ chuyển giao đặc tả API cho Huy trước 27/02. Nhớ nhé Minh.
+[00:08:42] Minh: Tôi sẽ gửi file spec qua chat ngay khi hoàn tất, chắc trước 27/02.
+[00:08:48] Huy: Ok, em sẽ bắt đầu dàn bài ngay khi có spec.
+[00:08:52] Trang: Còn việc tổng hợp báo cáo giao dịch hàng tuần mà tôi đã giao cho Lan tuần trước, tôi quyết định hủy bỏ, vì ưu tiên dữ liệu mẫu cao hơn. Lan không cần làm báo cáo đó nữa.
+[00:09:03] Lan: Vậy là tôi drop hẳn nhé? Good, đỡ một mối lo.
+[00:09:07] Trang: Đúng, bỏ hẳn.
+[00:09:10] Minh: Tôi có một góp ý: khi rollout, mình có nên tổ chức buổi demo nội bộ không?
+[00:09:16] Huy: Theo em nên có, để cả team nắm được tổng thể.
+[00:09:20] Trang: Cũng hay, nhưng chưa cần lên task hội họp. Tôi sẽ cân nhắc và tự setup nếu cần. Giờ mọi người tập trung vào các task đã có.
+[00:09:29] Tùng: Cho tôi hỏi nhỏ, ai sẽ review code của Minh phần integration? Tôi cần biết để test được khớp.
+[00:09:36] Minh: Tôi tự review, cần gì ai nữa.
+[00:09:39] Tùng: Nhưng quy trình yêu cầu có ít nhất một peer review mà.
+[00:09:43] Trang: Đúng, tôi cũng muốn có người review độc lập. Huy, cậu có thể review code backend không?
+[00:09:48] Huy: Em không rành code backend, sợ không hiệu quả.
+[00:09:52] Trang: Thảo thì sao?
+[00:09:54] Thảo: Tôi cũng bận rồi, với lại tôi thiên về ops, code thì chỉ đọc được Ruby.
+[00:09:59] Trang: Vậy việc reviewer cho API integration vẫn chưa có, để tôi xem xét thêm. Tạm thời unresolved, tôi sẽ hỏi anh Nam ở team khác xem có giúp được không.
+[00:10:08] Minh: Miễn là đừng block tôi merge code.
+[00:10:11] Trang: Yên tâm, tôi sẽ lo. Nhưng đây là một mối lo vì có thể ảnh hưởng đến chất lượng code.
+[00:10:18] Lan: Tôi cũng có một unresolved item: bên đối tác chưa phản hồi về định dạng dữ liệu, như đã nói. Tôi thấy hơi lo.
+[00:10:24] Trang: Tôi sẽ gọi ngay sau họp. Nếu không được, tôi sẽ escalation lên sếp. Cả nhà nhớ, đây là hai điểm unresolved chính: reviewer API và định dạng dữ liệu từ đối tác.
+[00:10:36] Tùng: Vậy tôi đề nghị mình recap lại các task để tránh sót, vì hôm nay có nhiều thay đổi.
+[00:10:42] Trang: Đồng ý, tôi recap nhé. Các bạn lắng nghe để khỏi nhầm.
+[00:10:47] Trang: Đầu tiên, Minh có hai task: một là hoàn thiện API integration, deadline 28/02. Hai là tối ưu hiệu năng API, có Huy hỗ trợ, deadline 05/03. Lưu ý đây là hai task khác nhau, dù đều liên quan API, tránh nhầm lẫn.
+[00:11:02] Minh: Rõ, integration là xác thực và kết nối; performance là caching và truy vấn.
+[00:11:07] Trang: Đúng. Tiếp theo, Lan chuẩn bị dữ liệu mẫu, deadline 03/03, kèm điều kiện phải có xác nhận định dạng trước 28/02. Tùng kiểm thử tích hợp, deadline 05/03. Huy viết tài liệu API guide, deadline 10/03, và Minh handoff đặc tả trước 27/02. Thảo khôi phục staging và tạo môi trường test, cố gắng xong trước 24/02. Ngoài ra, task tổng hợp báo cáo giao dịch cho Lan đã bị hủy, không làm nữa.
+[00:11:35] Tùng: Ok, tôi đã note đủ.
+[00:11:37] Lan: Tôi thấy chị không nhắc đến việc cấu hình môi trường test cho Tùng? Là nhiệm vụ của Thảo phải không?
+[00:11:42] Trang: Đúng, tôi gộp vào phần Thảo rồi, “tạo môi trường test” đó. Còn việc phân quyền thì chưa là task, chỉ là thảo luận. Với unresolved reviewer, tôi sẽ tìm người. Còn gì nữa không?
+[00:11:55] Huy: Em thấy có vẻ ổn.
+[00:11:57] Minh: Tôi chỉ lo task performance, vì dời deadline sang 05/03 nhưng tôi sợ không đủ thời gian cho Huy làm quen code.
+[00:12:04] Huy: Yên tâm, em sẽ không làm chậm tiến độ.
+[00:12:07] Trang: Đã thống nhất. Cả nhà lưu ý các mốc thời gian. Tôi sẽ gửi biên bản sau họp, mọi người xác nhận lại email nhé.
+[00:12:16] Thảo: Ok, tôi sẽ check mail.
+[00:12:19] Tùng: Tôi cũng sẽ bắt tay vào viết test script ngay.
+[00:12:22] Lan: Tôi tranh thủ làm sạch dữ liệu, dù chưa có định dạng cuối.
+[00:12:26] Trang: Cẩn thận nhé. Vậy kết thúc buổi họp hôm nay. Cảm ơn mọi người.
+[00:12:30] Minh: Cảm ơn Trang.
+[00:12:32] Huy: Bye mọi người.
+[00:12:34] Thảo: Tôi out đây, còn việc cần làm.
+[00:12:36] Tùng: Tôi cũng vậy.
+[00:12:38] Lan: Chào cả nhà.

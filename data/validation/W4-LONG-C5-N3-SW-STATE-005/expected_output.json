@@ -1,0 +1,37 @@
+{
+  "meeting_title": "Họp điều phối triển khai hệ thống",
+  "tasks": [
+    {
+      "task_name": "Hoàn thiện môi trường test staging",
+      "assignee": "Lan",
+      "start_date": "2026-02-19",
+      "due_date": "2026-02-26",
+      "due_date_text": "deadline 26/2",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Hoàn thiện tài liệu hướng dẫn triển khai staging",
+      "assignee": "Hà",
+      "start_date": "2026-02-19",
+      "due_date": "2026-03-05",
+      "due_date_text": "deadline 5/3",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Xử lý lỗi lock tài khoản staging và cấu hình monitoring",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-19",
+      "due_date": "2026-02-22",
+      "due_date_text": "monitoring deadline 22/2",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết rollback plan cho release",
+      "assignee": "Lan",
+      "start_date": "2026-02-19",
+      "due_date": "2026-02-22",
+      "due_date_text": "deadline 22/2",
+      "status": "Proposed"
+    }
+  ]
+}

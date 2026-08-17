@@ -1,0 +1,28 @@
+{
+  "case": {
+    "wave": 1,
+    "case_index": 4,
+    "meeting_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004",
+    "meeting_date": "2026-01-19",
+    "title": "Chuẩn bị bản demo",
+    "labels": "task_without_deadline,negative_context,clean_transcript",
+    "objective": "Có task rõ owner nhưng không có deadline; thêm suggestion chưa chốt."
+  },
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 681,
+    "turn_count": 47
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 42.730768499997794
+    }
+  ]
+}

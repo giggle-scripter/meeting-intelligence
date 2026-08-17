@@ -1,0 +1,98 @@
+MEETING_ID: W4-LONG-C4-N1-OPS-STATE-012
+PART: P04/5
+
+T000181 [10:15:02] Linh: Chúng ta tiếp tục. Phần này em muốn bàn về kế hoạch release và monitoring sau khi triển khai. Có ai có ý kiến gì không?
+
+T000182 [10:15:30] Minh: Em nghĩ cần xác định thời điểm release dự kiến, dựa trên các task hiện tại. Task A xong 02/03, task E xong 03/03, task B xong 05/03, task D xong 08/03. Vậy có thể release vào khoảng 10/03?
+
+T000183 [10:16:00] Huy: Nhưng còn testing phase nữa, chưa bàn. Em đề xuất release sau khi test xong, khoảng giữa tháng 3.
+
+T000184 [10:16:25] Trang: Vậy cần monitoring system để theo dõi sau release. Em có biết tool nào không?
+
+T000185 [10:16:50] Linh: Có thể dùng Grafana và Prometheus, nhưng cần cấu hình. Ai có kinh nghiệm?
+
+T000186 [10:17:15] Huy: Em từng setup, có thể làm. Nhưng mà task đó chưa có trong danh sách. Hay tạo task mới: “Cấu hình monitoring system”?
+
+T000187 [10:17:40] Minh: Nếu tạo task mới, deadline khi nào? Có thể sau task B.
+
+T000188 [10:18:00] Linh: Để sau, hiện tại em muốn xem lại các task cũ. Có task nào không cần thiết không? Em thấy task G “Phản hồi marketing về tính năng mới” có vẻ không ảnh hưởng đến kỹ thuật.
+
+T000189 [10:18:30] Trang: Thực ra em đã trả lời marketing qua email, họ không cần thêm gì. Vậy task G có thể hủy.
+
+T000190 [10:18:55] Linh: Vậy hủy task G. Mọi người đồng ý?
+
+T000191 [10:19:15] Huy: Đồng ý.
+
+T000192 [10:19:35] Minh: Em cũng ok.
+
+T000193 [10:19:55] Linh: Vậy task G chính thức bị hủy. Quay lại vấn đề monitoring, em thấy task F “Chuẩn bị dữ liệu test cho login” vẫn chưa có deadline. Trong khi task E sửa lỗi đăng nhập có deadline 03/03. Em muốn đặt deadline cho task F là 04/03, để kịp test sau khi sửa lỗi.
+
+T000194 [10:20:30] Huy: 04/03 hơi gấp, vì em còn task B và C. Nhưng em có thể làm song song. Deadline đó ok.
+
+T000195 [10:21:00] Trang: Vậy task F deadline 04/03. Nhưng mà dữ liệu test cần phối hợp với Minh.
+
+T000196 [10:21:25] Minh: Em sẽ cung cấp thông tin lỗi cho Huy trước 03/03.
+
+T000197 [10:21:50] Huy: Tốt, em sẽ bắt đầu script sau khi có thông tin.
+
+T000198 [10:22:15] Linh: Về monitoring, em muốn thảo luận negative context. Nếu không có monitoring, khi release gặp lỗi, team sẽ không biết sớm.
+
+T000199 [10:22:45] Minh: Đúng, rủi ro cao. Em đề xuất nên có task monitoring riêng.
+
+T000200 [10:23:10] Huy: Nhưng mà nếu tạo task mới, sẽ thêm áp lực. Em có thể gộp vào task B, vì hướng dẫn thiết lập môi trường có thể bao gồm monitoring.
+
+T000201 [10:23:40] Trang: Ý hay, task B hiện do Huy phụ trách, có thể mở rộng nội dung.
+
+T000202 [10:24:00] Linh: Vậy task B sẽ bao gồm cả hướng dẫn monitoring. Huy, em có đủ thời gian không?
+
+T000203 [10:24:25] Huy: Em sẽ cố gắng. Deadline 05/03, em có thể thêm phần monitoring.
+
+T000204 [10:24:50] Minh: Nhưng mà monitoring cần công cụ cụ thể, có thể cần thêm thời gian.
+
+T000205 [10:25:15] Huy: Em đã từng làm, nên không mất nhiều thời gian.
+
+T000206 [10:25:40] Linh: Vậy ok. Tiếp theo, về release plan, em nghĩ cần có một buổi họp riêng với team vận hành. Nhưng đó là part sau.
+
+T000207 [10:26:05] Trang: Có cần tạo task cho việc đó không?
+
+T000208 [10:26:25] Linh: Chưa, để sau. Bây giờ em muốn kiểm tra lại tiến độ task A. Minh, có tin gì từ IT chưa?
+
+T000209 [10:26:50] Minh: Chưa, em sẽ gọi lại cho anh Dũng chiều nay.
+
+T000210 [10:27:15] Huy: Nếu cần, em có thể gọi luôn.
+
+T000211 [10:27:35] Linh: Cứ để Minh xử lý. Còn task C của Huy, đã có phản hồi từ anh An chưa?
+
+T000212 [10:27:55] Huy: Chưa, em đang chờ. Chị Linh có nhắc giúp không?
+
+T000213 [10:28:15] Linh: Em sẽ nhắc anh An sau cuộc họp.
+
+T000214 [10:28:35] Minh: Vậy task C vẫn unresolved.
+
+T000215 [10:28:55] Linh: Đúng. Bây giờ em muốn bàn về kế hoạch testing. Có ai có đề xuất không?
+
+T000216 [10:29:20] Huy: Sau khi task E và F xong, team QA có thể bắt đầu test login flow. Dự kiến test trong 2 ngày.
+
+T000217 [10:29:45] Trang: Em có thể hỗ trợ viết test case nếu cần.
+
+T000218 [10:30:05] Linh: Vậy ta có thể lên lịch test từ 05/03 đến 07/03. Task B và D cũng cần review.
+
+T000219 [10:30:30] Minh: Em nghĩ nên có một buổi review tài liệu trước khi release.
+
+T000220 [10:30:55] Huy: Đồng ý, em có thể tham gia.
+
+T000221 [10:31:15] Linh: Tốt. Có ai muốn thêm vấn đề gì về release không?
+
+T000222 [10:31:35] Trang: Em muốn hỏi là có cần backup kế hoạch nếu release thất bại không?
+
+T000223 [10:31:55] Huy: Có, nên có rollback plan. Em đã đề cập trong task D.
+
+T000224 [10:32:15] Linh: Vậy task D cần bao gồm rollback plan. Trang, em nhớ bổ sung.
+
+T000225 [10:32:35] Trang: Vâng, em sẽ thêm.
+
+T000226 [10:32:55] Minh: Em thấy các task đã rõ. Còn gì cần thảo luận nữa không?
+
+T000227 [10:33:15] Linh: Em nghĩ chúng ta đã cover được nhiều vấn đề. Part sau sẽ là phần cuối, có thể tổng kết. Bây giờ tạm dừng.
+
+--- END OF PART P04 ---

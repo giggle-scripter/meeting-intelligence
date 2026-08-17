@@ -1,0 +1,6 @@
+ghi vội
+chủ đề: Chuẩn bị môi trường kiểm thử
+kw: moi truong / kiem thu / release / chuan / truong / nhe / dua
+- Vậy em sẽ chuẩn bị môi trường dựa trên VM hiện có
+* Đúng rồi, em chuẩn bị môi trường kiểm thử cho release này nhé, dl là thứ Tư tuần sau
+- Quyền đó chị sẽ cấp, em gửi email request

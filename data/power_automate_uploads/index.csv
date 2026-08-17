@@ -1,0 +1,173 @@
+﻿file_name,variant,case_id,meeting_title,meeting_date,wave,labels,meeting_note,expected_task_count
+W1-SHORT-C1-N0-IT-DASG-ABS-002.txt,transcript_only,W1-SHORT-C1-N0-IT-DASG-ABS-002,Theo dõi tiến độ tài liệu,2026-01-17,1,direct_assignment;absolute_date;clean_transcript,no,2
+W1-SHORT-C1-N0-IT-DASG-ABS-002__with-note.txt,with_note,W1-SHORT-C1-N0-IT-DASG-ABS-002,Theo dõi tiến độ tài liệu,2026-01-17,1,direct_assignment;absolute_date;clean_transcript,yes,2
+W1-SHORT-C1-N0-IT-DASG-ABS-010.txt,transcript_only,W1-SHORT-C1-N0-IT-DASG-ABS-010,Theo dõi tiến độ tài liệu,2026-01-25,1,direct_assignment;absolute_date;clean_transcript,no,2
+W1-SHORT-C1-N0-IT-DASG-ABS-010__with-note.txt,with_note,W1-SHORT-C1-N0-IT-DASG-ABS-010,Theo dõi tiến độ tài liệu,2026-01-25,1,direct_assignment;absolute_date;clean_transcript,yes,2
+W1-SHORT-C1-N0-IT-DASG-ABS-018.txt,transcript_only,W1-SHORT-C1-N0-IT-DASG-ABS-018,Theo dõi tiến độ tài liệu,2026-02-02,1,direct_assignment;absolute_date;clean_transcript,no,2
+W1-SHORT-C1-N0-IT-DASG-ABS-018__with-note.txt,with_note,W1-SHORT-C1-N0-IT-DASG-ABS-018,Theo dõi tiến độ tài liệu,2026-02-02,1,direct_assignment;absolute_date;clean_transcript,yes,2
+W1-SHORT-C1-N0-IT-FPC-DM-006.txt,transcript_only,W1-SHORT-C1-N0-IT-FPC-DM-006,Theo dõi tiến độ tài liệu,2026-01-21,1,first_person_commitment;day_month_deadline;mild_noise,no,1
+W1-SHORT-C1-N0-IT-FPC-DM-006__with-note.txt,with_note,W1-SHORT-C1-N0-IT-FPC-DM-006,Theo dõi tiến độ tài liệu,2026-01-21,1,first_person_commitment;day_month_deadline;mild_noise,yes,1
+W1-SHORT-C1-N0-IT-FPC-DM-014.txt,transcript_only,W1-SHORT-C1-N0-IT-FPC-DM-014,Theo dõi tiến độ tài liệu,2026-01-29,1,first_person_commitment;day_month_deadline;mild_noise,no,4
+W1-SHORT-C1-N0-IT-FPC-DM-014__with-note.txt,with_note,W1-SHORT-C1-N0-IT-FPC-DM-014,Theo dõi tiến độ tài liệu,2026-01-29,1,first_person_commitment;day_month_deadline;mild_noise,yes,4
+W1-SHORT-C1-N0-OPS-FPC-NDL-008.txt,transcript_only,W1-SHORT-C1-N0-OPS-FPC-NDL-008,Chuẩn bị bản demo,2026-01-23,1,first_person_commitment;no_deadline;mild_noise,no,2
+W1-SHORT-C1-N0-OPS-FPC-NDL-008__with-note.txt,with_note,W1-SHORT-C1-N0-OPS-FPC-NDL-008,Chuẩn bị bản demo,2026-01-23,1,first_person_commitment;no_deadline;mild_noise,yes,2
+W1-SHORT-C1-N0-OPS-FPC-NDL-016.txt,transcript_only,W1-SHORT-C1-N0-OPS-FPC-NDL-016,Chuẩn bị bản demo,2026-01-31,1,first_person_commitment;no_deadline;mild_noise,no,2
+W1-SHORT-C1-N0-OPS-FPC-NDL-016__with-note.txt,with_note,W1-SHORT-C1-N0-OPS-FPC-NDL-016,Chuẩn bị bản demo,2026-01-31,1,first_person_commitment;no_deadline;mild_noise,yes,2
+W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004.txt,transcript_only,W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004,Chuẩn bị bản demo,2026-01-19,1,task_without_deadline;negative_context;clean_transcript,no,4
+W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004__with-note.txt,with_note,W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004,Chuẩn bị bản demo,2026-01-19,1,task_without_deadline;negative_context;clean_transcript,yes,4
+W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012.txt,transcript_only,W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012,Chuẩn bị bản demo,2026-01-27,1,task_without_deadline;negative_context;clean_transcript,no,2
+W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012__with-note.txt,with_note,W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-012,Chuẩn bị bản demo,2026-01-27,1,task_without_deadline;negative_context;clean_transcript,yes,2
+W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020.txt,transcript_only,W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020,Chuẩn bị bản demo,2026-02-04,1,task_without_deadline;negative_context;clean_transcript,no,2
+W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020__with-note.txt,with_note,W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020,Chuẩn bị bản demo,2026-02-04,1,task_without_deadline;negative_context;clean_transcript,yes,2
+W1-SHORT-C2-N1-PROD-NEG-QUNC-007.txt,transcript_only,W1-SHORT-C2-N1-PROD-NEG-QUNC-007,Rà soát lỗi đăng nhập,2026-01-22,1,question_unconfirmed;negative_only;clean_transcript,no,3
+W1-SHORT-C2-N1-PROD-NEG-QUNC-007__with-note.txt,with_note,W1-SHORT-C2-N1-PROD-NEG-QUNC-007,Rà soát lỗi đăng nhập,2026-01-22,1,question_unconfirmed;negative_only;clean_transcript,yes,3
+W1-SHORT-C2-N1-PROD-NEG-QUNC-015.txt,transcript_only,W1-SHORT-C2-N1-PROD-NEG-QUNC-015,Rà soát lỗi đăng nhập,2026-01-30,1,question_unconfirmed;negative_only;clean_transcript,no,2
+W1-SHORT-C2-N1-PROD-NEG-QUNC-015__with-note.txt,with_note,W1-SHORT-C2-N1-PROD-NEG-QUNC-015,Rà soát lỗi đăng nhập,2026-01-30,1,question_unconfirmed;negative_only;clean_transcript,yes,2
+W1-SHORT-C2-N1-PROD-QACC-RDAY-003.txt,transcript_only,W1-SHORT-C2-N1-PROD-QACC-RDAY-003,Rà soát lỗi đăng nhập,2026-01-18,1,question_then_acceptance;relative_day_deadline;mild_noise,no,2
+W1-SHORT-C2-N1-PROD-QACC-RDAY-003__with-note.txt,with_note,W1-SHORT-C2-N1-PROD-QACC-RDAY-003,Rà soát lỗi đăng nhập,2026-01-18,1,question_then_acceptance;relative_day_deadline;mild_noise,yes,2
+W1-SHORT-C2-N1-PROD-QACC-RDAY-011.txt,transcript_only,W1-SHORT-C2-N1-PROD-QACC-RDAY-011,Rà soát lỗi đăng nhập,2026-01-26,1,question_then_acceptance;relative_day_deadline;mild_noise,no,2
+W1-SHORT-C2-N1-PROD-QACC-RDAY-011__with-note.txt,with_note,W1-SHORT-C2-N1-PROD-QACC-RDAY-011,Rà soát lỗi đăng nhập,2026-01-26,1,question_then_acceptance;relative_day_deadline;mild_noise,yes,2
+W1-SHORT-C2-N1-PROD-QACC-RDAY-019.txt,transcript_only,W1-SHORT-C2-N1-PROD-QACC-RDAY-019,Rà soát lỗi đăng nhập,2026-02-03,1,question_then_acceptance;relative_day_deadline;mild_noise,no,2
+W1-SHORT-C2-N1-PROD-QACC-RDAY-019__with-note.txt,with_note,W1-SHORT-C2-N1-PROD-QACC-RDAY-019,Rà soát lỗi đăng nhập,2026-02-03,1,question_then_acceptance;relative_day_deadline;mild_noise,yes,2
+W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005.txt,transcript_only,W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005,Chuẩn bị môi trường kiểm thử,2026-01-20,1,direct_assignment;weekday_next;negative_context,no,2
+W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005__with-note.txt,with_note,W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005,Chuẩn bị môi trường kiểm thử,2026-01-20,1,direct_assignment;weekday_next;negative_context,yes,2
+W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013.txt,transcript_only,W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013,Chuẩn bị môi trường kiểm thử,2026-01-28,1,direct_assignment;weekday_next;negative_context,no,1
+W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013__with-note.txt,with_note,W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013,Chuẩn bị môi trường kiểm thử,2026-01-28,1,direct_assignment;weekday_next;negative_context,yes,1
+W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001.txt,transcript_only,W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001,Chuẩn bị môi trường kiểm thử,2026-01-16,1,first_person_commitment;weekday_deadline;negative_context,no,1
+W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001__with-note.txt,with_note,W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001,Chuẩn bị môi trường kiểm thử,2026-01-16,1,first_person_commitment;weekday_deadline;negative_context,yes,1
+W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009.txt,transcript_only,W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009,Chuẩn bị môi trường kiểm thử,2026-01-24,1,first_person_commitment;weekday_deadline;negative_context,no,3
+W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009__with-note.txt,with_note,W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-009,Chuẩn bị môi trường kiểm thử,2026-01-24,1,first_person_commitment;weekday_deadline;negative_context,yes,3
+W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-017.txt,transcript_only,W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-017,Chuẩn bị môi trường kiểm thử,2026-02-01,1,first_person_commitment;weekday_deadline;negative_context,no,2
+W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-017__with-note.txt,with_note,W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-017,Chuẩn bị môi trường kiểm thử,2026-02-01,1,first_person_commitment;weekday_deadline;negative_context,yes,2
+W2-SHORT-C2-N0-IT-BRST-006.txt,transcript_only,W2-SHORT-C2-N0-IT-BRST-006,Trao đổi kế hoạch tích hợp,2026-01-31,2,brainstorm_only;no_active_task,no,0
+W2-SHORT-C2-N0-IT-BRST-006__with-note.txt,with_note,W2-SHORT-C2-N0-IT-BRST-006,Trao đổi kế hoạch tích hợp,2026-01-31,2,brainstorm_only;no_active_task,yes,0
+W2-SHORT-C2-N0-IT-DREP-030.txt,transcript_only,W2-SHORT-C2-N0-IT-DREP-030,Trao đổi kế hoạch tích hợp,2026-02-24,2,deadline_replacement;deadline_in_separate_sentence,no,2
+W2-SHORT-C2-N0-IT-DREP-030__with-note.txt,with_note,W2-SHORT-C2-N0-IT-DREP-030,Trao đổi kế hoạch tích hợp,2026-02-24,2,deadline_replacement;deadline_in_separate_sentence,yes,2
+W2-SHORT-C2-N0-IT-DUPR-018.txt,transcript_only,W2-SHORT-C2-N0-IT-DUPR-018,Trao đổi kế hoạch tích hợp,2026-02-12,2,task_mentioned_across_turns;recap_duplicate_risk,no,1
+W2-SHORT-C2-N0-IT-DUPR-018__with-note.txt,with_note,W2-SHORT-C2-N0-IT-DUPR-018,Trao đổi kế hoạch tích hợp,2026-02-12,2,task_mentioned_across_turns;recap_duplicate_risk,yes,1
+W2-SHORT-C2-N0-OPS-BRST-024.txt,transcript_only,W2-SHORT-C2-N0-OPS-BRST-024,Chuẩn bị bản phát hành nội bộ,2026-02-18,2,brainstorm_only;no_active_task,no,0
+W2-SHORT-C2-N0-OPS-BRST-024__with-note.txt,with_note,W2-SHORT-C2-N0-OPS-BRST-024,Chuẩn bị bản phát hành nội bộ,2026-02-18,2,brainstorm_only;no_active_task,yes,0
+W2-SHORT-C2-N0-OPS-DREP-012.txt,transcript_only,W2-SHORT-C2-N0-OPS-DREP-012,Chuẩn bị bản phát hành nội bộ,2026-02-06,2,deadline_replacement;deadline_in_separate_sentence,no,1
+W2-SHORT-C2-N0-OPS-DREP-012__with-note.txt,with_note,W2-SHORT-C2-N0-OPS-DREP-012,Chuẩn bị bản phát hành nội bộ,2026-02-06,2,deadline_replacement;deadline_in_separate_sentence,yes,1
+W2-SHORT-C2-N1-IT-NOOWN-022.txt,transcript_only,W2-SHORT-C2-N1-IT-NOOWN-022,Trao đổi kế hoạch tích hợp,2026-02-16,2,task_without_owner;unresolved_owner,no,4
+W2-SHORT-C2-N1-IT-NOOWN-022__with-note.txt,with_note,W2-SHORT-C2-N1-IT-NOOWN-022,Trao đổi kế hoạch tích hợp,2026-02-16,2,task_without_owner;unresolved_owner,yes,4
+W2-SHORT-C2-N1-IT-REJT-010.txt,transcript_only,W2-SHORT-C2-N1-IT-REJT-010,Trao đổi kế hoạch tích hợp,2026-02-04,2,task_rejection;rejected_without_replacement,no,0
+W2-SHORT-C2-N1-IT-REJT-010__with-note.txt,with_note,W2-SHORT-C2-N1-IT-REJT-010,Trao đổi kế hoạch tích hợp,2026-02-04,2,task_rejection;rejected_without_replacement,yes,0
+W2-SHORT-C2-N1-OPS-NOOWN-004.txt,transcript_only,W2-SHORT-C2-N1-OPS-NOOWN-004,Chuẩn bị bản phát hành nội bộ,2026-01-29,2,task_without_owner;unresolved_owner,no,3
+W2-SHORT-C2-N1-OPS-NOOWN-004__with-note.txt,with_note,W2-SHORT-C2-N1-OPS-NOOWN-004,Chuẩn bị bản phát hành nội bộ,2026-01-29,2,task_without_owner;unresolved_owner,yes,3
+W2-SHORT-C2-N1-OPS-REJT-028.txt,transcript_only,W2-SHORT-C2-N1-OPS-REJT-028,Chuẩn bị bản phát hành nội bộ,2026-02-22,2,task_rejection;rejected_without_replacement,no,2
+W2-SHORT-C2-N1-OPS-REJT-028__with-note.txt,with_note,W2-SHORT-C2-N1-OPS-REJT-028,Chuẩn bị bản phát hành nội bộ,2026-02-22,2,task_rejection;rejected_without_replacement,yes,2
+W2-SHORT-C2-N1-OPS-SEPD-016.txt,transcript_only,W2-SHORT-C2-N1-OPS-SEPD-016,Chuẩn bị bản phát hành nội bộ,2026-02-10,2,deadline_in_separate_sentence;task_mentioned_across_turns,no,3
+W2-SHORT-C2-N1-OPS-SEPD-016__with-note.txt,with_note,W2-SHORT-C2-N1-OPS-SEPD-016,Chuẩn bị bản phát hành nội bộ,2026-02-10,2,deadline_in_separate_sentence;task_mentioned_across_turns,yes,3
+W2-SHORT-C2-N2-IT-DASG-002.txt,transcript_only,W2-SHORT-C2-N2-IT-DASG-002,Trao đổi kế hoạch tích hợp,2026-01-27,2,direct_assignment;negative_context,no,3
+W2-SHORT-C2-N2-IT-DASG-002__with-note.txt,with_note,W2-SHORT-C2-N2-IT-DASG-002,Trao đổi kế hoạch tích hợp,2026-01-27,2,direct_assignment;negative_context,yes,3
+W2-SHORT-C2-N2-IT-PAST-026.txt,transcript_only,W2-SHORT-C2-N2-IT-PAST-026,Trao đổi kế hoạch tích hợp,2026-02-20,2,past_completed_work;informational_statement,no,0
+W2-SHORT-C2-N2-IT-PAST-026__with-note.txt,with_note,W2-SHORT-C2-N2-IT-PAST-026,Trao đổi kế hoạch tích hợp,2026-02-20,2,past_completed_work;informational_statement,yes,0
+W2-SHORT-C2-N2-IT-WORK-014.txt,transcript_only,W2-SHORT-C2-N2-IT-WORK-014,Trao đổi kế hoạch tích hợp,2026-02-08,2,working_day_duration;deadline_in_separate_sentence,no,2
+W2-SHORT-C2-N2-IT-WORK-014__with-note.txt,with_note,W2-SHORT-C2-N2-IT-WORK-014,Trao đổi kế hoạch tích hợp,2026-02-08,2,working_day_duration;deadline_in_separate_sentence,yes,2
+W2-SHORT-C2-N2-OPS-DASG-020.txt,transcript_only,W2-SHORT-C2-N2-OPS-DASG-020,Chuẩn bị bản phát hành nội bộ,2026-02-14,2,direct_assignment;negative_context,no,2
+W2-SHORT-C2-N2-OPS-DASG-020__with-note.txt,with_note,W2-SHORT-C2-N2-OPS-DASG-020,Chuẩn bị bản phát hành nội bộ,2026-02-14,2,direct_assignment;negative_context,yes,2
+W2-SHORT-C2-N2-OPS-PAST-008.txt,transcript_only,W2-SHORT-C2-N2-OPS-PAST-008,Chuẩn bị bản phát hành nội bộ,2026-02-02,2,past_completed_work;informational_statement,no,0
+W2-SHORT-C2-N2-OPS-PAST-008__with-note.txt,with_note,W2-SHORT-C2-N2-OPS-PAST-008,Chuẩn bị bản phát hành nội bộ,2026-02-02,2,past_completed_work;informational_statement,yes,0
+W2-SHORT-C3-N0-PROD-CANC-027.txt,transcript_only,W2-SHORT-C3-N0-PROD-CANC-027,Theo dõi lỗi và tài liệu,2026-02-21,2,task_cancellation;cancelled_not_output,no,0
+W2-SHORT-C3-N0-PROD-CANC-027__with-note.txt,with_note,W2-SHORT-C3-N0-PROD-CANC-027,Theo dõi lỗi và tài liệu,2026-02-21,2,task_cancellation;cancelled_not_output,yes,0
+W2-SHORT-C3-N0-PROD-EVTD-015.txt,transcript_only,W2-SHORT-C3-N0-PROD-EVTD-015,Theo dõi lỗi và tài liệu,2026-02-09,2,event_dependent_deadline;dependency_commitment,no,3
+W2-SHORT-C3-N0-PROD-EVTD-015__with-note.txt,with_note,W2-SHORT-C3-N0-PROD-EVTD-015,Theo dõi lỗi và tài liệu,2026-02-09,2,event_dependent_deadline;dependency_commitment,yes,3
+W2-SHORT-C3-N0-PROD-QACC-003.txt,transcript_only,W2-SHORT-C3-N0-PROD-QACC-003,Theo dõi lỗi và tài liệu,2026-01-28,2,question_then_acceptance;task_confirmed_later,no,2
+W2-SHORT-C3-N0-PROD-QACC-003__with-note.txt,with_note,W2-SHORT-C3-N0-PROD-QACC-003,Theo dõi lỗi và tài liệu,2026-01-28,2,question_then_acceptance;task_confirmed_later,yes,2
+W2-SHORT-C3-N0-SW-CANC-009.txt,transcript_only,W2-SHORT-C3-N0-SW-CANC-009,Rà soát công việc sprint,2026-02-03,2,task_cancellation;cancelled_not_output,no,0
+W2-SHORT-C3-N0-SW-CANC-009__with-note.txt,with_note,W2-SHORT-C3-N0-SW-CANC-009,Rà soát công việc sprint,2026-02-03,2,task_cancellation;cancelled_not_output,yes,0
+W2-SHORT-C3-N0-SW-QACC-021.txt,transcript_only,W2-SHORT-C3-N0-SW-QACC-021,Rà soát công việc sprint,2026-02-15,2,question_then_acceptance;task_confirmed_later,no,1
+W2-SHORT-C3-N0-SW-QACC-021__with-note.txt,with_note,W2-SHORT-C3-N0-SW-QACC-021,Rà soát công việc sprint,2026-02-15,2,question_then_acceptance;task_confirmed_later,yes,1
+W2-SHORT-C3-N1-PROD-FPC-019.txt,transcript_only,W2-SHORT-C3-N1-PROD-FPC-019,Theo dõi lỗi và tài liệu,2026-02-13,2,first_person_commitment;negative_context,no,4
+W2-SHORT-C3-N1-PROD-FPC-019__with-note.txt,with_note,W2-SHORT-C3-N1-PROD-FPC-019,Theo dõi lỗi và tài liệu,2026-02-13,2,first_person_commitment;negative_context,yes,4
+W2-SHORT-C3-N1-PROD-SUGG-007.txt,transcript_only,W2-SHORT-C3-N1-PROD-SUGG-007,Theo dõi lỗi và tài liệu,2026-02-01,2,suggestion_not_committed;no_active_task,no,0
+W2-SHORT-C3-N1-PROD-SUGG-007__with-note.txt,with_note,W2-SHORT-C3-N1-PROD-SUGG-007,Theo dõi lỗi và tài liệu,2026-02-01,2,suggestion_not_committed;no_active_task,yes,0
+W2-SHORT-C3-N1-SW-FPC-001.txt,transcript_only,W2-SHORT-C3-N1-SW-FPC-001,Rà soát công việc sprint,2026-01-26,2,first_person_commitment;negative_context,no,1
+W2-SHORT-C3-N1-SW-FPC-001__with-note.txt,with_note,W2-SHORT-C3-N1-SW-FPC-001,Rà soát công việc sprint,2026-01-26,2,first_person_commitment;negative_context,yes,1
+W2-SHORT-C3-N1-SW-RWKD-013.txt,transcript_only,W2-SHORT-C3-N1-SW-RWKD-013,Rà soát công việc sprint,2026-02-07,2,weekday_current;before_day,no,2
+W2-SHORT-C3-N1-SW-RWKD-013__with-note.txt,with_note,W2-SHORT-C3-N1-SW-RWKD-013,Rà soát công việc sprint,2026-02-07,2,weekday_current;before_day,yes,2
+W2-SHORT-C3-N1-SW-SUGG-025.txt,transcript_only,W2-SHORT-C3-N1-SW-SUGG-025,Rà soát công việc sprint,2026-02-19,2,suggestion_not_committed;no_active_task,no,1
+W2-SHORT-C3-N1-SW-SUGG-025__with-note.txt,with_note,W2-SHORT-C3-N1-SW-SUGG-025,Rà soát công việc sprint,2026-02-19,2,suggestion_not_committed;no_active_task,yes,1
+W2-SHORT-C3-N2-PROD-HOFF-011.txt,transcript_only,W2-SHORT-C3-N2-PROD-HOFF-011,Theo dõi lỗi và tài liệu,2026-02-05,2,owner_handoff;task_confirmed_later,no,2
+W2-SHORT-C3-N2-PROD-HOFF-011__with-note.txt,with_note,W2-SHORT-C3-N2-PROD-HOFF-011,Theo dõi lỗi và tài liệu,2026-02-05,2,owner_handoff;task_confirmed_later,yes,2
+W2-SHORT-C3-N2-PROD-NDL-023.txt,transcript_only,W2-SHORT-C3-N2-PROD-NDL-023,Theo dõi lỗi và tài liệu,2026-02-17,2,task_without_deadline;first_person_commitment,no,2
+W2-SHORT-C3-N2-PROD-NDL-023__with-note.txt,with_note,W2-SHORT-C3-N2-PROD-NDL-023,Theo dõi lỗi và tài liệu,2026-02-17,2,task_without_deadline;first_person_commitment,yes,2
+W2-SHORT-C3-N2-SW-HOFF-029.txt,transcript_only,W2-SHORT-C3-N2-SW-HOFF-029,Rà soát công việc sprint,2026-02-23,2,owner_handoff;task_confirmed_later,no,1
+W2-SHORT-C3-N2-SW-HOFF-029__with-note.txt,with_note,W2-SHORT-C3-N2-SW-HOFF-029,Rà soát công việc sprint,2026-02-23,2,owner_handoff;task_confirmed_later,yes,1
+W2-SHORT-C3-N2-SW-NDL-005.txt,transcript_only,W2-SHORT-C3-N2-SW-NDL-005,Rà soát công việc sprint,2026-01-30,2,task_without_deadline;first_person_commitment,no,2
+W2-SHORT-C3-N2-SW-NDL-005__with-note.txt,with_note,W2-SHORT-C3-N2-SW-NDL-005,Rà soát công việc sprint,2026-01-30,2,task_without_deadline;first_person_commitment,yes,2
+W2-SHORT-C3-N2-SW-RECF-017.txt,transcript_only,W2-SHORT-C3-N2-SW-RECF-017,Rà soát công việc sprint,2026-02-11,2,repeated_confirmation;recap_duplicate_risk,no,1
+W2-SHORT-C3-N2-SW-RECF-017__with-note.txt,with_note,W2-SHORT-C3-N2-SW-RECF-017,Rà soát công việc sprint,2026-02-11,2,repeated_confirmation;recap_duplicate_risk,yes,1
+W3-MED-C3-N1-IT-INT-002.txt,transcript_only,W3-MED-C3-N1-IT-INT-002,Họp phối hợp triển khai và xử lý vấn đề,2026-02-06,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,5
+W3-MED-C3-N1-IT-INT-002__with-note.txt,with_note,W3-MED-C3-N1-IT-INT-002,Họp phối hợp triển khai và xử lý vấn đề,2026-02-06,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,5
+W3-MED-C3-N1-IT-INT-006.txt,transcript_only,W3-MED-C3-N1-IT-INT-006,Họp phối hợp triển khai và xử lý vấn đề,2026-02-10,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,5
+W3-MED-C3-N1-IT-INT-006__with-note.txt,with_note,W3-MED-C3-N1-IT-INT-006,Họp phối hợp triển khai và xử lý vấn đề,2026-02-10,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,5
+W3-MED-C3-N1-IT-INT-010.txt,transcript_only,W3-MED-C3-N1-IT-INT-010,Họp phối hợp triển khai và xử lý vấn đề,2026-02-14,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,6
+W3-MED-C3-N1-IT-INT-010__with-note.txt,with_note,W3-MED-C3-N1-IT-INT-010,Họp phối hợp triển khai và xử lý vấn đề,2026-02-14,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,6
+W3-MED-C3-N1-IT-INT-014.txt,transcript_only,W3-MED-C3-N1-IT-INT-014,Họp phối hợp triển khai và xử lý vấn đề,2026-02-18,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,6
+W3-MED-C3-N1-IT-INT-014__with-note.txt,with_note,W3-MED-C3-N1-IT-INT-014,Họp phối hợp triển khai và xử lý vấn đề,2026-02-18,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,6
+W3-MED-C3-N1-IT-INT-018.txt,transcript_only,W3-MED-C3-N1-IT-INT-018,Họp phối hợp triển khai và xử lý vấn đề,2026-02-22,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,5
+W3-MED-C3-N1-IT-INT-018__with-note.txt,with_note,W3-MED-C3-N1-IT-INT-018,Họp phối hợp triển khai và xử lý vấn đề,2026-02-22,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,5
+W3-MED-C3-N1-OPS-INT-004.txt,transcript_only,W3-MED-C3-N1-OPS-INT-004,Họp phối hợp triển khai và xử lý vấn đề,2026-02-08,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,4
+W3-MED-C3-N1-OPS-INT-004__with-note.txt,with_note,W3-MED-C3-N1-OPS-INT-004,Họp phối hợp triển khai và xử lý vấn đề,2026-02-08,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,4
+W3-MED-C3-N1-OPS-INT-008.txt,transcript_only,W3-MED-C3-N1-OPS-INT-008,Họp phối hợp triển khai và xử lý vấn đề,2026-02-12,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,4
+W3-MED-C3-N1-OPS-INT-008__with-note.txt,with_note,W3-MED-C3-N1-OPS-INT-008,Họp phối hợp triển khai và xử lý vấn đề,2026-02-12,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,4
+W3-MED-C3-N1-OPS-INT-012.txt,transcript_only,W3-MED-C3-N1-OPS-INT-012,Họp phối hợp triển khai và xử lý vấn đề,2026-02-16,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,8
+W3-MED-C3-N1-OPS-INT-012__with-note.txt,with_note,W3-MED-C3-N1-OPS-INT-012,Họp phối hợp triển khai và xử lý vấn đề,2026-02-16,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,8
+W3-MED-C3-N1-OPS-INT-016.txt,transcript_only,W3-MED-C3-N1-OPS-INT-016,Họp phối hợp triển khai và xử lý vấn đề,2026-02-20,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,7
+W3-MED-C3-N1-OPS-INT-016__with-note.txt,with_note,W3-MED-C3-N1-OPS-INT-016,Họp phối hợp triển khai và xử lý vấn đề,2026-02-20,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,7
+W3-MED-C3-N1-OPS-INT-020.txt,transcript_only,W3-MED-C3-N1-OPS-INT-020,Họp phối hợp triển khai và xử lý vấn đề,2026-02-24,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,8
+W3-MED-C3-N1-OPS-INT-020__with-note.txt,with_note,W3-MED-C3-N1-OPS-INT-020,Họp phối hợp triển khai và xử lý vấn đề,2026-02-24,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,8
+W3-MED-C4-N2-PROD-INT-003.txt,transcript_only,W3-MED-C4-N2-PROD-INT-003,Họp phối hợp triển khai và xử lý vấn đề,2026-02-07,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,3
+W3-MED-C4-N2-PROD-INT-003__with-note.txt,with_note,W3-MED-C4-N2-PROD-INT-003,Họp phối hợp triển khai và xử lý vấn đề,2026-02-07,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,3
+W3-MED-C4-N2-PROD-INT-007.txt,transcript_only,W3-MED-C4-N2-PROD-INT-007,Họp phối hợp triển khai và xử lý vấn đề,2026-02-11,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,5
+W3-MED-C4-N2-PROD-INT-007__with-note.txt,with_note,W3-MED-C4-N2-PROD-INT-007,Họp phối hợp triển khai và xử lý vấn đề,2026-02-11,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,5
+W3-MED-C4-N2-PROD-INT-011.txt,transcript_only,W3-MED-C4-N2-PROD-INT-011,Họp phối hợp triển khai và xử lý vấn đề,2026-02-15,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,4
+W3-MED-C4-N2-PROD-INT-011__with-note.txt,with_note,W3-MED-C4-N2-PROD-INT-011,Họp phối hợp triển khai và xử lý vấn đề,2026-02-15,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,4
+W3-MED-C4-N2-PROD-INT-015.txt,transcript_only,W3-MED-C4-N2-PROD-INT-015,Họp phối hợp triển khai và xử lý vấn đề,2026-02-19,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,5
+W3-MED-C4-N2-PROD-INT-015__with-note.txt,with_note,W3-MED-C4-N2-PROD-INT-015,Họp phối hợp triển khai và xử lý vấn đề,2026-02-19,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,5
+W3-MED-C4-N2-PROD-INT-019.txt,transcript_only,W3-MED-C4-N2-PROD-INT-019,Họp phối hợp triển khai và xử lý vấn đề,2026-02-23,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,3
+W3-MED-C4-N2-PROD-INT-019__with-note.txt,with_note,W3-MED-C4-N2-PROD-INT-019,Họp phối hợp triển khai và xử lý vấn đề,2026-02-23,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,3
+W3-MED-C4-N2-SW-INT-001.txt,transcript_only,W3-MED-C4-N2-SW-INT-001,Họp phối hợp triển khai và xử lý vấn đề,2026-02-05,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,3
+W3-MED-C4-N2-SW-INT-001__with-note.txt,with_note,W3-MED-C4-N2-SW-INT-001,Họp phối hợp triển khai và xử lý vấn đề,2026-02-05,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,3
+W3-MED-C4-N2-SW-INT-005.txt,transcript_only,W3-MED-C4-N2-SW-INT-005,Họp phối hợp triển khai và xử lý vấn đề,2026-02-09,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,3
+W3-MED-C4-N2-SW-INT-005__with-note.txt,with_note,W3-MED-C4-N2-SW-INT-005,Họp phối hợp triển khai và xử lý vấn đề,2026-02-09,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,3
+W3-MED-C4-N2-SW-INT-009.txt,transcript_only,W3-MED-C4-N2-SW-INT-009,Họp phối hợp triển khai và xử lý vấn đề,2026-02-13,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,5
+W3-MED-C4-N2-SW-INT-009__with-note.txt,with_note,W3-MED-C4-N2-SW-INT-009,Họp phối hợp triển khai và xử lý vấn đề,2026-02-13,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,5
+W3-MED-C4-N2-SW-INT-013.txt,transcript_only,W3-MED-C4-N2-SW-INT-013,Họp phối hợp triển khai và xử lý vấn đề,2026-02-17,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,5
+W3-MED-C4-N2-SW-INT-013__with-note.txt,with_note,W3-MED-C4-N2-SW-INT-013,Họp phối hợp triển khai và xử lý vấn đề,2026-02-17,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,5
+W3-MED-C4-N2-SW-INT-017.txt,transcript_only,W3-MED-C4-N2-SW-INT-017,Họp phối hợp triển khai và xử lý vấn đề,2026-02-21,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,no,4
+W3-MED-C4-N2-SW-INT-017__with-note.txt,with_note,W3-MED-C4-N2-SW-INT-017,Họp phối hợp triển khai và xử lý vấn đề,2026-02-21,3,feature_interaction;deadline_replacement;recap_duplicate_risk;unresolved_item;negative_context,yes,4
+W4-LONG-C4-N1-IT-STATE-006.txt,transcript_only,W4-LONG-C4-N1-IT-STATE-006,Họp điều phối triển khai hệ thống,2026-02-20,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,6
+W4-LONG-C4-N1-IT-STATE-006__with-note.txt,with_note,W4-LONG-C4-N1-IT-STATE-006,Họp điều phối triển khai hệ thống,2026-02-20,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,6
+W4-LONG-C4-N1-OPS-STATE-012.txt,transcript_only,W4-LONG-C4-N1-OPS-STATE-012,Họp điều phối triển khai hệ thống,2026-02-26,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,6
+W4-LONG-C4-N1-OPS-STATE-012__with-note.txt,with_note,W4-LONG-C4-N1-OPS-STATE-012,Họp điều phối triển khai hệ thống,2026-02-26,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,6
+W4-LONG-C4-N2-IT-STATE-010.txt,transcript_only,W4-LONG-C4-N2-IT-STATE-010,Họp điều phối triển khai hệ thống,2026-02-24,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,6
+W4-LONG-C4-N2-IT-STATE-010__with-note.txt,with_note,W4-LONG-C4-N2-IT-STATE-010,Họp điều phối triển khai hệ thống,2026-02-24,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,6
+W4-LONG-C4-N2-OPS-STATE-004.txt,transcript_only,W4-LONG-C4-N2-OPS-STATE-004,Họp điều phối triển khai hệ thống,2026-02-18,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,5
+W4-LONG-C4-N2-OPS-STATE-004__with-note.txt,with_note,W4-LONG-C4-N2-OPS-STATE-004,Họp điều phối triển khai hệ thống,2026-02-18,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,5
+W4-LONG-C4-N3-IT-STATE-002.txt,transcript_only,W4-LONG-C4-N3-IT-STATE-002,Họp điều phối triển khai hệ thống,2026-02-16,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,4
+W4-LONG-C4-N3-IT-STATE-002__with-note.txt,with_note,W4-LONG-C4-N3-IT-STATE-002,Họp điều phối triển khai hệ thống,2026-02-16,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,4
+W4-LONG-C4-N3-OPS-STATE-008.txt,transcript_only,W4-LONG-C4-N3-OPS-STATE-008,Họp điều phối triển khai hệ thống,2026-02-22,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,5
+W4-LONG-C4-N3-OPS-STATE-008__with-note.txt,with_note,W4-LONG-C4-N3-OPS-STATE-008,Họp điều phối triển khai hệ thống,2026-02-22,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,5
+W4-LONG-C5-N1-PROD-STATE-003.txt,transcript_only,W4-LONG-C5-N1-PROD-STATE-003,Họp điều phối triển khai hệ thống,2026-02-17,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,4
+W4-LONG-C5-N1-PROD-STATE-003__with-note.txt,with_note,W4-LONG-C5-N1-PROD-STATE-003,Họp điều phối triển khai hệ thống,2026-02-17,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,4
+W4-LONG-C5-N1-SW-STATE-009.txt,transcript_only,W4-LONG-C5-N1-SW-STATE-009,Họp điều phối triển khai hệ thống,2026-02-23,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,4
+W4-LONG-C5-N1-SW-STATE-009__with-note.txt,with_note,W4-LONG-C5-N1-SW-STATE-009,Họp điều phối triển khai hệ thống,2026-02-23,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,4
+W4-LONG-C5-N2-PROD-STATE-007.txt,transcript_only,W4-LONG-C5-N2-PROD-STATE-007,Họp điều phối triển khai hệ thống,2026-02-21,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,5
+W4-LONG-C5-N2-PROD-STATE-007__with-note.txt,with_note,W4-LONG-C5-N2-PROD-STATE-007,Họp điều phối triển khai hệ thống,2026-02-21,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,5
+W4-LONG-C5-N2-SW-STATE-001.txt,transcript_only,W4-LONG-C5-N2-SW-STATE-001,Họp điều phối triển khai hệ thống,2026-02-15,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,4
+W4-LONG-C5-N2-SW-STATE-001__with-note.txt,with_note,W4-LONG-C5-N2-SW-STATE-001,Họp điều phối triển khai hệ thống,2026-02-15,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,4
+W4-LONG-C5-N3-PROD-STATE-011.txt,transcript_only,W4-LONG-C5-N3-PROD-STATE-011,Họp điều phối triển khai hệ thống,2026-02-25,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,7
+W4-LONG-C5-N3-PROD-STATE-011__with-note.txt,with_note,W4-LONG-C5-N3-PROD-STATE-011,Họp điều phối triển khai hệ thống,2026-02-25,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,7
+W4-LONG-C5-N3-SW-STATE-005.txt,transcript_only,W4-LONG-C5-N3-SW-STATE-005,Họp điều phối triển khai hệ thống,2026-02-19,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,no,4
+W4-LONG-C5-N3-SW-STATE-005__with-note.txt,with_note,W4-LONG-C5-N3-SW-STATE-005,Họp điều phối triển khai hệ thống,2026-02-19,4,long_meeting;long_distance_correction;owner_handoff;task_cancellation;topic_revisited;recap_duplicate_risk,yes,4
+W5-XL-C5-N2-IT-STRESS-002.txt,transcript_only,W5-XL-C5-N2-IT-STRESS-002,Họp tổng hợp phát triển và vận hành sản phẩm,2026-02-26,5,extra_long_meeting;multi_step_handoff;multiple_deadline_corrections;long_distance_dependency;ambiguous_reference;heavy_recoverable_noise,no,8
+W5-XL-C5-N2-IT-STRESS-002__with-note.txt,with_note,W5-XL-C5-N2-IT-STRESS-002,Họp tổng hợp phát triển và vận hành sản phẩm,2026-02-26,5,extra_long_meeting;multi_step_handoff;multiple_deadline_corrections;long_distance_dependency;ambiguous_reference;heavy_recoverable_noise,yes,8
+W5-XL-C5-N2-OPS-STRESS-004.txt,transcript_only,W5-XL-C5-N2-OPS-STRESS-004,Họp tổng hợp phát triển và vận hành sản phẩm,2026-02-28,5,extra_long_meeting;multi_step_handoff;multiple_deadline_corrections;long_distance_dependency;ambiguous_reference;heavy_recoverable_noise,no,10
+W5-XL-C5-N2-OPS-STRESS-004__with-note.txt,with_note,W5-XL-C5-N2-OPS-STRESS-004,Họp tổng hợp phát triển và vận hành sản phẩm,2026-02-28,5,extra_long_meeting;multi_step_handoff;multiple_deadline_corrections;long_distance_dependency;ambiguous_reference;heavy_recoverable_noise,yes,10
+W5-XL-C5-N3-PROD-STRESS-003.txt,transcript_only,W5-XL-C5-N3-PROD-STRESS-003,Họp tổng hợp phát triển và vận hành sản phẩm,2026-02-27,5,extra_long_meeting;multi_step_handoff;multiple_deadline_corrections;long_distance_dependency;ambiguous_reference;heavy_recoverable_noise,no,3
+W5-XL-C5-N3-PROD-STRESS-003__with-note.txt,with_note,W5-XL-C5-N3-PROD-STRESS-003,Họp tổng hợp phát triển và vận hành sản phẩm,2026-02-27,5,extra_long_meeting;multi_step_handoff;multiple_deadline_corrections;long_distance_dependency;ambiguous_reference;heavy_recoverable_noise,yes,3
+W5-XL-C5-N3-SW-STRESS-001.txt,transcript_only,W5-XL-C5-N3-SW-STRESS-001,Họp tổng hợp phát triển và vận hành sản phẩm,2026-02-25,5,extra_long_meeting;multi_step_handoff;multiple_deadline_corrections;long_distance_dependency;ambiguous_reference;heavy_recoverable_noise,no,10
+W5-XL-C5-N3-SW-STRESS-001__with-note.txt,with_note,W5-XL-C5-N3-SW-STRESS-001,Họp tổng hợp phát triển và vận hành sản phẩm,2026-02-25,5,extra_long_meeting;multi_step_handoff;multiple_deadline_corrections;long_distance_dependency;ambiguous_reference;heavy_recoverable_noise,yes,10

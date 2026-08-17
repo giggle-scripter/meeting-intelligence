@@ -1,0 +1,122 @@
+MEETING_ID: W5-XL-C5-N2-IT-STRESS-002
+PART: P06/10
+
+T000320 [10:00:00] Minh: Mọi người, chúng ta quay lại về kế hoạch release cuối tháng. Tôi nhận được yêu cầu từ lead product: muốn release sớm hơn dự kiến, vào 05/03 thay vì 10/03. Điều này ảnh hưởng đến nhiều task.
+
+T000321 [10:00:14] Lan: Như vậy sprint 14 kết thúc sớm, hạn chót cho các task là 05/03. Nhưng task thanh toán của em deadline 29/02 và 03/03 vẫn ổn.
+
+T000322 [10:00:26] Đức: Tuy nhiên, task banner động em đang phụ trách deadline 05/03, nếu release sớm thì phải có feature hoàn chỉnh trước ngày đó. Em thấy không khả thi vì spec từ Trang mới chỉ dự kiến.
+
+T000323 [10:00:40] Trang: Em vừa gửi spec qua chat, nhưng chưa đầy đủ. Có thể phải delay.
+
+T000324 [10:00:48] Minh: Vậy tôi quyết định hủy task banner động khỏi sprint 14. Scope quá lớn, không kịp. Thay vào đó, chúng ta sẽ tạo task tối ưu hình ảnh cho mobile, vì feedback gần đây về tốc độ. Hùng, em có thể làm việc này không?
+
+T000325 [10:01:06] Hùng: Em có thể tối ưu image bằng cách nén và lazy load. Cần 3 ngày, deadline 04/03.
+
+T000326 [10:01:14] Minh: Vậy task mới: tối ưu image mobile, Hùng làm owner, deadline 04/03. Đức có thể review code không?
+
+T000327 [10:01:22] Đức: OK, nhưng tôi đang có capacity payment deadline 05/03. Có thể dời deadline capacity payment lên 06/03?
+
+T000328 [10:01:32] Minh: Được. Đây là correction deadline thứ hai cho task capacity payment: từ 05/03 thành 06/03.
+
+T000329 [10:01:40] Đức: Vậy deadline của tôi: review code image của Hùng vào 04/03, và capacity payment 06/03.
+
+T000330 [10:01:48] Lan: Em thấy task tối ưu image có liên quan đến cache? Vì image được cache trên CDN.
+
+T000331 [10:01:56] Hùng: Không, chỉ tối ưu file size, không liên quan cache layer.
+
+T000332 [10:02:02] Minh: Vậy rõ. Tôi cũng muốn điều chỉnh deadline review design placement. Do release sớm, deadline 03/03 có thể trễ. Tôi dời sang 04/03.
+
+T000333 [10:02:16] Trang: Như vậy em phải gửi feedback sơ bộ trước 02/03.
+
+T000334 [10:02:22] Minh: Đúng. Vậy correction: deadline review design placement của Đức và Lan từ 03/03 thành 04/03.
+
+T000335 [10:02:32] Lan: OK. Em có thể làm được.
+
+T000336 [10:02:36] Đức: Nhưng tôi đã có review code image vào 04/03 và bây giờ thêm design placement cũng 04/03, xung đột. Tôi cần phân bổ.
+
+T000337 [10:02:48] Minh: Vậy dời design placement cho Lan làm chính, Đức chỉ hỗ trợ sau ngày 05/03. Lan, em có thể tự review design được không?
+
+T000338 [10:02:58] Lan: Em có thể, nhưng cần hỏi ý kiến Đức nếu có vấn đề kỹ thuật.
+
+T000339 [10:03:04] Minh: Vậy assign lại: Lan là owner review design placement, deadline 04/03. Đức chỉ review khi cần, không có deadline cứng.
+
+T000340 [10:03:14] Đức: Tôi ủng hộ.
+
+T000341 [10:03:18] Hùng: Anh Minh, vụ tối ưu image em cần tool và quyền truy cập CDN. Tuấn có thể cấp không?
+
+T000342 [10:03:26] Tuấn: Em sẽ cấp quyền cho Hùng trong chiều nay. Cần sau deploy cache.
+
+T000343 [10:03:32] Minh: Vậy task tối ưu image phụ thuộc vào Tuấn cấp quyền CDN trước cuối ngày.
+
+T000344 [10:03:40] Tuấn: Ngày mai 27/02 cũng được, vì Hùng bắt đầu từ ngày kia.
+
+T000345 [10:03:46] Hùng: OK, sáng 27/02 em có thể bắt đầu.
+
+T000346 [10:03:50] Trang: Em muốn hỏi, task của em về spec banner đã bị hủy. Em có cần giữ liên lạc với marketing không?
+
+T000347 [10:04:00] Minh: Vẫn giữ, vì có thể đưa vào sprint 15. Nhưng không phải task ngay.
+
+T000348 [10:04:06] Đức: Ngoài ra, tôi thấy task capacity payment deadline 06/03 có thể cần dựa vào metric từ Tuấn. Tuấn đã gửi chưa?
+
+T000349 [10:04:16] Tuấn: Em sẽ gửi metric cùng log thanh toán sáng mai.
+
+T000350 [10:04:22] Đức: Tốt.
+
+T000351 [10:04:26] Lan: Anh Minh, task thanh toán của em có bị ảnh hưởng bởi release sớm không? Em vẫn có deadline 29/02 và Đức review 03/03.
+
+T000352 [10:04:36] Minh: Không, vì 29/02 là trước 05/03, vẫn ổn.
+
+T000353 [10:04:42] Hùng: Em cũng có task phân loại alert deadline 06/03, sẽ ổn.
+
+T000354 [10:04:48] Trang: Em thấy khối lượng task dồn dập. Có cần tái ưu tiên không?
+
+T000355 [10:04:54] Minh: Hiện tại ưu tiên: thanh toán, cache, tối ưu image. Các việc khác có thể dời nếu cần.
+
+T000356 [10:05:04] Đức: Tôi đồng ý. Nhưng cần chú ý task banner động bị hủy không ảnh hưởng đến ai khác.
+
+T000357 [10:05:12] Minh: Đã hủy, không bàn thêm.
+
+T000358 [10:05:16] Tuấn: Em có một vấn đề: staging server đang yếu, có thể không chịu nổi deploy chiều nay. Cần kiểm tra tài nguyên.
+
+T000359 [10:05:24] Minh: Em kiểm tra đi. Nếu không ổn, hoãn deploy đến sáng mai.
+
+T000360 [10:05:30] Tuấn: Để em check ngay.
+
+T000361 [10:05:34] Lan: Nếu hoãn thì cache tuning cũng trễ.
+
+T000362 [10:05:38] Minh: Có thể, nhưng ưu tiên ổn định.
+
+T000363 [10:05:42] Đức: Tôi đề nghị nếu staging yếu, deploy bản hotfix trước, cache sau.
+
+T000364 [10:05:48] Minh: Hợp lý. Vậy quyết định: nếu staging không đáp ứng, chỉ deploy hotfix giá, bỏ cache. Lan và Tuấn tính toán lại.
+
+T000365 [10:06:00] Lan: Vâng.
+
+T000366 [10:06:02] Hùng: Anh Minh, task của em về tối ưu image có thể dùng script tự động, em nghĩ không cần CDN quyền nếu dùng webp. Nhưng cần tool.
+
+T000367 [10:06:14] Minh: Em tự quyết.
+
+T000368 [10:06:18] Trang: Support vẫn ghi nhận lỗi loading mobile. Task này sẽ giúp.
+
+T000369 [10:06:26] Đức: Tôi muốn recap các thay đổi trong part này:
+- Hủy task banner động.
+- Tạo task tối ưu image (Hùng, deadline 04/03).
+- Correction deadline capacity payment (Đức, từ 05/03 thành 06/03).
+- Correction deadline design placement (Lan, từ 03/03 thành 04/03; Đức không còn cứng).
+- Task tối ưu image phụ thuộc quyền CDN từ Tuấn trước 27/02.
+- Deploy cache có thể hoãn nếu staging yếu.
+
+Đúng không?
+
+T000370 [10:06:46] Minh: Chính xác. Mọi người có thắc mắc gì không?
+
+T000371 [10:06:50] Lan: Em không.
+
+T000372 [10:06:52] Hùng: Em rõ.
+
+T000373 [10:06:54] Tuấn: Em sẽ báo tình hình staging trước 11h.
+
+T000374 [10:06:58] Minh: Vậy chúng ta chờ. Tạm nghỉ 5 phút.
+
+--- END OF PART P06 ---

@@ -1,0 +1,9 @@
+chốt sơ bộ
+chủ đề: Theo dõi lỗi và tài liệu
+kw: tai lieu / ticket / tren / quan / trong / cap / nhat
+- Tôi thấy tuần rồi có ba ticket quan trọng bị bỏ lỡ cập nhật trạng thái, gây chậm phản hồi cho khách hàng
+* Đúng rồi anh, đặc biệt là ticket P1 trên hệ thống thanh toán
+- chuyển sang In Progress, đến thứ Năm mới có người nhận
+1) Vậy mình chốt task: Linh viết tài liệu hướng dẫn quy trình theo dõi lỗi, bám sát giao diện Jira hiện tại
+- Vậy task thứ hai: Hùng soạn template bug report chuẩn cho team, dựa trên mẫu công ty nhưng tinh gọn hơn
+* Em sẽ đặt dl thứ Ba cuối ngày để có buffer

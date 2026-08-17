@@ -1,0 +1,102 @@
+MEETING_ID: W4-LONG-C5-N1-PROD-STATE-003
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-17
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:00:00] Anh Tuấn: Chào cả nhà, cảm ơn đã vào đúng giờ. Hôm nay chúng ta bàn về kế hoạch triển khai phiên bản 2.1 lên môi trường test và staging.
+T000002 [09:00:12] Minh: Vâng, em đã check sơ bộ. Bên BE có vài thay đổi về config, cần cập nhật lại tài liệu.
+T000003 [09:00:25] Lan: Em lo nhất phần tài liệu triển khai. Bản cũ viết lộn xộn, nhiều chỗ thiếu step.
+T000004 [09:00:38] Hùng: Đồng ý. Hôm qua em thử chạy script cũ trên sandbox thấy lỗi environment variable. Phải có tài liệu chuẩn.
+T000005 [09:00:50] Anh Tuấn: Thế thì chúng ta xắp xếp lại. Mình sẽ chia làm hai đầu việc chính: tài liệu triển khai hệ thống và tài liệu hướng dẫn cho môi trường test.
+T000006 [09:01:05] Minh: Hai cái này khác gì nhau ạ? Em thấy hay bị nhầm. Tài liệu triển khai hệ thống là cho production hay tổng thể?
+T000007 [09:01:18] Anh Tuấn: Đúng – tài liệu triển khai hệ thống sẽ bao phủ từ dev đến prod, bao gồm cả cấu hình và rollback. Còn tài liệu hướng dẫn triển khai môi trường test chỉ tập trung vào sandbox và staging, đơn giản hơn.
+T000008 [09:01:35] Lan: Vậy em có thể viết cái môi trường test không? Vì em đã làm QA trên sandbox vài lần, quen các bước.
+T000009 [09:01:48] Anh Tuấn: Được, Lan phụ trách tài liệu triển khai môi trường test. Minh viết tài liệu triển khai hệ thống tổng thể. Có gì phối hợp với Hùng về hạ tầng.
+T000010 [09:02:00] Minh: Em ok, nhưng mà tài liệu tổng thể em cần data từ bên infra, nhất là phần database migration.
+T000011 [09:02:14] Hùng: Tuần trước em đã gửi file excel các thay đổi DB rồi, Minh check mail chưa?
+T000012 [09:02:28] Minh: À để em xem lại. Có vẻ nó vào spam? Em nhận được nhưng chưa mở. Sorry.
+T000013 [09:02:40] Anh Tuấn: Okay, hai em sync sau. Vậy task “Viết tài liệu triển khai hệ thống” assign cho Minh, deadline 20/2. Task “Viết tài liệu hướng dẫn triển khai test” assign Lan, chưa có deadline cụ thể, vì ưu tiên thấp hơn một chút.
+T000014 [09:02:58] Lan: Không deadline thì em sợ dễ trôi, tài liệu của em cũng cần Hùng review phần script.
+T000015 [09:03:10] Anh Tuấn: Đúng, nhưng group này sẽ review cuối tuần sau. Hùng hỗ trợ Lan nhé. Còn Minh tập trung xong tài liệu chính trước.
+T000016 [09:03:25] Hùng: Được. Tuy nhiên em đang bận setup CI/CD cho dự án bên B, nên có thể cuối tuần này mới có thời gian support.
+T000017 [09:03:40] Lan: Thế em ghi tài liệu sơ bộ trước, cuối tuần Hùng check lại phần kỹ thuật nhé.
+T000018 [09:03:52] Anh Tuấn: Ổn. Bây giờ về môi trường test – đã có server chưa? Bên infra nói cần phê duyệt ticket.
+T000019 [09:04:05] Hùng: Server sandbox mới tạo hôm thứ 6, nhưng chưa gán DNS. Staging vẫn đang chờ team infra cấp thêm resource.
+T000020 [09:04:20] Minh: Nếu staging chưa có thì tài liệu test phần deploy script sẽ chưa kiểm thử được. Có nên đẩy task đó sau?
+T000021 [09:04:35] Anh Tuấn: Không, vẫn viết dựa trên tài liệu cũ và kinh nghiệm của Hùng. Khi có server sẽ update sau. Mình không delay được lịch tổng thể.
+T000022 [09:04:50] Lan: Em thấy rủi ro vì nếu script thay đổi thì phải viết lại. Hay em chờ Hùng confirm config?
+T000023 [09:05:02] Hùng: Script cơ bản ổn, chỉ thiếu biến môi trường. Em sẽ fix trong tuần này. Lan cứ viết draft dựa trên bản hiện tại của repo, chỗ nào sai em sửa sau.
+T000024 [09:05:18] Anh Tuấn: Thống nhất nhé. Minh, em hãy chú ý phần rollback – trước team bảo thiếu hướng dẫn rollback. Minh phải đưa vào tài liệu triển khai hệ thống.
+T000025 [09:05:34] Minh: Vâng, em sẽ thêm mục "Rollback procedure". Nhưng mà em chưa rõ hiện tại có automation cho rollback chưa?
+T000026 [09:05:48] Hùng: Chưa, toàn manual. Em có script rollback sơ sài, sẽ đưa vào repo trong vài ngày tới.
+T000027 [09:06:00] Anh Tuấn: Hai em coordinat việc đó. Lan, khi nào em bắt đầu viết tài liệu test?
+T000028 [09:06:12] Lan: Em bắt đầu ngay chiều nay, sau meeting sẽ lấy template cũ và chỉnh sửa.
+T000029 [09:06:25] Anh Tuấn: Tốt. Còn vấn đề gì về tài liệu không? Mọi người thấy khó khăn gì không?
+T000030 [09:06:38] Hùng: Có một việc – bên security yêu cầu tài liệu triển khai phải có phần checklist an ninh. Liệu có nên đưa luôn vào tài liệu của Minh?
+T000031 [09:06:52] Minh: Nếu vậy thì tài liệu sẽ dài hơn, nhưng em có thể thêm một chapter "Security considerations". Tuy nhiên em cần đầu vào từ security team.
+T000032 [09:07:08] Anh Tuấn: Tuấn sẽ nói chuyện với security để họ gửi checklist. Minh không cần chờ, cứ viết khung trước. Tuần sau khi có checklist sẽ bổ sung.
+T000033 [09:07:22] Lan: Mà tài liệu của em cũng cần đề cập an ninh? Vì chạy trên môi trường test có thể dùng dữ liệu giả.
+T000034 [09:07:36] Anh Tuấn: Nếu có dữ liệu thật thì cần, nhưng test dùng dữ liệu synthetic nên em bỏ qua cũng được. Tập trung vào step và script.
+T000035 [09:07:50] Hùng: Thực ra sandbox của bọn em có kết nối đến DB thật một phần, nên em nghĩ Lan nên có note về bảo mật.
+T000036 [09:08:02] Lan: Ok, vậy em thêm một dòng cảnh báo không dùng dữ liệu thật. Còn lại em viết theo template chuẩn.
+T000037 [09:08:15] Anh Tuấn: Nhắc lại task: Minh – tài liệu triển khai hệ thống, deadline 20/2. Lan – tài liệu triển khai môi trường test, chưa có deadline nhưng ưu tiên review cuối tuần sau. Ai nhận rõ chưa?
+T000038 [09:08:30] Minh: Rõ.
+T000039 [09:08:35] Lan: Rõ.
+T000040 [09:08:38] Hùng: Em hỗ trợ review và fix script.
+T000041 [09:08:50] Anh Tuấn: Còn ai có thắc mắc về phạm vi tài liệu không? Ví dụ tài liệu của Minh có nên bao gồm cả hướng dẫn cấu hình monitoring?
+T000042 [09:09:05] Minh: Em nghĩ monitoring sẽ nằm trong tài liệu deploy chung, nhưng nếu tách ra thì cũng được. Anh Tuấn muốn như nào?
+T000043 [09:09:18] Anh Tuấn: Để đơn giản, Minh chỉ viết phần core: prerequiste, install, config, rollback. Monitoring sẽ là tài liệu riêng sau này.
+T000044 [09:09:32] Hùng: Vậy tài liệu test của Lan cũng không cần monitoring? Chỉ test chức năng deploy thôi?
+T000045 [09:09:45] Lan: Đúng, em chỉ viết steps để deploy lên sandbox và verify endpoints. Monitoring không nằm trong scope test.
+T000046 [09:10:00] Anh Tuấn: Nhất trí. Bây giờ chuyển sang vấn đề môi trường hiện tại. Hùng, em cho biết tiến độ setup server test?
+T000047 [09:10:15] Hùng: Sandbox đã sẵn sàng OS và Docker, thiếu cài đặt ứng dụng. Staging thì tài nguyên chưa duyệt, ticket số #3456 với infra vẫn pending từ tuần trước.
+T000048 [09:10:30] Anh Tuấn: Tuấn sẽ đôn đốc infra. Minh nếu cần test tích hợp sớm, có thể dùng sandbox tạm.
+T000049 [09:10:44] Minh: Dùng được, nhưng mà em cần port 8443 mở để test kết nối, không biết có bị chặn không.
+T000050 [09:10:58] Hùng: Port đó đang dành cho VNPT, em sẽ tạo rule tạm thời qua iptables. Chiều nay em làm.
+T000051 [09:11:12] Lan: Về database test, có snapshot mới nhất chưa? Em muốn lấy dữ liệu mẫu.
+T000052 [09:11:25] Hùng: Snapshot cuối tuần trước đã có, nhưng có vài record corrupt do job ETL lỗi. Để em restore bản trước đó.
+T000053 [09:11:38] Anh Tuấn: Nhanh lên nhé, tuần này cần chạy test E2E. Minh, tài liệu triển khai hệ thống của em có nhắc đến việc seed data không?
+T000054 [09:11:52] Minh: Em định viết, nhưng mà seed data là việc của QA hay OPS? Chưa rõ.
+T000055 [09:12:05] Hùng: OPS sẽ lo phần infrastructure, còn seed data thường do QA tự chạy script. Lan, em tự tạo nhé, em có quyền truy cập DB sandbox.
+T000056 [09:12:18] Lan: Vâng, em biết rồi. Tuy nhiên em thấy tài liệu triển khai test nên có script seed để chuẩn hóa, tránh mỗi người một kiểu.
+T000057 [09:12:32] Anh Tuấn: Ok, thế Lan có thể thêm phần seed data vào task của mình không? Có thể viết dưới dạng hướng dẫn chạy script.
+T000058 [09:12:45] Lan: Em làm được, nhưng cần Hùng cho biết script seed đặt ở đâu. Em thấy repo có folder /scripts/seed chứa file .sql nhưng chưa rõ dùng bản nào.
+T000059 [09:12:58] Hùng: Bản mới nhất là seed_v2.sql, em dùng nó. Nó có sẵn vài bảng demo. Em sẽ comment trong file README.
+T000060 [09:13:12] Anh Tuấn: Vậy Lan sẽ viết hướng dẫn seed data trong tài liệu test. Còn Minh, tài liệu hệ thống chỉ đề cập đến config chứ không cần seed. Rõ chưa?
+T000061 [09:13:28] Minh: Rõ.
+T000062 [09:13:34] Lan: Rõ.
+T000063 [09:13:40] Anh Tuấn: Tôi muốn hỏi thêm: tài liệu triển khai hệ thống có cần mô tả kiến trúc không? Hay chỉ step-by-step?
+T000064 [09:13:55] Minh: Nếu có diagram kiến trúc thì người đọc dễ hình dung. Em có thể vẽ sơ đồ bằng draw.io, nhưng cần xác nhận phiên bản kiến trúc hiện tại.
+T000065 [09:14:10] Hùng: Kiến trúc thay đổi từ sprint trước, em có file Visio trên Confluence, Minh lấy đó mà vẽ lại.
+T000066 [09:14:24] Anh Tuấn: Được, đưa vào tài liệu luôn. Nhưng mà tài liệu của Lan có cần kiến trúc không?
+T000067 [09:14:38] Lan: Không cần, test của em đơn giản hơn, chỉ cần ports và services. Nếu có thì thừa.
+T000068 [09:14:50] Anh Tuấn: Ok. Bây giờ có ai thấy vấn đề gì về timeline không? Minh, 20/2 em có kịp không? Còn 3 ngày nữa.
+T000069 [09:15:03] Minh: Em nghĩ kịp, vì tài liệu chính em đã viết được 50% trong tuần trước, chỉ thiếu phần rollback và security. Nhưng nếu pending checklist thì em sẽ ước lượng thêm.
+T000070 [09:15:18] Anh Tuấn: Checklist security em không chờ, để tôi lấy và gửi em sau. Em có thể nộp bản draft, rồi update khi có checklist.
+T000071 [09:15:32] Lan: Còn tài liệu của em dự kiến hoàn thành chiều thứ 5, vì em cần Hùng review script đầu tuần sau.
+T000072 [09:15:45] Hùng: Thứ 5 em bận meeting với vendor, nhưng tối em có thể review nhanh.
+T000073 [09:15:58] Lan: Ok, vậy tối thứ 5 em gửi Hùng, thứ 6 Hùng feedback nhé.
+T000074 [09:16:10] Anh Tuấn: Như vậy tuần sau sẽ review toàn bộ. Tôi muốn hỏi: có ai thấy hai tài liệu này dễ bị overlap không? Minh và Lan cần thống nhất format và không sao chép nội dung.
+T000075 [09:16:25] Minh: Em thấy tài liệu hệ thống có thể dùng làm reference cho tài liệu test, nhưng mà phạm vi khác. Em sẽ viết tổng quát, Lan viết cụ thể sandbox.
+T000076 [09:16:40] Lan: Đúng, em chỉ viết step cho sandbox, không viết lại config hay kiến trúc.
+T000077 [09:16:52] Anh Tuấn: Tốt. Vậy deadline nhớ rõ: Minh tài liệu triển khai hệ thống 20/2, Lan tài liệu triển khai test không deadline (nhưng target cuối tuần sau). Nếu có gì thay đổi, báo tôi.
+T000078 [09:17:05] Hùng: Mà này, tài liệu triển khai hệ thống và tài liệu triển khai test – tên nghe na ná nhau, dễ gây hiểu nhầm. Hay ta đặt tên khác?
+T000079 [09:17:20] Anh Tuấn: Cũng được. Minh, em đặt tên rõ hơn: "Deployment Guide – Whole System". Lan: "Test Environment Deployment Manual". Phân biệt ngay.
+T000080 [09:17:35] Minh: Vâng, em sẽ dùng title đó.
+T000081 [09:17:40] Lan: Em cũng đổi lại.
+T000082 [09:17:48] Anh Tuấn: Còn vấn đề gì nữa không? Về sticky note: tôi thấy vụ server staging chậm có thể ảnh hưởng đến test của Lan. Lan có thể làm việc trên sandbox trước.
+T000083 [09:18:02] Lan: Em sẽ dùng sandbox cho đến khi staging sẵn sàng. Nhưng mà em cần quyền root sandbox để cài một số tool monitoring.
+T000084 [09:18:16] Hùng: Quyền root sandbox thì em có, em sẽ share credential với Lan sau meeting.
+T000085 [09:18:28] Anh Tuấn: Nhớ mã hóa khi gửi. Thôi, hiện tại mọi người đã rõ. Chúng ta sẽ tiếp tục họp lại khi có thông tin về staging. Hôm nay trước mắt tập trung tài liệu.
+T000086 [09:18:42] Hùng: Em có việc cần báo – tuần sau em phải onboard nhân sự mới, có thể ảnh hưởng thời gian review. Lan thông cảm.
+T000087 [09:18:56] Lan: Không sao, em sẽ gửi sớm cho Hùng xem, nếu gấp quá thì Minh support review cũng được.
+T000088 [09:19:10] Minh: Nếu Lan cần, em có thể review phần seed script, còn phần kỹ thuật Hùng rành hơn.
+T000089 [09:19:22] Anh Tuấn: Các em tự sắp xếp. Ok, tôi không có vấn đề gì thêm. Ai còn ý kiến?
+T000090 [09:19:34] Minh: Em muốn hỏi rõ: tài liệu triển khai hệ thống có cần bao gồm hướng dẫn shutdown và restart dịch vụ không?
+T000091 [09:19:48] Anh Tuấn: Có, đưa vào phần operation. Nhưng mà tập trung vào step thường dùng, không phải toàn bộ admin.
+T000092 [09:20:00] Minh: Vâng, em viết ngắn gọn.
+T000093 [09:20:08] Lan: Em cũng không có câu hỏi.
+T000094 [09:20:14] Hùng: Tôi ok.
+T000095 [09:20:20] Anh Tuấn: Tạm thời như vậy. Chúng ta sẽ còn họp lại để review progress. Cảm ơn mọi người. Kết thúc nội dung hôm nay.
+--- END OF PART P01 ---

@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W2-SHORT-C3-N2-PROD-NDL-023",
+  "meeting_id": "W2-SHORT-C3-N2-PROD-NDL-023",
+  "meeting_title": "Theo dõi lỗi và tài liệu",
+  "meeting_date": "2026-02-17",
+  "wave": 2,
+  "wave_name": "wave_2_feature_isolation",
+  "labels": [
+    "task_without_deadline",
+    "first_person_commitment"
+  ],
+  "objective": "{\"name\": \"task without deadline\", \"code\": \"NDL\", \"labels\": \"task_without_deadline,first_person_commitment\", \"requirements\": \"Task và assignee rõ ràng nhưng không có bất kỳ deadline nào.\"}",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_2_feature_isolation/W2-SHORT-C3-N2-PROD-NDL-023/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-pro"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 706,
+    "turn_count": 25
+  },
+  "ground_truth": {
+    "available": true,
+    "expected_output_file": "expected_output.json",
+    "reviewer": "Codex",
+    "review_method": "full_transcript_and_final_state_audit",
+    "review_policy_version": "1.0",
+    "review_notes": "Reviewed against full transcript, final recap/state transitions, cancellation/handoff semantics, and deterministic date policy."
+  }
+}

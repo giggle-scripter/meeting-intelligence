@@ -1,0 +1,84 @@
+{
+  "case": {
+    "wave": 2,
+    "case_index": 24,
+    "meeting_id": "W2-SHORT-C2-N0-OPS-BRST-024",
+    "meeting_date": "2026-02-18",
+    "title": "Chuẩn bị bản phát hành nội bộ",
+    "labels": "brainstorm_only,no_active_task",
+    "objective": "{\"name\": \"brainstorm only\", \"code\": \"BRST\", \"labels\": \"brainstorm_only,no_active_task\", \"requirements\": \"Nhiều ý tưởng hành động được bàn nhưng không có câu nhận việc, giao việc hay quyết định cuối.\"}"
+  },
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 980,
+    "turn_count": 37
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 102.98119829999632
+    },
+    {
+      "attempt": 2,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.007887700005085208
+    },
+    {
+      "attempt": 3,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.004786699995747767
+    },
+    {
+      "attempt": 4,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.0058062000025529414
+    },
+    {
+      "attempt": 5,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.011012199989636429
+    },
+    {
+      "attempt": 6,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.0050826999940909445
+    },
+    {
+      "attempt": 7,
+      "kind": "api_error",
+      "errors": [
+        "RuntimeError: DeepSeek trả content rỗng."
+      ],
+      "elapsed_seconds": 159.98310440000205
+    },
+    {
+      "attempt": 8,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 268.03588179999497
+    }
+  ]
+}

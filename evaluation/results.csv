@@ -1,4 +1,0 @@
-TestCaseId,MeetingTitle,ExpectedMeetingCount,ActualMeetingCount,ExpectedTaskCount,ActualTaskCount,FlowStatus,DurationSeconds,MeetingItemId,TaskLinkagePass,ContentPass,HallucinationCount,OverallResult,Notes
-meeting_01,Weekly Project Sync,1,1,2,2,Succeeded,7,4,TRUE,TRUE,0,Pass,
-meeting_02,Project Discussion,1,1,1,1,Succeeded,3,5,TRUE,TRUE,0,Pass,
-meeting_03,Product Discussion,1,1,0,0,Succeeded,4,,N/A,TRUE,0,Pass,No task expected

@@ -1,0 +1,8 @@
+note nhanh
+chủ đề: Rà soát lỗi đăng nhập
+kw: xac / thuc / lay / log / gateway / service / sanh
+- Em sẽ lấy log từ gateway + service xác thực để so sánh thời gian response
+* Không ạ, ngày mai em sẽ hoàn thành
+- Về lỗi SMS xác thực, Bình em kiểm tra server side
+1) Em sẽ theo dõi thêm
+- Vậy em có thể nhận task phân tích chi tiết lỗi timeout này không? ? chưa chốt

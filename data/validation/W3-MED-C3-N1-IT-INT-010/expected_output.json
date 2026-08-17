@@ -1,0 +1,53 @@
+{
+  "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+  "tasks": [
+    {
+      "task_name": "Hoàn thiện API integration",
+      "assignee": "Minh",
+      "start_date": "2026-02-14",
+      "due_date": "2026-02-28",
+      "due_date_text": "28/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Tối ưu hiệu năng API",
+      "assignee": "Minh",
+      "start_date": "2026-02-14",
+      "due_date": "2026-03-05",
+      "due_date_text": "05/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Chuẩn bị dữ liệu mẫu",
+      "assignee": "Lan",
+      "start_date": "2026-02-14",
+      "due_date": "2026-03-03",
+      "due_date_text": "03/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Kiểm thử tích hợp",
+      "assignee": "Tùng",
+      "start_date": "2026-02-14",
+      "due_date": "2026-03-05",
+      "due_date_text": "05/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết tài liệu API guide",
+      "assignee": "Huy",
+      "start_date": "2026-02-14",
+      "due_date": "2026-03-10",
+      "due_date_text": "10/03",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Tạo môi trường test",
+      "assignee": "Thảo",
+      "start_date": "2026-02-14",
+      "due_date": "2026-02-23",
+      "due_date_text": "trước 24/02",
+      "status": "Proposed"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+MEETING_ID: W4-LONG-C5-N1-PROD-STATE-003
+PART: P05/5
+
+T000252 [09:51:35] Anh Tuấn: Tiếp tục nào. Hôm nay còn một số việc cần chốt trước khi kết thúc. Đầu tiên, về release 1/3, tôi muốn kiểm tra lại tiến độ tất cả task.
+T000253 [09:51:50] Hùng: Em đang tổng hợp. Task tài liệu triển khai hệ thống của em đã viết được 60%, còn phần security checklist chưa có.
+T000254 [09:52:04] Anh Tuấn: Checklist security tôi đã nhận từ team security hôm qua, sẽ gửi em sau meeting. Em có thể hoàn thành trước 25/2 chứ?
+T000255 [09:52:18] Hùng: Nếu có checklist thì em nghĩ kịp. Nhưng em cũng cần review phần kiến trúc từ Minh.
+T000256 [09:52:30] Minh: Em đã gửi file draw.io rồi mà. Hay em gửi lại vào chat?
+T000257 [09:52:42] Hùng: Em nhận được rồi, chỉ chưa mở. Để em check sau. Còn task kiểm tra config sandbox, em và Minh đã làm xong chưa?
+T000258 [09:52:54] Minh: Bọn em test qua loa, xác nhận config đúng. Nhưng chưa chạy full scenario. Deadline 27/2, còn thời gian.
+T000259 [09:53:06] Anh Tuấn: Vậy task đó vẫn đang tiến hành. Có ai thấy rủi ro gì không?
+T000260 [09:53:18] Lan: Em thấy cần chú ý phần database connection pool. Hôm qua em chạy thử load nhẹ thấy có warning timeout.
+T000261 [09:53:30] Hùng: Cảm ơn Lan, em sẽ add config tăng pool size vào tài liệu. Có thể cần fix cả code.
+T000262 [09:53:42] Anh Tuấn: Đó là technical debt. Nhưng trước mắt, task kiểm tra config sandbox vẫn giữ deadline 27/2.
+T000263 [09:53:54] Minh: Vâng. Còn task monitoring alert, Hùng đã bắt đầu chưa?
+T000264 [09:54:06] Hùng: Em mới setup script health check cơ bản, chưa tích hợp Slack. Em dự kiến làm trong tuần này.
+T000265 [09:54:18] Anh Tuấn: Được, deadline 28/2. Có cần hỗ trợ gì không?
+T000266 [09:54:30] Hùng: Em cần Minh cung cấp danh sách endpoint chi tiết. Minh hứa gửi mà chưa thấy.
+T000267 [09:54:42] Minh: À, em xin lỗi. Em gửi ngay bây giờ. Có 6 endpoint, bao gồm cả health check riêng.
+T000268 [09:54:54] Hùng: Ok. Còn task tài liệu test của Lan tiến độ sao?
+T000269 [09:55:06] Lan: Em viết gần xong, khoảng 85%. Còn phần staging config em để placeholder. Deadline 27/2 em nghĩ kịp.
+T000270 [09:55:18] Anh Tuấn: Tốt. Nhắc lại: task tài liệu triển khai hệ thống (Hùng) deadline 25/2; task tài liệu test (Lan) deadline 27/2; task kiểm tra config (Hùng, Minh) deadline 27/2; task monitoring (Hùng) deadline 28/2.
+T000271 [09:55:34] Hùng: Vậy có tổng cộng 4 task active. Còn ticket lỗi login của Minh thì sao?
+T000272 [09:55:46] Minh: Em đã viết ticket và assign cho BA, nhưng BA bảo backlog không có priority. Vẫn chưa giải quyết.
+T000273 [09:55:58] Anh Tuấn: Việc đó để tôi đẩy lên sau. Có thể sau release sẽ xử lý. Hiện tại nó là unresolved item.
+T000274 [09:56:10] Lan: Em có một concern về task monitoring. Nếu deadline 28/2 sát release, liệu có thời gian test monitor không?
+T000275 [09:56:22] Hùng: Em sẽ setup trước và test song song. Không cần nhiều thời gian.
+T000276 [09:56:34] Minh: Em cũng lo về overlap: 27/2 có hai task cùng deadline, 28/2 một task. Nhưng em nghĩ mỗi người một việc.
+T000277 [09:56:46] Anh Tuấn: Đúng vậy. Nếu có vấn đề, các em báo sớm. Bây giờ tôi muốn check lại các task đã hủy: clean data và bộ dữ liệu chuẩn. Có ai còn băn khoăn không?
+T000278 [09:57:00] Hùng: Không. Dữ liệu sandbox hiện tại ổn.
+T000279 [09:57:10] Lan: Em cũng thấy ổn, không cần làm lại.
+T000280 [09:57:22] Anh Tuấn: Vậy chốt. Một điều nữa: hồi đầu meeting có task restore DB của Hùng, đã hoàn thành. Ghi nhận.
+T000281 [09:57:34] Hùng: Vâng, xong.
+T000282 [09:57:44] Minh: Ngoài ra, em muốn hỏi về việc viết script warning Slack. Có nên giao task riêng không?
+T000283 [09:57:56] Anh Tuấn: Nó nằm trong monitoring alert rồi. Hùng tự quyết.
+T000284 [09:58:06] Hùng: Em sẽ làm, không cần task mới.
+T000285 [09:58:16] Anh Tuấn: Tổng kết cuối cùng: tiến độ chung ổn, nhưng cần bám sát deadline. Ai có vấn đề gì nữa không?
+T000286 [09:58:28] Lan: Em có một thắc mắc về phần recap tài liệu test. Em sợ khi viết lại các bước có thể trùng với tài liệu hệ thống. Nhưng em đã cố tách biệt.
+T000287 [09:58:40] Hùng: Đừng lo, hai tài liệu khác phạm vi. Nếu có overlap, em sẽ comment khi review.
+T000288 [09:58:52] Anh Tuấn: Vậy không có duplicate. Mọi người cần nhắc lại trạng thái cuối không?
+T000289 [09:59:04] Minh: Em nghĩ nên recap nhanh để tránh hiểu nhầm.
+T000290 [09:59:14] Anh Tuấn: Được. Tôi điểm qua:
+- Tài liệu triển khai hệ thống: Hùng, deadline 25/2.
+- Tài liệu triển khai test: Lan, deadline 27/2.
+- Kiểm tra config sandbox: Hùng & Minh, deadline 27/2.
+- Monitoring alert: Hùng, deadline 28/2.
+- Ticket lỗi login: chưa priority.
+- Các task khác hủy hoặc hoàn thành.
+Còn thiếu gì không?
+T000291 [09:59:30] Hùng: Đầy đủ.
+T000292 [09:59:38] Lan: Em đồng ý.
+T000293 [09:59:46] Minh: Ok.
+T000294 [09:59:54] Anh Tuấn: Vậy họp hôm nay đến đây kết thúc. Cảm ơn mọi người. Hẹn gặp lại ở meeting review vào cuối tuần sau.
+T000295 [10:00:00] Hùng: Cảm ơn anh.
+T000296 [10:00:04] Lan: Bye.
+T000297 [10:00:08] Minh: Tạm biệt.
+--- END OF PART P05 ---

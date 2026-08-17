@@ -1,0 +1,101 @@
+MEETING_ID: W5-XL-C5-N2-IT-STRESS-002
+PART: P09/10
+
+T000478 [10:20:00] Minh: Mọi người, trước khi chúng ta chuyển sang chuẩn bị deploy, tôi muốn chốt lại một số state transition cuối. Tôi có thông tin từ lead product: release sớm 05/03 đã được phê duyệt, nhưng họ yêu cầu tất cả code phải merged trước 04/03.
+
+T000479 [10:20:16] Lan: Vậy task tối ưu image của Hùng deadline 04/03 có vẻ sát. Em lo Hùng không kịp vì phải học tool mới.
+
+T000480 [10:20:26] Hùng: Em vừa check, việc chuyển sang webp và lazy load cần 3 ngày, nhưng em có thể làm từ 27/02 đến 01/03. Tuy nhiên, deadline 04/03 vẫn ổn.
+
+T000481 [10:20:38] Minh: Nhưng nếu em bận thêm việc khác? Tôi thấy em có task phân loại alert cũng sắp tới.
+
+T000482 [10:20:46] Hùng: Em thấy task alert có thể dời, vì em chưa có metric. Nếu cần ưu tiên image, em có thể hủy task alert.
+
+T000483 [10:20:56] Minh: Đây là cancellation muộn. Vậy tôi hủy task phân loại alert của Hùng. Không cần làm nữa, vì sprint 14 kết thúc sớm, không đủ thời gian. Thay vào đó, em tập trung vào tối ưu image.
+
+T000484 [10:21:10] Hùng: Đồng ý. Nhưng em cần Tuấn cấp quyền CDN sớm.
+
+T000485 [10:21:16] Tuấn: Em đã cấp rồi, Hùng kiểm tra mail.
+
+T000486 [10:21:20] Đức: Vậy task alert đã hủy. Tuy nhiên, nếu có vấn đề monitoring, ai sẽ xử lý? Có thể tôi support.
+
+T000487 [10:21:30] Minh: Tạm thời Đức support, nhưng không phải task.
+
+T000488 [10:21:36] Lan: Task thanh toán của em deadline 29/02, vẫn ổn. Nhưng em cần biết code review của Đức có bị ảnh hưởng bởi release sớm không? Nếu release 05/03, code review phải xong trước 03/03 để kịp merge.
+
+T000489 [10:21:52] Đức: Tôi có thể dời deadline code review từ 03/03 thành 04/03, vì ngày 03/03 tôi bận họp với lead.
+
+T000490 [10:22:00] Minh: Vậy correction: deadline code review payment của Đức từ 03/03 thành 04/03. Nhưng cần đảm bảo Lan gửi báo cáo trước 29/02.
+
+T000491 [10:22:14] Lan: Em sẽ gửi đúng hạn.
+
+T000492 [10:22:18] Đức: Như vậy tôi có hai task vào 04/03: code review payment và hỗ trợ image của Hùng. Hơi nặng, nhưng được.
+
+T000493 [10:22:28] Minh: Nếu cần, em có thể dời image review đến 05/03.
+
+T000494 [10:22:34] Đức: Không, 04/03 vẫn OK.
+
+T000495 [10:22:38] Tuấn: Em thấy task capacity payment của Đức deadline 06/03, có thể bị ảnh hưởng nếu dồn việc.
+
+T000496 [10:22:48] Đức: Không, capacity payment chỉ là phân tích số liệu, tôi đã có metric từ dashboard. Deadline 06/03 vẫn ổn.
+
+T000497 [10:22:58] Trang: Anh Minh, vụ spec product placement em gửi rồi. Lan có feedback gì không?
+
+T000498 [10:23:06] Lan: Em vừa xem qua, có một số điểm cần chỉnh. Em sẽ gửi feedback trong ngày.
+
+T000499 [10:23:14] Minh: Tốt. Nhưng deadline review design placement của Lan là 04/03, không cần vội.
+
+T000500 [10:23:22] Lan: Vâng.
+
+T000501 [10:23:26] Hùng: Em có câu hỏi về task tối ưu image: có cần test trên production không?
+
+T000502 [10:23:34] Minh: Cần test trên staging trước. Sau đó deploy production vào 04/03.
+
+T000503 [10:23:42] Tuấn: Em sẽ setup staging cho Hùng sau khi deploy cache chiều nay.
+
+T000504 [10:23:48] Hùng: OK.
+
+T000505 [10:23:52] Đức: Tôi thấy chúng ta có nhiều correction deadline trong sprint này. Cần thống nhất danh sách cuối.
+
+T000506 [10:24:00] Minh: Để tôi recap nhanh các thay đổi trong part này:
+- Hủy task phân loại alert của Hùng.
+- Deadlin code review payment (Đức): từ 03/03 thành 04/03.
+- Không thay đổi khác.
+
+T000507 [10:24:16] Lan: Còn task tối ưu image deadline 04/03, không thay đổi.
+
+T000508 [10:24:20] Hùng: Rõ.
+
+T000509 [10:24:24] Trang: Anh Minh, em có một thắc mắc: support vẫn ghi nhận lỗi mobile loading, liệu task image có giải quyết triệt để?
+
+T000510 [10:24:34] Hùng: Một phần. Còn lỗi JS cần xử lý riêng.
+
+T000511 [10:24:40] Minh: Đưa vào backlog.
+
+T000512 [10:24:44] Tuấn: Em có thông báo: staging OK, deploy 15h. Có thể deploy cache cùng.
+
+T000513 [10:24:52] Minh: Tốt.
+
+T000514 [10:24:56] Đức: Vậy state transition cuối: task alert bị hủy, deadline code review payment được dời. Các task khác giữ nguyên.
+
+T000515 [10:25:08] Lan: Em muốn hỏi về unresolved owner FastShip. Có cần nhắc lại với lead không?
+
+T000516 [10:25:16] Minh: Tôi sẽ gặp lead chiều nay. Để P10 bàn.
+
+T000517 [10:25:22] Trang: Vậy em chờ.
+
+T000518 [10:25:26] Hùng: Anh Minh, em có thể bắt đầu tối ưu image từ sáng mai. Cần Tuấn guide CDN.
+
+T000519 [10:25:34] Tuấn: Em sẽ hướng dẫn sau deploy.
+
+T000520 [10:25:38] Minh: OK.
+
+T000521 [10:25:42] Đức: Tôi cần Lan gửi báo cáo thanh toán sớm để tôi review code kịp.
+
+T000522 [10:25:48] Lan: Em sẽ gửi trước 29/02.
+
+T000523 [10:25:52] Minh: Vậy chúng ta kết thúc block này. Phần sau sẽ bàn về kế hoạch sprint 15 và unresolved items.
+
+T000524 [10:26:00] Trang: Em chuẩn bị cho 15h.
+
+--- END OF PART P09 ---

@@ -1,0 +1,118 @@
+MEETING_ID: W5-XL-C5-N3-SW-STRESS-001
+PART: P08/10
+
+T000395 [13:55:00] Hoàng: Chúng ta quay lại chủ đề integration. Tôi muốn xem xét kỹ hơn về spec integration và sự chồng chéo với multi-currency.
+
+T000396 [13:55:45] Linh: Vâng. Hiện tại có hai spec: integration spec do Thắng viết, bao gồm CRM và thanh toán cơ bản; multi-currency spec do Dũng viết. Có thể có ambiguity về scope.
+
+T000397 [13:56:35] Minh: Em nhận thấy vấn đề: spec integration đã được mở rộng sang multi-currency, nhưng Dũng lại viết spec riêng. Vậy ai là người chịu trách nhiệm cuối cùng?
+
+T000398 [13:57:25] Hoàng: Đây là ambiguous reference. Cần làm rõ. Linh, em là Product, em nghĩ sao?
+
+T000399 [13:58:15] Linh: Spec integration nên là tài liệu tổng thể, multi-currency là một phần. Vậy Thắng nên consolidate spec của Dũng vào spec integration. Tuy nhiên, Dũng có thể viết phần chi tiết.
+
+T000400 [13:59:05] Minh: Như vậy handoff không đổi, nhưng cần có coordination giữa Thắng và Dũng. Em đề xuất Thắng lead spec integration, Dũng cung cấp input, và Thắng merge.
+
+T000401 [13:59:55] Dũng: Em đồng ý. Em sẽ gửi phần multi-currency cho Thắng sau khi viết xong.
+
+T000402 [14:00:45] Thắng: OK, em sẽ tích hợp. Nhưng deadline spec integration vẫn là thứ Năm? Nếu nhận input từ Dũng vào thứ Năm, e khó kịp.
+
+T000403 [14:01:35] Hoàng: Có thể correction: Thắng nhận input từ Dũng trước thứ Tư, và spec integration deadline thứ Sáu? Mọi người đồng ý không?
+
+T000404 [14:02:25] Linh: Em không muốn correction thêm, vì đã nhiều. Tôi propose Dũng gửi input vào thứ Ba để Thắng có thời gian. Thứ Năm vẫn là deadline.
+
+T000405 [14:03:15] Dũng: Em sẽ cố gắng gửi vào thứ Ba. Nhưng thứ Ba em có meeting khác.
+
+T000406 [14:04:05] Minh: Vậy thứ Ba tối là kịp.
+
+T000407 [14:04:55] Trang: Liên quan đến test case integration, em cũng cần spec hoàn chỉnh. Vậy test case deadline sẽ phụ thuộc.
+
+T000408 [14:05:45] Hoàng: Đây là dependency đã biết. Chúng ta đã có correction trước. Bây giờ tôi muốn giải quyết ambiguity: spec integration sẽ do Thắng lead, Dũng support. Không handoff.
+
+T000409 [14:06:35] Hòa: Bên Ops có một thắc mắc: monitoring integration có nên là một phần của spec integration không? Hiện tại em đang làm riêng.
+
+T000410 [14:07:25] Linh: Nên là một phần. Thắng, em hãy thêm section monitoring vào spec.
+
+T000411 [14:08:15] Thắng: Vâng, em sẽ thêm. Nhưng cần input từ Hòa.
+
+T000412 [14:09:05] Hòa: Em gửi yêu cầu monitoring sau meeting.
+
+T000413 [14:10:00] Trang: Em có một câu hỏi khác: test case multi-currency đã assign em, nhưng chưa có spec chi tiết. Liệu có thể bắt đầu viết skeleton không?
+
+T000414 [14:10:50] Minh: Có thể, dựa trên requirement từ Linh. Em đề xuất Trang làm phần base, sau đó adjust.
+
+T000415 [14:11:40] Linh: Em sẽ gửi requirement tóm tắt cho Trang trong chiều nay.
+
+T000416 [14:12:30] Hoàng: Vậy chúng ta đã clear ambiguity về spec. Tuy nhiên, còn một unresolved reference khác: ai sẽ support Dũng cho performance analysis? Part trước chưa giải quyết.
+
+T000417 [14:13:20] Minh: Vẫn chưa có quyết định. Em nghĩ Hòa có thể support, nhưng Hòa đã có nhiều task.
+
+T000418 [14:14:10] Hòa: Em có thể dành 2 tiếng vào thứ Sáu, như đã nói.
+
+T000419 [14:15:00] Dũng: Vậy em nhận support từ Hòa. Tạm thời unresolved vần đề resource, nhưng có phương án.
+
+T000420 [14:15:50] Hoàng: Giữ unresolved, nhưng có hướng. Tiếp theo, tôi muốn recap cục bộ các task liên quan đến integration:
+
+- Spec integration: Thắng (lead), Dũng (input), deadline thứ Năm.
+- Test case integration: Trang, phụ thuộc spec.
+- Multi-currency input: Dũng gửi Thắng trước thứ Ba.
+- Monitoring section: Thắng thêm, Hòa input.
+- Test case multi-currency: Trang, deadline thứ Hai tuần sau.
+- Performance analysis: Dũng, deadline thứ Hai tuần sau.
+- Monitoring integration: Hòa, deadline mềm trước release.
+
+T000421 [14:16:40] Linh: Recap này không tạo task mới, chỉ là tổng hợp.
+
+T000422 [14:17:30] An: Em muốn hỏi về test data multi-currency: đã assign em, em sẽ gửi sau spec. Không thay đổi.
+
+T000423 [14:18:20] Trang: Em xác nhận test case multi-currency sẽ viết skeleton từ chiều nay.
+
+T000424 [14:19:10] Hoàng: Tốt. Có vấn đề gì khác về integration?
+
+T000425 [14:20:00] Minh: Em có một small issue: trong spec integration, cần quyết định dùng REST hay GraphQL cho CRM. Chưa có consensus.
+
+T000426 [14:20:50] Linh: Em propose REST, vì đơn giản. Nhưng nếu CRM team yêu cầu GraphQL, có thể change.
+
+T000427 [14:21:40] Hoàng: Đây là decision cần chốt. Nhưng có thể để part sau.
+
+T000428 [14:22:30] Trang: Nếu là GraphQL, test case của em sẽ khác.
+
+T000429 [14:23:20] Linh: Vậy em sẽ hỏi CRM và trả lời trong ngày mai.
+
+T000430 [14:24:10] Hòa: Liên quan đến REST, Ops có thể setup nhanh hơn.
+
+T000431 [14:25:00] Hoàng: Giữ unresolved decision về protocol. Chúng ta không giải quyết tất cả.
+
+T000432 [14:25:50] Dũng: Em có một clarification về multi-currency: có cần support real-time rate từ third-party trong spec không? Hay để sau?
+
+T000433 [14:26:40] Linh: Cần, vì đó là yêu cầu từ partner. Hãy đưa vào spec.
+
+T000434 [14:27:30] Thắng: OK, em sẽ thêm.
+
+T000435 [14:28:20] Trang: Vậy test case multi-currency cũng cần mock third-party API.
+
+T000436 [14:29:10] Hòa: Ops có thể setup mock server.
+
+T000437 [14:30:00] Linh: Task mock server assign Hòa, deadline? Có thể sau spec.
+
+T000438 [14:30:50] Hòa: Em làm trong tuần sau, deadline thứ Hai tuần sau.
+
+T000439 [14:31:40] Hoàng: Task mới: mock server for third-party API, Hòa, deadline thứ Hai tuần sau. Đây không phải correction, mà task mới.
+
+T000440 [14:32:30] Minh: Vậy chúng ta có thêm task. Recap cục bộ không tạo duplicate, nhưng lưu ý.
+
+T000441 [14:33:20] Trang: Em muốn nói thêm: test phase 2 chargeback đã hủy, nên em tập trung vào multi-currency.
+
+T000442 [14:34:10] Hoàng: Đúng. Tôi thấy part này xử lý được ambiguity về spec ownership. Nhưng unresolved protocol và support resource vẫn còn.
+
+T000443 [14:35:00] An: Em có một vấn đề nhỏ: data mapping cho CRM cần field cho multi-currency. Em sẽ gửi bổ sung.
+
+T000444 [14:35:50] Thắng: Em cần mapping đó để viết spec.
+
+T000445 [14:36:40] Hoàng: Vậy An gửi mapping trong sáng mai.
+
+T000446 [14:37:30] Linh: Em thấy chúng ta ổn. Part này gần hết.
+
+T000447 [14:38:20] Hoàng: Kết thúc part 8. Recap không tạo task mới. Cảm ơn.
+
+--- END OF PART P08 ---

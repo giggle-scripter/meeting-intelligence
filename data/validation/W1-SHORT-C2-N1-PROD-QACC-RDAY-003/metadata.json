@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-003",
+  "meeting_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-003",
+  "meeting_title": "Rà soát lỗi đăng nhập",
+  "meeting_date": "2026-01-18",
+  "wave": 1,
+  "wave_name": "wave_1_baseline",
+  "labels": [
+    "question_then_acceptance",
+    "relative_day_deadline",
+    "mild_noise"
+  ],
+  "objective": "Lead hỏi một người có nhận việc không; chỉ sau câu đồng ý mới hình thành task; deadline là ngày mai hoặc ngày kia.",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_1_baseline/W1-SHORT-C2-N1-PROD-QACC-RDAY-003/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-flash"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 554,
+    "turn_count": 35
+  },
+  "ground_truth": {
+    "available": true,
+    "expected_output_file": "expected_output.json",
+    "reviewer": "Codex",
+    "review_method": "full_transcript_and_final_state_audit",
+    "review_policy_version": "1.0",
+    "review_notes": "Reviewed against full transcript, final recap/state transitions, cancellation/handoff semantics, and deterministic date policy."
+  }
+}

@@ -1,0 +1,11 @@
+ghi vội
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / trien khai / release / monitoring / uat / review / nam
+- Bình, em phải hoàn thành review trước thứ Năm
+* Để em fix sau khi xong review
+- Anh An, em vừa nghĩ ra việc cần kiểm tra log lỗi sau khi fix bug
+1) Mà thực ra dl cho task review feature A là thứ Năm, em mới nhận ra hôm qua em đọc nhầm dl của task đó với task khác
+- Không cần slide, chỉ cần các task done là được
+* Sau khi có monitoring, em cần viết document hướng dẫn vận hành
+- Hình như có hai task tên giống nhau: "Cập nhật tài liệu kỹ thuật" và "Cập nhật tài liệu release"
+1) Hiện tại các task chính: Bình – review feature A (dl thứ Năm) + fix bug login (cuối ngày mai);

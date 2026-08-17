@@ -1,0 +1,11 @@
+minutes nháp
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: trien khai / spec / msf / display / hai / parser / hoan
+- Vậy chị Hoa, chị hoàn thiện spec MSF và gửi cho nhóm trong tuần này
+* Còn dl cho task này là thứ Hai tuần sau – 2/3
+- chốt lại: tôi làm parser mới, Lan hỗ trợ test
+1) Còn task của chị Hoa – spec MSF và spec display
+- Em sẽ gửi spec MSF thứ Sáu 27/2, spec display vào đầu tuần sau
+* Task chính của anh là "cải tiến parser logic"
+- Tôi thấy có một task giống nhau: "viết spec MSF" + "viết spec display" – cả hai đều do Hoa
+1) Nhưng dl có thể là thứ Sáu không ạ? ? chưa chốt

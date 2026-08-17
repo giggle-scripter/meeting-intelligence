@@ -1,0 +1,31 @@
+MEETING_ID: W2-SHORT-C2-N2-IT-PAST-026
+CASE_LABELS: past_completed_work,informational_statement
+MEETING_DATE: 2026-02-20
+TITLE: Trao đổi kế hoạch tích hợp
+
+[09:05:00] Linh: Chào mọi người, hôm nay chúng ta điểm lại các đầu việc đã hoàn thành trong tuần trước cho module thanh toán quốc tế. An, em bắt đầu nhé.
+[09:05:18] An: Vâng. Bên em đã hoàn tất việc mapping dữ liệu từ hệ thống cũ sang hệ thống mới cho 3 đối tác đầu tiên. Cụ thể, file mapping cho đối tác A và B đã được review và ký duyệt, còn đối tác C thì vừa xong hôm thứ Sáu.
+[09:05:52] Minh: Tôi cũng đã deploy xong bản cập nhật API cho cổng thanh toán. Bản test pass hết 98% test case, chỉ còn vài case ngoại lệ liên quan đến timeout nhưng đã được ghi nhận.
+[09:06:24] Linh: Tốt. Còn việc xử lý log lỗi mà tuần trước tôi giao cho Minh, tiến độ thế nào?
+[09:06:38] Minh: Em đã cleanup log cũ và cấu hình rotation cho server production. Việc này hoàn thành từ thứ Tư, không ảnh hưởng gì đến service.
+[09:07:02] An: Nhân tiện, em muốn hỏi về document API phiên bản mới. Minh đã cập nhật chưa? Tuần trước em thấy chưa có.
+[09:07:18] Minh: Ừ, tôi đã update vào chiều thứ Năm. Bản draft trên Confluence đã được chỉnh sửa theo feedback của bên kiểm thử.
+[09:07:34] Linh: Vậy các việc còn tồn đọng từ sprint trước? Như module xác thực OTP chẳng hạn.
+[09:07:48] Minh: Module OTP đã được tích hợp xong. Bên bảo mật đã audit code và approve. Chỉ còn đợi đối tác phía ngân hàng kích hoạt đầu cuối.
+[09:08:10] An: Đúng rồi, em cũng đã gửi mail xác nhận cấu hình cho ngân hàng vào thứ Sáu. Họ hẹn cuối tuần này sẽ bật service.
+[09:08:28] Linh: Ok. Tuần trước còn có ticket về migration dữ liệu lịch sử giao dịch. Việc đó sao rồi?
+[09:08:44] Minh: Migration đã chạy xong từ tối thứ Năm. Dữ liệu 6 tháng gần nhất được chuyển thành công. Tôi đã kiểm tra đối chiếu với báo cáo cũ, khớp 100%.
+[09:09:05] An: Tuy nhiên, em thấy có một số bản ghi giao dịch từ năm ngoái bị thiếu trường mã giao dịch. Đó là lỗi từ hệ thống cũ, team vận hành đã confirm.
+[09:09:22] Linh: Vậy mình ghi nhận lại là lỗi dữ liệu gốc, không phải lỗi migration. An có thể tổng hợp danh sách các bản ghi đó gửi cho bên vận hành không?
+[09:09:36] An: Em đã làm rồi ạ. Gửi mail hôm thứ Sáu kèm file Excel. Họ sẽ xử lý sau.
+[09:09:48] Minh: Về phần hiệu năng, tôi đã tối ưu query cho báo cáo tổng hợp. Trước đây chạy mất 15 giây, giờ còn dưới 2 giây.
+[09:10:08] Linh: Ấn tượng đấy. Có gặp vấn đề gì khi tối ưu không?
+[09:10:18] Minh: Có một chút. Lúc đầu tôi thêm index nhưng không ăn, sau đó phải refactor lại logic group by mới cải thiện được. Mất thêm một ngày rưỡi so với dự kiến.
+[09:10:38] An: Em cũng đã hoàn thành việc viết test case cho module tích hợp mới. Đã gửi lên GitLab, nhánh feature/integration-test.
+[09:10:54] Linh: Tốt. Tôi nhớ tuần trước còn có việc training cho bộ phận vận hành về quy trình xử lý lỗi mới. Ai làm?
+[09:11:10] An: Em đã tổ chức một buổi training online vào thứ Ba. Có 8 người tham dự, feedback khá tích cực. Slide đã được upload lên SharePoint.
+[09:11:28] Linh: Vậy là các đầu việc chính đã hoàn thành. Còn vấn đề nào chưa ổn không?
+[09:11:40] Minh: Có một việc nhỏ: bản ghi nhớ kỹ thuật cho đối tác D vẫn chưa được gửi vì chờ họ xác nhận mẫu. Nhưng không thuộc phạm vi sprint này.
+[09:11:58] Linh: Đúng vậy. Việc đó sẽ được bàn ở cuộc họp tuần sau. Tổng kết lại, tuần trước chúng ta đã hoàn thành 5 đầu việc lớn, không có blocking issue.
+[09:12:14] An: Em bổ sung thêm: báo cáo compliance cho dự án cũng đã được gửi cho phía pháp chế. Họ xác nhận đạt yêu cầu.
+[09:12:30] Linh: Cảm ơn mọi người. Cuộc họp kết thúc tại đây. Hẹn tuần sau.

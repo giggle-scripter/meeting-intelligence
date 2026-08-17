@@ -1,0 +1,126 @@
+MEETING_ID: W4-LONG-C5-N3-SW-STATE-005
+PART: P02/5
+
+T000072 [09:28:05] Anh Minh: Tiếp theo, tôi muốn bàn về lỗi đăng nhập mà bên QA báo cáo hôm qua trên môi trường staging. Anh Tuấn, em đã xem chưa?
+
+T000073 [09:28:30] Anh Tuấn: Dạ, em có xem sơ qua. Lỗi xảy ra khi người dùng nhập sai mật khẩu quá 5 lần, hệ thống lock tài khoản nhưng không hiển thị thông báo rõ ràng. Người dùng chỉ thấy màn hình trắng.
+
+T000074 [09:28:55] Chị Lan: Em cũng nhận được báo cáo từ bộ phận test. Họ nói rằng không chỉ thiếu thông báo, mà còn không có cách nào để unlock tài khoản tự động. Phải gửi email cho admin.
+
+T000075 [09:29:15] Anh Minh: Vậy đây là lỗi nghiêm trọng. Chúng ta cần xử lý ngay. Anh Tuấn, em đề xuất giải pháp gì?
+
+T000076 [09:29:40] Anh Tuấn: Em nghĩ có hai hướng: một là sửa luôn code để hiển thị thông báo và thêm chức năng unlock tự động sau 30 phút; hai là tạo một script tạm thời để reset lock từ phía admin, rồi sau đó mới sửa code chính thức.
+
+T000077 [09:30:05] Chị Hà: Em thấy phương án hai hợp lý hơn, vì sửa code chính thức cần nhiều thời gian test lại. Nhưng nếu làm script thì em có thể viết tài liệu hướng dẫn admin sử dụng.
+
+T000078 [09:30:28] Anh Tuấn: Script thì em có thể viết trong một ngày, nhưng cần có người test. Chị Lan, bên em có thể test giúp không?
+
+T000079 [09:30:50] Chị Lan: Bên em có thể test, nhưng cần script và môi trường test ổn định. Hiện tại môi trường staging đang có vấn đề về băng thông, nên khó test toàn diện.
+
+T000080 [09:31:15] Anh Minh: Đúng, môi trường test vẫn chưa hoàn thiện. Nhưng chúng ta không thể chờ. Tôi đề xuất: Anh Tuấn viết script tạm thời, chị Hà soạn tài liệu hướng dẫn, và chị Lan test trên một instance nhỏ riêng. Đó sẽ là task mới.
+
+T000081 [09:31:40] Anh Tuấn: Vậy em sẽ đặt tên task là "Xử lý lỗi lock tài khoản staging". Em sẽ hoàn thành script trong ngày mai.
+
+T000082 [09:32:00] Chị Hà: Em đồng ý. Tài liệu em sẽ viết song song. Nhưng em cần anh Tuấn cung cấp thông tin về cú pháp script.
+
+T000083 [09:32:20] Anh Tuấn: Anh sẽ gửi em sau khi viết xong.
+
+T000084 [09:32:38] Chị Lan: Em thấy task này không nên giao cho anh Tuấn một mình. Lỗi đăng nhập liên quan đến module xác thực, mà module đó do anh Khoa viết. Anh Tuấn có thể phối hợp với anh Khoa.
+
+T000085 [09:33:00] Anh Tuấn: Anh Khoa đang bận dự án khác. Em có thể tự xử lý, vì script không phức tạp.
+
+T000086 [09:33:18] Anh Minh: Vậy thôi, anh Tuấn chịu trách nhiệm. Nhưng cần báo cáo cho anh Khoa biết để tránh conflict sau này. Chị Lan, em làm đầu mối liên lạc.
+
+T000087 [09:33:40] Chị Lan: Vâng. Em cũng muốn hỏi về dữ liệu test. Bộ phận QA yêu cầu có bộ dữ liệu mẫu với nhiều tình huống đăng nhập. Hiện tại chúng ta chưa có.
+
+T000088 [09:34:05] Anh Minh: Đó là vấn đề thứ hai. Tôi nghĩ chúng ta cần tạo một bộ dữ liệu test riêng cho lỗi đăng nhập. Anh Tuấn, em có thể dùng script để sinh dữ liệu giả không?
+
+T000089 [09:34:25] Anh Tuấn: Em có thể viết script sinh dữ liệu, nhưng cần xác định các trường hợp: đăng nhập thành công, sai mật khẩu, lock tài khoản, quên mật khẩu. Mất khoảng nửa ngày.
+
+T000090 [09:34:48] Chị Hà: Em thấy việc sinh dữ liệu nên làm sau khi script fix lỗi hoàn thành, vì nếu chưa fix thì dữ liệu cũng vô dụng.
+
+T000091 [09:35:10] Anh Minh: Quan điểm của em có lý. Nhưng tôi muốn tách thành task riêng. Task "Tạo bộ dữ liệu test đăng nhập" giao cho anh Tuấn, không deadline cụ thể, nhưng nên hoàn thành trước khi chúng ta chạy test chính thức.
+
+T000092 [09:35:35] Anh Tuấn: Vậy em sẽ làm sau khi xong script chính. Dự kiến cuối tuần này.
+
+T000093 [09:35:55] Chị Lan: Em xin lưu ý, dữ liệu test không được chứa thông tin nhạy cảm. Cần đảm bảo tuân thủ quy định bảo mật.
+
+T000094 [09:36:15] Anh Minh: Đúng. Anh Tuấn, nhớ dùng dữ liệu giả hoàn toàn. Có thể tham khảo bộ mẫu từ dự án cũ.
+
+T000095 [09:36:35] Chị Hà: Em có một ý kiến. Thay vì tạo dữ liệu test riêng, chúng ta có thể dùng luôn dữ liệu từ production ẩn danh. Như vậy sẽ thực tế hơn.
+
+T000096 [09:36:58] Anh Tuấn: Nhưng chị Lan vừa nói về bảo mật. Việc đó cần phê duyệt pháp lý. Em nghĩ nên làm dữ liệu giả cho an toàn.
+
+T000097 [09:37:20] Anh Minh: Đồng ý với anh Tuấn. Chị Hà, ý em tốt nhưng rủi ro cao. Chúng ta cứ làm dữ liệu giả.
+
+T000098 [09:37:38] Chị Hà: Vâng, em hiểu.
+
+T000099 [09:37:55] Anh Minh: Vậy tổng kết lại, chúng ta có thêm hai task mới. Task C: "Xử lý lỗi lock tài khoản staging" – anh Tuấn chịu trách nhiệm, script hoàn thành ngày mai, tài liệu chị Hà viết, chị Lan test. Task D: "Tạo bộ dữ liệu test đăng nhập" – anh Tuấn thực hiện, không deadline. Có ai thấy vấn đề gì không?
+
+T000100 [09:38:20] Chị Lan: Em có thắc mắc về task C. Ai sẽ là người review giải pháp trước khi triển khai? Em nghĩ cần một người có chuyên môn về bảo mật.
+
+T000101 [09:38:42] Anh Minh: Ý em hay. Anh Tuấn, em có thể nhờ anh Khoa review không? Nếu anh Khoa bận, chúng ta có ai khác?
+
+T000102 [09:39:00] Anh Tuấn: Anh Khoa có thể review qua email. Em sẽ gửi draft cho anh ấy. Nhưng không chắc anh ấy trả lời nhanh.
+
+T000103 [09:39:18] Anh Minh: Vậy em cứ gửi, nếu không kịp thì chúng ta sẽ tự review nội bộ. Tôi tạm thời chưa assign reviewer chính thức. Để sau khi có kết quả script, chúng ta sẽ bàn.
+
+T000104 [09:39:40] Chị Hà: Em thấy việc không có reviewer rõ ràng dễ dẫn đến lỗi. Có thể chỉ định em làm reviewer phần tài liệu, còn phần code để anh Tuấn tự kiểm tra?
+
+T000105 [09:40:00] Anh Minh: Cũng được. Em làm reviewer cho tài liệu task C. Phần code thì anh Tuấn tự rà soát, sau đó gửi cho anh Khoa nếu cần.
+
+T000106 [09:40:18] Chị Hà: Vâng. Em sẽ xem xét kỹ.
+
+T000107 [09:40:35] Anh Tuấn: Em sẽ viết script và gửi cho chị Hà và chị Lan trước 10h sáng mai.
+
+T000108 [09:40:55] Anh Minh: Tốt. Quay lại vấn đề dữ liệu test. Em có nghĩ rằng chúng ta nên gộp task D với task A không? Vì môi trường test cũng cần dữ liệu.
+
+T000109 [09:41:18] Anh Tuấn: Em nghĩ để riêng vì task A đã có deadline chặt. Nếu gộp vào sẽ nặng hơn.
+
+T000110 [09:41:35] Chị Lan: Đồng ý. Để riêng giúp dễ quản lý.
+
+T000111 [09:41:50] Anh Minh: Vậy thôi.
+
+T000112 [09:42:05] Chị Hà: Em có một concern nhỏ. Script fix lỗi đăng nhập có thể ảnh hưởng đến các chức năng khác. Chúng ta có nên làm test hồi quy không? Nhưng test hồi quy cần nhiều thời gian.
+
+T000113 [09:42:30] Anh Tuấn: Em nghĩ chỉ cần test chức năng đăng nhập và unlock. Các module khác không liên quan.
+
+T000114 [09:42:48] Anh Minh: Để an toàn, chị Lan hãy test ít nhất các trường hợp cơ bản. Nếu có thời gian thì làm thêm vài case.
+
+T000115 [09:43:05] Chị Lan: Vâng, em sẽ làm.
+
+T000116 [09:43:20] Anh Minh: Còn vấn đề gì cần bàn thêm về lỗi đăng nhập và dữ liệu test không?
+
+T000117 [09:43:38] Chị Hà: Em có thắc mắc về tài liệu. Ở task B (tài liệu triển khai) em đang viết, liệu có nên lồng ghép phần hướng dẫn xử lý lỗi đăng nhập vào không? Hay để riêng?
+
+T000118 [09:44:00] Anh Minh: Nên để riêng, vì task B là tài liệu triển khai hệ thống, không phải tài liệu xử lý sự cố. Em cứ viết tài liệu cho script lock riêng.
+
+T000119 [09:44:20] Chị Hà: Rõ.
+
+T000120 [09:44:35] Anh Tuấn: Em có một băn khoăn. Môi trường test hiện tại không ổn định, nếu chúng ta deploy script lên đó có thể gây lỗi thêm. Em đề xuất test trên một sandbox riêng.
+
+T000121 [09:45:00] Anh Minh: Sandbox có sẵn không? Anh Tuấn, em kiểm tra xem.
+
+T000122 [09:45:15] Anh Tuấn: Có một sandbox cũ của dự án trước, em có thể cài lại.
+
+T000123 [09:45:30] Anh Minh: Được, dùng sandbox đó. Nhưng nhớ dọn dẹp sau khi xong.
+
+T000124 [09:45:45] Chị Lan: Em sẽ hỗ trợ cấu hình sandbox nếu cần.
+
+T000125 [09:46:00] Anh Minh: Tốt. Vậy mọi việc tạm ổn. Tôi thấy chúng ta đã có ba task chính: task A, B, C, D. Cần nhắc lại tiến độ: task A deadline 25/2, task C script mai, task D cuối tuần. Task B không deadline.
+
+T000126 [09:46:30] Chị Hà: Em muốn confirm lại, task C có cần deadline cho việc test không? Hay chỉ script là xong?
+
+T000127 [09:46:50] Anh Minh: Chúng ta sẽ chốt sau khi script hoàn thành. Tạm thời chưa đặt.
+
+T000128 [09:47:05] Anh Tuấn: Em sẽ cập nhật trạng thái vào hệ thống.
+
+T000129 [09:47:20] Anh Minh: Còn vấn đề gì về lỗi đăng nhập nữa không? Tôi thấy đã đủ. Chuyển sang vấn đề khác nếu có.
+
+T000130 [09:47:38] Chị Lan: Em muốn nhấn mạnh rằng việc thiếu dữ liệu test cũng là một rủi ro. Nếu không có dữ liệu, QA sẽ không thể test kỹ. Hy vọng task D được ưu tiên.
+
+T000131 [09:48:00] Anh Tuấn: Em sẽ cố gắng.
+
+T000132 [09:48:15] Anh Minh: Tốt. Tôi nghĩ chúng ta nên dừng ở đây. Cảm ơn mọi người.
+
+--- END OF PART P02 ---

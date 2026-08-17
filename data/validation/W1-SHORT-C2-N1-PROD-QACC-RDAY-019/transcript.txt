@@ -1,0 +1,23 @@
+[00:00:00] Lan: Chào mọi người, hôm nay mình gặp nhanh để rà soát lỗi đăng nhập mà team CS vừa escalate. Có ai đã xem qua report chưa?
+[00:00:10] Hoa: Mình đã đọc báo cáo buổi sáng. Lỗi xảy ra khi người dùng nhập đúng thông tin nhưng hệ thống báo sai mật khẩu.
+[00:00:20] Minh: Mình mới xem log thử, có vẻ liên quan đến caching session sau khi đổi mật khẩu.
+[00:00:30] Lan: Tần suất thế nào Hoa? Có ảnh hưởng đến nhiều user không?
+[00:00:40] Hoa: Khoảng 5% user trong giờ cao điểm, tương đương vài trăm người mỗi ngày. Mình đã thống kê và thấy tăng đột biến từ hôm qua.
+[00:00:55] Lan: Vậy khá nghiêm trọng. Minh, cậu có thể xác định nguyên nhân cụ thể hơn không?
+[00:01:05] Minh: Có thể là do cache chưa được invalidate khi user reset password. Mình cần thêm thời gian debug trên môi trường staging.
+[00:01:20] Hoa: Mình có thể tạo một tài khoản test và gửi các bước tái hiện cho cậu.
+[00:01:30] Minh: Ok, cảm ơn Hoa. Gửi qua Slack nhé, mình sẽ check ngay.
+[00:01:40] Lan: Trước khi phân công, cho mình hỏi thêm: Lỗi này có liên quan đến thay đổi gần đây ở module auth không?
+[00:01:55] Minh: Tuần trước mình có tối ưu phần session management, có thể side effect từ đó. Để mình review lại commit.
+[00:02:10] Lan: Được. Vậy mình muốn task này được ưu tiên cao nhất, fix càng sớm càng tốt. Minh, cậu có thể nhận và cam kết xong trước ngày mai không?
+[00:02:25] Minh: Để mình ước lượng... Khối lượng không quá lớn, nếu Hoa hỗ trợ tái hiện nhanh thì mình nghĩ khả thi. Ok, mình nhận task này.
+[00:02:40] Lan: Tuyệt. Vậy mình sẽ tạo task “Fix lỗi đăng nhập sai khi đúng mật khẩu”, assign cho Minh, deadline ngày mai.
+[00:02:55] Minh: Ngày mai là thứ Tư. Mình sẽ cố gắng xong trước 4h chiều để Hoa test.
+[00:03:05] Hoa: Mình sẽ chuẩn bị test case và sẵn sàng test bản fix. Có cần báo lại cho CS về tiến độ không Lan?
+[00:03:15] Lan: Để mình gửi mail cập nhật cho họ. Các cậu tập trung vào chuyên môn.
+[00:03:25] Hoa: Ok. Mình sẽ gửi tài liệu tái hiện trong 30 phút nữa.
+[00:03:35] Minh: Mình chờ nhé. À, Hoa ơi, cậu có thể check thêm xem có case nào tương tự với phần đăng nhập bằng Google không?
+[00:03:45] Hoa: Để mình kiểm tra lại log. Nhưng hiện tại report chỉ ghi nhận ở đăng nhập thường.
+[00:03:55] Lan: Cẩn thận vẫn hơn, Hoa cứ kiểm tra nếu có thời gian. Vậy chốt nhé: Minh fix lỗi login, deadline ngày mai; Hoa hỗ trợ và test. Cảm ơn mọi người, meeting kết thúc.
+[00:04:10] Minh: Cảm ơn Lan.
+[00:04:15] Hoa: Bye mọi người.

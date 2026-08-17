@@ -1,0 +1,356 @@
+[09:00:00] An: Chào mọi người, cảm ơn đã đến họp đúng giờ. Hôm nay chúng ta sẽ tập trung vào môi trường test và tài liệu triển khai. Mở đầu, mời Bình cập nhật tình hình môi trường UAT.
+[09:00:20] Bình: Dạ, em vừa kiểm tra lại server UAT. Hiện tại đã setup xong nhưng chưa deploy build mới nhất vì tụi em đang chờ bản fix lỗi từ Châu.
+[09:00:45] An: Châu, bên em fix xong chưa? Cần ưu tiên để deploy sớm.
+[09:01:00] Châu: Dạ, em còn vài lỗi nhỏ với module đăng nhập. Em nghĩ chiều nay sẽ xong.
+[09:01:25] Bình: Vậy em có thể push code lên nhánh test trước 17h không? Tối nay anh muốn deploy thử.
+[09:01:45] Châu: Được, em cố gắng. Nhưng mà em thấy môi trường UAT ổn chưa anh? Em sợ push lên rồi không chạy được.
+[09:02:05] An: Có vấn đề gì về môi trường à? Dũng, em phụ trách testing, có feedback gì không?
+[09:02:20] Dũng: Em mới chạy smoke test trên đó tối qua, bị lỗi kết nối DB. Em nghĩ do config hoặc network.
+[09:02:40] Bình: Cái đó em đang xử lý. Anh sẽ update lại config sáng nay. Châu cứ push code đi, khi nào xong em báo anh.
+[09:03:00] An: Tốt. Vậy tạm thời phân công: Châu fix lỗi module đăng nhập, deadline trước 17h hôm nay. Sau đó Bình sẽ deploy lên UAT. Dũng kiểm tra lại sau khi deploy.
+[09:03:25] Dũng: Rõ. Em có cần viết test case cho UAT không? Hay dùng test suite cũ?
+[09:03:40] Bình: Dùng test suite cũ đi, nhưng em update thêm case cho module đăng nhập.
+[09:04:00] An: Khoan, còn vụ tài liệu triển khai. Em cần một tài liệu hướng dẫn triển khai cho môi trường production. Em giao cho ai?
+[09:04:20] Em: Anh ơi, em có thể làm cái đó. Em đã viết draft cho staging rồi, giờ chỉ cần chỉnh sửa.
+[09:04:40] An: Ừ, vậy em làm luôn. Nhưng cẩn thận, tài liệu triển khai cho production khác với staging. Em cần có phần rollback và monitoring.
+[09:05:00] Em: Vâng, em sẽ làm. Anh cho em bao nhiêu thời gian?
+[09:05:15] An: Để xem… Tuần sau là 27/02 rồi, deadline 25/02 được không? Em có kịp không?
+[09:05:35] Em: 25/02 hơi gấp, em còn việc khác. Nhưng em cố gắng.
+[09:05:55] Bình: Em nghĩ nên đặt deadline là 27/02, để Em có thời gian kiểm tra chéo.
+[09:06:10] An: 27/02 cũng được. Nhưng mà còn một tài liệu nữa: tài liệu hướng dẫn triển khai cho môi trường staging, ai làm?
+[09:06:30] Dũng: Cái đó em có thể viết, vì em test staging nhiều. Nhưng mà tài liệu staging đã có sẵn từ đợt trước, chỉ cần update.
+[09:06:50] An: Vậy Dũng update tài liệu staging, không deadline cụ thể nhưng ưu tiên làm trong tuần. Còn Em làm tài liệu production, deadline 27/02. Hai tài liệu này gần giống nhau, đừng nhầm.
+[09:07:15] Em: Dạ, em sẽ để tên khác nhau: "HuongDanTrienKhai_Production" và "HuongDanTrienKhai_Staging".
+[09:07:30] An: OK. Quay lại vụ môi trường. Bình, em nói config DB đang fix? Cụ thể thế nào?
+[09:07:50] Bình: Bên infra cấp sai port, em đã Báo họ sửa. Họ hẹn trưa nay xong.
+[09:08:05] An: Vậy trưa nay mới có môi trường ổn. Châu, em có thể push code sớm hơn không? Hay phải đợi?
+[09:08:25] Châu: Code của em độc lập với DB, em push được ngay khi fix xong. Nhưng để test thì cần DB ổn.
+[09:08:45] An: Rõ. Vậy kế hoạch: Châu push code trước 17h, Bình depoy khi môi trường ổn, Dũng test sau đó. Mọi người OK?
+[09:09:05] Bình: OK.
+[09:09:10] Châu: OK.
+[09:09:15] Dũng: OK.
+[09:09:20] Em: Em có thắc mắc về tài liệu production, nên thêm phần về secret management không?
+[09:09:40] An: Có, em thêm vào. Cần mô tả cách lấy secret từ vault.
+[09:09:55] Em: Vâng. Mà em thấy tài liệu staging hiện tại thiếu phần CICD, Dũng update luôn nhé?
+[09:10:10] Dũng: Để em xem lại. Có vẻ phần CICD đã có ở tài liệu khác, em có thể link chéo.
+[09:10:30] An: Không, nên copy vào một chỗ để dễ tra cứu. Dũng chịu khó viết thêm.
+[09:10:45] Dũng: OK, em sẽ thêm.
+[09:11:00] Bình: Anh nghĩ chúng ta cần thống nhất template tài liệu. Em với Dũng dùng cùng format không?
+[09:11:20] Em: Em dùng markdown, có bảng và hình.
+[09:11:30] Dũng: Em cũng dùng markdown, nhưng em có template riêng. Có thể merge lại.
+[09:11:50] An: Vậy hai em thống nhất một template chung, rồi up lên confluence. Deadline thứ 4 tuần sau.
+[09:12:10] Bình: Thứ 4 là 25/02 à? Cũng được.
+[09:12:20] An: Ừ. Bình, em có thể support review tài liệu không?
+[09:12:35] Bình: Được, nhưng em bận fix config sáng nay. Em có thể review chiều.
+[09:12:50] An: Tốt. Còn ai có vấn đề gì về môi trường test nữa không?
+[09:13:05] Châu: Em thấy môi trường dev cũng cần nâng cấp, nhưng không nằm trong scope meeting này.
+[09:13:20] An: OK, để hôm khác. Bây giờ tập trung vào hai việc chính: test UAT và tài liệu.
+[09:13:40] Dũng: Em muốn hỏi, test UAT có cần test hiệu năng không? Hay chỉ functional?
+[09:13:55] Bình: Chỉ functional thôi. Hiệu năng sẽ test sau ở môi trường staging.
+[09:14:10] An: Nhưng em cần đảm bảo UAT không bị chậm do lỗi code. Châu check lại các query nhé.
+[09:14:30] Châu: Dạ, em đã optimize rồi. Nhưng có một số API chưa được cache.
+[09:14:45] Bình: Cache thì để sau, ưu tiên fix lỗi đăng nhập.
+[09:15:00] An: Vậy Châu tập trung vào lỗi đăng nhập. Bình deploy xong thì báo cho cả team.
+[09:15:20] Bình: Em sẽ tạo channel trên Slack thông báo.
+[09:15:35] An: OK. Còn tài liệu, Em và Dũng cần merge template xong trước 24/02 để Bình kịp review.
+[09:16:00] Em: 24/02 là thứ 3, em OK.
+[09:16:10] Dũng: Em cũng OK.
+[09:16:20] Bình: Anh thấy timeline hơi tight, nhưng cố gắng.
+[09:16:35] An: Chúng ta có thể điều chỉnh sau nếu cần. Nhưng ưu tiên giữ đúng tiến độ.
+[09:16:55] Châu: Anh An, em muốn confirm lại task của em: fix lỗi module đăng nhập, push code trước 17h, đúng không ạ?
+[09:17:10] An: Đúng. Deadline hôm nay. Không có deadline sau.
+[09:17:25] Bình: Còn task deploy UAT của em, chưa có deadline cụ thể vì phụ thuộc môi trường.
+[09:17:40] An: Đúng. Khi môi trường xong thì deploy ngay. Vậy coi như không deadline, nhưng ưu tiên.
+[09:18:00] Dũng: Em thấy task "kiểm thử UAT" cũng chưa có deadline. Em nên đặt không?
+[09:18:15] An: Tạm thời chưa, vì còn phụ thuộc deploy. Sau khi deploy xong thì Dũng test và báo kết quả trong ngày.
+[09:18:35] Dũng: Rõ.
+[09:18:45] An: Tổng kết lại: Chúng ta có mấy task. Task 1: Châu fix lỗi đăng nhập, deadline 17h hôm nay. Task 2: Bình deploy UAT, không deadline. Task 3: Dũng viết tài liệu staging, không deadline. Task 4: Em viết tài liệu production, deadline 27/02. Task 5: Em và Dũng thống nhất template, deadline 24/02. Task 6: Bình review tài liệu, sau 24/02.
+[09:19:15] Em: Anh ơi, em thấy task 4 và task 5 tên gần giống nhau, dễ nhầm. Em có thể đặt tên rõ hơn: "Tạo tài liệu hướng dẫn triển khai production" và "Cập nhật tài liệu hướng dẫn triển khai staging".
+[09:19:40] An: OK, vậy em dùng tên đó. Còn vấn đề gì nữa không?
+[09:19:55] Bình: Anh có một vấn đề: hiện tại chúng ta đang thiếu nhân sự cho việc review bảo mật. Có nên đưa vào tài liệu không?
+[09:20:10] An: Chưa cần, vì mới ở giai đoạn test. Sau này sẽ bổ sung.
+[09:20:25] Châu: Em thấy task fix lỗi của em cần access đến server để test. Em chưa có vpn.
+[09:20:40] Bình: Em sẽ cấp VPN cho em trong sáng nay. Em nhắn anh trên Slack.
+[09:20:55] Châu: Cảm ơn anh.
+[09:21:05] An: Mọi người lưu ý, có thể có thay đổi về môi trường do bên infra. Nếu có gì bất thường, báo ngay.
+[09:21:25] Dũng: Vâng.
+[09:21:35] An: Vậy tạm thời đến đây thôi. Chúng ta sẽ tiếp tục vào buổi họp sau. Cảm ơn mọi người.
+[09:21:45] Dũng: Anh An, em vừa nghĩ ra một vấn đề. Lỗi đăng nhập mà Châu đang fix có thể liên quan đến dữ liệu test hiện tại. Em thấy dữ liệu trong UAT chưa được reset từ đợt test trước.
+[09:22:00] An: Ừ, chuyện đó quan trọng đấy. Châu, em kiểm tra log lỗi có liên quan đến dữ liệu không?
+[09:22:15] Châu: Em đã check, lỗi chủ yếu là do session timeout và sai token. Dữ liệu test cũ có vài user bị duplicate, nhưng không ảnh hưởng nhiều.
+[09:22:35] Bình: Dữ liệu duplicate thì vẫn có thể gây lỗi nếu code không xử lý đúng. Em nên reset DB UAT về trạng thái sạch trước khi deploy.
+[09:22:55] An: Vậy Bình lo việc reset DB. Khi nào làm?
+[09:23:10] Bình: Em có thể làm ngay sau khi môi trường ổn, khoảng trưa nay.
+[09:23:30] An: OK, nhưng ai sẽ cung cấp dữ liệu test mới? Không thể deploy mà không có dữ liệu.
+[09:23:45] Dũng: Em có thể tạo script để generate dữ liệu test cho module đăng nhập, gồm các trường hợp: user hợp lệ, user hết hạn, user bị khóa.
+[09:24:00] An: Tốt, Dũng làm script đó. Cần bao lâu?
+[09:24:15] Dũng: Khoảng nửa ngày, em có thể gửi trước 14h hôm nay.
+[09:24:30] An: Vậy giao cho Dũng tạo dữ liệu test, deadline 14h hôm nay. Bình reset DB trưa nay. Ê, mà dữ liệu test có cần review không?
+[09:24:50] Châu: Em nghĩ nên có người review script của Dũng, vì dữ liệu test ảnh hưởng đến kết quả test.
+[09:25:05] An: Ai review? Bình bận với config, em có thể review không?
+[09:25:20] Châu: Em cũng bận fix lỗi. Có thể nhờ Ngọc, nhưng Ngọc không trong meeting này.
+[09:25:35] An: Vậy tạm thời chưa có reviewer. Dũng cứ làm, sau đó gửi cho Bình nhờ anh ấy review khi rảnh.
+[09:25:55] Dũng: OK, nhưng nếu không ai review thì dễ sai.
+[09:26:10] An: Đúng, nhưng hiện tại không có ai. Để sau tính. Giờ tập trung vào code và dữ liệu.
+[09:26:30] Bình: Anh An, em thấy vụ review này treo đó không tốt. Hay em assign cho Hùng ở team QA? Nhưng Hùng cũng bận.
+[09:26:50] An: Chưa chắc chắn. Cứ để đó, nếu cần thì part sau bàn. Tiếp tục.
+[09:27:05] Châu: Em muốn hỏi chi tiết lỗi đăng nhập. Dũng, em có log cụ thể không?
+[09:27:20] Dũng: Em có export log từ tối qua. Lỗi chính là “invalid token” khi refresh session.
+[09:27:35] Châu: Có vẻ do logic refresh token. Em sẽ kiểm tra lại.
+[09:27:50] Bình: Nhưng nếu token bị invalid do dữ liệu cũ thì sao? Dũng, script dữ liệu của em có tạo token mẫu không?
+[09:28:10] Dũng: Em sẽ tạo token hợp lệ, có expiration time cụ thể.
+[09:28:25] An: Vậy Châu fix code, Dũng tạo dữ liệu, Bình reset DB. Nhưng còn việc kiểm thử tích hợp, ai làm?
+[09:28:45] Em: Anh, em có thể hỗ trợ chạy test tích hợp sau khi deploy. Nhưng em đang làm tài liệu.
+[09:29:00] An: Em ưu tiên tài liệu trước. Test tích hợp để Dũng lo.
+[09:29:15] Dũng: Vâng. Nhưng em cần môi trường ổn để test.
+[09:29:30] Bình: Trưa nay em reset xong.
+[09:29:45] An: Tạm coi như vậy. Mọi người có thắc mắc gì về lỗi đăng nhập không?
+[09:30:00] Châu: Em thấy có một lỗi nữa: khi user nhập sai mật khẩu 5 lần, tài khoản bị khóa nhưng không có thông báo.
+[09:30:20] An: Đó có phải task mới không? Hay nằm trong fix lỗi đăng nhập?
+[09:30:35] Châu: Nó thuộc module đăng nhập, nên em sẽ xử lý luôn. Nhưng cần thêm thời gian.
+[09:30:50] An: Deadline vẫn 17h được không?
+[09:31:05] Châu: Em nghĩ em cần thêm 2 tiếng, vì phải thêm logic khóa và thông báo.
+[09:31:20] An: Vậy deadline 19h hôm nay. Mọi người OK?
+[09:31:35] Bình: Em OK, nhưng deploy sẽ bị đẩy muộn.
+[09:31:50] An: Không sao, miễn là code ổn. Dũng, kế hoạch test của em có thay đổi không?
+[09:32:05] Dũng: Em vẫn test sau deploy, nhưng nếu deploy muộn thì em cũng muộn.
+[09:32:20] An: Hiểu. Vậy task của Châu có hai phần: fix lỗi token và thêm logic khóa. Cả hai đều deadline 19h.
+[09:32:40] Châu: Rõ.
+[09:32:50] Bình: Anh An, em muốn báo là em vừa check với infra, họ nói port DB đã sửa xong. Em có thể reset ngay bây giờ.
+[09:33:10] An: Tốt, vậy Bình reset DB luôn. Dũng, em có script dữ liệu chưa?
+[09:33:25] Dũng: Em chưa viết xong, em sẽ bắt đầu làm ngay.
+[09:33:40] An: OK. Bình reset xong báo lại.
+[09:33:55] Bình: Rõ. Em sẽ báo trong channel.
+[09:34:10] Châu: Anh ơi, em có một băn khoăn: nếu Dũng tạo dữ liệu mới, mà DB reset thì dữ liệu cũ mất hết. Em sợ mất log cần debug.
+[09:34:30] An: Có kế hoạch backup không Bình?
+[09:34:45] Bình: Em sẽ backup trước khi reset, giữ lại bản snapshot.
+[09:35:00] An: Vậy OK. Cứ reset rồi import dữ liệu test mới.
+[09:35:15] Dũng: Vâng, em sẽ gửi script qua.
+[09:35:30] Em: Anh ơi, em vừa kiểm tra thấy template tài liệu staging và production của em và Dũng chưa thống nhất. Em cần họp riêng không?
+[09:35:50] An: Hai em tự trao đổi, không cần họp. Deadline 24/02 vẫn giữ.
+[09:36:05] Dũng: OK, em sẽ liên lạc với Em.
+[09:36:20] Bình: Anh thấy chúng ta có nhiều task nhỏ. Anh lo có task bị quên.
+[09:36:35] An: Ừ, em có thể tổng kết nhanh: Task A: Châu fix lỗi đăng nhập và thêm logic khóa – deadline 19h. Task B: Dũng tạo dữ liệu test – deadline 14h. Task C: Bình reset DB trưa nay. Task D: Em và Dũng thống nhất template – 24/02. Task E: Em làm tài liệu production – 27/02. Task nào quên?
+[09:37:10] Châu: Còn task F: Bình review script dữ liệu, nhưng chưa có deadline.
+[09:37:25] An: Đúng, quên. Vậy thêm task F: Bình review script dữ liệu của Dũng, deadline 16h hôm nay.
+[09:37:45] Bình: Em vừa reset DB, vừa review script, em OK. Nhưng nếu em không review kịp thì sao?
+[09:38:00] An: Cố gắng. Nếu quá tải thì báo sớm.
+[09:38:15] Dũng: Em sẽ gửi script sớm nhất có thể.
+[09:38:30] An: Tốt. Còn vấn đề gì về lỗi đăng nhập nữa không?
+[09:38:45] Châu: Em muốn hỏi Dũng có test case cụ thể cho module đăng nhập không? Hay em tự viết?
+[09:39:00] Dũng: Em có test suite cũ, em sẽ update thêm dựa trên dữ liệu mới.
+[09:39:15] An: Vậy Dũng lo test case. Châu chỉ fix code.
+[09:39:30] Châu: OK.
+[09:39:45] Bình: Anh An, em thấy việc review script dữ liệu chưa có người thay thế nếu em bận. Có ai khác không?
+[09:40:00] An: Không ai. Em cứ làm, nếu không kịp thì tạm gác lại.
+[09:40:15] Em: Anh, em có thể hỗ trợ review nếu cần. Em có kinh nghiệm với dữ liệu test.
+[09:40:30] An: Em đang làm tài liệu, không nên ôm thêm. Nhưng nếu em rảnh sau 14h thì giúp.
+[09:40:45] Em: Vâng, em sẽ xem.
+[09:41:00] Châu: Em vừa nhận được thông báo là công ty em có training chiều nay từ 14h đến 16h. Em có thể phải off.
+[09:41:15] An: Mâu thuẫn với deadline fix lỗi. Em có thể hoãn training không?
+[09:41:30] Châu: Không, bắt buộc. Em có thể làm việc trước 14h và sau 16h.
+[09:41:45] An: Vậy em cần hoàn thành code trước 14h hoặc sau 16h. Deadline 19h vẫn OK.
+[09:42:00] Châu: Em có thể fix phần token trước 14h, phần còn lại sau 16h.
+[09:42:15] Bình: Em có thể deploy phần token trước 15h, còn logic khóa deploy sau.
+[09:42:30] An: OK, vậy chia nhỏ thành hai deploy: đợt 1 deploy token fix, đợt 2 deploy logic khóa. Dũng test từng đợt.
+[09:42:50] Dũng: OK.
+[09:43:05] An: Có ai ý kiến gì không? Nếu không, chúng ta kết thúc topic này.
+[09:43:20] Bình: Em OK.
+[09:43:30] Châu: Em OK.
+[09:43:40] Dũng: Em OK.
+[09:43:50] Em: Em OK.
+[09:44:00] An: Mọi người, quay lại vụ tài liệu triển khai. Em và Dũng, hai em đã thống nhất template chưa?
+[09:44:15] Em: Dạ, bọn em mới trao đổi qua. Cơ bản đồng ý dùng template markdown của em, nhưng Dũng muốn thêm một số format cho phần CICD.
+[09:44:30] Dũng: Ừ, template của Em thiếu mấy bước pipeline. Em thêm vào để đồng bộ.
+[09:44:45] An: Vậy là xong phần template? Deadline 24/02 vẫn giữ nhé.
+[09:45:00] Em: Vâng, em nghĩ xong sớm. Nhưng mà anh, em có một vấn đề về task tài liệu production.
+[09:45:15] An: Nói đi.
+[09:45:25] Em: Là em đang bận với training chiều và còn việc khác. Em không chắc hoàn thành tài liệu production kịp 27/02. Em muốn nhờ Dũng làm thay.
+[09:45:40] Dũng: Em? Em đã có tài liệu staging rồi, giờ thêm production thì nặng quá.
+[09:45:55] An: Nhưng em có kinh nghiệm viết doc hơn, và Em cần tập trung vào template với các việc khác. Vậy có ổn không?
+[09:46:10] Dũng: Em có thể làm, nhưng deadline 27/02 phải giãn ra. Hoặc em chỉ viết draft, rồi Em review sau.
+[09:46:25] An: Không được, cần một người chịu trách nhiệm duy nhất. Vậy từ giờ, Dũng chịu trách nhiệm tài liệu production. Em chuyển hết tài liệu draft cho Dũng.
+[09:46:40] Em: Vâng, em sẽ gửi mail với bản draft em đã viết từ tuần trước.
+[09:46:55] An: OK, vậy handoff task đó cho Dũng. Còn deadline, Dũng cần thêm thời gian không?
+[09:47:10] Dũng: Em cần đến 01/03 thay vì 27/02, vì em phải học format mới.
+[09:47:25] An: 01/03 hơi xa, nhưng được. Chấp nhận. Vậy deadline tài liệu production thành 01/03.
+[09:47:40] Bình: Anh An, vậy em và Dũng có thêm việc. Em thấy Dũng đang ôm nhiều task: script dữ liệu, test case, giờ thêm doc.
+[09:47:55] An: Ừ, nhưng không còn ai phù hợp. Còn tài liệu staging của em Dũng, lúc đầu em giao không deadline. Bây giờ em muốn đặt deadline để tránh trễ.
+[09:48:10] Dũng: Hồi đầu anh nói làm trong tuần, giờ cụ thể là ngày nào?
+[09:48:25] An: 25/02 được không? Để kịp review với production doc.
+[09:48:40] Dũng: 25/02 gần quá, em cần 27/02 để có thời gian chỉnh sửa.
+[09:48:55] An: Không, 25/02. Em đã có template rồi, chỉ việc update nội dung.
+[09:49:10] Dũng: Nhưng em còn script dữ liệu deadline 14h hôm nay, với test case. Áp lực quá.
+[09:49:25] Bình: Anh thấy nên dời script dữ liệu deadline sang 16h, vì em còn review. Em OK không?
+[09:49:40] Dũng: Cũng được, nếu Bình review sớm.
+[09:49:55] An: Vậy điều chỉnh: Dũng script dữ liệu deadline 16h, Bình review sau đó. Còn tài liệu staging deadline 25/02.
+[09:50:10] Dũng: OK, em cố gắng.
+[09:50:20] Em: Anh, em có thể hỗ trợ Dũng viết một phần tài liệu staging nếu cần, vì em biết rõ process.
+[09:50:35] An: Không, để Dũng tự làm cho đồng bộ. Em chỉ cần gửi draft production cho Dũng thôi.
+[09:50:50] Em: Vâng.
+[09:51:00] Châu: Anh An, em xin phép cập nhật nhanh tình hình lỗi đăng nhập. Em vừa fix xong phần token, còn logic khóa sẽ làm sau 16h.
+[09:51:15] An: Tốt. Vậy phần token đã ổn để deploy chưa?
+[09:51:25] Châu: Chưa test trên môi trường, em cần Bình deploy để kiểm tra.
+[09:51:35] Bình: Em sẽ reset DB xong rồi deploy phần token lên UAT trước 15h.
+[09:51:50] An: OK. Dũng, script dữ liệu của em có kịp để import sau khi reset không?
+[09:52:05] Dũng: Em sẽ gửi script trước 14h, Bình import sau khi reset.
+[09:52:20] Bình: Được. Em reset DB lúc 13h, sau đó import dữ liệu mới.
+[09:52:35] An: Vậy timeline: Bình reset 13h, Dũng gửi script 14h, Bình import, Châu deploy token 15h. Mọi người ghi nhận.
+[09:52:55] Châu: Em có cần chờ dữ liệu mới để test không?
+[09:53:10] Dũng: Có, script của em tạo user test mới, Châu nên dùng để test token.
+[09:53:25] An: Vậy Châu test sau khi Bình import xong.
+[09:53:40] Bình: Import xong khoảng 14h30.
+[09:53:55] An: Rõ. Giờ quay lại tài liệu. Dũng, em có cần hỗ trợ gì từ Em về nội dung production không?
+[09:54:10] Dũng: Có, em muốn biết phần monitoring em nên mô tả tool nào.
+[09:54:20] Em: Dùng Prometheus và Grafana, em có sẵn diagram.
+[09:54:30] Dũng: OK, em sẽ copy.
+[09:54:45] An: Lưu ý, tài liệu staging và production phải giống format, nhưng nội dung khác nhau. Đừng nhầm.
+[09:55:00] Dũng: Vâng, em để tên khác nhau.
+[09:55:10] Bình: Anh An, em thấy task review tài liệu của em vẫn chưa có deadline cụ thể. Sau khi Dũng xong staging, em review khi nào?
+[09:55:25] An: Review staging sau 25/02, review production sau 01/03. Em tự sắp xếp.
+[09:55:35] Bình: OK.
+[09:55:45] Châu: Anh ơi, em muốn hỏi về môi trường dev. Em cần test thử token trước khi deploy lên UAT.
+[09:56:00] Bình: Môi trường dev đang down, em báo infra sáng nay. Họ hẹn 15h.
+[09:56:10] Châu: Vậy em đợi. Không có dev thì em không test được.
+[09:56:25] An: Vậy Châu tranh thủ viết code logic khóa trong lúc chờ.
+[09:56:35] Châu: Em đang làm.
+[09:56:45] An: Tốt.
+[09:56:55] Em: Anh, em có một thắc mắc về tài liệu production: phần rollback em nên viết chi tiết đến đâu?
+[09:57:10] An: Viết từng bước: stop service, restore DB, redeploy version cũ. Dũng sẽ tham khảo.
+[09:57:25] Dũng: Em sẽ viết theo hướng dẫn.
+[09:57:35] Bình: Em thấy chúng ta có nhiều task phụ thuộc vào nhau. Em lo có conflict.
+[09:57:50] An: Cụ thể?
+[09:58:00] Bình: Ví dụ script dữ liệu của Dũng phải xong trước khi em import, mà em cần review script. Nếu review trễ thì import trễ.
+[09:58:15] An: Đã có deadline 16h cho script, 14h cho gửi. Em review ngay sau đó.
+[09:58:25] Dũng: Em sẽ gửi sớm.
+[09:58:35] An: Vậy không lo.
+[09:58:45] Châu: Anh, em sắp phải đi training. Em sẽ gửi code token fix cho Bình trước 14h.
+[09:58:55] Bình: OK. Em deploy sau khi import dữ liệu.
+[09:59:05] An: Nhớ cập nhật Slack khi xong.
+[09:59:15] Dũng: Em cũng sẽ gửi script trước 14h.
+[09:59:25] An: Còn ai có vấn đề gì về tài liệu hoặc test nữa không?
+[09:59:35] Em: Em chỉ muốn confirm rằng task tài liệu production giờ thuộc về Dũng, deadline 01/03. Em không còn liên quan.
+[09:59:45] An: Đúng. Dũng chịu trách nhiệm.
+[09:59:55] Bình: Còn tài liệu staging deadline 25/02, Dũng nhé.
+[10:00:05] Dũng: Rõ.
+[10:00:15] An: Vậy tạm thời kết thúc topic tài liệu. Chúng ta sang vấn đề khác sau. Cảm ơn mọi người.
+[10:00:30] An: Giờ chúng ta chuyển sang vấn đề release và monitoring. Bình, em có kế hoạch gì cho việc release lên production chưa?
+[10:00:50] Bình: Dạ, em đang draft một schedule. Dự kiến tuần sau, sau khi test UAT ổn, nhưng còn phụ thuộc vào fix lỗi đăng nhập và dữ liệu test.
+[10:01:10] An: Vậy em cần chốt timeline. Còn monitoring, ai lo?
+[10:01:25] Bình: Em nghĩ mình cần setup monitoring ngay từ đầu. Có team infra hỗ trợ, nhưng cần người đứng đầu.
+[10:01:40] An: Em nghĩ Dũng có thể phụ trách monitoring vì em đã làm với Grafana.
+[10:01:55] Dũng: Em có kinh nghiệm, nhưng em đang ôm nhiều task rồi. Có thể giao cho Châu?
+[10:02:10] Châu: Em cũng không rành monitoring lắm. Em nghĩ Bình làm thì tốt.
+[10:02:25] Bình: Anh sẽ hỗ trợ, nhưng không thể chính. Vậy để em assign cho Hùng, nhưng Hùng không trong meeting.
+[10:02:40] An: Không, cần người trong team. Dũng, em cân đối thời gian. Em có thể làm monitoring vào cuối tuần.
+[10:02:55] Dũng: Nhưng em còn test UAT và tài liệu. Không biết có kịp không.
+[10:03:10] An: Vậy tôi sẽ cắt bớt task cho em. Tôi thấy tài liệu staging bây giờ không cần thiết nữa, vì chúng ta sẽ dùng chung tài liệu production. Hủy task tài liệu staging nhé.
+[10:03:30] Dũng: Hả? Em vừa có deadline 25/02. Giờ hủy thì công sức đổ sông đổ bể.
+[10:03:45] An: Không sao, em tập trung vào tài liệu production và monitoring. Còn staging, nếu cần thì ai đó khác làm sau.
+[10:04:00] Bình: Anh An nói đúng. Em cũng thấy tài liệu staging trùng lặp với production. Hủy là hợp lý.
+[10:04:15] Dũng: Vậy thôi. Em OK. Nhưng em muốn được bồi thường thời gian không?
+[10:04:25] An: Có thể debate sau. Giờ tập trung vào monitoring.
+[10:04:35] Em: Anh, em có thể hỗ trợ monitoring sơ qua, nhưng em cũng đang làm tài liệu production.
+[10:04:50] An: Không, em vẫn giữ tài liệu production, còn monitoring giao Dũng.
+[10:05:00] Dũng: Vậy em nhận monitoring. Em có script sẵn, chỉ cần cấu hình.
+[10:05:15] Bình: Anh sẽ hỗ trợ config. Deadline monitoring khoảng khi nào?
+[10:05:30] An: Hãy set deadline cho việc setup monitoring là 28/02, trước release tuần sau.
+[10:05:45] Dũng: 28/02 OK. Nhưng phải có môi trường UAT ổn trước.
+[10:06:00] An: Như chúng ta đã bàn, UAT sẽ deploy chiều nay.
+[10:06:15] Bình: Nhân tiện, em muốn nhắc deadline cho script dữ liệu của Dũng. Lúc nãy đã dời sang 16h, nhưng bây giờ đã 10h, em cần gửi sớm để em kịp review.
+[10:06:35] Dũng: Em đang gấp, em sẽ gửi trước 14h như cũ.
+[10:06:50] An: OK, vậy deadline script dữ liệu vẫn là 14h, không đổi.
+[10:07:00] Châu: Em muốn cập nhật. Em vừa gửi code token fix cho Bình qua email. Bình kiểm tra đi.
+[10:07:15] Bình: Em nhận rồi. Sẽ build và deploy sau khi reset DB.
+[10:07:30] An: Tốt. Về release, em cần ai đó viết release note.
+[10:07:45] Em: Em có thể viết, nhưng em chưa biết nội dung fix.
+[10:08:00] Châu: Em sẽ cung cấp list changes sau khi fix xong.
+[10:08:15] An: Vậy Em đợi changes từ Châu, rồi viết release note.
+[10:08:30] Em: Deadline?
+[10:08:40] An: Khi nào Châu xong, em viết. Không deadline cứng.
+[10:08:50] Bình: Nhưng em thấy cần có release plan sớm.
+[10:09:05] An: Được, Bình và Dũng lập release plan, trình vào end of day thứ 5 tuần sau.
+[10:09:20] Dũng: OK.
+[10:09:30] Bình: Còn monitoring, em cần list metric cần theo dõi.
+[10:09:45] An: Em và Dũng brainstorm, sau đó submit.
+[10:10:00] Châu: Anh, em lo về vụ security. Monitoring có bao gồm bảo mật không?
+[10:10:15] Bình: Chưa, chỉ performance.
+[10:10:25] An: Bảo mật để sau, khi có tài liệu chính thức.
+[10:10:35] Em: Em thấy hủy tài liệu staging là quyết định tốt, nhưng em vẫn lo nếu production doc chưa xong thì không có gì.
+[10:10:50] Dũng: Em sẽ đẩy nhanh. Deadline 01/03, em OK.
+[10:11:00] An: Vậy chốt. Task bị hủy: tài liệu staging. Task mới: release note (Em, không deadline), release plan (Bình và Dũng, end of day thứ 5 tuần sau), monitoring setup (Dũng, deadline 28/02). Còn task cũ như fix lỗi, script vẫn giữ.
+[10:11:30] Bình: Anh thấy có sự chồng chéo. Dũng vừa monitoring vừa test UAT vừa tài liệu production.
+[10:11:45] An: Đúng, nhưng Dũng có thể xử lý. Nếu quá tải, báo lại.
+[10:12:00] Dũng: Em sẽ cố gắng. Nhưng em muốn nhờ Em hỗ trợ viết một phần release note.
+[10:12:10] Em: Em có thể, nhưng em cần changes.
+[10:12:20] Châu: Em sẽ gửi changes sớm.
+[10:12:30] An: Vậy ổn. Giờ thảo luận về monitoring metric.
+[10:12:45] Bình: Theo em, cần theo dõi CPU, memory, response time, error rate.
+[10:13:00] Dũng: Thêm số lượng user đăng nhập, số session active.
+[10:13:15] An: OK. Bình, em có script template cho monitoring không?
+[10:13:25] Bình: Có, em sẽ gửi cho Dũng.
+[10:13:35] Dũng: Cảm ơn.
+[10:13:45] Châu: Em xin phép quay lại vụ training. Em phải đi lúc 14h, mong mọi người thông cảm.
+[10:14:00] An: OK. Em cố gắng xong phần token trước đó.
+[10:14:10] Châu: Em đã xong, vừa gửi.
+[10:14:20] Bình: Em nhận rồi.
+[10:14:30] An: Vậy đến đây, mọi người có vấn đề gì không?
+[10:14:40] Em: Em muốn confirm lại, task tài liệu production vẫn deadline 01/03, và Dũng là owner, đúng không?
+[10:14:55] An: Đúng.
+[10:15:05] Dũng: Rõ.
+[10:15:15] Bình: Còn script dữ liệu deadline 14h, em review sau đó.
+[10:15:25] Dũng: Em sẽ gửi sớm.
+[10:15:35] An: Vậy tạm thời kết thúc phần này. Chúng ta sẽ gặp lại trong part cuối. Cảm ơn mọi người.
+[10:15:45] An: Mọi người, đây là part cuối của buổi họp. Chúng ta có một số điểm cần giải quyết trước khi kết thúc. Trước tiên, Dũng, em báo cáo tiến độ script dữ liệu và test UAT.
+[10:16:05] Dũng: Dạ, em đã gửi script dữ liệu cho Bình lúc 13h45, và Bình review xong. Bây giờ Bình đã import dữ liệu vào UAT và deploy token fix của Châu.
+[10:16:25] Bình: Đúng vậy, em vừa deploy xong. Môi trường UAT đang chạy ổn với phần token. Châu có test thử chưa?
+[10:16:40] Châu: Em mới test vài case, token hoạt động tốt. Em đang chuẩn bị viết logic khóa sau 16h.
+[10:16:55] An: Tốt. Vậy task fix lỗi đăng nhập vẫn còn phần logic khóa, deadline 19h hôm nay. Em nhớ nhé.
+[10:17:10] Châu: Vâng.
+[10:17:20] An: Còn vụ release plan, Bình và Dũng đã làm gì chưa?
+[10:17:35] Bình: Em mới sketched draft, sẽ hoàn thành end of day thứ 5 tuần sau.
+[10:17:50] Dũng: Em đã góp ý metric cho monitoring. Em nghĩ cần thêm alert threshold.
+[10:18:05] An: Vậy Dũng ghi nhận. Còn monitoring setup deadline 28/02, em có khó khăn gì không?
+[10:18:20] Dũng: Em cần Bình gửi script template để bắt đầu. Bình, anh gửi sớm nhé.
+[10:18:35] Bình: Em sẽ gửi trước 17h hôm nay.
+[10:18:45] An: OK. Bây giờ quay lại tài liệu production. Dũng, em viết đến đâu rồi?
+[10:19:00] Dũng: Em đã có draft từ Em, đang chỉnh sửa. Deadline 01/03, em tin làm kịp.
+[10:19:15] Em: Em đã gửi mail với diagram monitoring. Dũng kiểm tra giúp.
+[10:19:30] Dũng: Em nhận rồi.
+[10:19:40] An: Còn vụ release note, Em có tiến triển gì không?
+[10:19:55] Em: Em đợi changes từ Châu. Châu, khi nào em gửi?
+[10:20:05] Châu: Sau 19h hôm nay, sau khi fix xong logic khóa.
+[10:20:20] An: Vậy release note sẽ hoàn thành sau 19h, không deadline cứng.
+[10:20:35] Bình: Anh An, em có một vấn đề chưa giải quyết: ai sẽ review monitoring setup? Hay Dũng tự review?
+[10:20:50] An: Chưa có ai review. Để đó, nếu cần thì sau này assign. Tạm thời Dũng tự chịu trách nhiệm.
+[10:21:05] Dũng: OK.
+[10:21:15] Châu: Em cũng muốn hỏi về vụ training chiều nay. Em sẽ off từ 14h đến 16h, có ảnh hưởng gì không?
+[10:21:30] An: Vẫn OK như đã bàn. Em làm logic khóa sau 16h.
+[10:21:45] Em: Anh, em thấy chúng ta có nhiều task, nhưng chưa có ai chịu trách nhiệm cho việc tổng hợp kết quả cuối cùng. Ví dụ như báo cáo sau release.
+[10:22:00] An: Việc đó sẽ do PM làm, không phải team mình. Không cần trong meeting này.
+[10:22:15] Bình: Em thấy việc hủy tài liệu staging hồi nãy là quyết định đúng, nhưng có thể gây nhầm lẫn. Em đề nghị recap lại trạng thái các task cuối cùng để tránh duplicate.
+[10:22:35] An: Ý kiến hay. Em điểm qua:
+[10:22:50] An: Task 1: Châu fix lỗi đăng nhập (token đã xong, logic khóa deadline 19h hôm nay). Task 2: Dũng script dữ liệu (đã giao 14h, Bình đã import). Task 3: Bình reset DB (đã xong). Task 4: Tài liệu staging (đã hủy). Task 5: Tài liệu production, Dũng owner, deadline 01/03. Task 6: Monitoring setup, Dũng, deadline 28/02. Task 7: Release plan, Bình và Dũng, end of day thứ 5 tuần sau. Task 8: Release note, Em, không deadline. Task 9: Review script dữ liệu (Bình đã làm). Còn task nào quên?
+[10:23:25] Dũng: Còn task thống nhất template hồi đầu, em và Em đã làm rồi. Không cần nhắc.
+[10:23:40] An: Đúng. Vậy đó là tất cả.
+[10:23:50] Bình: Em thấy vụ review monitoring vẫn treo. Đó là unresolved item.
+[10:24:00] An: Đúng, chưa có ai review monitoring setup. Để nguyên như vậy, không chốt.
+[10:24:15] Châu: Em muốn báo cáo thêm: em vừa test token trên UAT và thấy có một lỗi nhỏ về session timeout. Em đã fix trong code token, hy vọng ổn.
+[10:24:35] An: Tốt.
+[10:24:45] Em: Anh, em có thể hỗ trợ viết một phần monitoring dashboard nếu Dũng bận.
+[10:25:00] An: Không, giữ nguyên assignment.
+[10:25:10] Dũng: Em cảm ơn, nhưng em tự làm được.
+[10:25:20] Bình: Có ai thắc mắc gì về release không?
+[10:25:30] Châu: Em không.
+[10:25:35] Em: Em không.
+[10:25:40] Dũng: Em không.
+[10:25:45] An: Vậy chúng ta đã recap xong. Lưu ý còn unresolved là review monitoring. Các task khác đã phân công. Không có duplicate nào được tạo ra từ việc nhắc lại.
+[10:26:05] Bình: Anh An, em có cần báo cáo kết quả buổi họp lên cho quản lý không?
+[10:26:20] An: Em sẽ tự làm. Không cần mọi người.
+[10:26:30] Châu: Vậy em chuẩn bị đi training đây.
+[10:26:40] An: OK. Nhớ cập nhật sau 16h.
+[10:26:50] Dũng: Em sẽ tiếp tục viết tài liệu production.
+[10:27:00] Em: Em đợi changes.
+[10:27:10] Bình: Em sẽ gửi script monitoring cho Dũng.
+[10:27:20] An: Cảm ơn mọi người đã tham gia đầy đủ. Buổi họp kết thúc tại đây. Hẹn gặp lại trong các phiên sau. Chúc mọi người làm việc hiệu quả.
+[10:27:40] Tất cả: Cảm ơn anh.

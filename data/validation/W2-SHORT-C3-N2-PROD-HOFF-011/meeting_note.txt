@@ -1,0 +1,9 @@
+note nhanh
+chủ đề: Theo dõi lỗi và tài liệu
+kw: tai lieu / viet / tai / lieu / binh / chuyen / tiet
+- Chúng ta cần viết tài liệu chi tiết
+* Tôi đã giao task viết tài liệu cho Tuấn từ tuần trước, nhưng anh ấy bận việc khác
+- Tôi sẽ chuyển task viết tài liệu hướng dẫn cho Bình
+1) Vậy task viết tài liệu hiện tại do Bình chịu trách nhiệm, hạn 14/02, và Châu review trước 12/02
+- Bình, bạn nhớ cập nhật luôn ticket trên Jira, chuyển owner từ Tuấn sang bạn
+* Hạn cũ là 10/02, nhưng vì đã muộn, tôi nghĩ nên dời xuống 14/02 ? chưa chốt

@@ -1,0 +1,158 @@
+MEETING_ID: W4-LONG-C5-N2-PROD-STATE-007
+PART: P02/5
+
+T000068 [09:38:05] Linh: Được rồi, tôi nghĩ chúng ta đã có cơ sở ban đầu. Bây giờ tôi muốn chuyển sang một vấn đề khác mà tôi nghe phản ánh từ team QA. Đó là lỗi đăng nhập trên môi trường staging hiện tại.
+
+T000069 [09:38:42] Minh: Dạ, em cũng có nghe qua. Hình như liên quan đến session timeout và refresh token.
+
+T000070 [09:39:18] Hà: Cụ thể là lỗi gì vậy anh? Em chưa thấy bug report chính thức.
+
+T000071 [09:39:52] Linh: QA báo rằng khi đăng nhập bằng tài khoản test, sau khoảng 5 phút tự động logout. Họ nghi do cấu hình token ở backend, nhưng chưa xác định được nguyên nhân.
+
+T000072 [09:40:28] Duy: Lỗi này ảnh hưởng đến việc test flow thanh toán. Nếu không sửa, team em không thể verify manual được.
+
+T000073 [09:41:05] Minh: Em có thể xem log server. Nhưng em đang bận task môi trường payment. Nếu phải debug thêm cái này thì nguy cơ trễ deadline.
+
+T000074 [09:41:38] Hà: Hay để em vào cuộc? Em có thể phân tích log và tìm root cause. Minh chỉ cần cấp quyền truy cập.
+
+T000075 [09:42:12] Linh: Tốt. Vậy ta có task mới: "Xử lý lỗi đăng nhập trên staging". Hà làm owner, Minh support. Deadline chưa có, nhưng cần ưu tiên trong tuần này.
+
+T000076 [09:42:48] Hà: Em ok. Nhưng em cần quyền truy cập server staging và danh sách tài khoản test.
+
+T000077 [09:43:20] Minh: Em sẽ gửi quyền và credential qua chat riêng. Nhưng em cảnh báo trước: log session có thể bị rotate nhanh, cần capture sớm.
+
+T000078 [09:43:55] Hà: Em sẽ capture ngay sau meeting này.
+
+T000079 [09:44:25] Duy: Em có một thắc mắc: dữ liệu test hiện tại được seed từ đâu? Có thể lỗi xuất phát từ dữ liệu không chuẩn.
+
+T000080 [09:45:00] Linh: Tốt, Duy hỏi đúng vấn đề. QA dùng dữ liệu test tự tạo, không theo chuẩn. Có khi token bị sai do user không tồn tại trong DB.
+
+T000081 [09:45:38] Minh: DB staging payment chưa có dữ liệu mẫu. Em chỉ mới tạo bảng. Có khi lỗi đăng nhập vì kết nối sai DB.
+
+T000082 [09:46:12] Hà: Vậy trước khi debug lỗi, mình cần có dữ liệu test chuẩn. Em đề xuất tạo một task phụ: "Seed dữ liệu test cho staging". Ai làm?
+
+T000083 [09:46:48] Linh: Minh, em có thể seed dữ liệu không? Vì em đã quen với database payment.
+
+T000084 [09:47:22] Minh: Dạ em có thể, nhưng cần specification từ Hà và Duy về loại dữ liệu cần. Em muốn tránh seed sai.
+
+T000085 [09:47:55] Hà: Em có thể viết spec ngay bây giờ. Gồm: user test, role, và một số payment dummy.
+
+T000086 [09:48:30] Duy: Thêm nữa, dữ liệu sync cũng cần mock. Nếu chỉ seed payment thì không đủ để test flow từ đầu đến cuối.
+
+T000087 [09:49:05] Linh: Đúng. Vậy mở rộng task seed: bao gồm cả dữ liệu cho sync module. Nhưng deadline thì sao? Ta có hai task seed riêng hay gộp chung?
+
+T000088 [09:49:40] Minh: Em nghĩ gộp chung cho dễ quản lý, vì cùng một script.
+
+T000089 [09:50:12] Hà: Nhưng nếu gộp, khi sync module chưa có môi trường thì seed làm gì? Task B ở P01 chưa có deadline.
+
+T000090 [09:50:48] Linh: Vậy ta tách ra. Task seed payment: ưu tiên, vì task A có deadline ngày mai. Task seed sync: chờ task B hoàn thành. Được không?
+
+T000091 [09:51:22] Minh: Hợp lý. Vậy task: "Seed dữ liệu test cho module payment". Em sẽ làm sau khi cấu hình xong môi trường.
+
+T000092 [09:51:58] Linh: Nhưng em đang bận môi trường, liệu có kịp không? Nếu cần, để Duy hoặc Hà seed.
+
+T000093 [09:52:30] Duy: Em có thể seed dữ liệu payment, nhưng em cần quyền DB và script mẫu. Nếu Minh viết script, em chạy.
+
+T000094 [09:53:05] Minh: Em có thể viết script seed cơ bản trong 30 phút. Vậy em viết, Duy chạy. Được không ạ?
+
+T000095 [09:53:40] Hà: Được. Như vậy Duy là người chạy seed, Minh viết script. Nhưng ai review kết quả seed?
+
+T000096 [09:54:12] Linh: Hà review. Vậy phân công: script seed – Minh, chạy seed – Duy, review – Hà. Có vấn đề gì không?
+
+T000097 [09:54:48] Minh: Em ok.
+T000098 [09:55:10] Duy: Em ok.
+T000099 [09:55:35] Hà: Em ok.
+
+T000100 [09:56:02] Linh: Tốt. Như vậy ta có thêm hai task mới: task D – "Xử lý lỗi đăng nhập staging" – Hà owner, Minh support, chưa deadline. Task E – "Seed dữ liệu test payment" – Minh script, Duy chạy, Hà review, không deadline rõ nhưng cần trong ngày mai.
+
+T000101 [09:56:48] Hà: Em muốn hỏi: task D và task A có liên quan không? Vì lỗi đăng nhập có thể do môi trường payment chưa chuẩn.
+
+T000102 [09:57:22] Minh: Có thể. Nhưng em nghĩ lỗi đăng nhập độc lập, vì token dùng jwt, không phụ thuộc cấu hình payment.
+
+T000103 [09:57:58] Duy: Em không đồng ý. Nếu DB payment không có user đúng, thì token decode ra sẽ không match. Vậy lỗi có thể từ thiếu dữ liệu seed.
+
+T000104 [09:58:35] Hà: Đó là lý do mình seed data trước. Em nghĩ nên làm task E trước task D.
+
+T000105 [09:59:10] Linh: Hợp lý. Vậy thứ tự ưu tiên: Task A, sau đó Task E, rồi Task D. Còn Task B và C chờ.
+
+T000106 [09:59:48] Minh: Nhưng nếu task A trễ, task E cũng trễ theo.
+
+T000107 [10:00:20] Hà: Đúng. Vậy ta cần một người review tiến độ tổng thể. Em đề xuất Duy làm reviewer không chính thức, vì Duy có cái nhìn tổng quan.
+
+T000108 [10:00:55] Duy: Em có thể theo dõi, nhưng em không thể ép tiến độ. Chỉ có anh Linh mới có quyền đó.
+
+T000109 [10:01:30] Linh: Tôi sẽ review cuối ngày. Duy có thể báo cáo nếu thấy bất thường.
+
+T000110 [10:02:00] Minh: Em có một lo ngại: task D (lỗi đăng nhập) không có deadline, liệu có bị lãng quên? Em đề nghị đặt deadline cứng là cuối tuần này.
+
+T000111 [10:02:38] Hà: Cuối tuần này là 27/02, em nghĩ ok. Nhưng nếu task A và E trễ, deadline đó có thể không khả thi.
+
+T000112 [10:03:12] Linh: Tạm thời đặt deadline tham khảo là 27/02 cho task D. Nếu có biến động, ta điều chỉnh sau. Còn task E, tôi muốn có dữ liệu seed trước 4h chiều mai để kịp review.
+
+T000113 [10:03:48] Minh: Dạ, em cố gắng viết script xong trước trưa mai, Duy chạy buổi chiều.
+
+T000114 [10:04:20] Duy: Được. Nhưng em cần script trước 10h sáng mai, vì em có việc khác.
+
+T000115 [10:04:55] Minh: Em sẽ cố gắng.
+
+T000116 [10:05:25] Hà: Em có một câu hỏi về dữ liệu seed: có cần bao gồm dữ liệu cho module sync không? Vì em thấy task B chưa có deadline.
+
+T000117 [10:06:00] Linh: Không, chỉ seed payment thôi. Sync chưa có môi trường. Khi nào có môi trường thì tính sau.
+
+T000118 [10:06:35] Duy: Nhưng nếu sau này seed sync, script có tách biệt được không? Hay phải viết lại?
+
+T000119 [10:07:10] Minh: Em có thể viết script seed chung, chỉ cần chạy với flag khác nhau. Vậy sau này thêm sync cũng dễ.
+
+T000120 [10:07:45] Linh: Ý hay. Nhưng hiện tại chỉ tập trung payment.
+
+T000121 [10:08:15] Hà: Quay lại lỗi đăng nhập, em có thể bắt đầu capture log ngay bây giờ không? Hay chờ dữ liệu seed?
+
+T000122 [10:08:50] Linh: Em có thể capture log trước, vì nó độc lập. Nhưng đừng vội kết luận.
+
+T000123 [10:09:22] Hà: Vâng. Em sẽ ghi log và phân tích sơ bộ.
+
+T000124 [10:09:55] Duy: Em có một insight: nếu lỗi do session timeout, có thể do cấu hình access token quá ngắn. Kiểm tra trước.
+
+T000125 [10:10:30] Hà: Ok, em sẽ kiểm tra config access token expiry.
+
+T000126 [10:11:05] Linh: Tốt. Trong lúc đó, mọi người có thắc mắc gì về việc phân công không?
+
+T000127 [10:11:38] Minh: Em không có.
+
+T000128 [10:12:00] Hà: Em cũng không.
+
+T000129 [10:12:30] Duy: Em có một chút. Task D có owner là Hà, nhưng nếu lỗi thuộc về backend, ai sửa code? Hà chỉ phân tích log thôi.
+
+T000130 [10:13:05] Linh: Đúng. Hà sẽ xác định nguyên nhân, nếu cần fix code thì gán cho người khác. Có thể là Minh hoặc em.
+
+T000131 [10:13:40] Hà: Em đồng ý. Em chỉ phân tích.
+
+T000132 [10:14:10] Linh: Vậy là ok. Chúng ta còn khoảng 15 phút nữa cho phần này. Có ai muốn thảo luận thêm về dữ liệu test không?
+
+T000133 [10:14:45] Duy: Em muốn hỏi: dữ liệu test payment có cần bao gồm các case biên như số tiền âm, quá lớn?
+
+T000134 [10:15:18] Minh: Em nghĩ nên có, nhưng script seed chỉ tạo dữ liệu chuẩn. Còn case biên thì QA tự tạo.
+
+T000135 [10:15:52] Hà: Em đồng ý. Seed chỉ là dữ liệu nền.
+
+T000136 [10:16:25] Linh: Vậy thống nhất. Tôi sẽ tổng kết nhanh các task trong phần này:
+- Task D: Xử lý lỗi đăng nhập staging, owner Hà, support Minh, deadline tham khảo 27/02.
+- Task E: Seed dữ liệu test payment, Minh viết script, Duy chạy, Hà review, deadline script trước 10h sáng mai, chạy trước 4h chiều mai.
+
+T000137 [10:17:05] Hà: Còn task C template tài liệu thì sao? Nó vẫn chưa có deadline.
+
+T000138 [10:17:40] Linh: Task C vẫn treo, không có deadline. Nhưng tôi muốn Hà ưu tiên việc capture log và review seed trước.
+
+T000139 [10:18:12] Hà: Vâng.
+
+T000140 [10:18:45] Duy: Em thấy mình có khá nhiều task. Có cần ưu tiên hẳn task nào không?
+
+T000141 [10:19:20] Linh: Ưu tiên: Task A, Task E, Task D. Các task còn lại làm sau.
+
+T000142 [10:19:55] Minh: Em ok.
+
+T000143 [10:20:25] Hà: Vậy em bắt đầu capture log ngay sau meeting.
+
+T000144 [10:20:58] Linh: Được. Tôi sẽ ghi chú. Phần này có vẻ đã đủ. Chúng ta sẽ nghỉ 5 phút rồi vào phần ba.
+
+--- END OF PART P02 ---

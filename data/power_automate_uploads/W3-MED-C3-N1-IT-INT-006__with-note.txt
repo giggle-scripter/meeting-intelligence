@@ -1,0 +1,118 @@
+=== MEETING METADATA ===
+meeting_id: W3-MED-C3-N1-IT-INT-006
+meeting_title: Họp phối hợp triển khai và xử lý vấn đề
+meeting_date: 2026-02-10
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+chốt sơ bộ
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / moi truong / trien khai / staging / kiem / tra / trong
+- Khi nào Tuấn đưa mẫu đầu ra, em sẽ kiểm tra trong vòng 2 ngày
+* chuyển sang quyền truy cập
+- Chốt lại: Hùng setup môi trường staging, dl mới là 24/02
+1) Em sẽ liên hệ ngay trong chiều nay
+- Ừ, Linh nhớ kiểm tra phân quyền trước 18/02
+* Chị sẽ đóng gói bản build vào 19/02, sau khi hoàn tất tài liệu trước đó một ngày
+- ba là kiểm tra quyền truy cập, Linh owner, dl 18/02;
+1) Thực ra việc kiểm tra của em cũng chưa có dl vì phụ thuộc, nhưng em sẽ hoàn thành trong 2 ngày sau khi có script
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:00:05] Quân: Chào mọi người, cảm ơn đã tham gia buổi họp hôm nay. Mục tiêu chính của chúng ta là rà soát tiến độ triển khai API integration, dữ liệu mẫu, quyền truy cập và kế hoạch rollout. Chúng ta cần xác định các đầu việc còn tồn đọng và phân công rõ ràng. Mai, em có thể cập nhật nhanh về phần API integration được không?
+[09:00:25] Mai: Vâng, em đã hoàn thành thiết kế các endpoint chính cho việc đồng bộ dữ liệu khách hàng. Tuy nhiên, tài liệu mô tả API vẫn chưa xong, còn thiếu phần xác thực OAuth2 và rate limiting. Em dự kiến sẽ hoàn tất tài liệu này, nhưng cần thêm thời gian vì phải chờ xác nhận từ team security.
+[09:00:48] Quân: OK, vậy em cần thời hạn cụ thể để anh theo dõi. Mai cam kết hoàn thiện tài liệu API integration trước ngày nào?
+[09:01:02] Mai: Em nghĩ trước 20/02 sẽ ổn, vì bên security hứa phản hồi vào 15/02. Em sẽ cố gắng hoàn thành sớm.
+[09:01:18] Quân: Tốt, vậy chốt Mai hoàn thiện tài liệu API integration, deadline 20/02. Em lưu ý phần này có thể ảnh hưởng đến tiến độ của Hùng nếu trễ nhé.
+[09:01:33] Hùng: Đúng đó chị Mai, em phụ thuộc vào tài liệu để cấu hình staging. Chị cố gắng đừng delay.
+[09:01:42] Mai: Chị biết rồi, sẽ không trễ đâu.
+[09:01:50] Quân: Sau đó, Tuấn này, phần dữ liệu mẫu để tích hợp test thì sao rồi? Em đã có kế hoạch gì chưa?
+[09:02:05] Tuấn: Dạ, hiện tại em mới chỉ thu thập được một số tập dữ liệu thô từ phòng kinh doanh. Em đang phân vân nên làm sạch thủ công hay viết script tự động. Em có thể bắt tay vào chuẩn bị dữ liệu mẫu trong tuần này.
+[09:02:27] Linh: Mà này, dữ liệu mẫu cần phải đảm bảo tính toàn vẹn, không thể cứ thế mà dùng được. Em thấy cần có bước kiểm tra chất lượng dữ liệu trước khi đưa vào môi trường test.
+[09:02:45] Quân: Đúng rồi, Linh phụ trách mảng kiểm thử, em có thể hỗ trợ phần kiểm tra dữ liệu mẫu được không? Vậy Tuấn chuẩn bị dữ liệu mẫu, Linh kiểm tra sau đó nhé.
+[09:03:03] Tuấn: Nhưng mà em nghĩ nên viết script tự động để sinh dữ liệu mẫu, vì dữ liệu thô thay đổi liên tục. Em đề xuất em sẽ viết script sinh dữ liệu mẫu, còn phần kiểm tra thì Linh giúp. Mình nên tách ra để rõ ràng.
+[09:03:25] Quân: Ừ, vậy điều chỉnh lại: Tuấn viết script sinh dữ liệu mẫu, còn Linh kiểm tra tính toàn vẹn của tập dữ liệu được sinh. Công việc của Tuấn không cần deadline gấp vì còn phụ thuộc vào tiến độ chung, nhưng em cứ làm dần. Linh, em có cần deadline không?
+[09:03:52] Linh: Phần kiểm tra của em thì phải đợi Tuấn có script xong mới làm được, nên em chưa ấn định được ngày cụ thể. Khi nào Tuấn đưa mẫu đầu ra, em sẽ kiểm tra trong vòng 2 ngày.
+[09:04:10] Tuấn: OK, em sẽ hoàn thành script sớm nhất có thể, nhưng chưa hứa ngày được vì đang vướng sửa lỗi production.
+[09:04:22] Quân: Rõ rồi, vậy nhiệm vụ của Tuấn là viết script sinh dữ liệu mẫu, không ràng buộc deadline hôm nay. Tiếp theo, chuyển sang quyền truy cập. Linh, em đã xem xét phân quyền cho các role người dùng trên hệ thống mới chưa?
+[09:04:46] Linh: Em đã có bản thiết kế sơ bộ, nhưng cần rà soát lại danh sách các role thực tế từ phía vận hành. Có một số role như “quản lý vùng” và “chuyên viên hỗ trợ” có quyền hạn chồng chéo. Em cần thời gian để kiểm tra và cấu hình lại trong hệ thống.
+[09:05:10] Quân: OK, Linh làm đầu việc kiểm tra và thiết lập quyền truy cập cho từng role. Deadline cho phần này là khi nào?
+[09:05:25] Linh: Em nghĩ có thể xong trước 18/02, vì đầu tuần sau em tập trung làm.
+[09:05:38] Quân: Chốt Linh hoàn thành kiểm tra và cấu hình quyền truy cập, deadline 18/02. Ngoài ra, Hùng, phần rollout staging environment sao rồi? Bên em đã chuẩn bị được gì chưa?
+[09:05:58] Hùng: Em đã dựng xong các server cơ bản, nhưng chưa cài đặt các dịch vụ phụ trợ như message queue và caching. Em cần hoàn thiện môi trường staging để demo cho khách hàng vào tuần sau.
+[09:06:19] Quân: Vậy em cần hoàn thành setup staging environment. Deadline của em là khi nào để kịp demo?
+[09:06:31] Hùng: Em nghĩ 22/02 là vừa, vì còn phải chạy thử nội bộ trước khi demo.
+[09:06:42] Quân: OK, Hùng setup môi trường staging, deadline 22/02. Còn một việc nữa anh định giao: Tuấn, em làm báo cáo tiến độ hàng tuần để gửi cho ban giám đốc được không?
+[09:06:58] Tuấn: Báo cáo tiến độ ấy à? Nhưng mà mình đã có dashboard tự động cập nhật từ Jira rồi, việc làm báo cáo thủ công có cần thiết không anh? Em thấy hơi thừa.
+[09:07:16] Linh: Ừ, đúng rồi, dashboard đã hiển thị đủ thông tin rồi, em nghĩ không cần báo cáo riêng.
+[09:07:27] Mai: Em cũng đồng ý, mình nên tập trung nguồn lực cho các việc quan trọng hơn.
+[09:07:38] Quân: Ừ nhỉ, anh quên mất. Vậy bỏ việc này, không cần làm báo cáo tiến độ nữa. Tập trung vào các đầu việc chính.
+[09:07:52] Mai: Quay lại phần tài liệu API, em cần một người review độc lập. Không biết ai có thể làm được? Phần này khá kỹ thuật, cần người có kinh nghiệm về bảo mật API.
+[09:08:13] Quân: Đúng rồi, anh cũng đang nghĩ đến chuyện đó. Để anh hỏi anh Hải bên team security xem có thể review không. Nhưng hiện tại chưa có câu trả lời, mình ghi nhận việc này, sẽ cập nhật sau.
+[09:08:34] Mai: Vâng, mong sớm có người review để em kịp chỉnh sửa trước deadline. Chứ tình trạng này em lo quá.
+[09:08:48] Quân: Anh hiểu, sẽ cố gắng giải quyết. Đây là một điểm nghẽn mình cần theo dõi.
+[09:08:59] Tuấn: Em có thể hỗ trợ review được không? Tuy em không chuyên sâu bảo mật lắm nhưng cũng có thể xem phần logic.
+[09:09:14] Mai: Cảm ơn Tuấn, nhưng phần này cần đánh giá cả về các lỗ hổng OWASP, nên tốt nhất là người chuyên trách.
+[09:09:27] Quân: Đồng ý, vẫn nên để anh Hải hoặc người có chuyên môn.
+[09:09:35] Hùng: Mà anh Hải dạo này bận lắm, nghe nói đang dự án khác. Có khi phải tìm người khác.
+[09:09:47] Quân: Cứ để anh liên hệ đã. Nếu không được sẽ tính tiếp. Vậy việc này vẫn unresolved.
+[09:09:58] Mai: OK anh.
+[09:10:05] Quân: Giờ mình bàn về rollout. Ngoài môi trường staging, chúng ta cần đồng bộ với bên marketing để truyền thông. Hùng, em có cần phối hợp thêm gì không?
+[09:10:24] Hùng: Cần thông tin chính xác về ngày demo để em gửi cho họ. Với cả, em lo là hạ tầng staging có thể chưa sẵn sàng kịp 22/02, vì còn phụ thuộc vào cấu hình từ nhà cung cấp cloud. Có thể em cần thêm vài ngày.
+[09:10:48] Quân: Nếu vậy, mình cân nhắc dời deadline của Hùng sang 24/02. Anh thấy 22/02 thì gấp, 24/02 sẽ an toàn hơn. Hùng, em đồng ý chứ?
+[09:11:05] Hùng: Đồng ý ạ, 24/02 là khả thi. Em sẽ cố gắng hoàn thành staging setup trước 24/02.
+[09:11:18] Quân: Chốt lại: Hùng setup môi trường staging, deadline mới là 24/02. Như vậy thay vì 22/02, mình lùi lại 2 ngày. Các đầu việc khác vẫn giữ nguyên.
+[09:11:38] Mai: Như vậy cũng đỡ áp lực cho Hùng. Mà Hùng nhớ cập nhật lại timeline cho bên marketing nhé.
+[09:11:48] Hùng: Vâng, em sẽ báo lại.
+[09:11:55] Tuấn: À, Linh này, sẵn tiện em có làm một tài liệu nhỏ về API security để bổ sung vào tài liệu của chị Mai không? Em thấy có vài điểm cần cập nhật.
+[09:12:12] Mai: Thực ra không cần đâu Tuấn, vì tài liệu của chị đã bao gồm phần security rồi. Nếu em có ý tưởng thì gửi cho chị tham khảo, nhưng không cần làm tài liệu riêng.
+[09:12:28] Tuấn: Vậy thôi, em sẽ gửi góp ý qua chat, không tạo thành đầu việc riêng.
+[09:12:37] Quân: Tốt, đừng chồng chéo. Bây giờ, Linh có cần hỗ trợ gì thêm cho việc kiểm tra quyền truy cập không? Em đã liên hệ với phòng nhân sự để lấy danh sách role cập nhật chưa?
+[09:12:58] Linh: Em sẽ liên hệ ngay trong chiều nay. À, lúc nãy anh có nhắc em kiểm tra phân quyền, em ghi nhận rồi ạ.
+[09:13:13] Quân: Ừ, Linh nhớ kiểm tra phân quyền trước 18/02 nhé. Anh chỉ nhắc lại thôi.
+[09:13:24] Linh: Vâng, em sẽ đảm bảo. Em cũng cần hỏi ý kiến pháp chế về việc quyền truy cập dữ liệu cá nhân, nhưng chắc không ảnh hưởng deadline.
+[09:13:42] Quân: OK, nếu có vướng mắc thì báo anh.
+[09:13:49] Tuấn: Về phần script sinh dữ liệu mẫu, em định dùng Python và thư viện Faker để tạo dữ liệu giả. Có ai phản đối không?
+[09:14:05] Mai: Chị thấy ổn, nhưng cần đảm bảo dữ liệu sinh ra phủ được các edge case, ví dụ khách hàng không có số điện thoại, hoặc địa chỉ null. Phải mô phỏng được cả những bản ghi lỗi.
+[09:14:25] Tuấn: Em sẽ thêm các trường hợp đó vào config. Với cả có nên sinh luôn dữ liệu cho cả 100 nghìn bản ghi không, hay chỉ cần vài nghìn?
+[09:14:42] Linh: Theo em, chỉ cần vài nghìn bản ghi thôi, nhưng phủ đủ các loại lỗi. Để em có thể test hiệu năng và kiểm tra logic.
+[09:14:58] Tuấn: OK, em sẽ làm vậy.
+[09:15:06] Linh: Và nhớ cho em xem cấu trúc file dữ liệu mẫu trước khi sinh toàn bộ nhé, để em kiểm tra format.
+[09:15:18] Tuấn: Chắc chắn rồi.
+[09:15:25] Hùng: Quay lại rollout, em cần biết khi nào có bản build mới nhất của API để em cài lên staging. Mai, chị có kế hoạch gì không?
+[09:15:42] Mai: Chị sẽ đóng gói bản build vào 19/02, sau khi hoàn tất tài liệu trước đó một ngày. Em yên tâm.
+[09:15:55] Quân: Tốt, vậy lịch trình phối hợp khá khớp. Ngoài ra, anh muốn tổ chức một buổi demo nội bộ vào ngày 28/02, nhưng chưa quyết định mời những ai. Việc này không cần assign vội, để anh suy nghĩ thêm. Mọi người thấy thế nào?
+[09:16:20] Mai: Em nghĩ nên mời team product và sales để họ nắm được tính năng, nhưng thời gian đó có thể trùng lịch họp khác.
+[09:16:35] Linh: Với cả mình cũng cần chuẩn bị kịch bản demo, nhưng em thấy đó là việc của chị Mai và anh Hùng phối hợp.
+[09:16:50] Quân: Ừ, để anh kiểm tra lịch rồi quyết định sau. Đây không phải là task chính thức.
+[09:17:03] Linh: Vậy còn việc làm slide hướng dẫn sử dụng API cho bên đối tác, mình có cần làm không nhỉ? Hay chỉ cần tài liệu là đủ?
+[09:17:19] Quân: Ý tưởng hay, nhưng tạm thời chưa cần thiết. Chúng ta tập trung vào các việc đã cam kết. Có thể xem xét sau.
+[09:17:33] Linh: OK, vậy em chỉ hỏi thôi, không phải task.
+[09:17:42] Tuấn: À, lúc nãy anh Quân có nhắc em việc chuẩn bị dữ liệu mẫu, mà thực ra em chỉ lo phần script. Còn phần kiểm tra là của Linh, mọi người đừng nhầm nhé.
+[09:17:58] Quân: Đúng rồi, rõ ràng, không nhầm đâu. Chốt: Tuấn script sinh dữ liệu mẫu, không deadline. Linh kiểm tra dữ liệu mẫu khi có đầu ra. Mai tài liệu API, 20/02. Linh kiểm tra quyền truy cập, 18/02. Hùng staging, 24/02. Và hủy bỏ báo cáo tiến độ.
+[09:18:35] Mai: Em muốn tóm tắt lại cho chắc. Hiện tại chúng ta có 4 việc chính: một là tài liệu API của em, deadline 20/02; hai là dữ liệu mẫu, cả Tuấn và Linh cùng làm, bao gồm viết script và kiểm tra; ba là kiểm tra quyền truy cập, Linh phụ trách, deadline 18/02; bốn là setup staging, Hùng, 24/02. Còn việc báo cáo tiến độ đã hủy.
+[09:19:12] Tuấn: Chị Mai ơi, cho em đính chính: việc dữ liệu mẫu là hai đầu việc riêng biệt, chứ không gộp chung. Em chỉ làm script, còn Linh kiểm tra, không phải cùng làm một task đâu ạ.
+[09:19:30] Mai: Ừ nhỉ, chị xin lỗi. Đúng là Tuấn viết script, Linh kiểm tra. Vậy tổng cộng là 5 đầu việc, nhưng script của Tuấn không có deadline.
+[09:19:48] Linh: Thực ra việc kiểm tra của em cũng chưa có deadline vì phụ thuộc, nhưng em sẽ hoàn thành trong 2 ngày sau khi có script. Không có deadline cụ thể ngày tháng luôn.
+[09:20:05] Quân: OK, Linh vẫn chưa có deadline cụ thể cho kiểm tra dữ liệu mẫu, chỉ là cam kết 2 ngày sau khi có script. Còn các đầu việc khác thì có deadline rồi. Như vậy tổng kết: Mai – tài liệu API, deadline 20/02. Linh – kiểm tra quyền truy cập, deadline 18/02. Hùng – staging, deadline 24/02. Tuấn – script dữ liệu mẫu, không deadline. Và còn việc tìm reviewer cho tài liệu API của Mai vẫn chưa có ai, anh sẽ theo dõi sau.
+[09:21:10] Mai: Em chỉ lo nếu không có reviewer sớm, tài liệu của em sẽ bị trễ deadline mất. Nhưng thôi, hy vọng anh Hải nhận lời.
+[09:21:25] Quân: Anh sẽ cố gắng hỏi trong hôm nay. Mọi người còn vấn đề gì khác không?
+[09:21:35] Hùng: Em chỉ muốn xác nhận lại là em cần bản build API trước 24/02, nhưng nếu Mai gửi 19/02 thì quá tốt. Vậy không có gì cản trở.
+[09:21:52] Mai: Yên tâm, chị sẽ gửi đúng hẹn.
+[09:21:59] Tuấn: Về script dữ liệu, em sẽ cố gắng xong càng sớm càng tốt, nhưng không áp lực deadline, đúng không anh?
+[09:22:12] Quân: Đúng rồi, em cứ làm dần, ưu tiên sửa bug trước. Khi nào xong thì báo.
+[09:22:23] Linh: À, anh Quân, em thấy mình nên có một buổi họp ngắn để align lại vào tuần sau. Nhưng đó chỉ là đề xuất thôi, không phải task.
+[09:22:39] Quân: Ừ, để anh xem lịch, nếu cần sẽ tổ chức. Cảm ơn em.
+[09:22:48] Tuấn: Em cũng muốn nói thêm, dữ liệu mẫu của mình sau khi Linh kiểm tra xong có thể được dùng luôn cho demo không? Hay chỉ để test nội bộ?
+[09:23:04] Mai: Tốt nhất là dùng cho test nội bộ trước, demo nên dùng dữ liệu thật đã được làm mờ.
+[09:23:16] Quân: Đồng ý, không dùng dữ liệu giả cho demo khách hàng. Vấn đề này rõ ràng rồi.
+[09:23:28] Hùng: Em thấy tài liệu API của chị Mai cũng ảnh hưởng đến việc cấu hình tường lửa trên staging. Nếu chị Mai bổ sung phần rate limiting thì em cần cập nhật rule WAF. Chị nhớ báo em sớm nhé.
+[09:23:49] Mai: OK chị sẽ lưu ý.
+[09:23:55] Quân: Để tổng kết lần cuối: các đầu việc đã rõ, ai có gì thắc mắc nữa không?
+[09:24:10] Linh: Em không còn gì.
+[09:24:16] Tuấn: Em hết.
+[09:24:22] Hùng: Em cũng vậy.
+[09:24:28] Mai: Em vẫn lo phần reviewer, nhưng tạm thời vậy đi ạ.
+[09:24:37] Quân: Anh sẽ cố gắng giải quyết. Cảm ơn mọi người, buổi họp kết thúc.
+[09:24:50] Mai: Cảm ơn anh.
+[09:24:56] Tuấn: Cảm ơn mọi người.
+[09:25:03] Linh: Bye mọi người.
+[09:25:08] Hùng: Chào nhé.

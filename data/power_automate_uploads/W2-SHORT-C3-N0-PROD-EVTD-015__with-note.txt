@@ -1,0 +1,49 @@
+=== MEETING METADATA ===
+meeting_id: W2-SHORT-C3-N0-PROD-EVTD-015
+meeting_title: Theo dõi lỗi và tài liệu
+meeting_date: 2026-02-09
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+chốt sơ bộ
+chủ đề: Theo dõi lỗi và tài liệu
+kw: tai lieu / test case / staging / spec / khi / fix / yeu
+- Tôi sẽ yêu cầu CS gửi spec
+* Tôi sẽ update lịch
+- QA cần viết test case cho bản vá sau khi fix
+1) Tôi sẽ ghi vào ticket là: "Hoàn thành tài liệu sau 2 ngày làm việc kể từ khi bản vá được deploy lên staging."
+- Tôi sẽ gửi email kết quả kiểm tra ngay sau khi xong
+* Chốt lại: 1) Lan sẽ fix lỗi, dl 3 ngày làm việc sau khi nhận spec từ CS. 2) Hoàng viết tài liệu, dl 2 ngày làm việc sau khi bản vá lên staging
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:05:00] Minh: Chào mọi người, hôm nay mình họp nhanh để điểm lại lỗi trên production mà team CS vừa báo.
+[09:05:25] Lan: Tôi có xem log rồi. Lỗi ở module xử lý thanh toán khi người dùng chọn nhiều sản phẩm cùng lúc. Cần fix gấp.
+[09:05:52] Hoàng: QA team đã tái hiện được lỗi, nhưng chưa rõ nguyên nhân gốc. Có thể do logic tính tổng tiền bị sai.
+[09:06:18] Minh: Vậy bây giờ cần phân công ai làm? Lan có thể phụ trách phần fix code được không?
+[09:06:45] Lan: Được, tôi sẽ xử lý. Nhưng để bắt đầu thì tôi cần spec chi tiết từ CS về kịch bản gây lỗi. Hiện chưa có.
+[09:07:10] Minh: Tôi sẽ yêu cầu CS gửi spec. Tuy nhiên, deadline cho bản vá chưa thể chốt vì nó phụ thuộc vào lúc nhận được spec đó.
+[09:07:42] Hoàng: Rõ ràng rồi. Vậy chúng ta nói là deadline sẽ là 3 ngày làm việc sau khi có spec từ CS, được không?
+[09:08:07] Lan: Tôi đồng ý. Nhưng nhớ ghi chú rõ là thời gian bắt đầu tính từ lúc nhận được spec, không phải từ hôm nay.
+[09:08:35] Minh: Chốt thế nhé. Lan, khi nào có spec thì bạn bắt đầu. Tôi sẽ update lịch.
+[09:09:00] Hoàng: Ngoài ra, tôi muốn nhắc về tài liệu hướng dẫn sử dụng cho tính năng mới. QA cần viết test case cho bản vá sau khi fix.
+[09:09:28] Minh: Tài liệu đó dự kiến khi nào hoàn thành?
+[09:09:50] Hoàng: Tôi nghĩ nên để sau khi bản vá được deploy lên staging và test pass. Cụ thể là sau khi Lan xác nhận bản vá sẵn sàng.
+[09:10:15] Lan: OK. Vậy deadline cho tài liệu phụ thuộc vào ngày tôi deploy lên staging. Tôi chưa chốt được ngày vì chờ spec.
+[09:10:40] Minh: Nghĩa là cả hai deadline đều phụ thuộc sự kiện. Một cái là nhận spec, một cái là deploy staging. Thống nhất nhé.
+[09:11:05] Hoàng: Đúng. Tôi sẽ ghi vào ticket là: "Hoàn thành tài liệu sau 2 ngày làm việc kể từ khi bản vá được deploy lên staging."
+[09:11:32] Minh: Được. Nhưng tôi vẫn muốn có thời gian dự phòng. Nếu spec bị trễ thì sao?
+[09:11:58] Lan: Thì deadline tự động dời theo. Không thể fix trước ngày cụ thể.
+[09:12:20] Minh: Hiểu rồi. Vậy chúng ta sẽ theo dõi sự kiện kích hoạt. Còn vấn đề nào khác không?
+[09:12:45] Hoàng: Có một vấn đề nhỏ. Lỗi này có thể liên quan đến một module khác mà tôi chưa kiểm tra hết.
+[09:13:10] Lan: Bạn kiểm tra thêm và báo lại cho tôi trước khi tôi bắt đầu fix.
+[09:13:35] Hoàng: Tôi sẽ cố gắng xong trong sáng nay. Nhưng nếu chưa rõ thì tôi sẽ thông báo.
+[09:13:58] Minh: OK. Vậy chờ Hoàng có kết quả trước, rồi Lan mới nhận spec. Có vẻ hơi rối nhỉ?
+[09:14:20] Lan: Không sao, tôi vẫn có thể bắt đầu nghiên cứu background trong lúc chờ.
+[09:14:45] Hoàng: Tôi sẽ gửi email kết quả kiểm tra ngay sau khi xong.
+[09:15:10] Minh: Tốt. Chốt lại: 1) Lan sẽ fix lỗi, deadline 3 ngày làm việc sau khi nhận spec từ CS. 2) Hoàng viết tài liệu, deadline 2 ngày làm việc sau khi bản vá lên staging. Có ý kiến gì không?
+[09:15:35] Lan: Tôi không có. Nhưng nếu spec bị thiếu thông tin thì tôi sẽ yêu cầu bổ sung, lúc đó deadline có thể bị đẩy.
+[09:15:58] Minh: Đã rõ. Hoàng cần xác nhận việc kiểm tra module liên quan.
+[09:16:20] Hoàng: Tôi sẽ làm ngay bây giờ.
+[09:16:40] Minh: Vậy kết thúc meeting. Mọi người nhớ cập nhật ticket với các mốc sự kiện, không ghi ngày cụ thể.
+[09:17:00] Lan: OK.
+[09:17:15] Hoàng: Rõ.
+[09:17:30] Minh: Cảm ơn mọi người.

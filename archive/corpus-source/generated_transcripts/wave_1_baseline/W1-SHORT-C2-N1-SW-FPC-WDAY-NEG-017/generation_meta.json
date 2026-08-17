@@ -1,0 +1,28 @@
+{
+  "case": {
+    "wave": 1,
+    "case_index": 17,
+    "meeting_id": "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-017",
+    "meeting_date": "2026-02-01",
+    "title": "Chuẩn bị môi trường kiểm thử",
+    "labels": "first_person_commitment,weekday_deadline,negative_context",
+    "objective": "Một thành viên chủ động nhận một deliverable và deadline là một thứ trong tuần; có thêm thảo luận không tạo task."
+  },
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 632,
+    "turn_count": 29
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 67.97462130000349
+    }
+  ]
+}

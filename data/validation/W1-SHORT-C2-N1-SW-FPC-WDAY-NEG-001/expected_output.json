@@ -1,0 +1,6 @@
+{
+  "meeting_title": "Chuẩn bị môi trường kiểm thử",
+  "tasks": [
+    {"task_name":"Cài đặt máy ảo môi trường kiểm thử","assignee":"Minh","start_date":"2026-01-16","due_date":"2026-01-20","due_date_text":"vào thứ Ba tuần sau","status":"Proposed"}
+  ]
+}

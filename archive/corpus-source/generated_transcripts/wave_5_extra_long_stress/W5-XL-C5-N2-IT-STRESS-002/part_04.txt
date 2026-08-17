@@ -1,0 +1,132 @@
+MEETING_ID: W5-XL-C5-N2-IT-STRESS-002
+PART: P04/10
+
+T000204 [09:30:00] Minh: Lan và Đức ở lại, tôi muốn bàn thêm về product placement. Trang cũng vào đây, em còn nghe không?
+
+T000205 [09:30:08] Trang: Có anh, em vẫn ở ngoài cửa.
+
+T000206 [09:30:12] Minh: Vào đi. Trang, em nói rõ yêu cầu từ marketing về banner động.
+
+T000207 [09:30:18] Trang: Dạ, họ muốn banner trang chủ thay đổi dựa theo hành vi người dùng, ví dụ sản phẩm đã xem, thời gian truy cập. Đó là feature mới, ngoài wireframe em vẽ.
+
+T000208 [09:30:32] Lan: Cái đó cần tracking user behavior và logic hiển thị, không đơn giản. Em nghĩ là story riêng.
+
+T000209 [09:30:40] Đức: Tôi đồng ý. Không thể ghép vào placement tĩnh hiện tại. Cần ước lượng.
+
+T000210 [09:30:46] Minh: Vậy chúng ta tạo task: Lan và Đức cùng phân tích yêu cầu banner động và đưa ra ước lượng sơ bộ. Hạn là bao lâu?
+
+T000211 [09:30:56] Lan: Em nghĩ cần 3 ngày, nhưng em đang bận thanh toán. Có thể giao Hùng.
+
+T000212 [09:31:02] Đức: Hùng đang có hai task, nhưng phần tracking có thể em tự làm.
+
+T000213 [09:31:08] Minh: Để tránh quá tải, tôi assign task này cho Đức, Lan hỗ trợ một phần nhỏ. Deadline 05/03, nhưng nếu cần thêm, dời sang 07/03.
+
+T000214 [09:31:20] Đức: Deadline 05/03 OK. Nhưng cần spec từ Trang trước.
+
+T000215 [09:31:24] Trang: Em sẽ gửi spec trong vòng 2 ngày, tức 28/02.
+
+T000216 [09:31:30] Minh: Vậy có event-dependent: task banner động phụ thuộc vào spec của Trang trước 28/02. Nếu Trang trễ, deadline 05/03 của Đức cũng trễ.
+
+T000217 [09:31:40] Đức: Đúng.
+
+T000218 [09:31:42] Lan: Em có thể hỗ trợ Đức phần logic hiển thị sau khi xong performance.
+
+T000219 [09:31:48] Minh: Tốt.
+
+T000220 [09:31:50] Trang: Anh Minh, còn vụ FastShip owner chưa resolved. Tôi có thể follow hay không?
+
+T000221 [09:31:56] Minh: Chưa, tôi chưa hỏi lead. Cứ để pending. Đừng tạo task giờ.
+
+T000222 [09:32:02] Trang: Vâng.
+
+T000223 [09:32:05] Đức: Tôi có một băn khoăn. Với khối lượng task hiện tại, liệu chúng ta có thể hoàn thành sprint 14 đúng hạn? Tôi thấy mỗi người đang gánh 3-4 task.
+
+T000224 [09:32:16] Minh: Tôi ý thức được. Sprint 14 kết thúc 03/03, còn 5 ngày. Chúng ta phải ưu tiên: thanh toán và cache là quan trọng nhất. Các task khác nếu không kịp có thể dời sang sprint 15.
+
+T000225 [09:32:28] Lan: Vậy task design placement deadline 01/03 có nguy cơ trượt không? Em mới chỉ xem sơ qua.
+
+T000226 [09:32:36] Minh: Nếu cần, chúng ta điều chỉnh. Tôi có thể dời deadline design placement sang 03/03, kết thúc sprint. Nhưng cần ý kiến Đức.
+
+T000227 [09:32:46] Đức: Tôi đồng ý dời. 01/03 là Chủ nhật, không ai làm. Dời sang 03/03 hợp lý.
+
+T000228 [09:32:52] Minh: Vậy correction lần hai: deadline review design placement của Đức và Lan là 03/03.
+
+T000229 [09:33:00] Lan: OK.
+
+T000230 [09:33:02] Trang: Anh Minh, em có đề xuất nhỏ: để tránh chồng chéo, em có thể review design sơ bộ trước, rồi Đức và Lan góp ý sau. Như vậy đỡ áp lực.
+
+T000231 [09:33:14] Minh: Ý hay. Đức và Lan vẫn là owner, nhưng Trang review trước, deadline 01/03. Sau đó họ mới phải góp ý trước 03/03.
+
+T000232 [09:33:24] Trang: Em sẽ review wireframe và gửi feedback.
+
+T000233 [09:33:28] Đức: Vậy task của Trang là review design sơ bộ, deadline 01/03. Task chính của tôi và Lan là 03/03. Có thay đổi.
+
+T000234 [09:33:38] Minh: Đúng. Nhưng đừng quên task banner động deadline 05/03, phụ thuộc spec Trang 28/02.
+
+T000235 [09:33:46] Trang: Em sẽ cố gắng spec sớm hơn, 27/02.
+
+T000236 [09:33:50] Minh: Tốt.
+
+T000237 [09:33:52] Lan: Anh Minh, vụ cache tuning chiều nay, em có cần tham gia deploy không?
+
+T000238 [09:33:58] Tuấn (vọng vào): Có, em cần Lan kiểm tra code purge.
+
+T000239 [09:34:02] Minh: Lan, em vào deploy lúc 15h.
+
+T000240 [09:34:06] Lan: Vâng.
+
+T000241 [09:34:08] Đức: Tôi sẽ có mặt lúc đó.
+
+T000242 [09:34:11] Minh: Bây giờ nói về vấn đề khác: Hùng có báo cáo alert sơ bộ gì chưa?
+
+T000243 [09:34:18] Hùng (từ xa): Em đang tổng hợp, chưa xong.
+
+T000244 [09:34:22] Minh: Không vội, deadline 06/03. Nhưng đừng quên tắt debug hôm nay.
+
+T000245 [09:34:28] Hùng: Em đã chạy script, tắt xong rồi, đang deploy qua pipeline.
+
+T000246 [09:34:34] Minh: Tốt, vậy task đó done.
+
+T000247 [09:34:36] Trang: Anh Minh, support ghi nhận thêm một feedback: người dùng phàn nàn tốc độ tải trang chi tiết sản phẩm chậm trên mobile. Có liên quan đến cache không?
+
+T000248 [09:34:50] Lan: Cache product list không ảnh hưởng đến trang chi tiết. Có thể do image lớn.
+
+T000249 [09:34:56] Đức: Tôi nghĩ cần tối ưu image. Nhưng không phải task ngay.
+
+T000250 [09:35:02] Minh: Đưa vào backlog. Không tạo task.
+
+T000251 [09:35:06] Lan: Em muốn hỏi, deadline báo cáo payment của em là 29/02, nhưng nếu log về sớm, em có thể gửi 28/02 không?
+
+T000252 [09:35:16] Minh: Tất nhiên, càng sớm càng tốt. Nhưng không bắt buộc.
+
+T000253 [09:35:22] Đức: Tôi cũng sẽ sẵn sàng review sớm nếu có.
+
+T000254 [09:35:26] Trang: Em có một lo ngại về FastShip: bên sales hỏi tiến độ tích hợp, em không biết trả lời sao.
+
+T000255 [09:35:34] Minh: Cứ nói chúng tôi đang review API, chưa có timeline. Đừng hứa.
+
+T000256 [09:35:40] Trang: Vâng.
+
+T000257 [09:35:43] Đức: Tôi thấy chúng ta đã có nhiều task mới. Tôi đề nghị dừng thêm task ở đây.
+
+T000258 [09:35:50] Minh: Đồng ý. Tổng kết các task trong part này:
+- Task banner động: Đức (owner) và Lan hỗ trợ, deadline 05/03, phụ thuộc spec Trang trước 28/02 (hoặc 27/02 nếu sớm).
+- Task review design sơ bộ: Trang, deadline 01/03.
+- Task review design placement: Đức và Lan, deadline đã dời từ 01/03 thành 03/03.
+- Các task khác giữ nguyên.
+
+Có ai còn thắc mắc gì trước khi chuyển sang vấn đề khác?
+
+T000259 [09:36:12] Lan: Không.
+
+T000260 [09:36:14] Trang: Em ổn.
+
+T000261 [09:36:16] Đức: OK.
+
+T000262 [09:36:18] Minh: Tôi lưu ý: còn unresolved owner FastShip, chưa giải quyết. Sẽ bàn khi có lead.
+
+T000263 [09:36:26] Hùng (từ xa): Anh Minh, em deploy debug xong, memory đang ổn.
+
+T000264 [09:36:32] Minh: Cảm ơn. Mọi người nghỉ ngơi 15 phút trước 15h.
+
+--- END OF PART P04 ---

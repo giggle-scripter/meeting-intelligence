@@ -1,0 +1,315 @@
+{
+  "pipeline_version": "v1",
+  "meeting_context_mode": "assist",
+  "meeting_notes": "off",
+  "prompt_version": "v1-selective-fallback",
+  "model": "deterministic",
+  "mode": "local",
+  "endpoint": "",
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 3,
+    "unreviewed_ground_truth_count": 0,
+    "unreviewed_case_ids": [],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.0,
+    "task_identity_recall": 0.0,
+    "task_precision": 0.0,
+    "task_recall": 0.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "reviewed_metrics": {
+    "case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.0,
+    "task_identity_recall": 0.0,
+    "task_precision": 0.0,
+    "task_recall": 0.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "exploratory_metrics": {
+    "case_count": 0,
+    "passed_case_count": 0,
+    "failed_case_count": 0,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 1.0,
+    "task_identity_recall": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 11,
+    "rule_event_count": 7,
+    "ai_event_count": 0,
+    "ai_window_count": 10,
+    "ai_context_clause_count": 211,
+    "unresolved_window_count": 10,
+    "weighted_ai_call_rate": 0.9090909090909091,
+    "ai_clause_coverage": 0.7455830388692579
+  },
+  "fallback_metrics": {
+    "rule_only": 0,
+    "ai_fallback_not_configured": 3,
+    "ai_fallback_resolved": 0,
+    "ai_fallback_unresolved": 0,
+    "ai_fallback_failed": 0
+  },
+  "job_execution": [],
+  "execution_errors": [],
+  "case_execution": [
+    {
+      "case_id": "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 2,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 2
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-SW-NDL-005",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 2,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 2
+    },
+    {
+      "case_id": "W3-MED-C3-N1-IT-INT-002",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 6,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 6
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001",
+      "passed": false,
+      "expected_task_count": 1,
+      "actual_task_count": 2,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Cài đặt máy ảo môi trường kiểm thử",
+          "assignee": "Minh",
+          "start_date": "2026-01-16",
+          "due_date": "2026-01-20",
+          "due_date_text": "vào thứ Ba tuần sau",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Liên hệ với bên BA để xin trích xuất dữ liệu",
+          "assignee": "Quân",
+          "start_date": "2026-01-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Quân: Chị sẽ liên hệ với bên BA để xin trích xuất dữ liệu.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết test case trong lúc chờ môi trường",
+          "assignee": "Lan",
+          "start_date": "2026-01-16",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Lan: Em sẽ tranh thủ viết test case trong lúc chờ môi trường.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0,
+      "field_counts": {}
+    },
+    {
+      "case_id": "W2-SHORT-C3-N2-SW-NDL-005",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 1,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Tối ưu hiệu năng module báo cáo tổng hợp",
+          "assignee": "Bình",
+          "start_date": "2026-01-30",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chuẩn bị dữ liệu mẫu lớn để load test",
+          "assignee": "Dung",
+          "start_date": "2026-01-30",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Cập nhật kết quả profiling",
+          "assignee": "Trần Thị Bình",
+          "start_date": "2026-01-30",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Trần Thị Bình: Em sẽ cập nhật kết quả profiling vào giữa tuần sau.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0,
+      "field_counts": {}
+    },
+    {
+      "case_id": "W3-MED-C3-N1-IT-INT-002",
+      "passed": false,
+      "expected_task_count": 5,
+      "actual_task_count": 1,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Fix connection error API",
+          "assignee": "Đức",
+          "start_date": "2026-02-06",
+          "due_date": "2026-02-11",
+          "due_date_text": "trước thứ Năm",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thiện dữ liệu mẫu",
+          "assignee": "Lan",
+          "start_date": "2026-02-06",
+          "due_date": "2026-02-06",
+          "due_date_text": "cuối ngày hôm nay",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review dữ liệu mẫu",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-06",
+          "due_date": "",
+          "due_date_text": "sau khi Lan bàn giao",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Xử lý adapter token",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-06",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Phân quyền truy cập",
+          "assignee": "Hoa",
+          "start_date": "2026-02-06",
+          "due_date": "",
+          "due_date_text": "cuối tuần này",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Gửi qua cho Hoa review",
+          "assignee": "Lan",
+          "start_date": "2026-02-06",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Lan, em gửi qua cho Hoa review trước nhé.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0,
+      "field_counts": {}
+    }
+  ],
+  "case_diagnostics": {
+    "W1-SHORT-C2-N1-SW-FPC-WDAY-NEG-001": {
+      "caption_count": 25,
+      "deduplicated_caption_count": 25,
+      "turn_count": 25,
+      "sentence_count": 56,
+      "clause_count": 56,
+      "candidate_window_count": 2,
+      "rule_event_count": 3,
+      "ai_event_count": 0,
+      "ai_window_count": 2,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 47,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 2,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.8392857142857143
+    },
+    "W2-SHORT-C3-N2-SW-NDL-005": {
+      "caption_count": 32,
+      "deduplicated_caption_count": 32,
+      "turn_count": 32,
+      "sentence_count": 55,
+      "clause_count": 60,
+      "candidate_window_count": 2,
+      "rule_event_count": 1,
+      "ai_event_count": 0,
+      "ai_window_count": 2,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 42,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 2,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.7
+    },
+    "W3-MED-C3-N1-IT-INT-002": {
+      "caption_count": 62,
+      "deduplicated_caption_count": 62,
+      "turn_count": 62,
+      "sentence_count": 161,
+      "clause_count": 167,
+      "candidate_window_count": 7,
+      "rule_event_count": 3,
+      "ai_event_count": 0,
+      "ai_window_count": 6,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 122,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 6,
+      "ai_call_rate": 0.8571428571428571,
+      "ai_clause_coverage": 0.7305389221556886
+    }
+  }
+}

@@ -1,0 +1,44 @@
+MEETING_ID: W2-SHORT-C2-N0-IT-DREP-030
+CASE_LABELS: deadline_replacement,deadline_in_separate_sentence
+MEETING_DATE: 2026-02-24
+PRIMARY_FEATURE: deadline replacement
+TITLE: Trao đổi kế hoạch tích hợp
+
+[00:00:00] Nam: Chào mọi người, hôm nay chúng ta điểm lại các đầu việc tích hợp hệ thống.
+[00:00:05] Hoa: Em vừa gửi bản thiết kế API, anh chị xem giúp.
+[00:00:09] Nam: Cảm ơn Hoa. Về task tích hợp module thanh toán, mình cần xác nhận lại.
+[00:00:14] Tùng: Em đang test môi trường staging, phát hiện vài lỗi liên quan đến kết nối cổng.
+[00:00:21] Hoa: Lỗi đấy em cũng mới thấy hôm qua, có thể do cấu hình sai.
+[00:00:26] Nam: Tạm gác lỗi đấy sang một bên. Quay lại tích hợp module thanh toán, ai đang chịu trách nhiệm chính?
+[00:00:33] Hoa: Em đây. Em đang đợi bên đối tác xác nhận endpoint mới.
+[00:00:39] Nam: Vậy deadline cho task này thế nào?
+[00:00:43] Hoa: Em nghĩ cần hoàn tất trước ngày 28 tháng 2.
+[00:00:48] Nam: Anh ghi nhận. Ngày 28 tháng 2 là hạn chót.
+[00:00:53] Tùng: Nhưng với các lỗi hiện tại, em e rằng đủ thời gian test toàn bộ luồng không.
+[00:01:00] Hoa: Nếu sửa lỗi cấu hình nhanh thì test cũng kịp.
+[00:01:05] Nam: Còn vấn đề gì về tài liệu API không Hoa?
+[00:01:10] Hoa: Đang cập nhật, mai em gửi bản mới.
+[00:01:14] Tùng: Em đề xuất tách riêng việc kiểm thử module thanh toán thành task con.
+[00:01:21] Nam: Không cần thiết, vẫn gộp chung trong task tích hợp.
+[00:01:26] Tùng: Vậy cho em xác nhận, deadline 28/2 là cố định à?
+[00:01:31] Nam: Hiện tại là như vậy.
+[00:01:34] Hoa: Mà em vừa nhận email từ đối tác, họ báo cần thời gian migrate dữ liệu, chắc phải lùi lại.
+[00:01:42] Nam: Có nghĩa là mình không kịp 28/2 à?
+[00:01:46] Hoa: Vâng, khó kịp lắm.
+[00:01:49] Tùng: Nếu lùi thì mình nên chốt ngày mới luôn.
+[00:01:54] Nam: Để đảm bảo chất lượng, mình thống nhất dời deadline sang ngày 5 tháng 3 nhé.
+[00:02:02] Hoa: Vậy deadline cũ coi như không dùng nữa.
+[00:02:05] Nam: Đúng, deadline mới là 5 tháng 3.
+[00:02:09] Tùng: Đồng ý. Em sẽ điều chỉnh test plan theo mốc này.
+[00:02:14] Hoa: Em cũng cập nhật lại timeline trong Jira.
+[00:02:18] Nam: Còn phần kiểm tra bảo mật thì sao?
+[00:02:21] Tùng: Đấy là việc của bên DevSecOps, tuần sau họ mới có kết quả.
+[00:02:27] Hoa: Mình có cần đưa việc đó vào họp không?
+[00:02:30] Nam: Không, chỉ để ý tiến độ thôi.
+[00:02:34] Tùng: Anh cho em hỏi ngoài lề chút, release note bản mới bao giờ có?
+[00:02:40] Nam: Mai anh sẽ gửi. Quay trở lại, ai sẽ thông báo deadline mới cho khách hàng?
+[00:02:48] Hoa: Để em làm.
+[00:02:50] Nam: Tốt. Tóm lại task tích hợp module thanh toán deadline mới là 5/3, không còn ràng buộc với 28/2.
+[00:02:59] Tùng: Rõ rồi anh.
+[00:03:03] Hoa: Còn gì nữa không anh?
+[00:03:06] Nam: Hết, cảm ơn mọi người.

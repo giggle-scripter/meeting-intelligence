@@ -1,0 +1,34 @@
+=== MEETING METADATA ===
+meeting_id: W2-SHORT-C2-N0-IT-DUPR-018
+meeting_title: Trao đổi kế hoạch tích hợp
+meeting_date: 2026-02-12
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:02] Minh: Chào mọi người, hôm nay mình họp ngắn để kiểm tra tiến độ tích hợp cổng thanh toán và thống nhất vài đầu việc liên quan. An, em cập nhật task TASK-567 đi.
+[09:00:10] An: Dạ, phần tích hợp core đã code xong, em đang test trên môi trường staging. Còn một vài lỗi nhỏ với callback URL.
+[09:00:18] Minh: Ước lượng khi nào xong để kịp release ngày 20/02?
+[09:00:25] An: Em nghĩ đầu tuần sau, tầm 18/02 là xong test, rồi mình deploy thử.
+[09:00:32] Hoa: Em cũng đang viết test case cho phần payment này, cần anh An confirm API response mới cho trường hợp timeout.
+[09:00:40] An: OK, lát anh gửi spec bổ sung. Task này cũng bao gồm việc viết unit test phía integration, nên em yên tâm nhé.
+[09:00:50] Hoa: Vâng, mà anh ơi, mình có cần tạo subtask riêng cho việc test tích hợp không? Em sợ bị sót.
+[09:00:58] Minh: Không cần đâu Hoa, task TASK-567 đã có sẵn phần test acceptance rồi. Mình tạo subtask dễ gây duplicate không cần thiết.
+[09:01:05] Hoa: À, đúng rồi, em thấy trong mô tả task có checklist test. Vậy em chỉ follow theo đó thôi.
+[09:01:12] An: Chuẩn, em cứ theo checklist trong task, xong thì báo lại a.
+[09:01:18] Minh: Nhớ nhé, không tự ý tách task dẫn đến trùng lặp. Quản lý task đã đủ chi tiết rồi.
+[09:01:25] Hoa: Vâng anh.
+[09:01:30] Minh: Tiếp theo, còn vấn đề bảo mật cho luồng thanh toán. An, em đã implement basic auth chưa?
+[09:01:38] An: Dạ, đã có, nhưng chưa review sâu. Em định nhờ team review chung trong task TASK-567 luôn, thay vì tạo task mới.
+[09:01:47] Minh: OK, tốt. Hoa, em chú ý thêm test case cho security không?
+[09:01:55] Hoa: Dạ, em sẽ thêm vào bộ test hiện có, cũng trong task đó ạ.
+[09:02:03] Minh: Đúng rồi, tận dụng task gốc để tránh bị phân mảnh.
+[09:02:10] Bình: Cho anh hỏi, còn phần hiệu năng khi xử lý nhiều giao dịch thì sao? Có cần tạo ticket riêng không?
+[09:02:20] Minh: Theo anh, chưa cần, vì task tích hợp đã có mục performance benchmark ở giai đoạn cuối. Nếu phát sinh vấn đề thì mới tách sau.
+[09:02:30] An: Đồng ý, em sẽ chạy thử tải rồi báo cáo trong cùng task luôn.
+[09:02:37] Bình: OK, vậy rõ rồi.
+[09:02:42] Minh: Quay lại recap chính: task TASK-567 - tích hợp payment gateway, An đang làm, deadline 20/02, đã cover cả test và bảo mật. Chúng ta không tạo thêm task con hay task phụ nào liên quan, để tránh duplicate và loãng thông tin.
+[09:02:58] An: Đã rõ.
+[09:03:02] Hoa: Em hiểu rồi, sẽ bám sát task gốc.
+[09:03:06] Bình: Anh cũng nắm được.
+[09:03:10] Minh: Còn ai có câu hỏi gì nữa không?
+[09:03:15] System: (Không ai nói thêm)
+[09:03:20] Minh: OK, vậy họp kết thúc. Cảm ơn mọi người.

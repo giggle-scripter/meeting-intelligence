@@ -1,0 +1,87 @@
+{
+  "case": {
+    "wave": 4,
+    "case_index": 8,
+    "meeting_id": "W4-LONG-C4-N3-OPS-STATE-008",
+    "meeting_date": "2026-02-22",
+    "title": "Họp điều phối triển khai hệ thống",
+    "labels": "long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk",
+    "objective": "P01: Mở meeting, bàn môi trường test và tài liệu triển khai. Tạo hai task có tên gần giống nhau, đặt một deadline ban đầu và một task không deadline. | P02: Chuyển sang lỗi đăng nhập và dữ liệu test. Tạo thêm task, distractor và unresolved reviewer; chưa sửa task P01. | P03: Quay lại tài liệu P01. Handoff owner của một task và thay deadline của task còn lại; phải tham chiếu tự nhiên qua khoảng cách dài. | P04: Bàn release và monitoring. Hủy một task cũ, đặt một deadline gần lời bàn về task khác nhưng thuộc đúng antecedent cũ. | P05: Xử lý các điểm cuối, recap trạng thái cuối cùng, không tạo duplicate và giữ một unresolved item nếu chưa chốt."
+  },
+  "part_index": 1,
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 1671,
+    "turn_count": 77
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 103.03775109999697
+    },
+    {
+      "attempt": 2,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.0041658999980427325
+    },
+    {
+      "attempt": 3,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005095500004244968
+    },
+    {
+      "attempt": 4,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005975099993520416
+    },
+    {
+      "attempt": 5,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005092899998999201
+    },
+    {
+      "attempt": 6,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005236500001046807
+    },
+    {
+      "attempt": 7,
+      "kind": "validation_error",
+      "errors": [
+        "Quá ít turn: 0; cần ít nhất khoảng 60.",
+        "Không tìm thấy timestamp hợp lệ.",
+        "Không tìm thấy turn ID dạng T000001."
+      ],
+      "elapsed_seconds": 292.0225888999994
+    },
+    {
+      "attempt": 8,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 247.95892739998817
+    }
+  ]
+}

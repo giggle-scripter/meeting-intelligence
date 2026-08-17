@@ -1,0 +1,11 @@
+ghi vội
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / moi truong / trien khai / spec / hai / khac / check
+- Anh sẽ check lại
+* Anh sẽ gửi credential riêng
+- Vậy là Huy có hai task: môi trường hôm nay và đăng nhập tuần sau
+1) Lưu ý hai tài liệu này khác deliverable nhưng đều về deployment. (two tasks with similar object)
+- Em sẽ gửi spec chiều nay
+* correction)
+- Anh sẽ gửi template ngay bây giờ trong meeting, link ở chat
+1) dời sang meeting khác

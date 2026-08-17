@@ -1,0 +1,11 @@
+minutes nháp
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: du lieu / trien khai / test case / staging / api / oauth / spec
+- Đó là task “Tạo dữ liệu mẫu”
+* Hai task tên gần giống: tạo và kiểm tra
+- Vậy active tasks: OAuth – Bình 25/2, dữ liệu mẫu – Chi, xác thực dữ liệu mẫu – Bình, staging – Bình
+1) Tôi thấy có hai task giống nhau: dữ liệu mẫu và xác thực
+- Giờ tôi muốn thêm task test case API
+* Recap cuối: OAuth – Bình 27/2, dữ liệu mẫu – Chi, xác thực – Bình handoff Dũng, test case – Chi, staging – Bình, review – unresolved
+- Em sẽ gửi spec API cho Chi chiều nay
+1) Đầu tiên, phần API integration, Bình em làm đến đâu? ? chưa chốt

@@ -1,0 +1,82 @@
+=== MEETING METADATA ===
+meeting_id: W3-MED-C4-N2-SW-INT-001
+meeting_title: Họp phối hợp triển khai và xử lý vấn đề
+meeting_date: 2026-02-05
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+ghi vội
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / trien khai / kiem thu / rollback / lai / duy / check
+- Để em check lại rule
+* vậy có 2 task: một là phần tài liệu hướng dẫn cài đặt do anh Khánh, hạn 11/02;
+- còn một task về "kiểm thử bảo mật" không thấy ai nhắc
+1) Như vậy ta đã có 3 task active
+- Vậy ta tổng kết: task 1 – fix lỗi đăng nhập (Duy, dl 7/02);
+* task 3 – script triển khai + rollback (Duy, dl 10/02)
+- Em muốn test xong trước thứ Sáu
+1) Chốt lại, em sẽ gửi meeting minutes sau 2 tiếng
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[10:02:00] Duy: Rất cảm ơn mọi người đã đến đúng giờ. Hôm nay chúng ta có vài vấn đề cần bàn về môi trường test và đợt triển khai sắp tới.
+[10:02:23] Hương: Em có chuẩn bị trước agenda rồi, nhưng trước tiên anh Duy cho em hỏi tình hình cái lỗi đăng nhập trên môi trường staging tuần trước đã xong chưa?
+[10:02:45] Duy: Vẫn chưa bạn ạ. Bên anh Khánh vừa báo lại hôm qua vẫn còn hiện tượng session timeout bất thường.
+[10:03:02] Khánh: Đúng vậy, tôi đã test lại với token refresh, nhưng có vẻ server không đồng bộ. Mà tôi thấy trong ticket cũng có ghi là liên quan đến cấu hình mới bên phần infra.
+[10:03:30] An: Ừ, cái đấy là bên em mới cập nhật load balancer. Để em check lại rule. Nhưng mà để em confirm thì cần Duy cho em access log của tối thứ Sáu.
+[10:03:52] Duy: Ok, tí em gửi anh link log. Nhưng mà việc đấy priority cao, vì còn block team test ở vài case.
+[10:04:15] Khánh: Tôi đã liệt kê các case bị block trong sheet rồi, cần Duy fix trước thứ Tư tuần sau để kịp smoke test.
+[10:04:35] Duy: Thứ Tư tuần sau là 12/02 hả anh? Để em xem lịch… À em có deadline khác rồi, anh cho em đẩy lên thứ Sáu tuần này được không? Tức là 7/02.
+[10:05:00] Khánh: Thứ Sáu này? Được thôi, miễn là trước cuối tuần. Nhưng em nhớ cập nhật lại ticket và báo cho team test.
+[10:05:20] Duy: Em sẽ cập nhật ngay sau meeting. Anh Khánh cho em hỏi thêm cái tài liệu triển khai bản mới đã có bản nháp chưa?
+[10:05:42] Khánh: Tôi mới chỉ viết xong phần hướng dẫn cài đặt. Còn phần rollback thì chưa.
+[10:06:00] Hương: Vậy phần viết tài liệu triển khai đó, ai sẽ chịu trách nhiệm chính? Em thấy trong plan giao cho cả Duy và anh Khánh.
+[10:06:22] Duy: Em tưởng phần rollback là anh Khánh viết, còn phần chạy script deploy em sẽ viết mẫu.
+[10:06:40] Khánh: Ừ, đúng rồi. Phần triển khai tổng thể tôi sẽ viết, em viết phần script riêng. Nhưng mà chúng ta nên thống nhất format trước.
+[10:07:05] Hương: Vậy hai đầu việc tài liệu này, ngày hoàn thành dự kiến là bao giờ? Em cần để phối hợp với bên vận hành.
+[10:07:25] Khánh: Tôi có thể xong phần hướng dẫn cài đặt vào thứ Ba tuần sau (11/02). Còn phần script của Duy thì em nghĩ sao?
+[10:07:45] Duy: Em làm xong phần script deploy trước thứ Hai (10/02) được không? Vì thứ Hai em còn phải support môi trường.
+[10:08:10] Hương: Ok, vậy có 2 task: một là phần tài liệu hướng dẫn cài đặt do anh Khánh, hạn 11/02; hai là phần script deploy do Duy, hạn 10/02. Em sẽ ghi lại.
+[10:08:35] Duy: Mà khoan, em vừa nhớ ra hôm qua có thử chạy thử script trên môi trường develop, gặp lỗi kết nối API.
+[10:08:50] An: Lỗi gì thế? Em cũng thấy báo trong log có API connection error.
+[10:09:05] Duy: Đúng rồi, APIConnectionError từ service resoure. Em chưa debug sâu, nhưng nghi do endpoint mới bị sai cert.
+[10:09:25] An: Để em kiểm tra lại cấu hình cert bên em. Chắc do tuần trước em rotate chứng chỉ.
+[10:09:48] Khánh: Lỗi này có ảnh hưởng tới test case đăng nhập không? Vì mấy test của tôi cũng gọi API đó.
+[10:10:05] Duy: Có thể, vì token refresh cũng qua endpoint đó. Em sẽ phối hợp với anh An check sau meeting.
+[10:10:28] Hương: Thôi, cái đấy để sau. Còn việc viết tài liệu, em có ý kiến: hay là viết chung một file duy nhất, chia hai phần?
+[10:10:50] Khánh: Cũng được. Nhưng nếu viết chung thì người đọc dễ nhầm. Tôi đề xuất viết riêng hai file, tham chiếu chéo.
+[10:11:08] Duy: Em thấy viết riêng vẫn ổn. Mà em hỏi thêm, bản hướng dẫn cài đặt có bao gồm cả cấu hình biến môi trường không?
+[10:11:30] Khánh: Có chứ. Cái đấy quan trọng. Anh sẽ viết một section về biến môi trường và file .env.
+[10:11:52] Hương: Được rồi. Về phần lỗi đăng nhập, anh Duy đã nhận fix trước thứ Sáu. Nhưng em thấy trong plan cũ còn một task về "kiểm thử bảo mật" không thấy ai nhắc.
+[10:12:15] Duy: Cái đấy chưa thấy assign. Có thể bỏ qua đợt này?
+[10:12:30] Khánh: Không. Tôi nghĩ vẫn nên làm, nhưng tuần sau mới bắt đầu. Để tôi assign lại sau.
+[10:12:50] Hương: Vậy để đó, chưa có deadline, chưa có người làm. Em ghi là unresolved.
+[10:13:05] An: Tôi muốn hỏi về môi trường UAT, khi nào có quyết định dùng lại môi trường cũ hay build mới?
+[10:13:28] Duy: Cái này em chưa biết, hình như sếp chưa chốt. Có thể topic này không tạo task, đợi họp riêng.
+[10:13:50] Hương: Đúng, topic đấy không thuộc phạm vi meeting này. Ta focusing vào các việc đã liệt kê.
+[10:14:10] Khánh: Vậy recap lại nào. Thứ nhất, lỗi đăng nhập và session timeout, Duy fix trước thứ Sáu 7/02, phối hợp với An về cert. Thứ hai, tài liệu hướng dẫn cài đặt anh viết, xong 11/02. Thứ ba, script deploy của Duy xong 10/02.
+[10:14:45] Duy: Đúng rồi. Mà em nhắc lại, script deploy em sẽ viết sample code cho cả rollback, chứ không chỉ deploy.
+[10:15:00] Khánh: Ừ, vậy tên task nên là "Script triển khai và rollback" chứ không phải "Script deploy". Em sửa lại nhé Hương.
+[10:15:18] Hương: Ok, em ghi là "Script triển khai và rollback". Như vậy ta đã có 3 task active.
+[10:15:35] An: Em muốn hỏi, riêng phần kiểm tra cert em làm luôn trong hôm nay, cần ai support?
+[10:15:52] Duy: Em có thể support nếu anh cần, nhưng em tập trung xử lý lỗi đăng nhập trước.
+[10:16:10] Hương: Việc cert đó có cần tạo task không? Hay là sub-task của lỗi đăng nhập?
+[10:16:30] An: Thôi, em tự xử, coi như việc nhỏ, không cần tạo task riêng.
+[10:16:48] Hương: Được. Vậy ta tổng kết: task 1 – fix lỗi đăng nhập (Duy, deadline 7/02); task 2 – tài liệu hướng dẫn cài đặt (Khánh, deadline 11/02); task 3 – script triển khai và rollback (Duy, deadline 10/02). Còn task kiểm thử bảo mật unresolved.
+[10:17:20] Duy: Mà cái script em viết, liệu có cần review từ anh Khánh không?
+[10:17:35] Khánh: Có, em viết xong gửi anh review, tối đa 1 ngày. Nhưng mà việc này không nằm trong deadline script, mà là quy trình thôi.
+[10:17:55] Hương: Đúng, việc review là distractor, không phải task riêng.
+[10:18:10] An: Tôi có một ý: hay là ta gộp hai tài liệu thành một? Như vậy đỡ nhầm lẫn.
+[10:18:30] Duy: Ý hay, nhưng mỗi người viết một phần, vẫn là hai deliverable. Nếu gộp thì phải có người tổng hợp.
+[10:18:48] Khánh: Tôi thấy cứ để riêng, vì dễ bảo trì sau này. Không nên gộp.
+[10:19:05] Hương: Vậy thôi, giữ nguyên. Em thấy trong cuộc họp chúng ta có nhắc tới "phần này", "việc đó", vậy em ghi chú thích.
+[10:19:25] Duy: Mà em có thắc mắc, task tài liệu của em và của anh Khánh tên gần giống nhau, có bị trùng scope không?
+[10:19:45] Khánh: Không, script của em là hướng dẫn thủ công, còn script của anh là code tự động. Khác nhau.
+[10:20:00] Hương: Tuy gần giống tên nhưng deliverable khác. Không duplicate.
+[10:20:15] An: Nãy Duy nói APIConnectionError, em đã check sơ, hình như do thiếu CA trong trusted store. Em sẽ update cert ngay.
+[10:20:35] Duy: Ok, nếu cert ổn thì em sẽ thử lại việc login. Em muốn test xong trước thứ Sáu.
+[10:20:55] Khánh: Nhưng chú ý đừng ảnh hưởng môi trường staging.
+[10:21:10] Duy: Vâng, em chạy trên môi trường dev trước.
+[10:21:25] Hương: Chốt lại, em sẽ gửi meeting minutes sau 2 tiếng. Mọi người check và góp ý. Còn gì không?
+[10:21:40] Khánh: Hết rồi.
+[10:21:50] Duy: Em không có thêm.
+[10:22:00] An: Tôi cũng ổn.
+[10:22:10] Hương: Vậy meeting kết thúc. Cảm ơn mọi người.

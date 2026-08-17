@@ -1,0 +1,118 @@
+MEETING_ID: W5-XL-C5-N3-SW-STRESS-001
+PART: P06/10
+
+T000288 [12:26:30] Hoàng: Chúng ta chuyển sang chủ đề release. Tôi muốn thảo luận về kế hoạch phát hành module thanh toán quốc tế sau khi có scope update.
+
+T000289 [12:27:15] Linh: Vâng. Hiện tại chúng ta có hai phiên bản: release chính và bản canary. Tuy nhiên, do thêm multi-currency, tôi đề xuất release chính vào ngày 15/3 thay vì 10/3.
+
+T000290 [12:28:05] Minh: Em đồng ý lùi lại, nhưng cần có milestone rõ ràng. Task design doc performance của Dũng có còn phù hợp không? Vì caching giờ phải tính đến multi-currency.
+
+T000291 [12:28:55] Hoàng: Task design doc performance có thể không cần thiết nữa, vì scope đã thay đổi. Tôi propose hủy task đó và thay bằng task mới: "Phân tích hiệu năng cho multi-currency settlement".
+
+T000292 [12:29:45] Linh: Em đồng ý. Design doc performance cũ tập trung vào đơn hàng nội địa, giờ ưu tiên multi-currency. Vậy hủy task cũ, tạo task mới.
+
+T000293 [12:30:35] Minh: Task mới này do ai lead? Dũng vẫn phù hợp, vì bạn đã có background về caching.
+
+T000294 [12:31:25] Dũng: Em sẵn sàng nhận. Nhưng cần clarification: task mới này có bao gồm viết design doc hay chỉ phân tích?
+
+T000295 [12:32:15] Linh: Cần design doc cho multi-currency performance. Deadline? Tôi propose một tuần, tức thứ Sáu tuần sau.
+
+T000296 [12:33:00] Hoàng: Deadline cho task mới là thứ Sáu tuần sau. Ghi nhận hủy task design doc performance cũ.
+
+T000297 [12:33:50] Trang: Liên quan đến test data chargeback, em thấy task này đã bị correction nhiều. Có thể hủy luôn và thay bằng test data cho multi-currency?
+
+T000298 [12:34:40] An: Bên Finance vẫn chưa gửi chargeback. Nếu hủy, chúng ta không cần chờ nữa. Em đồng ý hủy task chargeback data cũ, thay bằng "Chuẩn bị test data cho multi-currency".
+
+T000299 [12:35:30] Hoàng: Đây là hủy task thứ hai. Vậy task chargeback data bị hủy, task mới: "Chuẩn bị test data multi-currency", assign An, deadline? An em cần bao lâu?
+
+T000300 [12:36:20] An: Cần khoảng 3 ngày sau khi có spec multi-currency. Spec multi-currency deadline thứ Năm, vậy test data deadline thứ Hai tuần sau.
+
+T000301 [12:37:10] Hoàng: Correction deadline thứ hai: test data multi-currency deadline thứ Hai tuần sau. Nhưng đây là deadline mới, không phải correction của task cũ.
+
+T000302 [12:38:00] Linh: Vậy chúng ta có hai task mới thay thế: performance analysis cho multi-currency (Dũng) và test data multi-currency (An).
+
+T000303 [12:38:50] Minh: Em có một vấn đề: task integration spec của Thắng cũng bị ảnh hưởng. Liệu có cần hủy luôn spec cũ và viết spec mới cho multi-currency?
+
+T000304 [12:39:40] Hoàng: Không, spec integration đã được mở rộng bao gồm multi-currency. Không hủy, chỉ correction deadline.
+
+T000305 [12:40:30] Hòa: Bên Ops cần hỗ trợ Dũng trong task mới. Em có thể setup môi trường benchmark.
+
+T000306 [12:41:20] Dũng: Cảm ơn Hòa. Em sẽ gửi yêu cầu cụ thể sau khi có outline.
+
+T000307 [12:42:10] Trang: QA cũng cần test case cho multi-currency. Nhưng task này phụ thuộc vào spec, nên chưa assign. Em sẽ chờ.
+
+T000308 [12:43:00] Hoàng: Đó là event-dependent. Chúng ta cần correction deadline cho các task phụ thuộc sau spec.
+
+T000309 [12:43:50] Linh: Em thấy có nhiều thay đổi. Tôi muốn recap: hủy task design doc performance và chargeback data, thay bằng hai task mới. Correction deadline: spec integration từ thứ Ba lên thứ Năm (đã có), bổ sung deadline cho task mới.
+
+T000310 [12:44:40] Minh: Liệu có negative impact nào không? Dũng hiện có task multi-currency spec deadline thứ Năm, thêm task performance analysis deadline thứ Sáu tuần sau. Có thể quá tải.
+
+T000311 [12:45:30] Hoàng: Đúng, đây là negative block. Chúng ta có thể hỗ trợ Dũng: Thắng có thể giúp phân tích số liệu.
+
+T000312 [12:46:20] Dũng: Nếu Thắng support, em có thể chia workload. Thắng làm phần kiến trúc caching, em làm phần multi-currency logic.
+
+T000313 [12:47:10] Minh: Thắng vẫn có integration spec. Nhưng integration spec đã mở rộng scope, cần Thắng tập trung. Có thể tìm người khác.
+
+T000314 [12:48:00] Linh: Bạn Huyền designer có thể hỗ trợ phân tích không? Huyền có background về số liệu.
+
+T000315 [12:48:50] Hoàng: Huyền đang làm wireframe admin UI. Có thể support một phần. Nhưng wireframe deadline thứ Năm tuần sau, nếu support thì ảnh hưởng.
+
+T000316 [12:49:40] Trang: Em thấy chúng ta đang tạo thêm complexity. Tôi propose giữ nguyên Dũng lead, và nếu quá tải, sẽ delay performance analysis thêm một ngày.
+
+T000317 [12:50:30] Hoàng: Đó là correction: deadline performance analysis từ thứ Sáu lên thứ Hai tuần sau (thêm 3 ngày). Mọi người đồng ý?
+
+T000318 [12:51:20] Minh: Đồng ý, nhưng cần confirm với Dũng.
+
+T000319 [12:52:10] Dũng: Em OK với thứ Hai tuần sau. Như vậy em có thêm cuối tuần.
+
+T000320 [12:53:00] An: Về test data multi-currency, deadline thứ Hai tuần sau cũng ổn. Nhưng cần spec trước.
+
+T000321 [12:53:50] Hoàng: Vậy correction thứ hai cho task performance analysis (thay vì thứ Sáu, thành thứ Hai tuần sau). Đã có hai correction trong part này: deadline test data (mới) và deadline performance analysis (correction).
+
+T000322 [12:54:40] Linh: Chúng ta cũng cần xem xét lại release date. Tôi propose milestone: release module thanh toán (bao gồm multi-currency) vào ngày 20/3 thay vì 15/3.
+
+T000323 [12:55:30] Hoàng: Correction release date từ 15/3 lên 20/3. Đây là correction thứ ba, nhưng không phải task deadline.
+
+T000324 [12:56:20] Minh: Như vậy timeline bị đẩy lùi 10 ngày so với kế hoạch gốc. Cần approve từ management.
+
+T000325 [12:57:10] Hoàng: Tôi sẽ báo cáo. Bây giờ, chúng ta có một unresolved item: ai sẽ làm test case cho multi-currency? Trang chưa có assign.
+
+T000326 [12:58:00] Trang: Em chờ spec, nhưng nếu spec trễ, em vẫn có thể viết test case skeleton dựa trên requirement. Tôi propose bắt đầu từ thứ Bảy.
+
+T000327 [12:58:50] Linh: Tốt, vậy task test case multi-currency assign Trang, deadline: thứ Hai tuần sau (sau spec thứ Năm). Nhưng là ước lượng.
+
+T000328 [12:59:40] Hoàng: Task mới: test case multi-currency, Trang, deadline thứ Hai tuần sau. Nhưng cần confirmation khi spec xong.
+
+T000329 [13:00:30] Hòa: Em có issue về CI/CD: verification đã xong sáng nay, pipeline hoạt động. Task đó closed.
+
+T000330 [13:01:20] Minh: Tốt, vậy task CI/CD closed.
+
+T000331 [13:02:10] Trang: Em báo cáo test phase 1 module thanh toán đã chạy xong sáng nay, kết quả pass 95% test case. Còn 5% lỗi nhỏ về UI, đã log bug.
+
+T000332 [13:03:00] Hoàng: Phase 1 pass tốt. Bug nhỏ assign Thắng hoặc Minh.
+
+T000333 [13:03:50] An: Em muốn hỏi: task chargeback data đã hủy, vậy dữ liệu chargeback cũ có được dùng cho gì không?
+
+T000334 [13:04:40] Linh: Không, có thể archive. Không cần action.
+
+T000335 [13:05:30] Minh: Em có một request: cần tài liệu về kiến trúc multi-currency từ Linh để Dũng làm việc.
+
+T000336 [13:06:20] Linh: Em sẽ gửi document trong chiều nay.
+
+T000337 [13:07:10] Dũng: Cảm ơn.
+
+T000338 [13:08:00] Hoàng: Part 6 sắp kết thúc. Tổng kết:
+
+- Hủy task: design doc performance, chargeback data.
+- Task mới: performance analysis (Dũng, deadline thứ Hai tuần sau), test data multi-currency (An, deadline thứ Hai tuần sau), test case multi-currency (Trang, deadline thứ Hai tuần sau).
+- Correction deadline: performance analysis từ thứ Sáu lên thứ Hai.
+- Release date correction: 15/3 → 20/3.
+- Unresolved: canary deployment, monitoring integration, support cho Dũng.
+
+T000339 [13:08:50] Linh: Còn task wireframe admin UI vẫn giữ deadline thứ Năm tuần sau.
+
+T000340 [13:09:40] Trang: Em xác nhận phase 1 test completed.
+
+T000341 [13:10:30] Hoàng: Cảm ơn. Part 6 kết thúc.
+
+--- END OF PART P06 ---

@@ -1,0 +1,28 @@
+{
+  "case": {
+    "wave": 1,
+    "case_index": 6,
+    "meeting_id": "W1-SHORT-C1-N0-IT-FPC-DM-006",
+    "meeting_date": "2026-01-21",
+    "title": "Theo dõi tiến độ tài liệu",
+    "labels": "first_person_commitment,day_month_deadline,mild_noise",
+    "objective": "Cam kết ngôi thứ nhất, deadline ngày/tháng thiếu năm, hội thoại có filler nhẹ."
+  },
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 697,
+    "turn_count": 37
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 23.610755599991535
+    }
+  ]
+}

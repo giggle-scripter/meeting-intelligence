@@ -1,0 +1,25 @@
+MEETING_ID: W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013
+CASE_LABELS: direct_assignment,weekday_next,negative_context
+MEETING_DATE: 2026-01-28
+TITLE: Chuẩn bị môi trường kiểm thử
+[00:00:00] Lan: Chào mọi người, chúng ta bắt đầu nhé. Hôm nay chủ yếu bàn về việc chuẩn bị môi trường kiểm thử cho phiên bản 2.3.
+[00:00:05] Minh: Chào chị, em sẵn sàng rồi.
+[00:00:10] Hùng: Chào chị, anh cũng tham gia để hỗ trợ phần hệ thống.
+[00:00:15] Lan: Tốt. Minh, em sẽ chịu trách nhiệm chính việc cài đặt môi trường test trên server 192.168.1.50. Em cần cài đặt hệ điều hành, cơ sở dữ liệu và application server. Hoàn thành trước thứ Tư tuần sau nhé.
+[00:00:35] Minh: Dạ, thứ Tư tuần sau là ngày 4/2 phải không chị?
+[00:00:40] Lan: Đúng rồi, em tính vậy là chuẩn. Em cần đảm bảo xong hết để kịp cho đợt test vào cuối tuần đó.
+[00:00:50] Minh: Chị cho em hỏi, phiên bản cơ sở dữ liệu mình dùng là MySQL 8.0 hay PostgreSQL 13? Em thấy trong tài liệu có nhắc đến cả hai.
+[00:01:00] Lan: Mình dùng MySQL 8.0 em nhé. Còn tài liệu cài đặt chi tiết đã có trên wiki, phần “Setup môi trường test 2.3”, Hùng đã soạn hôm qua.
+[00:01:15] Hùng: Đúng rồi, anh đã cập nhật wiki sáng nay, có cả các bước kiểm tra sau cài đặt. Em tham khảo thêm.
+[00:01:25] Minh: Ok anh, em sẽ đọc. À, tuần trước mình test thử trên môi trường lab thì gặp lỗi kết nối đến database, lúc đó do tường lửa, nhưng giờ đã khắc phục rồi phải không anh?
+[00:01:40] Hùng: Đúng, lỗi đó do rule tường lửa trên server lab, không ảnh hưởng đến server mới. Em yên tâm.
+[00:01:50] Lan: Vậy thì không có gì lo. Ngoài ra, hệ thống giám sát hiện tại đang báo lỗi ổ cứng trên server 192.168.1.30, nhưng cái đó không liên quan đến môi trường test mới, để tuần sau anh Hùng xử lý sau.
+[00:02:10] Hùng: Ừ, anh sẽ kiểm tra sau. Giờ tập trung cho môi trường test trước.
+[00:02:20] Minh: Chị Lan, môi trường này có cần cài thêm công cụ giám sát không ạ? Hay chỉ cần cơ bản?
+[00:02:30] Lan: Không cần vội đâu em, để ổn định đã rồi tính sau. Chỉ cần hệ thống sạch sẽ, sẵn sàng cho tester là được.
+[00:02:45] Hùng: Anh đã chuẩn bị sẵn license phần mềm, gửi email cho em rồi đấy Minh.
+[00:02:55] Minh: Dạ em nhận được rồi, cảm ơn anh.
+[00:03:05] Lan: Còn vấn đề gì nữa không? Nếu không có gì thì chúng ta kết thúc sớm.
+[00:03:15] Minh: Em không còn gì thêm. Em sẽ bắt tay vào làm ngay sau meeting.
+[00:03:20] Hùng: Anh cũng không có gì thêm đâu.
+[00:03:25] Lan: Tốt, cảm ơn mọi người. Vậy nhé, kết thúc ở đây.

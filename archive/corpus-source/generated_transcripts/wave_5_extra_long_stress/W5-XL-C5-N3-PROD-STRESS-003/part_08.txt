@@ -1,0 +1,118 @@
+MEETING_ID: W5-XL-C5-N3-PROD-STRESS-003
+PART: P08/10
+
+T000582 [01:25:05] Thảo: Chúng ta quay lại với topic integration. Mọi người có cập nhật gì từ hôm qua không? Hôm nay là 28/02, deadline cho firewall verify và check data.
+
+T000583 [01:25:14] Hùng: Em đã verify firewall rules với Phong. Đã hoạt động. Cảm ơn Linh đã hỗ trợ.
+
+T000584 [01:25:21] Linh: Không có gì.
+
+T000585 [01:25:25] Thảo: Tốt. Còn vụ data mẫu của Huy? Minh, em review chưa?
+
+T000586 [01:25:32] Minh: Em review rồi. Có một ambiguity: trong data, field "status" có giá trị "pending" và "approved", nhưng trong schema mới có thêm "rejected". Huy chưa update.
+
+T000587 [01:25:42] Thảo: Đây là ambiguity cần xử lý. Huy đã được thông báo? Em nghĩ ai sẽ quyết định?
+
+T000588 [01:25:50] Minh: Em có thể tự thêm "rejected" vào data, vì nó là giá trị hợp lý.
+
+T000589 [01:25:57] Hùng: Nhưng nếu không đúng với requirement? Có thể gây lỗi test.
+
+T000590 [01:26:04] Thảo: Vậy em quyết định: Minh thêm "rejected" vào data mẫu, nhưng note lại để Huy review sau. Đây là giải pháp tạm thời.
+
+T000591 [01:26:13] Minh: Vâng.
+
+T000592 [01:26:17] Anh: Như vậy ambiguity đã được xử lý. Nhưng vẫn còn một unresolved reference khác: tool test script chưa quyết.
+
+T000593 [01:26:25] Thảo: Đúng, unresolved reference đó vẫn giữ. Không giải quyết bây giờ.
+
+T000594 [01:26:31] Hùng: Em muốn hỏi: integration test suite của em, khi nào cần spec từ Minh? Em đã bắt đầu viết case dựa trên requirement cũ.
+
+T000595 [01:26:40] Minh: Em gửi spec priority chiều qua rồi. Hùng đã check chưa?
+
+T000596 [01:26:46] Hùng: Chưa, em sẽ xem ngay.
+
+T000597 [01:26:50] Linh: Về UI prototype, em đã cập nhật filter theo spec mới. Còn priority thì chưa, vì chờ spec.
+
+T000598 [01:26:58] Minh: Spec priority em gửi rồi, Linh kiểm tra hộ.
+
+T000599 [01:27:03] Linh: OK, em xem sau.
+
+T000600 [01:27:07] Thảo: Bây giờ em muốn recap cục bộ về tiến độ integration:
+
+T000601 [01:27:13] Thảo: Mock core (Minh) đang tiến triển, filter (Linh) gần xong, UI prototype (Linh) chờ priority. Firewall rules đã verify. Data mẫu đang được adjust. Họp tool test script vẫn để 02/03. Đây chỉ là recap, không tạo task mới.
+
+T000602 [01:27:30] Hùng: Rõ.
+
+T000603 [01:27:33] Anh: Em có thắc mắc về dependency giữa filter và priority: chúng có ảnh hưởng lẫn nhau không? Hay hoàn toàn độc lập?
+
+T000604 [01:27:42] Minh: Độc lập.
+
+T000605 [01:27:46] Thảo: Vậy không có vấn đề.
+
+T000606 [01:27:50] Hùng: Em có phát hiện một bug: trong staging, endpoint /orders trả về status code 500 khi gọi với param sai. Có thể do mock chưa handle.
+
+T000607 [01:27:59] Minh: Em sẽ fix, nhưng không phải lỗi nghiêm trọng.
+
+T000608 [01:28:04] Thảo: Ghi nhận.
+
+T000609 [01:28:08] Linh: Em cần hỏi: UI prototype có cần hiển thị field priority không? Nếu có, em phải thiết kế thêm.
+
+T000610 [01:28:16] Anh: Cần, vì business muốn thấy filter và priority.
+
+T000611 [01:28:21] Thảo: Vậy Linh thêm priority vào UI, deadline vẫn 04/03.
+
+T000612 [01:28:27] Linh: Vâng.
+
+T000613 [01:28:31] Minh: Em xin phép báo: mock core của em có thể chậm một chút do fix bug 500, nhưng vẫn kịp 03/03.
+
+T000614 [01:28:40] Hùng: Vậy em sẽ test core trước, filter sau.
+
+T000615 [01:28:46] Thảo: Tốt.
+
+T000616 [01:28:50] Hùng: Có ai hỗ trợ em viết test case cho priority? Vì em chưa rõ logic.
+
+T000617 [01:28:58] Minh: Em sẽ hướng dẫn nhanh sau meeting.
+
+T000618 [01:29:03] Thảo: Vậy ok.
+
+T000619 [01:29:07] Anh: Em muốn nhấn mạnh rằng deadline 03/03 là cực kỳ quan trọng.
+
+T000620 [01:29:14] Minh: Em hiểu.
+
+T000621 [01:29:17] Linh: Em vừa kiểm tra, filter của em chạy ổn trên local. Sẽ deploy lên staging cuối ngày.
+
+T000622 [01:29:24] Thảo: Tuyệt.
+
+T000623 [01:29:28] Hùng: Em có noise về âm thanh, mọi người nghe rõ không?
+
+T000624 [01:29:34] Thảo: Có, hơi rè nhưng tạm được.
+
+T000625 [01:29:39] Minh: Em cũng bị.
+
+T000626 [01:29:43] Hùng: Em sẽ tắt mic rồi bật lại.
+
+T000627 [01:29:47] Hùng: Ok, rõ hơn.
+
+T000628 [01:29:51] Thảo: Tiếp tục. Còn vấn đề gì về integration không?
+
+T000629 [01:29:56] Linh: Em muốn hỏi: khi nào có thể integration filter với core mock? Cần phối hợp.
+
+T000630 [01:30:03] Minh: Sau 02/03, khi cả hai hoàn chỉnh.
+
+T000631 [01:30:08] Thảo: Vậy lên lịch integration chiều 03/03.
+
+T000632 [01:30:13] Hùng: Em sẽ tham gia.
+
+T000633 [01:30:17] Anh: Vậy part này đã rõ.
+
+T000634 [01:30:21] Thảo: Recap: đã xử lý ambiguity về data (thêm rejected), giữ unresolved tool test script.
+
+T000635 [01:30:29] Hùng: Vâng.
+
+T000636 [01:30:33] Minh: Em xin phép làm việc.
+
+T000637 [01:30:37] Linh: Em cũng vậy.
+
+T000638 [01:30:41] Thảo: Kết thúc part 8.
+
+--- END OF PART P08 ---

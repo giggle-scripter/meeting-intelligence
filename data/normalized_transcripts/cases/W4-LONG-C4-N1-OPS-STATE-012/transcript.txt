@@ -1,0 +1,281 @@
+[09:00:02] Linh: Chào mọi người, hôm nay chúng ta có cuộc họp dài để bàn về kế hoạch triển khai hệ thống mới. Tôi sẽ là người điều phối, và các bạn Linh, Minh, Huy, Trang đều có mặt. Mục tiêu hôm nay là khởi động các công việc cần thiết.
+[09:00:45] Minh: Chào chị, em có chuẩn bị một số ghi chú về môi trường test rồi ạ. Chúng ta cần quyết định dùng server nào trước.
+[09:01:12] Huy: Em nghĩ nên dùng server staging hiện tại, nhưng cần kiểm tra lại phiên bản database. Anh Trang có thể hỗ trợ phần tài liệu không?
+[09:01:48] Trang: Ừ, tài liệu triển khai đang được viết dở, em sẽ hoàn thiện sau khi có thông tin môi trường. Nhưng hiện tại em cần biết chúng ta dùng môi trường test nào: local, staging, hay production clone?
+[09:02:15] Linh: Tốt nhất là dùng staging, nhưng trước đó phải thiết lập môi trường test cho đợt này. Có ai từng làm việc với server đó chưa?
+[09:02:40] Minh: Em từng config một lần, nhưng lâu rồi. Có thể cần cập nhật lại. Em đề xuất tạo task “Chuẩn bị môi trường test” và giao cho em, deadline cuối tuần này.
+[09:03:05] Linh: Được, nhưng mà chúng ta cũng cần một task tương tự là “Thiết lập môi trường test” cho phần tài liệu? Hay là gộp lại?
+[09:03:28] Huy: Theo em, hai việc khác nhau: “Chuẩn bị môi trường test” là cài đặt cấu hình, còn “Thiết lập môi trường test” là viết hướng dẫn sử dụng cho team QA.
+[09:03:52] Trang: Em nghĩ Huy nói đúng, nên tách ra. Nhưng nếu vậy, task “Thiết lập môi trường test” không có deadline cụ thể, vì phụ thuộc vào việc chuẩn bị xong.
+[09:04:15] Linh: Ok, vậy ta có task A: “Chuẩn bị môi trường test” do Minh phụ trách, deadline 28/02. Task B: “Thiết lập môi trường test” do Trang phụ trách, chưa có deadline, sẽ xác định sau. Mọi người đồng ý không?
+[09:04:40] Minh: Em đồng ý, nhưng mà deadline 28/02 có kịp không? Em còn phải xin quyền truy cập từ bên IT.
+[09:05:02] Huy: Cái đó lâu lắm, thường mất 2 ngày làm việc. Nếu bắt đầu hôm nay thì 28/02 vẫn ổn.
+[09:05:28] Trang: Vậy task của em sẽ chờ task A xong mới làm. Em có thể bắt đầu soạn outline tài liệu trước.
+[09:05:50] Linh: Tốt. Chúng ta cũng cần bàn thêm về tài liệu triển khai. Hiện tại Trang đang viết, nhưng mà nội dung có gì cần thảo luận không?
+[09:06:15] Huy: Em thấy tài liệu lần trước thiếu phần rollback plan. Lần này nên bổ sung.
+[09:06:38] Trang: Đúng, em ghi chú rồi. Sẽ thêm vào mục “Quy trình khôi phục”.
+[09:07:00] Linh: Còn phần checklist triển khai, có ai kiểm tra với team vận hành chưa?
+[09:07:22] Minh: Em chưa, nhưng em nghĩ nên có cuộc họp riêng với anh An. Anh An có tham gia không?
+[09:07:45] Huy: Anh An bận, có thể gửi email trước. Nhưng để tiện, em sẽ tạo task nhỏ là “Gửi checklist cho anh An để review”. Để em đảm nhận, không deadline, chỉ cần trước khi triển khai.
+[09:08:08] Linh: Ok, nhưng mà nhớ cập nhật sau. Quay lại vấn đề môi trường test, Minh cần làm gì trước tiên?
+[09:08:30] Minh: Đầu tiên em cần access vào server staging, sau đó clone database từ production. Nhưng mà e ngại permission, em sẽ gửi ticket lên IT.
+[09:08:55] Trang: Ticketing system hiện tại có backlog, nên em nghĩ nên nói trực tiếp với anh Dũng bên IT.
+[09:09:18] Minh: Để em thử cách đó. Nếu không được thì em sẽ lên lịch meeting nhỏ.
+[09:09:40] Linh: Vậy tạm ổn. Chúng ta cần xác định các task rõ ràng. Em muốn ghi lại: Task C – “Gửi checklist cho anh An” do Huy, không deadline. Nhưng mà cần đặt tên chính xác, tránh nhầm với task khác.
+[09:10:02] Huy: Em đặt là “Review checklist triển khai với anh An”. Được không?
+[09:10:20] Linh: Được. Còn task nào khác cho phần mở đầu không?
+[09:10:40] Minh: Em nghĩ nên có task về cập nhật tài liệu kỹ thuật cho môi trường, nhưng mà đó là việc của Trang.
+[09:11:00] Trang: Việc đó em sẽ gộp vào task B, nhưng cần phân biệt rõ: task B là viết hướng dẫn thiết lập, còn tài liệu triển khai là một đầu ra riêng.
+[09:11:22] Linh: Đúng, vậy ta có task D – “Hoàn thiện tài liệu triển khai” do Trang, deadline dự kiến? Có thể dựa trên task A, B.
+[09:11:45] Huy: Nếu task A xong ngày 28/02, task B mất thêm 3 ngày, thì task D có thể cuối tuần sau.
+[09:12:05] Linh: Nhưng mà cần review, nên deadline chưa chốt. Để sau khi có kết quả task A. Bây giờ em muốn thảo luận về negative context: team mình có gặp rủi ro gì không?
+[09:12:28] Minh: Có rủi ro là IT không cấp quyền kịp, làm chậm task A. Khi đó task B và D cũng bị ảnh hưởng.
+[09:12:50] Huy: Thêm nữa là tài liệu có thể không đầy đủ nếu không có thông tin từ team vận hành. Em lo checklist chưa đủ.
+[09:13:12] Trang: Em cũng lo là có thể xảy ra xung đột lịch giữa các bên, nên cần sắp xếp meeting nhỏ.
+[09:13:35] Linh: Ok, tất cả những rủi ro đó sẽ được theo dõi. Bây giờ em muốn phân công rõ: Minh task A deadline 28/02, Trang task B không deadline nhưng cần theo dõi, Huy task C không deadline, và Trang task D tạm thời không deadline, sẽ cập nhật sau. Ai có thắc mắc gì không?
+[09:14:00] Minh: Em muốn hỏi là task A có cần thêm người hỗ trợ không? Nếu bị kẹt thì em nhờ Huy.
+[09:14:20] Huy: Em có thể support nếu Minh cần, nhưng em cũng bận với task C.
+[09:14:38] Linh: Tạm thời một mình Minh, nếu quá tải thì báo em. Chúng ta cũng cần nghĩ đến bước tiếp theo sau khi hoàn thành môi trường test. Nhưng đó là chuyện của part sau.
+[09:15:00] Trang: Em muốn biết là tài liệu triển khai có cần bao gồm user guide không? Hay chỉ dành cho team vận hành?
+[09:15:20] Linh: Chỉ dành cho team vận hành và developer thôi, không cần user guide. Nhưng mà cần ghi rõ quy trình.
+[09:15:40] Huy: Em đồng ý. Ngoài ra, em muốn đề xuất là nên có một buổi training nhỏ sau khi triển khai, nhưng không phải task bây giờ.
+[09:16:00] Linh: Tốt, ta sẽ để dành cho part sau. Hiện tại, em thấy các task đã ổn. Nhưng mà có một vấn đề: tên task A “Chuẩn bị môi trường test” và task B “Thiết lập môi trường test” hơi dễ nhầm. Có nên đổi tên không?
+[09:16:25] Minh: Em nghĩ là nên giữ nguyên vì đã quen, chỉ cần mô tả rõ trong ghi chú.
+[09:16:45] Trang: Em cũng thấy vậy, nhưng mà nếu nhầm thì gây confusion. Em đề xuất đặt tên cụ thể hơn: “Chuẩn bị môi trường test (cấu hình server)” và “Thiết lập môi trường test (viết hướng dẫn)”.
+[09:17:08] Linh: Ý hay, em sẽ cập nhật trong meeting notes. Vậy task A chính thức là “Chuẩn bị môi trường test (cấu hình)”, task B là “Thiết lập môi trường test (hướng dẫn)”. Nhưng deadline chỉ có task A thôi.
+[09:17:30] Huy: Nếu đổi tên thì task C cũng nên đổi thành “Review checklist triển khai với anh An” như em nói.
+[09:17:50] Linh: Rồi. Vậy ta có 4 task. Còn task D “Hoàn thiện tài liệu triển khai” có thể đổi thành “Viết và hoàn thiện tài liệu triển khai” để rõ hơn.
+[09:18:12] Minh: Ok, thống nhất. Bây giờ em muốn đi vào chi tiết task A: cần những bước nào?
+[09:18:35] Huy: Bước 1: liên hệ IT xin quyền. Bước 2: clone database. Bước 3: kiểm tra kết nối. Bước 4: báo cáo.
+[09:18:55] Trang: Em có thể giúp viết tài liệu cho bước 2 và 3 nếu Minh cần.
+[09:19:15] Minh: Cảm ơn Trang, để em làm xong bước 1 rồi nhờ. Ngay bây giờ em sẽ gửi email cho anh Dũng.
+[09:19:38] Linh: Tốt. Về task B, Trang có thể bắt đầu viết outline không? Cần những nội dung gì?
+[09:20:00] Trang: Em sẽ viết: mục đích, yêu cầu hệ thống, các bước cài đặt, kiểm tra, và rollback. Dự kiến khoảng 10 trang.
+[09:20:22] Huy: Có thể thêm phần troubleshooting để sau này dễ sửa.
+[09:20:42] Trang: Vâng, em sẽ thêm.
+[09:21:00] Linh: Vậy là mọi người đã nắm được công việc. Em muốn nhấn mạnh là task A có deadline cụ thể, các task còn lại không deadline nhưng cần tiến hành song song.
+[09:21:20] Minh: Em lo nếu IT chậm thì mình có kế hoạch B không?
+[09:21:40] Huy: Có thể dùng môi trường local của mình, nhưng không giống staging lắm.
+[09:22:00] Linh: Kế hoạch B là dùng máy chủ dự phòng của team, nhưng cần setup thêm. Để em xem xét, nếu cần thiết sẽ bàn ở part sau.
+[09:22:20] Trang: Ok, em cũng có một số thắc mắc về tài liệu: có cần bảng so sánh giữa các môi trường không?
+[09:22:40] Linh: Có thể thêm, nhưng không ưu tiên. Ưu tiên là hoàn thiện hướng dẫn thiết lập.
+[09:23:00] Huy: Em muốn nhấn mạnh là task C của em có thể làm ngay, em sẽ gửi checklist cho anh An chiều nay.
+[09:23:20] Linh: Tốt. Còn ai có ý kiến gì về các task vừa thiết lập không?
+[09:23:40] Minh: Em không có ý kiến.
+[09:23:55] Trang: Em cũng không.
+[09:24:12] Huy: Không.
+[09:24:30] Linh: Vậy chúng ta đã thống nhất 4 task chính. Em sẽ ghi chú lại. Bây giờ thời gian còn lại, mọi người có muốn thảo luận thêm về kế hoạch dài hạn không? Hay dừng ở đây?
+[09:24:55] Minh: Em nghĩ nên dừng, để bắt đầu làm luôn. Part sau chúng ta có thể bàn về testing phase.
+[09:25:15] Huy: Đồng ý.
+[09:25:35] Trang: Em cũng ok.
+[09:25:50] Linh: Cảm ơn mọi người. Phần một của cuộc họp kết thúc tại đây. Chúng ta sẽ tiếp tục ở part sau.
+[09:30:02] Linh: Chúng ta tiếp tục. Phần trước đã bàn về môi trường test và tài liệu. Bây giờ em muốn chuyển sang một vấn đề mới: lỗi đăng nhập mà team QA báo cáo gần đây. Có ai nắm thông tin không?
+[09:30:30] Minh: Em có nghe, hình như là lỗi khi nhập sai mật khẩu quá 3 lần, hệ thống không khóa tài khoản đúng cách.
+[09:30:55] Huy: Em cũng thấy vài log lỗi trên server staging. Có thể liên quan đến module xác thực.
+[09:31:18] Trang: Nhưng mà lỗi đó có ảnh hưởng đến kế hoạch triển khai không? Em nghĩ nên ưu tiên môi trường test trước.
+[09:31:40] Linh: Đúng, nhưng nếu để lâu, QA sẽ không test được login flow. Em đề xuất tạo task riêng cho việc này.
+[09:32:02] Minh: Vậy để em phụ trách. Em sẽ kiểm tra code và sửa lỗi. Nhưng cần truy cập repository, em đã có quyền.
+[09:32:25] Huy: Em có thể hỗ trợ review code sau khi Minh sửa. Nhưng mà trước đó cần có dữ liệu test để kiểm tra.
+[09:32:48] Linh: Ok, vậy ta có task E – “Xử lý lỗi đăng nhập” do Minh, deadline? Em nghĩ nên đặt trong tuần sau, trước khi bước vào test phase.
+[09:33:10] Minh: Có thể 03/03, vì cuối tuần này em bận task A.
+[09:33:30] Linh: Vậy deadline 03/03. Nhưng mà cần dữ liệu test, ai lo phần đó?
+[09:33:52] Huy: Em có thể chuẩn bị dữ liệu test mẫu, nhưng cần biết yêu cầu cụ thể. Hay tạo task F – “Chuẩn bị dữ liệu test cho login” do em, không deadline vì phụ thuộc vào task E.
+[09:34:15] Trang: Dữ liệu test có thể lấy từ production clone không? Hay cần tự tạo?
+[09:34:35] Huy: Nên dùng dữ liệu giả lập, tránh ảnh hưởng dữ liệu thật. Em sẽ viết script tạo user test.
+[09:34:58] Linh: Cái đó hay. Nhưng mà em thấy task F nghe giống với task B “Thiết lập môi trường test” của Trang. Có trùng không?
+[09:35:20] Trang: Không, task B là viết hướng dẫn thiết lập môi trường, còn task F là tạo dữ liệu cho một chức năng cụ thể.
+[09:35:40] Huy: Em xin phép task F, nhưng mà deadline không có, em sẽ làm sau task E.
+[09:36:00] Linh: Vậy task E deadline 03/03, task F chưa deadline. Còn ai review task E? Huy đã đề xuất, vậy Huy làm reviewer.
+[09:36:22] Huy: Em có thể review, nhưng mà lịch em hơi kín. Có thể đẩy review sang sau khi em hoàn thành task C.
+[09:36:45] Minh: Vậy tạm thời chưa có reviewer cố định? Hay là để Trang?
+[09:37:05] Trang: Em không rõ code, chỉ review tài liệu thôi. Em nghĩ nên để Huy.
+[09:37:25] Linh: Vậy reviewer là Huy, nhưng chưa chốt thời gian. Em sẽ ghi là “unresolved reviewer” và sẽ xác định sau.
+[09:37:48] Huy: Có thể em sẽ review sau 03/03, nếu không kịp thì nhờ anh Tuấn.
+[09:38:08] Linh: Để sau. Bây giờ em muốn thảo luận về negative context của lỗi đăng nhập. Nó có thể gây ra rủi ro gì?
+[09:38:30] Minh: Nếu không sửa kịp, QA không test được, ảnh hưởng tiến độ triển khai.
+[09:38:50] Huy: Thêm nữa, log lỗi không rõ ràng, có thể cần debug lâu.
+[09:39:12] Trang: Em cũng lo là nếu dữ liệu test không đúng, sẽ tạo ra bug giả.
+[09:39:35] Linh: Tất cả đều là rủi ro. Chúng ta cần theo dõi. Ngoài ra, em thấy có một distractor: hôm qua team marketing hỏi về tính năng mới, nhưng không liên quan đến kỹ thuật. Có nên bỏ qua?
+[09:40:00] Minh: Bỏ qua, vì không ảnh hưởng.
+[09:40:20] Huy: Em đồng ý.
+[09:40:40] Trang: Nhưng mà họ cần báo cáo, em có thể trả lời sau.
+[09:41:00] Linh: Vậy em giao Trang trả lời marketing, nhưng không phải task chính. Đó là task G – “Phản hồi marketing về tính năng mới”, không deadline, Trang tự xử lý.
+[09:41:25] Trang: Ok, em sẽ trả lời trong tuần.
+[09:41:45] Linh: Quay lại vấn đề chính. Về lỗi đăng nhập, Minh có cần hỗ trợ gì thêm không?
+[09:42:05] Minh: Hiện tại chưa, để em xem log trước. Nếu cần em sẽ báo.
+[09:42:25] Huy: Em muốn hỏi là dữ liệu test có cần bao gồm các trường hợp đặc biệt như tài khoản bị khóa không?
+[09:42:48] Linh: Tốt, em nên thêm vào task F.
+[09:43:08] Huy: Vậy em sẽ viết script tạo user với nhiều trạng thái.
+[09:43:30] Trang: Khi nào có dữ liệu, em có thể cập nhật tài liệu test case.
+[09:43:50] Linh: Ok, vậy task E, F, G. Nhưng em thấy task E và task A có liên quan không? Vì task A là môi trường test.
+[09:44:12] Minh: Không liên quan trực tiếp, lỗi đăng nhập là trên code, không phải môi trường.
+[09:44:32] Huy: Nhưng nếu sửa lỗi, cần deploy lên môi trường test, phụ thuộc vào task A.
+[09:44:55] Linh: Đúng, vậy task E phải sau task A. Nhưng deadline task E là 03/03, task A là 28/02, vậy ổn.
+[09:45:18] Minh: Em sẽ cố gắng hoàn thành task A sớm để có base.
+[09:45:40] Huy: Em cũng cần task A để chạy script dữ liệu test.
+[09:46:00] Linh: Các phụ thuộc đã rõ. Bây giờ em muốn thảo luận thêm về dữ liệu test. Huy, em có cần input từ team QA không?
+[09:46:25] Huy: Có, em cần danh sách tình huống test. Em sẽ hỏi chị Lan.
+[09:46:48] Trang: Chị Lan bận, em có thể cung cấp một số test case cơ bản từ tài liệu cũ.
+[09:47:10] Huy: Vậy em sẽ lấy từ Trang, đỡ mất thời gian.
+[09:47:32] Linh: Tốt. Có ai muốn thêm vấn đề gì khác không? Về phần môi trường test, Minh có tiến triển gì chưa?
+[09:47:55] Minh: Em vừa gửi email cho anh Dũng, chờ phản hồi. Có thể chiều nay có kết quả.
+[09:48:15] Huy: Nếu không có, em có thể nhờ anh Tuấn bên IT.
+[09:48:35] Linh: Để xem. Bây giờ em thấy nhiều task rồi, nhưng có một vấn đề: task B của Trang vẫn chưa có deadline. Có nên đặt tạm không?
+[09:48:58] Trang: Em nghĩ chờ task A xong rồi tính, vì nội dung phụ thuộc.
+[09:49:18] Linh: Ok. Vậy chúng ta tạm kết thúc phần lỗi đăng nhập và dữ liệu test. Còn gì muốn thảo luận nữa không?
+[09:49:40] Minh: Em không có.
+[09:49:58] Huy: Em cũng không.
+[09:50:15] Trang: Em có một thắc mắc nhỏ: tài liệu triển khai có cần đề cập đến lỗi đăng nhập không?
+[09:50:38] Linh: Có thể thêm ở phần troubleshooting, nhưng không ưu tiên.
+[09:51:00] Huy: Nếu sửa xong, Trang nên cập nhật.
+[09:51:20] Linh: Vậy chúng ta tạm dừng tại đây. Part sau sẽ bàn về testing phase và các vấn đề khác. Cảm ơn mọi người.
+[09:55:02] Linh: Chúng ta tiếp tục. Phần trước em có nói về tài liệu triển khai, nhưng chưa đi sâu. Em muốn quay lại vấn đề đó để xem tiến độ.
+[09:55:30] Trang: Dạ, task D của em là viết tài liệu triển khai. Em đã bắt đầu outline, nhưng cần thông tin từ task A và B mới viết được phần chi tiết.
+[09:56:00] Huy: À, về task B “Thiết lập môi trường test (hướng dẫn)”, em thấy Trang có vẻ bận nhiều. Hay em có thể hỗ trợ viết phần đó?
+[09:56:25] Linh: Ý hay. Trang, em có đồng ý chuyển task B cho Huy không? Vì Huy rành về kỹ thuật hơn.
+[09:56:50] Trang: Em đồng ý. Em có thể cung cấp outline cho Huy, nhưng mà deadline của task B vẫn chưa có. Vậy Huy sẽ là owner mới?
+[09:57:15] Huy: Được, em nhận task B. Nhưng mà em cũng đang có task C và F. Em có thể làm task B sau task F.
+[09:57:40] Linh: Tạm thời vậy. Vậy task B chính thức chuyển từ Trang sang Huy. Còn deadline của task B, em nghĩ nên đặt sau task A. Nhưng task A có deadline 28/02, vậy task B có deadline 05/03? Trang có ý kiến không?
+[09:58:05] Trang: 05/03 hợp lý, vì em sẽ có thời gian hoàn thiện task D dựa trên task B.
+[09:58:30] Huy: Em ok, nhưng mà task A mà chậm thì em cũng bị ảnh hưởng.
+[09:58:55] Linh: Em hiểu. Đổi lại, em muốn thay đổi deadline của task A. Lúc đầu đặt 28/02, nhưng thấy IT có thể chậm. Hay dời sang 02/03 để an toàn?
+[09:59:20] Minh: Em đồng ý, vì em mới gửi email mà chưa có phản hồi. 02/03 có vẻ khả thi hơn.
+[09:59:45] Huy: Vậy deadline mới của task A là 02/03. Và task B deadline 05/03.
+[10:00:10] Linh: Chốt. Nhưng mà cần lưu ý là task A và task B có quan hệ phụ thuộc. Minh, em có cần hỗ trợ gì từ Huy không?
+[10:00:35] Minh: Có thể, nếu em bí thì nhờ Huy. Nhưng mà em muốn tự làm.
+[10:01:00] Trang: Về task D, deadline của em vẫn chưa có. Em có thể đặt dựa trên task B, ví dụ 08/03?
+[10:01:25] Linh: 08/03 có vẻ ổn, nhưng mà cần review. Vậy tạm thời task D deadline 08/03. Huy, em vừa nhận task B, vậy task C của em vẫn giữ nguyên?
+[10:01:50] Huy: Vâng, task C “Review checklist triển khai với anh An” em vẫn phụ trách, không deadline.
+[10:02:15] Linh: Tốt. Em muốn nhắc lại, khi chuyển task B, cần cập nhật trong ghi chú. Ai sẽ làm?
+[10:02:40] Trang: Em sẽ cập nhật tài liệu meeting notes.
+[10:03:00] Minh: Em thấy có một vấn đề: task A và E của em đều có deadline gần nhau: 02/03 và 03/03. Liệu em có quá tải không?
+[10:03:25] Huy: Nếu cần, em có thể hỗ trợ task E một phần, nhưng em cũng bận với task B và F.
+[10:03:50] Linh: Vậy em giao Huy làm backup cho task E, nhưng chưa chính thức. Nếu Minh cần thì báo.
+[10:04:15] Trang: Em có thể giúp viết test case cho task E, nhưng đó là việc của task F.
+[10:04:40] Linh: Đúng, task F là dữ liệu test, task E là sửa lỗi. Hai cái khác nhau.
+[10:05:00] Huy: Em sẽ làm task F sau khi có thông tin từ Minh về lỗi đăng nhập.
+[10:05:25] Minh: Em sẽ báo cáo sau khi kiểm tra log.
+[10:05:50] Linh: Ngoài ra, em thấy chúng ta có nhiều task rồi. Có cần sắp xếp ưu tiên không?
+[10:06:15] Huy: Task A và E là ưu tiên cao, vì ảnh hưởng tiến độ testing.
+[10:06:40] Trang: Task D và B cũng quan trọng, nhưng phụ thuộc.
+[10:07:00] Linh: Vậy ưu tiên: A và E, kế đến là B, D, F, C và G. Mọi người đồng ý?
+[10:07:25] Minh: Đồng ý.
+[10:07:45] Huy: Em đồng ý.
+[10:08:05] Trang: Em cũng ok.
+[10:08:25] Linh: Về negative context, em lo là nếu task A trễ, cả dây chuyền bị ảnh hưởng. Minh có kế hoạch dự phòng không?
+[10:08:50] Minh: Nếu IT không trả lời, em sẽ nhờ Huy liên hệ trực tiếp anh Dũng.
+[10:09:15] Huy: Em có số anh Dũng, có thể gọi.
+[10:09:35] Linh: Tốt. Còn về task E, nếu lỗi phức tạp, ai có thể support thêm?
+[10:10:00] Huy: Em có thể debug cùng Minh, nhưng cần thời gian.
+[10:10:20] Minh: Em sẽ cố gắng tự xử lý trước.
+[10:10:40] Linh: Vậy tạm thời ok. Còn gì muốn thảo luận thêm không?
+[10:11:00] Trang: Em muốn hỏi về tài liệu: có cần thêm phần hướng dẫn cài đặt cho từng hệ điều hành không?
+[10:11:25] Huy: Theo em, chỉ cần hướng dẫn cho Linux, vì server chạy Linux.
+[10:11:45] Minh: Đồng ý, không cần Windows.
+[10:12:05] Linh: Vậy Trang chỉ viết cho Linux thôi.
+[10:12:25] Huy: Em muốn nhắc lại về task C: em đã gửi checklist cho anh An, nhưng chưa nhận phản hồi. Có thể cần relance.
+[10:12:50] Linh: Em có thể nhắc anh An, nhưng để em làm.
+[10:13:10] Huy: Vậy nhờ chị.
+[10:13:30] Trang: Em cũng sắp xong outline cho task D, sẽ gửi mọi người review.
+[10:13:50] Linh: Tốt. Vậy chúng ta tạm kết thúc phần ba. Phần sau sẽ bàn về kế hoạch testing. Cảm ơn mọi người.
+[10:15:02] Linh: Chúng ta tiếp tục. Phần này em muốn bàn về kế hoạch release và monitoring sau khi triển khai. Có ai có ý kiến gì không?
+[10:15:30] Minh: Em nghĩ cần xác định thời điểm release dự kiến, dựa trên các task hiện tại. Task A xong 02/03, task E xong 03/03, task B xong 05/03, task D xong 08/03. Vậy có thể release vào khoảng 10/03?
+[10:16:00] Huy: Nhưng còn testing phase nữa, chưa bàn. Em đề xuất release sau khi test xong, khoảng giữa tháng 3.
+[10:16:25] Trang: Vậy cần monitoring system để theo dõi sau release. Em có biết tool nào không?
+[10:16:50] Linh: Có thể dùng Grafana và Prometheus, nhưng cần cấu hình. Ai có kinh nghiệm?
+[10:17:15] Huy: Em từng setup, có thể làm. Nhưng mà task đó chưa có trong danh sách. Hay tạo task mới: “Cấu hình monitoring system”?
+[10:17:40] Minh: Nếu tạo task mới, deadline khi nào? Có thể sau task B.
+[10:18:00] Linh: Để sau, hiện tại em muốn xem lại các task cũ. Có task nào không cần thiết không? Em thấy task G “Phản hồi marketing về tính năng mới” có vẻ không ảnh hưởng đến kỹ thuật.
+[10:18:30] Trang: Thực ra em đã trả lời marketing qua email, họ không cần thêm gì. Vậy task G có thể hủy.
+[10:18:55] Linh: Vậy hủy task G. Mọi người đồng ý?
+[10:19:15] Huy: Đồng ý.
+[10:19:35] Minh: Em cũng ok.
+[10:19:55] Linh: Vậy task G chính thức bị hủy. Quay lại vấn đề monitoring, em thấy task F “Chuẩn bị dữ liệu test cho login” vẫn chưa có deadline. Trong khi task E sửa lỗi đăng nhập có deadline 03/03. Em muốn đặt deadline cho task F là 04/03, để kịp test sau khi sửa lỗi.
+[10:20:30] Huy: 04/03 hơi gấp, vì em còn task B và C. Nhưng em có thể làm song song. Deadline đó ok.
+[10:21:00] Trang: Vậy task F deadline 04/03. Nhưng mà dữ liệu test cần phối hợp với Minh.
+[10:21:25] Minh: Em sẽ cung cấp thông tin lỗi cho Huy trước 03/03.
+[10:21:50] Huy: Tốt, em sẽ bắt đầu script sau khi có thông tin.
+[10:22:15] Linh: Về monitoring, em muốn thảo luận negative context. Nếu không có monitoring, khi release gặp lỗi, team sẽ không biết sớm.
+[10:22:45] Minh: Đúng, rủi ro cao. Em đề xuất nên có task monitoring riêng.
+[10:23:10] Huy: Nhưng mà nếu tạo task mới, sẽ thêm áp lực. Em có thể gộp vào task B, vì hướng dẫn thiết lập môi trường có thể bao gồm monitoring.
+[10:23:40] Trang: Ý hay, task B hiện do Huy phụ trách, có thể mở rộng nội dung.
+[10:24:00] Linh: Vậy task B sẽ bao gồm cả hướng dẫn monitoring. Huy, em có đủ thời gian không?
+[10:24:25] Huy: Em sẽ cố gắng. Deadline 05/03, em có thể thêm phần monitoring.
+[10:24:50] Minh: Nhưng mà monitoring cần công cụ cụ thể, có thể cần thêm thời gian.
+[10:25:15] Huy: Em đã từng làm, nên không mất nhiều thời gian.
+[10:25:40] Linh: Vậy ok. Tiếp theo, về release plan, em nghĩ cần có một buổi họp riêng với team vận hành. Nhưng đó là part sau.
+[10:26:05] Trang: Có cần tạo task cho việc đó không?
+[10:26:25] Linh: Chưa, để sau. Bây giờ em muốn kiểm tra lại tiến độ task A. Minh, có tin gì từ IT chưa?
+[10:26:50] Minh: Chưa, em sẽ gọi lại cho anh Dũng chiều nay.
+[10:27:15] Huy: Nếu cần, em có thể gọi luôn.
+[10:27:35] Linh: Cứ để Minh xử lý. Còn task C của Huy, đã có phản hồi từ anh An chưa?
+[10:27:55] Huy: Chưa, em đang chờ. Chị Linh có nhắc giúp không?
+[10:28:15] Linh: Em sẽ nhắc anh An sau cuộc họp.
+[10:28:35] Minh: Vậy task C vẫn unresolved.
+[10:28:55] Linh: Đúng. Bây giờ em muốn bàn về kế hoạch testing. Có ai có đề xuất không?
+[10:29:20] Huy: Sau khi task E và F xong, team QA có thể bắt đầu test login flow. Dự kiến test trong 2 ngày.
+[10:29:45] Trang: Em có thể hỗ trợ viết test case nếu cần.
+[10:30:05] Linh: Vậy ta có thể lên lịch test từ 05/03 đến 07/03. Task B và D cũng cần review.
+[10:30:30] Minh: Em nghĩ nên có một buổi review tài liệu trước khi release.
+[10:30:55] Huy: Đồng ý, em có thể tham gia.
+[10:31:15] Linh: Tốt. Có ai muốn thêm vấn đề gì về release không?
+[10:31:35] Trang: Em muốn hỏi là có cần backup kế hoạch nếu release thất bại không?
+[10:31:55] Huy: Có, nên có rollback plan. Em đã đề cập trong task D.
+[10:32:15] Linh: Vậy task D cần bao gồm rollback plan. Trang, em nhớ bổ sung.
+[10:32:35] Trang: Vâng, em sẽ thêm.
+[10:32:55] Minh: Em thấy các task đã rõ. Còn gì cần thảo luận nữa không?
+[10:33:15] Linh: Em nghĩ chúng ta đã cover được nhiều vấn đề. Part sau sẽ là phần cuối, có thể tổng kết. Bây giờ tạm dừng.
+[10:35:02] Linh: Chúng ta bắt đầu phần cuối cùng. Hôm nay em muốn tổng kết lại toàn bộ trạng thái các task và các vấn đề còn tồn tại. Mọi người chuẩn bị nhé.
+[10:35:30] Minh: Dạ, em đã sẵn sàng.
+[10:35:52] Huy: Em cũng vậy.
+[10:36:15] Trang: Ok.
+[10:36:38] Linh: Trước tiên, về task A – “Chuẩn bị môi trường test (cấu hình)”, do Minh phụ trách, deadline đã dời sang 02/03. Minh, tình hình hiện tại thế nào?
+[10:37:05] Minh: Em đã liên hệ với anh Dũng bên IT, họ hứa sẽ cấp quyền trong ngày mai. Vậy khả năng hoàn thành 02/03 là cao.
+[10:37:30] Huy: Nếu chậm, em có thể hỗ trợ, nhưng em cũng đang có task B.
+[10:37:55] Linh: Tốt. Task B – “Thiết lập môi trường test (hướng dẫn)”, đã chuyển từ Trang sang Huy, deadline 05/03, bao gồm cả phần monitoring. Huy, em có tiến triển gì chưa?
+[10:38:25] Huy: Em đã bắt đầu viết outline. Dựa trên kinh nghiệm cũ, em sẽ hoàn thành đúng deadline. Phần monitoring em cũng có tài liệu mẫu.
+[10:38:55] Trang: Em có thể gửi outline cũ cho Huy tham khảo.
+[10:39:15] Huy: Cảm ơn Trang.
+[10:39:35] Linh: Task C – “Review checklist triển khai với anh An”, vẫn do Huy, không deadline. Đã có phản hồi chưa?
+[10:40:00] Huy: Chưa, anh An chưa trả lời. Chị Linh đã nhắc giúp, nhưng vẫn chưa có. Vậy task C vẫn unresolved.
+[10:40:30] Minh: Em nghĩ nếu không có phản hồi, ta có thể tự review.
+[10:40:55] Linh: Để em nhắc lại anh An một lần nữa. Nếu cuối tuần này không có, chúng ta sẽ tự review. Nhưng tạm thời vẫn unresolved.
+[10:41:25] Trang: Vậy ghi nhận.
+[10:41:45] Linh: Task D – “Viết và hoàn thiện tài liệu triển khai”, do Trang, deadline 08/03. Trang, em đang ở đâu?
+[10:42:10] Trang: Em đã viết xong outline và phần lớn nội dung. Còn phần rollback plan em sẽ bổ sung sau khi có thông tin từ task B. Dự kiến hoàn thành trước 08/03.
+[10:42:40] Huy: Em có thể review tài liệu sau khi task D xong.
+[10:43:00] Linh: Tốt. Task E – “Xử lý lỗi đăng nhập”, do Minh, deadline 03/03. Minh, em đã kiểm tra log chưa?
+[10:43:25] Minh: Em đã xem log và xác định nguyên nhân. Lỗi do session timeout không được xử lý đúng. Em đang sửa code, dự kiến xong trong ngày 01/03.
+[10:43:55] Huy: Em có thể review code cho Minh, nhưng còn chưa chốt reviewer.
+[10:44:20] Linh: Đúng, reviewer vẫn chưa xác định. Em đề xuất Huy làm reviewer cho task E, nhưng cần chốt thời gian.
+[10:44:45] Huy: Em đồng ý. Em sẽ review sau 03/03, vì lịch em kín đến 02/03.
+[10:45:10] Minh: Vậy deadline review là 04/03 được không?
+[10:45:30] Huy: Ok, 04/03.
+[10:45:50] Linh: Chốt. Vậy task E có reviewer là Huy, deadline review 04/03. Task F – “Chuẩn bị dữ liệu test cho login”, do Huy, deadline 04/03. Huy, em làm sao?
+[10:46:20] Huy: Em đã thu thập yêu cầu từ Minh và viết script tạo dữ liệu. Em sẽ hoàn thành trước 04/03, nhưng cần test trên môi trường staging.
+[10:46:50] Minh: Môi trường staging sẽ sẵn sàng sau task A, khoảng 02/03.
+[10:47:15] Huy: Vậy em sẽ chạy script vào 03/03 để kịp deadline.
+[10:47:40] Linh: Vậy các task chính đã rõ. Về task G, đã hủy. Bây giờ em muốn recap lại tổng thể.
+[10:48:10] Trang: Em nghĩ nên có bảng tổng kết trong meeting notes.
+[10:48:35] Linh: Đúng, em sẽ ghi lại. Tổng cộng các task hiện tại: A (Minh, deadline 02/03), B (Huy, deadline 05/03), C (Huy, không deadline, unresolved), D (Trang, deadline 08/03), E (Minh, deadline 03/03, reviewer Huy), F (Huy, deadline 04/03). Một mục unresolved là task C vì chưa có phản hồi từ anh An.
+[10:49:10] Minh: Vậy sau khi hoàn thành các task, chúng ta cần lên lịch testing.
+[10:49:35] Huy: Em có thể hỗ trợ testing, nhưng cần xác định scope.
+[10:50:00] Linh: Để part sau nếu có cuộc họp khác. Bây giờ em muốn thảo luận về negative context cuối cùng: rủi ro về deadline.
+[10:50:30] Trang: Rủi ro lớn nhất là task A chậm, ảnh hưởng toàn bộ.
+[10:50:55] Minh: Em sẽ cố gắng, nhưng nếu IT trễ, em đã có kế hoạch nhờ Huy.
+[10:51:20] Huy: Em sẵn sàng.
+[10:51:40] Linh: Rủi ro thứ hai là task C unresolved, có thể thiếu checklist triển khai.
+[10:52:05] Huy: Em có thể tự xây dựng checklist từ kinh nghiệm, nếu anh An không phản hồi.
+[10:52:30] Linh: Vậy nếu đến 28/02 không có phản hồi, em sẽ tự làm. Đó là kế hoạch dự phòng.
+[10:52:55] Trang: Còn rủi ro về tài liệu, em sẽ cố gắng đúng deadline.
+[10:53:20] Linh: Tốt. Vậy chúng ta đã phủ hết các rủi ro. Bây giờ em muốn mọi người xác nhận lại trạng thái.
+[10:53:50] Minh: Em xác nhận task A và E như đã báo.
+[10:54:15] Huy: Em xác nhận task B, C, F.
+[10:54:40] Trang: Em xác nhận task D.
+[10:55:00] Linh: Cảm ơn. Cuối cùng, em muốn nhấn mạnh rằng tất cả deadline đều là dự kiến, nếu có thay đổi cần báo ngay.
+[10:55:30] Minh: Vâng.
+[10:55:50] Huy: Ok.
+[10:56:10] Linh: Vậy em xin kết thúc cuộc họp hôm nay. Cảm ơn mọi người đã tham gia tích cực. Hẹn gặp lại trong các part sau.
+[10:56:35] Minh: Cảm ơn chị.
+[10:56:55] Huy: Cảm ơn mọi người.
+[10:57:15] Trang: Tạm biệt.

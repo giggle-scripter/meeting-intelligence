@@ -1,0 +1,90 @@
+MEETING_ID: W5-XL-C5-N3-SW-STRESS-001
+PART: P10/10
+
+T000494 [15:16:15] Hoàng: Chúng ta bước vào part cuối cùng. Tôi muốn tổng kết toàn bộ trạng thái meeting, điểm lại các quyết định và unresolved items. Đây là recap chính thức, không tạo task mới.
+
+T000495 [15:17:05] Linh: Vâng. Em có danh sách các task chính đã được xác nhận. Trước hết, module thanh toán quốc tế với multi-currency settlement.
+
+T000496 [15:17:55] Minh: Các task cụ thể: spec integration do Thắng lead với deadline thứ Năm tuần này, input từ Dũng (multi-currency spec) gửi trước thứ Ba.
+
+T000497 [15:18:45] Trang: Test case integration do em phụ trách, deadline đã correction thành thứ Ba tuần sau.
+
+T000498 [15:19:35] An: Test data multi-currency do em chuẩn bị, deadline thứ Hai tuần sau, phụ thuộc spec từ Thắng.
+
+T000499 [15:20:25] Dũng: Em còn task performance analysis deadline thứ Hai tuần sau (đã correction từ thứ Sáu), và khảo sát crypto deadline 2h chiều thứ Hai.
+
+T000500 [15:21:15] Hòa: Task của em: monitoring integration (deadline mềm trước release), setup canary deadline 15/3, mock server deadline thứ Hai tuần sau, và SSL staging đã hoàn thành.
+
+T000501 [15:22:05] Minh: Ngoài ra, bug UI phase 1 đã được Thắng fix. Task support CI/CD đã hủy. Chargeback data đã hủy, dữ liệu đến muộn không dùng.
+
+T000502 [15:22:55] Linh: Về timeline release: chốt ngày 20/3 cho module thanh toán, bao gồm multi-currency. Canary deployment được chấp thuận, setup trước 15/3.
+
+T000503 [15:23:45] Trang: Phase 1 test completed 95% pass. Phase 2 chargeback đã hủy, nhưng có phase test multi-currency sau spec.
+
+T000504 [15:24:35] An: Protocol REST cho CRM đã chốt. Mapping data đã gửi cho Thắng.
+
+T000505 [15:25:25] Hòa: Mock server cho third-party API sẽ được setup sau spec.
+
+T000506 [15:26:15] Hoàng: Bây giờ tôi muốn điểm lại các unresolved items còn tồn đọng. Những vấn đề chưa được giải quyết triệt để.
+
+T000507 [15:27:05] Linh: Thứ nhất, quy trình review code cho multi-currency module. Chưa có consensus về người review. Dev Lead hay Product?
+
+T000508 [15:27:55] Minh: Em đề xuất review chéo: Thắng review Dũng và ngược lại. Nhưng chưa được approve.
+
+T000509 [15:28:45] Hoàng: Đây là unresolved. Tạm thời chưa quyết định, để sau khi spec hoàn thành.
+
+T000510 [15:29:35] Trang: Thứ hai, môi trường test cho admin UI. Hòa đã nói sẽ tạo stack riêng, nhưng chưa có deadline cụ thể.
+
+T000511 [15:30:25] Hòa: Em sẽ làm sau khi có requirement spec từ Linh. Requirement spec admin UI deadline thứ Ba tuần sau, vậy stack sẽ xong trước thứ Sáu tuần sau.
+
+T000512 [15:31:15] Linh: Vậy stack admin UI deadline thứ Sáu tuần sau. Nhưng chưa chốt.
+
+T000513 [15:32:05] Hoàng: Vẫn unresolved vì thiếu deadline chính thức. Nhưng tạm ghi nhận.
+
+T000514 [15:32:55] An: Thứ ba, vấn đề hỗ trợ Dũng cho performance analysis. Hòa đã đồng ý support 2 tiếng thứ Sáu, nhưng chưa confirm cụ thể.
+
+T000515 [15:33:45] Hòa: Em confirm support thứ Sáu từ 2-4h chiều.
+
+T000516 [15:34:35] Dũng: OK, em sẽ chuẩn bị câu hỏi.
+
+T000517 [15:35:25] Hoàng: Như vậy resolved.
+
+T000518 [15:36:15] Minh: Còn một unresolved: quy trình deploy cho canary. Ai sẽ approval? Có cần testing trước không?
+
+T000519 [15:37:05] Linh: Em propose QA approve trước khi deploy canary. Trang, em có thể làm không?
+
+T000520 [15:37:55] Trang: Có thể, nhưng cần test case cho canary. Chưa có.
+
+T000521 [15:38:45] Hoàng: Vậy unresolved: cần test case canary. Không tạo task mới, nhưng ghi nhận.
+
+T000522 [15:39:35] Linh: Tôi muốn nhấn mạnh: không tạo task mới trong recap. Đây chỉ là liệt kê.
+
+T000523 [15:40:25] Hòa: Em có một clarification: monitoring integration có cần thiết lập alert cho canary không?
+
+T000524 [15:41:15] Minh: Cần, nhưng chưa có spec. Để sau.
+
+T000525 [15:42:05] Trang: Tôi thấy chúng ta có khá nhiều unresolved, nhưng đa số đã có hướng.
+
+T000526 [15:42:55] Hoàng: Đúng. Bây giờ tôi sẽ recap tổng quát: meeting hôm nay đã thiết lập lộ trình cho tháng 3. Các milestone chính: test data phase 1 (xong), spec integration (thứ Năm), test phase multi-currency (từ thứ Ba tuần sau), release production (20/3). Có nhiều correction chain và handoff. Một số task bị hủy, thay thế. Còn vài unresolved sẽ được giải quyết trong các meeting tiếp theo.
+
+T000527 [15:43:45] Linh: Em xin phép gửi biên bản tổng hợp sau.
+
+T000528 [15:44:35] Minh: Cảm ơn mọi người vì sự kiên nhẫn.
+
+T000529 [15:45:25] Trang: Tôi chỉ muốn confirm lại: test case integration deadline thứ Ba, spec integration thứ Năm, không thay đổi.
+
+T000530 [15:46:15] An: OK.
+
+T000531 [15:47:05] Dũng: Em sẽ gửi multi-currency input trước thứ Ba.
+
+T000532 [15:47:55] Hòa: Em có một thông tin cuối: CI/CD pipeline đã hoạt động ổn định từ sáng.
+
+T000533 [15:48:45] Hoàng: Tốt. Có ai còn vấn đề gì trước khi kết thúc?
+
+T000534 [15:49:35] Minh: Em muốn hỏi về lịch meeting tiếp theo. Có cần sớm không?
+
+T000535 [15:50:25] Linh: Tôi propose tổ chức vào thứ Hai tuần sau để review spec integration.
+
+T000536 [15:51:15] Hoàng: Đồng ý. Sẽ gửi invitation. Cảm ơn tất cả. Meeting kết thúc.
+
+--- END OF PART P10 ---

@@ -1,0 +1,35 @@
+[09:00:00] An: Chào cả team, bắt đầu meeting ngày 18/1 về rà soát lỗi đăng nhập.
+[09:00:10] Bình: Chào anh.
+[09:00:15] Chi: Em chào mọi người.
+[09:00:20] An: Tuần qua có khoảng 15 ticket về lỗi đăng nhập, phần lớn là timeout. Chi, em đã xem qua chưa?
+[09:00:35] Chi: Dạ em có xem sơ qua, thấy nhiều trường hợp request bị treo ở tầng xác thực.
+[09:00:50] An: Đúng. Em nghĩ hướng phân tích thế nào?
+[09:01:00] Chi: Em sẽ lấy log từ gateway và service xác thực để so sánh thời gian response.
+[09:01:15] An: Vậy em có thể nhận task phân tích chi tiết lỗi timeout này không? Cần báo cáo kết quả.
+[09:01:30] Chi: Dạ được ạ, em nhận.
+[09:01:40] (nhiễu nhẹ) Bình: Em có script... (không rõ)
+[09:01:45] Chi: Anh Bình nói gì ạ? Em nghe không rõ.
+[09:01:50] Bình: Em nói là nếu cần script parse log thì em có thể giúp.
+[09:01:55] Chi: Cảm ơn anh, em sẽ nhờ nếu cần.
+[09:02:00] An: Deadline là ngày mai, vì thứ hai team cần có số liệu để báo cáo lên trên. Có vướng gì không?
+[09:02:10] Chi: Không ạ, ngày mai em sẽ hoàn thành.
+[09:02:20] An: Về lỗi SMS xác thực, Bình em kiểm tra server side nhé. Có gì bất thường?
+[09:02:35] Bình: Dạ, em đã check thử, service vẫn chạy nhưng log có warning về kết nối đến provider. Em sẽ theo dõi thêm.
+[09:02:50] An: Em tự assign task đó, cần report vào cuối ngày mai.
+[09:03:00] Bình: Vâng, em sẽ báo cáo.
+[09:03:10] An: Còn vụ giao diện chậm, có cần xem không? Hay để tuần sau?
+[09:03:20] Chi: Em nghĩ không nên ưu tiên, vì đa số phản hồi tốt.
+[09:03:30] An: Nhất trí. Vậy tạm thời bỏ qua.
+[09:03:40] Bình: Hôm qua em có deploy bản fix nhẹ cho phần hiển thị lỗi, không ảnh hưởng gì.
+[09:03:50] An: Ok, không vấn đề.
+[09:04:00] Chi: Anh cho em hỏi, khi phân tích timeout, em có cần so sánh với dữ liệu tháng trước không?
+[09:04:15] An: Nếu có thì tốt, không thì chỉ cần số liệu tuần này là đủ.
+[09:04:25] Chi: Vâng, em sẽ cố gắng lấy thêm.
+[09:04:35] An: Tốt. Còn lưu ý gì khác?
+[09:04:45] Bình: Em thấy một số IP lạ gửi request liên tục, có thể là tấn công brute force.
+[09:04:55] An: Cái đó để team bảo mật xử lý, không nằm trong phạm vi này.
+[09:05:05] Bình: Rõ.
+[09:05:15] An: Vậy tổng kết: Chi task phân tích timeout, deadline ngày mai; Bình task kiểm tra SMS, deadline ngày mai. Có thắc mắc gì không?
+[09:05:30] Chi: Không ạ.
+[09:05:35] Bình: Không.
+[09:05:40] An: Cảm ơn mọi người, kết thúc meeting.

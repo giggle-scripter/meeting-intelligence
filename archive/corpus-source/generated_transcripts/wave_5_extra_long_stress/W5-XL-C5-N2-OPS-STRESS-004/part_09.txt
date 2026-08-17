@@ -1,0 +1,118 @@
+MEETING_ID: W5-XL-C5-N2-OPS-STRESS-004
+PART: P09/10
+
+T000524 [11:07:00] Minh: Chúng ta bước vào phần gần cuối. Cần chốt một số state transition cho các task quan trọng. Lan, em có cập nhật gì về board không?
+
+T000525 [11:07:15] Lan: Dạ, board hiện tại có nhiều task đang progress. Riêng task ETL data migration cho CRM vẫn unresolved từ P02, chưa có owner.
+
+T000526 [11:07:30] Minh: Anh nghĩ chúng ta nên hủy task đó. Product đã thay đổi yêu cầu, không cần migration dữ liệu lịch sử nữa. Có ai phản đối không?
+
+T000527 [11:07:45] Tuấn: Em đồng ý, vì nếu không có spec, làm cũng vô ích.
+
+T000528 [11:08:00] Hà: Vậy task ETL cancellation chính thức. Em sẽ xóa khỏi test plan.
+
+T000529 [11:08:15] An: Nhưng vẫn cần dữ liệu mới từ CRM? Hay bỏ luôn?
+
+T000530 [11:08:30] Minh: Bỏ luôn. Tập trung vào payment.
+
+T000531 [11:08:45] Lan: Ghi nhận hủy task ETL. Không tạo task thay thế.
+
+T000532 [11:09:00] Tuấn: Em có vấn đề với task log spec error codes. Em đã cập nhật, nhưng deadline 11/3 có thể không kịp vì bận CI/CD config.
+
+T000533 [11:09:15] Minh: Em cần dời? Bao lâu?
+
+T000534 [11:09:30] Tuấn: Thêm 2 ngày, lên 13/3.
+
+T000535 [11:09:45] Hà: Nhưng error codes cần cho runbook, mà runbook deadline 8/3 đã qua. An, runbook xong chưa?
+
+T000536 [11:10:00] An: Runbook em đã hoàn thành, dựa trên log spec cũ. Error codes có thể bổ sung sau.
+
+T000537 [11:10:15] Minh: Vậy dời deadline log spec error codes lên 13/3, không ảnh hưởng runbook.
+
+T000538 [11:10:30] Lan: Correction chain: log spec error codes từ 11/3 lên 13/3.
+
+T000539 [11:10:45] An: Em có vấn đề về CI/CD pipeline. Em đã cấu hình xong build, nhưng cần Tuấn gửi script build để tích hợp.
+
+T000540 [11:11:00] Tuấn: Em đã gửi hôm qua, An kiểm tra inbox.
+
+T000541 [11:11:15] An: A, có rồi. Em sẽ test ngay.
+
+T000542 [11:11:30] Minh: Vậy CI/CD pipeline vẫn deadline 12/3? Có cần correction?
+
+T000543 [11:11:45] An: Có khả năng chậm 1 ngày vì cần debug. Em đề xuất dời lên 13/3.
+
+T000544 [11:12:00] Minh: Được, correction CI/CD từ 12/3 lên 13/3.
+
+T000545 [11:12:15] Hà: Vậy bây giờ có hai task có cùng deadline 13/3: log spec error codes và CI/CD pipeline. Có xung đột resource không?
+
+T000546 [11:12:30] Tuấn: Em làm log spec, An làm CI/CD. Không xung đột.
+
+T000547 [11:12:45] Lan: Tuy nhiên, An cũng có task alerting deadline 12/3. Nếu CI/CD dời, alerting có ảnh hưởng?
+
+T000548 [11:13:00] An: Alerting độc lập, em vẫn đảm bảo deadline 12/3.
+
+T000549 [11:13:15] Minh: Tốt. Chúng ta cũng cần xem lại task metric define (Tuấn, 10/3). Hôm nay là 7/3, em có kịp không?
+
+T000550 [11:13:30] Tuấn: Em đã hoàn thành bản nháp, đang chờ An gửi số liệu stress test.
+
+T000551 [11:13:45] An: Em sẽ gửi trong chiều nay.
+
+T000552 [11:14:00] Minh: Vậy metric define vẫn deadline 10/3, không thay đổi.
+
+T000553 [11:14:15] Hà: Em có thắc mắc, task review code payment deadline 8/3. Hôm nay là 7/3, em đã review xong chưa?
+
+T000554 [11:14:30] Hà: Em đã review, gửi feedback cho Tuấn sáng nay.
+
+T000555 [11:14:45] Tuấn: Em đã nhận, đang sửa lỗi. Dự kiến xong 9/3.
+
+T000556 [11:15:00] Minh: Vậy deadline review code đã hoàn thành, task sửa lỗi sẽ nằm trong scope của payment API.
+
+T000557 [11:15:15] Lan: Ghi nhận, task review code done.
+
+T000558 [11:15:30] An: Em muốn hỏi, task dữ liệu mẫu cho CRM (Lan, 14/3) có cần không? Vì ETL đã hủy.
+
+T000559 [11:15:45] Minh: Có thể cancel luôn, vì CRM integration chưa rõ.
+
+T000560 [11:16:00] Lan: Vậy hủy task dữ liệu mẫu. Em đồng ý.
+
+T000561 [11:16:15] Hà: Vậy chỉ còn task mở firewall (Tuấn, 13/3) có cần không?
+
+T000562 [11:16:30] Tuấn: Firewall đã mở xong rồi, em quên báo. Task đó hoàn thành.
+
+T000563 [11:16:45] Minh: Vậy task mở firewall đóng.
+
+T000564 [11:17:00] Lan: Như vậy sau các cancellation và correction, board có nhiều thay đổi.
+
+T000565 [11:17:15] Tuấn: Em xin phép hỏi, task E2E test scenario deadline 9/3, em đã viết xong. Hà review chưa?
+
+T000566 [11:17:30] Hà: Em chưa, em sẽ review ngay sau meeting.
+
+T000567 [11:17:45] Minh: Vậy E2E test vẫn deadline 9/3.
+
+T000568 [11:18:00] An: Em có vấn đề negative: CI/CD pipeline đang bị blocked do thiếu quyền truy cập repository. Cần admin help.
+
+T000569 [11:18:15] Minh: Ai là admin? Anh có thể cấp quyền. Em gửi request.
+
+T000570 [11:18:30] An: Em sẽ gửi ticket.
+
+T000571 [11:18:45] Hà: Có vẻ nhiều block nhỏ, nhưng recoverable.
+
+T000572 [11:19:00] Minh: Đúng. Chúng ta cần đảm bảo không có task nào bị lãng quên.
+
+T000573 [11:19:15] Lan: Em thấy task thiết lập support process (Lan, 13/3) vẫn còn, em đang làm.
+
+T000574 [11:19:30] Tuấn: Còn task metric define sẽ có số liệu từ An, em sẽ hoàn thành.
+
+T000575 [11:19:45] Minh: Vậy tổng kết các state transition cuối: hủy ETL và dữ liệu mẫu; correction log spec error codes lên 13/3, CI/CD lên 13/3; đóng firewall và review code. Unresolved còn gì không?
+
+T000576 [11:20:00] Hà: Em chỉ còn test plan updating, nhưng đã dời theo deploy 20/3.
+
+T000577 [11:20:15] An: Em còn alerting (12/3) và CI/CD (13/3). Không vấn đề.
+
+T000578 [11:20:30] Tuấn: Em còn log spec (13/3), E2E test (9/3), metric (10/3). OK.
+
+T000579 [11:20:45] Lam: Vậy board đã ổn. Không cần thêm recap.
+
+T000580 [11:21:00] Minh: Chúng ta kết thúc P09. Còn part cuối sẽ bàn về kế hoạch chi tiết.
+
+--- END OF PART P09 ---

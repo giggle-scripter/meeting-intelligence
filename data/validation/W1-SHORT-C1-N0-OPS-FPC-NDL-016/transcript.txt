@@ -1,0 +1,30 @@
+[00:00:00] Linh: OK, mọi người đã vào đủ chưa? Hôm nay chúng ta cần thống nhất kế hoạch chuẩn bị demo cho khách hàng vào thứ Năm tuần sau.
+[00:00:05] Minh: Em có mặt. Yêu cầu em đã đọc qua rồi, nhưng còn vài điểm chưa rõ về layout.
+[00:00:10] Hoa: Em cũng ở đây. Em đã phác thảo được vài ý tưởng design.
+[00:00:14] Linh: Tốt. Đầu tiên, mình cần bản mockup để duyệt vào thứ Hai. Hoa, em làm tiếp phần mockup nhé?
+[00:00:20] Hoa: Vâng, em đang làm dở, nhưng em chưa có deadline cụ thể từ chị. Khi nào cần gấp ạ?
+[00:00:25] Linh: Thứ Hai là đẹp, nhưng nếu em cần thêm thời gian thì cứ báo. Quan trọng là chất lượng.
+[00:00:31] Hoa: Em sẽ cố gắng xong trước thứ Hai, nhưng nếu chưa xong thì chắc thứ Ba em gửi. Không sao chứ ạ?
+[00:00:37] Linh: Được, miễn là kịp trước buổi demo. Còn phần frontend, Minh lo nhé? Em có nhận làm không?
+[00:00:43] Minh: Dạ, em tự nhận làm phần đó. Em sẽ bắt tay vào code luôn. Nhưng em cũng chưa chốt được ngày hoàn thành, vì còn phụ thuộc vào mockup của Hoa.
+[00:00:50] Linh: Ừ, đúng rồi, cần mockup trước. Vậy em cứ ước lượng rồi báo lại, không cần deadline cứng.
+[00:00:55] Minh: Dạ, em sẽ làm và báo cáo tiến độ hàng ngày. Khi nào xong em sẽ gửi link demo.
+[00:01:00] Hoa: Chị Linh ơi, em có hỏi thêm là phần màu sắc chủ đạo có cần giữ nguyên như bản cũ không, hay mình thay đổi?
+[00:01:07] Linh: Ừ, nên giữ nguyên để khách không bỡ ngỡ. Nhưng nếu có ý tưởng hay thì em cứ đề xuất.
+[00:01:13] Minh: Nhân tiện, máy tính của em dạo này chạy ì ạch quá, build code lâu lắm. Chắc phải nâng cấp RAM lên 32GB mới được. (cười)
+[00:01:21] Linh: (cười) Thế thì phải duyệt kinh phí rồi. Nhưng thôi lo demo trước đi, máy móc tính sau.
+[00:01:27] Hoa: Em cũng đang dùng máy cũ, nhưng tạm ổn. À, mà em cần bản text nội dung từ chị để chèn vào mockup, có sẵn chưa ạ?
+[00:01:34] Linh: Text thì chị sẽ gửi sau buổi họp này. Em yên tâm.
+[00:01:38] Minh: Em có một câu hỏi nữa: API cho phần đăng ký đã có chưa? Nếu chưa thì em phải dùng mock data.
+[00:01:44] Linh: API backend chưa sẵn sàng, em dùng mock data nhé. Quan trọng là giao diện và luồng hoạt động phải mượt.
+[00:01:51] Minh: OK, vậy em sẽ tạo mock data. Cũng không mất nhiều thời gian.
+[00:01:56] Hoa: Khi nào mockup xong em sẽ báo để mình họp review nhỏ.
+[00:02:01] Linh: Nhớ tag chị vào file. Còn gì nữa không?
+[00:02:05] Minh: Em không có thêm gì. Chị có cần em làm thêm phần responsive không?
+[00:02:10] Linh: Có, làm luôn nhé, nhưng không cần phải hoàn hảo ngay. Quan trọng là bản desktop chạy tốt.
+[00:02:17] Minh: Dạ, em sẽ chú ý. Không có deadline thì em thoải mái hơn, nhưng em vẫn sẽ cố gắng nhanh.
+[00:02:23] Hoa: Em cũng thế, em sẽ ưu tiên mockup.
+[00:02:26] Linh: OK, vậy chốt lại: Hoa làm mockup, cố gắng thứ Hai hoặc thứ Ba; Minh làm frontend với mock data, chưa có deadline cứng, báo tiến độ hàng ngày. Chị gửi text ngay bây giờ.
+[00:02:37] Minh: Em hiểu rồi. Cảm ơn chị.
+[00:02:40] Hoa: Em cũng rõ. Hẹn gặp lại ở review.
+[00:02:43] Linh: OK, kết thúc họp. Cảm ơn mọi người.

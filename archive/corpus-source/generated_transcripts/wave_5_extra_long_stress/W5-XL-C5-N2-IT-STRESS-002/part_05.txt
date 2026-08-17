@@ -1,0 +1,114 @@
+MEETING_ID: W5-XL-C5-N2-IT-STRESS-002
+PART: P05/10
+
+T000265 [09:50:00] Minh: Mọi người quay lại. Chúng ta sẽ tiếp tục với vấn đề thanh toán, bởi vì tôi thấy đây là ưu tiên số một. Lan, em đã có thông tin gì mới từ lúc tôi nói chuyện riêng chưa?
+
+T000266 [09:50:10] Lan: Dạ, em vừa lấy một số log từ bản cũ tối qua để phân tích sơ bộ. Có một pattern lạ: các request thanh toán thành công luôn có latency dưới 1 giây, nhưng thất bại thường kéo dài hơn 5 giây.
+
+T000267 [09:50:24] Đức: Vậy vấn đề có thể là retry logic. Em đã xem code chưa?
+
+T000268 [09:50:30] Lan: Chưa, em mới chỉ check log. Cần code review.
+
+T000269 [09:50:34] Minh: Đây là handoff bước hai: mở rộng scope phân tích. Trước đây tôi yêu cầu báo cáo root cause, bây giờ thêm yêu cầu: sau khi có báo cáo, Đức sẽ code review và đề xuất fix. Nhưng chưa giao hẳn, vẫn là hand-off.
+
+T000270 [09:50:48] Đức: Tôi đồng ý. Nhưng cần deadline mới cho phần code review. Tôi nghĩ sau khi Lan gửi báo cáo 29/02, tôi có thể review code trong 3 ngày, tức 03/03.
+
+T000271 [09:51:00] Minh: Vậy điều chỉnh: task thanh toán cũ của Lan có scope mở rộng gồm báo cáo và code review. Deadline review của Đức là 03/03. Lan, em có bổ sung thêm yêu cầu nào không?
+
+T000272 [09:51:10] Lan: Em nghĩ cần thêm log từ third-party. Nhưng có thể Tuấn không lấy được.
+
+T000273 [09:51:16] Tuấn: Tôi có thể lấy log phía gateway, bao gồm external response. Nhưng cần thời gian.
+
+T000274 [09:51:22] Minh: Vậy em lấy luôn, gửi cùng log payment. Deadline vẫn sáng mai.
+
+T000275 [09:51:28] Tuấn: Rõ.
+
+T000276 [09:51:30] Hùng (vào phòng): Xin lỗi, em vừa xong deploy debug. Có ai cần gì không?
+
+T000277 [09:51:38] Minh: Không, em ngồi xuống. Nhân tiện, Hùng, vụ debug production em đã tắt chưa?
+
+T000278 [09:51:44] Hùng: Rồi ạ, em đã chạy script từ 10 phút trước, server memory giảm.
+
+T000279 [09:51:48] Minh: OK. Đây là repeated mention, không phải task mới.
+
+T000280 [09:51:52] Đức: Quay lại thanh toán. Tôi muốn xem code hiện tại để chuẩn bị review. Lan, em có share repo không?
+
+T000281 [09:51:58] Lan: Em sẽ gửi link branch staging sau.
+
+T000282 [09:52:02] Minh: Được. Vậy chúng ta thống nhất: task thanh toán scope mới gồm báo cáo (Lan, deadline 29/02) và code review (Đức, deadline 03/03).
+
+T000283 [09:52:14] Hùng: Anh Minh, em có một thông tin: bên infrastructure vừa thông báo plan upgrade database vào cuối tuần, có thể ảnh hưởng đến performance.
+
+T000284 [09:52:24] Minh: Thật sao? Upgrade lúc nào, ai làm?
+
+T000285 [09:52:28] Hùng: Họ nói sáng thứ Bảy 28/02. Nhưng chưa chắc, vì cần phê duyệt.
+
+T000286 [09:52:34] Minh: Đây có thể là vấn đề nếu upgrade lúc Lan đang phân tích. Chúng ta cần support. Tôi không tạo task mới, nhưng ghi nhận.
+
+T000287 [09:52:44] Lan: Em có thể tạm dừng nếu có can thiệp, nhưng báo trước.
+
+T000288 [09:52:48] Đức: Tôi nghĩ database upgrade không liên quan trực tiếp. Nhưng nếu có, cần delay.
+
+T000289 [09:52:54] Minh: Để tôi hỏi họ sau.
+
+T000290 [09:52:58] Trang: Anh Minh, spec product placement em sẽ gửi chiều nay, nhưng có thể trễ vài giờ vì phải họp với marketing.
+
+T000291 [09:53:06] Minh: Vẫn kịp deadline 28/02. Em cố gắng trước tối.
+
+T000292 [09:53:12] Trang: Vâng.
+
+T000293 [09:53:14] Tuấn: Em vừa nhận thêm request từ Hùng về metric. Em sẽ ưu tiên log payment trước.
+
+T000294 [09:53:20] Hùng: Không sao, metric của em có thể chậm.
+
+T000295 [09:53:24] Minh: Mọi người, tôi muốn kiểm tra tiến độ deploy cache chiều nay. Tuấn, em chuẩn bị đến đâu rồi?
+
+T000296 [09:53:32] Tuấn: Em đã tạo branch, chỉ cần merge code hotfix và cache. Chiều 15h deploy staging.
+
+T000297 [09:53:38] Lan: Em kiểm tra code cache purge rồi, ổn.
+
+T000298 [09:53:42] Đức: Tôi đã review sơ bộ cache, thấy OK.
+
+T000299 [09:53:46] Minh: Tốt. Vậy deploy như kế hoạch.
+
+T000300 [09:53:50] Hùng: Anh Minh, vụ task phân loại alert, em có thể dùng template cũ. Em sợ deadline 06/03 khả thi, nhưng nếu có upgrade database thì hơi rối.
+
+T000301 [09:54:00] Minh: Upgrade chưa chắc. Cứ làm.
+
+T000302 [09:54:04] Lan: Em xin phép hỏi, báo cáo thanh toán cần bao gồm các bảng biểu không? Hay chỉ text?
+
+T000303 [09:54:12] Minh: Nên có biểu đồ nếu có time. Nhưng không bắt buộc. Quan trọng là root cause.
+
+T000304 [09:54:18] Đức: Tôi cần biểu đồ latency để review.
+
+T000305 [09:54:22] Lan: Vậy em sẽ cố gắng.
+
+T000306 [09:54:26] Trang: Anh Minh, em vừa nhận feedback khác: người dùng không thể hoàn tất order trên mobile do lỗi js. Có cần báo dev không?
+
+T000307 [09:54:36] Minh: Lỗi gì?
+
+T000308 [09:54:38] Trang: Màn hình loading vô tận khi chọn phương thức thanh toán. Có thể liên quan đến cache.
+
+T000309 [09:54:44] Lan: Cái đó mới, không phải cache cũ. Em nghĩ lỗi frontend.
+
+T000310 [09:54:48] Minh: Gửi ticket riêng cho Hùng, vì Hùng làm UI.
+
+T000311 [09:54:52] Hùng: Em sẽ xem.
+
+T000312 [09:54:54] Minh: Nhưng không tạo task meeting. Ghi nhận.
+
+T000313 [09:54:58] Đức: Chúng ta đã có nhiều task. Tôi đề nghị chốt block này.
+
+T000314 [09:55:02] Minh: Đồng ý. Tổng kết scope update trong part này: task thanh toán mở rộng thêm code review, deadline review của Đức 03/03. Task cũ không thay đổi.
+
+T000315 [09:55:14] Lan: Rõ.
+
+T000316 [09:55:16] Hùng: Em nhắc lại, debug production đã done.
+
+T000317 [09:55:20] Minh: Cảm ơn. Không tạo duplicate.
+
+T000318 [09:55:24] Tuấn: Em sẽ gửi log trong sáng mai.
+
+T000319 [09:55:28] Minh: Vậy kết thúc part này. Mọi người chuẩn bị cho 15h.
+
+--- END OF PART P05 ---

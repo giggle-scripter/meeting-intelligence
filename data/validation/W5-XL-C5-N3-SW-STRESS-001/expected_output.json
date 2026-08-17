@@ -1,0 +1,85 @@
+{
+  "meeting_title": "Họp tổng hợp phát triển và vận hành sản phẩm",
+  "tasks": [
+    {
+      "task_name": "Hoàn thành spec integration",
+      "assignee": "Thắng",
+      "start_date": "2026-02-25",
+      "due_date": "2026-02-26",
+      "due_date_text": "deadline thứ Năm tuần này",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Gửi multi-currency spec",
+      "assignee": "Dũng",
+      "start_date": "2026-02-25",
+      "due_date": "2026-02-26",
+      "due_date_text": "deadline thứ Năm",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Hoàn thành test case integration",
+      "assignee": "Trang",
+      "start_date": "2026-02-25",
+      "due_date": "2026-03-03",
+      "due_date_text": "deadline thứ Ba tuần sau",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Phân tích performance",
+      "assignee": "Dũng",
+      "start_date": "2026-02-25",
+      "due_date": "2026-03-02",
+      "due_date_text": "deadline thứ Hai tuần sau",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Khảo sát crypto",
+      "assignee": "Dũng",
+      "start_date": "2026-02-25",
+      "due_date": "2026-03-02",
+      "due_date_text": "2h chiều thứ Hai",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Chuẩn bị test data multi-currency",
+      "assignee": "An",
+      "start_date": "2026-02-25",
+      "due_date": "2026-03-02",
+      "due_date_text": "deadline thứ Hai tuần sau",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Tạo mock server cho third-party API",
+      "assignee": "Hòa",
+      "start_date": "2026-02-25",
+      "due_date": "2026-03-02",
+      "due_date_text": "deadline thứ Hai tuần sau",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Monitoring integration",
+      "assignee": "Hòa",
+      "start_date": "2026-02-25",
+      "due_date": "",
+      "due_date_text": "trước release",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Setup canary",
+      "assignee": "Hòa",
+      "start_date": "2026-02-25",
+      "due_date": "2026-03-15",
+      "due_date_text": "deadline 15/3",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Hoàn thành wireframe admin UI",
+      "assignee": "Huyền",
+      "start_date": "2026-02-25",
+      "due_date": "2026-03-05",
+      "due_date_text": "deadline thứ Năm tuần sau",
+      "status": "Proposed"
+    }
+  ]
+}

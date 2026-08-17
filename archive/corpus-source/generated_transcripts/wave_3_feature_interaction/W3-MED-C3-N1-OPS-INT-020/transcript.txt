@@ -1,0 +1,132 @@
+MEETING_ID: W3-MED-C3-N1-OPS-INT-020
+CASE_LABELS: feature_interaction,deadline_replacement,recap_duplicate_risk,unresolved_item,negative_context
+MEETING_DATE: 2026-02-24
+TITLE: Họp phối hợp triển khai và xử lý vấn đề
+
+[09:00:00] PL: Chào mọi người, hôm nay chúng ta có cuộc họp phối hợp triển khai release. Mình điểm qua các đầu việc chính: chuẩn bị release, xử lý bug, giám sát và tài liệu. Anh em xem có bổ sung gì không?
+
+[09:00:15] Dev1: Em thấy có thêm vụ tương tác giữa feature mới và module cũ. Cái đó cần test kỹ trước khi release.
+
+[09:00:28] QA1: Đúng vậy, tụi em đã phát hiện một bug liên quan đến tính năng đó. Em sẽ report chi tiết.
+
+[09:00:40] PL: OK, vậy mình bắt đầu từ mục chuẩn bị release. Minh, anh có thể kiểm tra lại các dependency và cập nhật version cho các service không? Hạn chót là thứ Sáu tuần này.
+
+[09:01:05] Dev1: Em sẽ làm việc đó. Tuy nhiên, phần dependency của logging service hiện đang xung đột. Em cần thêm thời gian.
+
+[09:01:20] PL: Cụ thể là bao lâu? Anh muốn deadline phải chắc chắn.
+
+[09:01:30] Dev1: Em nghĩ thêm hai ngày là được, tức là hạn chót vào thứ Ba tuần sau.
+
+[09:01:42] PL: Vậy thì chuyển deadline cho task ấy sang thứ Ba. Nhưng anh vẫn cần bản cập nhật version cho các service khác trước thứ Sáu.
+
+[09:02:00] Dev1: Vâng, phần còn lại em hoàn thành đúng hạn. Còn vụ xung đột em sẽ handle riêng.
+
+[09:02:15] PL: Tốt. Tiếp theo, về bug triage. Lan, em đã ghi nhận bug nào cần ưu tiên?
+
+[09:02:30] QA1: Dạ, có bug số #4521 – khi bật tính năng mới thì module cũ bị lỗi hiển thị. Em đã assign cho team dev nhưng chưa thấy ai nhận.
+
+[09:02:50] Dev1: Bug đó em thấy thuộc phần của Hùng, nhưng Hùng đang bận việc khác. Em có thể nhận sửa, nhưng cần thêm thông tin từ Lan.
+
+[09:03:08] QA1: Em sẽ gửi log và steps reproduce ngay sau cuộc họp.
+
+[09:03:15] PL: Vậy Minh, anh nhận fix bug đó nhé. Hạn chót là thứ Năm tuần này. Hùng, anh tập trung vào việc giám sát release.
+
+[09:03:30] Ops1: Tôi e là không thể, vì đầu tuần sau tôi có việc riêng. Tôi đề nghị chuyển việc giám sát cho người khác.
+
+[09:03:48] PL: Vậy Hùng, anh làm giám sát đến hết thứ Tư, sau đó chuyển lại cho Minh. Minh, em có thể nhận tiếp phần đó không?
+
+[09:04:02] Dev1: Được ạ, nhưng sau thứ Năm em bận fix bug rồi, nên em chỉ nhận từ thứ Sáu thôi.
+
+[09:04:15] PL: OK, vậy điều chỉnh: Hùng giám sát đến thứ Tư, Minh nhận từ thứ Năm. Nhưng cần có báo cáo hàng ngày. Anh sẽ là người review.
+
+[09:04:35] Dev1: Vâng. À, em muốn hỏi thêm về việc update monitoring dashboard. Có cần thêm alert cho service mới không?
+
+[09:04:50] PL: Để anh suy nghĩ. Có thể chưa cần gấp, nhưng nếu có thời gian thì làm. Anh chưa chốt việc này.
+
+[09:05:05] QA1: Em thấy nên có alert, vì feature mới có thể ảnh hưởng. Nhưng nếu không kịp thì để release sau.
+
+[09:05:18] PL: Đúng vậy, tạm thời chưa tạo task. Sang phần tài liệu, Thảo có update gì không? À, Thảo không tham gia hôm nay. Vậy ai viết tài liệu hướng dẫn vận hành?
+
+[09:05:40] Ops1: Tôi nghĩ phần đó có thể để sau, vì release còn phải test.
+
+[09:05:50] PL: Nhưng tài liệu là bắt buộc. Minh, em có thể viết phần mô tả kỹ thuật không? Không cần deadline, nhưng viết trước release.
+
+[09:06:08] Dev1: Em có thể viết, nhưng em không rõ format. Em sẽ hỏi Thảo sau.
+
+[09:06:20] PL: OK, vậy đó là task không deadline. Nhưng em nhớ làm. Tiếp theo, phần monitoring, Hùng anh có thể thiết lập các metric cơ bản cho new service không? Hạn chót là thứ Ba.
+
+[09:06:40] Ops1: Được, tôi sẽ làm. Tuy nhiên tôi thấy có metric trùng với service cũ. Cần gộp lại không?
+
+[09:06:55] PL: Cái đó để anh xem. Mà thôi, việc này để sau. Bây giờ quay lại bug. Lan, em đã gửi log chưa?
+
+[09:07:10] QA1: Em đang gửi qua chat. Minh sẽ nhận được ngay.
+
+[09:07:18] Dev1: Rồi, em thấy rồi. Em sẽ bắt đầu fix từ chiều nay.
+
+[09:07:30] PL: Nhắc lại, hạn chót bug là thứ Năm. Nếu có vấn đề thì báo sớm.
+
+[09:07:42] Dev1: Vâng.
+
+[09:07:50] PL: Sang phần giám sát. Hùng, anh cần làm rõ các chỉ số uptime và error rate. Còn việc update dashboard thì em nghĩ sao, Minh? – À câu hỏi đó lúc nãy chưa chốt. Thôi bỏ qua.
+
+[09:08:15] Ops1: Tôi sẽ setup các metric cơ bản. Dashboard hiện tại có thể dùng chung, chỉ cần thêm widget.
+
+[09:08:30] PL: Được. Vậy task giám sát không có deadline cứng, nhưng anh cần trước thứ Ba. Thực ra lúc nãy anh nói hạn thứ Ba rồi.
+
+[09:08:45] Ops1: Vâng, tôi nhớ.
+
+[09:08:52] PL: Bây giờ, đề cập đến vấn đề chưa giải quyết: dependency logging service bị xung đột. Minh đã nói cần thêm thời gian. Nhưng vẫn chưa có giải pháp cụ thể. Việc này sẽ được bàn lại sau.
+
+[09:09:12] Dev1: Em sẽ nghiên cứu và báo cáo vào cuối tuần này. Nhưng chưa chắc chắn.
+
+[09:09:25] PL: Đó là unresolved item. Không tự giải quyết được ngay.
+
+[09:09:35] QA1: Em có ý kiến: phần test feature interaction có thể làm song song với fix bug không? Hay cần chờ bug xong?
+
+[09:09:48] PL: Tốt nhất là fix bug trước, vì bug ảnh hưởng đến test. Lan, em lên kế hoạch test sau khi Minh fix xong.
+
+[09:10:02] QA1: Vâng, em sẽ chuẩn bị test case và đợi.
+
+[09:10:10] PL: Tiếp theo, em muốn recap lại các task đã giao. Minh: update version các service (trừ logging) – hạn thứ Sáu; fix bug #4521 – hạn thứ Năm; viết tài liệu kỹ thuật – không deadline; giám sát từ thứ Năm. Hùng: setup metric giám sát – hạn thứ Ba; giám sát đến thứ Tư. Lan: gửi log, chuẩn bị test case. Anh sẽ review báo cáo giám sát. Còn task update dashboard – chưa chốt. Có ai thấy thiếu gì không?
+
+[09:11:02] Dev1: Em thấy task "update monitoring dashboard" đã được nhắc, nhưng chưa giao. Có cần thêm không ạ?
+
+[09:11:15] PL: Không, đó là distractor – không phải task chính thức vì chưa quyết định. Mà em thấy có task "update version" và "update monitoring" nhưng khác nhau.
+
+[09:11:35] Ops1: Tôi có thắc mắc: task "setup metric" và "cập nhật dashboard" có khác gì nhau không? Hay trùng?
+
+[09:11:48] PL: Setup metric là cấu hình, dashboard là hiển thị. Hai việc khác nhau. Nhưng dashboard chưa có task. Còn về deadline, lúc nãy anh đã thay thế deadline của task dependency logging từ thứ Sáu sang thứ Ba, nhưng đó là task riêng chứ không phải update version.
+
+[09:12:10] Dev1: Vâng, em hiểu.
+
+[09:12:18] PL: Recap có thể có nguy cơ duplicate, nhưng các task được liệt kê rõ ràng, không trùng. Tuy nhiên, nhắc lại task viết tài liệu – em thấy không có deadline, nhưng vẫn là task. Đừng nhầm với câu hỏi về dashboard.
+
+[09:12:40] QA1: Rõ rồi ạ.
+
+[09:12:48] PL: Có vấn đề tiêu cực nào khác không? Hùng, anh thấy lịch giám sát có ổn không?
+
+[09:13:00] Ops1: Tôi thấy hơi căng, nhưng tôi sẽ cố gắng. Có thể tôi không làm kịp hết metric trước thứ Ba nếu phải làm nhiều.
+
+[09:13:15] PL: Vậy anh ưu tiên metric quan trọng trước. Phần còn lại có thể làm sau.
+
+[09:13:25] Ops1: OK.
+
+[09:13:30] PL: Cuối cùng, mọi người có câu hỏi gì về feature interaction không? Đây là chủ đề chưa được giải quyết triệt để.
+
+[09:13:45] Dev1: Em vẫn còn băn khoăn về cách xử lý xung đột. Có thể cần meeting riêng với team architecture.
+
+[09:13:58] PL: Để anh sắp xếp. Việc đó chưa tạo task, chỉ là ý kiến.
+
+[09:14:08] QA1: Em nghĩ nên có task test interaction sau khi fix bug.
+
+[09:14:16] PL: Đúng, nhưng đó là một phần của test plan. Lan, em tự ghi nhớ, không cần giao thêm.
+
+[09:14:28] Ops1: Tôi thấy ổn.
+
+[09:14:35] PL: Vậy kết thúc họp. Nhắc lại: Minh, nhớ viết tài liệu. Hùng, báo cáo giám sát hàng ngày. Lan, gửi test plan sau. Cảm ơn mọi người.
+
+[09:14:50] Dev1: Cảm ơn anh.
+
+[09:14:55] QA1: Vâng.
+
+[09:15:00] Ops1: Rõ.

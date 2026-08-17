@@ -1,0 +1,11 @@
+ghi vội
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: trien khai / giao / loi / sung / vao / flow / test
+- Em sẽ bổ sung vào flow
+* Em có test sơ qua, phát hiện lỗi khi parsing dòng timestamp có dấu cách
+- Tôi giao cho Chi sửa lỗi parser đó
+1) Tôi thấy phần việc này trước đây giao cho tôi, nhưng giờ Chi làm thì hợp lý hơn
+- chuyển sang SP365 display
+* correction dl so với lúc nãy
+- Tạm thời không có task cho việc đó
+1) Em xác nhận giao diện và hỗ trợ

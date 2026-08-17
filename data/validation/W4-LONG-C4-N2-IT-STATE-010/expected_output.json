@@ -1,0 +1,53 @@
+{
+  "meeting_title": "Họp điều phối triển khai hệ thống",
+  "tasks": [
+    {
+      "task_name": "Chuẩn bị môi trường test",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-24",
+      "due_date": "2026-02-27",
+      "due_date_text": "deadline thứ Sáu",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết tài liệu môi trường test",
+      "assignee": "Hà",
+      "start_date": "2026-02-24",
+      "due_date": "2026-02-26",
+      "due_date_text": "deadline mới cho tài liệu môi trường test là thứ Năm",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Fix lỗi đăng nhập",
+      "assignee": "Khoa",
+      "start_date": "2026-02-24",
+      "due_date": "2026-02-27",
+      "due_date_text": "deadline thứ Sáu",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết test case đăng nhập",
+      "assignee": "Lan",
+      "start_date": "2026-02-24",
+      "due_date": "2026-02-26",
+      "due_date_text": "deadline thứ Năm",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết tài liệu triển khai tổng thể",
+      "assignee": "Hà",
+      "start_date": "2026-02-24",
+      "due_date": "2026-03-06",
+      "due_date_text": "thứ Sáu tuần sau",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Cấu hình monitoring",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-24",
+      "due_date": "2026-03-06",
+      "due_date_text": "thứ Sáu tuần sau",
+      "status": "Proposed"
+    }
+  ]
+}

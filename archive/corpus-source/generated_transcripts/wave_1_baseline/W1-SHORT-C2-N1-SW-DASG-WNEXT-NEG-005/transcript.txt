@@ -1,0 +1,37 @@
+MEETING_ID: W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-005
+CASE_LABELS: direct_assignment,weekday_next,negative_context
+MEETING_DATE: 2026-01-20
+TITLE: Chuẩn bị môi trường kiểm thử
+
+[00:00:00] An: Chào mọi người, hôm nay chúng ta họp nhanh về việc chuẩn bị môi trường kiểm thử cho release tháng hai.
+[00:00:06] Bình: Vâng, em đã xem qua tài liệu yêu cầu. Có một số điểm cần làm rõ.
+[00:00:12] An: Em nói đi.
+[00:00:14] Bình: Về môi trường hiện tại, server staging đang gặp lỗi cấu hình, cần fix trước khi setup thêm.
+[00:00:21] An: Cái đó đã có bên DevOps xử lý rồi, họ sẽ fix trong tuần này.
+[00:00:26] Cường: Em thấy bên mình nên dùng Docker để dễ tái tạo môi trường hơn.
+[00:00:31] An: Ý kiến hay, nhưng đợt này chưa kịp, vẫn dùng VM truyền thống.
+[00:00:37] Bình: Vậy em sẽ chuẩn bị môi trường dựa trên VM hiện có.
+[00:00:42] An: Đúng rồi, em chuẩn bị môi trường kiểm thử cho release này nhé, deadline là thứ Tư tuần sau.
+[00:00:49] Bình: Thứ Tư tuần sau? Dạ được, nhưng em muốn hỏi là cần chuẩn bị những gì cụ thể?
+[00:00:55] An: Chị cần em setup đầy đủ database, application server và mock service cho module thanh toán.
+[00:01:02] Bình: Database hiện tại đã có rồi, chỉ cần cấu hình lại. Application server cần deploy bản mới nhất.
+[00:01:09] An: Ừ, đúng vậy. Em xem bản build mới nhất từ CI.
+[00:01:14] Cường: Build mới nhất có vấn đề, em vừa thấy lỗi unit test.
+[00:01:19] An: Lỗi gì thế?
+[00:01:21] Cường: Lỗi ở module thanh toán, liên quan đến logic tính thuế.
+[00:01:26] An: Đã có hotfix chưa?
+[00:01:28] Cường: Bên dev đang fix, chưa có bản mới.
+[00:01:32] An: Vậy Bình cần chờ bản fix xong rồi mới deploy lên môi trường được.
+[00:01:37] Bình: Vâng, thế deadline thứ Tư tuần sau có chắc chắn không ạ? Nếu build chưa xong thì em không kịp.
+[00:01:44] An: Chị sẽ đôn đốc bên dev. Cố gắng hoàn thành trong thời gian đó, nếu không thì chị sẽ báo lại sau.
+[00:01:51] Bình: Dạ, em hiểu.
+[00:01:53] Cường: Em nghĩ nên có kế hoạch dự phòng, nếu build trễ thì dùng bản cũ để test tạm.
+[00:01:59] An: Cũng được, nhưng ưu tiên bản mới. Vậy Bình cứ chuẩn bị môi trường, khi có build mới thì deploy.
+[00:02:06] Bình: Vâng.
+[00:02:08] An: Còn vấn đề gì khác không?
+[00:02:10] Bình: Em cần quyền truy cập vào server production để copy config?
+[00:02:15] An: Quyền đó chị sẽ cấp, em gửi email request nhé.
+[00:02:19] Bình: Vâng.
+[00:02:21] Cường: Em cũng muốn hỏi về tài liệu API, có bản mới không?
+[00:02:26] An: Chị sẽ hỏi BA. Có gì sẽ cập nhật sau.
+[00:02:30] An: Vậy nhé, Bình làm task chuẩn bị môi trường, deadline thứ Tư tuần sau. Cường hỗ trợ khi cần. Cảm ơn mọi người.

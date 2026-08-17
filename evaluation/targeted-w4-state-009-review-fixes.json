@@ -1,0 +1,174 @@
+{
+  "pipeline_version": "v1",
+  "meeting_context_mode": "assist",
+  "meeting_notes": "sidecar_if_present",
+  "prompt_version": "v1-ledger-mutation-v1",
+  "model": "deterministic",
+  "mode": "local",
+  "endpoint": "",
+  "completed_case_count": 1,
+  "expected_case_count": 1,
+  "metrics_are_partial": false,
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 1,
+    "unreviewed_ground_truth_count": 0,
+    "unreviewed_case_ids": [],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 1,
+    "passed_case_count": 1,
+    "failed_case_count": 0,
+    "case_pass_rate": 1.0,
+    "task_identity_precision": 1.0,
+    "task_identity_recall": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": 1.0,
+    "due_date_accuracy": 1.0,
+    "due_date_text_exact_accuracy": 1.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "reviewed_metrics": {
+    "case_count": 1,
+    "passed_case_count": 1,
+    "failed_case_count": 0,
+    "case_pass_rate": 1.0,
+    "task_identity_precision": 1.0,
+    "task_identity_recall": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": 1.0,
+    "due_date_accuracy": 1.0,
+    "due_date_text_exact_accuracy": 1.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "exploratory_metrics": {
+    "case_count": 0,
+    "passed_case_count": 0,
+    "failed_case_count": 0,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 1.0,
+    "task_identity_recall": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 19,
+    "rule_event_count": 6,
+    "ai_event_count": 0,
+    "ai_window_count": 7,
+    "ai_batch_count": 7,
+    "ai_context_clause_count": 203,
+    "unresolved_window_count": 7,
+    "event_count_before_deduplication": 6,
+    "event_count_after_deduplication": 6,
+    "terminal_replay_blocked_count": 0,
+    "ledger_task_created_count": 4,
+    "ledger_task_updated_count": 0,
+    "exact_id_link_count": 0,
+    "exact_alias_link_count": 0,
+    "semantic_link_count": 0,
+    "unresolved_mutation_count": 1,
+    "duplicate_task_merge_count": 0,
+    "weighted_ai_call_rate": 0.3684210526315789,
+    "ai_clause_coverage": 0.347008547008547
+  },
+  "fallback_metrics": {
+    "rule_only": 0,
+    "ai_fallback_not_configured": 1,
+    "ai_fallback_resolved": 0,
+    "ai_fallback_unresolved": 0,
+    "ai_fallback_failed": 0
+  },
+  "job_execution": [],
+  "execution_errors": [],
+  "case_execution": [
+    {
+      "case_id": "W4-LONG-C5-N1-SW-STATE-009",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 7,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 7
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "W4-LONG-C5-N1-SW-STATE-009",
+      "passed": true,
+      "expected_task_count": 4,
+      "actual_task_count": 4,
+      "matched_task_count": 4,
+      "missing_tasks": [],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 24,
+      "correct_field_count": 24,
+      "field_counts": {
+        "assignee_accuracy": [
+          4,
+          4
+        ],
+        "due_date_accuracy": [
+          4,
+          4
+        ],
+        "due_date_text_exact_accuracy": [
+          4,
+          4
+        ],
+        "state_link_accuracy": [
+          4,
+          4
+        ]
+      }
+    }
+  ],
+  "case_diagnostics": {
+    "W4-LONG-C5-N1-SW-STATE-009": {
+      "caption_count": 259,
+      "deduplicated_caption_count": 259,
+      "turn_count": 255,
+      "sentence_count": 561,
+      "clause_count": 585,
+      "candidate_window_count": 19,
+      "rule_event_count": 6,
+      "ai_event_count": 0,
+      "ai_window_count": 7,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 203,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 7,
+      "ai_call_rate": 0.3684210526315789,
+      "ai_clause_coverage": 0.347008547008547,
+      "ai_batch_count": 7,
+      "event_count_before_deduplication": 6,
+      "event_count_after_deduplication": 6,
+      "terminal_replay_blocked_count": 0,
+      "ledger_task_created_count": 4,
+      "ledger_task_updated_count": 0,
+      "exact_id_link_count": 0,
+      "exact_alias_link_count": 0,
+      "semantic_link_count": 0,
+      "unresolved_mutation_count": 1,
+      "duplicate_task_merge_count": 0,
+      "recap_scope": "AUTHORITATIVE"
+    }
+  }
+}

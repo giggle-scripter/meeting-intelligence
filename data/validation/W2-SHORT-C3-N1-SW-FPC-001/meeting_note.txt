@@ -1,0 +1,9 @@
+minutes nháp
+chủ đề: Rà soát công việc sprint
+kw: tai lieu / api / trong / thanh / nghi / quan / hon
+- Em nghĩ có một task quan trọng hơn cần làm ngay: tích hợp API thanh toán cho bên đối tác
+* Em sẽ bắt tay vào chiều nay, chắc hoàn thành trước thứ Sáu
+- Em thấy trong board có task “cập nhật tài liệu hướng dẫn”, mà hình như chưa ai làm
+1) Vậy em tổng kết: task thiết kế của em vẫn đang chạy, task API do Minh mới nhận
+- còn lại mấy task kia chưa có owner hoặc bị dời
+* Đầu tiên, Hoa cho biết task thiết kế giao diện đến đâu rồi? ? chưa chốt

@@ -1,0 +1,29 @@
+{
+  "meeting_title": "Chuẩn bị môi trường kiểm thử",
+  "tasks": [
+    {
+      "task_name": "Setup lại dữ liệu và xác định nguyên nhân API",
+      "assignee": "Lan",
+      "start_date": "2026-01-24",
+      "due_date": "2026-01-27",
+      "due_date_text": "Thứ Ba tuần sau",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Gửi báo cáo tổng thể và dữ liệu test mới",
+      "assignee": "Lan",
+      "start_date": "2026-01-24",
+      "due_date": "2026-01-27",
+      "due_date_text": "Thứ Ba tuần sau",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Kiểm tra cấu hình proxy",
+      "assignee": "Tuấn",
+      "start_date": "2026-01-24",
+      "due_date": "2026-01-28",
+      "due_date_text": "xong trước thứ Năm",
+      "status": "Proposed"
+    }
+  ]
+}

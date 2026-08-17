@@ -1,0 +1,113 @@
+MEETING_ID: W5-XL-C5-N3-SW-STRESS-001
+PART: P05/10
+
+T000236 [11:47:30] Hoàng: Chúng ta quay trở lại topic từ part 1, về module thanh toán quốc tế. Tôi muốn cập nhật tình hình sau khi có một số thay đổi.
+
+T000237 [11:48:15] Linh: Vâng. Như đã thảo luận, test data phase 1 đã sẵn sàng, QA bắt đầu sáng thứ Sáu. Tuy nhiên, có một vấn đề mới từ bên đối tác: họ yêu cầu thêm tính năng hỗ trợ multi-currency settlement, nghĩa là thanh toán bằng nhiều loại tiền trong một giao dịch.
+
+T000238 [11:49:05] Minh: Đây là scope update lớn. Nếu thêm tính năng này, module thanh toán sẽ phải mở rộng logic xử lý. Em cần estimate lại effort.
+
+T000239 [11:49:50] Hoàng: Mức độ ưu tiên thế nào? Có ảnh hưởng đến deadline release tháng 3 không?
+
+T000240 [11:50:35] Linh: Đối tác nói đây là yêu cầu bắt buộc cho đợt release chính thức. Vậy chúng ta phải integrate.
+
+T000241 [11:51:20] Trang: Nếu thêm tính năng mới, test case hiện tại phải mở rộng rất nhiều. Em cần thời gian.
+
+T000242 [11:52:05] An: Bên Business cũng cần cập nhật mapping data cho multi-currency. Em sẽ làm việc với Finance.
+
+T000243 [11:52:50] Hoàng: Scope update này tác động đến nhiều task cũ. Chúng ta cần handoff một số trách nhiệm. Minh, em nghĩ ai sẽ lead phần multi-currency?
+
+T000244 [11:53:35] Minh: Em propose Thắng lead, nhưng Thắng đang viết integration spec. Có thể Thắng sẽ overload.
+
+T000245 [11:54:20] Hoàng: Vậy handoff bước hai: task integration spec vẫn do Thắng, nhưng phần multi-currency settlement sẽ do Dũng lead, vì Dũng có kinh nghiệm về xử lý tiền tệ.
+
+T000246 [11:55:05] Minh: Đồng ý. Dũng sẽ làm việc với Linh để clarify requirement.
+
+T000247 [11:55:50] Linh: Vậy scope update: thêm tính năng multi-currency settlement vào module thanh toán. Dũng lead, Thắng support. Deadline cho spec multi-currency: thứ Năm tuần sau.
+
+T000248 [11:56:35] Hoàng: Đây là deadline mới, chưa correction. Ghi nhận.
+
+T000249 [11:57:20] Trang: Liệu multi-currency có ảnh hưởng đến test data chargeback không? Vì chargeback cũng liên quan đến tiền tệ.
+
+T000250 [11:58:05] An: Có thể, nhưng chargeback data hiện tại chỉ gồm USD, EUR, JPY. Nếu thêm multi-currency, chargeback test sẽ phức tạp hơn.
+
+T000251 [11:58:50] Hoàng: Tạm thời chargeback vẫn giữ nguyên scope cũ. Multi-currency là scope mới, sẽ được test riêng.
+
+T000252 [11:59:35] Dũng: Em xin clarify: multi-currency settlement có yêu cầu real-time conversion rate không? Hay chỉ lưu giá trị gốc?
+
+T000253 [12:00:20] Linh: Họ muốn real-time rate từ bên thứ ba. Em sẽ gửi API reference cho Dũng.
+
+T000254 [12:01:05] Minh: Vậy Dũng cần integrate third-party rate API. Đây là task non-trivial.
+
+T000255 [12:01:50] Hòa: Bên Ops cần biết nếu có third-party API, cần whitelist domain và setup proxy.
+
+T000256 [12:02:35] Hoàng: Task cho Ops: support third-party API integration. Hòa, em cần làm việc với Dũng.
+
+T000257 [12:03:20] Hòa: OK, deadline? Có thể sau khi spec multi-currency xong.
+
+T000258 [12:04:05] Minh: Spec multi-currency deadline thứ Năm tuần sau, vậy Ops task deadline thứ Sáu tuần sau.
+
+T000259 [12:04:50] Hoàng: Ghi nhận deadline.
+
+T000260 [12:05:35] Trang: Em có một repeated mention: về test phase 1 cho module thanh toán. Em xin nhắc lại là đã chuẩn bị xong test environment. Nhưng do scope update, có cần thay đổi gì không?
+
+T000261 [12:06:25] Hoàng: Phase 1 giữ nguyên, không thay đổi. Đây không phải task mới, chỉ là confirmation.
+
+T000262 [12:07:10] Linh: Correct. Phase 1 test vẫn bắt đầu sáng thứ Sáu.
+
+T000263 [12:07:55] An: Em có vấn đề về chargeback data. Do Finance delay, deadline thứ Sáu có thể bị trễ thêm. Em propose correction: chargeback data bàn giao thứ Hai tuần sau.
+
+T000264 [12:08:45] Hoàng: Deadlin correction correction: từ thứ Sáu lên thứ Hai tuần sau. Có ảnh hưởng đến phase 2 test?
+
+T000265 [12:09:30] Trang: Nếu thứ Hai, phase 2 có thể bắt đầu thứ Ba, vẫn kịp.
+
+T000266 [12:10:15] Hoàng: Vậy correction approved.
+
+T000267 [12:11:00] Minh: Quay lại handoff: task integration spec vẫn do Thắng, nhưng scope đã thay đổi do multi-currency. Liệu Thắng có cần update spec không?
+
+T000268 [12:11:50] Linh: Integration spec cần bao gồm multi-currency. Vậy Thắng phải mở rộng spec.
+
+T000269 [12:12:35] Hoàng: Đây là handoff bước hai: Thắng giữ task nhưng mở rộng scope. Deadline spec integration correction từ thứ Ba lên thứ Năm tuần sau (do thêm scope).
+
+T000270 [12:13:25] Trang: Vậy test case integration cũng phải delay. Em sẽ viết test case sau khi spec completed.
+
+T000271 [12:14:10] Hòa: Review bảo mật cũng phải delay theo.
+
+T000272 [12:14:55] Hoàng: Tất cả các task liên quan đều bị đẩy: spec integration → thứ Năm, test case → thứ Sáu, review bảo mật → thứ Hai tuần sau.
+
+T000273 [12:15:40] Linh: Vậy chúng ta có một chain correction dài. Cần tracking kỹ.
+
+T000274 [12:16:25] Minh: Em có một repeated mention: về task performance caching của Dũng. Design doc deadline vẫn thứ Hai, nhưng Dũng giờ có multi-currency task. Liệu có conflict?
+
+T000275 [12:17:15] Hoàng: Dũng có hai task: design doc performance (deadline thứ Hai) và multi-currency spec (deadline thứ Năm). Không conflict vì thời gian khác nhau. Nhưng Dũng cần quản lý thời gian.
+
+T000276 [12:18:05] Dũng: Em sẽ hoàn thành design doc trước thứ Hai, sau đó focus multi-currency.
+
+T000277 [12:18:50] An: Em có một clarification: mapping data cho multi-currency có cần bao gồm tỷ giá? Em có thể cung cấp mẫu.
+
+T000278 [12:19:35] Dũng: Cần, em sẽ lấy từ API, nhưng mẫu mapping giúp em test.
+
+T000279 [12:20:20] Trang: Vậy em sẽ chuẩn bị test case cho multi-currency sau khi có spec.
+
+T000280 [12:21:05] Hoàng: Tôi thấy part này có nhiều correction và handoff. Tổng kết nhanh:
+
+- Scope update: thêm multi-currency settlement.
+- Handoff: Dũng lead multi-currency task.
+- Deadlin correction: chargeback data → thứ Hai; spec integration → thứ Năm; test case → thứ Sáu; review bảo mật → thứ Hai tuần sau.
+- Repeated mention: test phase 1 giữ nguyên, design doc performance giữ nguyên.
+
+T000281 [12:21:55] Linh: Còn unresolved item về canary deployment vẫn chưa giải quyết.
+
+T000282 [12:22:40] Hoàng: Đúng, vẫn unresolved. Chúng ta không giải quyết tất cả trong part này.
+
+T000283 [12:23:25] Minh: Em muốn nhấn mạnh: task multi-currency cần resource từ Dũng, nên task performance caching có thể bị ảnh hưởng nếu quá tải.
+
+T000284 [12:24:10] Hoàng: Nếu quá tải, chúng ta có thể support từ Thắng hoặc em. Sẽ xem xét ở part sau.
+
+T000285 [12:24:55] Trang: Em xin xác nhận: môi trường test staging cho module thanh toán đã sẵn sàng.
+
+T000286 [12:25:40] Hòa: SSL staging đã renew sáng nay. OK.
+
+T000287 [12:26:25] Hoàng: Tốt. Part 5 kết thúc. Cảm ơn.
+
+--- END OF PART P05 ---

@@ -1,0 +1,49 @@
+MEETING_ID: W2-SHORT-C2-N2-IT-WORK-014
+CASE_LABELS: working_day_duration,deadline_in_separate_sentence
+MEETING_DATE: 2026-02-08
+TITLE: Trao đổi kế hoạch tích hợp
+
+[00:00:05] An: Chào mọi người, hôm nay chúng ta họp để trao đổi về kế hoạch tích hợp module thanh toán mới vào hệ thống hiện tại.
+[00:00:15] Bình: Vâng, tôi đã xem qua tài liệu yêu cầu. Có một số điểm cần làm rõ về API.
+[00:00:25] Chi: Tôi cũng vừa review test case sơ bộ. Cần thống nhất luồng dữ liệu để viết test.
+[00:00:35] An: Trước tiên, về timeline. Dự kiến chúng ta có 15 ngày làm việc để hoàn thành tích hợp này.
+[00:00:45] Bình: 15 ngày làm việc? Từ hôm nay 8/2, tính cả thứ 7 không? Hay chỉ thứ 2 đến thứ 6?
+[00:00:55] An: Chỉ tính các ngày làm việc trong tuần, không kể thứ 7 và chủ nhật. Vậy từ 8/2 đến hết 28/2 là 15 ngày làm việc.
+[00:01:10] Chi: Nhưng mà tuần sau có nghỉ Tết Nguyên đán? Đó có được tính là ngày làm việc không?
+[00:01:20] An: Đúng, tôi quên mất. Theo lịch công ty, từ 10/2 đến 14/2 là nghỉ Tết. Vậy số ngày làm việc thực tế sẽ ít hơn.
+[00:01:30] Bình: Thế thì phải điều chỉnh deadline. Có thể kéo dài thêm vài ngày làm việc.
+[00:01:40] An: Chúng ta sẽ thảo luận sau. Trước mắt, cần xác định các đầu việc chính. Bình, cậu ước lượng phần backend mất bao nhiêu ngày làm việc?
+[00:01:55] Bình: Backend có khoảng 6 API mới và tích hợp queue. Tôi nghĩ tầm 8 ngày làm việc, nếu không có vấn đề gì.
+[00:02:10] Chi: Tôi cần thời gian để viết test tự động cho các API đó. Có thể mất 5 ngày làm việc sau khi backend xong.
+[00:02:25] An: Vậy tổng cộng backend + test là 13 ngày làm việc, cộng thêm thời gian chờ review và fix bug. Có lẽ nên đặt deadline là 20 ngày làm việc kể từ ngày bắt đầu.
+[00:02:45] Bình: 20 ngày làm việc? Nhưng tính cả nghỉ Tết thì thực tế sẽ lâu hơn.
+[00:02:55] An: Tôi đã tính rồi: bắt đầu từ 17/2 (sau Tết), 20 ngày làm việc sẽ kết thúc vào khoảng 13/3.
+[00:03:10] Chi: Vậy deadline là ngày 13 tháng 3.
+[00:03:15] An: Đúng vậy, deadline đó tính theo ngày làm việc.
+[00:03:25] Bình: Ok, tôi sẽ cố gắng. Nhưng nếu có phát sinh thì sao?
+[00:03:35] An: Chúng ta sẽ có buổi review hàng tuần để điều chỉnh nếu cần.
+[00:03:45] Chi: Tôi muốn thống nhất rõ về môi trường test. Hiện tại môi trường staging đang có vấn đề.
+[00:03:55] An: Vấn đề gì? Cần đội infra hỗ trợ không?
+[00:04:05] Chi: Có, con database trên staging bị chậm, ảnh hưởng đến việc chạy test.
+[00:04:15] Bình: Tôi đã báo với đội infra, họ nói sẽ fix trong tuần này.
+[00:04:25] An: Vậy chúng ta cần đảm bảo môi trường ổn định trước khi bắt đầu tích hợp.
+[00:04:35] Chi: Nếu không kịp, tôi đề xuất dùng môi trường dev để test tạm.
+[00:04:45] An: Được, nhưng phải đảm bảo dữ liệu không ảnh hưởng. Về phần frontend, có ai phụ trách?
+[00:04:55] Bình: Frontend do Đạt lo, nhưng Đạt đang bận dự án khác. Có thể cần thêm người.
+[00:05:05] An: Tôi sẽ nói chuyện với leader để điều phối. Vậy tạm thời, Bình sẽ làm backend, Chi viết test, tôi lo phối hợp.
+[00:05:20] Bình: Và sau khi backend xong, tôi sẽ hỗ trợ frontend nếu cần.
+[00:05:30] An: Tốt. Vậy chúng ta có thể bắt đầu từ 17/2. Tôi sẽ gửi email xác nhận với timeline chi tiết.
+[00:05:40] Chi: Nhưng deadline 20 ngày làm việc có chắc không? Tôi thấy hơi gấp.
+[00:05:50] An: Tôi nghĩ chúng ta có thể thương lượng. Nếu thấy quá tải, có thể tăng lên 25 ngày làm việc.
+[00:06:00] Bình: 25 ngày làm việc sẽ thoải mái hơn.
+[00:06:10] An: Vậy chốt: deadline là 25 ngày làm việc kể từ 17/2, tức là ngày 20/3.
+[00:06:20] Chi: Như vậy hợp lý hơn. Tôi sẽ chuẩn bị test plan trong tuần này.
+[00:06:30] Bình: Tôi sẽ bắt đầu thiết kế API từ hôm nay để tiết kiệm thời gian.
+[00:06:40] An: Lưu ý: deadline được tính bằng ngày làm việc, không phải ngày lịch. Mọi người nhớ nhé.
+[00:06:50] Chi: Rõ rồi. Có vấn đề gì khác không?
+[00:07:00] An: Còn vấn đề về bảo mật? Bộ phận security có yêu cầu gì không?
+[00:07:10] Bình: Họ yêu cầu token phải được mã hóa, tôi đã tính đến rồi.
+[00:07:20] An: OK. Vậy hẹn review lần đầu vào thứ 2 tuần sau, tức 22/2 lúc 10h.
+[00:07:30] Chi: Đã ghi nhận.
+[00:07:35] Bình: OK.
+[00:07:40] An: Cảm ơn mọi người, cuộc họp kết thúc.

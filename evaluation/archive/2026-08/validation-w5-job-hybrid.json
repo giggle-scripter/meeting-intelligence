@@ -1,0 +1,914 @@
+{
+  "mode": "job_api",
+  "endpoint": "http://127.0.0.1:8010/api/v1/meetings/jobs/process-file",
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 4,
+    "unreviewed_ground_truth_count": 0,
+    "unreviewed_case_ids": [],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 4,
+    "passed_case_count": 0,
+    "failed_case_count": 4,
+    "case_pass_rate": 0.0,
+    "task_precision": 0.0425531914893617,
+    "task_recall": 0.06451612903225806,
+    "field_accuracy": 0.6666666666666666
+  },
+  "reviewed_metrics": {
+    "case_count": 4,
+    "passed_case_count": 0,
+    "failed_case_count": 4,
+    "case_pass_rate": 0.0,
+    "task_precision": 0.0425531914893617,
+    "task_recall": 0.06451612903225806,
+    "field_accuracy": 0.6666666666666666
+  },
+  "exploratory_metrics": {
+    "case_count": 0,
+    "passed_case_count": 0,
+    "failed_case_count": 0,
+    "case_pass_rate": 0.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 194,
+    "rule_event_count": 162,
+    "ai_event_count": 36,
+    "ai_window_count": 137,
+    "ai_context_clause_count": 2774,
+    "unresolved_window_count": 95,
+    "weighted_ai_call_rate": 0.7061855670103093,
+    "ai_clause_coverage": 0.5838770785097874
+  },
+  "fallback_metrics": {
+    "rule_only": 0,
+    "ai_fallback_not_configured": 0,
+    "ai_fallback_resolved": 0,
+    "ai_fallback_unresolved": 2,
+    "ai_fallback_failed": 2
+  },
+  "job_execution": [
+    {
+      "case_id": "W5-XL-C5-N2-IT-STRESS-002",
+      "job_id": "job-07164c99f69f4b4090d446ea64df3df5",
+      "status": "succeeded",
+      "poll_count": 60,
+      "elapsed_seconds": 901.24
+    },
+    {
+      "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+      "job_id": "job-3743f1361bdf460997620d8a6e9de4e4",
+      "status": "succeeded",
+      "poll_count": 73,
+      "elapsed_seconds": 1096.06
+    },
+    {
+      "case_id": "W5-XL-C5-N3-PROD-STRESS-003",
+      "job_id": "job-c9f2fab601da47119361fd55774941d1",
+      "status": "succeeded",
+      "poll_count": 49,
+      "elapsed_seconds": 735.77
+    },
+    {
+      "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+      "job_id": "job-05dfa9971d3c42c8974866aa659622ba",
+      "status": "succeeded",
+      "poll_count": 61,
+      "elapsed_seconds": 915.97
+    }
+  ],
+  "execution_errors": [],
+  "case_execution": [
+    {
+      "case_id": "W5-XL-C5-N2-IT-STRESS-002",
+      "route": "ai_fallback_failed",
+      "ai_window_count": 32,
+      "ai_provider_call_count": 12,
+      "ai_event_count": 12,
+      "ai_fallback_error_count": 3,
+      "unresolved_window_count": 25
+    },
+    {
+      "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+      "route": "ai_fallback_failed",
+      "ai_window_count": 30,
+      "ai_provider_call_count": 16,
+      "ai_event_count": 7,
+      "ai_fallback_error_count": 1,
+      "unresolved_window_count": 23
+    },
+    {
+      "case_id": "W5-XL-C5-N3-PROD-STRESS-003",
+      "route": "ai_fallback_unresolved",
+      "ai_window_count": 42,
+      "ai_provider_call_count": 14,
+      "ai_event_count": 17,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 29
+    },
+    {
+      "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+      "route": "ai_fallback_unresolved",
+      "ai_window_count": 33,
+      "ai_provider_call_count": 21,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 18
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "W5-XL-C5-N2-IT-STRESS-002",
+      "passed": false,
+      "expected_task_count": 8,
+      "actual_task_count": 17,
+      "matched_task_count": 2,
+      "missing_tasks": [
+        {
+          "task_name": "Xuất log và metric thanh toán",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-26",
+          "due_date": "2026-02-27",
+          "due_date_text": "sáng 27/02",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review design product placement",
+          "assignee": "Lan",
+          "start_date": "2026-02-26",
+          "due_date": "2026-03-04",
+          "due_date_text": "deadline 04/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Code review payment",
+          "assignee": "Đức",
+          "start_date": "2026-02-26",
+          "due_date": "2026-03-04",
+          "due_date_text": "deadline 04/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review API FastShip",
+          "assignee": "Hùng; Đức",
+          "start_date": "2026-02-26",
+          "due_date": "2026-03-07",
+          "due_date_text": "deadline 07/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tối ưu image mobile",
+          "assignee": "Hùng",
+          "start_date": "2026-02-26",
+          "due_date": "2026-03-04",
+          "due_date_text": "deadline 04/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Đánh giá capacity payment",
+          "assignee": "Đức",
+          "start_date": "2026-02-26",
+          "due_date": "2026-03-06",
+          "due_date_text": "deadline 06/03",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Export log và trace cho",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-26",
+          "due_date": "2026-02-27",
+          "due_date_text": "27/02",
+          "evidence": "Minh: Tôi tổng kết các task chính: - Task 1: Lan – phân tích log thanh toán, báo cáo sơ bộ hạn 28/02 (sau đó gia hạn khả năng 01/03). - Task 2: Tuấn – export log và trace cho Lan và Hùng\nMinh: Tôi sẽ recap nhanh: - Task phân tích log thanh toán (Lan): deadline 28/02, có thể 01/03 nếu cần, nhưng phải báo. - Task export log (Tuấn): sáng 27/02. - Task deploy hotfix+cache (Tuấn & Lan): chiều 26/02 (hôm nay) 15h. - Task review design placement (Đức & Lan): 01/03. - Task review API FastShip (Hùng & Đức): 07/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review design product placement",
+          "assignee": "Đức; Lan",
+          "start_date": "2026-02-26",
+          "due_date": "2026-03-01",
+          "due_date_text": "deadline 01/03",
+          "evidence": "Minh: hạn 10h sáng mai (27/02). - Task 3: Tuấn & Lan – phối hợp deploy hotfix giá + cache tuning, staging 15h hôm nay. - Task 4: Đức & Lan – review design product placement, deadline 01/03. - Task 5: Hùng – phân loại alert monitoring, không deadline gấp, cuối sprint.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review, nhưng chưa cần chốt",
+          "assignee": "Lan",
+          "start_date": "2026-02-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Nhưng lưu ý task 1 sẽ cần hand-off sang Đức nếu Lan cần review, nhưng chưa cần chốt.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review API FastShip",
+          "assignee": "Đức",
+          "start_date": "2026-02-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Tôi sẽ recap nhanh: - Task phân tích log thanh toán (Lan): deadline 28/02, có thể 01/03 nếu cần, nhưng phải báo. - Task export log (Tuấn): sáng 27/02. - Task deploy hotfix+cache (Tuấn & Lan): chiều 26/02 (hôm nay) 15h. - Task review design placement (Đức & Lan): 01/03. - Task review API FastShip (Hùng & Đức): 07/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Export log (",
+          "assignee": "Lan",
+          "start_date": "2026-02-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Tôi sẽ recap nhanh: - Task phân tích log thanh toán (Lan): deadline 28/02, có thể 01/03 nếu cần, nhưng phải báo. - Task export log (Tuấn): sáng 27/02. - Task deploy hotfix+cache (Tuấn & Lan): chiều 26/02 (hôm nay) 15h. - Task review design placement (Đức & Lan): 01/03. - Task review API FastShip (Hùng & Đức): 07/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Deploy hotfix+cache (",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Tôi sẽ recap nhanh: - Task phân tích log thanh toán (Lan): deadline 28/02, có thể 01/03 nếu cần, nhưng phải báo. - Task export log (Tuấn): sáng 27/02. - Task deploy hotfix+cache (Tuấn & Lan): chiều 26/02 (hôm nay) 15h. - Task review design placement (Đức & Lan): 01/03. - Task review API FastShip (Hùng & Đức): 07/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review design placement (",
+          "assignee": "Tuấn; Lan",
+          "start_date": "2026-02-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Tôi sẽ recap nhanh: - Task phân tích log thanh toán (Lan): deadline 28/02, có thể 01/03 nếu cần, nhưng phải báo. - Task export log (Tuấn): sáng 27/02. - Task deploy hotfix+cache (Tuấn & Lan): chiều 26/02 (hôm nay) 15h. - Task review design placement (Đức & Lan): 01/03. - Task review API FastShip (Hùng & Đức): 07/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review API FastShip (",
+          "assignee": "Đức; Lan",
+          "start_date": "2026-02-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Tôi sẽ recap nhanh: - Task phân tích log thanh toán (Lan): deadline 28/02, có thể 01/03 nếu cần, nhưng phải báo. - Task export log (Tuấn): sáng 27/02. - Task deploy hotfix+cache (Tuấn & Lan): chiều 26/02 (hôm nay) 15h. - Task review design placement (Đức & Lan): 01/03. - Task review API FastShip (Hùng & Đức): 07/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Liên hệ FastShip (",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: có extension 10/03. - Task phân loại alert (Hùng): deadline 06/03 (đã điều chỉnh từ 04/03). - Task export metric (Tuấn): cuối ngày 26/02. - Task liên hệ FastShip (Trang): unresolved owner, chờ.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Kiểm tra memory",
+          "assignee": "Tuấn (từ xa)",
+          "start_date": "2026-02-26",
+          "due_date": "",
+          "due_date_text": "sau khi deploy",
+          "evidence": "Tuấn (từ xa): Em sẽ kiểm tra memory sau khi deploy.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Deploy cache có thể hoãn nếu staging yếu",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Đức: Đức không còn cứng). - Task tối ưu image phụ thuộc quyền CDN từ Tuấn trước 27/02. - Deploy cache có thể hoãn nếu staging yếu.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Kiểm tra sau, nhưng",
+          "assignee": "Đức",
+          "start_date": "2026-02-26",
+          "due_date": "2026-03-04",
+          "due_date_text": "ngày 04/03",
+          "evidence": "Đức: Tôi sẽ kiểm tra sau, nhưng\nĐức: Có, sau khi em có log, tôi sẽ dùng.\nĐức: Không, tôi sẽ review trong ngày 04/03.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi feedback trong ngày",
+          "assignee": "Lan",
+          "start_date": "2026-02-26",
+          "due_date": "2026-03-03",
+          "due_date_text": "trước 04/03",
+          "evidence": "Lan: Em sẽ gửi feedback trong ngày.\nLan: Em sẽ gửi trước 29/02.\nLan: Em sẽ review và gửi feedback trước 04/03.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review payment (",
+          "assignee": "Hùng",
+          "start_date": "2026-02-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Để tôi recap nhanh các thay đổi trong part này: - Hủy task phân loại alert của Hùng. - Deadlin code review payment (Đức): từ 03/03 thành 04/03. - Không thay đổi khác.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm nữa",
+          "assignee": "Hùng",
+          "start_date": "2026-02-26",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Hùng, em không cần làm nữa.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Phân tích log thanh toán",
+          "field": "due_date",
+          "expected": "",
+          "actual": "2026-02-26"
+        },
+        {
+          "task_name": "Phân tích log thanh toán",
+          "field": "due_date_text",
+          "expected": "deadline 29/02",
+          "actual": "trong tối nay"
+        },
+        {
+          "task_name": "Deploy hotfix giá và cache tuning",
+          "field": "due_date",
+          "expected": "2026-02-26",
+          "actual": ""
+        },
+        {
+          "task_name": "Deploy hotfix giá và cache tuning",
+          "field": "due_date_text",
+          "expected": "hôm nay 15h",
+          "actual": ""
+        }
+      ],
+      "checked_field_count": 12,
+      "correct_field_count": 8
+    },
+    {
+      "case_id": "W5-XL-C5-N2-OPS-STRESS-004",
+      "passed": false,
+      "expected_task_count": 10,
+      "actual_task_count": 7,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Thiết lập CI/CD pipeline cho payment",
+          "assignee": "An",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-13",
+          "due_date_text": "deadline dời lên 13/3",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấu hình alerting",
+          "assignee": "An",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-12",
+          "due_date_text": "12/3",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Định nghĩa metric và threshold",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-10",
+          "due_date_text": "10/3",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cập nhật log spec error codes",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-13",
+          "due_date_text": "13/3",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết E2E test scenario",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-09",
+          "due_date_text": "9/3",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Thiết lập support process",
+          "assignee": "Lan",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-13",
+          "due_date_text": "13/3",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết API draft cho CRM",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-13",
+          "due_date_text": "13/3",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết migration script",
+          "assignee": "An",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-18",
+          "due_date_text": "18/3",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Deploy payment",
+          "assignee": "",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-20",
+          "due_date_text": "20/3",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Liên hệ product về webhook spec",
+          "assignee": "Minh",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-14",
+          "due_date_text": "trước 15/3",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Test), webhook registration endpoint (sẽ bổ sung), và ETL data migration",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-28",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Các task về integration gồm: API draft (Tuấn, chưa có deadline chính thức, nhưng cần trước khi CRM test), webhook registration endpoint (sẽ bổ sung), và ETL data migration (unresolved).",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi CRM",
+          "assignee": "Minh",
+          "start_date": "2026-02-28",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Anh sẽ review, sau đó gửi CRM.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Deploy API draft lên sandbox",
+          "assignee": "Tuấn",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-09",
+          "due_date_text": "trước 10/3",
+          "evidence": "Tuấn: Em sẽ deploy API draft lên sandbox sau khi review.\nTuấn: Có rồi, em sẽ hoàn thành metric trước 10/3.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi ticket",
+          "assignee": "An",
+          "start_date": "2026-02-28",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "An: Em sẽ gửi ticket.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tổng hợp giúp anh",
+          "assignee": "Lan",
+          "start_date": "2026-02-28",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Lan, em tổng hợp giúp anh.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cấp ngay sau cuộc họp",
+          "assignee": "Minh",
+          "start_date": "2026-02-28",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Anh sẽ cấp ngay sau cuộc họp.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi email cho product yêu cầu spec",
+          "assignee": "Minh",
+          "start_date": "2026-02-28",
+          "due_date": "2026-03-14",
+          "due_date_text": "trước 15/3",
+          "evidence": "Minh: Anh sẽ gửi email cho product yêu cầu spec trước 15/3.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W5-XL-C5-N3-PROD-STRESS-003",
+      "passed": false,
+      "expected_task_count": 3,
+      "actual_task_count": 20,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Hoàn thành UI prototype",
+          "assignee": "Linh",
+          "start_date": "2026-02-27",
+          "due_date": "2026-03-04",
+          "due_date_text": "deadline 04/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thành integration test script",
+          "assignee": "Hùng",
+          "start_date": "2026-02-27",
+          "due_date": "2026-03-04",
+          "due_date_text": "deadline 04/03",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Xử lý container memory",
+          "assignee": "Linh",
+          "start_date": "2026-02-27",
+          "due_date": "2026-03-03",
+          "due_date_text": "deadline 03/03",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Cập nhật firewall rules cho endpoint mới",
+          "assignee": "team SRE",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Anh: Họ cần cập nhật firewall rules cho endpoint mới.\nThảo: Chưa, task đó sẽ được tạo và chuyển cho team SRE.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Rà soát và cập nhật Cuối ngày",
+          "assignee": "Thảo",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Thảo: Cuối ngày em sẽ rà soát và cập nhật.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Test plan (28/02), test UI, hỗ trợ integration",
+          "assignee": "Hùng",
+          "start_date": "2026-02-27",
+          "due_date": "2026-02-28",
+          "due_date_text": "28/02",
+          "evidence": "Thảo: Tổng kết: - Minh: mock server core (deadline 28/02), script test API cơ bản (deadline 02/03). - Hùng: test plan (28/02), test UI, hỗ trợ integration. - Linh: gọi đối tác (hôm nay), liên hệ admin DNS (28/02), sau này liên lạc SRE. - Anh: cập nhật requirement nếu có. - Em: review và điều phối.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Liên hệ admin DNS (28/02), sau này liên lạc SRE",
+          "assignee": "Linh",
+          "start_date": "2026-02-27",
+          "due_date": "2026-03-04",
+          "due_date_text": "trước 05/03",
+          "evidence": "Thảo: Tổng kết: - Minh: mock server core (deadline 28/02), script test API cơ bản (deadline 02/03). - Hùng: test plan (28/02), test UI, hỗ trợ integration. - Linh: gọi đối tác (hôm nay), liên hệ admin DNS (28/02), sau này liên lạc SRE. - Anh: cập nhật requirement nếu có. - Em: review và điều phối.\nLinh: Em sẽ báo kết quả gọi điện vào group chiều nay.\nLinh: Đã có ticket cho DNS, giờ em thêm request quyền DB view.\nThảo: Deadline cho DB access là 28/02.\nLinh: Em sẽ làm luôn.\nLinh: Em sẽ làm sau khi có yêu cầu cụ thể.\nHùng: Cần trước 02/03.\nLinh: Em sẽ kích hoạt.\nLinh: Em sẽ cố gắng xong trước 05/03 8h sáng.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cập nhật requirement nếu có. - Em: review và điều phối",
+          "assignee": "Anh",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Thảo: Tổng kết: - Minh: mock server core (deadline 28/02), script test API cơ bản (deadline 02/03). - Hùng: test plan (28/02), test UI, hỗ trợ integration. - Linh: gọi đối tác (hôm nay), liên hệ admin DNS (28/02), sau này liên lạc SRE. - Anh: cập nhật requirement nếu có. - Em: review và điều phối.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo 2 user: admin và user thường",
+          "assignee": "Huy",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Huy: Em sẽ tạo 2 user: admin và user thường.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chuẩn bị slide mô phỏng để backup",
+          "assignee": "Huy",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Thảo: Em sẽ yêu cầu Huy chuẩn bị slide mô phỏng để backup.\nHuy: Vâng, em làm.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Liên hệ Phong để lên lịch update rules",
+          "assignee": "Hùng",
+          "start_date": "2026-02-27",
+          "due_date": "2026-03-03",
+          "due_date_text": "03/03",
+          "evidence": "Thảo: Hùng, em chịu trách nhiệm liên hệ Phong để lên lịch update rules.\nHùng: Em sẽ có test plan 28/02, bắt đầu test chạy từ 02/03.\nHùng: Vậy test của em sẽ bắt đầu từ 03/03 với toàn bộ mock.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi scenario sau",
+          "assignee": "Thảo",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Thảo: Em sẽ gửi scenario sau.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Viết endpoint search với filter",
+          "assignee": "Minh",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Thảo: Minh, em viết endpoint search với filter.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review performance",
+          "assignee": "Thảo",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Anh: Ai sẽ làm review performance?\nThảo: Chưa có, nhưng em sẽ giao cho team infra sau.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi API spec mới cho Linh",
+          "assignee": "Minh",
+          "start_date": "2026-02-27",
+          "due_date": "2026-02-28",
+          "due_date_text": "28/02",
+          "evidence": "Minh: Em sẽ gửi API spec mới cho Linh.\nMinh: Em sẽ xem trong ngày.\nAnh: Vậy deadline cho review data của Minh là 28/02, test data của Linh là 01/03.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi email xác nhận với PO",
+          "assignee": "Thảo",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Thảo: Em sẽ gửi email xác nhận với PO.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Cập nhật risk log",
+          "assignee": "Thảo",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Anh: Em thấy nhiều thay đổi, cần cập nhật risk log.\nThảo: Em sẽ ghi nhận.\nThảo: Em sẽ cập nhật sau meeting.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Review code của Linh",
+          "assignee": "Minh",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "sau khi push code mới",
+          "evidence": "Thảo: Minh review, vì Minh hiểu architecture.\nHùng: Em cũng chuẩn bị test.\nMinh: Em sẽ restart sau khi push code mới.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Xây dựng test suite dựa trên test plan đã có",
+          "assignee": "Hùng",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: Em sẽ xây dựng test suite dựa trên test plan đã có.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Làm cùng",
+          "assignee": "Hùng",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hùng: OK, em sẽ làm cùng.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Fix, nhưng",
+          "assignee": "Minh",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Em sẽ fix, nhưng",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Setup Jest",
+          "assignee": "Thảo",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Minh: Em giúp setup Jest.",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Test script: resolved, chọn Jest. - Task documentation: cancelled",
+          "assignee": "Linh",
+          "start_date": "2026-02-27",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Thảo: Recap lại các state transition: - Mock core: từ 28/02 lên 02/03, nay hoàn thành. - Filter: đang progress, deadline 03/03. - UI prototype: deadline 04/03, Linh sẽ cố 05/03 sáng. - Firewall: done. - Data mẫu: done after adjust. - Tool test script: resolved, chọn Jest. - Task documentation: cancelled",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    },
+    {
+      "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+      "passed": false,
+      "expected_task_count": 10,
+      "actual_task_count": 3,
+      "matched_task_count": 0,
+      "missing_tasks": [
+        {
+          "task_name": "Hoàn thành spec integration",
+          "assignee": "Thắng",
+          "start_date": "2026-02-25",
+          "due_date": "2026-02-26",
+          "due_date_text": "deadline thứ Năm tuần này",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Gửi multi-currency spec",
+          "assignee": "Dũng",
+          "start_date": "2026-02-25",
+          "due_date": "2026-02-26",
+          "due_date_text": "deadline thứ Năm",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thành test case integration",
+          "assignee": "Trang",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-03",
+          "due_date_text": "deadline thứ Ba tuần sau",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Phân tích performance",
+          "assignee": "Dũng",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-02",
+          "due_date_text": "deadline thứ Hai tuần sau",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Khảo sát crypto",
+          "assignee": "Dũng",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-02",
+          "due_date_text": "2h chiều thứ Hai",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Chuẩn bị test data multi-currency",
+          "assignee": "An",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-02",
+          "due_date_text": "deadline thứ Hai tuần sau",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Tạo mock server cho third-party API",
+          "assignee": "Hòa",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-02",
+          "due_date_text": "deadline thứ Hai tuần sau",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Monitoring integration",
+          "assignee": "Hòa",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "trước release",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Setup canary",
+          "assignee": "Hòa",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-15",
+          "due_date_text": "deadline 15/3",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Hoàn thành wireframe admin UI",
+          "assignee": "Huyền",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-05",
+          "due_date_text": "deadline thứ Năm tuần sau",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Hủy task",
+          "assignee": "design",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-02",
+          "due_date_text": "deadline thứ Hai tuần sa",
+          "evidence": "Hoàng: Tổng kết: - Hủy task: design doc performance, chargeback data. - Task mới: performance analysis (Dũng, deadline thứ Hai tuần sau), test data multi-currency (An, deadline thứ Hai tuần sau), test case multi-currency (Trang, deadline thứ Hai tuần sau). -",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Date correction: 15/3 → 20/3. - Unresolved: canary deployment",
+          "assignee": "Release",
+          "start_date": "2026-02-25",
+          "due_date": "2026-03-20",
+          "due_date_text": "20/3",
+          "evidence": "Hoàng: Tổng kết: - Hủy task: design doc performance, chargeback data. - Task mới: performance analysis (Dũng, deadline thứ Hai tuần sau), test data multi-currency (An, deadline thứ Hai tuần sau), test case multi-currency (Trang, deadline thứ Hai tuần sau). -",
+          "status": "Proposed"
+        },
+        {
+          "task_name": "Monitoring integration, support cho Dũng",
+          "assignee": "Release",
+          "start_date": "2026-02-25",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Hoàng: Tổng kết: - Hủy task: design doc performance, chargeback data. - Task mới: performance analysis (Dũng, deadline thứ Hai tuần sau), test data multi-currency (An, deadline thứ Hai tuần sau), test case multi-currency (Trang, deadline thứ Hai tuần sau). -",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [],
+      "checked_field_count": 0,
+      "correct_field_count": 0
+    }
+  ],
+  "case_diagnostics": {
+    "W5-XL-C5-N2-IT-STRESS-002": {
+      "caption_count": 580,
+      "deduplicated_caption_count": 580,
+      "turn_count": 574,
+      "sentence_count": 1070,
+      "clause_count": 1091,
+      "candidate_window_count": 48,
+      "rule_event_count": 62,
+      "ai_event_count": 12,
+      "ai_window_count": 32,
+      "ai_provider_call_count": 12,
+      "ai_context_clause_count": 616,
+      "ai_fallback_error_count": 3,
+      "unresolved_window_count": 25,
+      "ai_call_rate": 0.6666666666666666,
+      "ai_clause_coverage": 0.5646196150320807
+    },
+    "W5-XL-C5-N2-OPS-STRESS-004": {
+      "caption_count": 620,
+      "deduplicated_caption_count": 620,
+      "turn_count": 609,
+      "sentence_count": 1096,
+      "clause_count": 1123,
+      "candidate_window_count": 48,
+      "rule_event_count": 56,
+      "ai_event_count": 7,
+      "ai_window_count": 30,
+      "ai_provider_call_count": 16,
+      "ai_context_clause_count": 647,
+      "ai_fallback_error_count": 1,
+      "unresolved_window_count": 23,
+      "ai_call_rate": 0.625,
+      "ai_clause_coverage": 0.5761353517364203
+    },
+    "W5-XL-C5-N3-PROD-STRESS-003": {
+      "caption_count": 774,
+      "deduplicated_caption_count": 774,
+      "turn_count": 763,
+      "sentence_count": 1318,
+      "clause_count": 1343,
+      "candidate_window_count": 55,
+      "rule_event_count": 41,
+      "ai_event_count": 17,
+      "ai_window_count": 42,
+      "ai_provider_call_count": 14,
+      "ai_context_clause_count": 655,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 29,
+      "ai_call_rate": 0.7636363636363637,
+      "ai_clause_coverage": 0.48771407297096053
+    },
+    "W5-XL-C5-N3-SW-STRESS-001": {
+      "caption_count": 536,
+      "deduplicated_caption_count": 536,
+      "turn_count": 527,
+      "sentence_count": 1174,
+      "clause_count": 1194,
+      "candidate_window_count": 43,
+      "rule_event_count": 3,
+      "ai_event_count": 0,
+      "ai_window_count": 33,
+      "ai_provider_call_count": 21,
+      "ai_context_clause_count": 856,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 18,
+      "ai_call_rate": 0.7674418604651163,
+      "ai_clause_coverage": 0.7169179229480737
+    }
+  }
+}

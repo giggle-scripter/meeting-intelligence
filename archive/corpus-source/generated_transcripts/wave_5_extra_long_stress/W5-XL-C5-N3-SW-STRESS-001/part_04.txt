@@ -1,0 +1,126 @@
+MEETING_ID: W5-XL-C5-N3-SW-STRESS-001
+PART: P04/10
+
+T000178 [11:06:40] Hoàng: Bây giờ tôi muốn chuyển sang chủ đề sản phẩm. Linh, em có thể giới thiệu về yêu cầu mới từ đối tác cho module thanh toán không?
+
+T000179 [11:07:20] Linh: Vâng. Hôm qua bên đối tác gửi yêu cầu bổ sung: hỗ trợ thanh toán bằng tiền điện tử cho một số giao dịch thử nghiệm. Họ muốn có tính năng này trong đợt release tháng 3.
+
+T000180 [11:08:05] Minh: Em xin hỏi: đây là yêu cầu hard hay chỉ là wishlist? Vì module hiện tại chưa có gateway cho crypto.
+
+T000181 [11:08:50] Linh: Họ nói là ưu tiên cao, nhưng chưa có timeline cụ thể từ họ. Tuy nhiên, họ muốn chúng ta bắt đầu khảo sát kỹ thuật trong tuần này.
+
+T000182 [11:09:35] Hoàng: Vậy chúng ta cần một task khảo sát tính khả thi. Minh, ai có thể làm?
+
+T000183 [11:10:15] Minh: Dũng có kinh nghiệm về blockchain, em nghĩ Dũng phù hợp. Nhưng Dũng đang hỗ trợ Thắng integration spec. Có thể giao thêm nếu không ảnh hưởng deadline.
+
+T000184 [11:11:00] Linh: Deadline cho khảo sát này là bao lâu? Bên đối tác muốn có báo cáo sơ bộ trước cuộc họp tuần sau.
+
+T000185 [11:11:45] Hoàng: Vậy deadline cho khảo sát là thứ Hai tuần sau, trước 2h chiều. Dũng sẽ trình bày kết quả trong meeting với partner.
+
+T000186 [11:12:30] Minh: Em sẽ assign Dũng task này. Nhưng cần lưu ý: task design doc performance cho caching cũng có deadline thứ Hai. Hai task độc lập?
+
+T000187 [11:13:15] Linh: Thứ Hai có design doc performance và khảo sát crypto. Dũng có thể làm cả hai, nhưng cần sắp xếp thời gian. Có thể design doc viết vào cuối tuần, khảo sát vào sáng thứ Hai.
+
+T000188 [11:14:00] Hoàng: Event-dependent deadline: task khảo sát crypto phải hoàn thành trước meeting 2h chiều thứ Hai, còn design doc performance có deadline cuối ngày thứ Hai. Vậy khảo sát ưu tiên trước.
+
+T000189 [11:14:45] Minh: Rõ. Em sẽ inform Dũng về priority.
+
+T000190 [11:15:25] Trang: Liên quan đến crypto, QA cũng cần test case mới. Nhưng chưa có spec, nên em chưa thể bắt đầu. Vậy task này sẽ có trigger từ khảo sát.
+
+T000191 [11:16:10] Hoàng: Correct. Task QA crypto sẽ phụ thuộc vào kết quả khảo sát. Tạm thời chưa assign.
+
+T000192 [11:16:55] An: Em muốn hỏi: khảo sát này có cần dữ liệu thị trường về crypto không? Bên em có thể cung cấp.
+
+T000193 [11:17:35] Dũng (mới tham gia): Em xin phép. Về khảo sát, em cần access vào API của vài sàn lớn và tài liệu compliance. Anh An có thể share contact không ạ?
+
+T000194 [11:18:15] An: Em sẽ gửi danh sách API và contact cho Dũng vào cuối ngày.
+
+T000195 [11:18:55] Linh: Ngoài crypto, em có một feature khác: cải tiến giao diện quản lý đơn hàng cho admin. Hiện tại UI chưa thân thiện, cần redesign.
+
+T000196 [11:19:40] Minh: Feature này do ai design? Product hay Dev?
+
+T000197 [11:20:20] Linh: Product sẽ làm wireframe. Em sẽ assign cho bạn Huyền – designer. Deadline wireframe: thứ Năm tuần sau.
+
+T000198 [11:21:00] Hoàng: Task mới: wireframe admin UI, assign Huyền, deadline thứ Năm tuần sau. Có dependecy với module thanh toán không?
+
+T000199 [11:21:45] Linh: Không trực tiếp, nhưng sau khi có wireframe, dev sẽ estimate effort. Có thể ảnh hưởng timeline release.
+
+T000200 [11:22:30] Hòa: Bên Ops có một yêu cầu cho admin UI: cần responsive trên mobile, vì team vận hành hay dùng tablet.
+
+T000201 [11:23:10] Linh: OK, em sẽ ghi chú responsive trong requirement.
+
+T000202 [11:23:55] Trang: Testing cho admin UI sẽ cần môi trường staging riêng? Em có thể dùng same environment với module thanh toán?
+
+T000203 [11:24:40] Hòa: Nên dùng riêng để tránh ảnh hưởng. Em sẽ tạo một stack mới cho admin UI test.
+
+T000204 [11:25:20] Hoàng: Tạo môi trường test admin UI là task cho Ops. Hòa, deadline khi nào?
+
+T000205 [11:26:00] Hòa: Em có thể làm trước khi wireframe hoàn thành, nhưng cần spec sơ bộ. Deadline: khi nào có requirement spec.
+
+T000206 [11:26:45] Linh: Product sẽ release requirement spec cho admin UI vào thứ Ba tuần sau. Vậy Hòa có thể bắt đầu từ thứ Ba.
+
+T000207 [11:27:30] Hoàng: Event-dependent: Ops task phụ thuộc vào requirement spec. Vậy deadline Ops task là sau thứ Ba, nhưng chưa có ngày hoàn thành.
+
+T000208 [11:28:15] Trang: Em muốn clarification: yêu cầu responsive có ảnh hưởng đến test case không? Nếu có, em cần update test plan.
+
+T000209 [11:29:00] Linh: Huyền sẽ đảm bảo responsive, QA chỉ cần test theo wireframe.
+
+T000210 [11:29:40] Hoàng: Vậy chúng ta có nhiều task mới. Nhưng tôi thấy có vấn đề: resource allocation – Dũng đã có hai task (design doc performance và khảo sát crypto). Thắng integration spec. Huyền wireframe. Cần tracking.
+
+T000211 [11:30:25] Minh: Em đề xuất tạo một tracker riêng cho Dũng, vì có thể bị overload. Nếu cần, em có thể support.
+
+T000212 [11:31:10] Linh: Em có thể giúp Dũng một phần về business requirement cho crypto.
+
+T000213 [11:31:55] Hoàng: Đó là support, không phải handoff. Ghi nhận.
+
+T000214 [11:32:35] An: Quay lại vấn đề test data phase 1, em đã gửi file cho Trang sáng nay. Trang đã nhận chưa?
+
+T000215 [11:33:15] Trang: Em nhận rồi, cảm ơn An. Phase 1 sẽ bắt đầu test từ sáng thứ Sáu như kế hoạch.
+
+T000216 [11:33:55] Hòa: Nhân tiện, em đã cập nhật retention log cho thanh toán. Script chạy lúc 10h sáng nay.
+
+T000217 [11:34:35] Hoàng: Task đó hoàn thành. Tốt. Bây giờ tôi muốn thảo luận về vấn đề monitor integration unresolved từ part 2. Ở đây chúng ta chưa quyết định ai làm, nhưng có thể đưa vào part này?
+
+T000218 [11:35:20] Linh: Em nghĩ nên chờ spec integration xong để biết scope.
+
+T000219 [11:36:00] Hoàng: Vậy vẫn unresolved. Chúng ta chuyển sang topic khác.
+
+T000220 [11:36:45] Minh: Em có một đề xuất nhỏ: trong design doc performance, Dũng nên đề cập đến khả năng mở rộng cho crypto. Phòng xa.
+
+T000221 [11:37:30] Linh: Ý hay, nhưng crypto mới là khảo sát, chưa chính thức. Có thể chỉ là note.
+
+T000222 [11:38:10] Hoàng: Ghi nhận suggestion. Không tạo task.
+
+T000223 [11:38:50] Trang: Em muốn báo cáo: bug hiển thị amount decimal đã được Thắng fix provisional, em sẽ test lại vào chiều nay.
+
+T000224 [11:39:30] Minh: Tốt, nếu fix rồi thì update bug status.
+
+T000225 [11:40:10] An: Về chargeback data, em đã gửi email cho Finance, họ hứa cuối ngày mai. Deadline thứ Sáu vẫn ổn.
+
+T000226 [11:40:55] Hòa: Em có một vấn đề nữa: trên server staging có một số log error về SSL certificate sắp hết hạn. Cần renew trước khi QA test.
+
+T000227 [11:41:40] Hoàng: Task: renew SSL cho staging, assign Hòa, deadline: trước 8h sáng thứ Sáu để kịp deploy.
+
+T000228 [11:42:20] Hòa: OK.
+
+T000229 [11:43:00] Minh: Liên quan đến SSL, bên production cũng sắp hết hạn vào cuối tháng 3. Cần plan.
+
+T000230 [11:43:45] Hoàng: Task riêng cho production SSL, chưa có deadline. Ghi nhận.
+
+T000231 [11:44:25] Linh: Em cảm thấy có quá nhiều task phát sinh. Có thể chúng ta cần review lại priority sau part này.
+
+T000232 [11:45:10] Hoàng: Đồng ý. Các part sau sẽ có recap và điều chỉnh. Part 4 gần hết, tôi muốn tổng kết nhanh:
+
+- Task khảo sát crypto: Dũng, deadline 2h chiều thứ Hai.
+- Wireframe admin UI: Huyền, deadline thứ Năm tuần sau.
+- Requirement spec admin UI: Linh, deadline thứ Ba tuần sau.
+- Renew SSL staging: Hòa, deadline sáng thứ Sáu.
+- Các task cũ vẫn giữ deadline.
+
+T000233 [11:46:00] Minh: Còn task design doc performance của Dũng vẫn deadline cuối ngày thứ Hai, nhưng ưu tiên khảo sát hơn.
+
+T000234 [11:46:40] Trang: Em confirm phase 1 test start sáng thứ Sáu.
+
+T000235 [11:47:20] Hoàng: Tốt. Part 4 kết thúc, không giải quyết unresolved items cũ. Cảm ơn mọi người.
+
+--- END OF PART P04 ---

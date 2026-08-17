@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020",
+  "meeting_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020",
+  "meeting_title": "Chuẩn bị bản demo",
+  "meeting_date": "2026-02-04",
+  "wave": 1,
+  "wave_name": "wave_1_baseline",
+  "labels": [
+    "task_without_deadline",
+    "negative_context",
+    "clean_transcript"
+  ],
+  "objective": "Có task rõ owner nhưng không có deadline; thêm suggestion chưa chốt.",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_1_baseline/W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-020/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-pro"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 635,
+    "turn_count": 26
+  },
+  "ground_truth": {
+    "available": true,
+    "expected_output_file": "expected_output.json",
+    "reviewer": "Codex",
+    "review_method": "full_transcript_and_final_state_audit",
+    "review_policy_version": "1.0",
+    "review_notes": "Reviewed against full transcript, final recap/state transitions, cancellation/handoff semantics, and deterministic date policy."
+  }
+}

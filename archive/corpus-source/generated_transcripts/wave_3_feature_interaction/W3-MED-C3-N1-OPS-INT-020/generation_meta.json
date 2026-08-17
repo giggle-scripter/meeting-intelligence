@@ -1,0 +1,76 @@
+{
+  "case": {
+    "wave": 3,
+    "case_index": 20,
+    "meeting_id": "W3-MED-C3-N1-OPS-INT-020",
+    "meeting_date": "2026-02-24",
+    "title": "Họp phối hợp triển khai và xử lý vấn đề",
+    "labels": "feature_interaction,deadline_replacement,recap_duplicate_risk,unresolved_item,negative_context",
+    "objective": "Release preparation, bug triage, monitoring và documentation. Có assignment bị từ chối rồi chuyển người, recap và task không deadline."
+  },
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 1552,
+    "turn_count": 64
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 103.02701240000897
+    },
+    {
+      "attempt": 2,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.003973500002757646
+    },
+    {
+      "attempt": 3,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005364800003007986
+    },
+    {
+      "attempt": 4,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.004775499997776933
+    },
+    {
+      "attempt": 5,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.0053989000007277355
+    },
+    {
+      "attempt": 6,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005182799999602139
+    },
+    {
+      "attempt": 7,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 349.69016920001013
+    }
+  ]
+}

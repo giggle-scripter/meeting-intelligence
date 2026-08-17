@@ -1,0 +1,84 @@
+MEETING_ID: W4-LONG-C5-N1-SW-STATE-009
+PART: P05/5
+
+T000220 [10:52:00] Minh: Chúng ta bước vào part cuối của meeting lần này. Mục tiêu là tổng kết các task và quyết định những mục còn tồn đọng. Hà, em báo cáo sơ qua tiến độ hôm nay?
+
+T000221 [10:52:35] Hà: Dạ, em đã hoàn thành verify môi trường test cho các module chính. Chỉ còn phần monitoring em chờ Tuấn cấu hình xong để chạy test load. Task môi trường test deadline 05/03 vẫn đang đúng lộ trình.
+
+T000222 [10:53:05] Tuấn: Về monitoring, em đã cấu hình ELK stack cơ bản và alert script. Hà có thể kiểm tra hôm nay. Deadline 03/03 sẽ kịp.
+
+T000223 [10:53:35] Minh: Tốt. Còn tài liệu triển khai? Lan, em đã chuyển bản draft cho Tuấn và Hà chưa?
+
+T000224 [10:54:00] Lan: Dạ, em đã gửi qua mail sáng nay. Em cũng gửi kèm template và các lưu ý về format. Tuấn và Hà có thể bắt đầu viết phần của mình.
+
+T000225 [10:54:30] Hà: Em đã nhận. Em sẽ viết phần test case và error handling trong tuần này, sau khi monitoring xong.
+
+T000226 [10:54:55] Tuấn: Em cũng nhận. Em sẽ viết phần kỹ thuật và CI/CD, dự kiến xong trước 10/03 để kịp deadline 14/03.
+
+T000227 [10:55:20] Minh: Vậy deadline 14/03 cho bản hoàn chỉnh vẫn giữ. Lan, em review trong vòng 2 ngày sau đó.
+
+T000228 [10:55:45] Lan: Dạ.
+
+T000229 [10:56:05] Hà: Em có một câu hỏi về review: chúng ta đã thống nhất Hà và Tuấn là reviewer tạm thời cho tài liệu. Nhưng sau handoff, ai sẽ là reviewer chính thức? Hay vẫn là Lan?
+
+T000230 [10:56:35] Tuấn: Em nghĩ Lan làm reviewer chính vì BA đã viết phần lớn nội dung.
+
+T000231 [10:56:55] Minh: Đồng ý. Lan sẽ là reviewer chính thức cho tài liệu, nhưng vì em đã handoff owner, nên reviewer này độc lập. Hà và Tuấn support nếu cần.
+
+T000232 [10:57:20] Lan: Vậy em sẽ review dựa trên bản draft cuối cùng từ Tuấn và Hà.
+
+T000233 [10:57:40] Minh: OK. Tiếp theo, về release plan. Lan, em đã viết sơ bộ chưa?
+
+T000234 [10:58:05] Lan: Dạ, em có draft dựa trên các deadline: monitoring 03/03, môi trường test 05/03, tài liệu 14/03, release dự kiến 28/03. Tuy nhiên, còn thiếu mục phân công release manager và quy trình sign-off.
+
+T000235 [10:58:35] Hà: Em đề xuất Minh làm release manager vì có kinh nghiệm điều phối. Em sẵn sàng hỗ trợ.
+
+T000236 [10:58:55] Tuấn: Em cũng đồng ý.
+
+T000237 [10:59:15] Minh: Cám ơn, nhưng tôi nghĩ Hà có thể đảm nhiệm, vì em đã theo sát môi trường test. Tôi sẽ hỗ trợ từ xa.
+
+T000238 [10:59:40] Hà: Dạ, em có thể thử. Nhưng nếu em thiếu kinh nghiệm, anh Minh giúp em.
+
+T000239 [11:00:00] Minh: Nhất trí. Vậy release manager là Hà, deadline cho release plan chi tiết là 21/03, trước release một tuần.
+
+T000240 [11:00:25] Hà: Em sẽ cập nhật vào draft của Lan và gửi mọi người review.
+
+T000241 [11:00:45] Lan: Em sẽ chuyển draft release cho Hà sau meeting.
+
+T000242 [11:01:05] Minh: Bây giờ tôi muốn điểm lại toàn bộ trạng thái cuối cùng của các task để tránh nhầm lẫn. Đầu tiên, task "Hoàn thiện môi trường test" – owner Hà và Tuấn, deadline 05/03. Task "Viết tài liệu triển khai chi tiết" – owner Tuấn và Hà, deadline 14/03, reviewer Lan. Task "Cấu hình monitoring cho staging" – owner Tuấn, deadline 03/03. Task "Tạo dataset test đăng nhập" – đã hủy.
+
+T000243 [11:01:50] Hà: Chính xác.
+
+T000244 [11:02:05] Tuấn: Em confirm.
+
+T000245 [11:02:20] Lan: Vậy còn vấn đề maintainer tài liệu sau này? Chúng ta đã đề cập nhưng chưa chốt.
+
+T000246 [11:02:40] Minh: Đúng, đó là unresolved item. Em đề xuất để Lan làm maintainer, nhưng vì em có nhiều việc BA khác, có thể cần thảo luận thêm. Tôi sẽ để mở, quyết định trong meeting tiếp theo.
+
+T000247 [11:03:10] Hà: Hợp lý. Vậy vẫn unresolved.
+
+T000248 [11:03:25] Tuấn: OK.
+
+T000249 [11:03:40] Minh: Còn gì khác không? Em muốn nhắc lại: không có duplicate task nào được tạo từ recap này. Chúng ta chỉ ghi nhận trạng thái hiện tại.
+
+T000250 [11:04:00] Hà: Rõ.
+
+T000251 [11:04:15] Lan: Em muốn hỏi về timeline monitoring: 03/03 là deadline, nhưng nếu có vấn đề, chúng ta có lùi không?
+
+T000252 [11:04:35] Minh: Nếu cần thiết, ta có thể điều chỉnh ở meeting tiếp theo. Nhưng hiện tại cứ giữ.
+
+T000253 [11:04:55] Tuấn: Em sẽ cố gắng xong đúng hạn.
+
+T000254 [11:05:10] Hà: Em sẽ test monitoring ngay sau khi Tuấn cấu hình xong.
+
+T000255 [11:05:30] Minh: Tốt. Vậy tổng kết lại, meeting lần này đã giải quyết các vấn đề về môi trường test, tài liệu, handoff, thay đổi deadline, và hủy task. Còn unresolved là maintainer tài liệu.
+
+T000256 [11:06:00] Lan: Cảm ơn anh Minh và mọi người.
+
+T000257 [11:06:15] Hà: Em cũng cảm ơn.
+
+T000258 [11:06:30] Tuấn: Cảm ơn.
+
+T000259 [11:06:45] Minh: Chúng ta kết thúc meeting ở đây. Hẹn meeting tiếp theo vào ngày 28/02 để review tiến độ trước deadline 05/03. Chúc mọi người một ngày làm việc hiệu quả.
+
+--- END OF PART P05 ---

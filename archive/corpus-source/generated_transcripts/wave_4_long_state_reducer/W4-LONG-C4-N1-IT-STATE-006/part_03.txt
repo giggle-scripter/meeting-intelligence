@@ -1,0 +1,98 @@
+MEETING_ID: W4-LONG-C4-N1-IT-STATE-006
+PART: P03/5
+
+T000148 [09:27:00] An: Chúng ta bắt đầu phần 3. Như đã hẹn, tôi muốn quay lại vấn đề tài liệu triển khai mà chúng ta thảo luận từ đầu buổi. Dung, em đã nhận được template từ Cường chưa?
+
+T000149 [09:27:10] Dung: Dạ, em chưa nhận được. Anh Cường nói sẽ gửi chiều nay, nhưng em chưa thấy.
+
+T000150 [09:27:18] Cường: Tôi đã gửi vào lúc 9 giờ sáng qua email. Em check lại hộp thư đi.
+
+T000151 [09:27:25] Dung: À, em xin lỗi, em thấy rồi. Cảm ơn anh.
+
+T000152 [09:27:32] An: Tốt. Vậy Dung, em bắt đầu viết tài liệu triển khai chưa?
+
+T000153 [09:27:38] Dung: Em đang phác thảo. Nhưng em thấy phần nội dung về cấu hình môi trường còn mơ hồ, vì chưa có staging.
+
+T000154 [09:27:48] An: Đúng, đó là vấn đề. Nhưng tôi nghĩ cần có người chịu trách nhiệm chính cho tài liệu này. Trước đây tôi giao cho Dung, nhưng bây giờ Cường có nhiều kinh nghiệm hơn, hay ta chuyển task "Soạn tài liệu hướng dẫn triển khai" cho Cường? Cường, anh nghĩ sao?
+
+T000155 [09:28:08] Cường: Tôi không ngại, nhưng hiện tại tôi đang bận review dữ liệu test và LDAP. Nếu nhận thêm, tôi cần điều chỉnh thời gian.
+
+T000156 [09:28:20] Bình: Em nghĩ Cường phù hợp hơn vì từng viết tài liệu cho dự án cũ. Dung có thể hỗ trợ.
+
+T000157 [09:28:30] Dung: Em đồng ý. Em sẽ hỗ trợ anh Cường nếu cần.
+
+T000158 [09:28:38] An: Vậy quyết định chuyển owner của task "Soạn tài liệu hướng dẫn triển khai" từ Dung sang Cường. Dung sẽ là người hỗ trợ. Cường, deadline của task này trước đây chưa xác định, anh muốn đặt khi nào?
+
+T000159 [09:28:55] Cường: Tôi nghĩ cần 2 tuần sau khi có môi trường staging. Nhưng vì chưa có môi trường, tạm thời đặt deadline 15/03. Nếu staging có sớm, tôi sẽ đẩy nhanh.
+
+T000160 [09:29:08] An: OK. Vậy task 2 bây giờ có owner mới là Cường, deadline 15/03.
+
+T000161 [09:29:15] Bình: Khoan, hồi phần 1 tôi nhớ task "Thiết lập môi trường staging" của tôi có deadline 25/02. Nhưng nếu meeting với IT chưa diễn ra, e rằng không kịp. Anh có thể dời deadline không?
+
+T000162 [09:29:30] An: Đúng, tôi cũng đang nghĩ. Task 1 deadline 25/02 có vẻ không khả thi. Bình, em muốn dời đến ngày nào?
+
+T000163 [09:29:40] Bình: Em đề xuất 05/03, để có thêm thời gian xử lý.
+
+T000164 [09:29:48] Cường: Tôi thấy 05/03 hợp lý, nhưng cần đảm bảo không ảnh hưởng đến task khác.
+
+T000165 [09:29:55] An: Vậy thay đổi deadline của task 1 thành 05/03. Ghi nhận.
+
+T000166 [09:30:02] Dung: Như vậy task 2 của Cường phụ thuộc vào task 1. Nếu task 1 trễ, task 2 cũng ảnh hưởng.
+
+T000167 [09:30:12] An: Đúng, đó là rủi ro. Nhưng tạm thời cứ giữ.
+
+T000168 [09:30:18] Cường: Về tài liệu, tôi muốn làm rõ phần kiến trúc hệ thống. Hồi phần 1 chúng ta chưa bàn sâu. Tôi cần thông tin từ Bình về luồng xác thực.
+
+T000169 [09:30:30] Bình: Em có thể cung cấp sơ đồ. Em sẽ gửi vào cuối ngày.
+
+T000170 [09:30:38] Cường: Tốt. Vậy em gửi sớm để tôi viết tài liệu.
+
+T000171 [09:30:45] An: Nhân tiện, về task 4 "Xử lý lỗi đăng nhập LDAP", Bình, em có tiến triển gì chưa?
+
+T000172 [09:30:55] Bình: Em mới bắt đầu phân tích log. Dự kiến đến 27/02 em sẽ có báo cáo sơ bộ.
+
+T000173 [09:31:02] Cường: Nhưng nếu firewall chặn, em cần thông tin từ IT. Liệu meeting với IT có giúp được không?
+
+T000174 [09:31:12] Bình: Hy vọng. Meeting đã lên lịch thứ hai.
+
+T000175 [09:31:18] An: Vậy tạm thời ổn. Tôi muốn điểm lại các thay đổi: task 1 deadline thành 05/03, task 2 owner thành Cường deadline 15/03, các task khác giữ nguyên.
+
+T000176 [09:31:32] Dung: Em thấy có sự mâu thuẫn nhỏ: task 6 "Chuẩn bị dữ liệu test" của em deadline 28/02, nhưng dữ liệu test cần dựa trên môi trường staging. Nếu task 1 trễ, em không thể test dữ liệu.
+
+T000177 [09:31:48] An: Tốt, em đã chỉ ra. Vậy chúng ta cần điều chỉnh task 6? Hay giữ nguyên?
+
+T000178 [09:31:55] Cường: Tôi nghĩ nên giữ nguyên deadline, vì em có thể chuẩn bị dữ liệu mẫu trước, không cần staging. Chỉ khi test tích hợp mới cần môi trường.
+
+T000179 [09:32:05] Dung: Vâng, em sẽ làm vậy.
+
+T000180 [09:32:10] Bình: Về distractor "Cập nhật tài liệu hướng dẫn sử dụng", có ai muốn nhận không?
+
+T000181 [09:32:18] Cường: Để sau, hiện tại chưa cần.
+
+T000182 [09:32:22] An: Đồng ý. Vậy ta bỏ qua.
+
+T000183 [09:32:28] Dung: Em có một băn khoăn: task 5 "Soạn hướng dẫn cấu hình LDAP" deadline 24/02, nhưng em chưa có thông số từ Cường. Anh đã gửi chưa?
+
+T000184 [09:32:40] Cường: Tôi sẽ gửi trong email chiều nay. Em yên tâm.
+
+T000185 [09:32:45] Dung: OK.
+
+T000186 [09:32:50] An: Tôi thấy phần 3 đã đi được nửa chặng. Chúng ta vừa handoff task 2, thay đổi deadline task 1. Còn vấn đề gì khác muốn thảo luận trong topic này không?
+
+T000187 [09:33:02] Bình: Em muốn nhắc lại rằng task 3 "Sắp xếp meeting với IT" deadline 22/02 sắp tới. Em đã gửi lời mời, nhưng chưa có xác nhận.
+
+T000188 [09:33:15] An: Em theo dõi và báo lại.
+
+T000189 [09:33:20] Cường: Tôi nghĩ chúng ta nên dành thời gian cuối phần 3 để nói về kế hoạch tổng thể, nhưng có vẻ chưa đủ.
+
+T000190 [09:33:30] An: Ừ, để phần 4. Bây giờ tôi muốn chốt lại: task 1 và 2 đã điều chỉnh, các task khác không đổi. Mọi người đồng ý?
+
+T000191 [09:33:40] Bình: Đồng ý.
+
+T000192 [09:33:42] Dung: Em đồng ý.
+
+T000193 [09:33:45] Cường: OK.
+
+T000194 [09:33:50] An: Vậy kết thúc phần 3. Hẹn gặp lại ở phần 4 để bàn tiếp.
+
+--- END OF PART P03 ---

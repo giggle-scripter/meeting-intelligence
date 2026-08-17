@@ -1,0 +1,8 @@
+ghi vội
+chủ đề: Chuẩn bị môi trường kiểm thử
+kw: bao cao / du lieu / moi truong / kiem thu / api / lai / lieu
+- Để em dành cuối tuần này setup lại dữ liệu và xác định nguyên nhân API
+* Thứ Ba tuần sau em gửi báo cáo tổng thể + dữ liệu test mới cho cả nhóm
+- Đúng, thứ Năm tuần sau em sẽ xong task của mình + kiểm tra lại toàn bộ cấu hình proxy cho Lan
+1) Anh yên tâm, em sẽ chạy hết case tích hợp sau khi Tuấn sửa xong
+- Dạ chắc chỉ thiếu chút dung lượng ổ đĩa, để em tự mở rộng, không đáng kể

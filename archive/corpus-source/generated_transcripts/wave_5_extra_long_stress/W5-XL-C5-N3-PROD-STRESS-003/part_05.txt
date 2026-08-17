@@ -1,0 +1,114 @@
+MEETING_ID: W5-XL-C5-N3-PROD-STRESS-003
+PART: P05/10
+
+T000415 [00:55:05] Thảo: Chúng ta quay lại topic từ part 1 về module X. Hôm qua có một số thay đổi về yêu cầu từ business. Chúng ta cần cập nhật scope.
+
+T000416 [00:55:14] Hùng: Em nhớ là filter search đã được thêm vào part 4. Còn gì mới không?
+
+T000417 [00:55:21] Thảo: Có. Họ yêu cầu thêm một trường "priority" trong kết quả search. Như vậy cần mở rộng endpoint.
+
+T000418 [00:55:29] Minh: Lại thay đổi. Em vừa điều chỉnh mock xong cho filter, giờ lại thêm priority. Điều này ảnh hưởng tới deadline.
+
+T000419 [00:55:38] Hùng: Thế thì test của em cũng phải sửa. Em vừa cập nhật test plan xong, giờ phải làm lại.
+
+T000420 [00:55:46] Thảo: Hiểu. Nhưng bên business nói đây là yêu cầu bắt buộc cho demo. Chúng ta phải xử lý.
+
+T000421 [00:55:53] Anh: Vậy scope đã thay đổi đáng kể. Cần xem lại toàn bộ kế hoạch.
+
+T000422 [00:56:00] Thảo: Đúng. Nhưng trước hết, ai sẽ implement priority? Minh vẫn là người lo phần backend.
+
+T000423 [00:56:08] Minh: Em có thể thêm, nhưng deadline 02/03 cho mock core và filter giờ phải kéo dài thêm. Có thể 03/03 mới xong.
+
+T000424 [00:56:17] Thảo: Không được, vì demo 05/03. Cần mock hoàn chỉnh trước 03/03 để Hùng test.
+
+T000425 [00:56:25] Minh: Nếu vậy, em cần ai đó hỗ trợ phần filter để em tập trung core và priority. Có thể handoff filter cho Hùng?
+
+T000426 [00:56:35] Hùng: Em không rành về API code. Em chỉ làm test thôi.
+
+T000427 [00:56:41] Linh: Em có thể viết filter API đơn giản không? Em có kiến thức Node.js cơ bản.
+
+T000428 [00:56:49] Thảo: Tốt. Vậy Linh sẽ nhận phần filter search, Minh lo core mock và priority. Handoff chính thức.
+
+T000429 [00:56:57] Minh: Đồng ý. Em sẽ chuyển spec filter cho Linh và hướng dẫn.
+
+T000430 [00:57:04] Linh: Em sẵn sàng. Nhưng em cần deadline rõ.
+
+T000431 [00:57:10] Thảo: Filter search của Linh: deadline 02/03, trễ nhất 03/03. Minh vẫn giữ core mock và priority, deadline 03/03.
+
+T000432 [00:57:19] Hùng: Vậy test của em sẽ bắt đầu từ 03/03 với toàn bộ mock. Nhưng nếu filter của Linh chưa xong thì test lẻ.
+
+T000433 [00:57:27] Thảo: Linh phải hoàn thành đúng hạn.
+
+T000434 [00:57:33] Anh: Scope update này có cần approval lại không? Hay ta tự quyết?
+
+T000435 [00:57:41] Thảo: Em sẽ báo PO. Không cần họp riêng.
+
+T000436 [00:57:47] Hùng: Như vậy là handoff bước hai: từ Minh sang Linh. Minh đã bàn giao spec.
+
+T000437 [00:57:55] Minh: Em gửi doc ngay.
+
+T000438 [00:58:00] Linh: Cảm ơn.
+
+T000439 [00:58:04] Thảo: Về repeated mention: Hùng vừa nhắc lại về data mẫu. Hôm qua Huy đã gửi, Minh review rồi. Chúng ta không cần tạo task mới, chỉ nhắc.
+
+T000440 [00:58:13] Hùng: Vâng, em chỉ confirm là đã nhận.
+
+T000441 [00:58:18] Thảo: Tốt. Không tạo duplicate.
+
+T000442 [00:58:22] Anh: Còn vụ firewall rules? Hùng đã follow up chưa?
+
+T000443 [00:58:28] Hùng: Em gọi Phong rồi. Anh ấy nói sẽ update 28/02. Chưa có response.
+
+T000444 [00:58:35] Thảo: Vẫn chưa confirm. Em theo dõi.
+
+T000445 [00:58:40] Minh: Về priority field, em cần thêm trường trong schema. Có thể ảnh hưởng tới UI prototype.
+
+T000446 [00:58:48] Linh: Nếu có thay đổi UI, em cập nhật sau khi có spec.
+
+T000447 [00:58:54] Thảo: Vậy Linh sẽ đợi spec priority từ Minh.
+
+T000448 [00:58:59] Hùng: Em muốn hỏi: test script tool đã có quyết định chưa? Hay vẫn chờ họp 02/03?
+
+T000449 [00:59:07] Thảo: Vẫn chờ. Họp 02/03 sẽ quyết.
+
+T000450 [00:59:12] Anh: Em thấy nhiều thay đổi, cần cập nhật risk log.
+
+T000451 [00:59:18] Thảo: Em sẽ ghi nhận.
+
+T000452 [00:59:23] Minh: Em có thắc mắc: handoff filter cho Linh, vậy ai sẽ review code của Linh?
+
+T000453 [00:59:31] Thảo: Minh review, vì Minh hiểu architecture. Linh gửi pull request.
+
+T000454 [00:59:38] Linh: Vâng.
+
+T000455 [00:59:42] Hùng: Em thấy lịch rất chặt. Có thể cần tăng ca.
+
+T000456 [00:59:48] Thảo: Có thể. Nhưng hãy cố gắng.
+
+T000457 [00:59:53] Anh: Vậy nhiệm vụ chính: Linh nhận filter, Minh core và priority, Hùng test, Thảo liên lạc PO.
+
+T000458 [01:00:00] Hùng: Đúng.
+
+T000459 [01:00:05] Linh: Em bắt đầu ngay.
+
+T000460 [01:00:09] Minh: Em cũng vậy.
+
+T000461 [01:00:13] Thảo: Nhắc lại, không giải quyết unresolved tool test script, để họp sau.
+
+T000462 [01:00:19] Anh: OK.
+
+T000463 [01:00:23] Hùng: Em có cảm giác scope đang phình to. Có cần cắt bớt?
+
+T000464 [01:00:30] Thảo: Không, vì business yêu cầu. Ta phải theo.
+
+T000465 [01:00:35] Minh: Em lo về deadline.
+
+T000466 [01:00:39] Thảo: Đã điều chỉnh. Cố gắng.
+
+T000467 [01:00:43] Linh: Em xin phép out để code.
+
+T000468 [01:00:47] Hùng: Em cũng chuẩn bị test.
+
+T000469 [01:00:51] Thảo: Kết thúc part 5.
+
+--- END OF PART P05 ---

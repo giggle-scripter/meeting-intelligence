@@ -1,0 +1,620 @@
+[09:00:00] Minh: Chào mọi người, bắt đầu buổi họp tổng hợp. Hôm nay chúng ta có nhiều việc, tập trung vào tiến độ thanh toán mới và kế hoạch vận hành. Có mặt đủ chưa?
+[09:00:12] Lan: Có Lan, Tuấn, Hà và An. Giang báo ốm, Huy đang làm việc với bên đối tác nên vắng.
+[09:00:22] Minh: OK. Chúng ta sẽ dành khoảng 30 phút cho phần phát triển, sau đó chuyển sang vận hành. Mọi người chuẩn bị gì chưa?
+[09:00:35] Tuấn: Em có cập nhật về API payment. Đã xong logic cơ bản, đang chờ review từ phía Hà.
+[09:00:45] Hà: QA team đang viết test cho module đó. Dự kiến cuối tuần này có kết quả.
+[09:00:55] An: Em muốn hỏi về môi trường staging, hiện tại đang có vấn đề với container orchestration.
+[09:01:08] Minh: Cụ thể là gì? Ảnh hưởng đến tiến độ triển khai không?
+[09:01:18] An: Có, pod không start được vì thiếu config cho secret. Em cần team dev cập nhật giá trị mới.
+[09:01:30] Tuấn: À, cái đó do bên em chưa push file env mẫu. Em sẽ gửi trong chiều nay.
+[09:01:40] Minh: Vậy đặt deadline sửa config trước ngày 3/3 nhé. An, em check và confirm.
+[09:01:52] An: OK, em sẽ kiểm tra sau khi Tuấn cập nhật. Nhưng mà...
+[09:02:05] Hà: Anh Minh, em thấy trong spec có phần xử lý refund chưa rõ. Tuấn đã implement chưa?
+[09:02:18] Tuấn: Chưa, em đang chờ clarification từ phía product. Trong tài liệu ghi là "sẽ có sau".
+[09:02:30] Minh: Đúng, phần đó tạm thời để sau phiên bản đầu. Chỉ tập trung vào payment chính.
+[09:02:42] Lan: Vậy deadline cho API payment là ngày 5/3? Em cần để phối hợp với QA.
+[09:02:55] Minh: Theo kế hoạch gốc là 5/3, nhưng nếu có vấn đề gì thì cần báo sớm.
+[09:03:08] Tuấn: Dạ, em có thể hoàn thành sớm hơn, khoảng 3/3. Nhưng chờ Hà review xong.
+[09:03:20] Hà: Em sẽ review ngay khi Tuấn gửi. Có thể cuối ngày 3/3 em có feedback.
+[09:03:32] Minh: Tốt. Thế thì deadline cho code complete là 3/3, QA review xong 5/3. Anh ghi nhận.
+[09:03:45] An: Em muốn nhấn mạnh lại, môi trường staging cần fix trước 3/3 để test được.
+[09:03:58] Tuấn: Em sẽ ưu tiên gửi config file chiều nay.
+[09:04:10] Minh: OK, chuyển sang phần vận hành. Anh thấy bên ops có đề xuất thay đổi lịch deploy?
+[09:04:25] An: Vâng, ban đầu lịch deploy cho release 2.0 là 10/3. Nhưng do phần cơ sở hạ tầng chưa ổn, em đề nghị dời sang 15/3.
+[09:04:40] Lan: Dời thì ảnh hưởng đến các milestone khác. Team dev đã điều chỉnh theo lịch cũ rồi.
+[09:04:55] Minh: Phải cân nhắc. An, em cần thêm thời gian bao lâu và lý do cụ thể?
+[09:05:08] An: Thực tế là cluster chưa được nâng cấp, cần bảo trì database scaling. Em nghĩ thêm 5 ngày là tối thiểu.
+[09:05:22] Hà: Nếu dời deploy thì QA schedule cũng phải dời. Bọn em đã lên test plan cho tuần từ 8/3 đến 10/3.
+[09:05:36] Tuấn: Em thấy vẫn có thể chạy song song, vừa fix infra vừa test trên staging cũ.
+[09:05:50] An: Không được, staging cũ đã tắt để tiết kiệm chi phí. Giờ chỉ có một môi trường dev.
+[09:06:02] Minh: Vậy giải pháp là gì? Mọi người brainstorm nhanh.
+[09:06:15] Lan: Có thể dùng tạm môi trường của team data, nhưng Huy vắng, cần hỏi lại.
+[09:06:28] Minh: Để sau, mai anh sẽ nói chuyện với Huy. Còn hiện tại, tạm giữ lịch deploy cũ, và An chuẩn bị plan dự phòng cho 15/3.
+[09:06:42] An: Vậy em sẽ viết memo chi tiết gửi mọi người trước cuối ngày hôm nay.
+[09:06:55] Hà: Anh Minh, có vấn đề về test automation. Em cần Tuấn thêm mock data cho một số endpoint.
+[09:07:08] Tuấn: Em tưởng mock data đã có sẵn trong repo? Hay Hà muốn endpoint mới?
+[09:07:20] Hà: Endpoint cũ nhưng response thay đổi do schema mới. Em cần cập nhật lại.
+[09:07:32] Tuấn: OK, em sẽ update schema trong ngày mai và gửi lại.
+[09:07:45] Minh: Chú ý, đừng để việc này ảnh hưởng deadline 3/3.
+[09:07:58] Tuấn: Dạ, em sẽ làm song song.
+[09:08:10] Lan: Anh Minh, em muốn hỏi về dependency giữa payment và module notification. Khi nào có API notification?
+[09:08:25] Minh: Notification đang giao cho team khác, dự kiến cuối tháng 3. Nhưng payment không phải chờ.
+[09:08:38] Lan: Vậy luồng thanh toán hiện tại có gửi email confirm không? Hay tạm thời bỏ qua?
+[09:08:52] Minh: Bỏ qua, chỉ lưu log. Sau này tích hợp notification.
+[09:09:05] Hà: Như vậy thì manual test khó kiểm tra, em sẽ viết test case dựa trên log.
+[09:09:18] An: Em có cập nhật, bên DevOps vừa phát hiện lỗi SSL cho payment gateway. Cần team dev fix.
+[09:09:32] Tuấn: Cái đó liên quan đến config, em đã để placeholder. Cần ops update cert.
+[09:09:45] An: Cert sẽ có trong thứ Tư tuần sau. Tạm thời dùng self-signed để test.
+[09:09:58] Minh: OK, Tuấn và An phối hợp, deadline update cert là 4/3.
+[09:10:12] Lan: Em thấy có nhiều việc nhỏ lẻ, cần hệ thống lại. Anh Minh, cuối tuần này có review milestone không?
+[09:10:25] Minh: Có, thứ Sáu tuần này. Mọi người chuẩn bị báo cáo nhé.
+[09:10:38] Hà: Em xin phép hỏi, test plan cho payment có cần bao gồm stress test không? Spec có đề cập.
+[09:10:52] Tuấn: Tạm thời chưa, vì chúng ta mới chỉ ở giai đoạn MVP.
+[09:11:05] Minh: Đồng ý, stress test để sau. Hà tập trung vào functional test.
+[09:11:18] An: Em có một vấn đề nữa, database production đang chạy với cấu hình cũ. Khi deploy payment, cần migrate schema. Em sợ downtime.
+[09:11:32] Minh: Có kế hoạch zero-downtime không?
+[09:11:45] An: Có, nhưng cần Tuấn viết migration script và kiểm tra rolling update.
+[09:11:58] Tuấn: Em chưa làm migration bao giờ. Có tài liệu hướng dẫn không?
+[09:12:10] An: Em sẽ gửi link cho Tuấn, khá chi tiết. Deadline script là trước 6/3.
+[09:12:25] Minh: Vậy assign: Tuấn viết migration script, An review và test trên staging. OK?
+[09:12:38] Tuấn: OK, em sẽ xem tài liệu chiều nay.
+[09:12:50] Lan: Em nhắc lại, team dev còn task viết unit test cho payment service. Tuấn có làm chưa?
+[09:13:03] Tuấn: Em đã viết một phần, còn coverage tầm 70%. Em sẽ bổ sung trong tuần này.
+[09:13:15] Hà: QA sẽ review unit test sau khi Tuấn push. Có thể phối hợp.
+[09:13:28] Minh: Tất cả task đều tracking trên board nhé. Em thấy ticket payment API còn chưa update trạng thái.
+[09:13:42] Lan: Để em nhắc Tuấn cập nhật sau cuộc họp.
+[09:13:55] Tuấn: Dạ, em sẽ update ngay.
+[09:14:08] An: Em muốn hỏi về monitoring cho payment, team ops cần biết log format. Tuấn có doc không?
+[09:14:20] Tuấn: Chưa, nhưng em sẽ viết nhanh và gửi trong ngày mai.
+[09:14:33] Minh: Thêm task cho Tuấn: viết log spec, deadline 2/3.
+[09:14:45] Hà: Anh Minh, em thấy có nhiều task quá, liệu Tuấn có quá tải không?
+[09:14:58] Minh: Cũng đúng. Tuấn, em thấy sao? Cần hỗ trợ gì không?
+[09:15:10] Tuấn: Em vẫn ổn, nhưng ưu tiên config và API chính trước. Log spec em làm sau.
+[09:15:22] Minh: OK, vậy deadline log spec đẩy lên 4/3. Điều chỉnh nhé.
+[09:15:35] An: Em cũng có task chuẩn bị tài liệu runbook cho payment. Em sẽ làm sau khi Tuấn có log spec.
+[09:15:48] Minh: Ghi nhận. Task runbook giao An, deadline 8/3.
+[09:16:00] Lan: Em thấy còn nhiều vấn đề về dependency, nhưng hết giờ cho phần phát triển rồi. Chúng ta chuyển sang vận hành?
+[09:16:14] Minh: Ừ, vận hành. Anh có vài điểm cần thảo luận về quy trình deploy và rollback.
+[09:16:28] An: Vâng. Hiện tại team ops đã thống nhất quy trình blue-green, nhưng cần xác nhận từ phía dev.
+[09:16:42] Tuấn: Blue-green là gì? Em chưa nghe.
+[09:16:55] An: Là chiến lược deploy với hai môi trường giống hệt nhau, một live, một staging. Khi deploy mới, chuyển traffic.
+[09:17:08] Minh: Ok, Tuấn có thể tìm hiểu thêm. Anh thấy phương án này khả thi. Có vấn đề gì không?
+[09:17:22] An: Cần đồng bộ database, nếu schema thay đổi có thể gây conflict.
+[09:17:35] Lan: Vậy migration script phải hỗ trợ backward compatible.
+[09:17:48] Tuấn: Em sẽ chú ý.
+[09:18:00] Hà: Em có câu hỏi, rollback plan nếu deploy lỗi? Có script tự động không?
+[09:18:13] An: Có, nhưng chưa test trên môi trường thật. Em sẽ viết và test vào tuần sau.
+[09:18:26] Minh: Vậy for now, chưa có rollback tự động. Khi deploy production đầu tiên, chúng ta sẽ manual.
+[09:18:40] An: Được, em sẽ chuẩn bị quy trình manual.
+[09:18:52] Lan: Em nghĩ chúng ta nên có buổi workshop về deploy flow cho cả team. Khi nào sắp xếp?
+[09:19:05] Minh: Tuần sau, đề nghị An và Tuấn tổ chức. Deadline 8/3.
+[09:19:18] Tuấn: OK, em sẽ chuẩn bị nội dung.
+[09:19:30] An: Em sẽ hỗ trợ slide.
+[09:19:42] Hà: Workshop có cần QA tham gia không?
+[09:19:55] Minh: Cần, Hà và cả team dev. Mọi người đều phải hiểu.
+[09:20:08] Lan: Vậy ghi vào lịch, thứ Tư 3/3 lúc 14h?
+[09:20:20] Minh: OK, Lan tổ chức lịch nhé. Chúng ta gần hết giờ rồi, còn issue gì cấp bách không?
+[09:20:33] An: Em có một vấn đề kỹ thuật: endpoint health check của payment service bị timeout. Cần dev fix.
+[09:20:46] Tuấn: Đã có ticket, em đang xử lý. Dự kiến xong chiều nay.
+[09:20:58] Hà: Còn bug UI nhỏ trên trang thanh toán, nhưng không block.
+[09:21:10] Minh: Bỏ qua, focus vào core logic. Vậy tổng kết: các task đã assign, deadline như đã nói. Ai có góp ý thêm?
+[09:21:23] Lan: Em chỉ muốn nhấn mạnh, cần đẩy nhanh config staging vì dependency nhiều.
+[09:21:35] Tuấn: Vâng, em sẽ là ưu tiên số một.
+[09:21:47] Minh: OK, hết phần P01. Hẹn mọi người part sau tiếp tục các vấn đề còn lại. Cảm ơn.
+[09:22:00] Minh: Tiếp tục nhé. Chúng ta cần bàn về tích hợp payment với module CRM. Lan, em có cập nhật gì từ phía đối tác không?
+[09:22:15] Lan: Có, bên CRM yêu cầu chúng ta cung cấp API để đồng bộ trạng thái đơn hàng. Họ muốn hai chiều.
+[09:22:30] Tuấn: API hiện tại chỉ có một chiều từ payment sang CRM. Cần thêm endpoint để CRM gửi cập nhật.
+[09:22:45] Hà: Vậy có thay đổi spec không? Em cần cập nhật test plan.
+[09:23:00] Minh: Chưa rõ. Anh cần Huy bàn với bên CRM, nhưng Huy vắng. Có thể hoãn sang tuần sau.
+[09:23:15] An: Nhưng nếu hoãn thì lịch deploy bị ảnh hưởng.
+[09:23:30] Minh: Để anh assign tạm cho Tuấn viết API draft dựa trên tài liệu cũ. Tuấn, em làm được không?
+[09:23:45] Tuấn: Em có thể phác thảo, nhưng cần confirmation từ product.
+[09:24:00] Minh: Vậy em viết draft, deadline 4/3. Sau đó anh sẽ review.
+[09:24:15] Lan: Còn việc đồng bộ dữ liệu lịch sử? Payment có dữ liệu từ năm ngoái, cần migrate lên CRM.
+[09:24:30] An: Em thấy cần script chạy batch. Có thể dùng ETL pipeline.
+[09:24:45] Minh: Ai sẽ làm việc đó? Chưa assign.
+[09:25:00] Hà: Theo anh, team data hay team dev? Em thấy cần chuyên môn về data.
+[09:25:15] Minh: Để hỏi Giang khi quay lại. Nhưng tạm thời tạo task với owner unresolved.
+[09:25:30] Lan: Vậy deadline dự kiến? Nếu không có owner thì khó.
+[09:25:45] Minh: Deadline tham khảo 10/3, nhưng sẽ xác nhận sau.
+[09:26:00] Tuấn: Em có thể hỗ trợ viết script nếu có spec rõ.
+[09:26:15] Hà: Nhưng Tuấn đã có nhiều task rồi. Liệu có quá tải?
+[09:26:30] Minh: Em nói đúng. Để phân công lại: task migration data tạm gác, chờ Huy và Giang.
+[09:26:45] An: Vậy còn việc setup môi trường cho CRM test? Bên họ cần sandbox.
+[09:27:00] Minh: An, em làm được không? Cần bao lâu?
+[09:27:15] An: Khoảng 2 ngày, nhưng cần Tuấn mở port trên firewall.
+[09:27:30] Tuấn: Em sẽ làm ngay. Deadline mở port là hôm nay.
+[09:27:45] Minh: OK, ghi nhận. Task cho An: setup sandbox, deadline 3/3.
+[09:28:00] Lan: Anh Minh, em thấy có hai task tên giống nhau: "viết script migration" cho database và "viết script migration" cho CRM. Dễ nhầm.
+[09:28:15] Minh: Ừ, cần phân biệt. Một cái là write ETL, một cái là write db migration. Ghi rõ trong ticket.
+[09:28:30] Hà: Em nghĩ nên đặt tên khác, ví dụ "ETL data migration" và "schema migration".
+[09:28:45] Minh: Đồng ý, Lan update board nhé.
+[09:29:00] Lan: Vâng. Có ai phản đối gì không? ... Không.
+[09:29:15] Tuấn: Em có thắc mắc, schema migration có dependency với payment deploy. Nếu payment chưa xong thì migration không chạy được.
+[09:29:30] Minh: Đúng vậy, cần đồng bộ. Vậy deadline của migration script phải sau payment API. Điều chỉnh thành 22/3.
+[09:29:45] An: Nhưng lịch deploy là 15/3, script phải có trước đó.
+[09:30:00] Minh: Anh nhầm, payment deploy 15/3, nên script cần trước 14/3. OK.
+[09:30:15] Hà: Vậy migration script deadline 14/3? Nhưng vẫn chưa có owner.
+[09:30:30] Minh: Tạm thời assign Tuấn, nhưng nếu quá tải thì chuyển cho người khác sau.
+[09:30:45] Tuấn: Em có thể đảm nhận, nhưng cần support từ data team.
+[09:31:00] Minh: Ok, có negative context ở đây: Tuấn nhận nhưng không chắc. Ghi chú trong ticket.
+[09:31:15] Lan: Chúng ta đang có nhiều task overlapping. Em sợ mất tracking.
+[09:31:30] Minh: Vậy phần còn lại của P02, chúng ta tập trung giải quyết vấn đề kỹ thuật khác. An, em có báo cáo gì về Kubernetes?
+[09:31:45] An: Kubernetes cluster sắp hết resource, cần scale. Nhưng chưa có budget approve.
+[09:32:00] Minh: Việc đó ngoài scope. Cho qua.
+[09:32:15] Hà: Em muốn hỏi, test environment cho integration có ổn không?
+[09:32:30] An: Đang dùng chung với dev, có thể conflict.
+[09:32:45] Tuấn: Em nghĩ nên tách riêng môi trường integration.
+[09:33:00] Minh: Nhưng tốn thêm chi phí. Có cách khác không?
+[09:33:15] An: Có thể dùng namespace riêng trong cùng cluster, không tốn thêm.
+[09:33:30] Minh: OK, An làm việc đó, deadline 5/3.
+[09:33:45] Lan: Em thấy mọi người đang quá tải, chúng ta nên ưu tiên lại.
+[09:34:00] Minh: Ý em là cancel một số task không critical?
+[09:34:15] Lan: Ví dụ như workshop deploy flow có thể hoãn, vì chưa cần ngay.
+[09:34:30] An: Nhưng đã set date rồi.
+[09:34:45] Minh: Để giữ nguyên. Quyết định giữ.
+[09:35:00] Hà: Còn vấn đề về notification? Em thấy payment không có notification đã là negative.
+[09:35:15] Minh: Đã bàn, bỏ qua. Chuyển chủ đề.
+[09:35:30] Tuấn: Em cần làm rõ, ETL script có dùng chung connector với notification không? Vì dependency.
+[09:35:45] Minh: Không, separate. Em cứ làm.
+[09:36:00] Lan: Vậy chốt P02, còn nhiều việc chưa resolved, hẹn part sau.
+[09:36:15] Minh: Đúng, kết thúc phần này. Cảm ơn mọi người.
+[09:36:30] Minh: Chúng ta bắt đầu phần vận hành. Anh muốn xem lại task config staging đã giao cho Tuấn. Tình hình thế nào rồi?
+[09:36:45] Tuấn: Dạ, em đã gửi file config chiều qua. Nhưng bên An nói thiếu một số biến environment cho payment.
+[09:37:00] An: Đúng vậy, file env mẫu chỉ có biến cơ bản. Cần thêm connection string cho database mới.
+[09:37:15] Minh: Vậy deadline 3/3 có kịp không? Tuấn cần bổ sung.
+[09:37:30] Tuấn: Có thể kịp, nhưng em đang bận viết log spec. Em nghĩ nên dời config sang thứ Sáu.
+[09:37:45] Minh: Ừ, deadline correction: chuyển config từ 3/3 lên 5/3. Đồng ý không?
+[09:38:00] An: OK với em. Nhưng cần đảm bảo trước weekend để em test.
+[09:38:15] Lan: Vậy ghi chú lại, deadline mới cho config: 5/3.
+[09:38:30] Tuấn: Còn task migration script cho database, em đã bắt đầu nhưng gặp khó khăn. Có thể chuyển cho An được không?
+[09:38:45] Minh: An, em có nhận không? Tuấn nói cần handoff.
+[09:39:00] An: Em có thể nhận, nhưng cần Tuấn giải thích logic migration. Em chưa nắm hết.
+[09:39:15] Tuấn: Dạ, em sẽ viết doc hướng dẫn trong hôm nay. Sau đó chuyển ownership cho An.
+[09:39:30] Minh: OK, handoff chính thức. Từ hôm nay, task migration script chuyển sang An. Tuấn vẫn hỗ trợ tài liệu.
+[09:39:45] Hà: Vậy deadline cũ 14/3 có còn không? Hay cần điều chỉnh?
+[09:40:00] An: Em cần thời gian học, có thể dời lên 16/3.
+[09:40:15] Minh: Chưa vội, em làm doc trước đã. Deadline correction sẽ bàn sau.
+[09:40:30] Lan: Anh Minh, em muốn hỏi về task ETL data migration cho CRM. Owner vẫn unresolved.
+[09:40:45] Minh: Đúng, chưa ai nhận. Huy và Giang vắng. Có thể tạm thời assign Lan làm coordinator?
+[09:41:00] Lan: Em có thể đứng ra phối hợp, nhưng không viết code. Cần tìm người làm.
+[09:41:15] Minh: Vậy Lan nhận task owner, nhưng việc thực hiện sẽ được assign sau. Ghi là pending.
+[09:41:30] An: Vậy môi trường sandbox cho CRM em đã setup xong. Bên họ có thể test từ mai.
+[09:41:45] Minh: Tốt. Vậy task sandbox hoàn thành trước deadline 3/3.
+[09:42:00] Tuấn: Em đã mở port trên firewall rồi, không vấn đề.
+[09:42:15] Hà: Em có vấn đề về test automation. Công cụ chạy test bị lỗi do thay đổi schema. Em cần Tuấn cập nhật mẫu mock data.
+[09:42:30] Tuấn: Em đã gửi hôm qua, Hà kiểm tra lại inbox nhé.
+[09:42:45] Hà: A, có rồi. Cảm ơn. Em sẽ cập nhật test case.
+[09:43:00] Lan: Anh Minh, chúng ta có task viết doc cho deploy flow. An đã làm slide chưa?
+[09:43:15] An: Em đang làm, dự kiến xong trước workshop thứ Tư 3/3.
+[09:43:30] Minh: Nhưng workshop đã dời sang 5/3 do xung đột lịch? Mọi người có biết không?
+[09:43:45] Lan: Chưa, em mới biết. Ai quyết định dời?
+[09:44:00] Minh: Anh quyết định vì An có việc đột xuất. Vậy workshop chuyển sang thứ Năm 5/3.
+[09:44:15] An: OK, em sẽ kịp slide trước buổi.
+[09:44:30] Hà: Vậy test plan cho workshop thay đổi không? Em không trực tiếp tham gia.
+[09:44:45] Minh: Không, chỉ là training. Test plan giữ nguyên.
+[09:45:00] Tuấn: Em muốn hỏi về task viết log spec. Deadline em đã đẩy lên 4/3. Hiện tại em mới viết xong bản nháp.
+[09:45:15] An: Em cần log spec để viết runbook. Có thể gửi trước 4/3 không?
+[09:45:30] Minh: Tuấn cố gắng gửi trước 3/3 để An có thời gian.
+[09:45:45] Tuấn: Dạ, em sẽ gửi bản draft tối nay.
+[09:46:00] Lan: Như vậy nhiều task sắp xếp lại. Có task nào bị cancel không?
+[09:46:15] Minh: Chưa, tất cả vẫn active. Nhưng có thể gộp một số task nhỏ.
+[09:46:30] An: Em đề xuất gộp task "update log spec" và "write runbook" lại, vì runbook dựa trên log spec.
+[09:46:45] Minh: Không nên, vì hai việc khác nhau. Giữ riêng.
+[09:47:00] Hà: Em có thắc mắc, task review code cho payment API đã ai làm? Tuấn gửi code chưa?
+[09:47:15] Tuấn: Em đã push lên branch review, nhưng chưa có ai review. Anh Minh có thể assign người?
+[09:47:30] Minh: Anh sẽ review sáng mai. Hà cũng cần review từ góc độ QA.
+[09:47:45] Hà: Vâng, em sẽ review sau khi anh xong.
+[09:48:00] Lan: Vậy cần set deadline cho review. Anh Minh, anh có thể hoàn thành trước 4/3?
+[09:48:15] Minh: Anh có thể, nhưng nếu bận thì có thể 5/3.
+[09:48:30] Lan: Vậy đặt deadline 5/3 cho review dev, sau đó Hà review đến 6/3.
+[09:48:45] Hà: OK.
+[09:49:00] An: Em muốn nhấn mạnh, task config staging cần hoàn thành sớm để em test migration script. Nên deadline 5/3 là quan trọng.
+[09:49:15] Tuấn: Dạ, em sẽ ưu tiên.
+[09:49:30] Minh: Chúng ta có vấn đề về nhân sự. Huy chưa backup cho việc CRM integration. Em Lan, em có thể liên hệ Huy được không?
+[09:49:45] Lan: Em đã nhắn tin, Huy bảo mai mới rảnh.
+[09:50:00] Minh: Vậy chờ. Còn Giang, khi nào đi làm lại?
+[09:50:15] Lan: Giang báo ốm đến thứ Năm.
+[09:50:30] Minh: Vậy thứ Năm có mặt. Có ai cần gì không?
+[09:50:45] Hà: Em muốn hỏi, có cần tạo ticket cho việc backup dữ liệu trước khi deploy payment không?
+[09:51:00] Minh: Cần, An lo việc đó. Deadline backup script trước 14/3.
+[09:51:15] An: Em sẽ thêm vào backlog.
+[09:51:30] Tuấn: Em thấy có một số việc lặp lại, như task "update config" và "fix SSL cert" có thể một người làm.
+[09:51:45] Minh: Không chồng chéo. Cứ giữ.
+[09:52:00] Lan: Vậy tổng kết P03: task mới có handoff migration script cho An, deadline correction config thành 5/3, và workshop dời sang 5/3. Còn gì nữa không?
+[09:52:15] Minh: Thêm task review code payment với deadline 5/3. Được rồi, tạm dừng ở đây.
+[09:52:30] Minh: Chuyển sang topic sản phẩm. Anh có vài điểm cần thảo luận về tính năng recurring payment. Lan, em có thông tin từ phía product không?
+[09:52:45] Lan: Có, họ muốn thêm chức năng thanh toán định kỳ cho khách hàng doanh nghiệp. Spec sơ bộ đã được gửi qua email.
+[09:53:00] Hà: Em chưa thấy spec đó. Có thể gửi lại không?
+[09:53:15] Lan: Anh Minh, em có thể forward lại sau cuộc họp.
+[09:53:30] Minh: OK. Vậy cần tìm hiểu xem chức năng này có ảnh hưởng đến API payment hiện tại không.
+[09:53:45] Tuấn: Chắc chắn có. Recurring payment cần thêm endpoint mới và logic scheduling.
+[09:54:00] An: Và cần thêm cronjob để xử lý thanh toán định kỳ.
+[09:54:15] Minh: Đúng, nhưng trước mắt chưa làm. Cần lên kế hoạch. Chúng ta sẽ tạo một task nghiên cứu spec.
+[09:54:30] Lan: Ai sẽ làm việc đó? Tuấn có thể đọc spec và đánh giá tác động.
+[09:54:45] Tuấn: Em có thể, nhưng cần thời gian. Dự kiến 2 ngày.
+[09:55:00] Minh: Vậy task "đánh giá tác động recurring payment" assign Tuấn, deadline 7/3.
+[09:55:15] Hà: Sau đó em cần update test plan dựa trên đánh giá đó. Deadline phụ thuộc vào Tuấn.
+[09:55:30] Minh: Vậy deadline cho Hà là 10/3, nhưng phụ thuộc vào Tuấn hoàn thành.
+[09:55:45] Lan: Có thể tạo event-dependent deadline: một khi Tuấn xong, Hà có 3 ngày để làm.
+[09:56:00] Minh: Ghi nhận. Vậy deadline Hà là "10/3 hoặc 3 ngày sau khi Tuấn xong, tùy cái nào đến trước?" Thực tế là sau.
+[09:56:15] Tuấn: Em sẽ cố gắng hoàn thành sớm.
+[09:56:30] An: Còn về infra, recurring payment cần database schema mới. Có thể phải migrate sau.
+[09:56:45] Minh: Tạm thời chưa có task cụ thể, chờ đánh giá tác động.
+[09:57:00] Hà: Em có câu hỏi, nếu recurring payment được triển khai, liệu nó có block release 2.0 không?
+[09:57:15] Minh: Không, release 2.0 chỉ gồm payment cơ bản. Recurring là cho phiên bản sau.
+[09:57:30] Lan: Vậy task này không ảnh hưởng lịch hiện tại.
+[09:57:45] Tuấn: Tuy nhiên, em cần xem spec có requirement nào thay đổi API cũ không.
+[09:58:00] Minh: Nếu có, thì cần báo sớm.
+[09:58:15] An: Chúng ta cũng cần nghĩ đến monitoring cho recurring. Nhưng để sau.
+[09:58:30] Minh: Ok, chuyển sang vấn đề khác. Anh thấy trong spec payment hiện tại có phần refund đã bỏ qua, nhưng product muốn đưa vào release 2.0?
+[09:58:45] Lan: Có, em vừa nhận email từ họ sáng nay. Họ muốn refund feature trong đợt này.
+[09:59:00] Hà: Vậy spec thay đổi, ảnh hưởng đến test plan.
+[09:59:15] Minh: Nghiêm trọng. Chúng ta cần thêm task implement refund. Tuấn, em có thể đảm nhận?
+[09:59:30] Tuấn: Em có thể, nhưng deadline API payment đã gần. Nếu thêm refund, phải dời deadline.
+[09:59:45] Minh: Vậy cần thảo luận. Anh nghĩ refund có thể làm sau release 2.0, nhưng product lại muốn gấp.
+[10:00:00] Lan: Em có thể đàm phán với họ, nhưng cần thời gian.
+[10:00:15] An: Nếu thêm refund, thì cần thay đổi schema và migration script, kéo theo nhiều việc.
+[10:00:30] Minh: Để anh quyết định: tạm thời không thêm refund. Chúng ta tập trung vào payment cơ bản. Nếu product không đồng ý, sẽ bàn sau.
+[10:00:45] Hà: Vậy test plan giữ nguyên.
+[10:01:00] Tuấn: Em đồng ý.
+[10:01:15] Lan: Em sẽ thông báo cho product.
+[10:01:30] Minh: Tạo task cho Lan: thông báo quyết định cho product, deadline 4/3.
+[10:01:45] An: Anh Minh, em có ý kiến về việc dùng third-party gateway cho refund? Có thể giảm công việc.
+[10:02:00] Minh: Nhưng tốn thêm chi phí. Chưa xem xét.
+[10:02:15] Hà: Em muốn hỏi, còn task review spec cho refund không? Mặc dù không làm, vẫn cần review?
+[10:02:30] Minh: Không, bỏ qua.
+[10:02:45] Tuấn: Em có thắc mắc, deadline cho task đánh giá recurring payment vẫn là 7/3, nhưng nếu bận việc refund thì có thể dời?
+[10:03:00] Minh: Không, refund không được chọn. Vẫn giữ deadline 7/3.
+[10:03:15] Lan: Vậy có task mới nào khác không? Anh Minh, em thấy chúng ta cần một task tổng hợp các requirement từ product.
+[10:03:30] Minh: Anh nghĩ Lan làm việc đó. Deadline 6/3.
+[10:03:45] Hà: Task đó có liên quan đến test plan? Em có thể cần.
+[10:04:00] Lan: Em sẽ gửi cho Hà khi hoàn thành.
+[10:04:15] An: Em có vấn đề về resource: cluster đang thiếu memory, có thể ảnh hưởng đến performance test.
+[10:04:30] Minh: Vấn đề ops, không thuộc topic sản phẩm. Ghi nhận để bàn sau.
+[10:04:45] Tuấn: Em thấy chúng ta có nhiều task phụ thuộc vào nhau. Ví dụ, task đánh giá recurring payment cần spec từ product, nhưng spec chưa gửi.
+[10:05:00] Lan: Spec sẽ được gửi trong ngày hôm nay.
+[10:05:15] Minh: Vậy Tuấn có thể bắt đầu sau khi nhận.
+[10:05:30] Hà: Còn về task update test plan cho payment, em có thể làm song song.
+[10:05:45] Minh: OK, không có vấn đề.
+[10:06:00] Lan: Anh Minh, em thấy topic sản phẩm đã được ổn. Có cần thêm gì không?
+[10:06:15] Minh: Chưa, tạm đủ. Chúng ta chuyển sang vấn đề khác.
+[10:06:30] An: Em có báo cáo về performance test môi trường dev, cần cải thiện.
+[10:06:45] Minh: Để dành cho phần vận hành sau. Bây giờ, tổng kết P04.
+[10:07:00] Lan: Vậy task mới: đánh giá recurring payment (Tuấn, 7/3), update test plan phụ thuộc (Hà, 10/3), tổng hợp requirement (Lan, 6/3), thông báo product (Lan, 4/3). Có gì thiếu?
+[10:07:15] Minh: Đủ. Không giải quyết gì từ part trước. Kết thúc P04.
+[10:07:30] Minh: Chúng ta quay lại vấn đề còn dang dở ở phần đầu. Cụ thể là task migration script cho database, đã handoff từ Tuấn sang An. Tiến độ sao rồi?
+[10:07:45] An: Em đã nhận doc hướng dẫn từ Tuấn. Tuy nhiên, em thấy logic migration phức tạp hơn dự kiến. Cần thêm thời gian nghiên cứu.
+[10:08:00] Minh: Anh hiểu. Vậy scope của task có thay đổi? Hay chỉ cần thêm bước phân tích?
+[10:08:15] An: Có thể cần thêm bước validation schema trước khi migration. Em nghĩ nên update scope.
+[10:08:30] Tuấn: Em đã viết doc nhưng chưa đề cập validation. An có thể bổ sung.
+[10:08:45] Minh: Vậy đồng ý scope update: thêm bước validation. Ai làm? An hay Tuấn?
+[10:09:00] An: Em có thể làm, nhưng deadline 14/3 có thể bị ảnh hưởng.
+[10:09:15] Minh: Chưa vội. Hiện tại deadline cũ 16/3. Em cần thêm bao lâu cho validation?
+[10:09:30] An: Khoảng 2 ngày.
+[10:09:45] Minh: Vậy deadline mới là 18/3. Đồng ý?
+[10:10:00] An: OK.
+[10:10:15] Lan: Ghi nhận deadline correction: migration script từ 16/3 lên 18/3, scope thêm validation.
+[10:10:30] Hà: Task đó có ảnh hưởng đến test plan không? Em cần biết schema mới.
+[10:10:45] An: Sau khi validation xong, em sẽ gửi schema.
+[10:11:00] Minh: Tốt. Chuyển sang task config staging. Tuấn đã sửa chưa?
+[10:11:15] Tuấn: Dạ, em đã bổ sung biến environment. An đã test chưa?
+[10:11:30] An: Em chưa, hôm nay em mới nhận file cuối. Sáng mai em sẽ test.
+[10:11:45] Minh: Vậy deadline config vẫn 5/3? Có kịp không?
+[10:12:00] Tuấn: Chiều nay em gửi bản hoàn chỉnh. An test ngày mai.
+[10:12:15] An: OK, nếu không lỗi thì deadline 5/3 vẫn ổn.
+[10:12:30] Lan: Em thấy task này đang tiến triển tốt.
+[10:12:45] Hà: Em muốn hỏi, test end-to-end cho payment đã có kịch bản chưa?
+[10:13:00] Minh: Chưa. Ai có thể viết?
+[10:13:15] Tuấn: Em có thể phác thảo, nhưng cần Hà review.
+[10:13:30] Hà: Em đồng ý. Viết test case cho luồng thanh toán cơ bản.
+[10:13:45] Minh: Vậy tạo task viết E2E test scenario, assign Tuấn, deadline 7/3. Hà review sau.
+[10:14:00] Lan: Nhưng Tuấn đã có nhiều task. Liệu có quá tải?
+[10:14:15] Tuấn: Em có thể đảm nhận thêm task này, vì nó liên quan trực tiếp đến code của em.
+[10:14:30] Minh: OK, ghi nhận. Còn task cũ như log spec, Tuấn đã gửi bản draft tối qua?
+[10:14:45] Tuấn: Dạ, em đã gửi. An nhận được chưa?
+[10:15:00] An: Có, em đã xem qua. Cần bổ sung thêm section về retry policy.
+[10:15:15] Tuấn: Em sẽ cập nhật trong bản cuối, dự kiến 3/3.
+[10:15:30] Minh: Lưu ý, log spec vẫn deadline 3/3, không thay đổi.
+[10:15:45] Hà: Em nhắc lại task review code payment. Anh Minh đã review chưa?
+[10:16:00] Minh: Anh chưa, sáng nay bận. Em review bao giờ?
+[10:16:15] Hà: Em đợi anh xong trước.
+[10:16:30] Minh: Vậy deadline review dev vẫn 5/3. Anh sẽ cố gắng.
+[10:16:45] Tuấn: Em có thắc mắc, task ETL data migration cho CRM vẫn chưa có owner, nhưng em thấy Lan nhắc lại nhiều lần. Có cần tạo task mới?
+[10:17:00] Lan: Đây là repeated mention, nhưng không cần tạo duplicate. Chúng ta đã có task cũ với owner unresolved.
+[10:17:15] Minh: Đúng, không tạo thêm. Ghi chú là đã đề cập lại.
+[10:17:30] An: Em có ý kiến, nếu task migration script database xong, thì ETL có thể dùng chung một phần logic.
+[10:17:45] Minh: Có thể, nhưng để sau. Chúng ta còn handoff bước hai cho task nào không?
+[10:18:00] Lan: Task viết unit test cho payment service, Tuấn đã làm chưa?
+[10:18:15] Tuấn: Em đã viết thêm, coverage lên 80%. Nhưng cần Hà review.
+[10:18:30] Hà: Em có thể review, nhưng cần Tuấn gửi branch.
+[10:18:45] Tuấn: Em sẽ push trong hôm nay.
+[10:19:00] Minh: Vậy handoff review unit test từ Tuấn sang Hà. Hà review xong deadline 6/3.
+[10:19:15] Hà: OK.
+[10:19:30] An: Em có vấn đề, môi trường staging vừa có sự cố. Cần Tuấn fix config lại.
+[10:19:45] Tuấn: Cụ thể là gì? Em tưởng config đã ổn.
+[10:20:00] An: Có một biến connection string sai port. Em cần sửa.
+[10:20:15] Tuấn: À, lỗi đó. Em sẽ update ngay.
+[10:20:30] Minh: Vậy sửa nhanh, không ảnh hưởng deadline 5/3.
+[10:20:45] Lan: Anh Minh, chúng ta cũng cần cập nhật board. Em thấy nhiều ticket outdated.
+[10:21:00] Minh: Lan lo việc đó. Deadline update board là cuối ngày hôm nay.
+[10:21:15] Hà: Em có thắc mắc, task migration script có liên quan đến payment deploy? Nếu script chưa xong, deploy có block?
+[10:21:30] An: Có, vì cần schema mới. Nhưng deadline script 18/3, deploy 15/3? Mâu thuẫn.
+[10:21:45] Minh: Anh nhầm. Payment deploy dự kiến 15/3, nhưng migration script cần trước 14/3. Nhưng vừa dời lên 18/3. Cần điều chỉnh.
+[10:22:00] Lan: Vậy phải dời payment deploy hay thu xếp migration sớm hơn?
+[10:22:15] Tuấn: Em nghĩ có thể chạy migration sau deploy, nếu backward compatible.
+[10:22:30] An: Không được, vì schema thay đổi không tương thích.
+[10:22:45] Minh: Vậy chúng ta cần dời payment deploy lên 20/3. Đồng ý không?
+[10:23:00] Hà: Ảnh hưởng đến QA schedule. Em sẽ dời test plan.
+[10:23:15] An: Em đồng ý, có thêm thời gian fix infra.
+[10:23:30] Tuấn: Em không vấn đề.
+[10:23:45] Lan: Vậy deadline correction: payment deploy từ 15/3 lên 20/3, và migration script 18/3 vẫn phù hợp.
+[10:24:00] Minh: Chốt vậy. Có ai thấy vấn đề gì không?
+[10:24:15] Hà: Em muốn hỏi, task workshop deploy vẫn 5/3? Hay cần dời theo?
+[10:24:30] Minh: Workshop vẫn 5/3, vì là training, không phụ thuộc.
+[10:24:45] An: Em đã chuẩn bị slide xong.
+[10:25:00] Tuấn: Em cũng sẵn sàng.
+[10:25:15] Lan: Vậy P05 kết thúc với các correction và handoff. Còn unresolved từ P02 vẫn giữ nguyên.
+[10:25:30] Minh: Đúng. Tiếp tục part sau.
+[10:26:00] Minh: Chúng ta bước sang topic release. Anh muốn thảo luận về kế hoạch release 2.0. Đã có nhiều thay đổi về deadline. Lan, em cập nhật giúp anh.
+[10:26:15] Lan: Dạ, hiện tại payment deploy dời lên 20/3, migration script deadline 18/3, còn API code complete vẫn 3/3.
+[10:26:30] Hà: Nhưng test plan phải dời theo deploy, em cần điều chỉnh.
+[10:26:45] Minh: Đúng. Có task nào cần hủy không? Anh thấy workshop deploy flow đã tổ chức xong, không cần duy trì.
+[10:27:00] An: Workshop đã diễn ra hôm 5/3, mọi người đều tham dự. Vậy task đó có thể đóng.
+[10:27:15] Minh: Vậy chính thức hủy task workshop khỏi board. Có ai phản đối không?
+[10:27:30] Tuấn: Không, em đồng ý.
+[10:27:45] Lan: Nhưng chúng ta cần một task thay thế để đảm bảo deploy suôn sẻ. Anh Minh, em đề xuất tạo task "thiết lập CI/CD pipeline cho payment".
+[10:28:00] Minh: Ý hay. Ai có thể làm? An, em có kinh nghiệm về CI/CD?
+[10:28:15] An: Em có thể, nhưng cần Tuấn hỗ trợ config build.
+[10:28:30] Tuấn: Em sẵn sàng.
+[10:28:45] Minh: Vậy task mới: thiết lập CI/CD pipeline, assign An, hỗ trợ Tuấn. Deadline bao lâu?
+[10:29:00] An: Khoảng 5 ngày, từ nay đến 12/3.
+[10:29:15] Minh: Được, deadline 12/3. Ghi nhận.
+[10:29:30] Hà: Vậy task này có phụ thuộc vào migration script không? Vì pipeline cần schema mới.
+[10:29:45] An: Không, pipeline chỉ build và test, không deploy production. Schema chưa cần.
+[10:30:00] Minh: Tốt. Tiếp theo, anh thấy deadline cho task review code payment vẫn là 5/3. Hôm nay là 6/3 rồi. Có ai đã review chưa?
+[10:30:15] Minh: Anh chưa, do bận. Hà, em đã review chưa?
+[10:30:30] Hà: Em đợi anh review trước. Nhưng nếu không kịp, em có thể review độc lập.
+[10:30:45] Minh: Vậy em review luôn, deadline đẩy lên 8/3. Anh sẽ review sau.
+[10:31:00] Lan: Vậy correction deadline: review code từ 5/3 lên 8/3, chuyển từ Minh sang Hà thực hiện.
+[10:31:15] Tuấn: Em cần feedback sớm để sửa lỗi.
+[10:31:30] Hà: Em sẽ review ngay trong ngày mai.
+[10:31:45] An: Em có vấn đề về CI/CD tool: cần chọn giữa Jenkins và GitLab CI. Anh Minh có ý kiến không?
+[10:32:00] Minh: Em tự quyết, miễn tích hợp được.
+[10:32:15] Lan: Task CI/CD cần tài liệu hướng dẫn. An có thể viết luôn?
+[10:32:30] An: Em sẽ viết doc sau khi hoàn thành.
+[10:32:45] Hà: Em muốn hỏi, task ETL data migration cho CRM vẫn unresolved. Giang đã đi làm lại chưa?
+[10:33:00] Lan: Giang mới đi làm hôm qua, nhưng chưa có thời gian.
+[10:33:15] Minh: Vậy vẫn chưa assign. Có thể hủy task đó không? Vì phạm vi thay đổi.
+[10:33:30] Tuấn: Nhưng product cần dữ liệu lịch sử. Nếu không làm, CRM không có thông tin.
+[10:33:45] Minh: Vậy vẫn giữ, nhưng cần người. Anh sẽ nói chuyện với Huy và Giang.
+[10:34:00] An: Anh Minh, em muốn nhấn mạnh deadline migration script 18/3 là rất quan trọng. Nếu không có, payment deploy 20/3 sẽ bị block.
+[10:34:15] Minh: Anh hiểu. Em có thể đảm bảo không?
+[10:34:30] An: Có thể, nếu không có trục trặc.
+[10:34:45] Hà: Em có câu hỏi về test automation. Em cần môi trường stable để chạy regression.
+[10:35:00] An: Môi trường staging đang ổn, nhưng có thể bị ảnh hưởng bởi CI/CD setup.
+[10:35:15] Minh: Thế thì cần đồng bộ. An, cố gắng không làm gián đoạn staging.
+[10:35:30] An: Em sẽ dùng namespace riêng cho pipeline.
+[10:35:45] Tuấn: Em thấy có nhiều task phụ thuộc vào CI/CD. Có thể làm trước các task khác.
+[10:36:00] Minh: Hợp lý. Vậy ưu tiên CI/CD.
+[10:36:15] Lan: Anh Minh, em thấy board có task "update log spec" đã hoàn thành chưa? Tuấn báo cáo.
+[10:36:30] Tuấn: Dạ, em đã gửi bản cuối, An xác nhận đã nhận.
+[10:36:45] An: Đúng, em đã dùng để viết runbook.
+[10:37:00] Minh: Vậy task log spec đóng.
+[10:37:15] Hà: Còn task runbook, An làm đến đâu?
+[10:37:30] An: Em đang viết, dự kiến xong 8/3.
+[10:37:45] Minh: OK.
+[10:38:00] Lan: Vậy tổng kết P06: hủy task workshop, tạo task CI/CD pipeline (An, deadline 12/3), correction review code từ 5/3 lên 8/3 (giao Hà). Còn gì nữa?
+[10:38:15] Tuấn: Em muốn hỏi, task ETL data migration có owner chưa? Nếu chưa, em có thể tạm nhận, nhưng sẽ quá tải.
+[10:38:30] Minh: Không, em không nhận. Để sau.
+[10:38:45] Hà: Em thấy chúng ta có quá nhiều task chưa resolved. Có nên giảm bớt không?
+[10:39:00] Minh: Không, vẫn giữ. Mọi người cố gắng.
+[10:39:15] An: Em có ý kiến, task "viết E2E test scenario" của Tuấn có deadline 7/3, nhưng Tuấn chưa bắt đầu.
+[10:39:30] Tuấn: Em sẽ làm ngay sau khi review code. Có thể chậm một chút.
+[10:39:45] Minh: Vậy dời deadline lên 9/3.
+[10:40:00] Lan: Ghi nhận deadline correction thứ hai: E2E test từ 7/3 lên 9/3.
+[10:40:15] Hà: Có vẻ nhiều correction. Cần đảm bảo tracking.
+[10:40:30] Minh: Lan update board. Cảm ơn mọi người, kết thúc P06.
+[10:40:30] Minh: Chúng ta chuyển sang topic monitoring và support. Sau khi payment service được deploy, cần giám sát hoạt động. An, em đã có kế hoạch gì chưa?
+[10:40:45] An: Em đã dựa trên log spec từ Tuấn để phác thảo monitoring dashboard. Nhưng cần bổ sung alerting rule.
+[10:41:00] Tuấn: Log spec đã có thông tin về format, nhưng chưa có metric về performance.
+[10:41:15] Minh: Vậy cần thêm task define metric cho payment. Tuấn, em có thể làm?
+[10:41:30] Tuấn: Em có thể, nhưng cần biết threshold. Có thể tham khảo từ team ops.
+[10:41:45] An: Em có số liệu từ stress test sơ bộ, em sẽ gửi.
+[10:42:00] Minh: Vậy task define metric và threshold, assign Tuấn, deadline 10/3. An hỗ trợ số liệu.
+[10:42:15] Lan: Em thấy deadline này gần với deadline CI/CD pipeline (12/3). Có cần điều chỉnh không?
+[10:42:30] Minh: Không, vì metric độc lập.
+[10:42:45] Hà: Em có thắc mắc, monitoring có cần tích hợp với hệ thống alerting hiện tại hay dùng riêng?
+[10:43:00] An: Dùng chung với hệ thống hiện tại, đỡ chi phí.
+[10:43:15] Minh: Đồng ý. Vậy ai sẽ cấu hình alert?
+[10:43:30] An: Em có thể, nhưng cần Tuấn xác định threshold trước.
+[10:43:45] Tuấn: Em sẽ gửi threshold trong bản metric.
+[10:44:00] Minh: Vậy task alerting configuration assign An, deadline 12/3, phụ thuộc vào Tuấn.
+[10:44:15] Lan: Ghi nhận event-dependent deadline: alerting phụ thuộc metric define.
+[10:44:30] Hà: Em muốn hỏi về support plan. Khi deploy, ai sẽ on-call?
+[10:44:45] Minh: Ban đầu, team dev và ops. An và Tuấn sẽ túc trực trong 48h đầu.
+[10:45:00] An: Em OK, nhưng cần Tuấn shared tài liệu troubleshooting.
+[10:45:15] Tuấn: Em đã viết runbook, An đang hoàn thiện.
+[10:45:30] Minh: Vậy runbook cần xong trước deploy. Deadline runbook là 8/3, vẫn ổn?
+[10:45:45] An: Em sẽ cố gắng xong sớm.
+[10:46:00] Lan: Em nhắc lại, task runbook đã có từ trước, không tạo duplicate. Chỉ cần theo dõi.
+[10:46:15] Tuấn: Em có vấn đề, task log spec đã đóng, nhưng em thấy cần cập nhật thêm section về error codes. Đó có phải task mới?
+[10:46:30] Minh: Không, đó là update của task đã đóng. Có thể mở lại nếu cần. Nhưng không tạo mới.
+[10:46:45] An: Em nghĩ error codes cần có trong doc, vì anh Tuấn chưa ghi.
+[10:47:00] Minh: Vậy mở lại task log spec với scope bổ sung error codes, assign Tuấn, deadline 11/3.
+[10:47:15] Hà: Như vậy task cũ được mở lại, không phải mới.
+[10:47:30] Tuấn: OK, em sẽ cập nhật.
+[10:47:45] Lan: Anh Minh, em thấy có long-distance reference: task ETL data migration từ P02 vẫn unresolved. Có cần nhắc lại?
+[10:48:00] Minh: Chỉ nhắc, không tạo task. Nhưng anh sẽ hỏi Huy và Giang sau.
+[10:48:15] An: Em có câu hỏi, monitoring dashboard cần bao gồm cả CRM integration? Vì sẽ có traffic từ họ.
+[10:48:30] Minh: Tạm thời chưa, chỉ payment.
+[10:48:45] Tuấn: Em thấy có rủi ro nếu không monitor CRM, nhưng ok.
+[10:49:00] Hà: Vậy test plan monitoring có cần test các alert không?
+[10:49:15] An: Có, em sẽ test sau khi config.
+[10:49:30] Minh: Vậy thêm test alert vào task của An.
+[10:49:45] Lan: Ghi chú, task alerting bao gồm test.
+[10:50:00] Tuấn: Em muốn hỏi, deadline metric define 10/3, alerting 12/3, có quá gần không? Nếu metric chậm, alerting ảnh hưởng.
+[10:50:15] Minh: Nếu cần, có thể dời deadline metric lên 9/3. Nhưng anh nghĩ 10/3 ổn.
+[10:50:30] Lan: Vậy giữ nguyên.
+[10:50:45] Hà: Có negative context ở đây: nếu metric không kịp, alerting bị delay, ảnh hưởng support.
+[10:51:00] Minh: Đúng, nhưng chúng ta có buffer. Nếu cần, sẽ dời deploy.
+[10:51:15] An: Em đồng ý.
+[10:51:30] Tuấn: Em sẽ ưu tiên metric.
+[10:51:45] Minh: Chuyển sang vấn đề khác. Hệ thống support ticket cần được set up. Ai làm?
+[10:52:00] Lan: Em có thể tạo kênh Slack. Nhưng cần xác định quy trình.
+[10:52:15] Minh: Vậy Lan tạo task quy trình support, deadline 13/3.
+[10:52:30] Hà: Em muốn hỏi, ticket có cần tích hợp với payment không?
+[10:52:45] Minh: Không, support riêng.
+[10:53:00] An: Em có ý kiến, nếu có sự cố, cần có playbook reference runbook.
+[10:53:15] Minh: Playbook có thể viết sau.
+[10:53:30] Tuấn: Em thấy chúng ta có nhiều task monitoring, cần prioritize.
+[10:53:45] Minh: Đồng ý, ưu tiên metric và alerting. Còn support để sau.
+[10:54:00] Lan: Vậy tổng kết P07: task metric (Tuấn, 10/3), task alerting (An, 12/3), mở lại log spec (Tuấn, 11/3), task support process (Lan, 13/3). Còn unresolved ETL vẫn giữ.
+[10:54:15] Minh: Đúng. Cảm ơn, kết thúc P07.
+[10:54:30] Minh: Chúng ta quay lại vấn đề integration với CRM. Ở P02, chúng ta có task API draft do Tuấn phụ trách, nhưng vẫn còn ambiguity về spec từ product. Tuấn, em đã làm gì với draft đó?
+[10:54:45] Tuấn: Dạ, em đã viết bản nháp dựa trên tài liệu cũ. Nhưng có điểm chưa rõ: endpoint cho đồng bộ trạng thái, bên CRM muốn polling hay webhook?
+[10:55:00] Lan: Sáng nay em có trao đổi với Huy, Huy nói product muốn dùng webhook. Nhưng chưa có confirmation chính thức.
+[10:55:15] Minh: Vậy ambiguity ở đây là chọn phương thức. Có thể tạm thời giả định webhook và viết API theo hướng đó. Nếu product thay đổi, sẽ sửa sau.
+[10:55:30] Tuấn: OK, em sẽ update draft thành webhook-based. Nhưng cần thêm endpoint để CRM đăng ký webhook.
+[10:55:45] Hà: Việc đó ảnh hưởng đến test plan. Em cần thêm test case cho webhook registration.
+[10:56:00] Minh: Đúng, nhưng hiện tại chưa phải làm ngay. Chúng ta chỉ xử lý ambiguity này trong part này.
+[10:56:15] An: Em có câu hỏi, webhook có cần xác thực không? Nếu có, cần thêm logic.
+[10:56:30] Tuấn: Có, em sẽ thêm signature verification.
+[10:56:45] Minh: Vậy draft API đã rõ hơn. Tuy nhiên, vẫn còn unresolved reference từ P02: task ETL data migration cho CRM chưa có owner. Đó là vấn đề khác, không giải quyết ở đây.
+[10:57:00] Lan: Em nhắc lại, task đó vẫn pending, chờ Huy và Giang.
+[10:57:15] Hà: Anh Minh, em thấy chúng ta có nhiều task liên quan đến CRM integration. Có thể recap lại để tránh nhầm lẫn.
+[10:57:30] Minh: OK, recap cục bộ. Các task về integration gồm: API draft (Tuấn, chưa có deadline chính thức, nhưng cần trước khi CRM test), webhook registration endpoint (sẽ bổ sung), và ETL data migration (unresolved). Không tạo task mới từ recap.
+[10:57:45] Tuấn: Em xin phép hỏi, draft API có deadline không? Hay em làm xong thì gửi?
+[10:58:00] Minh: Anh nghĩ nên có deadline để tracking. Đặt 13/3, vì sau đó CRM cần test.
+[10:58:15] Lan: Vậy deadline cho draft API là 13/3. Nhưng đây không phải task mới, chỉ update deadline.
+[10:58:30] Hà: Em muốn hỏi, sau khi draft xong, cần review không? Hay gửi thẳng cho CRM?
+[10:58:45] Minh: Cần review nội bộ. Anh sẽ review, sau đó gửi CRM.
+[10:59:00] An: Em có vấn đề về môi trường cho CRM test. Sandbox đã setup, nhưng chưa có endpoint thật.
+[10:59:15] Tuấn: Em sẽ deploy API draft lên sandbox sau khi review.
+[10:59:30] Minh: Vậy dependency: draft -> review -> deploy -> CRM test. Cần đồng bộ.
+[10:59:45] Lan: Chúng ta có thể tạo một task tổng thể cho integration, nhưng không cần, vì đã có các task nhỏ.
+[11:00:00] Hà: Em thấy có ambiguity khác: spec cho webhook chưa có tài liệu chính thức. Product vẫn chưa gửi.
+[11:00:15] Minh: Đó là vấn đề bên ngoài. Chúng ta chỉ xử lý ambiguity về phương thức, còn spec thì chờ product.
+[11:00:30] Tuấn: Em sẽ viết draft dựa trên giả định webhook, nếu product gửi spec sau, em sẽ điều chỉnh.
+[11:00:45] An: Em muốn nhấn mạnh, task CI/CD pipeline của em đang tiến triển, nhưng cần Tuấn config build script.
+[11:01:00] Tuấn: Em sẽ gửi script trong ngày mai.
+[11:01:15] Minh: OK, không liên quan đến integration, nhưng ghi nhận.
+[11:01:30] Lan: Em thấy chúng ta đã xử lý ambiguity về phương thức webhook. Còn unresolved reference là ETL migration, vẫn giữ.
+[11:01:45] Hà: Vậy recap integration: draft API deadline 13/3, review sau đó, deploy lên sandbox. Không tạo task mới.
+[11:02:00] Minh: Đúng. Có ai có thắc mắc gì về integration không?
+[11:02:15] Tuấn: Em có thắc mắc, CRM cần dữ liệu mẫu để test. Ai sẽ tạo?
+[11:02:30] Lan: Em có thể tạo dữ liệu giả, nhưng cần Tuấn hướng dẫn format.
+[11:02:45] Tuấn: Em sẽ gửi sample data.
+[11:03:00] Minh: Vậy task phụ: tạo dữ liệu mẫu, assign Lan, deadline 14/3. Nhưng đây là task hỗ trợ, không phải chính.
+[11:03:15] Hà: Em muốn hỏi, test integration có cần viết riêng không? Hay dùng chung test plan?
+[11:03:30] Minh: Dùng riêng, nhưng chưa cần ngay.
+[11:03:45] An: Em có vấn đề về network, firewall giữa sandbox và CRM chưa mở. Cần Tuấn check.
+[11:04:00] Tuấn: Em sẽ kiểm tra và mở port nếu cần.
+[11:04:15] Minh: Vậy thêm task mở firewall, Tuấn làm, deadline 13/3.
+[11:04:30] Lan: Ghi nhận, nhưng không tạo duplicate nếu đã có task tương tự.
+[11:04:45] Hà: Task mở firewall có thể gộp với task config trước đó? Nhưng config là cho payment, không liên quan.
+[11:05:00] Minh: Riêng, vì CRM là hệ thống khác.
+[11:05:15] Tuấn: Em sẽ update.
+[11:05:30] Minh: Chúng ta sắp hết thời gian cho P08. Còn gì cần thảo luận không?
+[11:05:45] An: Em chỉ muốn nhấn mạnh, task metric define của Tuấn deadline 10/3, cần gấp.
+[11:06:00] Tuấn: Em đang làm, sẽ xong.
+[11:06:15] Hà: Em thấy recap hôm nay có nhiều task, nhưng không tạo mới. Tốt.
+[11:06:30] Lan: Vậy tổng kết P08: xử lý ambiguity webhook cho CRM, giữ unresolved ETL migration. Có thêm task dữ liệu mẫu (Lan, 14/3) và mở firewall (Tuấn, 13/3). Recap không tạo duplicate.
+[11:06:45] Minh: OK, kết thúc P08.
+[11:07:00] Minh: Chúng ta bước vào phần gần cuối. Cần chốt một số state transition cho các task quan trọng. Lan, em có cập nhật gì về board không?
+[11:07:15] Lan: Dạ, board hiện tại có nhiều task đang progress. Riêng task ETL data migration cho CRM vẫn unresolved từ P02, chưa có owner.
+[11:07:30] Minh: Anh nghĩ chúng ta nên hủy task đó. Product đã thay đổi yêu cầu, không cần migration dữ liệu lịch sử nữa. Có ai phản đối không?
+[11:07:45] Tuấn: Em đồng ý, vì nếu không có spec, làm cũng vô ích.
+[11:08:00] Hà: Vậy task ETL cancellation chính thức. Em sẽ xóa khỏi test plan.
+[11:08:15] An: Nhưng vẫn cần dữ liệu mới từ CRM? Hay bỏ luôn?
+[11:08:30] Minh: Bỏ luôn. Tập trung vào payment.
+[11:08:45] Lan: Ghi nhận hủy task ETL. Không tạo task thay thế.
+[11:09:00] Tuấn: Em có vấn đề với task log spec error codes. Em đã cập nhật, nhưng deadline 11/3 có thể không kịp vì bận CI/CD config.
+[11:09:15] Minh: Em cần dời? Bao lâu?
+[11:09:30] Tuấn: Thêm 2 ngày, lên 13/3.
+[11:09:45] Hà: Nhưng error codes cần cho runbook, mà runbook deadline 8/3 đã qua. An, runbook xong chưa?
+[11:10:00] An: Runbook em đã hoàn thành, dựa trên log spec cũ. Error codes có thể bổ sung sau.
+[11:10:15] Minh: Vậy dời deadline log spec error codes lên 13/3, không ảnh hưởng runbook.
+[11:10:30] Lan: Correction chain: log spec error codes từ 11/3 lên 13/3.
+[11:10:45] An: Em có vấn đề về CI/CD pipeline. Em đã cấu hình xong build, nhưng cần Tuấn gửi script build để tích hợp.
+[11:11:00] Tuấn: Em đã gửi hôm qua, An kiểm tra inbox.
+[11:11:15] An: A, có rồi. Em sẽ test ngay.
+[11:11:30] Minh: Vậy CI/CD pipeline vẫn deadline 12/3? Có cần correction?
+[11:11:45] An: Có khả năng chậm 1 ngày vì cần debug. Em đề xuất dời lên 13/3.
+[11:12:00] Minh: Được, correction CI/CD từ 12/3 lên 13/3.
+[11:12:15] Hà: Vậy bây giờ có hai task có cùng deadline 13/3: log spec error codes và CI/CD pipeline. Có xung đột resource không?
+[11:12:30] Tuấn: Em làm log spec, An làm CI/CD. Không xung đột.
+[11:12:45] Lan: Tuy nhiên, An cũng có task alerting deadline 12/3. Nếu CI/CD dời, alerting có ảnh hưởng?
+[11:13:00] An: Alerting độc lập, em vẫn đảm bảo deadline 12/3.
+[11:13:15] Minh: Tốt. Chúng ta cũng cần xem lại task metric define (Tuấn, 10/3). Hôm nay là 7/3, em có kịp không?
+[11:13:30] Tuấn: Em đã hoàn thành bản nháp, đang chờ An gửi số liệu stress test.
+[11:13:45] An: Em sẽ gửi trong chiều nay.
+[11:14:00] Minh: Vậy metric define vẫn deadline 10/3, không thay đổi.
+[11:14:15] Hà: Em có thắc mắc, task review code payment deadline 8/3. Hôm nay là 7/3, em đã review xong chưa?
+[11:14:30] Hà: Em đã review, gửi feedback cho Tuấn sáng nay.
+[11:14:45] Tuấn: Em đã nhận, đang sửa lỗi. Dự kiến xong 9/3.
+[11:15:00] Minh: Vậy deadline review code đã hoàn thành, task sửa lỗi sẽ nằm trong scope của payment API.
+[11:15:15] Lan: Ghi nhận, task review code done.
+[11:15:30] An: Em muốn hỏi, task dữ liệu mẫu cho CRM (Lan, 14/3) có cần không? Vì ETL đã hủy.
+[11:15:45] Minh: Có thể cancel luôn, vì CRM integration chưa rõ.
+[11:16:00] Lan: Vậy hủy task dữ liệu mẫu. Em đồng ý.
+[11:16:15] Hà: Vậy chỉ còn task mở firewall (Tuấn, 13/3) có cần không?
+[11:16:30] Tuấn: Firewall đã mở xong rồi, em quên báo. Task đó hoàn thành.
+[11:16:45] Minh: Vậy task mở firewall đóng.
+[11:17:00] Lan: Như vậy sau các cancellation và correction, board có nhiều thay đổi.
+[11:17:15] Tuấn: Em xin phép hỏi, task E2E test scenario deadline 9/3, em đã viết xong. Hà review chưa?
+[11:17:30] Hà: Em chưa, em sẽ review ngay sau meeting.
+[11:17:45] Minh: Vậy E2E test vẫn deadline 9/3.
+[11:18:00] An: Em có vấn đề negative: CI/CD pipeline đang bị blocked do thiếu quyền truy cập repository. Cần admin help.
+[11:18:15] Minh: Ai là admin? Anh có thể cấp quyền. Em gửi request.
+[11:18:30] An: Em sẽ gửi ticket.
+[11:18:45] Hà: Có vẻ nhiều block nhỏ, nhưng recoverable.
+[11:19:00] Minh: Đúng. Chúng ta cần đảm bảo không có task nào bị lãng quên.
+[11:19:15] Lan: Em thấy task thiết lập support process (Lan, 13/3) vẫn còn, em đang làm.
+[11:19:30] Tuấn: Còn task metric define sẽ có số liệu từ An, em sẽ hoàn thành.
+[11:19:45] Minh: Vậy tổng kết các state transition cuối: hủy ETL và dữ liệu mẫu; correction log spec error codes lên 13/3, CI/CD lên 13/3; đóng firewall và review code. Unresolved còn gì không?
+[11:20:00] Hà: Em chỉ còn test plan updating, nhưng đã dời theo deploy 20/3.
+[11:20:15] An: Em còn alerting (12/3) và CI/CD (13/3). Không vấn đề.
+[11:20:30] Tuấn: Em còn log spec (13/3), E2E test (9/3), metric (10/3). OK.
+[11:20:45] Lam: Vậy board đã ổn. Không cần thêm recap.
+[11:21:00] Minh: Chúng ta kết thúc P09. Còn part cuối sẽ bàn về kế hoạch chi tiết.
+[11:21:15] Minh: Chúng ta bước vào phần cuối cùng của buổi họp. Cần recap lại toàn bộ trạng thái các task và chốt những gì còn tồn đọng. Lan, em tổng hợp giúp anh.
+[11:21:30] Lan: Dạ, em xin điểm qua. Đầu tiên, các task đã hoàn thành: review code payment (Hà, deadline 8/3), mở firewall cho CRM (Tuấn, sớm), workshop deploy flow (đã hủy), log spec bản đầu (Tuấn, đã đóng). Các task đang progress: CI/CD pipeline (An, deadline dời lên 13/3), alerting configuration (An, 12/3), metric define (Tuấn, 10/3), log spec error codes (Tuấn, 13/3), E2E test scenario (Tuấn, 9/3, chờ Hà review), support process (Lan, 13/3), API draft cho CRM (Tuấn, 13/3), và dữ liệu mẫu cho CRM (đã hủy). Deadline quan trọng: payment deploy 20/3, migration script (An, 18/3). Còn unresolved: task ETL data migration cho CRM đã hủy, nhưng vẫn có issue về webhook spec chờ product.
+[11:21:55] Minh: Cảm ơn. Có gì thiếu không?
+[11:22:10] Tuấn: Em thấy task viết unit test coverage 80% đã được Hà review, coi như done. Nhưng chưa có ticket riêng.
+[11:22:25] Hà: Em đã review, feedback đã gửi. Tuấn sửa xong, em có thể confirm.
+[11:22:40] Minh: Vậy task unit test coverage có thể đóng. Nhưng không tạo duplicate, chỉ ghi nhận.
+[11:22:55] An: Em muốn nhấn mạnh, CI/CD pipeline đang bị block vì quyền repository, cần anh Minh cấp quyền admin.
+[11:23:10] Minh: Anh sẽ cấp ngay sau cuộc họp. Gửi email nhắc anh.
+[11:23:25] Lan: Về task support process, em đã tạo kênh Slack và draft quy trình, cần mọi người góp ý.
+[11:23:40] Hà: Em có thể xem sau meeting.
+[11:23:55] Tuấn: Em có thắc mắc, sau khi API draft cho CRM hoàn thành, cần ai review? Anh Minh đã nhận?
+[11:24:10] Minh: Anh sẽ review, nhưng nếu bận, Hà có thể review thay.
+[11:24:25] Hà: OK, em có thể.
+[11:24:40] An: Em có update về alerting, đã cấu hình xong, đang test. Deadline 12/3 vẫn ổn.
+[11:24:55] Minh: Tốt. Còn task metric define, Tuấn cần số liệu từ An. An đã gửi chưa?
+[11:25:10] An: Em đã gửi trong chiều nay. Tuấn check mail.
+[11:25:25] Tuấn: Có rồi, em sẽ hoàn thành metric trước 10/3.
+[11:25:40] Hà: Vậy còn test plan cho payment? Em đã điều chỉnh theo deploy 20/3. Không có vấn đề.
+[11:25:55] Minh: OK. Bây giờ, anh muốn nhắc lại các deadline quan trọng: 9/3 E2E test, 10/3 metric, 12/3 alerting, 13/3 CI/CD, log spec error codes, API draft, support process, 14/3 dữ liệu mẫu (đã hủy), 18/3 migration script, 20/3 deploy. Có xung đột nào không?
+[11:26:15] Lan: Em thấy 13/3 có nhiều task cùng lúc. Có thể quá tải cho Tuấn và An.
+[11:26:30] Tuấn: Em có ba task deadline 13/3: log spec error codes, API draft, và hỗ trợ CI/CD. Em nghĩ em có thể làm được, nhưng cần ưu tiên.
+[11:26:45] An: Em có hai task 12/3 và 13/3, cũng ổn.
+[11:27:00] Minh: Vậy giữ nguyên. Nếu có vấn đề, báo sớm.
+[11:27:15] Hà: Em có một unresolved item: spec webhook từ product vẫn chưa có. Điều này ảnh hưởng đến API draft và test plan integration.
+[11:27:30] Minh: Đó là unresolved thật sự. Chúng ta không giải quyết được trong meeting này. Anh sẽ gửi email cho product yêu cầu spec trước 15/3.
+[11:27:45] Lan: Vậy tạo task cho anh Minh: liên hệ product về webhook spec, deadline 15/3.
+[11:28:00] Minh: OK, nhưng đây là task cho anh, không phải technical task, chỉ là communication.
+[11:28:15] Tuấn: Em có một clarification: task migration script đã handoff từ em sang An, nhưng em vẫn hỗ trợ. Có cần update gì không?
+[11:28:30] An: Em đã nhận, deadline 18/3, không cần thay đổi.
+[11:28:45] Minh: Vậy mọi thứ đã rõ. Recap toàn meeting: chúng ta đã thảo luận về payment development, integration với CRM, monitoring, release plan, và support. Các task chính đã được assign, deadline có điều chỉnh. Còn unresolved duy nhất là spec webhook từ product.
+[11:29:05] Lan: Em muốn bổ sung, task ETL migration đã hủy, không cần theo dõi.
+[11:29:20] Hà: Còn test plan cho integration sẽ được cập nhật sau khi có spec.
+[11:29:35] An: Em có một negative: cluster resource vẫn thiếu, có thể ảnh hưởng performance test. Nhưng đã ghi nhận.
+[11:29:50] Minh: Đó là vấn đề ops, để anh bàn với Huy sau.
+[11:30:05] Tuấn: Em có một positive: code payment cơ bản đã ổn, chỉ cần fix lỗi review.
+[11:30:20] Minh: Tốt. Cảm ơn mọi người vì buổi họp dài. Chúng ta sẽ có meeting tiếp theo vào ngày 10/3 để kiểm tra tiến độ. Giờ thì kết thúc.
+[11:30:35] Lan: Cảm ơn anh Minh.
+[11:30:45] Hà: Bye mọi người.
+[11:30:55] Tuấn: Tạm biệt.
+[11:31:05] An: Hẹn gặp lại.

@@ -1,0 +1,149 @@
+MEETING_ID: W4-LONG-C5-N3-SW-STATE-005
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-19
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:02:01] Anh Minh: Chào mọi người, cảm ơn đã đến đúng giờ. Hôm nay chúng ta có nhiều việc cần bàn cho đợt triển khai hệ thống mới. Đầu tiên, tôi muốn điểm qua tình hình môi trường test và tài liệu triển khai. Chị Lan, bên em có gì mới không?
+
+T000002 [09:02:34] Chị Lan: Dạ, bên em vừa nhận được yêu cầu từ khách hàng về việc mở rộng staging. Hiện tại môi trường test đang hoạt động nhưng chưa có đủ băng thông để chạy thử nghiệm tải. Anh Tuấn bên infra đã đề xuất một số giải pháp nhưng chưa chốt.
+
+T000003 [09:03:15] Anh Tuấn: Đúng vậy, tôi đã gửi email chi tiết về ba phương án nâng cấp. Phương án một là mở rộng ổ cứng SSD, phương án hai là thuê thêm server ảo, phương án ba là chuyển sang cloud tạm thời. Tôi nghĩ nên chốt sớm để kịp lịch.
+
+T000004 [09:03:52] Anh Minh: Rõ rồi. Chúng ta sẽ quay lại vấn đề đó sau. Trước mắt, tôi muốn tập trung vào hai việc chính: hoàn thiện môi trường test và soạn tài liệu hướng dẫn triển khai. Những việc này cần được phân công rõ ràng.
+
+T000005 [09:04:20] Chị Hà: Em xin phép góp ý. Theo em, việc soạn tài liệu nên song song với việc setup môi trường, vì nếu môi trường chưa ổn thì tài liệu cũng khó chính xác. Nhưng nếu chờ nhau thì lại mất thời gian.
+
+T000006 [09:04:55] Anh Minh: Ý em đúng. Do đó tôi đề xuất chia làm hai task riêng. Task thứ nhất: "Hoàn thiện môi trường test staging" – giao cho anh Tuấn làm chính, chị Lan hỗ trợ kỹ thuật. Task thứ hai: "Hoàn thiện tài liệu hướng dẫn triển khai phiên bản staging" – giao cho chị Hà phụ trách, em có thể tham khảo từ bản cũ.
+
+T000007 [09:05:22] Chị Hà: Anh Minh, task tài liệu đó em thấy tên hơi giống task môi trường, dễ nhầm. Em đề xuất đặt tên rõ hơn, ví dụ "Tài liệu triển khai staging v2".
+
+T000008 [09:05:50] Anh Minh: Ừ, cũng được. Nhưng tôi vẫn giữ nguyên hai tên đó để dễ theo dõi. Về deadline, anh Tuấn cần hoàn thành môi trường test trước ngày 25 tháng 2, vì sau đó chúng ta có đợt kiểm thử. Còn tài liệu thì chưa cần gấp, em Hà cứ làm xong là báo, không ấn định ngày.
+
+T000009 [09:06:18] Anh Tuấn: Deadline 25/2 hơi căng đấy anh. Hiện bên infra đang phải xử lý vài sự cố legacy. Nếu được, em xin thêm ba ngày, đến 28/2.
+
+T000010 [09:06:42] Anh Minh: Không được, 25/2 là hạn chót vì bên QA đã lên lịch test. Em cố gắng sắp xếp lại. Có cần điều chỉnh nhân sự không?
+
+T000011 [09:07:10] Anh Tuấn: Vậy em sẽ bàn với chị Lan để tận dụng thêm một bạn từ team infra hỗ trợ. Chị Lan có đồng ý không?
+
+T000012 [09:07:30] Chị Lan: Em không vấn đề gì, nhưng cần đảm bảo bạn đó không bị cuốn vào dự án khác. Em sẽ check và báo lại sau.
+
+T000013 [09:08:01] Anh Minh: Tốt. Chị Lan ơi, em cũng nhận trách nhiệm theo dõi tiến độ môi trường test, vì sau này em sẽ là người dùng chính. Anh Tuấn báo cáo lại cho chị Lan hàng tuần nhé.
+
+T000014 [09:08:25] Anh Tuấn: Rõ. Tôi sẽ gửi mail update vào thứ Hai và thứ Năm.
+
+T000015 [09:08:45] Chị Hà: Anh Minh, về tài liệu, em thấy bản cũ thiếu phần hướng dẫn cấu hình log và monitoring. Em định bổ sung thêm. Như vậy tài liệu sẽ dài hơn, có cần giới hạn không?
+
+T000016 [09:09:12] Anh Minh: Em cứ bổ sung đầy đủ, nhưng đừng làm quá chi tiết. Tập trung vào các bước chính và các lưu ý về bảo mật. Sau này chúng ta có thể cập nhật thêm.
+
+T000017 [09:09:38] Chị Hà: Vâng. Em cũng muốn hỏi, tài liệu này sẽ dùng cho ai? Nhân viên vận hành hay cả developer?
+
+T000018 [09:09:58] Anh Minh: Chủ yếu cho đội vận hành và support. Developer đã có tài liệu riêng. Em nên viết theo hướng thực hành, dễ đọc.
+
+T000019 [09:10:20] Chị Lan: Em thấy có vấn đề về dữ liệu test. Bên em chưa có bộ data mẫu chuẩn. Nếu không có data thì môi trường test cũng khó kiểm tra.
+
+T000020 [09:10:48] Anh Minh: Vấn đề đó chúng ta sẽ bàn sau. Anh Tuấn, em để ý giúp việc tạo data mẫu. Có thể dùng script copy từ production nhưng ẩn danh.
+
+T000021 [09:11:10] Anh Tuấn: Việc đó cần phê duyệt từ bộ phận pháp lý về bảo mật dữ liệu. Em sẽ làm văn bản đề xuất.
+
+T000022 [09:11:35] Anh Minh: Được. Vậy tạm thời chưa giao việc đó. Chúng ta tập trung vào hai task chính đã. Có ai ý kiến gì thêm không?
+
+T000023 [09:11:57] Chị Hà: Em có thắc mắc. Task tài liệu của em, em có thể tham khảo từ các dự án trước của anh Tuấn không? Hay phải tự viết mới hoàn toàn?
+
+T000024 [09:12:20] Anh Tuấn: Em có thể lấy template từ dự án cũ của anh, nhưng cần điều chỉnh cho phù hợp với phiên bản này. Anh sẽ gửi link cho em sau.
+
+T000025 [09:12:40] Anh Minh: Tốt. Vậy sau cuộc họp, anh Tuấn gửi tài liệu tham khảo cho chị Hà. Chị Hà, em có thể bắt đầu ngay khi nhận được.
+
+T000026 [09:13:05] Chị Hà: Em rõ. Em sẽ cố gắng hoàn thành trong vòng hai tuần, tức khoảng đầu tháng 3.
+
+T000027 [09:13:25] Anh Minh: Chị không đặt deadline cứng, nhưng em nên tự đặt mục tiêu để tránh trễ. Anh Tuấn, về môi trường test, em có kế hoạch chi tiết chưa?
+
+T000028 [09:13:50] Anh Tuấn: Em đã có draft. Trước tiên, em sẽ kiểm tra lại cấu hình hiện tại, sau đó mua thêm ổ SSD nếu ngân sách cho phép. Em sẽ báo giá trong hôm nay.
+
+T000029 [09:14:12] Anh Minh: Ai phê duyệt ngân sách? Có cần lên ban giám đốc không?
+
+T000030 [09:14:30] Anh Tuấn: Khoản nhỏ thôi, dưới 10 triệu, chị Lan có thể duyệt được. Em sẽ gửi chị Lan dự toán.
+
+T000031 [09:14:48] Chị Lan: Ừ, em gửi đi, chị xem rồi ký.
+
+T000032 [09:15:05] Anh Minh: Vậy thống nhất nhé. Task "Hoàn thiện môi trường test staging" – anh Tuấn chịu trách nhiệm chính, chị Lan hỗ trợ duyệt ngân sách và giám sát, deadline 25/2. Task "Hoàn thiện tài liệu hướng dẫn triển khai staging" – chị Hà chịu trách nhiệm, không deadline cứng. Có cần ghi nhận lại vào biên bản không?
+
+T000033 [09:15:30] Chị Hà: Em sẽ ghi lại và gửi mail cho mọi người sau.
+
+T000034 [09:15:48] Anh Minh: Thank em. Nhưng tôi thấy có một điểm cần làm rõ. Tên hai task khá giống nhau, dễ gây nhầm lẫn khi báo cáo. Liệu có cách nào phân biệt rõ hơn không?
+
+T000035 [09:16:10] Anh Tuấn: Em nghĩ nên thêm ký hiệu: Task A là môi trường, Task B là tài liệu. Hoặc dùng từ viết tắt.
+
+T000036 [09:16:28] Chị Hà: Hoặc chúng ta có thể đặt tên task theo mã dự án. Ví dụ "TASK-ENV-STAGING" và "TASK-DOC-STAGING".
+
+T000037 [09:16:52] Anh Minh: Ừ, cách đó được. Anh Tuấn, em đặt mã như vậy nhé. Và khi nhắc đến trong các cuộc họp sau, mọi người nên dùng mã để tránh hiểu lầm.
+
+T000038 [09:17:15] Anh Tuấn: Vâng. Em sẽ cập nhật trong hệ thống quản lý công việc.
+
+T000039 [09:17:30] Chị Lan: Em có một băn khoăn. Task tài liệu không có deadline, liệu có bị trễ không? Vì thường những việc không deadline sẽ bị đẩy xuống cuối.
+
+T000040 [09:17:52] Anh Minh: Chị hiểu, nhưng hiện tại chưa có áp lực thời gian. Nếu cần, sau này chúng ta sẽ điều chỉnh. Chị Hà có thể tự đặt kỳ vọng cho mình.
+
+T000041 [09:18:15] Chị Hà: Em vẫn sẽ cố gắng xong trước ngày 28/2 để đồng bộ với deadline của anh Tuấn. Nếu không kịp thì đầu tháng 3 cũng được.
+
+T000042 [09:18:35] Anh Minh: Đó là tinh thần tốt. Nhưng em đừng hy sinh chất lượng. Có vấn đề gì thì báo ngay.
+
+T000043 [09:18:55] Chị Hà: Vâng ạ.
+
+T000044 [09:19:10] Anh Minh: Chuyển sang vấn đề khác. Về môi trường test, chúng ta cần quyết định xem dùng luôn server cũ hay mua mới. Anh Tuấn, em nghĩ sao?
+
+T000045 [09:19:35] Anh Tuấn: Server cũ vẫn còn khả năng đáp ứng nếu nâng cấp RAM và SSD. Chi phí thấp hơn mua mới. Em khuyên nên nâng cấp.
+
+T000046 [09:19:58] Chị Lan: Em đồng ý. Nhưng cần check lại thời gian bảo hành. Server cũ đã dùng 3 năm, nếu linh kiện hỏng thì sao?
+
+T000047 [09:20:20] Anh Tuấn: Linh kiện SSD và RAM đều có bảo hành riêng. Em sẽ chọn loại có bảo hành 2 năm.
+
+T000048 [09:20:40] Anh Minh: Vậy thống nhất. Tiến hành nâng cấp. Ai sẽ thực hiện việc đặt hàng và lắp đặt?
+
+T000049 [09:20:58] Anh Tuấn: Em có thể tự làm, nhưng cần một người hỗ trợ cài đặt hệ điều hành. Bên em có bạn Khoa rảnh.
+
+T000050 [09:21:15] Anh Minh: Được. Em sắp xếp với bạn Khoa nhé. Nhưng nhớ cập nhật chị Lan về tiến độ.
+
+T000051 [09:21:32] Chị Lan: Em sẽ theo dõi qua mail. Anh Tuấn, em gửi chị báo giá sớm nhé.
+
+T000052 [09:21:50] Anh Tuấn: Trong chiều nay em gửi.
+
+T000053 [09:22:08] Anh Minh: Còn vấn đề gì về môi trường test nữa không? Chị Lan, em có cần thêm gì không?
+
+T000054 [09:22:25] Chị Lan: Em muốn có một bản kiểm tra an ninh mạng trước khi đưa vào sử dụng. Nhưng việc đó có thể để sau khi nâng cấp xong.
+
+T000055 [09:22:45] Anh Minh: Tốt. Vậy tạm thời chưa bàn. Chuyển sang tài liệu triển khai. Chị Hà, em có cần hỗ trợ từ ai không?
+
+T000056 [09:23:05] Chị Hà: Em cần anh Tuấn review kỹ thuật các phần về cấu hình hệ thống. Anh Tuấn có thể dành chút thời gian không?
+
+T000057 [09:23:22] Anh Tuấn: Anh có thể review vào cuối tuần. Em gửi bản nháp trước thứ Sáu.
+
+T000058 [09:23:40] Chị Hà: Vâng, em sẽ cố gắng.
+
+T000059 [09:23:55] Anh Minh: Lưu ý, tài liệu cần có phần khắc phục sự cố thường gặp. Em nhớ bổ sung.
+
+T000060 [09:24:10] Chị Hà: Em sẽ tham khảo từ các dự án cũ.
+
+T000061 [09:24:28] Anh Minh: Được rồi. Tổng kết lại, chúng ta có hai task chính. Anh Tuấn sẽ gửi báo giá và kế hoạch nâng cấp. Chị Hà sẽ bắt đầu soạn tài liệu. Ai còn thắc mắc không?
+
+T000062 [09:24:50] Chị Lan: Em muốn hỏi về việc backup dữ liệu trong quá trình nâng cấp. Nếu ổ cứng mới không tương thích thì sao?
+
+T000063 [09:25:12] Anh Tuấn: Em đã tính đến việc backup toàn bộ trước khi thay thế. Sẽ dùng ổ cứng ngoài. Vấn đề tương thích em đã kiểm tra model.
+
+T000064 [09:25:30] Anh Minh: Vậy là ổn. Không có thắc mắc nào khác? Tốt. Tôi sẽ kết thúc phần này. Cảm ơn mọi người.
+
+T000065 [09:25:48] Chị Hà: Em xin phép hỏi thêm một chút. Trong tài liệu, em có nên đưa phần cài đặt phần mềm giám sát không? Hay để riêng?
+
+T000066 [09:26:05] Anh Minh: Nên đưa vào, vì nó là quy trình chuẩn. Nhưng nhớ đánh dấu là tùy chọn.
+
+T000067 [09:26:20] Chị Hà: Vâng.
+
+T000068 [09:26:30] Anh Minh: Vậy hết. Cuộc họp hôm nay tạm dừng ở đây. Phần còn lại chúng ta sẽ bàn trong các buổi sau. Nhớ gửi mail biên bản.
+
+T000069 [09:26:48] Anh Tuấn: Em sẽ gửi báo giá trong chiều nay.
+
+T000070 [09:27:00] Chị Hà: Em sẽ gửi draft vào thứ Sáu.
+
+T000071 [09:27:12] Anh Minh: Cảm ơn. Kết thúc.
+
+--- END OF PART P01 ---

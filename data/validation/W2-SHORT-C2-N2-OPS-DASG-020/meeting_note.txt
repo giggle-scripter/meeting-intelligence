@@ -1,0 +1,9 @@
+minutes nháp
+chủ đề: Chuẩn bị bản phát hành nội bộ
+kw: build / chao / chuan / gap / phat / hanh / giao
+- Chào mọi người, hôm nay chúng ta cần chuẩn bị gấp bản phát hành nội bộ để kịp demo thứ Hai đấy
+* Tuấn, chị đã giao cho em thì em làm nhé, chị tin em sắp xếp được
+- Chị sẽ trao đổi với bên kinh doanh lùi bug đó sang thứ Hai, em yên tâm tập trung build trước
+1) Nhưng em lo build vội sẽ sót lỗi vặt
+- Vậy chốt: Tuấn chịu trách nhiệm chính build bản nội bộ, Hương hỗ trợ rà soát checklist
+* Tuấn, chị giao em làm build này, cố gắng xong trước 5 giờ chiều nay ? chưa chốt

@@ -1,0 +1,37 @@
+{
+  "case": {
+    "wave": 2,
+    "case_index": 10,
+    "meeting_id": "W2-SHORT-C2-N1-IT-REJT-010",
+    "meeting_date": "2026-02-04",
+    "title": "Trao đổi kế hoạch tích hợp",
+    "labels": "task_rejection,rejected_without_replacement",
+    "objective": "{\"name\": \"assignment rejection\", \"code\": \"REJT\", \"labels\": \"task_rejection,rejected_without_replacement\", \"requirements\": \"Một người được hỏi/giao việc nhưng từ chối; không có người nhận thay.\"}"
+  },
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 667,
+    "turn_count": 26
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "validation_error",
+      "errors": [
+        "Quá ít turn: 0; cần ít nhất khoảng 25.",
+        "Không tìm thấy timestamp hợp lệ."
+      ],
+      "elapsed_seconds": 216.53609490000235
+    },
+    {
+      "attempt": 2,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 321.0284459000104
+    }
+  ]
+}

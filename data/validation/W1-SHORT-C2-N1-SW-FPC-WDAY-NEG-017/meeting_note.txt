@@ -1,0 +1,6 @@
+note nhanh
+chủ đề: Chuẩn bị môi trường kiểm thử
+kw: moi truong / kiem thu / file / email / cong / check / cai
+- Vậy em sẽ gửi file đến email công ty, Minh check giúp
+* Cái đó để anh báo với infra, không nằm trong phần việc này
+- Ý hay, nhưng để làm sau khi hoàn tất việc chính

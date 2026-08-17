@@ -1,0 +1,67 @@
+MEETING_ID: W4-LONG-C5-N3-PROD-STATE-011
+PART: P02/5
+
+T000082 [09:15:10] QA: Chị PM ơi, em có một vấn đề về lỗi đăng nhập trên môi trường dev muốn báo cáo. Hôm qua em thử nghiệm thì thấy không thể đăng nhập được bằng tài khoản test.
+T000083 [09:15:25] PM: Ồ, vấn đề đó có nghiêm trọng không? Anh DevLead đã biết chưa?
+T000084 [09:15:33] DevLead: Tôi chưa nghe báo cáo này. Lỗi gì cụ thể thế?
+T000085 [09:15:40] QA: Em thử đăng nhập bằng user "tester" với mật khẩu mặc định, nó báo "Invalid credentials". Nhưng tài khoản đó vẫn dùng được tuần trước.
+T000086 [09:15:55] DevLead: Có thể do thay đổi cấu hình database mới đây. Để tôi kiểm tra lại bảng user trong PostgreSQL.
+T000087 [09:16:05] QA: Nhưng staging đang chuyển sang MySQL, sao dev lại dùng PostgreSQL?
+T000088 [09:16:12] DevLead: Dev vẫn giữ nguyên PostgreSQL cho module chính. Chỉ staging mới chuyển MySQL cho module báo cáo. Có thể script đồng bộ dữ liệu bị lỗi.
+T000089 [09:16:25] PM: Vậy chúng ta cần có task riêng cho việc debug lỗi đăng nhập. Anh DevLead làm luôn được không?
+T000090 [09:16:35] DevLead: Tôi sẽ xem, nhưng hiện đang bận với database staging. Có thể giao cho anh Nam hỗ trợ QA.
+T000091 [09:16:45] QA: Em muốn tự debug cùng với Dev để hiểu rõ quy trình, nhưng cần có quyền truy cập log.
+T000092 [09:16:55] Arch: Tôi nghĩ lỗi đăng nhập có thể liên quan đến việc thay đổi authentication flow trong bản cập nhật gần đây. Có cần review lại code không?
+T000093 [09:17:08] DevLead: Chưa chắc. Để tôi check log trước, nếu cần thiết sẽ mở task fix. Tạm thời assign cho em Tuấn (Dev) hỗ trợ QA.
+T000094 [09:17:20] QA: Vậy em và Tuấn sẽ cùng phân tích. Cần thêm dữ liệu test để tái hiện lỗi. Dữ liệu test hiện tại có đủ không?
+T000095 [09:17:30] Doc: Tôi có thể cung cấp danh sách tài khoản test từ tài liệu, nhưng không chắc đồng bộ với database hiện tại.
+T000096 [09:17:42] PM: Vậy chúng ta cần có dữ liệu test chuẩn. Ai sẽ tạo bộ dữ liệu test cho lỗi đăng nhập?
+T000097 [09:17:52] QA: Em đề nghị DevLead cung cấp script tạo dữ liệu test dựa trên cấu hình mới.
+T000098 [09:18:00] DevLead: Tôi không có sẵn script đó. Có thể để em Tuấn viết, nhưng cần thời gian.
+T000099 [09:18:10] PM: Vậy task tạo dữ liệu test sẽ giao cho ai? Chưa rõ reviewer.
+T000100 [09:18:18] QA: Em có thể viết test case dựa trên dữ liệu hiện có, nhưng cần dữ liệu thực tế từ Dev để tái hiện.
+T000101 [09:18:28] Arch: Tôi thấy việc này nên có người chịu trách nhiệm chính. Nhưng thực sự đang thiếu nhân lực.
+T000102 [09:18:38] PM: Tạm thời, em QA và Tuấn cùng làm, chưa có deadline cứng. Kết quả báo cáo trong part sau.
+T000103 [09:18:50] DevLead: Như vậy, unresolved review cho task debug lỗi đăng nhập. Tôi sẽ assign cho Tuấn, nhưng chưa có người review chính thức.
+T000104 [09:19:00] QA: Em thấy lỗi này có thể do database migration không đồng bộ. Cần kiểm tra both môi trường.
+T000105 [09:19:08] DevLead: Đúng, nhưng tôi đang bận. Có thể part sau mới giải quyết triệt để.
+T000106 [09:19:18] PM: Được, chúng ta tạm gác lại và chuyển sang topic dữ liệu test. Chị Doc, chị có thể hỗ trợ làm rõ yêu cầu dữ liệu test không?
+T000107 [09:19:30] Doc: Tôi có bản mô tả dữ liệu test trong tài liệu hướng dẫn, nhưng chưa cập nhật cho phần đăng nhập. Có thể cần điều chỉnh.
+T000108 [09:19:42] QA: Em muốn có dữ liệu test bao gồm các trường hợp: tài khoản hợp lệ, không hợp lệ, hết hạn. Devần cần cung cấp.
+T000109 [09:19:55] DevLead: Được, tôi sẽ yêu cầu Tuấn soạn một bộ dữ liệu mẫu. Nhưng cần ưu tiên cho staging trước.
+T000110 [09:20:05] PM: Vậy task tạo dữ liệu test cho lỗi đăng nhập có người làm là Tuấn, nhưng ai review? Chưa có.
+T000111 [09:20:13] QA: Em có thể review phần logic, nhưng không đủ chuyên môn để review dữ liệu kỹ thuật.
+T000112 [09:20:22] Arch: Tôi có thể review nếu cần, nhưng không phải chuyên về dữ liệu test.
+T000113 [09:20:32] PM: Vậy unresolved: reviewer cho task dữ liệu test. Sẽ quyết định sau.
+T000114 [09:20:42] DevLead: Một vấn đề khác: nếu lỗi đăng nhập tồn tại, việc copy dữ liệu production sang staging có thể gặp rủi ro. Vì script copy cũng dùng thông tin đăng nhập.
+T000115 [09:20:55] PM: Anh có đề xuất gì?
+T000116 [09:21:02] DevLead: Tôi nghĩ nên fix lỗi đăng nhập trước khi copy dữ liệu, để tránh ảnh hưởng đến quá trình đồng bộ.
+T000117 [09:21:10] Arch: Nhưng copy dữ liệu cần dùng tài khoản service riêng, không phải user test. Có thể vẫn chạy được.
+T000118 [09:21:20] QA: Em lo lắng nếu không fix, QA không thể test login trên staging.
+T000119 [09:21:30] PM: Chúng ta có thể điều chỉnh kế hoạch. Tôi quyết định: task fix lỗi đăng nhập cần được ưu tiên. Anh DevLead, anh bố trí người làm, deadline trước khi copy dữ liệu, tức thứ Năm.
+T000120 [09:21:48] DevLead: Nhưng tôi đã nói là bận. Có thể giao cho Tuấn sửa, nhưng cần thời gian tìm hiểu.
+T000121 [09:21:58] PM: Vậy task này có deadline thứ Năm, assign cho Tuấn, nhưng cần DevLead support. Chưa có reviewer.
+T000122 [09:22:08] QA: Em có thể hỗ trợ test sau khi fix.
+T000123 [09:22:15] Arch: Tôi đề nghị thêm một task kiểm tra tính tương thích giữa authentication và database mới, phòng khi có vấn đề khác.
+T000124 [09:22:28] PM: Ghi nhận. Nhưng hôm nay chúng ta có quá nhiều task. Tôi muốn focus vào dữ liệu test trước.
+T000125 [09:22:38] QA: Em muốn biết: dữ liệu test cho staging sẽ lấy từ đâu? Có dùng bản sao production không?
+T000126 [09:22:48] DevLead: Sau khi copy xong thì có dữ liệu thật. Nhưng trước đó, chúng ta cần dữ liệu giả để test.
+T000127 [09:22:58] PM: Vậy Tuấn tạo dữ liệu giả, deadline thứ Tư để kịp test trước copy. OK?
+T000128 [09:23:08] QA: Ok, nhưng em cần danh sách các tài khoản test từ chị Doc.
+T000129 [09:23:15] Doc: Tôi sẽ gửi danh sách trong email hôm nay.
+T000130 [09:23:22] PM: Tốt. Chúng ta tạm thời có ba task mới: fix lỗi đăng nhập, tạo dữ liệu test giả, và kiểm tra tương thích. Cả ba đều chưa có reviewer chính thức.
+T000131 [09:23:38] Arch: Tôi có thể review task tương thích, nhưng không phải task fix.
+T000132 [09:23:45] QA: Em có thể review test case, nhưng dữ liệu test thì cần người khác.
+T000133 [09:23:55] PM: Vậy unresolved reviewer cho task tạo dữ liệu test giả. Sẽ bàn trong part sau.
+T000134 [09:24:05] DevLead: Một điểm tiêu cực: nếu task fix lỗi đăng nhập không kịp, toàn bộ kế hoạch test có thể bị trễ.
+T000135 [09:24:15] PM: Tôi hiểu. Nhưng chúng ta vẫn đang trong quá trình lên kế hoạch. Có thể điều chỉnh sau.
+T000136 [09:24:25] QA: Em đề nghị có một buổi họp ngắn giữa QA và Dev để thống nhất dữ liệu test trước khi part sau.
+T000137 [09:24:35] PM: Tốt, em QA và anh DevLead tự sắp xếp. Tôi sẽ không tham gia.
+T000138 [09:24:42] Arch: Về task tương thích, tôi cần spec từ DevLead về database mới.
+T000139 [09:24:50] DevLead: Tôi sẽ gửi spec qua email chiều nay.
+T000140 [09:24:58] PM: Ok. Vậy chúng ta đã bàn được nhiều việc. Tôi thấy căng thẳng về deadline, nhưng cố gắng.
+T000141 [09:25:08] QA: Em có thêm một câu hỏi: dữ liệu test giả có cần bao gồm dữ liệu nhạy cảm không?
+T000142 [09:25:16] Arch: Không, dữ liệu giả phải là dữ liệu ẩn danh, tuân thủ quy định.
+T000143 [09:25:24] DevLead: Tôi sẽ nhắc Tuấn.
+T000144 [09:25:30] PM: Tốt. Vậy tôi xin tạm dừng part hai tại đây. Các task chưa có reviewer sẽ được giải quyết trong part sau. Cảm ơn mọi người.
+--- END OF PART P02 ---

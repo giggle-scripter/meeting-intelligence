@@ -1,0 +1,604 @@
+=== MEETING METADATA ===
+meeting_id: W5-XL-C5-N2-IT-STRESS-002
+meeting_title: Họp tổng hợp phát triển và vận hành sản phẩm
+meeting_date: 2026-02-26
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+chốt sơ bộ
+chủ đề: Họp tổng hợp phát triển và vận hành sản phẩm
+kw: bao cao / release / payment / api / oauth / spec / review
+- Giao task review design cho Đức và Lan, dl cuối tuần 01/03
+* Tôi tổng kết các task chính: - Task 1: Lan – phân tích log thanh toán, báo cáo sơ bộ hạn 28/02 (sau đó gia hạn khả năng 01/03)
+- correction: - Task payment analysis: Lan, dl 29/02 (sau
+1) Tổng kết scope update trong part này: task thanh toán mở rộng thêm code review, dl review của Đức 03/03
+- Vậy tôi quyết định hủy task banner động khỏi sprint 14
+* correction dl thứ hai cho task capacity payment: từ 05/03 thành 06/03
+- Tôi muốn recap các thay đổi trong part này: - Hủy task banner động. - Tạo task tối ưu image (Hùng, dl 04/03). -
+1) Recap local: integration FastShip spec thay đổi, task review vẫn dl 07/03, scope cập nhật
+- Tổng kết: task review API vẫn tiến hành, dl 07/03, spec mới
+* Task review design placement: ban đầu dl 01/03, sau dời thành 03/03, rồi tiếp tục dời thành 04/03 do release sớm
+- Task review API FastShip: Hùng và Đức, dl 07/03, scope spec mới (không OAuth2 mà dùng API key)
+1) Task tối ưu image mobile: Hùng, dl 04/03, phụ thuộc quyền CDN từ Tuấn
+- Hùng, em không cần làm nữa
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:00:00] Minh: Chào mọi người, bắt đầu cuộc họp tổng hợp tuần này. Hôm nay có đủ các anh chị chưa ạ? Lan, Hùng, Tuấn, Trang, Đức đều có mặt chứ?
+[09:00:06] Lan: Em có mặt rồi anh Minh.
+[09:00:09] Hùng: Có em.
+[09:00:12] Tuấn: Có.
+[09:00:14] Trang: Em đây.
+[09:00:16] Đức: Tôi đây.
+[09:00:19] Minh: Tốt. Mục tiêu cuộc họp hôm nay là review tiến độ sprint 14, bàn tiếp về vấn đề performance module thanh toán, và thống nhất hướng xử lý một số lỗi vận hành. Chúng ta bắt đầu từ phần dev nhé.
+[09:00:30] Lan: Vâng. Sprint này bọn em đã hoàn thành 3 story chính: thêm tính năng lọc đơn hàng, sửa lỗi validate email, và nâng cấp cache cho danh sách sản phẩm. Phần hiệu năng module thanh toán bọn em mới bắt đầu phân tích, chưa có kết quả cụ thể.
+[09:00:48] Hùng: Bên QA em test thấy 3 story kia pass, nhưng có một số fail về timeout ở môi trường staging khi tải lớn. Em nghĩ liên quan đến phần cache mà Lan vừa nói.
+[09:01:00] Tuấn: Đúng, cache layer bên em cấu hình hơi lỏng, dễ dẫn đến miss và phải query database. Để em xem lại config sau.
+[09:01:10] Đức: Vấn đề performance thanh toán là ưu tiên số một vì khách hàng phản ánh chậm. Thứ Năm tuần trước có một vụ order treo 5 phút, lead biz rất gấp. Lan, em đã nắm được nguyên nhân sơ bộ chưa?
+[09:01:28] Lan: Dạ em đã dump log từ ngày 20 đến 25/02, thấy có pattern lạ: các request thanh toán vào giờ cao điểm queue rất dài, có thể do service payment gọi sang third-party quá chậm. Nhưng cần phân tích sâu hơn.
+[09:01:48] Minh: OK. Em sẽ giao cho Lan một task: điều tra và báo cáo chi tiết root cause của chậm thanh toán. Trong bao lâu thì em có thể có kết quả sơ bộ?
+[09:01:57] Lan: Dạ nếu có data đầy đủ, cuối tuần này em có thể báo cáo sơ bộ, tức ngày 01/03.
+[09:02:06] Minh: Tốt. Hạn chốt báo cáo sơ bộ là 28/02 thứ Bảy, vì đầu tuần sau tôi phải báo cáo lead product. Lan cố gắng nhé.
+[09:02:18] Lan: Vâng anh, em sẽ cố gắng đẩy trước thứ Bảy. Nhưng em cần server log full từ staging mới có thể chạy phân tích chính xác. Tuấn có thể export log tuần vừa rồi cho em không?
+[09:02:32] Tuấn: Được, em sẽ xuất log payment trong thời gian 20/02 – 26/02 và gửi link bucket cho Lan trước 10h sáng mai. Có cần thêm request trace không?
+[09:02:43] Lan: Thêm cái đó nữa thì tốt, em muốn clear hơn.
+[09:02:48] Tuấn: OK, em làm luôn.
+[09:02:51] Hùng: Em cũng muốn data log để xem các test case fail do timeout. Tuấn share cho em với.
+[09:02:58] Tuấn: Ừ, em share chung một link cho cả team. Anh Hùng lấy file log payment và general net.
+[09:03:05] Minh: Rõ. Bây giờ chuyển qua vấn đề lỗi vận hành. Trang, em update tình hình từ bên support đi.
+[09:03:14] Trang: Dạ. Phòng support ghi nhận trong tuần có hai lỗi nghiêm trọng. Một là hiển thị giá sai ở trang chi tiết sản phẩm, hai là user không đăng nhập được sau khi reset mật khẩu. Em đã gửi ticket cho team dev, chưa thấy phản hồi.
+[09:03:30] Lan: Lỗi giá sai bên em đã sửa ở bản hotfix đêm qua rồi, chưa kịp deploy lên production. Hùng có test lại chưa?
+[09:03:38] Hùng: Em test xong sáng nay, pass rồi. Có thể triển khai sớm.
+[09:03:44] Tuấn: Vậy deploy giờ nào? Em cần chuẩn bị pipeline.
+[09:03:49] Minh: Chiều nay 15h deploy lên staging, nếu ổn thì cuối ngày push production. Đức có ý kiến gì không?
+[09:04:00] Đức: Ổn. Nhưng nhớ rolling update, không được dừng service. Anh Tuấn chú ý health check.
+[09:04:07] Tuấn: Rõ.
+[09:04:10] Minh: Còn lỗi reset mật khẩu thì sao? Lan em đã xem chưa?
+[09:04:15] Lan: Em chưa, vụ đó bên mới để Trang assign cho ai? Em nghĩ không phải module của em.
+[09:04:22] Trang: À, em mới gán cho Đức vì liên quan đến logic security. Anh Đức hôm qua em nhắn anh xem rồi.
+[09:04:29] Đức: Cái đó đơn giản, do bên auth service quên config redirect url. Anh fix rồi, đang test. Mai deploy được.
+[09:04:36] Trang: Tốt quá, em thông báo lại support.
+[09:04:40] Minh: Vậy bỏ qua lỗi đó. Chúng ta chuyển qua topic thứ hai: Product Placement – bố trí sản phẩm lại cho trang chủ. Trang, em có cập nhật feedback từ marketing không?
+[09:04:53] Trang: Dạ. Họ muốn điều chỉnh vị trí banner quảng cáo và box sản phẩm khuyến mãi để tăng conversion. Em đã vẽ wireframe mới, gửi anh Minh hôm qua.
+[09:05:05] Minh: Ừm, tôi có xem rồi. Cần dev ước lượng effort. Lan, em có người rảnh không?
+[09:05:14] Lan: Sprint này team em đang full, chỉ có thể handle hotfix và performance thanh toán. Có thể đẩy sang sprint 15.
+[09:05:22] Đức: Tôi thấy cũng chưa gấp. Nhưng cần chốt design sớm để tránh chậm. Trang em gửi figma cho tôi và Lan để review.
+[09:05:33] Trang: Em sẽ gửi trong chiều nay.
+[09:05:36] Minh: OK. Giao task review design cho Đức và Lan, deadline cuối tuần 01/03. Tuần sau sprint planning sẽ có quyết định.
+[09:05:50] Hùng: Anh Minh, em có một băn khoăn. Task phân tích thanh toán của Lan với task review design có overlap về thời gian không? Lan chỉ có một người.
+[09:06:00] Lan: Em có thể review design cuối ngày, không ảnh hưởng. Nhưng anh Minh, deadline 28/02 cho báo cáo performance hơi ngắn, em sợ không kịp nếu log chưa có.
+[09:06:14] Minh: Đã nói Tuấn cung cấp log sáng mai, em sẽ có sớm. Nếu khó khăn, tôi cho phép kéo dài đến 01/03, nhưng phải báo tôi ngay.
+[09:06:24] Lan: Vâng, em cố gắng.
+[09:06:27] Đức: Lan, em cần gì hỗ trợ thêm, cứ nói.
+[09:06:31] Lan: Dạ, nếu có thể nhờ Đức review output phân tích giúp em, vì em chưa từng deep dive vào payment service nhiều.
+[09:06:39] Đức: OK, cuối tuần em gửi draft, tôi review cho.
+[09:06:43] Minh: Tốt. Bây giờ quay lại vấn đề cache và timeout. Tuấn, em đã nói config lỏng, có plan fix chưa?
+[09:06:53] Tuấn: Em đã lên phương án: tăng TTL cho cache product list lên 30 phút, và tối ưu query active. Nhưng cần test kỹ. Em muốn chiều nay deploy thử trên staging.
+[09:07:08] Minh: Lịch deploy staging đã có hotfix lúc 15h, em gộp luôn cache tuning vào bản đó.
+[09:07:14] Tuấn: Vậy em sẽ chuẩn bị code, tag cùng hotfix.
+[09:07:19] Hùng: Em lo nếu TTL tăng quá thì data lỗi thời khi update sản phẩm. Cần cơ chế invalidate.
+[09:07:27] Tuấn: Đúng, em sẽ thêm webhook để purge cache khi có upsert. Code đã có sẵn, chỉ chưa test.
+[09:07:34] Đức: Cái này cần phối hợp với Lan vì module product list của em viết. Lan, em kiểm tra API upsert có gọi cache purge không?
+[09:07:42] Lan: Em sẽ check. Trong sprint này em đã thêm hook rồi, nhưng chưa triển khai.
+[09:07:47] Minh: Vậy Lan và Tuấn phối hợp để hoàn thiện cache trước cuối ngày mai. Nhưng không được làm trễ báo cáo performance. Tuấn có thể hỗ trợ Lan phần code cache?
+[09:08:00] Tuấn: Em có thể pair session với Lan chiều nay khi deploy xong.
+[09:08:05] Lan: OK, chiều em rảnh sau 16h.
+[09:08:10] Minh: Được. Chúng ta còn 10 phút, ai có thắc mắc gì thêm không?
+[09:08:16] Trang: Anh Minh, vụ wireframe product placement, em cần feedback từ bên anh và Đức trước 29/02 để kịp vào sprint planning.
+[09:08:27] Minh: Tôi sẽ feedback trong tối nay. Đức thì anh có ý kiến gì ngay bây giờ không?
+[09:08:33] Đức: Xem sơ qua thấy phần banner quá to, khả năng mobile bị che. Cần shrink 20%. Trang để tôi ghi chú cụ thể.
+[09:08:43] Trang: Vâng em sẽ chỉnh lại rồi gửi v2.
+[09:08:47] Minh: Nhớ gửi lại cho Lan và tôi.
+[09:08:50] Lan: Dạ.
+[09:08:52] Hùng: Anh Minh, em có một đề nghị. Sprint này ngoài performance, có thể dành một story nhỏ để xử lý các cảnh báo monitoring không? Số lượng alert tăng 30% từ đầu tháng.
+[09:09:04] Minh: Ý hay. Nhưng phải cân đối. Đức, anh thấy sao?
+[09:09:09] Đức: Có thể lọc bỏ các cảnh báo nhiễu trước, chứ mở story thì sợ không kịp sprint. Tôi assign cho Hùng việc phân loại alert, cuối sprint tổng hợp báo cáo.
+[09:09:21] Hùng: OK, em sẽ làm. Cần data từ Tuấn.
+[09:09:24] Tuấn: Em sẽ share dashboard để anh export.
+[09:09:27] Minh: Ghi nhận. Task phụ, không xung đột. Cuối cùng, tôi muốn nhấn mạnh: vụ log thanh toán là key. Trong case nhỡ Tuấn không kịp, Lan phải tự chạy script lấy log.
+[09:09:43] Lan: Em hiểu rồi.
+[09:09:46] Minh: Tôi tổng kết các task chính: - Task 1: Lan – phân tích log thanh toán, báo cáo sơ bộ hạn 28/02 (sau đó gia hạn khả năng 01/03). - Task 2: Tuấn – export log và trace cho Lan và Hùng, hạn 10h sáng mai (27/02). - Task 3: Tuấn & Lan – phối hợp deploy hotfix giá + cache tuning, staging 15h hôm nay. - Task 4: Đức & Lan – review design product placement, deadline 01/03. - Task 5: Hùng – phân loại alert monitoring, không deadline gấp, cuối sprint. Nhưng lưu ý task 1 sẽ cần hand-off sang Đức nếu Lan cần review, nhưng chưa cần chốt. Mọi người có ý kiến gì không?
+[09:10:35] Lan: Không ạ.
+[09:10:37] Hùng: OK.
+[09:10:39] Tuấn: Rõ.
+[09:10:41] Đức: Tôi ổn.
+[09:10:43] Trang: Em cũng rõ.
+[09:10:45] Minh: Cám ơn mọi người. Phần sau chúng ta sẽ bàn về kế hoạch vận hành cho quý 2, nhưng tôi muốn dành thời gian họp riêng với Đức và Lan sau. Tạm thời kết thúc phiên này, hẹn mọi người 15h deploy.
+[09:10:50] Minh: Tiếp theo, tôi muốn bàn về tích hợp với đối tác vận chuyển mới. Trang, em có thông tin gì từ phía business không?
+[09:11:00] Trang: Dạ, bên sales đã ký MOU với một đơn vị logistics mới tên là FastShip. Họ yêu cầu tích hợp API để đồng bộ đơn hàng và tracking. Dự kiến go-live cuối tháng 3.
+[09:11:15] Minh: OK. Dev cần ước lượng. Lan, em có thể review tài liệu API của họ không? Tôi sẽ giao task này cho em.
+[09:11:22] Lan: Em sẵn sàng, nhưng hiện tại em đang tập trung thanh toán và cache. Nếu được, để sang sprint 15, vì sprint 14 gần kết thúc.
+[09:11:32] Minh: Ý tôi là em chỉ review, không code. Có thể làm song song. Tuy nhiên nếu em quá tải thì để Hùng làm.
+[09:11:40] Hùng: Em cũng có thể review, nhưng em chưa rõ yêu cầu kỹ thuật. Cần Đức support.
+[09:11:48] Đức: Tôi rảnh sau buổi họp riêng với Minh và Lan. Có thể review cùng Hùng, nhưng phải có deadline.
+[09:11:55] Minh: Tôi đặt deadline review API là cuối tuần sau, 07/03. Nhưng trước đó, cần có một buổi workshop với bên FastShip. Trang lo lịch.
+[09:12:08] Trang: Em sẽ sắp xếp với họ, dự kiến thứ Tư hoặc thứ Năm tuần tới.
+[09:12:16] Lan: Anh Minh, em vẫn thấy hơi phân tâm. Task thanh toán deadline 28/02/01/03, cache phối hợp với Tuấn, review design placement, giờ thêm integration nữa. Không biết có quá tải không.
+[09:12:30] Minh: Em chỉ review ban đầu, không phải code. Nếu không kịp, em nói ngay. Tôi có thể chuyển sang Hùng.
+[09:12:37] Hùng: Em đang có task monitoring. Cũng ok.
+[09:12:42] Đức: Nhưng Hùng không rõ business logic, review có thể thiếu. Tôi nghĩ cùng nhau làm.
+[09:12:50] Minh: Vậy assign task review API cho cả Hùng và Đức, Lan chỉ hỗ trợ khi cần. Deadline 07/03. Nhưng tôi muốn Lan lấy API spec từ FastShip, gửi team trước 28/02.
+[09:13:05] Lan: Vâng, em sẽ liên hệ Trang để lấy.
+[09:13:08] Trang: Em gửi link doc ngay bây giờ trong chat.
+[09:13:13] Tuấn: Tôi cũng cần spec để chuẩn bị pipeline cho tích hợp.
+[09:13:18] Trang: Rồi, em share rồi.
+[09:13:22] Đức: Tôi vừa xem qua. API có vẻ dùng OAuth2, cần tạo endpoint auth. Hùng, cái này mày rành.
+[09:13:30] Hùng: Ừ, OAuth của họ khác normal, cần token refresh periodic. Nhưng em sợ deadline 07/03 không đủ để phân tích chi tiết.
+[09:13:40] Minh: Vậy điều chỉnh: deadline review API sơ bộ là 07/03, nhưng nếu phức tạp thì extended đến 10/03. Tôi muốn có báo cáo trước meeting tuần sau.
+[09:13:54] Lan: Vậy em cũng sẽ góp ý trong báo cáo.
+[09:13:58] Đức: OK. Nhưng cần thống nhất ai nhận task cuối cùng. Tôi hiểu là Hùng review content chính, tôi hỗ trợ kỹ thuật.
+[09:14:07] Minh: Đúng. Hùng làm owner, Đức review. Có gì khó khăn thì báo.
+[09:14:14] Hùng: Rõ.
+[09:14:17] Trang: Anh Minh, em thấy business cũng gấp. Họ muốn tích hợp xong trước 20/03 để kịp campaign.
+[09:14:26] Minh: Đó là mốc sau, chúng ta sẽ tính dần. Không cần vội.
+[09:14:32] Tuấn: Tôi có ý: ngoài API review, chúng ta cần test connection môi trường. Có thể lập một task test integration riêng.
+[09:14:40] Minh: Đúng, nhưng chưa phải bây giờ. Sau review mới.
+[09:14:45] Lan: Em muốn hỏi, task phân tích log thanh toán hạn 28/02, em vẫn phải báo cáo dù chưa đầy đủ? Vì log Tuấn chưa gửi mà hạn gần đến.
+[09:14:58] Tuấn: Em đang export, sáng mai chắc chắn có. Nếu chậm quá thì em push sớm hơn.
+[09:15:05] Minh: Được. Nhưng nếu không có log thì em báo tôi, không tự kéo dài.
+[09:15:10] Lan: Vâng.
+[09:15:13] Minh: Bây giờ, có một vấn đề khác: dữ liệu vận hành. Hùng, em thấy các cảnh báo monitoring gồm những gì?
+[09:15:24] Hùng: Chủ yếu là latency cao, lỗi 503, và memory leak ở một số pod. Em đã tổng hợp sơ bộ, chưa điều chỉnh.
+[09:15:34] Minh: Tôi muốn em phân loại mức độ nghiêm trọng, để tuần sau đưa vào backlog. Có thể làm báo cáo nhỏ, deadline giữa tuần sau 04/03.
+[09:15:46] Hùng: Em sẽ làm. Nhưng cần số liệu từ Tuấn về resource usage.
+[09:15:52] Tuấn: Em export dashboard và gửi trước cuối ngày.
+[09:15:58] Minh: Vậy hai task riêng: task phân loại alert của Hùng, deadline 04/03. Và task export metric của Tuấn, deadline hôm nay.
+[09:16:10] Đức: Khoan, tôi thấy có sự trùng lặp. Phân loại alert và phân tích log thanh toán đều đòi hỏi dữ liệu từ Tuấn, và cả hai đều có deadline sát nhau. Liệu có cần ưu tiên không?
+[09:16:22] Minh: Tôi hiểu. Nhưng thanh toán đang gấp hơn. Hùng, em có thể dời deadline phân loại sang 06/03 không?
+[09:16:30] Hùng: Được, ngày 06/03 em trả.
+[09:16:34] Minh: OK, điều chỉnh. Không có thay đổi deadline thanh toán.
+[09:16:39] Tuấn: Vậy em sẽ ưu tiên export log thanh toán trước, metric sau.
+[09:16:44] Minh: Tốt.
+[09:16:47] Trang: Anh Minh, em cần confirm ai là người follow hợp đồng FastShip? Bên sales hỏi em.
+[09:16:54] Minh: Chưa có owner rõ. Tôi sẽ hỏi lead product. Tạm thời em giữ liên lạc.
+[09:17:02] Trang: Vậy em ghi là unresolved, chờ anh trả lời.
+[09:17:07] Minh: Ừ.
+[09:17:10] Lan: Em vẫn lo về khối lượng. Có thể tôi không kịp review design placement vì bận integration không?
+[09:17:20] Minh: Em vừa nói sẽ review cuối ngày, mà giờ lại lo. Task đó vẫn giữ, deadline 01/03. Nếu không kịp thì báo sớm.
+[09:17:28] Lan: Dạ.
+[09:17:31] Đức: Tôi thấy Hùng có task mới, còn Hùng đang có task monitoring nhẹ, không sao. Nhưng tôi không muốn phân tán quá.
+[09:17:40] Hùng: Em vẫn handle được, nhưng cần Tuấn support số liệu đúng hạn.
+[09:17:46] Tuấn: OK.
+[09:17:49] Minh: Mọi người, chúng ta cần thống nhất một số deadline đã điều chỉnh. Tôi sẽ recap nhanh: - Task phân tích log thanh toán (Lan): deadline 28/02, có thể 01/03 nếu cần, nhưng phải báo. - Task export log (Tuấn): sáng 27/02. - Task deploy hotfix+cache (Tuấn & Lan): chiều 26/02 (hôm nay) 15h. - Task review design placement (Đức & Lan): 01/03. - Task review API FastShip (Hùng & Đức): 07/03, có extension 10/03. - Task phân loại alert (Hùng): deadline 06/03 (đã điều chỉnh từ 04/03). - Task export metric (Tuấn): cuối ngày 26/02. - Task liên hệ FastShip (Trang): unresolved owner, chờ.
+[09:18:30] Đức: Còn task thanh toán có cần hand-off cho tôi review không? Như anh nói lúc trước.
+[09:18:38] Minh: Chưa, vì Lan mới bắt đầu. Khi có draft, em gửi tôi và Đức. Nhưng chưa giao task review riêng.
+[09:18:47] Lan: Em sẽ gửi trước 28/02.
+[09:18:51] Hùng: Anh Minh, em thấy task phân loại alert và review API đều yêu cầu thời gian. Nếu cả hai cùng deadline cuối tuần sau, e rằng em overload.
+[09:19:02] Minh: Em vừa đồng ý 06/03 cho alert, 07/03 cho API. Cách nhau một ngày. Nếu quá sức, em có thể xin điều chỉnh.
+[09:19:12] Hùng: Để em xem. Em sẽ báo trước 03/03 nếu cần hỗ trợ.
+[09:19:20] Minh: Đồng ý. Đây là negative block: nhiều task gần nhau. Cố gắng.
+[09:19:27] Trang: Anh Minh, bên support còn ghi nhận một lỗi hiển thị thời gian giao hàng trên mobile. Có cần đưa vào không?
+[09:19:36] Minh: Mức độ?
+[09:19:38] Trang: Medium. Không ảnh hưởng đến thanh toán.
+[09:19:42] Minh: Đưa vào backlog, không tạo task ngay. Tuần sau bàn.
+[09:19:46] Trang: Vâng.
+[09:19:48] Đức: Tôi đề nghị kết thúc topic integration ở đây, chuyển sang phần riêng với Minh và Lan về payment.
+[09:19:56] Minh: OK, mọi người có thể out, chỉ giữ Lan và Đức ở lại.
+[09:20:02] Hùng: Em out trước, lo export metric.
+[09:20:05] Tuấn: Em cũng chuẩn bị pipeline.
+[09:20:08] Trang: Em sẽ gửi link spec.
+[09:20:12] Minh: Lan và Đức ở lại. Chúng ta nói chi tiết về payment performance. Lan, em có thông tin gì thêm từ log cũ hay chưa?
+[09:20:20] Lan: Dạ, em đã xem một vài log từ hôm qua anh Hùng ghi lại, chưa có bản đầy đủ. Có dấu hiệu lỗi timeout từ service payment khi gọi đến cổng thanh toán bên thứ ba.
+[09:20:32] Đức: Cụ thể là timeout ở hàm nào? Em có ghi lại call stack không?
+[09:20:38] Lan: Em thấy ở endpoint /charge, thỉnh thoảng http response kéo dài đến 8 giây, gây timeout cho client. Nhưng log chưa đủ để kết luận.
+[09:20:50] Minh: Như vậy, sáng mai Tuấn gửi log, em sẽ phân tích sâu. Nhưng tôi muốn biết kế hoạch ban đầu của em. Có cần Đức hỗ trợ từ bây giờ không?
+[09:21:00] Lan: Em nghĩ có thể cần Đức xem kiến trúc payment service vì em chưa hiểu rõ luồng. Nhưng nếu anh Đức bận thì em tự tìm hiểu.
+[09:21:08] Đức: Không bận, tôi có thể xem qua. Nhưng tôi muốn có cái nhìn tổng thể trước, chứ không phải debug từng dòng.
+[09:21:16] Minh: Vậy tôi giao hand-off: Lan sẽ gửi cho Đức bản phân tích sơ bộ sau khi có log, và Đức sẽ review và góp ý. Đây là hand-off bước một, chưa chính thức đổi owner. Lan vẫn là owner.
+[09:21:30] Lan: Dạ, em sẽ gửi trước 28/02.
+[09:21:34] Đức: Tôi sẽ review trước 01/03. Nhưng nếu thấy vấn đề phức tạp thì tôi có thể cần thêm một ngày.
+[09:21:42] Minh: OK. Nhưng deadline review của Đức cũng là một mốc. Chúng ta điều chỉnh: deadline báo cáo sơ bộ của Lan vẫn 28/02, nhưng nếu cần, em có thể gửi muộn nhất 29/02. Và Đức review xong trước 02/03.
+[09:21:58] Lan: Nhưng anh Minh, 29/02/2026 là thứ Bảy, em có thể gửi vào cuối ngày.
+[09:22:05] Minh: Không sao, tôi cần trước Chủ nhật. Vậy deadline của Lan là 29/02. Đây là correction lần đầu cho task này.
+[09:22:14] Đức: Tôi sẽ dời review sang 02/03. Nhưng cần lưu ý rằng nếu Lan gửi trễ, tôi cũng trễ.
+[09:22:23] Minh: Đúng. Lan phải bảo đảm. Em có cam kết không?
+[09:22:27] Lan: Em cam kết, trừ khi log đến chậm.
+[09:22:31] Tuấn (vọng từ xa): Em nghe thấy, em sẽ gửi log sáng mai sớm.
+[09:22:36] Minh: Tốt. Bây giờ chuyển sang vấn đề vận hành khác: hệ thống gần đây có một số cảnh báo về dung lượng ổ cứng. Đức, anh có thông tin gì không?
+[09:22:48] Đức: Có. Pod logging tăng nhanh do bật debug level. Tôi đã yêu cầu Hùng tắt debug trên production. Nhưng chưa thực hiện.
+[09:22:58] Minh: Tại sao chưa thực hiện? Đây là vấn đề vận hành nghiêm trọng.
+[09:23:04] Đức: Tuần trước tôi có giao Hùng task tắt debug, nhưng Hùng bảo bận deploy hotfix. Giờ Hùng đang ở topic khác.
+[09:23:12] Minh: Tôi sẽ nhắc Hùng sau. Nhưng cần có deadline. Tôi đặt task: tắt debug log trên production, assign cho Hùng, deadline cuối ngày hôm nay.
+[09:23:22] Đức: Đã có task từ trước, giờ chỉ nhắc lại. Nhưng vậy là đã tồn tại, tôi không coi là mới.
+[09:23:28] Minh: Đúng. Không tạo duplicate.
+[09:23:30] Lan: Anh Minh, em có thể hỗ trợ Hùng tắt debug, vì em biết cấu hình.
+[09:23:36] Minh: Không cần, em lo thanh toán. Để Hùng tự xử.
+[09:23:40] Lan: Vâng.
+[09:23:43] Đức: Một vấn đề nữa: server report memory high trên pod payment staging. Có thể liên quan đến cache tuning chúng ta sẽ deploy chiều nay.
+[09:23:54] Minh: Vậy cần kiểm tra sau deploy. Tuấn có ở đây không? (gọi) Tuấn, em còn nghe không?
+[09:24:00] Tuấn (từ xa): Có, em đang nghe. Em sẽ kiểm tra memory sau khi deploy.
+[09:24:06] Minh: OK. Đó là task ngắn.
+[09:24:10] Đức: Tôi muốn quay lại payment. Lan, ngoài timeout, em thấy có error rate tăng không?
+[09:24:18] Lan: Em thấy tỷ lệ lỗi 500 tăng nhẹ, khoảng 2% trong tuần qua, chủ yếu do timeout.
+[09:24:26] Đức: Có thể do service payment không đủ worker. Tôi nghĩ cần tăng số lượng pod.
+[09:24:32] Minh: Ý kiến hay, nhưng cần tính toán. Anh có thể làm đề xuất không?
+[09:24:37] Đức: Tôi sẽ đưa con số crawl từ dashboard. Giao cho tôi.
+[09:24:41] Minh: Vậy tôi tạo task: Đức phân tích capacity payment và đề xuất scale, deadline 05/03.
+[09:24:50] Đức: OK. Nhưng cần Tuấn cung cấp số liệu CPU/memory.
+[09:24:55] Minh: Tuấn, em nghe rồi chứ? Gửi metric cho Đức trước 28/02.
+[09:25:00] Tuấn: Rõ.
+[09:25:02] Lan: Anh Minh, em có một lo ngại. Nếu tập trung quá nhiều vào payment, các task khác như cache và review API sẽ bị trễ.
+[09:25:12] Minh: Em yên tâm, tôi đã phân bổ. Cache do Tuấn và em phối hợp, review API do Hùng và Đức. Em chỉ hỗ trợ khi cần.
+[09:25:20] Lan: Dạ.
+[09:25:23] Đức: Tôi nghĩ chúng ta nên dừng ở đây. Sắp đến 10h, tôi còn họp khác.
+[09:25:28] Minh: Được, chỉ còn vài việc. Tôi muốn xác nhận các task mới và correction: - Task payment analysis: Lan, deadline 29/02 (sau correction từ 28/02). Hand-off: Lan gửi Đức, Đức review deadline 02/03. - Task tắt debug: Hùng, deadline cuối hôm nay (đã tồn tại, chỉ nhắc). - Task capacity payment: Đức, deadline 05/03, cần metric từ Tuấn trước 28/02. - Task kiểm tra memory sau deploy: Tuấn, hôm nay. Còn task review API, design placement, export log, metric, alert không thay đổi. Có gì thắc mắc không?
+[09:26:10] Lan: Không ạ.
+[09:26:12] Đức: Không.
+[09:26:14] Minh: Vậy chúng ta kết thúc phiên nhỏ. Mọi người chuẩn bị cho deploy lúc 15h.
+[09:26:20] Lan: Em sẽ ra ngoài làm việc.
+[09:26:22] Đức: Tôi sẽ ghé qua chỗ Tuấn lấy metric.
+[09:30:00] Minh: Lan và Đức ở lại, tôi muốn bàn thêm về product placement. Trang cũng vào đây, em còn nghe không?
+[09:30:08] Trang: Có anh, em vẫn ở ngoài cửa.
+[09:30:12] Minh: Vào đi. Trang, em nói rõ yêu cầu từ marketing về banner động.
+[09:30:18] Trang: Dạ, họ muốn banner trang chủ thay đổi dựa theo hành vi người dùng, ví dụ sản phẩm đã xem, thời gian truy cập. Đó là feature mới, ngoài wireframe em vẽ.
+[09:30:32] Lan: Cái đó cần tracking user behavior và logic hiển thị, không đơn giản. Em nghĩ là story riêng.
+[09:30:40] Đức: Tôi đồng ý. Không thể ghép vào placement tĩnh hiện tại. Cần ước lượng.
+[09:30:46] Minh: Vậy chúng ta tạo task: Lan và Đức cùng phân tích yêu cầu banner động và đưa ra ước lượng sơ bộ. Hạn là bao lâu?
+[09:30:56] Lan: Em nghĩ cần 3 ngày, nhưng em đang bận thanh toán. Có thể giao Hùng.
+[09:31:02] Đức: Hùng đang có hai task, nhưng phần tracking có thể em tự làm.
+[09:31:08] Minh: Để tránh quá tải, tôi assign task này cho Đức, Lan hỗ trợ một phần nhỏ. Deadline 05/03, nhưng nếu cần thêm, dời sang 07/03.
+[09:31:20] Đức: Deadline 05/03 OK. Nhưng cần spec từ Trang trước.
+[09:31:24] Trang: Em sẽ gửi spec trong vòng 2 ngày, tức 28/02.
+[09:31:30] Minh: Vậy có event-dependent: task banner động phụ thuộc vào spec của Trang trước 28/02. Nếu Trang trễ, deadline 05/03 của Đức cũng trễ.
+[09:31:40] Đức: Đúng.
+[09:31:42] Lan: Em có thể hỗ trợ Đức phần logic hiển thị sau khi xong performance.
+[09:31:48] Minh: Tốt.
+[09:31:50] Trang: Anh Minh, còn vụ FastShip owner chưa resolved. Tôi có thể follow hay không?
+[09:31:56] Minh: Chưa, tôi chưa hỏi lead. Cứ để pending. Đừng tạo task giờ.
+[09:32:02] Trang: Vâng.
+[09:32:05] Đức: Tôi có một băn khoăn. Với khối lượng task hiện tại, liệu chúng ta có thể hoàn thành sprint 14 đúng hạn? Tôi thấy mỗi người đang gánh 3-4 task.
+[09:32:16] Minh: Tôi ý thức được. Sprint 14 kết thúc 03/03, còn 5 ngày. Chúng ta phải ưu tiên: thanh toán và cache là quan trọng nhất. Các task khác nếu không kịp có thể dời sang sprint 15.
+[09:32:28] Lan: Vậy task design placement deadline 01/03 có nguy cơ trượt không? Em mới chỉ xem sơ qua.
+[09:32:36] Minh: Nếu cần, chúng ta điều chỉnh. Tôi có thể dời deadline design placement sang 03/03, kết thúc sprint. Nhưng cần ý kiến Đức.
+[09:32:46] Đức: Tôi đồng ý dời. 01/03 là Chủ nhật, không ai làm. Dời sang 03/03 hợp lý.
+[09:32:52] Minh: Vậy correction lần hai: deadline review design placement của Đức và Lan là 03/03.
+[09:33:00] Lan: OK.
+[09:33:02] Trang: Anh Minh, em có đề xuất nhỏ: để tránh chồng chéo, em có thể review design sơ bộ trước, rồi Đức và Lan góp ý sau. Như vậy đỡ áp lực.
+[09:33:14] Minh: Ý hay. Đức và Lan vẫn là owner, nhưng Trang review trước, deadline 01/03. Sau đó họ mới phải góp ý trước 03/03.
+[09:33:24] Trang: Em sẽ review wireframe và gửi feedback.
+[09:33:28] Đức: Vậy task của Trang là review design sơ bộ, deadline 01/03. Task chính của tôi và Lan là 03/03. Có thay đổi.
+[09:33:38] Minh: Đúng. Nhưng đừng quên task banner động deadline 05/03, phụ thuộc spec Trang 28/02.
+[09:33:46] Trang: Em sẽ cố gắng spec sớm hơn, 27/02.
+[09:33:50] Minh: Tốt.
+[09:33:52] Lan: Anh Minh, vụ cache tuning chiều nay, em có cần tham gia deploy không?
+[09:33:58] Tuấn (vọng vào): Có, em cần Lan kiểm tra code purge.
+[09:34:02] Minh: Lan, em vào deploy lúc 15h.
+[09:34:06] Lan: Vâng.
+[09:34:08] Đức: Tôi sẽ có mặt lúc đó.
+[09:34:11] Minh: Bây giờ nói về vấn đề khác: Hùng có báo cáo alert sơ bộ gì chưa?
+[09:34:18] Hùng (từ xa): Em đang tổng hợp, chưa xong.
+[09:34:22] Minh: Không vội, deadline 06/03. Nhưng đừng quên tắt debug hôm nay.
+[09:34:28] Hùng: Em đã chạy script, tắt xong rồi, đang deploy qua pipeline.
+[09:34:34] Minh: Tốt, vậy task đó done.
+[09:34:36] Trang: Anh Minh, support ghi nhận thêm một feedback: người dùng phàn nàn tốc độ tải trang chi tiết sản phẩm chậm trên mobile. Có liên quan đến cache không?
+[09:34:50] Lan: Cache product list không ảnh hưởng đến trang chi tiết. Có thể do image lớn.
+[09:34:56] Đức: Tôi nghĩ cần tối ưu image. Nhưng không phải task ngay.
+[09:35:02] Minh: Đưa vào backlog. Không tạo task.
+[09:35:06] Lan: Em muốn hỏi, deadline báo cáo payment của em là 29/02, nhưng nếu log về sớm, em có thể gửi 28/02 không?
+[09:35:16] Minh: Tất nhiên, càng sớm càng tốt. Nhưng không bắt buộc.
+[09:35:22] Đức: Tôi cũng sẽ sẵn sàng review sớm nếu có.
+[09:35:26] Trang: Em có một lo ngại về FastShip: bên sales hỏi tiến độ tích hợp, em không biết trả lời sao.
+[09:35:34] Minh: Cứ nói chúng tôi đang review API, chưa có timeline. Đừng hứa.
+[09:35:40] Trang: Vâng.
+[09:35:43] Đức: Tôi thấy chúng ta đã có nhiều task mới. Tôi đề nghị dừng thêm task ở đây.
+[09:35:50] Minh: Đồng ý. Tổng kết các task trong part này: - Task banner động: Đức (owner) và Lan hỗ trợ, deadline 05/03, phụ thuộc spec Trang trước 28/02 (hoặc 27/02 nếu sớm). - Task review design sơ bộ: Trang, deadline 01/03. - Task review design placement: Đức và Lan, deadline đã dời từ 01/03 thành 03/03. - Các task khác giữ nguyên. Có ai còn thắc mắc gì trước khi chuyển sang vấn đề khác?
+[09:36:12] Lan: Không.
+[09:36:14] Trang: Em ổn.
+[09:36:16] Đức: OK.
+[09:36:18] Minh: Tôi lưu ý: còn unresolved owner FastShip, chưa giải quyết. Sẽ bàn khi có lead.
+[09:36:26] Hùng (từ xa): Anh Minh, em deploy debug xong, memory đang ổn.
+[09:36:32] Minh: Cảm ơn. Mọi người nghỉ ngơi 15 phút trước 15h.
+[09:50:00] Minh: Mọi người quay lại. Chúng ta sẽ tiếp tục với vấn đề thanh toán, bởi vì tôi thấy đây là ưu tiên số một. Lan, em đã có thông tin gì mới từ lúc tôi nói chuyện riêng chưa?
+[09:50:10] Lan: Dạ, em vừa lấy một số log từ bản cũ tối qua để phân tích sơ bộ. Có một pattern lạ: các request thanh toán thành công luôn có latency dưới 1 giây, nhưng thất bại thường kéo dài hơn 5 giây.
+[09:50:24] Đức: Vậy vấn đề có thể là retry logic. Em đã xem code chưa?
+[09:50:30] Lan: Chưa, em mới chỉ check log. Cần code review.
+[09:50:34] Minh: Đây là handoff bước hai: mở rộng scope phân tích. Trước đây tôi yêu cầu báo cáo root cause, bây giờ thêm yêu cầu: sau khi có báo cáo, Đức sẽ code review và đề xuất fix. Nhưng chưa giao hẳn, vẫn là hand-off.
+[09:50:48] Đức: Tôi đồng ý. Nhưng cần deadline mới cho phần code review. Tôi nghĩ sau khi Lan gửi báo cáo 29/02, tôi có thể review code trong 3 ngày, tức 03/03.
+[09:51:00] Minh: Vậy điều chỉnh: task thanh toán cũ của Lan có scope mở rộng gồm báo cáo và code review. Deadline review của Đức là 03/03. Lan, em có bổ sung thêm yêu cầu nào không?
+[09:51:10] Lan: Em nghĩ cần thêm log từ third-party. Nhưng có thể Tuấn không lấy được.
+[09:51:16] Tuấn: Tôi có thể lấy log phía gateway, bao gồm external response. Nhưng cần thời gian.
+[09:51:22] Minh: Vậy em lấy luôn, gửi cùng log payment. Deadline vẫn sáng mai.
+[09:51:28] Tuấn: Rõ.
+[09:51:30] Hùng (vào phòng): Xin lỗi, em vừa xong deploy debug. Có ai cần gì không?
+[09:51:38] Minh: Không, em ngồi xuống. Nhân tiện, Hùng, vụ debug production em đã tắt chưa?
+[09:51:44] Hùng: Rồi ạ, em đã chạy script từ 10 phút trước, server memory giảm.
+[09:51:48] Minh: OK. Đây là repeated mention, không phải task mới.
+[09:51:52] Đức: Quay lại thanh toán. Tôi muốn xem code hiện tại để chuẩn bị review. Lan, em có share repo không?
+[09:51:58] Lan: Em sẽ gửi link branch staging sau.
+[09:52:02] Minh: Được. Vậy chúng ta thống nhất: task thanh toán scope mới gồm báo cáo (Lan, deadline 29/02) và code review (Đức, deadline 03/03).
+[09:52:14] Hùng: Anh Minh, em có một thông tin: bên infrastructure vừa thông báo plan upgrade database vào cuối tuần, có thể ảnh hưởng đến performance.
+[09:52:24] Minh: Thật sao? Upgrade lúc nào, ai làm?
+[09:52:28] Hùng: Họ nói sáng thứ Bảy 28/02. Nhưng chưa chắc, vì cần phê duyệt.
+[09:52:34] Minh: Đây có thể là vấn đề nếu upgrade lúc Lan đang phân tích. Chúng ta cần support. Tôi không tạo task mới, nhưng ghi nhận.
+[09:52:44] Lan: Em có thể tạm dừng nếu có can thiệp, nhưng báo trước.
+[09:52:48] Đức: Tôi nghĩ database upgrade không liên quan trực tiếp. Nhưng nếu có, cần delay.
+[09:52:54] Minh: Để tôi hỏi họ sau.
+[09:52:58] Trang: Anh Minh, spec product placement em sẽ gửi chiều nay, nhưng có thể trễ vài giờ vì phải họp với marketing.
+[09:53:06] Minh: Vẫn kịp deadline 28/02. Em cố gắng trước tối.
+[09:53:12] Trang: Vâng.
+[09:53:14] Tuấn: Em vừa nhận thêm request từ Hùng về metric. Em sẽ ưu tiên log payment trước.
+[09:53:20] Hùng: Không sao, metric của em có thể chậm.
+[09:53:24] Minh: Mọi người, tôi muốn kiểm tra tiến độ deploy cache chiều nay. Tuấn, em chuẩn bị đến đâu rồi?
+[09:53:32] Tuấn: Em đã tạo branch, chỉ cần merge code hotfix và cache. Chiều 15h deploy staging.
+[09:53:38] Lan: Em kiểm tra code cache purge rồi, ổn.
+[09:53:42] Đức: Tôi đã review sơ bộ cache, thấy OK.
+[09:53:46] Minh: Tốt. Vậy deploy như kế hoạch.
+[09:53:50] Hùng: Anh Minh, vụ task phân loại alert, em có thể dùng template cũ. Em sợ deadline 06/03 khả thi, nhưng nếu có upgrade database thì hơi rối.
+[09:54:00] Minh: Upgrade chưa chắc. Cứ làm.
+[09:54:04] Lan: Em xin phép hỏi, báo cáo thanh toán cần bao gồm các bảng biểu không? Hay chỉ text?
+[09:54:12] Minh: Nên có biểu đồ nếu có time. Nhưng không bắt buộc. Quan trọng là root cause.
+[09:54:18] Đức: Tôi cần biểu đồ latency để review.
+[09:54:22] Lan: Vậy em sẽ cố gắng.
+[09:54:26] Trang: Anh Minh, em vừa nhận feedback khác: người dùng không thể hoàn tất order trên mobile do lỗi js. Có cần báo dev không?
+[09:54:36] Minh: Lỗi gì?
+[09:54:38] Trang: Màn hình loading vô tận khi chọn phương thức thanh toán. Có thể liên quan đến cache.
+[09:54:44] Lan: Cái đó mới, không phải cache cũ. Em nghĩ lỗi frontend.
+[09:54:48] Minh: Gửi ticket riêng cho Hùng, vì Hùng làm UI.
+[09:54:52] Hùng: Em sẽ xem.
+[09:54:54] Minh: Nhưng không tạo task meeting. Ghi nhận.
+[09:54:58] Đức: Chúng ta đã có nhiều task. Tôi đề nghị chốt block này.
+[09:55:02] Minh: Đồng ý. Tổng kết scope update trong part này: task thanh toán mở rộng thêm code review, deadline review của Đức 03/03. Task cũ không thay đổi.
+[09:55:14] Lan: Rõ.
+[09:55:16] Hùng: Em nhắc lại, debug production đã done.
+[09:55:20] Minh: Cảm ơn. Không tạo duplicate.
+[09:55:24] Tuấn: Em sẽ gửi log trong sáng mai.
+[09:55:28] Minh: Vậy kết thúc part này. Mọi người chuẩn bị cho 15h.
+[10:00:00] Minh: Mọi người, chúng ta quay lại về kế hoạch release cuối tháng. Tôi nhận được yêu cầu từ lead product: muốn release sớm hơn dự kiến, vào 05/03 thay vì 10/03. Điều này ảnh hưởng đến nhiều task.
+[10:00:14] Lan: Như vậy sprint 14 kết thúc sớm, hạn chót cho các task là 05/03. Nhưng task thanh toán của em deadline 29/02 và 03/03 vẫn ổn.
+[10:00:26] Đức: Tuy nhiên, task banner động em đang phụ trách deadline 05/03, nếu release sớm thì phải có feature hoàn chỉnh trước ngày đó. Em thấy không khả thi vì spec từ Trang mới chỉ dự kiến.
+[10:00:40] Trang: Em vừa gửi spec qua chat, nhưng chưa đầy đủ. Có thể phải delay.
+[10:00:48] Minh: Vậy tôi quyết định hủy task banner động khỏi sprint 14. Scope quá lớn, không kịp. Thay vào đó, chúng ta sẽ tạo task tối ưu hình ảnh cho mobile, vì feedback gần đây về tốc độ. Hùng, em có thể làm việc này không?
+[10:01:06] Hùng: Em có thể tối ưu image bằng cách nén và lazy load. Cần 3 ngày, deadline 04/03.
+[10:01:14] Minh: Vậy task mới: tối ưu image mobile, Hùng làm owner, deadline 04/03. Đức có thể review code không?
+[10:01:22] Đức: OK, nhưng tôi đang có capacity payment deadline 05/03. Có thể dời deadline capacity payment lên 06/03?
+[10:01:32] Minh: Được. Đây là correction deadline thứ hai cho task capacity payment: từ 05/03 thành 06/03.
+[10:01:40] Đức: Vậy deadline của tôi: review code image của Hùng vào 04/03, và capacity payment 06/03.
+[10:01:48] Lan: Em thấy task tối ưu image có liên quan đến cache? Vì image được cache trên CDN.
+[10:01:56] Hùng: Không, chỉ tối ưu file size, không liên quan cache layer.
+[10:02:02] Minh: Vậy rõ. Tôi cũng muốn điều chỉnh deadline review design placement. Do release sớm, deadline 03/03 có thể trễ. Tôi dời sang 04/03.
+[10:02:16] Trang: Như vậy em phải gửi feedback sơ bộ trước 02/03.
+[10:02:22] Minh: Đúng. Vậy correction: deadline review design placement của Đức và Lan từ 03/03 thành 04/03.
+[10:02:32] Lan: OK. Em có thể làm được.
+[10:02:36] Đức: Nhưng tôi đã có review code image vào 04/03 và bây giờ thêm design placement cũng 04/03, xung đột. Tôi cần phân bổ.
+[10:02:48] Minh: Vậy dời design placement cho Lan làm chính, Đức chỉ hỗ trợ sau ngày 05/03. Lan, em có thể tự review design được không?
+[10:02:58] Lan: Em có thể, nhưng cần hỏi ý kiến Đức nếu có vấn đề kỹ thuật.
+[10:03:04] Minh: Vậy assign lại: Lan là owner review design placement, deadline 04/03. Đức chỉ review khi cần, không có deadline cứng.
+[10:03:14] Đức: Tôi ủng hộ.
+[10:03:18] Hùng: Anh Minh, vụ tối ưu image em cần tool và quyền truy cập CDN. Tuấn có thể cấp không?
+[10:03:26] Tuấn: Em sẽ cấp quyền cho Hùng trong chiều nay. Cần sau deploy cache.
+[10:03:32] Minh: Vậy task tối ưu image phụ thuộc vào Tuấn cấp quyền CDN trước cuối ngày.
+[10:03:40] Tuấn: Ngày mai 27/02 cũng được, vì Hùng bắt đầu từ ngày kia.
+[10:03:46] Hùng: OK, sáng 27/02 em có thể bắt đầu.
+[10:03:50] Trang: Em muốn hỏi, task của em về spec banner đã bị hủy. Em có cần giữ liên lạc với marketing không?
+[10:04:00] Minh: Vẫn giữ, vì có thể đưa vào sprint 15. Nhưng không phải task ngay.
+[10:04:06] Đức: Ngoài ra, tôi thấy task capacity payment deadline 06/03 có thể cần dựa vào metric từ Tuấn. Tuấn đã gửi chưa?
+[10:04:16] Tuấn: Em sẽ gửi metric cùng log thanh toán sáng mai.
+[10:04:22] Đức: Tốt.
+[10:04:26] Lan: Anh Minh, task thanh toán của em có bị ảnh hưởng bởi release sớm không? Em vẫn có deadline 29/02 và Đức review 03/03.
+[10:04:36] Minh: Không, vì 29/02 là trước 05/03, vẫn ổn.
+[10:04:42] Hùng: Em cũng có task phân loại alert deadline 06/03, sẽ ổn.
+[10:04:48] Trang: Em thấy khối lượng task dồn dập. Có cần tái ưu tiên không?
+[10:04:54] Minh: Hiện tại ưu tiên: thanh toán, cache, tối ưu image. Các việc khác có thể dời nếu cần.
+[10:05:04] Đức: Tôi đồng ý. Nhưng cần chú ý task banner động bị hủy không ảnh hưởng đến ai khác.
+[10:05:12] Minh: Đã hủy, không bàn thêm.
+[10:05:16] Tuấn: Em có một vấn đề: staging server đang yếu, có thể không chịu nổi deploy chiều nay. Cần kiểm tra tài nguyên.
+[10:05:24] Minh: Em kiểm tra đi. Nếu không ổn, hoãn deploy đến sáng mai.
+[10:05:30] Tuấn: Để em check ngay.
+[10:05:34] Lan: Nếu hoãn thì cache tuning cũng trễ.
+[10:05:38] Minh: Có thể, nhưng ưu tiên ổn định.
+[10:05:42] Đức: Tôi đề nghị nếu staging yếu, deploy bản hotfix trước, cache sau.
+[10:05:48] Minh: Hợp lý. Vậy quyết định: nếu staging không đáp ứng, chỉ deploy hotfix giá, bỏ cache. Lan và Tuấn tính toán lại.
+[10:06:00] Lan: Vâng.
+[10:06:02] Hùng: Anh Minh, task của em về tối ưu image có thể dùng script tự động, em nghĩ không cần CDN quyền nếu dùng webp. Nhưng cần tool.
+[10:06:14] Minh: Em tự quyết.
+[10:06:18] Trang: Support vẫn ghi nhận lỗi loading mobile. Task này sẽ giúp.
+[10:06:26] Đức: Tôi muốn recap các thay đổi trong part này: - Hủy task banner động. - Tạo task tối ưu image (Hùng, deadline 04/03). - Correction deadline capacity payment (Đức, từ 05/03 thành 06/03). - Correction deadline design placement (Lan, từ 03/03 thành 04/03; Đức không còn cứng). - Task tối ưu image phụ thuộc quyền CDN từ Tuấn trước 27/02. - Deploy cache có thể hoãn nếu staging yếu. Đúng không?
+[10:06:46] Minh: Chính xác. Mọi người có thắc mắc gì không?
+[10:06:50] Lan: Em không.
+[10:06:52] Hùng: Em rõ.
+[10:06:54] Tuấn: Em sẽ báo tình hình staging trước 11h.
+[10:06:58] Minh: Vậy chúng ta chờ. Tạm nghỉ 5 phút.
+[10:07:00] Minh: Mọi người quay lại. Hùng, em có báo cáo gì về tình hình monitoring từ đầu tuần không?
+[10:07:08] Hùng: Dạ, em đang tổng hợp. Sáng nay em thấy có một số cảnh báo về thời gian phản hồi API tăng đột biến, nhưng sau khi tắt debug thì giảm. Tuy nhiên, em vẫn chưa phân loại xong.
+[10:07:22] Minh: Em đã có metric từ Tuấn chưa? Nếu chưa thì em có thể ưu tiên những gì có sẵn.
+[10:07:28] Hùng: Em có một số dashboard cũ, nhưng cần số liệu mới. Tuấn nói sẽ gửi cuối ngày, em chờ.
+[10:07:34] Minh: Vậy em tạm thời phân loại dựa trên alert cũ. Deadline 06/03 vẫn còn xa.
+[10:07:40] Trang: Anh Minh, support ghi nhận thêm một vấn đề: nhiều người dùng phản ánh sau khi reset mật khẩu, họ không nhận được email. Em đã kiểm tra, có vẻ lỗi từ service email.
+[10:07:56] Đức: Vụ đó liên quan đến lỗi reset mật khẩu hôm qua tôi fix, nhưng có thể còn sót. Tôi cần xem log email.
+[10:08:04] Tuấn: Em có thể export log email service. Nhưng cần biết thời gian cụ thể.
+[10:08:10] Trang: Từ ngày 24 đến 26/02, khoảng 50 complaint.
+[10:08:16] Minh: Đức, anh xem giúp có phải lỗi do config redirect không? Anh đã fix rồi mà.
+[10:08:22] Đức: Có thể do email queue bị treo. Tôi sẽ kiểm tra sau, nhưng không phải task mới. Nếu cần, tôi sẽ báo.
+[10:08:30] Minh: Vậy lưu ý, không tạo task.
+[10:08:34] Lan: Anh Minh, liên quan đến task thanh toán của em, Tuấn chưa gửi log mà em cần để kịp deadline 29/02. Em lo.
+[10:08:44] Tuấn: Em đã bắt đầu export, dự kiến gửi trước 10h sáng mai.
+[10:08:50] Minh: Như vậy còn gần 24h. Nếu 10h sáng 27/02, em có đủ thời gian để báo cáo 29/02 không?
+[10:08:58] Lan: Có thể, nhưng em sẽ phải làm việc liên tục. Em nghĩ vẫn kịp.
+[10:09:04] Đức: Tôi muốn hỗ trợ Lan từ xa nếu cần.
+[10:09:08] Hùng: Em thấy deadlne thanh toán gần với deadlne tối ưu image 04/03 của em, nhưng khác nhau.
+[10:09:16] Minh: Đúng, không liên quan. Nhưng lưu ý, long-distance reference: log thanh toán sẽ dùng cho phân tích root cause, mà sau đó Đức review code. Đó là chuỗi.
+[10:09:28] Trang: Anh Minh, em có thể giúp lọc complaint để Lan biết context không? Nhưng em sợ trễ work của em.
+[10:09:36] Minh: Không, em cứ làm việc của em. Spec product placement em gửi chưa?
+[10:09:42] Trang: Em đang hoàn thiện, gửi trong 30 phút nữa.
+[10:09:46] Minh: OK.
+[10:09:48] Đức: Trở lại monitoring, tôi thấy cảnh báo API tăng có thể liên quan đến lỗi cache sắp fix. Sau deploy chiều nay, cần theo dõi.
+[10:10:00] Tuấn: Em có thể set up dashboard realtime cho Hùng.
+[10:10:04] Hùng: Tốt, cảm ơn.
+[10:10:08] Minh: Đó là support cho task alert của Hùng.
+[10:10:12] Lan: Anh Minh, em muốn hỏi về task capacity payment của Đức: deadline 06/03, có cần em cung cấp số liệu từ thanh toán không?
+[10:10:22] Đức: Có, sau khi em có log, tôi sẽ dùng. Nhưng có thể tự lấy từ dashboard.
+[10:10:28] Minh: Vậy phụ thuộc nhẹ.
+[10:10:32] Trang: Support có thêm feedback về UI: nút thanh toán không hiển thị trên một số thiết bị.
+[10:10:40] Hùng: Cái đó là CSS, có thể fix nhanh.
+[10:10:44] Minh: Đưa vào backlog, không tạo task.
+[10:10:48] Đức: Tôi muốn nói về long-distance dependency: task thanh toán và capacity payment có chung nguồn dữ liệu, cần đồng bộ.
+[10:11:00] Minh: Đúng. Lan và Đức phối hợp.
+[10:11:04] Hùng: Anh Minh, em thấy deadline 06/03 cho alert của em gần với deadline capacity payment 06/03. Có thể gây xung đột.
+[10:11:12] Minh: Không, vì khác chủ đề. Em có thể làm song song.
+[10:11:18] Lan: Em xin hỏi, có cần update gì về cache sau khi Tuấn kiểm tra staging không?
+[10:11:24] Tuấn: Staging ổn, em sẽ deploy như kế hoạch 15h.
+[10:11:30] Minh: Tốt. Vậy deploy cả hotfix và cache.
+[10:11:36] Đức: Nhưng nếu cache deploy trễ thì capacity payment deadline 06/03 vẫn ổn.
+[10:11:42] Minh: OK.
+[10:11:46] Trang: Anh Minh, spec product placement em gửi rồi. Có feedback gì không?
+[10:11:52] Minh: Để tôi xem sau. Lan cũng sẽ review.
+[10:11:56] Lan: Em sẽ xem trong tối nay.
+[10:12:00] Hùng: Em thấy khối lượng công việc nhiều, nhưng em nghĩ deadline 06/03 của em có thể bị ảnh hưởng nếu có thêm alert.
+[10:12:10] Minh: Nếu cần dời, em báo.
+[10:12:14] Đức: Tôi có một long-distance reference: task review design placement deadline 04/03 cần spec, nhưng spec đã gửi. OK.
+[10:12:24] Minh: Đúng.
+[10:12:26] Tuấn: Em gửi log và metric sáng mai rõ ràng.
+[10:12:32] Minh: Tạm kết thúc topic monitoring và support. Không có task mới. Mọi người chuẩn bị cho deploy 15h.
+[10:12:36] Minh: Mọi người, trước khi chúng ta chuẩn bị cho deploy 15h, tôi muốn quay lại vấn đề tích hợp FastShip. Trang, em có thông tin gì mới về API spec từ phía họ không?
+[10:12:50] Trang: Dạ, em vừa nhận email từ bên FastShip, họ gửi bản cập nhật API spec version 1.2. Có một số thay đổi nhỏ về endpoint tracking và cách xác thực.
+[10:13:06] Đức: Thay đổi gì? Có ảnh hưởng đến kế hoạch review không?
+[10:13:12] Trang: Họ thay đổi endpoint từ /tracking/id thành /track/{order_id}, và bắt buộc dùng API key mới, không còn OAuth2.
+[10:13:24] Hùng: Cái đó khác hoàn toàn với spec trước. Chúng ta đã bắt đầu review dựa trên OAuth2, giờ phải làm lại.
+[10:13:34] Minh: Vậy ambiguity này cần giải quyết: chúng ta có nên tiếp tục với spec cũ hay chuyển sang mới? Tôi muốn thống nhất.
+[10:13:46] Đức: Rõ ràng phải dùng spec mới vì đó là yêu cầu bên họ. Nhưng điều này làm trễ task review của tôi và Hùng.
+[10:13:56] Hùng: Em đồng ý. Nếu chuyển, deadline 07/03 có thể không kịp.
+[10:14:04] Minh: Tôi đề nghị điều chỉnh: task review API FastShip vẫn giữ deadline 07/03, nhưng scope sẽ là spec mới. Hùng và Đức cần cập nhật.
+[10:14:18] Hùng: Vậy em cần xem trước spec mới từ Trang. Trang, em gửi ngay được không?
+[10:14:24] Trang: Em sẽ forward email trong 5 phút nữa.
+[10:14:28] Tuấn: Tôi cũng cần spec để cập nhật pipeline. Liệu có cần tạo mới hay chỉnh sửa?
+[10:14:36] Minh: Chưa, chúng ta mới review. Sau đó mới tích hợp.
+[10:14:42] Lan: Em xin hỏi, vụ thay đổi spec này có làm tăng scope công việc không? Nếu có, có thể cần thêm người.
+[10:14:52] Minh: Tôi nghĩ không, vì chỉ thay đổi authentication, không ảnh hưởng data.
+[10:15:00] Đức: Nhưng cần kiểm tra code cũ có hỗ trợ API key không. Hùng, mày rành nhất.
+[10:15:08] Hùng: Em sẽ check. Tuy nhiên, nếu spec thay đổi, chúng ta có thể cần một buổi workshop khác với FastShip.
+[10:15:18] Minh: Workshop đã được Trang lên lịch thứ Tư hoặc thứ Năm tuần sau. Vẫn giữ.
+[10:15:26] Trang: Nhưng bây giờ chưa xác nhận ngày vì bên họ chưa reply.
+[10:15:32] Minh: Vậy vẫn unresolved. Chúng ta giữ reference này.
+[10:15:38] Tuấn: Một câu hỏi: nếu thay đổi authentication, liệu có ảnh hưởng đến security review không? Tôi nghĩ cần Đức xem.
+[10:15:50] Đức: Tôi sẽ xem trong review. Không vấn đề.
+[10:15:56] Hùng: Anh Minh, em muốn hỏi rõ: task review API của em và Đức có phải đưa ra ước lượng luôn không? Hay chỉ review kỹ thuật?
+[10:16:08] Minh: Task hiện tại là review spec, đưa ra nhận xét về tính khả thi. Chưa yêu cầu ước lượng. Đó là việc sau.
+[10:16:18] Lan: Vậy task này chỉ dừng ở review, không phải code. OK.
+[10:16:24] Trang: Anh Minh, em cần biết workshop có cần sự tham gia của bên dev không? Hay chỉ support?
+[10:16:34] Minh: Cần Hùng hoặc Đức tham gia. Ai rảnh?
+[10:16:38] Hùng: Em có thể tham gia nếu không phải sáng thứ Năm.
+[10:16:44] Đức: Tôi cũng được. Nhưng chờ lịch cụ thể.
+[10:16:50] Trang: Em sẽ gửi poll.
+[10:16:54] Minh: Tốt.
+[10:16:58] Tuấn: Ngoài ra, tôi thấy cần có một môi trường test riêng cho tích hợp, tránh ảnh hưởng staging.
+[10:17:08] Minh: Đúng, nhưng chưa phải bây giờ. Khi có review và ước lượng, chúng ta sẽ tạo sandbox.
+[10:17:18] Hùng: Em muốn hỏi về unresolved owner FastShip. Nếu chưa xác định, workshop có cần người chủ trì không?
+[10:17:28] Minh: Tôi sẽ chủ trì tạm. Nhưng vẫn chưa resolve.
+[10:17:34] Lan: Em thấy nhiều vấn đề chưa rõ. Nhưng em tập trung thanh toán.
+[10:17:40] Đức: Recap local: integration FastShip spec thay đổi, task review vẫn deadline 07/03, scope cập nhật. Workshop chưa chốt lịch, owner unresolved. Đúng không?
+[10:17:54] Minh: Đúng. Không tạo task mới từ recap.
+[10:17:58] Trang: Anh Minh, em muốn confirm lại: em có cần follow hợp đồng FastShip hay không? Hay chờ lead?
+[10:18:08] Minh: Vẫn chờ. Tôi chưa gặp lead.
+[10:18:14] Hùng: Em có một câu hỏi khác: spec mới có yêu cầu phải dùng webhook không? Em thấy họ đề cập.
+[10:18:24] Trang: Có, họ có webhook để thông báo trạng thái đơn hàng.
+[10:18:30] Đức: Cái đó là feature riêng, có thể đưa vào sau.
+[10:18:36] Minh: Ghi nhận.
+[10:18:40] Tuấn: Vậy là chúng ta có ambiguity về authentication và webhook, đã giải quyết authentication bằng spec mới, nhưng webhook chưa.
+[10:18:50] Minh: Đúng. Webhook giữ unresolved.
+[10:18:54] Lan: Anh Minh, thời gian deploy sắp đến. Em cần ra ngoài chuẩn bị.
+[10:19:00] Minh: OK, gần xong. Tổng kết: task review API vẫn tiến hành, deadline 07/03, spec mới. Workshop chưa chốt. Owner FastShip chưa resolve. Webhook unresolved.
+[10:19:16] Hùng: Em rõ.
+[10:19:18] Đức: Không còn gì.
+[10:19:20] Trang: Em sẽ gửi spec ngay.
+[10:19:24] Minh: Vậy kết thúc block này. Mọi người chuẩn bị deploy 15h.
+[10:20:00] Minh: Mọi người, trước khi chúng ta chuyển sang chuẩn bị deploy, tôi muốn chốt lại một số state transition cuối. Tôi có thông tin từ lead product: release sớm 05/03 đã được phê duyệt, nhưng họ yêu cầu tất cả code phải merged trước 04/03.
+[10:20:16] Lan: Vậy task tối ưu image của Hùng deadline 04/03 có vẻ sát. Em lo Hùng không kịp vì phải học tool mới.
+[10:20:26] Hùng: Em vừa check, việc chuyển sang webp và lazy load cần 3 ngày, nhưng em có thể làm từ 27/02 đến 01/03. Tuy nhiên, deadline 04/03 vẫn ổn.
+[10:20:38] Minh: Nhưng nếu em bận thêm việc khác? Tôi thấy em có task phân loại alert cũng sắp tới.
+[10:20:46] Hùng: Em thấy task alert có thể dời, vì em chưa có metric. Nếu cần ưu tiên image, em có thể hủy task alert.
+[10:20:56] Minh: Đây là cancellation muộn. Vậy tôi hủy task phân loại alert của Hùng. Không cần làm nữa, vì sprint 14 kết thúc sớm, không đủ thời gian. Thay vào đó, em tập trung vào tối ưu image.
+[10:21:10] Hùng: Đồng ý. Nhưng em cần Tuấn cấp quyền CDN sớm.
+[10:21:16] Tuấn: Em đã cấp rồi, Hùng kiểm tra mail.
+[10:21:20] Đức: Vậy task alert đã hủy. Tuy nhiên, nếu có vấn đề monitoring, ai sẽ xử lý? Có thể tôi support.
+[10:21:30] Minh: Tạm thời Đức support, nhưng không phải task.
+[10:21:36] Lan: Task thanh toán của em deadline 29/02, vẫn ổn. Nhưng em cần biết code review của Đức có bị ảnh hưởng bởi release sớm không? Nếu release 05/03, code review phải xong trước 03/03 để kịp merge.
+[10:21:52] Đức: Tôi có thể dời deadline code review từ 03/03 thành 04/03, vì ngày 03/03 tôi bận họp với lead.
+[10:22:00] Minh: Vậy correction: deadline code review payment của Đức từ 03/03 thành 04/03. Nhưng cần đảm bảo Lan gửi báo cáo trước 29/02.
+[10:22:14] Lan: Em sẽ gửi đúng hạn.
+[10:22:18] Đức: Như vậy tôi có hai task vào 04/03: code review payment và hỗ trợ image của Hùng. Hơi nặng, nhưng được.
+[10:22:28] Minh: Nếu cần, em có thể dời image review đến 05/03.
+[10:22:34] Đức: Không, 04/03 vẫn OK.
+[10:22:38] Tuấn: Em thấy task capacity payment của Đức deadline 06/03, có thể bị ảnh hưởng nếu dồn việc.
+[10:22:48] Đức: Không, capacity payment chỉ là phân tích số liệu, tôi đã có metric từ dashboard. Deadline 06/03 vẫn ổn.
+[10:22:58] Trang: Anh Minh, vụ spec product placement em gửi rồi. Lan có feedback gì không?
+[10:23:06] Lan: Em vừa xem qua, có một số điểm cần chỉnh. Em sẽ gửi feedback trong ngày.
+[10:23:14] Minh: Tốt. Nhưng deadline review design placement của Lan là 04/03, không cần vội.
+[10:23:22] Lan: Vâng.
+[10:23:26] Hùng: Em có câu hỏi về task tối ưu image: có cần test trên production không?
+[10:23:34] Minh: Cần test trên staging trước. Sau đó deploy production vào 04/03.
+[10:23:42] Tuấn: Em sẽ setup staging cho Hùng sau khi deploy cache chiều nay.
+[10:23:48] Hùng: OK.
+[10:23:52] Đức: Tôi thấy chúng ta có nhiều correction deadline trong sprint này. Cần thống nhất danh sách cuối.
+[10:24:00] Minh: Để tôi recap nhanh các thay đổi trong part này: - Hủy task phân loại alert của Hùng. - Deadlin code review payment (Đức): từ 03/03 thành 04/03. - Không thay đổi khác.
+[10:24:16] Lan: Còn task tối ưu image deadline 04/03, không thay đổi.
+[10:24:20] Hùng: Rõ.
+[10:24:24] Trang: Anh Minh, em có một thắc mắc: support vẫn ghi nhận lỗi mobile loading, liệu task image có giải quyết triệt để?
+[10:24:34] Hùng: Một phần. Còn lỗi JS cần xử lý riêng.
+[10:24:40] Minh: Đưa vào backlog.
+[10:24:44] Tuấn: Em có thông báo: staging OK, deploy 15h. Có thể deploy cache cùng.
+[10:24:52] Minh: Tốt.
+[10:24:56] Đức: Vậy state transition cuối: task alert bị hủy, deadline code review payment được dời. Các task khác giữ nguyên.
+[10:25:08] Lan: Em muốn hỏi về unresolved owner FastShip. Có cần nhắc lại với lead không?
+[10:25:16] Minh: Tôi sẽ gặp lead chiều nay. Để P10 bàn.
+[10:25:22] Trang: Vậy em chờ.
+[10:25:26] Hùng: Anh Minh, em có thể bắt đầu tối ưu image từ sáng mai. Cần Tuấn guide CDN.
+[10:25:34] Tuấn: Em sẽ hướng dẫn sau deploy.
+[10:25:38] Minh: OK.
+[10:25:42] Đức: Tôi cần Lan gửi báo cáo thanh toán sớm để tôi review code kịp.
+[10:25:48] Lan: Em sẽ gửi trước 29/02.
+[10:25:52] Minh: Vậy chúng ta kết thúc block này. Phần sau sẽ bàn về kế hoạch sprint 15 và unresolved items.
+[10:26:00] Trang: Em chuẩn bị cho 15h.
+[10:26:00] Minh: Mọi người, đây là part cuối cùng của cuộc họp hôm nay. Tôi muốn tổng kết toàn bộ trạng thái các task, các thay đổi và những item chưa giải quyết. Chúng ta sẽ không tạo thêm task mới.
+[10:26:12] Lan: Vâng, em sẵn sàng.
+[10:26:16] Hùng: Em nghe.
+[10:26:20] Đức: Tôi cũng vậy.
+[10:26:24] Trang: Em đây.
+[10:26:28] Tuấn: OK.
+[10:26:32] Minh: Đầu tiên, task phân tích log thanh toán của Lan. Deadline ban đầu 28/02, sau điều chỉnh thành 29/02. Lan, em có cam kết gửi báo cáo sơ bộ đúng hạn không?
+[10:26:48] Lan: Em cam kết. Nếu log về sớm, em sẽ gửi trước.
+[10:26:54] Minh: Tốt. Sau đó, Đức sẽ review code, deadline đã dời từ 03/03 thành 04/03. Đức, anh có vấn đề gì không?
+[10:27:06] Đức: Không, tôi sẽ review trong ngày 04/03.
+[10:27:12] Minh: Task xuất log và metric của Tuấn: deadline sáng 27/02. Tuấn, em vẫn giữ đúng?
+[10:27:22] Tuấn: Vâng, em gửi trước 10h.
+[10:27:28] Minh: Task deploy hotfix giá và cache hôm nay 15h. Tuấn và Lan phối hợp. Staging ổn, tiến hành.
+[10:27:40] Lan: Em đã sẵn sàng.
+[10:27:44] Tuấn: Em cũng vậy.
+[10:27:48] Minh: Task review design placement: ban đầu deadline 01/03, sau dời thành 03/03, rồi tiếp tục dời thành 04/03 do release sớm. Lan, em là owner chính, Đức hỗ trợ. Đúng không?
+[10:28:06] Lan: Đúng ạ. Em sẽ review và gửi feedback trước 04/03.
+[10:28:14] Đức: Tôi sẽ hỗ trợ nếu có vấn đề kỹ thuật.
+[10:28:20] Minh: Task review API FastShip: Hùng và Đức, deadline 07/03, scope spec mới (không OAuth2 mà dùng API key). Hùng, em đã nhận spec từ Trang chưa?
+[10:28:36] Hùng: Em vừa nhận, sẽ xem ngay.
+[10:28:42] Minh: Task này vẫn giữ deadline, nhưng nếu cần có thể kéo dài 10/03. Tuy nhiên, chưa có quyết định.
+[10:28:54] Đức: Tôi nghĩ giữ 07/03 là ổn.
+[10:28:58] Minh: Task tối ưu image mobile: Hùng, deadline 04/03, phụ thuộc quyền CDN từ Tuấn. Tuấn đã cấp quyền chưa?
+[10:29:12] Tuấn: Đã cấp, Hùng kiểm tra.
+[10:29:16] Hùng: Em check rồi, OK.
+[10:29:20] Minh: Task capacity payment: Đức, deadline 06/03. Có phụ thuộc metric từ Tuấn, nhưng Tuấn sẽ gửi sáng mai. Đức, anh ổn chứ?
+[10:29:32] Đức: Ổn, tôi sẽ hoàn thành.
+[10:29:36] Minh: Task phân loại alert đã bị hủy. Hùng, em không cần làm nữa.
+[10:29:44] Hùng: Em rõ.
+[10:29:48] Minh: Các task tồn tại khác không thay đổi.
+[10:29:52] Trang: Anh Minh, em muốn hỏi về spec product placement. Em đã gửi, Lan sẽ review. Nhưng còn vụ webhook từ FastShip, chúng ta chưa giải quyết.
+[10:30:06] Minh: Đúng, webhook vẫn là unresolved. Không ai assigned. Tôi ghi nhận, sẽ đưa vào sprint 15.
+[10:30:16] Đức: Ngoài ra, owner FastShip vẫn chưa xác định. Lead product chưa trả lời.
+[10:30:26] Minh: Đúng, unresolved item này sẽ được tôi hỏi sau cuộc họp.
+[10:30:34] Lan: Về lỗi mobile loading, chúng ta đã có task image, nhưng còn lỗi JS. Đó cũng là unresolved.
+[10:30:44] Minh: Ghi nhận. Đưa vào backlog.
+[10:30:48] Hùng: Anh Minh, em muốn xác nhận: task tối ưu image của em có cần phải test trên staging trước production không?
+[10:31:00] Minh: Cần, như đã nói. Tuấn sẽ setup staging cho em sau deploy cache.
+[10:31:08] Tuấn: Em sẽ làm.
+[10:31:12] Đức: Tôi muốn nhấn mạnh: task thanh toán có hand-off hai bước. Lan báo cáo, tôi review code. Đây không phải change owner.
+[10:31:24] Minh: Đúng, Lan vẫn là owner chính.
+[10:31:28] Trang: Support vẫn có vài ticket nhỏ, em sẽ handle nhưng không cần meeting.
+[10:31:36] Minh: OK.
+[10:31:40] Tuấn: Em có một clarification: log third-party có thể trễ 1-2 tiếng do bên họ gửi chậm. Nhưng em vẫn gửi trong sáng mai.
+[10:31:52] Lan: Không sao, em vẫn kịp.
+[10:31:56] Minh: Tổng kết lại, các unresolved items cuối meeting: - Owner chính thức cho integration FastShip (chưa có). - Webhook FastShip (chưa được xử lý). - Lỗi JS mobile (backlog). - Ngày workshop FastShip chưa chốt. Còn gì khác không?
+[10:32:14] Đức: Không.
+[10:32:16] Hùng: Em không.
+[10:32:18] Trang: Em nghĩ vậy là đủ.
+[10:32:22] Lan: Em cũng đồng ý.
+[10:32:26] Minh: Vậy tôi xin phép kết thúc cuộc họp. Cảm ơn mọi người đã tham gia. Hãy chuẩn bị cho deploy 15h và tuân thủ các deadline đã thống nhất. Mọi thắc mắc phát sinh, liên hệ tôi hoặc lead.
+[10:32:40] Hùng: Cảm ơn anh.
+[10:32:42] Lan: Em cảm ơn.
+[10:32:44] Đức: Cảm ơn mọi người.
+[10:32:46] Trang: Bye mọi người.
+[10:32:48] Tuấn: Tạm biệt.

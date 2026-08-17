@@ -1,0 +1,9 @@
+minutes nháp
+chủ đề: Rà soát công việc sprint
+kw: bao cao / trien khai / test case / test / nhe / tao / case
+- Dung test giúp em
+* chị, em sẽ tạo test case + chạy trong hôm nay
+- Em sẽ cố hết sức
+1) Vậy em triển khai tối ưu hiệu năng module báo cáo tổng hợp
+- Em sẽ cập nhật kết quả profiling vào giữa tuần sau
+* Bình, phần module xuất báo cáo PDF của em đến đâu rồi? ? chưa chốt

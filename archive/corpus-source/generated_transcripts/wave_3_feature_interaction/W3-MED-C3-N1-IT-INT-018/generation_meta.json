@@ -1,0 +1,84 @@
+{
+  "case": {
+    "wave": 3,
+    "case_index": 18,
+    "meeting_id": "W3-MED-C3-N1-IT-INT-018",
+    "meeting_date": "2026-02-22",
+    "title": "Họp phối hợp triển khai và xử lý vấn đề",
+    "labels": "feature_interaction,deadline_replacement,recap_duplicate_risk,unresolved_item,negative_context",
+    "objective": "API integration, dữ liệu mẫu, quyền truy cập và rollout. Có handoff owner, một task bị hủy và một unresolved reviewer."
+  },
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 1332,
+    "turn_count": 95
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 103.02423299998918
+    },
+    {
+      "attempt": 2,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.0042166999919572845
+    },
+    {
+      "attempt": 3,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.004190199993900023
+    },
+    {
+      "attempt": 4,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005573300004471093
+    },
+    {
+      "attempt": 5,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.006975600001169369
+    },
+    {
+      "attempt": 6,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.003599699994083494
+    },
+    {
+      "attempt": 7,
+      "kind": "validation_error",
+      "errors": [
+        "Quá ngắn: 1098 từ; cần ít nhất khoảng 1800."
+      ],
+      "elapsed_seconds": 183.765324100008
+    },
+    {
+      "attempt": 8,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 329.95329210000637
+    }
+  ]
+}

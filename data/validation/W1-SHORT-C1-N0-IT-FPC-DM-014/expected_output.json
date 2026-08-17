@@ -1,0 +1,9 @@
+{
+  "meeting_title": "Theo dõi tiến độ tài liệu",
+  "tasks": [
+    {"task_name":"Gửi tài liệu kỹ thuật","assignee":"Lan","start_date":"2026-01-29","due_date":"2026-03-15","due_date_text":"vào 15/3","status":"Proposed"},
+    {"task_name":"Gửi hình ảnh minh họa","assignee":"Lan","start_date":"2026-01-29","due_date":"2026-01-30","due_date_text":"vào ngày mai","status":"Proposed"},
+    {"task_name":"Gửi bản nháp hướng dẫn sử dụng","assignee":"Tuấn","start_date":"2026-01-29","due_date":"2026-03-15","due_date_text":"vào 15/3","status":"Proposed"},
+    {"task_name":"Hoàn thành hướng dẫn sử dụng","assignee":"Tuấn","start_date":"2026-01-29","due_date":"2026-03-20","due_date_text":"vào 20/3","status":"Proposed"}
+  ]
+}

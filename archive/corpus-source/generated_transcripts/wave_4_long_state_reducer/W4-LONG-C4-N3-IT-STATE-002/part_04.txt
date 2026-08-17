@@ -1,0 +1,126 @@
+MEETING_ID: W4-LONG-C4-N3-IT-STATE-002
+PART: P04/5
+
+T000157 [09:26:05] Minh: Chúng ta chuyển sang vấn đề release và monitoring. Tuần sau có một bản release nhỏ, cần chuẩn bị monitoring trước đó. Lan, em có kế hoạch gì chưa?
+
+T000158 [09:26:18] Lan: Dạ, em đã xem lịch release dự kiến là ngày 05/03. Nhưng monitoring hiện tại chưa được cấu hình cho hệ thống mới. Cần setup từ bây giờ.
+
+T000159 [09:26:30] Minh: Ai sẽ làm việc này? Hùng đang bận nhiều, hay giao cho Tuấn?
+
+T000160 [09:26:40] Hùng: Em nghĩ nên giao cho bạn Tuấn, vì Tuấn rành về DevOps. Nhưng Tuấn đang viết tài liệu, liệu có kịp không?
+
+T000161 [09:26:52] Lan: Em có thể giảm bớt phần việc cho Tuấn trong tài liệu, để Tuấn tập trung cho monitoring.
+
+T000162 [09:27:02] Minh: Được. Vậy tôi sẽ assign task "Cấu hình monitoring cho release 05/03" cho Tuấn. Deadline đặt vào 28/02 để kịp test trước khi release.
+
+T000163 [09:27:15] Hùng: 28/02 gần với deadline task kiểm tra môi trường test của em là 26/02. Hai task này có liên quan, vì cần môi trường ổn mới monitor được.
+
+T000164 [09:27:28] Minh: Đúng, nên deadline task test vẫn là 26/02, còn monitoring sau đó. Nhưng mà tôi muốn bàn về task cũ "Cập nhật dữ liệu test đăng nhập". Task đó giờ thấy không còn cần thiết nữa vì chúng ta sẽ dùng dữ liệu thật sau release.
+
+T000165 [09:27:42] Lan: Ý anh là hủy task đó? Nhưng Khang đã bắt đầu làm rồi.
+
+T000166 [09:27:52] Minh: Vậy hãy hủy để tránh lãng phí. Khang có thể tập trung vào việc khác.
+
+T000167 [09:28:03] Hùng: Em đồng ý. Task đó không có reviewer và không rõ mục đích.
+
+T000168 [09:28:12] Minh: Chính thức hủy task "Cập nhật dữ liệu test đăng nhập". Ghi nhận điều này.
+
+T000169 [09:28:23] Lan: Vâng. Vậy chúng ta có task mới về monitoring cho Tuấn, deadline 28/02.
+
+T000170 [09:28:35] Hùng: Em muốn hỏi về release: có cần xem xét lại lỗi đăng nhập trước khi release không? Nếu chưa fix thì release có rủi ro.
+
+T000171 [09:28:48] Minh: Tốt, đó là negative. Ta chưa biết kết quả điều tra lỗi đăng nhập của Hùng. Cần chốt trước release.
+
+T000172 [09:29:00] Lan: Em đề xuất nếu đến 28/02 chưa fix được lỗi, thì delay release.
+
+T000173 [09:29:10] Minh: Hợp lý. Vậy tôi muốn đặt deadline cho task điều tra lỗi đăng nhập: 28/02. Như vậy nó trùng với deadline monitoring, nhưng đó là cố ý.
+
+T000174 [09:29:22] Hùng: 28/02 là thứ bảy, em có thể làm xong trong tuần. Em sẽ cố gắng.
+
+T000175 [09:29:33] Minh: Nhưng nhớ, deadline này thuộc về antecedent cũ, tức là task từ P02. Đã lâu rồi.
+
+T000176 [09:29:45] Lan: Vậy deadline cho task điều tra lỗi đăng nhập là 28/02, owner Hùng.
+
+T000177 [09:29:55] Hùng: Em nhận. Nhưng vậy em có ba task: test môi trường (26/02), tài liệu (27/02), và lỗi đăng nhập (28/02). Rất sát nhau.
+
+T000178 [09:30:07] Minh: Căng đấy. Có cần hỗ trợ gì không?
+
+T000179 [09:30:16] Hùng: Có thể nhờ Lan review nhanh các báo cáo để em đỡ mất thời gian.
+
+T000180 [09:30:26] Lan: Em sẵn sàng. Nhưng em cũng có việc riêng.
+
+T000181 [09:30:35] Minh: Vậy sắp xếp hỗ trợ lẫn nhau.
+
+T000182 [09:30:45] Hùng: Bây giờ bàn về monitoring chi tiết hơn. Cần cài đặt Prometheus và Grafana, hay dùng công cụ khác?
+
+T000183 [09:30:57] Lan: Team Ops đã có sẵn Stackdriver, dùng luôn cho đồng bộ.
+
+T000184 [09:31:07] Minh: Tuấn sẽ biết. Tôi sẽ gửi email hướng dẫn.
+
+T000185 [09:31:17] Hùng: Em lo là monitoring sẽ ảnh hưởng hiệu năng nếu không tối ưu. Cần test trước.
+
+T000186 [09:31:28] Minh: Đúng, đó là rủi ro. Nên monitoring cũng cần được test trên staging trước.
+
+T000187 [09:31:39] Lan: Vậy task monitoring của Tuấn nên bao gồm cả test trên staging.
+
+T000188 [09:31:49] Minh: Ghi nhận. Bất kỳ ai có ý kiến về monitoring không?
+
+T000189 [09:31:58] Hùng: Em nghĩ nên có một buổi họp riêng với Tuấn và Ops để bàn kỹ thuật.
+
+T000190 [09:32:08] Lan: Có thể, nhưng chưa cần ngay. Khi Tuấn bắt đầu sẽ rõ.
+
+T000191 [09:32:18] Minh: Đồng ý. Quay lại vấn đề deadline, tôi thấy deadline 28/02 cho monitoring gần với deadline task tài liệu cũ, nhưng thuộc antecedent mới.
+
+T000192 [09:32:30] Hùng: Vậy task nào bị hủy? Chỉ có task dữ liệu test là bị hủy thôi, đúng không?
+
+T000193 [09:32:40] Minh: Đúng. Các task khác vẫn giữ nguyên.
+
+T000194 [09:32:49] Lan: Tôi sẽ cập nhật danh sách task mới: hủy task dữ liệu test, thêm monitoring, thêm deadline cho lỗi đăng nhập.
+
+T000195 [09:33:00] Hùng: Em muốn hỏi về release plan: có cần tài liệu release notes không? Ai viết?
+
+T000196 [09:33:10] Minh: Thường thì Tuấn viết. Nhưng hôm nay chưa bàn.
+
+T000197 [09:33:19] Lan: Vậy có nên tạo task release notes không? Hay để sau?
+
+T000198 [09:33:28] Minh: Để sau. Nguy cơ quá tải.
+
+T000199 [09:33:37] Hùng: Vậy tạm thời chưa có task mới.
+
+T000200 [09:33:46] Minh: Đúng.
+
+T000201 [09:33:54] Lan: Em muốn lưu ý: deadline 28/02 cho lỗi đăng nhập cần được thông báo cho team Ops, vì họ cấp quyền truy cập.
+
+T000202 [09:34:04] Hùng: Em đã gửi email, đang chờ phản hồi.
+
+T000203 [09:34:13] Minh: Nếu không có access, deadline sẽ trễ. Cần dự phòng.
+
+T000204 [09:34:22] Lan: Vậy nên có một checkpoint: nếu đến 25/02 chưa có access, thì cần escalate.
+
+T000205 [09:34:32] Minh: Đồng ý. Ghi nhận checkpoint.
+
+T000206 [09:34:41] Hùng: Em thấy có nhiều task cùng thời điểm, cần ưu tiên rõ.
+
+T000207 [09:34:50] Minh: Ưu tiên như sau: test môi trường là gốc, sau đó tài liệu, rồi lỗi đăng nhập, cuối cùng là monitoring.
+
+T000208 [09:35:00] Lan: Rõ. Tôi sẽ update priority.
+
+T000209 [09:35:08] Hùng: Vậy em sẽ làm test môi trường trước, sau đó viết tài liệu, và xen kẽ điều tra lỗi.
+
+T000210 [09:35:18] Minh: Hợp lý.
+
+T000211 [09:35:26] Lan: Có ai cần hỏi thêm về release không?
+
+T000212 [09:35:34] Hùng: Em muốn biết release 05/03 có bao gồm các bản vá không? Hay chỉ feature mới?
+
+T000213 [09:35:44] Minh: Đa phần là feature mới, có một vài bug fix nhỏ.
+
+T000214 [09:35:53] Lan: Vậy cần test regression.
+
+T000215 [09:36:02] Minh: Đúng, nhưng không phải hôm nay bàn.
+
+T000216 [09:36:10] Hùng: Vậy tạm thời mọi thứ đã rõ.
+
+T000217 [09:36:18] Minh: Tốt. Chúng ta dừng ở đây.
+
+--- END OF PART P04 ---

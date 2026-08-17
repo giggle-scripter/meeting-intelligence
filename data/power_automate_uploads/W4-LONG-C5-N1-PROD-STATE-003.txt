@@ -1,0 +1,303 @@
+=== MEETING METADATA ===
+meeting_id: W4-LONG-C5-N1-PROD-STATE-003
+meeting_title: Họp điều phối triển khai hệ thống
+meeting_date: 2026-02-17
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:00] Anh Tuấn: Chào cả nhà, cảm ơn đã vào đúng giờ. Hôm nay chúng ta bàn về kế hoạch triển khai phiên bản 2.1 lên môi trường test và staging.
+[09:00:12] Minh: Vâng, em đã check sơ bộ. Bên BE có vài thay đổi về config, cần cập nhật lại tài liệu.
+[09:00:25] Lan: Em lo nhất phần tài liệu triển khai. Bản cũ viết lộn xộn, nhiều chỗ thiếu step.
+[09:00:38] Hùng: Đồng ý. Hôm qua em thử chạy script cũ trên sandbox thấy lỗi environment variable. Phải có tài liệu chuẩn.
+[09:00:50] Anh Tuấn: Thế thì chúng ta xắp xếp lại. Mình sẽ chia làm hai đầu việc chính: tài liệu triển khai hệ thống và tài liệu hướng dẫn cho môi trường test.
+[09:01:05] Minh: Hai cái này khác gì nhau ạ? Em thấy hay bị nhầm. Tài liệu triển khai hệ thống là cho production hay tổng thể?
+[09:01:18] Anh Tuấn: Đúng – tài liệu triển khai hệ thống sẽ bao phủ từ dev đến prod, bao gồm cả cấu hình và rollback. Còn tài liệu hướng dẫn triển khai môi trường test chỉ tập trung vào sandbox và staging, đơn giản hơn.
+[09:01:35] Lan: Vậy em có thể viết cái môi trường test không? Vì em đã làm QA trên sandbox vài lần, quen các bước.
+[09:01:48] Anh Tuấn: Được, Lan phụ trách tài liệu triển khai môi trường test. Minh viết tài liệu triển khai hệ thống tổng thể. Có gì phối hợp với Hùng về hạ tầng.
+[09:02:00] Minh: Em ok, nhưng mà tài liệu tổng thể em cần data từ bên infra, nhất là phần database migration.
+[09:02:14] Hùng: Tuần trước em đã gửi file excel các thay đổi DB rồi, Minh check mail chưa?
+[09:02:28] Minh: À để em xem lại. Có vẻ nó vào spam? Em nhận được nhưng chưa mở. Sorry.
+[09:02:40] Anh Tuấn: Okay, hai em sync sau. Vậy task “Viết tài liệu triển khai hệ thống” assign cho Minh, deadline 20/2. Task “Viết tài liệu hướng dẫn triển khai test” assign Lan, chưa có deadline cụ thể, vì ưu tiên thấp hơn một chút.
+[09:02:58] Lan: Không deadline thì em sợ dễ trôi, tài liệu của em cũng cần Hùng review phần script.
+[09:03:10] Anh Tuấn: Đúng, nhưng group này sẽ review cuối tuần sau. Hùng hỗ trợ Lan nhé. Còn Minh tập trung xong tài liệu chính trước.
+[09:03:25] Hùng: Được. Tuy nhiên em đang bận setup CI/CD cho dự án bên B, nên có thể cuối tuần này mới có thời gian support.
+[09:03:40] Lan: Thế em ghi tài liệu sơ bộ trước, cuối tuần Hùng check lại phần kỹ thuật nhé.
+[09:03:52] Anh Tuấn: Ổn. Bây giờ về môi trường test – đã có server chưa? Bên infra nói cần phê duyệt ticket.
+[09:04:05] Hùng: Server sandbox mới tạo hôm thứ 6, nhưng chưa gán DNS. Staging vẫn đang chờ team infra cấp thêm resource.
+[09:04:20] Minh: Nếu staging chưa có thì tài liệu test phần deploy script sẽ chưa kiểm thử được. Có nên đẩy task đó sau?
+[09:04:35] Anh Tuấn: Không, vẫn viết dựa trên tài liệu cũ và kinh nghiệm của Hùng. Khi có server sẽ update sau. Mình không delay được lịch tổng thể.
+[09:04:50] Lan: Em thấy rủi ro vì nếu script thay đổi thì phải viết lại. Hay em chờ Hùng confirm config?
+[09:05:02] Hùng: Script cơ bản ổn, chỉ thiếu biến môi trường. Em sẽ fix trong tuần này. Lan cứ viết draft dựa trên bản hiện tại của repo, chỗ nào sai em sửa sau.
+[09:05:18] Anh Tuấn: Thống nhất nhé. Minh, em hãy chú ý phần rollback – trước team bảo thiếu hướng dẫn rollback. Minh phải đưa vào tài liệu triển khai hệ thống.
+[09:05:34] Minh: Vâng, em sẽ thêm mục "Rollback procedure". Nhưng mà em chưa rõ hiện tại có automation cho rollback chưa?
+[09:05:48] Hùng: Chưa, toàn manual. Em có script rollback sơ sài, sẽ đưa vào repo trong vài ngày tới.
+[09:06:00] Anh Tuấn: Hai em coordinat việc đó. Lan, khi nào em bắt đầu viết tài liệu test?
+[09:06:12] Lan: Em bắt đầu ngay chiều nay, sau meeting sẽ lấy template cũ và chỉnh sửa.
+[09:06:25] Anh Tuấn: Tốt. Còn vấn đề gì về tài liệu không? Mọi người thấy khó khăn gì không?
+[09:06:38] Hùng: Có một việc – bên security yêu cầu tài liệu triển khai phải có phần checklist an ninh. Liệu có nên đưa luôn vào tài liệu của Minh?
+[09:06:52] Minh: Nếu vậy thì tài liệu sẽ dài hơn, nhưng em có thể thêm một chapter "Security considerations". Tuy nhiên em cần đầu vào từ security team.
+[09:07:08] Anh Tuấn: Tuấn sẽ nói chuyện với security để họ gửi checklist. Minh không cần chờ, cứ viết khung trước. Tuần sau khi có checklist sẽ bổ sung.
+[09:07:22] Lan: Mà tài liệu của em cũng cần đề cập an ninh? Vì chạy trên môi trường test có thể dùng dữ liệu giả.
+[09:07:36] Anh Tuấn: Nếu có dữ liệu thật thì cần, nhưng test dùng dữ liệu synthetic nên em bỏ qua cũng được. Tập trung vào step và script.
+[09:07:50] Hùng: Thực ra sandbox của bọn em có kết nối đến DB thật một phần, nên em nghĩ Lan nên có note về bảo mật.
+[09:08:02] Lan: Ok, vậy em thêm một dòng cảnh báo không dùng dữ liệu thật. Còn lại em viết theo template chuẩn.
+[09:08:15] Anh Tuấn: Nhắc lại task: Minh – tài liệu triển khai hệ thống, deadline 20/2. Lan – tài liệu triển khai môi trường test, chưa có deadline nhưng ưu tiên review cuối tuần sau. Ai nhận rõ chưa?
+[09:08:30] Minh: Rõ.
+[09:08:35] Lan: Rõ.
+[09:08:38] Hùng: Em hỗ trợ review và fix script.
+[09:08:50] Anh Tuấn: Còn ai có thắc mắc về phạm vi tài liệu không? Ví dụ tài liệu của Minh có nên bao gồm cả hướng dẫn cấu hình monitoring?
+[09:09:05] Minh: Em nghĩ monitoring sẽ nằm trong tài liệu deploy chung, nhưng nếu tách ra thì cũng được. Anh Tuấn muốn như nào?
+[09:09:18] Anh Tuấn: Để đơn giản, Minh chỉ viết phần core: prerequiste, install, config, rollback. Monitoring sẽ là tài liệu riêng sau này.
+[09:09:32] Hùng: Vậy tài liệu test của Lan cũng không cần monitoring? Chỉ test chức năng deploy thôi?
+[09:09:45] Lan: Đúng, em chỉ viết steps để deploy lên sandbox và verify endpoints. Monitoring không nằm trong scope test.
+[09:10:00] Anh Tuấn: Nhất trí. Bây giờ chuyển sang vấn đề môi trường hiện tại. Hùng, em cho biết tiến độ setup server test?
+[09:10:15] Hùng: Sandbox đã sẵn sàng OS và Docker, thiếu cài đặt ứng dụng. Staging thì tài nguyên chưa duyệt, ticket số #3456 với infra vẫn pending từ tuần trước.
+[09:10:30] Anh Tuấn: Tuấn sẽ đôn đốc infra. Minh nếu cần test tích hợp sớm, có thể dùng sandbox tạm.
+[09:10:44] Minh: Dùng được, nhưng mà em cần port 8443 mở để test kết nối, không biết có bị chặn không.
+[09:10:58] Hùng: Port đó đang dành cho VNPT, em sẽ tạo rule tạm thời qua iptables. Chiều nay em làm.
+[09:11:12] Lan: Về database test, có snapshot mới nhất chưa? Em muốn lấy dữ liệu mẫu.
+[09:11:25] Hùng: Snapshot cuối tuần trước đã có, nhưng có vài record corrupt do job ETL lỗi. Để em restore bản trước đó.
+[09:11:38] Anh Tuấn: Nhanh lên nhé, tuần này cần chạy test E2E. Minh, tài liệu triển khai hệ thống của em có nhắc đến việc seed data không?
+[09:11:52] Minh: Em định viết, nhưng mà seed data là việc của QA hay OPS? Chưa rõ.
+[09:12:05] Hùng: OPS sẽ lo phần infrastructure, còn seed data thường do QA tự chạy script. Lan, em tự tạo nhé, em có quyền truy cập DB sandbox.
+[09:12:18] Lan: Vâng, em biết rồi. Tuy nhiên em thấy tài liệu triển khai test nên có script seed để chuẩn hóa, tránh mỗi người một kiểu.
+[09:12:32] Anh Tuấn: Ok, thế Lan có thể thêm phần seed data vào task của mình không? Có thể viết dưới dạng hướng dẫn chạy script.
+[09:12:45] Lan: Em làm được, nhưng cần Hùng cho biết script seed đặt ở đâu. Em thấy repo có folder /scripts/seed chứa file .sql nhưng chưa rõ dùng bản nào.
+[09:12:58] Hùng: Bản mới nhất là seed_v2.sql, em dùng nó. Nó có sẵn vài bảng demo. Em sẽ comment trong file README.
+[09:13:12] Anh Tuấn: Vậy Lan sẽ viết hướng dẫn seed data trong tài liệu test. Còn Minh, tài liệu hệ thống chỉ đề cập đến config chứ không cần seed. Rõ chưa?
+[09:13:28] Minh: Rõ.
+[09:13:34] Lan: Rõ.
+[09:13:40] Anh Tuấn: Tôi muốn hỏi thêm: tài liệu triển khai hệ thống có cần mô tả kiến trúc không? Hay chỉ step-by-step?
+[09:13:55] Minh: Nếu có diagram kiến trúc thì người đọc dễ hình dung. Em có thể vẽ sơ đồ bằng draw.io, nhưng cần xác nhận phiên bản kiến trúc hiện tại.
+[09:14:10] Hùng: Kiến trúc thay đổi từ sprint trước, em có file Visio trên Confluence, Minh lấy đó mà vẽ lại.
+[09:14:24] Anh Tuấn: Được, đưa vào tài liệu luôn. Nhưng mà tài liệu của Lan có cần kiến trúc không?
+[09:14:38] Lan: Không cần, test của em đơn giản hơn, chỉ cần ports và services. Nếu có thì thừa.
+[09:14:50] Anh Tuấn: Ok. Bây giờ có ai thấy vấn đề gì về timeline không? Minh, 20/2 em có kịp không? Còn 3 ngày nữa.
+[09:15:03] Minh: Em nghĩ kịp, vì tài liệu chính em đã viết được 50% trong tuần trước, chỉ thiếu phần rollback và security. Nhưng nếu pending checklist thì em sẽ ước lượng thêm.
+[09:15:18] Anh Tuấn: Checklist security em không chờ, để tôi lấy và gửi em sau. Em có thể nộp bản draft, rồi update khi có checklist.
+[09:15:32] Lan: Còn tài liệu của em dự kiến hoàn thành chiều thứ 5, vì em cần Hùng review script đầu tuần sau.
+[09:15:45] Hùng: Thứ 5 em bận meeting với vendor, nhưng tối em có thể review nhanh.
+[09:15:58] Lan: Ok, vậy tối thứ 5 em gửi Hùng, thứ 6 Hùng feedback nhé.
+[09:16:10] Anh Tuấn: Như vậy tuần sau sẽ review toàn bộ. Tôi muốn hỏi: có ai thấy hai tài liệu này dễ bị overlap không? Minh và Lan cần thống nhất format và không sao chép nội dung.
+[09:16:25] Minh: Em thấy tài liệu hệ thống có thể dùng làm reference cho tài liệu test, nhưng mà phạm vi khác. Em sẽ viết tổng quát, Lan viết cụ thể sandbox.
+[09:16:40] Lan: Đúng, em chỉ viết step cho sandbox, không viết lại config hay kiến trúc.
+[09:16:52] Anh Tuấn: Tốt. Vậy deadline nhớ rõ: Minh tài liệu triển khai hệ thống 20/2, Lan tài liệu triển khai test không deadline (nhưng target cuối tuần sau). Nếu có gì thay đổi, báo tôi.
+[09:17:05] Hùng: Mà này, tài liệu triển khai hệ thống và tài liệu triển khai test – tên nghe na ná nhau, dễ gây hiểu nhầm. Hay ta đặt tên khác?
+[09:17:20] Anh Tuấn: Cũng được. Minh, em đặt tên rõ hơn: "Deployment Guide – Whole System". Lan: "Test Environment Deployment Manual". Phân biệt ngay.
+[09:17:35] Minh: Vâng, em sẽ dùng title đó.
+[09:17:40] Lan: Em cũng đổi lại.
+[09:17:48] Anh Tuấn: Còn vấn đề gì nữa không? Về sticky note: tôi thấy vụ server staging chậm có thể ảnh hưởng đến test của Lan. Lan có thể làm việc trên sandbox trước.
+[09:18:02] Lan: Em sẽ dùng sandbox cho đến khi staging sẵn sàng. Nhưng mà em cần quyền root sandbox để cài một số tool monitoring.
+[09:18:16] Hùng: Quyền root sandbox thì em có, em sẽ share credential với Lan sau meeting.
+[09:18:28] Anh Tuấn: Nhớ mã hóa khi gửi. Thôi, hiện tại mọi người đã rõ. Chúng ta sẽ tiếp tục họp lại khi có thông tin về staging. Hôm nay trước mắt tập trung tài liệu.
+[09:18:42] Hùng: Em có việc cần báo – tuần sau em phải onboard nhân sự mới, có thể ảnh hưởng thời gian review. Lan thông cảm.
+[09:18:56] Lan: Không sao, em sẽ gửi sớm cho Hùng xem, nếu gấp quá thì Minh support review cũng được.
+[09:19:10] Minh: Nếu Lan cần, em có thể review phần seed script, còn phần kỹ thuật Hùng rành hơn.
+[09:19:22] Anh Tuấn: Các em tự sắp xếp. Ok, tôi không có vấn đề gì thêm. Ai còn ý kiến?
+[09:19:34] Minh: Em muốn hỏi rõ: tài liệu triển khai hệ thống có cần bao gồm hướng dẫn shutdown và restart dịch vụ không?
+[09:19:48] Anh Tuấn: Có, đưa vào phần operation. Nhưng mà tập trung vào step thường dùng, không phải toàn bộ admin.
+[09:20:00] Minh: Vâng, em viết ngắn gọn.
+[09:20:08] Lan: Em cũng không có câu hỏi.
+[09:20:14] Hùng: Tôi ok.
+[09:20:20] Anh Tuấn: Tạm thời như vậy. Chúng ta sẽ còn họp lại để review progress. Cảm ơn mọi người. Kết thúc nội dung hôm nay.
+[09:21:01] Hùng: À, mà em có vấn đề muốn nói. Hôm qua em test thử login trên sandbox mới thì bị lỗi 500. Không vào được.
+[09:21:14] Anh Tuấn: Lỗi gì thế? Có log không?
+[09:21:22] Hùng: Có, em check thì thấy lỗi kết nối database. Snapshot cũ bị corrupt như em nói lúc nãy.
+[09:21:34] Lan: Thế thì em không thể test login flow được nếu DB chưa restore.
+[09:21:46] Minh: Hay là em dùng DB local của em để test tạm? Em có instance chạy SQLite.
+[09:21:58] Hùng: Không được, sandbox dùng PostgreSQL, khác loại. Phải restore snapshot mới.
+[09:22:10] Anh Tuấn: Hùng, em có thể restore bản snapshot trước khi bị corrupt không? Bao giờ xong?
+[09:22:22] Hùng: Em có bản backup từ thứ 5 tuần trước. Restore mất khoảng 30 phút. Chiều nay em làm.
+[09:22:34] Lan: Vậy chiều nay em mới có thể test à? Em định viết tài liệu test dựa trên dữ liệu thực tế.
+[09:22:48] Anh Tuấn: Trước mắt Lan cứ viết dựa trên mô tả, sau khi có dữ liệu update. Hùng, em assign task restore DB này cho em nhé, hoàn thành trước 17h.
+[09:23:00] Hùng: Ok, em sẽ làm ngay sau meeting.
+[09:23:10] Minh: Ngoài lỗi login, em thấy API get user list trả về sai. Hình như do dữ liệu test bị duplicate ID.
+[09:23:24] Lan: Có thể do migration lỗi. Em nghĩ cần tạo script để xóa duplicate.
+[09:23:36] Hùng: Đúng, em thấy trong bảng accounts có nhiều row trùng email. Lỗi từ ETL job cũ.
+[09:23:48] Anh Tuấn: Cần làm sạch dữ liệu. Ai có thể viết script clean? Lan có rảnh không?
+[09:24:00] Lan: Em có thể viết, nhưng mà không rõ logic gộp duplicate thế nào. Có cần giữ row mới nhất không?
+[09:24:12] Hùng: Theo business rule, giữ row có updated_at gần nhất. Em sẽ gửi query mẫu.
+[09:24:24] Anh Tuấn: Lan viết script clean data, Hùng review. Thêm task này, không deadline nhưng làm ngay để test.
+[09:24:36] Lan: Vậy em sẽ làm sau khi xong tài liệu test. Có thể tối nay hoặc ngày mai.
+[09:24:48] Hùng: Mà này, em đã gửi log lỗi login cho Minh chưa? Minh check xem có liên quan đến config của tài liệu của Minh không.
+[09:25:00] Minh: Chưa, em mới nghe lỗi. Hùng gửi em stack trace nhé. Em sẽ xem có cần update tài liệu triển khai không.
+[09:25:12] Anh Tuấn: Tốt, phối hợp vậy. Còn vấn đề dữ liệu test, tôi thấy cần có một bộ dữ liệu chuẩn cho tất cả. Không ai làm cái này à?
+[09:25:24] Hùng: Trước em có tạo một bộ dữ liệu mẫu, nhưng hiện tại nó lỗi thời. Cần tạo lại.
+[09:25:36] Anh Tuấn: Ai có thể làm? Lan đã có task viết tài liệu test, Minh viết tài liệu hệ thống. Hùng bận CI/CD.
+[09:25:48] Minh: Hay em thuê ngoài? Không có budget.
+[09:26:00] Lan: Em có thể làm thêm nếu cần, nhưng sợ quá tải. Hay thuê thực tập sinh?
+[09:26:12] Hùng: Thực tập sinh mới vào tuần sau. Có thể giao cho bạn ấy.
+[09:26:24] Anh Tuấn: Được, tôi sẽ assign task "Tạo bộ dữ liệu test chuẩn" cho thực tập sinh, khi nào có người sẽ nói sau. Nhưng trước mắt, ai đó cần tạo dữ liệu tạm cho test login.
+[09:26:36] Hùng: Em sẽ tạo một vài user giả trong DB sau khi restore. Việc này mất 10 phút.
+[09:26:48] Anh Tuấn: Vậy Hùng restore DB và tạo dữ liệu tạm. Lan, em không cần đợi dữ liệu chuẩn, cứ viết tài liệu dựa trên dự kiến.
+[09:27:00] Lan: Nhưng nếu dữ liệu khác thì tài liệu không khớp. Em sợ phải sửa nhiều.
+[09:27:12] Hùng: Dữ liệu tạm em tạo sẽ giống với dữ liệu chuẩn cuối cùng. Em sẽ dùng script tạo user mẫu có sẵn.
+[09:27:24] Minh: Mà này, về lỗi đăng nhập, em thấy error message từ web hiện ra generic. Có nên sửa luôn không?
+[09:27:36] Anh Tuấn: Đó là vấn đề UX. Hiện tại MVP không yêu cầu, nhưng có thể đưa vào backlog. Có ai muốn nhận không?
+[09:27:48] Minh: Em có thể viết ticket, nhưng không implement.
+[09:28:00] Anh Tuấn: Được, Minh viết ticket mô tả lỗi, assign cho BA để phân tích sau.
+[09:28:12] Hùng: Còn em, em muốn hỏi về script restore DB – em có nên viết doc cho nó không? Hay chỉ chạy tay?
+[09:28:24] Anh Tuấn: Nếu là ad-hoc thì không cần. Nhưng nếu lặp lại thì nên document. Tôi nghĩ cho đợt này chạy tay.
+[09:28:36] Lan: Vậy tài liệu test của em có cần mention restore DB step không?
+[09:28:48] Anh Tuấn: Nếu Hùng làm thì em không cần. Chỉ cần nói dữ liệu test được cung cấp bởi infra.
+[09:29:00] Hùng: Ok, em sẽ ghi chú lại cho Lan.
+[09:29:10] Minh: Mà nãy em nói về lỗi login, có thể là do config của application.properties. Em sợ tài liệu triển khai của em chưa cập nhật cấu hình DB.
+[09:29:22] Hùng: Config DB hiện tại đã có trong file mẫu, nhưng chưa được kiểm thử trên sandbox.
+[09:29:34] Anh Tuấn: Vậy Hùng và Minh cùng kiểm tra config sau khi restore DB. Minh update tài liệu nếu cần.
+[09:29:46] Hùng: Em sẽ chạy thử deploy script sau restore. Nếu lỗi thì fix.
+[09:29:58] Anh Tuấn: Như vậy ta có thêm task: kiểm tra config trên sandbox. Hùng và Minh cùng làm.
+[09:30:10] Lan: Em có thể giúp verify login sau khi DB được restore và config sửa.
+[09:30:22] Anh Tuấn: Lan verify nhé, nhưng trước mắt em tập trung tài liệu. Có thể nhờ Hùng verify.
+[09:30:34] Hùng: Thôi để em tự verify, Lan cứ viết tài liệu.
+[09:30:46] Minh: Về task tài liệu triển khai hệ thống của em, em thấy cần thêm phần debug common errors. Ví dụ lỗi kết nối DB.
+[09:30:58] Anh Tuấn: Có thể thêm appendix. Nhưng đừng làm chậm deadline. Em có thể viết sau khi nộp bản draft.
+[09:31:10] Hùng: Em đồng ý. Tập trung ra bản chính trước.
+[09:31:22] Lan: Em thấy có nhiều task rồi. Có cần tổng hợp lại không?
+[09:31:34] Anh Tuấn: Tạm thời chưa cần. Tôi sẽ note lại. Còn ai có gì thêm về lỗi đăng nhập hay dữ liệu không?
+[09:31:46] Minh: Em có thêm một vấn đề: sandbox đang dùng chứng chỉ SSL tự ký, trình duyệt báo lỗi. Có nên mua chứng chỉ thật không?
+[09:31:58] Anh Tuấn: Không, test environment chấp nhận self-signed. Ai thấy phiền thì thêm ngoại lệ.
+[09:32:10] Hùng: Đúng, em đã thêm trong team policy.
+[09:32:20] Lan: Vậy em có thể viết trong tài liệu test là bỏ qua lỗi SSL.
+[09:32:32] Anh Tuấn: Được. Thế nhé, mọi người tiếp tục công việc. P02 tạm dừng ở đây, phần còn lại họp sau.
+[09:33:00] Anh Tuấn: Quay lại vấn đề tài liệu hồi đầu meeting. Minh, task tài liệu triển khai hệ thống của em tiến độ sao rồi?
+[09:33:12] Minh: Dạ, em viết được 70% rồi. Thiếu phần rollback và security checklist.
+[09:33:24] Anh Tuấn: Còn deadline 20/2, em nghĩ em kịp chứ?
+[09:33:36] Minh: Em nghĩ kịp, nhưng mà hơi căng. Vì em còn phải xử lý mấy task khác Hùng giao.
+[09:33:48] Hùng: Task kiểm tra config trên sandbox đó hả? Cái đó em làm chính, Minh chỉ support thôi mà.
+[09:34:00] Minh: Vâng, nhưng em muốn review kỹ phần debug common errors nữa, nên thời hơi bị hẹp.
+[09:34:12] Lan: Tài liệu test của em cũng đang viết. Em thấy mình nên ưu tiên tài liệu chính trước.
+[09:34:24] Anh Tuấn: Đúng. Minh, nếu em thấy deadline quá sức, ta có thể điều chỉnh. Còn task tài liệu test của Lan, em thấy sao? Có ổn không?
+[09:34:36] Lan: Em viết tạm ổn, nhưng mà phần seed data em chưa chắc chắn. Hùng hứa gửi query mẫu mà chưa thấy.
+[09:34:48] Hùng: À, em xin lỗi. Em sẽ gửi trong chiều nay. Lan cứ viết phần còn lại trước.
+[09:35:00] Anh Tuấn: Tôi nghĩ đến việc chuyển giao. Minh, task tài liệu hệ thống có phần hạ tầng nặng, Hùng rành hơn. Hay mình chuyển task đó cho Hùng từ bây giờ?
+[09:35:14] Minh: Nếu Hùng nhận thì em rất mừng, vì em cũng không tự tin về phần rollback và config DB.
+[09:35:26] Hùng: Em cũng đã viết tài liệu tương tự cho dự án cũ. Nhưng mà hiện tại em đang bận CI/CD, e là không kịp deadline 20/2.
+[09:35:38] Anh Tuấn: Nếu chuyển sang Hùng thì deadline nên đẩy lên. Còn task tài liệu test của Lan, deadline có cần đặt không?
+[09:35:50] Lan: Em nghĩ nếu Hùng viết tài liệu hệ thống thì em có thể hỗ trợ Hùng về phần test. Còn tài liệu test của em, em vẫn làm.
+[09:36:02] Anh Tuấn: Vậy thế này: Hùng, em nhận viết tài liệu triển khai hệ thống, deadline đẩy lên 25/2. Minh, em chuyển sang support Hùng và hoàn thành tài liệu test cùng Lan. Có ok không?
+[09:36:16] Hùng: Em ok. Nhưng mà em cần Minh cung cấp những gì em đã viết. Minh gửi bản draft hiện tại cho em.
+[09:36:28] Minh: Vâng, em gửi ngay sau meeting. Trong đó em có ghi chú các phần cần hoàn thiện.
+[09:36:40] Anh Tuấn: Còn deadline cho tài liệu test? Lan, em có muốn đặt deadline không?
+[09:36:52] Lan: Em nghĩ nên có deadline để tránh trôi. Em đề xuất 27/2, vì sau khi Hùng xong tài liệu hệ thống thì em mới có base để update.
+[09:37:04] Anh Tuấn: Hợp lý. Vậy tài liệu test của Lan deadline 27/2. Nhưng mà lưu ý: tài liệu test không phụ thuộc hoàn toàn vào tài liệu hệ thống.
+[09:37:16] Lan: Em biết, em chỉ cần phần cấu hình cuối cùng để xác nhận step. Em vẫn viết 80% trước.
+[09:37:28] Anh Tuấn: Tốt. Như vậy task của Minh (cũ) đã được handoff sang Hùng, deadline thay đổi từ 20/2 thành 25/2. Còn task của Lan có deadline mới 27/2. Mọi người đồng ý?
+[09:37:40] Minh: Em đồng ý.
+[09:37:46] Hùng: Đồng ý.
+[09:37:50] Lan: Em cũng đồng ý.
+[09:37:58] Hùng: Nhưng mà em có một băn khoăn: tài liệu của Minh đã viết về phần kiến trúc, em không chắc có cần giữ nguyên không. Hay em viết lại?
+[09:38:10] Anh Tuấn: Em xem bản draft rồi quyết định. Nếu giữ được thì càng tốt, đừng làm lại từ đầu.
+[09:38:22] Minh: Phần kiến trúc em vẽ sơ đồ draw.io rồi, em sẽ gửi cả file nguồn.
+[09:38:34] Hùng: Ok, em sẽ dùng lại. Em chỉ tập trung phần config và rollback.
+[09:38:46] Lan: Còn tài liệu test, em muốn thêm phần môi trường staging, nhưng chưa có server. Nếu deadline 27/2 mà staging chưa xong thì sao?
+[09:38:58] Anh Tuấn: Thì em viết dựa trên sandbox, khi có staging sẽ update. Ta có thể có bản revision sau.
+[09:39:10] Hùng: Em nghĩ staging sẽ có trong tuần sau, nên Lan yên tâm.
+[09:39:22] Anh Tuấn: Vậy nhé, mọi người giữ trạng thái này. Còn vấn đề gì về tài liệu không?
+[09:39:34] Minh: Em muốn hỏi: task "Clean data" của Lan và "Restore DB" của Hùng có ảnh hưởng đến tài liệu không?
+[09:39:46] Anh Tuấn: Có thể Lan sẽ thêm script clean vào tài liệu test. Hùng, em viết restore DB như ad-hoc, không cần document.
+[09:39:58] Lan: Em sẽ add một mục "Maintenance tasks" nhỏ.
+[09:40:10] Hùng: Em thấy ổn.
+[09:40:20] Anh Tuấn: Thế thôi, tạm thời chốt. Có ai cần clarify gì thêm?
+[09:40:30] Minh: Em không có.
+[09:40:36] Lan: Em cũng không.
+[09:40:42] Anh Tuấn: Vậy chúng ta tiếp tục nội dung khác sau. Cảm ơn.
+[09:41:00] Anh Tuấn: Chuyển sang vấn đề release sắp tới. Chúng ta cần bàn về timeline và monitoring.
+[09:41:12] Hùng: Em thấy release 2.1 dự kiến ngày 1/3. Còn 2 tuần nữa, khá gấp.
+[09:41:24] Minh: Nhưng staging chưa sẵn sàng, liệu có kịp không?
+[09:41:36] Anh Tuấn: Staging phải có trong tuần này. Tôi đã đôn đốc infra. Còn monitoring, Hùng, em đã chuẩn bị gì chưa?
+[09:41:48] Hùng: Em có script check health cơ bản, nhưng chưa tích hợp alert. Cần thêm time.
+[09:42:00] Lan: Vậy trước mắt có thể dùng email notification. Nhưng mà phải cấu hình SMTP.
+[09:42:12] Anh Tuấn: Để tôi assign task "Setup monitoring alert" cho Hùng, deadline 28/2. Được không?
+[09:42:24] Hùng: 28/2 hơi sát release, nhưng em cố được. Cần Minh hỗ trợ phần log.
+[09:42:36] Minh: Em có thể cấu hình log aggregation. Tuy nhiên em thấy task clean data hồi trước có vẻ không còn cần thiết nữa.
+[09:42:48] Hùng: Tại sao? Em tưởng Lan đang viết script clean?
+[09:43:00] Lan: Sau khi Hùng restore snapshot mới, dữ liệu đã được làm sạch rồi. Bảng accounts không còn duplicate.
+[09:43:12] Anh Tuấn: Thế thì hủy task clean data của Lan nhé. Lan, em không cần viết script đó nữa.
+[09:43:24] Lan: Vâng, em sẽ xóa task đó khỏi list. Tập trung vào tài liệu test.
+[09:43:36] Hùng: Nhưng mà em nhớ task clean data được tạo ra để xử lý duplicate. Nếu snapshot mới sạch rồi thì ok.
+[09:43:48] Minh: Tuy nhiên em vẫn thấy trong DB có vài row lỗi encoding. Có nên làm sạch triệt để?
+[09:44:00] Anh Tuấn: Không, release gần tới, ưu tiên core chức năng. Encoding lỗi để bản sau.
+[09:44:12] Hùng: Về monitoring, em cần biết các chỉ số nào cần alert. Anh Tuấn có yêu cầu gì?
+[09:44:24] Anh Tuấn: Chủ yếu uptime API, response time > 500ms, error rate > 1%. Em setup threshold đó.
+[09:44:36] Minh: Em có thể viết script warning qua Slack.
+[09:44:48] Hùng: Slack thì dễ, nhưng cần webhook. Em sẽ tạo channel riêng.
+[09:45:00] Lan: Còn tài liệu test, em dự kiến nộp bản draft vào 28/2 để kịp review trước release.
+[09:45:12] Anh Tuấn: 28/2 là deadline của monitoring task rồi. Lan đặt deadline 28/2 có sát không?
+[09:45:24] Lan: Em nghĩ kịp, vì tài liệu đã gần xong, chỉ cần update phần staging khi có server.
+[09:45:36] Hùng: Nhưng em đã nhắc, staging có thể chưa có đến cuối tuần. Em sợ Lan không có data để test.
+[09:45:48] Anh Tuấn: Đã bàn, Lan viết dựa trên sandbox. Nếu staging trễ, update sau. Vậy deadline tài liệu test 28/2 là được.
+[09:46:00] Minh: Vậy task tài liệu test có deadline 28/2, còn task monitoring alert cũng 28/2. Hai task này cùng ngày.
+[09:46:12] Anh Tuấn: Đúng, nhưng không vấn đề. Hùng và Lan tự điều phối.
+[09:46:24] Hùng: Vâng. Nhân tiện, về task "Kiểm tra config trên sandbox", em thấy cần đặt deadline để tránh quên. Đề xuất 27/2.
+[09:46:36] Minh: 27/2 sát release, nhưng em nghĩ làm được. Anh Tuấn thấy sao?
+[09:46:48] Anh Tuấn: Được, set deadline 27/2 cho task đó. Nhưng mà hồi đầu ta còn task "Tạo bộ dữ liệu test chuẩn" cho intern, giờ intern chưa vào, có nên hủy luôn?
+[09:47:00] Lan: Em thấy chưa cần, vì dữ liệu tạm của Hùng đủ dùng.
+[09:47:12] Hùng: Đồng ý, hủy task đó. Không cần dữ liệu chuẩn lúc này.
+[09:47:24] Anh Tuấn: Quyết định hủy task "Tạo bộ dữ liệu test chuẩn". Vậy summary: hủy clean data và bộ dữ liệu chuẩn. Còn task khác giữ nguyên.
+[09:47:36] Minh: Rõ.
+[09:47:42] Lan: Em cũng rõ.
+[09:47:48] Hùng: Ok.
+[09:48:00] Anh Tuấn: Bây giờ về monitoring, Hùng cần thêm thông tin gì từ team không?
+[09:48:12] Hùng: Em cần list các service cần monitor. Minh, em có thể cung cấp danh sách endpoint không?
+[09:48:24] Minh: Có, em gửi sau. Gồm 5 API chính: login, user, order, payment, notification.
+[09:48:36] Hùng: Tốt. Em sẽ setup health check cho từng cái.
+[09:48:48] Anh Tuấn: Chú ý không monitor staging nếu chưa có. Chỉ sandbox trước.
+[09:49:00] Hùng: Vâng.
+[09:49:10] Lan: Em thấy task "Restore DB" đã xong chiều hôm qua. Hùng confirm?
+[09:49:22] Hùng: Đã xong, em restore snapshot lúc 15h. DB sandbox hoạt động bình thường.
+[09:49:34] Anh Tuấn: Vậy task đó hoàn thành. Còn ticket lỗi login, Minh viết chưa?
+[09:49:46] Minh: Em viết xong rồi, assign cho BA. Nhưng BA bảo không có priority.
+[09:49:58] Anh Tuấn: Tạm thời để đó. Có ai cần thảo luận thêm về release?
+[09:50:10] Hùng: Em không có.
+[09:50:18] Lan: Em chỉ muốn nhắc: tài liệu test deadline 28/2, cần review từ Hùng trước 27/2.
+[09:50:30] Anh Tuấn: Hùng sắp xếp nhé. Vậy nội dung hôm nay tàm tạm. Còn vấn đề gì không?
+[09:50:42] Minh: Em có một lo ngại: deadline monitoring 28/2 và tài liệu test 28/2 có thể chồng chéo nhân lực review. Nhưng mà thôi.
+[09:50:54] Anh Tuấn: Hùng sẽ review tài liệu test trước, sau đó làm monitoring. Ưu tiên tài liệu.
+[09:51:06] Hùng: Ok, em sẽ review tài liệu test vào 26/2 để Lan kịp sửa.
+[09:51:18] Lan: Cảm ơn Hùng.
+[09:51:28] Anh Tuấn: Phần còn lại họp sau. Kết thúc P04.
+[09:51:35] Anh Tuấn: Tiếp tục nào. Hôm nay còn một số việc cần chốt trước khi kết thúc. Đầu tiên, về release 1/3, tôi muốn kiểm tra lại tiến độ tất cả task.
+[09:51:50] Hùng: Em đang tổng hợp. Task tài liệu triển khai hệ thống của em đã viết được 60%, còn phần security checklist chưa có.
+[09:52:04] Anh Tuấn: Checklist security tôi đã nhận từ team security hôm qua, sẽ gửi em sau meeting. Em có thể hoàn thành trước 25/2 chứ?
+[09:52:18] Hùng: Nếu có checklist thì em nghĩ kịp. Nhưng em cũng cần review phần kiến trúc từ Minh.
+[09:52:30] Minh: Em đã gửi file draw.io rồi mà. Hay em gửi lại vào chat?
+[09:52:42] Hùng: Em nhận được rồi, chỉ chưa mở. Để em check sau. Còn task kiểm tra config sandbox, em và Minh đã làm xong chưa?
+[09:52:54] Minh: Bọn em test qua loa, xác nhận config đúng. Nhưng chưa chạy full scenario. Deadline 27/2, còn thời gian.
+[09:53:06] Anh Tuấn: Vậy task đó vẫn đang tiến hành. Có ai thấy rủi ro gì không?
+[09:53:18] Lan: Em thấy cần chú ý phần database connection pool. Hôm qua em chạy thử load nhẹ thấy có warning timeout.
+[09:53:30] Hùng: Cảm ơn Lan, em sẽ add config tăng pool size vào tài liệu. Có thể cần fix cả code.
+[09:53:42] Anh Tuấn: Đó là technical debt. Nhưng trước mắt, task kiểm tra config sandbox vẫn giữ deadline 27/2.
+[09:53:54] Minh: Vâng. Còn task monitoring alert, Hùng đã bắt đầu chưa?
+[09:54:06] Hùng: Em mới setup script health check cơ bản, chưa tích hợp Slack. Em dự kiến làm trong tuần này.
+[09:54:18] Anh Tuấn: Được, deadline 28/2. Có cần hỗ trợ gì không?
+[09:54:30] Hùng: Em cần Minh cung cấp danh sách endpoint chi tiết. Minh hứa gửi mà chưa thấy.
+[09:54:42] Minh: À, em xin lỗi. Em gửi ngay bây giờ. Có 6 endpoint, bao gồm cả health check riêng.
+[09:54:54] Hùng: Ok. Còn task tài liệu test của Lan tiến độ sao?
+[09:55:06] Lan: Em viết gần xong, khoảng 85%. Còn phần staging config em để placeholder. Deadline 27/2 em nghĩ kịp.
+[09:55:18] Anh Tuấn: Tốt. Nhắc lại: task tài liệu triển khai hệ thống (Hùng) deadline 25/2; task tài liệu test (Lan) deadline 27/2; task kiểm tra config (Hùng, Minh) deadline 27/2; task monitoring (Hùng) deadline 28/2.
+[09:55:34] Hùng: Vậy có tổng cộng 4 task active. Còn ticket lỗi login của Minh thì sao?
+[09:55:46] Minh: Em đã viết ticket và assign cho BA, nhưng BA bảo backlog không có priority. Vẫn chưa giải quyết.
+[09:55:58] Anh Tuấn: Việc đó để tôi đẩy lên sau. Có thể sau release sẽ xử lý. Hiện tại nó là unresolved item.
+[09:56:10] Lan: Em có một concern về task monitoring. Nếu deadline 28/2 sát release, liệu có thời gian test monitor không?
+[09:56:22] Hùng: Em sẽ setup trước và test song song. Không cần nhiều thời gian.
+[09:56:34] Minh: Em cũng lo về overlap: 27/2 có hai task cùng deadline, 28/2 một task. Nhưng em nghĩ mỗi người một việc.
+[09:56:46] Anh Tuấn: Đúng vậy. Nếu có vấn đề, các em báo sớm. Bây giờ tôi muốn check lại các task đã hủy: clean data và bộ dữ liệu chuẩn. Có ai còn băn khoăn không?
+[09:57:00] Hùng: Không. Dữ liệu sandbox hiện tại ổn.
+[09:57:10] Lan: Em cũng thấy ổn, không cần làm lại.
+[09:57:22] Anh Tuấn: Vậy chốt. Một điều nữa: hồi đầu meeting có task restore DB của Hùng, đã hoàn thành. Ghi nhận.
+[09:57:34] Hùng: Vâng, xong.
+[09:57:44] Minh: Ngoài ra, em muốn hỏi về việc viết script warning Slack. Có nên giao task riêng không?
+[09:57:56] Anh Tuấn: Nó nằm trong monitoring alert rồi. Hùng tự quyết.
+[09:58:06] Hùng: Em sẽ làm, không cần task mới.
+[09:58:16] Anh Tuấn: Tổng kết cuối cùng: tiến độ chung ổn, nhưng cần bám sát deadline. Ai có vấn đề gì nữa không?
+[09:58:28] Lan: Em có một thắc mắc về phần recap tài liệu test. Em sợ khi viết lại các bước có thể trùng với tài liệu hệ thống. Nhưng em đã cố tách biệt.
+[09:58:40] Hùng: Đừng lo, hai tài liệu khác phạm vi. Nếu có overlap, em sẽ comment khi review.
+[09:58:52] Anh Tuấn: Vậy không có duplicate. Mọi người cần nhắc lại trạng thái cuối không?
+[09:59:04] Minh: Em nghĩ nên recap nhanh để tránh hiểu nhầm.
+[09:59:14] Anh Tuấn: Được. Tôi điểm qua: - Tài liệu triển khai hệ thống: Hùng, deadline 25/2. - Tài liệu triển khai test: Lan, deadline 27/2. - Kiểm tra config sandbox: Hùng & Minh, deadline 27/2. - Monitoring alert: Hùng, deadline 28/2. - Ticket lỗi login: chưa priority. - Các task khác hủy hoặc hoàn thành. Còn thiếu gì không?
+[09:59:30] Hùng: Đầy đủ.
+[09:59:38] Lan: Em đồng ý.
+[09:59:46] Minh: Ok.
+[09:59:54] Anh Tuấn: Vậy họp hôm nay đến đây kết thúc. Cảm ơn mọi người. Hẹn gặp lại ở meeting review vào cuối tuần sau.
+[10:00:00] Hùng: Cảm ơn anh.
+[10:00:04] Lan: Bye.
+[10:00:08] Minh: Tạm biệt.

@@ -1,0 +1,100 @@
+MEETING_ID: W4-LONG-C5-N3-SW-STATE-005
+PART: P05/5
+
+T000221 [10:17:10] Anh Minh: Chúng ta còn một số việc cần hoàn tất. Trước khi kết thúc, tôi muốn điểm qua toàn bộ trạng thái và xử lý các vấn đề còn tồn đọng. Chị Lan, bắt đầu từ task A nhé.
+
+T000222 [10:17:35] Chị Lan: Vâng. Task A - môi trường test staging. Em đã tiếp nhận từ anh Tuấn. Hiện tại, em đã liên hệ với bạn Khoa để hỗ trợ lắp đặt linh kiện. Dự kiến nâng cấp SSD và RAM sẽ hoàn thành vào ngày 24/2, sau đó chạy thử 2 ngày, đảm bảo deadline 26/2.
+
+T000223 [10:18:00] Anh Minh: Tốt. Nếu có trục trặc, em báo ngay. Còn vấn đề backup dữ liệu? Em đã viết kế hoạch chưa?
+
+T000224 [10:18:20] Chị Lan: Em đang viết. Sẽ gửi anh trong ngày mai. Kế hoạch bao gồm backup toàn bộ config và dữ liệu test trước khi can thiệp phần cứng.
+
+T000225 [10:18:40] Anh Minh: Được. Task B - tài liệu triển khai. Chị Hà, tiến độ thế nào?
+
+T000226 [10:18:58] Chị Hà: Em đã viết được 70% nội dung. Phần còn lại là hướng dẫn cấu hình log và monitoring, chờ anh Tuấn cung cấp thông số. Em đã gửi draft sơ bộ cho anh Tuấn vào thứ Sáu để review.
+
+T000227 [10:19:20] Anh Tuấn: Anh đã xem qua, phần tổng quan ổn. Cần bổ sung thêm mục khắc phục sự cố thường gặp. Em sẽ góp ý chi tiết bằng email.
+
+T000228 [10:19:40] Chị Hà: Vâng. Em sẽ cập nhật và hoàn thiện trước 5/3.
+
+T000229 [10:20:00] Anh Minh: Task C - script lock. Anh Tuấn, hôm nay là ngày em hẹn hoàn thành script. Thực tế thế nào?
+
+T000230 [10:20:20] Anh Tuấn: Script đã viết xong. Em đã test sơ bộ trên sandbox, thấy hoạt động tốt. Chức năng lock tài khoản sau 5 lần sai mật khẩu, hiển thị thông báo lỗi rõ ràng, và tự động unlock sau 30 phút. Phần monitoring em cũng tích hợp được metric vào Prometheus.
+
+T000231 [10:20:50] Chị Lan: Vậy khi nào em chuyển giao để bên em test?
+
+T000232 [10:21:05] Anh Tuấn: Chiều nay em sẽ deploy lên sandbox riêng và gửi link cho chị Lan. Chị có thể test vào sáng mai. Em đã viết tài liệu hướng dẫn test kèm theo.
+
+T000233 [10:21:25] Chị Lan: Tốt. Em sẽ test vào sáng mai và báo kết quả trong ngày.
+
+T000234 [10:21:45] Anh Minh: Vậy deadline monitoring 22/2 vẫn giữ chứ? Em có kịp không?
+
+T000235 [10:22:00] Anh Tuấn: Dạ, em sẽ hoàn thiện phần dashboard Grafana trong ngày mai, kịp deadline.
+
+T000236 [10:22:18] Chị Hà: Em xin phép hỏi, sau khi monitoring xong, em có thể viết tài liệu hướng dẫn sử dụng cho team vận hành. Việc này có thể gộp vào task B hay tạo task riêng?
+
+T000237 [10:22:40] Anh Minh: Gộp vào task B, vì tài liệu đã có phần monitoring. Em nhớ cập nhật deadline 5/3.
+
+T000238 [10:22:58] Chị Hà: Vâng. Vậy em sẽ bổ sung sau khi nhận thông số từ anh Tuấn.
+
+T000239 [10:23:15] Anh Tuấn: Anh sẽ gửi thông số chi tiết vào cuối ngày mai.
+
+T000240 [10:23:32] Anh Minh: Về vấn đề rollback plan, hồi nãy chúng ta để ngỏ. Tôi nghĩ cần có người phụ trách. Chị Lan, em có thể viết một bản rollback plan sơ bộ cho release không? Không cần chi tiết, chỉ nêu các bước chính.
+
+T000241 [10:24:00] Chị Lan: Em có thể viết, nhưng cần anh Tuấn cung cấp thông tin về cấu hình hệ thống và các module liên quan. Em sẽ làm và gửi anh Minh trong vòng 3 ngày, tức trước ngày 22/2.
+
+T000242 [10:24:25] Anh Minh: Được. Vậy đây sẽ là task E - "Viết rollback plan cho release". Giao cho chị Lan, deadline 22/2. Mọi người có ý kiến gì không?
+
+T000243 [10:24:45] Anh Tuấn: Em chỉ lưu ý, rollback plan cần được review bởi em hoặc anh Khoa về mặt kỹ thuật.
+
+T000244 [10:25:00] Chị Lan: Em sẽ gửi bản nháp cho anh Tuấn review trước khi nộp.
+
+T000245 [10:25:18] Anh Minh: Tốt. Như vậy chúng ta có tổng cộng 4 task chính: A, B, C, E. Task D đã hủy.
+
+T000246 [10:25:35] Chị Hà: Em thấy task E có deadline 22/2, trùng với deadline monitoring của task C. Liệu có quá tải cho chị Lan không?
+
+T000247 [10:25:55] Chị Lan: Không sao, vì rollback plan chỉ là bản draft, không quá nặng. Em có thể làm song song.
+
+T000248 [10:26:10] Anh Minh: Vậy ổn. Tiếp theo, tôi muốn nhắc về vấn đề chưa giải quyết. Đó là chuyện tạo dữ liệu test đã hủy, nhưng bộ phận QA vẫn cần dữ liệu để test. Anh Tuấn, em có thể dùng script lock để sinh dữ liệu tạm thời cho họ không?
+
+T000249 [10:26:40] Anh Tuấn: Script hiện tại chỉ sinh dữ liệu cho module đăng nhập. Nếu QA cần dữ liệu cho các module khác, em phải viết thêm. Nhưng hiện tại em chưa có thời gian.
+
+T000250 [10:27:00] Anh Minh: Vậy tạm thời không giải quyết. Đây sẽ là unresolved item. QA sẽ phải tự tạo dữ liệu thủ công hoặc chờ task D cũ. Chúng ta ghi nhận và để sau.
+
+T000251 [10:27:20] Chị Lan: Em thấy nên thông báo cho QA biết để họ chủ động.
+
+T000252 [10:27:35] Anh Minh: Chị Lan, em làm đầu mối liên lạc. Vậy giờ tôi điểm lại toàn bộ trạng thái cuối.
+
+T000253 [10:27:55] Anh Minh: Task A: Hoàn thiện môi trường test staging – owner chị Lan, deadline 26/2, đang triển khai nâng cấp phần cứng. Task B: Hoàn thiện tài liệu hướng dẫn triển khai staging – owner chị Hà, deadline 5/3, đã viết 70%, chờ review và bổ sung monitoring. Task C: Xử lý lỗi lock tài khoản staging – owner anh Tuấn, script đã xong, test vào mai, monitoring deadline 22/2. Task E: Viết rollback plan – owner chị Lan, deadline 22/2.
+
+T000254 [10:28:30] Chị Hà: Anh Minh, em muốn confirm lại task B có bao gồm cả tài liệu monitoring không? Hay tách riêng?
+
+T000255 [10:28:48] Anh Minh: Gộp chung. Em nhớ cập nhật trong tài liệu triển khai.
+
+T000256 [10:29:00] Chị Hà: Rõ.
+
+T000257 [10:29:12] Anh Tuấn: Em có một băn khoăn về task C. Phần code script, ai sẽ review? Em đã gửi cho anh Khoa nhưng chưa có phản hồi.
+
+T000258 [10:29:30] Anh Minh: Vẫn unresolved. Em tiếp tục theo dõi, nếu không có review thì em tự chịu trách nhiệm. Nhưng em nên test kỹ.
+
+T000259 [10:29:48] Anh Tuấn: Vâng.
+
+T000260 [10:30:00] Chị Lan: Em xin hỏi về release date. Nếu mọi thứ ổn, chúng ta có thể release vào 1/3 không?
+
+T000261 [10:30:18] Anh Minh: Dự kiến vậy, nhưng cần kiểm tra sau khi có kết quả test task C và task A. Chúng ta sẽ quyết định trong họp thứ Hai.
+
+T000262 [10:30:35] Chị Hà: Vậy em sẽ chuẩn bị tài liệu kịp trước release.
+
+T000263 [10:30:50] Anh Minh: Còn vấn đề nào khác cần bàn? Tôi thấy mọi việc đã rõ. Chúng ta có một unresolved item về dữ liệu test cho QA, và reviewer cho task C chưa chốt.
+
+T000264 [10:31:10] Chị Lan: Em có một đề xuất về việc họp ngắn vào thứ Hai để kiểm tra tiến độ. Em sẽ gửi lịch.
+
+T000265 [10:31:28] Anh Minh: Đồng ý. Cảm ơn mọi người vì buổi làm việc hiệu quả. Tôi xin kết thúc cuộc họp tại đây.
+
+T000266 [10:31:45] Anh Tuấn: Cảm ơn anh.
+
+T000267 [10:31:55] Chị Hà: Chúc mọi người cuối tuần vui vẻ.
+
+T000268 [10:32:05] Chị Lan: Cảm ơn mọi người.
+
+--- END OF PART P05 ---

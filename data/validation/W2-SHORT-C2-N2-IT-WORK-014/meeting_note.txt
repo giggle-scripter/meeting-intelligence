@@ -1,0 +1,9 @@
+note nhanh
+chủ đề: Trao đổi kế hoạch tích hợp
+kw: api / tiet / diem / chuyen / leader / dieu / phoi
+- Có một số điểm cần làm rõ về API
+* Tôi sẽ nói chuyện với leader để điều phối
+- Tôi sẽ gửi email xác nhận với timeline chi tiết
+1) Tôi sẽ chuẩn bị test plan trong tuần này
+- Tôi sẽ bắt đầu thiết kế API từ hôm nay để tiết kiệm thời gian
+* Từ hôm nay 8/2, tính cả thứ 7 không? ? chưa chốt

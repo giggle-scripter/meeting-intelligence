@@ -1,0 +1,109 @@
+{
+  "mode": "job_api",
+  "endpoint": "http://127.0.0.1:8010/api/v1/meetings/jobs/process-file",
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 1,
+    "unreviewed_ground_truth_count": 0,
+    "unreviewed_case_ids": [],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 1,
+    "passed_case_count": 1,
+    "failed_case_count": 0,
+    "case_pass_rate": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0
+  },
+  "reviewed_metrics": {
+    "case_count": 1,
+    "passed_case_count": 1,
+    "failed_case_count": 0,
+    "case_pass_rate": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0
+  },
+  "exploratory_metrics": {
+    "case_count": 0,
+    "passed_case_count": 0,
+    "failed_case_count": 0,
+    "case_pass_rate": 0.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 1,
+    "rule_event_count": 4,
+    "ai_event_count": 2,
+    "ai_window_count": 1,
+    "ai_context_clause_count": 28,
+    "unresolved_window_count": 0,
+    "weighted_ai_call_rate": 1.0,
+    "ai_clause_coverage": 0.7567567567567568
+  },
+  "fallback_metrics": {
+    "rule_only": 0,
+    "ai_fallback_not_configured": 0,
+    "ai_fallback_resolved": 1,
+    "ai_fallback_unresolved": 0,
+    "ai_fallback_failed": 0
+  },
+  "job_execution": [
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-002",
+      "job_id": "job-39b9e3f5a9e74af993c0e90dfce75755",
+      "status": "succeeded",
+      "poll_count": 13,
+      "elapsed_seconds": 26.54
+    }
+  ],
+  "execution_errors": [],
+  "case_execution": [
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-002",
+      "route": "ai_fallback_resolved",
+      "ai_window_count": 1,
+      "ai_provider_call_count": 1,
+      "ai_event_count": 2,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 0
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-002",
+      "passed": true,
+      "expected_task_count": 2,
+      "actual_task_count": 2,
+      "matched_task_count": 2,
+      "missing_tasks": [],
+      "unexpected_tasks": [],
+      "field_errors": [],
+      "checked_field_count": 12,
+      "correct_field_count": 12
+    }
+  ],
+  "case_diagnostics": {
+    "W1-SHORT-C1-N0-IT-DASG-ABS-002": {
+      "caption_count": 30,
+      "deduplicated_caption_count": 30,
+      "turn_count": 30,
+      "sentence_count": 36,
+      "clause_count": 37,
+      "candidate_window_count": 1,
+      "rule_event_count": 4,
+      "ai_event_count": 2,
+      "ai_window_count": 1,
+      "ai_provider_call_count": 1,
+      "ai_context_clause_count": 28,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 0,
+      "ai_call_rate": 1.0,
+      "ai_clause_coverage": 0.7567567567567568
+    }
+  }
+}

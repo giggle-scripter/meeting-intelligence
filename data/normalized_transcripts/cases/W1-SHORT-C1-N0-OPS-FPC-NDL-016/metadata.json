@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-016",
+  "meeting_id": "W1-SHORT-C1-N0-OPS-FPC-NDL-016",
+  "meeting_title": "Chuẩn bị bản demo",
+  "meeting_date": "2026-01-31",
+  "wave": 1,
+  "wave_name": "wave_1_baseline",
+  "labels": [
+    "first_person_commitment",
+    "no_deadline",
+    "mild_noise"
+  ],
+  "objective": "Người nói tự nhận task nhưng chưa chốt deadline.",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_1_baseline/W1-SHORT-C1-N0-OPS-FPC-NDL-016/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-pro"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 687,
+    "turn_count": 30
+  },
+  "ground_truth": {
+    "available": false,
+    "expected_output_file": ""
+  }
+}

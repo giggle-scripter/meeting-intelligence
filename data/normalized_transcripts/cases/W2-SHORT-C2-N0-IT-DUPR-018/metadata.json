@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W2-SHORT-C2-N0-IT-DUPR-018",
+  "meeting_id": "W2-SHORT-C2-N0-IT-DUPR-018",
+  "meeting_title": "Trao đổi kế hoạch tích hợp",
+  "meeting_date": "2026-02-12",
+  "wave": 2,
+  "wave_name": "wave_2_feature_isolation",
+  "labels": [
+    "task_mentioned_across_turns",
+    "recap_duplicate_risk"
+  ],
+  "objective": "{\"name\": \"repeated mention without duplicate\", \"code\": \"DUPR\", \"labels\": \"task_mentioned_across_turns,recap_duplicate_risk\", \"requirements\": \"Một task được nhắc lại ở nhiều chỗ, bao gồm recap, nhưng không tạo action item mới.\"}",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_2_feature_isolation/W2-SHORT-C2-N0-IT-DUPR-018/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-pro"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 582,
+    "turn_count": 28
+  },
+  "ground_truth": {
+    "available": false,
+    "expected_output_file": ""
+  }
+}

@@ -1,0 +1,9 @@
+minutes nháp
+chủ đề: Rà soát công việc sprint
+kw: dashboard / trong / proj / soat / cac / sprint / nhe
+- Hôm nay mình rà soát các task trong sprint
+* Task này vẫn cần hoàn thành trước 16/03, quan trọng đó
+- Mình cũng đang có task PROJ-105 dở dang
+1) Tiếp theo, task PROJ-102 "Tối ưu tốc độ load trang dashboard" ban đầu assign cho Linh
+- Làm sau khi có giao diện mới sẽ tốt hơn
+* Với lại họ sắp thay đổi giao diện dashboard, nên tối ưu lúc này có thể xung đột với thiết kế mới ? chưa chốt

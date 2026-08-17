@@ -1,0 +1,116 @@
+MEETING_ID: W5-XL-C5-N3-PROD-STRESS-003
+PART: P07/10
+
+T000526 [01:15:05] Thảo: Chúng ta bắt đầu part 7. Hôm nay em muốn thảo luận về việc monitoring staging và support cho team dev.
+
+T000527 [01:15:13] Hùng: Em có feedback về performance staging. Dù đã restart container, nhưng vẫn có latency khi gọi endpoint.
+
+T000528 [01:15:21] Minh: Latency đó em cũng thấy. Có thể do mock server chưa tối ưu. Em sẽ kiểm tra log.
+
+T000529 [01:15:29] Anh: Nhắc đến monitoring, hồi part 1 chúng ta có thống nhất về mock core, giờ tiến độ thế nào rồi?
+
+T000530 [01:15:37] Thảo: Đã hủy task test script API và chuyển integration test cho Hùng. Bây giờ mock core của Minh dự kiến 03/03. Anh, cần follow.
+
+T000531 [01:15:46] Minh: Em đang làm priority field, cơ bản xong 80%. Còn chờ Linh filter.
+
+T000532 [01:15:53] Linh: Filter của em đã chạy thử, nhưng có bug nhỏ về pagination. Sẽ fix trong chiều nay.
+
+T000533 [01:16:00] Thảo: Tốt. Vậy deadline cho filter của Linh vẫn 03/03, không đổi.
+
+T000534 [01:16:06] Hùng: Em cần hỏi về vụ support từ DevOps. Hồi part 3 đã handoff firewall rules cho em. Bây giờ rules chưa verify, ai follow?
+
+T000535 [01:16:15] Thảo: Hùng tiếp tục, vì em đã nhận. Cần verify với Phong trước 28/02.
+
+T000536 [01:16:22] Hùng: Vâng, em sẽ làm.
+
+T000537 [01:16:26] Anh: Còn vụ monitor log? Ai là người check daily? Em thấy không ai được assign.
+
+T000538 [01:16:34] Thảo: Đó là long-distance reference từ part 1? Lúc đó mình giao Minh mock, nhưng không có task monitor riêng. Bây giờ cần assign.
+
+T000539 [01:16:43] Linh: Em có thể check log hàng ngày đến khi demo.
+
+T000540 [01:16:49] Thảo: Vậy giao Linh. Deadline bắt đầu từ 28/02, kết thúc 05/03.
+
+T000541 [01:16:56] Linh: Vâng.
+
+T000542 [01:17:00] Minh: Em có một issue: deadlinemock core và priority của em là 03/03, trong khi đó deadline filter của Linh cũng 03/03. Gần nhau, nhưng không conflict.
+
+T000543 [01:17:11] Thảo: Đúng, ta có thể integration cùng ngày. Chú ý phối hợp.
+
+T000544 [01:17:17] Hùng: Về integration test suite, em đã bắt đầu viết manual cases. Tuy nhiên, cần spec từ Minh về priority.
+
+T000545 [01:17:26] Minh: Em gửi spec priority vào cuối ngày.
+
+T000546 [01:17:31] Thảo: Vậy Linh, em đã nhận spec filter chưa? Hay vẫn dựa trên doc cũ?
+
+T000547 [01:17:38] Linh: Em dựa trên doc từ đối tác và update từ Minh hồi part 5. Đã có.
+
+T000548 [01:17:45] Anh: Em lo rằng long-distance dependency từ part 3 về data mẫu của Huy vẫn chưa resolved. Huy chưa adjust theo schema mới.
+
+T000549 [01:17:55] Thảo: Đúng, Huy vắng. Em sẽ email thúc. Nhưng không tạo task mới, chỉ nhắc.
+
+T000550 [01:18:01] Minh: Em đã comment vào data, chờ Huy update.
+
+T000551 [01:18:06] Hùng: Em thấy có repeated mention về tool test script. Chúng ta có giải quyết không?
+
+T000552 [01:18:14] Thảo: Không, để họp 02/03.
+
+T000553 [01:18:19] Anh: Vậy tạm ổn. Còn vụ support từ SRE? Hùng gọi Phong chưa?
+
+T000554 [01:18:26] Hùng: Gọi rồi, họ hẹn 28/02. Nhưng chưa confirm.
+
+T000555 [01:18:32] Thảo: Theo dõi.
+
+T000556 [01:18:36] Linh: Em xin phép đi verify firewall rules với Hùng.
+
+T000557 [01:18:42] Hùng: OK, em sẽ làm cùng.
+
+T000558 [01:18:47] Thảo: Vậy có tiến triển. Nhưng cần lưu ý: deadline gần nhau không ảnh hưởng.
+
+T000559 [01:18:54] Minh: Em có một thắc mắc: task monitoring log của Linh, có cần báo cáo hàng ngày không?
+
+T000560 [01:19:01] Thảo: Có, Linh gửi brief vào group cuối ngày.
+
+T000561 [01:19:07] Linh: Vâng.
+
+T000562 [01:19:11] Anh: Vậy chúng ta đang có các deadline chính: 28/02 (firewall verify, check data), 02/03 (họp tool), 03/03 (mock, filter), 04/03 (UI prototype), 05/03 (demo). Khá khít.
+
+T000563 [01:19:23] Thảo: Đúng, mọi người cố gắng.
+
+T000564 [01:19:28] Hùng: Em có noise về mạng, mọi người nghe rõ không?
+
+T000565 [01:19:34] Thảo: Có, nhưng tạm ổn. Tiếp tục.
+
+T000566 [01:19:39] Minh: Em muốn hỏi: priority field có cần chỉnh UI prototype? Nếu có, Linh cần updated spec.
+
+T000567 [01:19:48] Linh: Em cần spec mới, nếu không thì prototype hiện tại không có priority.
+
+T000568 [01:19:55] Thảo: Minh gửi spec priority cho Linh, để kịp update UI trước 04/03.
+
+T000569 [01:20:01] Minh: Vâng, em gửi trong 2 tiếng.
+
+T000570 [01:20:06] Anh: Vậy long-distance dependency từ spec priority tới UI đã được nối.
+
+T000571 [01:20:13] Hùng: Em có câu hỏi về integration test: khi nào có thể bắt đầu test toàn bộ?
+
+T000572 [01:20:20] Thảo: Sau 03/03, khi mock hoàn chỉnh và filter ổn.
+
+T000573 [01:20:26] Linh: Em sẽ update filter xong trước 03/03.
+
+T000574 [01:20:31] Minh: Em cũng vậy.
+
+T000575 [01:20:35] Thảo: Vậy clear.
+
+T000576 [01:20:39] Anh: Còn unresolved duy nhất là tool test script. Hẹn 02/03.
+
+T000577 [01:20:45] Hùng: Vâng.
+
+T000578 [01:20:49] Thảo: Kết thúc part 7. Mọi người ghi nhớ deadline 28/02, 02/03, 03/03, 04/03.
+
+T000579 [01:20:56] Minh: OK.
+
+T000580 [01:20:59] Linh: Tạm biệt.
+
+T000581 [01:21:03] Hùng: Bye.
+
+--- END OF PART P07 ---

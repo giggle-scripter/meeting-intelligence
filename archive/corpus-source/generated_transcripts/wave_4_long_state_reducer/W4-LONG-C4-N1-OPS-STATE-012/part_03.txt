@@ -1,0 +1,102 @@
+MEETING_ID: W4-LONG-C4-N1-OPS-STATE-012
+PART: P03/5
+
+T000132 [09:55:02] Linh: Chúng ta tiếp tục. Phần trước em có nói về tài liệu triển khai, nhưng chưa đi sâu. Em muốn quay lại vấn đề đó để xem tiến độ.
+
+T000133 [09:55:30] Trang: Dạ, task D của em là viết tài liệu triển khai. Em đã bắt đầu outline, nhưng cần thông tin từ task A và B mới viết được phần chi tiết.
+
+T000134 [09:56:00] Huy: À, về task B “Thiết lập môi trường test (hướng dẫn)”, em thấy Trang có vẻ bận nhiều. Hay em có thể hỗ trợ viết phần đó?
+
+T000135 [09:56:25] Linh: Ý hay. Trang, em có đồng ý chuyển task B cho Huy không? Vì Huy rành về kỹ thuật hơn.
+
+T000136 [09:56:50] Trang: Em đồng ý. Em có thể cung cấp outline cho Huy, nhưng mà deadline của task B vẫn chưa có. Vậy Huy sẽ là owner mới?
+
+T000137 [09:57:15] Huy: Được, em nhận task B. Nhưng mà em cũng đang có task C và F. Em có thể làm task B sau task F.
+
+T000138 [09:57:40] Linh: Tạm thời vậy. Vậy task B chính thức chuyển từ Trang sang Huy. Còn deadline của task B, em nghĩ nên đặt sau task A. Nhưng task A có deadline 28/02, vậy task B có deadline 05/03? Trang có ý kiến không?
+
+T000139 [09:58:05] Trang: 05/03 hợp lý, vì em sẽ có thời gian hoàn thiện task D dựa trên task B.
+
+T000140 [09:58:30] Huy: Em ok, nhưng mà task A mà chậm thì em cũng bị ảnh hưởng.
+
+T000141 [09:58:55] Linh: Em hiểu. Đổi lại, em muốn thay đổi deadline của task A. Lúc đầu đặt 28/02, nhưng thấy IT có thể chậm. Hay dời sang 02/03 để an toàn?
+
+T000142 [09:59:20] Minh: Em đồng ý, vì em mới gửi email mà chưa có phản hồi. 02/03 có vẻ khả thi hơn.
+
+T000143 [09:59:45] Huy: Vậy deadline mới của task A là 02/03. Và task B deadline 05/03.
+
+T000144 [10:00:10] Linh: Chốt. Nhưng mà cần lưu ý là task A và task B có quan hệ phụ thuộc. Minh, em có cần hỗ trợ gì từ Huy không?
+
+T000145 [10:00:35] Minh: Có thể, nếu em bí thì nhờ Huy. Nhưng mà em muốn tự làm.
+
+T000146 [10:01:00] Trang: Về task D, deadline của em vẫn chưa có. Em có thể đặt dựa trên task B, ví dụ 08/03?
+
+T000147 [10:01:25] Linh: 08/03 có vẻ ổn, nhưng mà cần review. Vậy tạm thời task D deadline 08/03. Huy, em vừa nhận task B, vậy task C của em vẫn giữ nguyên?
+
+T000148 [10:01:50] Huy: Vâng, task C “Review checklist triển khai với anh An” em vẫn phụ trách, không deadline.
+
+T000149 [10:02:15] Linh: Tốt. Em muốn nhắc lại, khi chuyển task B, cần cập nhật trong ghi chú. Ai sẽ làm?
+
+T000150 [10:02:40] Trang: Em sẽ cập nhật tài liệu meeting notes.
+
+T000151 [10:03:00] Minh: Em thấy có một vấn đề: task A và E của em đều có deadline gần nhau: 02/03 và 03/03. Liệu em có quá tải không?
+
+T000152 [10:03:25] Huy: Nếu cần, em có thể hỗ trợ task E một phần, nhưng em cũng bận với task B và F.
+
+T000153 [10:03:50] Linh: Vậy em giao Huy làm backup cho task E, nhưng chưa chính thức. Nếu Minh cần thì báo.
+
+T000154 [10:04:15] Trang: Em có thể giúp viết test case cho task E, nhưng đó là việc của task F.
+
+T000155 [10:04:40] Linh: Đúng, task F là dữ liệu test, task E là sửa lỗi. Hai cái khác nhau.
+
+T000156 [10:05:00] Huy: Em sẽ làm task F sau khi có thông tin từ Minh về lỗi đăng nhập.
+
+T000157 [10:05:25] Minh: Em sẽ báo cáo sau khi kiểm tra log.
+
+T000158 [10:05:50] Linh: Ngoài ra, em thấy chúng ta có nhiều task rồi. Có cần sắp xếp ưu tiên không?
+
+T000159 [10:06:15] Huy: Task A và E là ưu tiên cao, vì ảnh hưởng tiến độ testing.
+
+T000160 [10:06:40] Trang: Task D và B cũng quan trọng, nhưng phụ thuộc.
+
+T000161 [10:07:00] Linh: Vậy ưu tiên: A và E, kế đến là B, D, F, C và G. Mọi người đồng ý?
+
+T000162 [10:07:25] Minh: Đồng ý.
+
+T000163 [10:07:45] Huy: Em đồng ý.
+
+T000164 [10:08:05] Trang: Em cũng ok.
+
+T000165 [10:08:25] Linh: Về negative context, em lo là nếu task A trễ, cả dây chuyền bị ảnh hưởng. Minh có kế hoạch dự phòng không?
+
+T000166 [10:08:50] Minh: Nếu IT không trả lời, em sẽ nhờ Huy liên hệ trực tiếp anh Dũng.
+
+T000167 [10:09:15] Huy: Em có số anh Dũng, có thể gọi.
+
+T000168 [10:09:35] Linh: Tốt. Còn về task E, nếu lỗi phức tạp, ai có thể support thêm?
+
+T000169 [10:10:00] Huy: Em có thể debug cùng Minh, nhưng cần thời gian.
+
+T000170 [10:10:20] Minh: Em sẽ cố gắng tự xử lý trước.
+
+T000171 [10:10:40] Linh: Vậy tạm thời ok. Còn gì muốn thảo luận thêm không?
+
+T000172 [10:11:00] Trang: Em muốn hỏi về tài liệu: có cần thêm phần hướng dẫn cài đặt cho từng hệ điều hành không?
+
+T000173 [10:11:25] Huy: Theo em, chỉ cần hướng dẫn cho Linux, vì server chạy Linux.
+
+T000174 [10:11:45] Minh: Đồng ý, không cần Windows.
+
+T000175 [10:12:05] Linh: Vậy Trang chỉ viết cho Linux thôi.
+
+T000176 [10:12:25] Huy: Em muốn nhắc lại về task C: em đã gửi checklist cho anh An, nhưng chưa nhận phản hồi. Có thể cần relance.
+
+T000177 [10:12:50] Linh: Em có thể nhắc anh An, nhưng để em làm.
+
+T000178 [10:13:10] Huy: Vậy nhờ chị.
+
+T000179 [10:13:30] Trang: Em cũng sắp xong outline cho task D, sẽ gửi mọi người review.
+
+T000180 [10:13:50] Linh: Tốt. Vậy chúng ta tạm kết thúc phần ba. Phần sau sẽ bàn về kế hoạch testing. Cảm ơn mọi người.
+
+--- END OF PART P03 ---

@@ -1,0 +1,9 @@
+minutes nháp
+chủ đề: Rà soát công việc sprint
+kw: dang / ket / thuc / integration / test / giao / hoan
+- Task X em đang làm dở, thực sự em bị kẹt phần integration test
+* Vậy mình cần giao task Y với dl trước thứ Ba tuần sau
+- vậy em sẽ hoàn thành code task Y trước thứ Hai tuần sau
+1) Vậy tổng kết: task X đang dở, sẽ xong hôm nay
+- Task W cancel
+* Trước hết, ai có update gì về task X không? ? chưa chốt

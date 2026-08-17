@@ -1,0 +1,106 @@
+MEETING_ID: W4-LONG-C5-N1-SW-STATE-009
+PART: P04/5
+
+T000169 [10:30:00] Minh: Chào mọi người, tiếp tục part 4 hôm nay. Chúng ta sẽ bàn về kế hoạch release và monitoring sau khi môi trường test ổn định. Hà, em có cập nhật gì về tiến độ môi trường test không?
+
+T000170 [10:30:35] Hà: Dạ, em đã test xong basic functionality trên staging, lỗi đăng nhập đã fix. Tuy nhiên, em vẫn chưa kiểm tra hết các flow liên quan đến payment vì thiếu dữ liệu.
+
+T000171 [10:31:05] Tuấn: Em đã tạo thêm dữ liệu payment mẫu, Hà có thể lấy từ database test. Em up lên server sáng nay.
+
+T000172 [10:31:30] Hà: Cảm ơn Tuấn. Vậy task môi trường test cơ bản đã gần xong, chỉ còn phần monitoring server. Em nghĩ cần một buổi test load để xem staging chịu được bao nhiêu request.
+
+T000173 [10:32:00] Minh: Đúng, monitoring rất quan trọng trước khi release. Chúng ta cần có công cụ đo lường. Lan, em có yêu cầu gì từ phía BA cho việc monitoring không?
+
+T000174 [10:32:35] Lan: Dạ, BA muốn có dashboard thể hiện số lượng user đăng nhập, lỗi xảy ra, và response time. Nhưng em chưa biết ai sẽ xây dựng công cụ này.
+
+T000175 [10:33:05] Tuấn: Cái đó thường do DevOps làm, nhưng hiện tại Phúc còn bận. Em có thể viết script đơn giản ghi log vào file, sau đó dùng Grafana nếu có server.
+
+T000176 [10:33:35] Hà: Không cần phức tạp, em có thể dùng ELK stack đã có sẵn trên staging. Chỉ cần Tuấn cấu hình log format là được.
+
+T000177 [10:34:00] Minh: Vậy ta thống nhất: sẽ dùng ELK stack cho monitoring. Tuấn, em phối hợp với Hà để cấu hình log. Task này có tên là "Cấu hình monitoring cho staging". Owner Tuấn, hỗ trợ Hà.
+
+T000178 [10:34:35] Hà: Em OK. Nhưng task này có deadline không? Hay làm xong khi nào môi trường test ổn định?
+
+T000179 [10:35:00] Minh: Deadline cho monitoring nên trước khi có buổi test load. Em đề xuất 03/03, tức là trước deadline môi trường test 05/03.
+
+T000180 [10:35:30] Tuấn: 03/03 hơi gấp, vì em còn phải viết tài liệu. Nhưng nếu Hà giúp thiết lập cấu hình cơ bản, em có thể hoàn thành đúng hạn.
+
+T000181 [10:36:00] Hà: Em có thể viết sẵn template log, Tuấn chỉ cần apply. Vậy 03/03 tạm ổn.
+
+T000182 [10:36:25] Minh: Vậy deadline 03/03 cho task monitoring. Nhưng tôi muốn nhắc lại: deadline 05/03 cho môi trường test vẫn giữ nguyên, và 14/03 cho tài liệu. Ê, à còn task "Tạo dataset test đăng nhập" – Tuấn, task đó thế nào rồi?
+
+T000183 [10:37:00] Tuấn: Em đã tạo dataset đó và tích hợp vào môi trường test. Nhưng em thấy task này thực sự không còn cần thiết vì dữ liệu đã được gộp vào task môi trường test. Có nên hủy task này không?
+
+T000184 [10:37:30] Hà: Em đồng ý. Dataset đăng nhập chỉ là một phần nhỏ, việc hủy giúp giảm số task lộn xộn.
+
+T000185 [10:37:55] Minh: Tốt. Vậy chính thức hủy task "Tạo dataset test đăng nhập". Lan, em ghi nhận vào minutes nhé. Chuyển qua vấn đề release: khi nào chúng ta có thể release phiên bản đầu tiên?
+
+T000186 [10:38:30] Lan: Theo kế hoạch BA, release đầu tiên dự kiến sau khi tài liệu hoàn thành, khoảng cuối tháng 3. Nhưng cần monitoring ổn định trước.
+
+T000187 [10:39:00] Hà: Em có một băn khoăn: release có cần sign-off từ DevOps không? Vì Phúc chưa tham gia meeting.
+
+T000188 [10:39:30] Tuấn: Cần, nhưng em có thể liên hệ Phúc qua email. Em sẽ gửi yêu cầu chính thức.
+
+T000189 [10:39:55] Minh: Vậy em gửi email và cc tôi. Chúng ta cần release plan chi tiết. Nhưng trước đó, monitoring phải sẵn sàng.
+
+T000190 [10:40:20] Lan: Về monitoring dashboard, BA có yêu cầu một số metric cụ thể: số lỗi 5xx, latency trung bình, và uptime. Liệu có khả thi không?
+
+T000191 [10:40:50] Tuấn: Có, ELK stack có thể capture các metric đó. Em sẽ cấu hình log thành JSON để dễ parse.
+
+T000192 [10:41:15] Hà: Nhưng cần cảnh báo khi latency vượt ngưỡng. Chúng ta có thể dùng alerting tool của Elastic không?
+
+T000193 [10:41:40] Tuấn: Có, nhưng cần license. Em nghĩ dùng script Python kết hợp email alert là đủ cho staging.
+
+T000194 [10:42:05] Minh: Đơn giản thôi, không cần quá hoành tráng cho staging. Production sau sẽ nâng cấp.
+
+T000195 [10:42:30] Hà: Vậy em sẽ viết script alert đơn giản, trigger khi 5xx > 5% trong 5 phút. Deadline 03/03 cho monitoring có áp dụng cho cả alert không?
+
+T000196 [10:43:00] Minh: Nên bao gồm. Tuấn, em có thể tích hợp alert vào cùng monitoring không?
+
+T000197 [10:43:25] Tuấn: Được, em sẽ làm alert cơ bản. Nhưng deadline 03/03 chỉ có 3 ngày nữa, em cần Hà hỗ trợ viết logic alert.
+
+T000198 [10:43:50] Hà: Em viết script alert trong vòng một buổi chiều, đưa cho Tuấn tích hợp.
+
+T000199 [10:44:10] Minh: Vậy task "Cấu hình monitoring cho staging" bao gồm cả alert, owner Tuấn, deadline 03/03.
+
+T000200 [10:44:35] Lan: Như vậy, task môi trường test deadline 05/03 vẫn là chính, monitoring 03/03 là phụ. Nhưng tôi thấy deadline 03/03 rất gần với 05/03, dễ gây nhầm lẫn.
+
+T000201 [10:45:00] Tuấn: Không nhầm lẫn đâu, vì monitoring là một phần của môi trường test, nhưng có deadline riêng.
+
+T000202 [10:45:25] Hà: Nếu monitoring trễ, có thể ảnh hưởng đến test load, nhưng deadline môi trường test 05/03 vẫn độc lập.
+
+T000203 [10:45:50] Minh: Đúng vậy. Vậy ta có hai deadline gần nhau: 03/03 cho monitoring và 05/03 cho môi trường test. Nhưng đây là các task khác nhau, không gây xung đột.
+
+T000204 [10:46:15] Lan: Về release, em có thông tin từ BA rằng ngày dự kiến release là 28/03. Nhưng cần phụ thuộc vào monitoring và tài liệu.
+
+T000205 [10:46:45] Tuấn: 28/03 có vẻ khả thi nếu mọi thứ đúng tiến độ.
+
+T000206 [10:47:10] Minh: Còn một vấn đề: ai sẽ là release manager? Có thể để tôi hoặc Hà, nhưng cần quyết định.
+
+T000207 [10:47:35] Hà: Em có thể làm nếu không quá nặng. Nhưng task monitoring 03/03 cần xong trước.
+
+T000208 [10:48:00] Minh: Tạm thời chưa chốt, để part sau bàn tiếp. Bây giờ, tôi muốn kết thúc vấn đề monitoring và hủy task cũ.
+
+T000209 [10:48:25] Tuấn: Em đã hủy task "Tạo dataset test đăng nhập" trong Jira rồi, nhưng cần xác nhận chính thức.
+
+T000210 [10:48:45] Minh: Hủy chính thức từ hôm nay. Lan cập nhật vào minutes.
+
+T000211 [10:49:05] Lan: Dạ, em đã ghi.
+
+T000212 [10:49:25] Hà: Em có thắc mắc: sau khi hủy task dataset, liệu có cần dataset cho các module khác không? Hay chỉ cần dataset trong môi trường test?
+
+T000213 [10:49:50] Tuấn: Dataset môi trường test đã cover đủ, không cần riêng.
+
+T000214 [10:50:10] Minh: OK. Vậy part 4 hôm nay còn vấn đề gì nữa không?
+
+T000215 [10:50:30] Lan: Về release plan, em có thể viết sơ bộ dựa trên các deadline đã có: monitoring 03/03, môi trường 05/03, tài liệu 14/03, release 28/03.
+
+T000216 [10:51:00] Minh: Tốt, em viết và gửi trước part 5.
+
+T000217 [10:51:20] Hà: Em không có thêm.
+
+T000218 [10:51:35] Tuấn: Em cũng không.
+
+T000219 [10:51:55] Minh: Vậy chúng ta tạm dừng ở đây. Hẹn gặp part cuối để bàn chi tiết release và phân công.
+
+--- END OF PART P04 ---

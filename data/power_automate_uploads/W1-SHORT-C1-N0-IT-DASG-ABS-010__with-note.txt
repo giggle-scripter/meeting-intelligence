@@ -1,0 +1,37 @@
+=== MEETING METADATA ===
+meeting_id: W1-SHORT-C1-N0-IT-DASG-ABS-010
+meeting_title: Theo dõi tiến độ tài liệu
+meeting_date: 2026-01-25
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+ghi vội
+chủ đề: Theo dõi tiến độ tài liệu
+kw: tai lieu / bao cao / kiem / tra / trong / chuyen / sang
+- anh sẽ kiểm tra trong hôm nay
+* chuyển sang module báo cáo
+- Em nhớ cập nhật thường xuyên
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:00:05] Trưởng nhóm: Chào mọi người, hôm nay mình họp nhanh để theo dõi tiến độ biên soạn tài liệu hướng dẫn cho phần mềm mới. Hùng, phần tài liệu module quản lý kho của anh thế nào rồi?
+[09:00:17] Hùng: Em đã hoàn thành và gửi qua email cho anh tối qua. Anh xem thử có cần chỉnh sửa gì không ạ.
+[09:00:26] Trưởng nhóm: Ok, anh sẽ kiểm tra trong hôm nay. Cảm ơn em. Giờ chuyển sang module báo cáo. Lan, em làm đến đâu rồi?
+[09:00:37] Lan: Dạ em đã xong bản nháp phần tổng quan và đang rà soát các số liệu minh họa. Chắc em cần thêm khoảng hai hôm để hoàn thiện.
+[09:00:48] Trưởng nhóm: Tốt. Vậy em cố gắng gửi bản hoàn chỉnh cho anh trước ngày 28/01/2026 nhé. Đây là mốc cuối để ghép tài liệu vào bộ cài đặt.
+[09:01:01] Lan: Vâng ạ, em sẽ gửi trước ngày 28/01. Em có cần đính kèm file dữ liệu mẫu không anh?
+[09:01:10] Trưởng nhóm: Có, em gửi luôn file Excel dùng cho các báo cáo mẫu. Nhớ xuất tài liệu thành PDF và chèn header, footer theo mẫu công ty nhé.
+[09:01:22] Lan: Dạ em sẽ làm đúng như vậy. Em cũng sẽ kiểm tra chính tả lần cuối trước khi gửi.
+[09:01:30] Trưởng nhóm: Ừ, kiểm tra kỹ chính tả nhé. À, Hùng này, trong tài liệu kho em có đề cập đến quy trình nhập mới không?
+[09:01:41] Hùng: Dạ có, em đã mô tả cả quy trình nhập hàng hóa mới và quy trình điều chuyển nội bộ. Nhưng em phân vân không biết có nên thêm sơ đồ luồng không?
+[09:01:55] Trưởng nhóm: Sơ đồ luồng sẽ trực quan hơn. Nếu có thời gian, em vẽ thêm vào. Nhưng không bắt buộc vì tài liệu đã khá ổn rồi.
+[09:02:05] Hùng: Vậy em sẽ cố gắng vẽ sơ đồ, nếu xong sớm em gửi lại anh bản cập nhật.
+[09:02:13] Trưởng nhóm: Ok. Minh, phần tài liệu module quản lý người dùng của em sao rồi?
+[09:02:21] Minh: Dạ em đang viết đến phần phân quyền. Em dự kiến hoàn thành trong tuần sau ạ.
+[09:02:29] Trưởng nhóm: Tuần sau là sát nút rồi đấy. Em nhớ cập nhật thường xuyên nhé. Cần hỗ trợ gì không?
+[09:02:37] Minh: Em có thắc mắc nhỏ về cách mô tả quy trình xét duyệt nhưng có thể trao đổi sau qua chat. Còn lại thì ổn ạ.
+[09:02:48] Trưởng nhóm: Ok, nhắn anh bất cứ lúc nào. Lan này, hôm qua QA báo lỗi font khi xuất PDF từ phần mềm, em có gặp vấn đề gì khi tạo tài liệu PDF không?
+[09:03:03] Lan: Dạ không ạ, lỗi đó ở phần mềm chứ không ảnh hưởng đến tài liệu. Em vẫn xuất PDF bình thường. QA đã báo dev xử lý rồi.
+[09:03:13] Trưởng nhóm: Tốt. Vậy mọi người còn vướng mắc gì nữa không?
+[09:03:18] Hùng: Em không có thêm gì.
+[09:03:21] Minh: Em cũng hết ạ.
+[09:03:23] Lan: Dạ em hết.
+[09:03:26] Trưởng nhóm: Ok, vậy hôm nay dừng ở đây. Lan nhớ gửi tài liệu trước 28/01, Minh tập trung xong tuần sau, Hùng gửi bản cập nhật nếu có sơ đồ. Cảm ơn cả nhóm.

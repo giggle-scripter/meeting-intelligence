@@ -1,0 +1,14 @@
+chốt sơ bộ
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / trien khai / kiem thu / monitoring / spec / cap
+- vậy task "Cập nhật kịch bản kiểm thử triển khai" có dl 20/02, assignee là chị Hoa, nhưng cần spec từ anh Minh
+* Task "Cập nhật tài liệu triển khai" anh Tuấn làm, không dl cứng, nhưng cần có draft để review
+- Tổng kết lại, hôm nay chúng ta có hai task chính: "Cập nhật tài liệu triển khai" do anh Tuấn, không dl cứng;
+1) Tổng kết: có task mới "Viết unit test authentication" anh Minh tự quản, không dl
+- Vậy chị sẽ reassign task "Cập nhật tài liệu triển khai" từ anh Tuấn sang anh Minh
+* Nhưng trước hết, chị muốn confirm lại trạng thái các task: - Task 1: "Cập nhật tài liệu triển khai" – owner mới là anh Minh, dl 26/02
+- Vậy chính thức hủy task "Viết unit test authentication"
+1) Anh Minh, em không cần làm nữa
+- Vậy task "Tạo dữ liệu test" trở thành task chính thức, dl 19/02, assignee anh Tuấn
+* Vậy task "Tạo dữ liệu test" của anh Tuấn dl 19/02 vẫn ổn
+- Vậy task monitoring vẫn chưa chính thức, nhưng anh Hùng nhận trách nhiệm

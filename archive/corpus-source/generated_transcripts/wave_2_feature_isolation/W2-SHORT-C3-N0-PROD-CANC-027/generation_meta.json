@@ -1,0 +1,76 @@
+{
+  "case": {
+    "wave": 2,
+    "case_index": 27,
+    "meeting_id": "W2-SHORT-C3-N0-PROD-CANC-027",
+    "meeting_date": "2026-02-21",
+    "title": "Theo dõi lỗi và tài liệu",
+    "labels": "task_cancellation,cancelled_not_output",
+    "objective": "{\"name\": \"task cancellation\", \"code\": \"CANC\", \"labels\": \"task_cancellation,cancelled_not_output\", \"requirements\": \"Task được tạo trước, sau đó bị hủy rõ ràng; không có câu mở lại task.\"}"
+  },
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 576,
+    "turn_count": 22
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 102.9855033000058
+    },
+    {
+      "attempt": 2,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.00841039999795612
+    },
+    {
+      "attempt": 3,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.003776899990043603
+    },
+    {
+      "attempt": 4,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005256899996311404
+    },
+    {
+      "attempt": 5,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.004625999994459562
+    },
+    {
+      "attempt": 6,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005171500000869855
+    },
+    {
+      "attempt": 7,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 344.60098819999257
+    }
+  ]
+}

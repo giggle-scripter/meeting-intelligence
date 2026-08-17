@@ -1,0 +1,32 @@
+=== MEETING METADATA ===
+meeting_id: W1-SHORT-C2-N1-PROD-NEG-QUNC-007
+meeting_title: Rà soát lỗi đăng nhập
+meeting_date: 2026-01-22
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:05] Minh: Chào cả nhà, hôm nay chúng ta họp nhanh để rà soát lỗi đăng nhập trên production. Tình trạng này đã ảnh hưởng khoảng 20% người dùng trong hai ngày qua.
+[09:00:15] Lan: Tôi đã xem log trên monitoring, thấy lỗi token hết hạn quá sớm và refresh token trả về lỗi liên tục. Cụ thể token expire sau 30 phút nhưng refresh không hoạt động.
+[09:00:28] Huy: Trên staging tôi test cũng thấy tương tự, nhưng không reproduce được toàn bộ. Có thể do khác biệt cấu hình môi trường.
+[09:00:40] Minh: Vậy ai có thể phụ trách kiểm tra lại source code phần xử lý session để tìm nguyên nhân? (câu hỏi không ai nhận – im lặng)
+[09:00:50] Lan: Tôi thấy service auth trả về 401 từ chiều qua, có vẻ vấn đề nằm ở gateway hoặc config xác thực.
+[09:01:02] Minh: Tôi đề nghị team DevOps cập nhật cấu hình xác thực trên gateway trước thứ Sáu tuần này. Đây là ưu tiên cao. (task 1)
+[09:01:15] Lan: Vâng, tôi sẽ liên hệ với DevOps và tạo ticket tracking. Cũng sẽ theo dõi tiến độ.
+[09:01:25] Huy: Có cần thông báo tạm thời cho người dùng về sự cố không?
+[09:01:32] Minh: Chưa cần, chờ khi xác định root cause và kế hoạch fix đã.
+[09:01:40] Lan: Tôi cũng nhận thấy response time API đăng nhập tăng gấp đôi, có thể do lỗi gây ra retry.
+[09:01:50] Minh: Vấn đề hiệu năng để sau, trước mắt tập trung vào lỗi xác thực.
+[09:02:00] Huy: Tôi vừa check thì thấy có pull request mới về session management chưa được review. Có thể do thay đổi đó gây conflict.
+[09:02:12] Minh: Giao cho Lan review PR đó trước cuối ngày hôm nay để loại trừ nguyên nhân. (task 2)
+[09:02:22] Lan: Ok, tôi sẽ review ngay sau meeting và báo cáo kết quả.
+[09:02:30] Huy: Nếu cần support kỹ thuật, tôi sẵn sàng.
+[09:02:38] Minh: Còn ai có thông tin thêm về lỗi đăng nhập không?
+[09:02:46] Lan: Tôi nghĩ nên bổ sung logging ở phần refresh token để sau này dễ debug.
+[09:02:55] Huy: Để tôi thêm log chi tiết và commit trong ngày hôm nay.
+[09:03:05] Minh: Được, làm luôn đi. Còn việc cập nhật tài liệu hướng dẫn xử lý lỗi, ai đảm nhận? (câu hỏi thứ hai, không được xác nhận)
+[09:03:15] Lan: Tài liệu nên để sau khi fix xong mới viết cho chuẩn.
+[09:03:22] Minh: Hợp lý. Vậy tạm thời chưa assign việc đó.
+[09:03:30] Huy: Em đồng ý.
+[09:03:35] Minh: Tổng kết: hai việc gấp – DevOps cập nhật config trước thứ Sáu, Lan review PR trước cuối ngày. Mọi người có ý kiến gì không?
+[09:03:48] Lan: Không, rõ rồi.
+[09:03:52] Huy: Em không có thắc mắc.
+[09:03:58] Minh: OK, cảm ơn mọi người. Meeting kết thúc.

@@ -1,0 +1,9 @@
+minutes nháp
+chủ đề: Rà soát công việc sprint
+kw: tai lieu / api / core / hoan / trong / lai / tai
+- vậy mốc chính là hoàn thành core API docs trong tuần này
+* Em sẽ gửi bản draft sớm
+- chốt lại: Lan làm tài liệu API, ưu tiên core xong trong tuần này, phần example để sang tuần sau
+1) Khi nào core xong, mình sẽ thông báo cho các bên
+- À mà để mình recap lại lần nữa cho chắc: Lan làm tài liệu API, core hoàn thành trước thứ Sáu, example sang tuần sau
+* Trước tiên cho mình hỏi Lan, phần tài liệu API đang đến đâu rồi nhỉ? ? chưa chốt

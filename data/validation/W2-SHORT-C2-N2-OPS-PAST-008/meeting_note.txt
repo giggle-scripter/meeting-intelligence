@@ -1,0 +1,7 @@
+note nhanh
+chủ đề: Chuẩn bị bản phát hành nội bộ
+kw: du lieu / lieu / cap / test / thanh / khi / dam
+- Tôi sẽ đảm bảo dữ liệu được cung cấp trong hôm nay
+* Vậy tôi sẽ test module thanh toán ngay sau khi có dữ liệu
+- Tôi sẽ cập nhật kết quả test sau khi hoàn thành
+1) Đầu tiên, ai báo cáo về module tìm kiếm? ? chưa chốt

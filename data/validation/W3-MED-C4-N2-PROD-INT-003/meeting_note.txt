@@ -1,0 +1,11 @@
+minutes nháp
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: trien khai / khong / parser / correction / nhan / xay / giong
+- tôi sẽ gửi template chiều nay
+* Correction vừa rồi không thay đổi dl, chỉ xác nhận
+- Tôi giao cho chị việc này, không có dl cụ thể, nhưng cần hoàn thành sau khi parser xong
+1) Tôi cần lưu ý: task parser có tên "xây dựng parser transcript" rất giống với một task cũ "cập nhật parser" từ đợt trước
+- Vậy có hai task gần giống nhau nhưng chỉ một task active trong meeting này
+* correction: lúc đầu anh Minh nói dl flow là 13, sau đó không sửa
+- Tôi muốn nhấn mạnh: task "xây dựng parser" + task "cập nhật parser" là hai việc khác nhau, dù tên gần giống
+1) Tuy nhiên dl cho parser là khi nào? ? chưa chốt

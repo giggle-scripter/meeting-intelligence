@@ -1,0 +1,76 @@
+MEETING_ID: W4-LONG-C5-N2-SW-STATE-001
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-15
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:00:15] Chị Lan: Chào cả team, hôm nay chúng ta họp về kế hoạch triển khai hệ thống đợt này. Mục tiêu chính là rà soát môi trường test và tài liệu triển khai. Anh Tuấn, em có thông tin gì từ bên vận hành chưa?
+T000002 [09:00:45] Anh Tuấn: Dạ chị, bên vận hành chưa confirm lịch mở môi trường staging. Họ nói tuần sau mới có, nhưng em nghĩ mình nên chuẩn bị trước tài liệu để không bị chậm.
+T000003 [09:01:15] Chị Lan: Đúng rồi, tài liệu triển khai là phần quan trọng. Chị Hoa, bên QA có bản kịch bản kiểm thử cho môi trường staging chưa?
+T000004 [09:01:45] Chị Hoa: Em có draft rồi, nhưng còn thiếu phần test integration với service cũ. Anh Minh đang hỗ trợ viết spec, mong là xong trong tuần này.
+T000005 [09:02:10] Anh Minh: Vâng, em đang viết spec cho module kết nối, dự kiến cuối ngày mai hoàn thành. Sau đó chị Hoa có thể update kịch bản.
+T000006 [09:02:40] Chị Lan: Tốt. Vậy chúng ta có hai việc cần làm: một là cập nhật tài liệu triển khai tổng thể, hai là cập nhật kịch bản kiểm thử triển khai. Anh Tuấn, em phụ trách tài liệu triển khai nhé? Deadline em tự đặt được không?
+T000007 [09:03:10] Anh Tuấn: Em nghĩ tài liệu triển khai cần được review kỹ, nếu có thể em sẽ hoàn thành bản draft trước thứ Sáu tuần này, tức 19/02. Nhưng chưa có deadline chính thức vì phụ thuộc vào spec.
+T000008 [09:03:40] Chị Lan: Được, không cần deadline cứng cho tài liệu lúc này. Còn kịch bản kiểm thử triển khai, chị Hoa, em cần hoàn thành trước ngày 20/02 để kịp chạy thử khi có staging.
+T000009 [09:04:10] Chị Hoa: Vâng, em sẽ cố gắng. Nhưng em cần spec từ anh Minh trước, nếu không kịp thì e là deadline 20/02 khó đạt.
+T000010 [09:04:40] Anh Minh: Em sẽ ưu tiên spec integration, hứa trước 9h sáng mai gửi chị Hoa. Còn spec chi tiết có thể gửi sau, không ảnh hưởng kịch bản chính.
+T000011 [09:05:10] Chị Lan: OK, vậy task "Cập nhật kịch bản kiểm thử triển khai" có deadline 20/02, assignee là chị Hoa, nhưng cần spec từ anh Minh. Task "Cập nhật tài liệu triển khai" anh Tuấn làm, không deadline cứng, nhưng cần có draft để review.
+T000012 [09:05:40] Anh Tuấn: Vâng, em cũng muốn hỏi thêm về phần môi trường test. Bên vận hành có yêu cầu mình phải setup certificate mới không? Trong tài liệu cũ chưa đề cập.
+T000013 [09:06:10] Chị Lan: Để chị hỏi lại. Hôm qua anh Dũng bên infra nói là vẫn dùng cert cũ, nhưng cần xác nhận bằng mail. Chị sẽ forward cho em.
+T000014 [09:06:40] Anh Minh: Em xin phép bổ sung: spec module kết nối sẽ có phần về xác thực, nếu cert thay đổi thì em phải sửa luôn.
+T000015 [09:07:10] Chị Hoa: Vậy em cần biết cert trước khi viết kịch bản test authentication. Nếu không thì 20/02 cũng khó vì thiếu thông tin.
+T000016 [09:07:40] Chị Lan: Thôi thì tạm thời em cứ viết dựa trên cert cũ, sau đó update nếu có thay đổi. Việc này không ảnh hưởng nhiều đến logic test.
+T000017 [09:08:10] Anh Tuấn: Em đồng ý. Về tài liệu triển khai, em thấy tài liệu hiện tại thiếu phần rollback, thường team mình hay quên. Em định bổ sung vào.
+T000018 [09:08:40] Chị Lan: Quan trọng đó. Em cứ thêm vào, nhưng nhớ đừng làm tài liệu dài quá, cô đọng thôi.
+T000019 [09:09:10] Chị Hoa: Em sẽ xem tài liệu triển khai của anh Tuấn để đảm bảo kịch bản test phù hợp. Có thể có sự chồng chéo giữa tài liệu và kịch bản?
+T000020 [09:09:40] Anh Tuấn: Có thể, nhưng tài liệu triển khai mô tả các bước thực hiện, còn kịch bản test kiểm tra tính đúng đắn. Em sẽ cố gắng viết rõ ràng để chị Hoa dễ đối chiếu.
+T000021 [09:10:10] Chị Lan: Vậy hai task này có điểm chung là đều liên quan đến quy trình triển khai. Mọi người lưu ý tránh làm trùng lặp nội dung. Anh Minh, em có comment gì thêm về phía BA?
+T000022 [09:10:40] Anh Minh: Em thấy cần thống nhất thuật ngữ trong cả hai tài liệu. Ví dụ "deployment" hay "triển khai" – nên dùng một từ. Em sẽ gửi glossary nhỏ cho mọi người.
+T000023 [09:11:10] Chị Hoa: Đồng ý, vì em thấy tài liệu cũ dùng lẫn lộn, gây khó hiểu.
+T000024 [09:11:40] Anh Tuấn: Em cũng muốn đề cập: có cần tài liệu hướng dẫn cấu hình môi trường không? Hay là gộp vào tài liệu triển khai?
+T000025 [09:12:10] Chị Lan: Gộp vào một tài liệu thôi, đừng tạo thêm đầu việc. Tài liệu triển khai nên bao gồm các bước từ chuẩn bị đến go-live, cả rollback.
+T000026 [09:12:40] Anh Tuấn: Vâng, em sẽ làm như vậy. Nhưng phần cấu hình môi trường em cần thông tin từ bên vận hành, chị giúp em liên hệ nhé.
+T000027 [09:13:10] Chị Lan: OK, chị sẽ gửi email và cc em. Dự kiến cuối ngày hôm nay có thông tin.
+T000028 [09:13:40] Chị Hoa: Em có một băn khoăn: kịch bản kiểm thử triển khai thường chỉ test trên staging, nhưng nếu môi trường staging chưa sẵn sàng thì em viết xong cũng không chạy được. Có nên chờ đến khi có staging không?
+T000029 [09:14:10] Chị Lan: Không nên chờ. Em viết kịch bản trước, khi có staging thì chỉ việc chạy. Việc này tiết kiệm thời gian.
+T000030 [09:14:40] Anh Minh: Em cũng nghĩ vậy. Hơn nữa kịch bản test triển khai thường dựa trên tài liệu, nên có thể review chéo.
+T000031 [09:15:10] Anh Tuấn: Mà chị Lan ơi, em thấy tài liệu triển khai của dự án trước team mình từng làm khá tốt, em có thể tham khảo và điều chỉnh cho phù hợp.
+T000032 [09:15:40] Chị Lan: Ừ, em lấy template cũ, nhưng nhớ cập nhật công nghệ mới, đặc biệt là phần database migration.
+T000033 [09:16:10] Anh Tuấn: Vâng, database migration là phần quan trọng. Em sẽ viết chi tiết.
+T000034 [09:16:40] Chị Hoa: Anh Tuấn cho em hỏi: tài liệu triển khai có đề cập đến việc kiểm tra log sau triển khai không? Em định đưa vào kịch bản test.
+T000035 [09:17:10] Anh Tuấn: Có, em sẽ thêm bước kiểm tra log và cảnh báo. Như vậy kịch bản test của chị nên bao gồm test log.
+T000036 [09:17:40] Chị Hoa: Ok, em sẽ bổ sung. Vậy task của em phụ thuộc khá nhiều vào đầu vào từ cả anh Tuấn và anh Minh.
+T000037 [09:18:10] Chị Lan: Đúng, nhưng em vẫn chịu trách nhiệm chính. Anh Tuấn và anh Minh hỗ trợ đúng hạn nhé.
+T000038 [09:18:40] Anh Minh: Dạ. Em cũng muốn thảo luận thêm về phần tài liệu hướng dẫn người dùng, liệu có cần trong đợt này không? Hay để sau?
+T000039 [09:19:10] Chị Lan: Để sau, đợt này tập trung triển khai kỹ thuật. Tài liệu người dùng sẽ làm ở phase sau.
+T000040 [09:19:40] Anh Tuấn: Về môi trường test, ngoài staging còn có môi trường UAT không? Team mình có cần chuẩn bị gì không?
+T000041 [09:20:10] Chị Lan: UAT sẽ do bên business test, mình không cần can thiệp nhiều. Nhưng tài liệu triển khai nên có phần bàn giao cho UAT.
+T000042 [09:20:40] Anh Tuấn: Ok em sẽ thêm.
+T000043 [09:21:10] Chị Hoa: Em thấy task của em có tên “cập nhật kịch bản kiểm thử triển khai” hơi giống với task “cập nhật tài liệu triển khai” của anh Tuấn. Liệu có gây nhầm lẫn không?
+T000044 [09:21:40] Anh Tuấn: Cũng hơi giống, nhưng nội dung khác. Tài liệu của em là procedure, còn của chị là test case. Nên ghi rõ trong hệ thống.
+T000045 [09:22:10] Chị Lan: Chị sẽ ghi chú rõ trong meeting notes. Cả hai đều là task riêng, không gộp.
+T000046 [09:22:40] Anh Minh: Về việc phân công, em thấy task tài liệu triển khai chưa có deadline chính thức, liệu có cần đặt một deadline ước lượng để dễ theo dõi không?
+T000047 [09:23:10] Chị Lan: Tạm thời chưa cần, vì còn phụ thuộc nhiều. Khi nào có thông tin từ vận hành thì sẽ điều chỉnh. Anh Tuấn, em cứ làm, cuối tuần này báo cáo tiến độ.
+T000048 [09:23:40] Anh Tuấn: Vâng, em sẽ cố gắng có draft vào thứ Sáu.
+T000049 [09:24:10] Chị Hoa: Em xin phép confirm lại: deadline cho task của em là 20/02, nhưng em cần spec từ anh Minh trước 9h sáng mai. Nếu không có spec, deadline có thể bị trễ.
+T000050 [09:24:40] Chị Lan: Anh Minh, em cam kết được chứ? Nếu không thì phải điều chỉnh deadline.
+T000051 [09:25:10] Anh Minh: Em cam kết gửi spec trước 9h sáng 16/02, không kể cuối tuần. Hôm nay là thứ Hai, mai là thứ Ba, em sẽ gửi đúng hạn.
+T000052 [09:25:40] Chị Hoa: Vậy em yên tâm. Em sẽ bắt đầu viết kịch bản từ chiều nay dựa trên template cũ, sau đó update khi có spec.
+T000053 [09:26:10] Anh Tuấn: Nếu chị Hoa cần phần về rollback, em có thể gửi sơ qua cho chị luôn bây giờ.
+T000054 [09:26:40] Chị Hoa: Tốt quá, anh gửi giúp em, em sẽ tham khảo.
+T000055 [09:27:10] Chị Lan: Mọi người có vấn đề gì khác về môi trường test không? Em thấy chưa bàn đến phần dữ liệu test.
+T000056 [09:27:40] Anh Tuấn: Dạ, em đang định hỏi. Dữ liệu test cho staging có sẵn từ đợt trước, nhưng cần làm mới. Em sẽ tạo script để refresh.
+T000057 [09:28:10] Chị Hoa: Việc đó có nằm trong task của em không? Hay là task riêng?
+T000058 [09:28:40] Chị Lan: Có thể là task phụ, nhưng chưa cần chính thức. Anh Tuấn cứ làm, sau này tính.
+T000059 [09:29:10] Anh Tuấn: Vâng, em sẽ tự sắp xếp.
+T000060 [09:29:40] Anh Minh: Em có ý kiến: nếu tài liệu triển khai và kịch bản test đều viết xong, team mình nên có một buổi review chung để đảm bảo consistency. Có thể tổ chức vào tuần sau.
+T000061 [09:30:10] Chị Lan: Đồng ý, nhưng chờ khi có bản draft cụ thể. Anh Tuấn và chị Hoa, sau khi hoàn thành thì schedule meeting riêng.
+T000062 [09:30:40] Anh Tuấn: OK.
+T000063 [09:31:10] Chị Hoa: Vâng.
+T000064 [09:31:40] Chị Lan: Tổng kết lại, hôm nay chúng ta có hai task chính: "Cập nhật tài liệu triển khai" do anh Tuấn, không deadline cứng; "Cập nhật kịch bản kiểm thử triển khai" do chị Hoa, deadline 20/02, phụ thuộc spec từ anh Minh. Anh Minh sẽ gửi spec trước 9h sáng mai. Ngoài ra, chị sẽ hỏi thông tin cert và môi trường từ bên vận hành. Có ai cần clarify gì thêm không?
+T000065 [09:32:10] Anh Tuấn: Em muốn hỏi về việc dùng tool quản lý task? Có cần update lên Jira không?
+T000066 [09:32:40] Chị Lan: Có, em sẽ tạo task trên Jira sau meeting. Chị sẽ assign đúng người.
+T000067 [09:33:10] Anh Minh: Em không có thắc mắc gì thêm.
+T000068 [09:33:40] Chị Hoa: Em cũng không.
+T000069 [09:34:10] Chị Lan: Vậy chúng ta tạm dừng ở đây. Phần còn lại về kiến trúc và timeline triển khai sẽ bàn ở phần sau. Cảm ơn mọi người.
+--- END OF PART P01 ---

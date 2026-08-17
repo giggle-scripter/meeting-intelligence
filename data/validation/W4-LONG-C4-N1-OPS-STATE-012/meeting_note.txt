@@ -1,0 +1,14 @@
+ghi vội
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / trien khai / rollback / khi / viet / thong / tin
+- Nhưng để tiện, em sẽ tạo task nhỏ là “Gửi checklist cho anh An để review”
+* Việc đó em sẽ gộp vào task B, nhưng cần phân biệt rõ: task B là viết hướng dẫn thiết lập
+- Em xin phép task F, nhưng mà dl không có, em sẽ làm sau task E
+1) Dạ, task D của em là viết tài liệu triển khai
+- Được, em nhận task B
+* 05/03 hợp lý, vì em sẽ có thời gian hoàn thiện task D dựa trên task B
+- Vậy dl mới của task A là 02/03
+1) Em sẽ làm task F sau khi có thông tin từ Minh về lỗi đăng nhập
+- Vậy hủy task G
+* Trong khi task E sửa lỗi đăng nhập có dl 03/03
+- Còn phần rollback plan em sẽ bổ sung sau khi có thông tin từ task B

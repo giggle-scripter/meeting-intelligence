@@ -1,0 +1,7 @@
+{
+  "meeting_title": "Rà soát lỗi đăng nhập",
+  "tasks": [
+    {"task_name":"Fix lỗi đăng nhập sai khi đúng mật khẩu","assignee":"Minh","start_date":"2026-02-03","due_date":"2026-02-04","due_date_text":"ngày mai","status":"Proposed"},
+    {"task_name":"Gửi tài liệu tái hiện lỗi","assignee":"Hoa","start_date":"2026-02-03","due_date":"2026-02-03","due_date_text":"trong 30 phút nữa","status":"Proposed"}
+  ]
+}

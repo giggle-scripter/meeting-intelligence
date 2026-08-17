@@ -1,0 +1,111 @@
+MEETING_ID: W5-XL-C5-N2-IT-STRESS-002
+PART: P03/10
+
+T000154 [09:20:12] Minh: Lan và Đức ở lại. Chúng ta nói chi tiết về payment performance. Lan, em có thông tin gì thêm từ log cũ hay chưa?
+
+T000155 [09:20:20] Lan: Dạ, em đã xem một vài log từ hôm qua anh Hùng ghi lại, chưa có bản đầy đủ. Có dấu hiệu lỗi timeout từ service payment khi gọi đến cổng thanh toán bên thứ ba.
+
+T000156 [09:20:32] Đức: Cụ thể là timeout ở hàm nào? Em có ghi lại call stack không?
+
+T000157 [09:20:38] Lan: Em thấy ở endpoint /charge, thỉnh thoảng http response kéo dài đến 8 giây, gây timeout cho client. Nhưng log chưa đủ để kết luận.
+
+T000158 [09:20:50] Minh: Như vậy, sáng mai Tuấn gửi log, em sẽ phân tích sâu. Nhưng tôi muốn biết kế hoạch ban đầu của em. Có cần Đức hỗ trợ từ bây giờ không?
+
+T000159 [09:21:00] Lan: Em nghĩ có thể cần Đức xem kiến trúc payment service vì em chưa hiểu rõ luồng. Nhưng nếu anh Đức bận thì em tự tìm hiểu.
+
+T000160 [09:21:08] Đức: Không bận, tôi có thể xem qua. Nhưng tôi muốn có cái nhìn tổng thể trước, chứ không phải debug từng dòng.
+
+T000161 [09:21:16] Minh: Vậy tôi giao hand-off: Lan sẽ gửi cho Đức bản phân tích sơ bộ sau khi có log, và Đức sẽ review và góp ý. Đây là hand-off bước một, chưa chính thức đổi owner. Lan vẫn là owner.
+
+T000162 [09:21:30] Lan: Dạ, em sẽ gửi trước 28/02.
+
+T000163 [09:21:34] Đức: Tôi sẽ review trước 01/03. Nhưng nếu thấy vấn đề phức tạp thì tôi có thể cần thêm một ngày.
+
+T000164 [09:21:42] Minh: OK. Nhưng deadline review của Đức cũng là một mốc. Chúng ta điều chỉnh: deadline báo cáo sơ bộ của Lan vẫn 28/02, nhưng nếu cần, em có thể gửi muộn nhất 29/02. Và Đức review xong trước 02/03.
+
+T000165 [09:21:58] Lan: Nhưng anh Minh, 29/02/2026 là thứ Bảy, em có thể gửi vào cuối ngày.
+
+T000166 [09:22:05] Minh: Không sao, tôi cần trước Chủ nhật. Vậy deadline của Lan là 29/02. Đây là correction lần đầu cho task này.
+
+T000167 [09:22:14] Đức: Tôi sẽ dời review sang 02/03. Nhưng cần lưu ý rằng nếu Lan gửi trễ, tôi cũng trễ.
+
+T000168 [09:22:23] Minh: Đúng. Lan phải bảo đảm. Em có cam kết không?
+
+T000169 [09:22:27] Lan: Em cam kết, trừ khi log đến chậm.
+
+T000170 [09:22:31] Tuấn (vọng từ xa): Em nghe thấy, em sẽ gửi log sáng mai sớm.
+
+T000171 [09:22:36] Minh: Tốt. Bây giờ chuyển sang vấn đề vận hành khác: hệ thống gần đây có một số cảnh báo về dung lượng ổ cứng. Đức, anh có thông tin gì không?
+
+T000172 [09:22:48] Đức: Có. Pod logging tăng nhanh do bật debug level. Tôi đã yêu cầu Hùng tắt debug trên production. Nhưng chưa thực hiện.
+
+T000173 [09:22:58] Minh: Tại sao chưa thực hiện? Đây là vấn đề vận hành nghiêm trọng.
+
+T000174 [09:23:04] Đức: Tuần trước tôi có giao Hùng task tắt debug, nhưng Hùng bảo bận deploy hotfix. Giờ Hùng đang ở topic khác.
+
+T000175 [09:23:12] Minh: Tôi sẽ nhắc Hùng sau. Nhưng cần có deadline. Tôi đặt task: tắt debug log trên production, assign cho Hùng, deadline cuối ngày hôm nay.
+
+T000176 [09:23:22] Đức: Đã có task từ trước, giờ chỉ nhắc lại. Nhưng vậy là đã tồn tại, tôi không coi là mới.
+
+T000177 [09:23:28] Minh: Đúng. Không tạo duplicate.
+
+T000178 [09:23:30] Lan: Anh Minh, em có thể hỗ trợ Hùng tắt debug, vì em biết cấu hình.
+
+T000179 [09:23:36] Minh: Không cần, em lo thanh toán. Để Hùng tự xử.
+
+T000180 [09:23:40] Lan: Vâng.
+
+T000181 [09:23:43] Đức: Một vấn đề nữa: server report memory high trên pod payment staging. Có thể liên quan đến cache tuning chúng ta sẽ deploy chiều nay.
+
+T000182 [09:23:54] Minh: Vậy cần kiểm tra sau deploy. Tuấn có ở đây không? (gọi) Tuấn, em còn nghe không?
+
+T000183 [09:24:00] Tuấn (từ xa): Có, em đang nghe. Em sẽ kiểm tra memory sau khi deploy.
+
+T000184 [09:24:06] Minh: OK. Đó là task ngắn.
+
+T000185 [09:24:10] Đức: Tôi muốn quay lại payment. Lan, ngoài timeout, em thấy có error rate tăng không?
+
+T000186 [09:24:18] Lan: Em thấy tỷ lệ lỗi 500 tăng nhẹ, khoảng 2% trong tuần qua, chủ yếu do timeout.
+
+T000187 [09:24:26] Đức: Có thể do service payment không đủ worker. Tôi nghĩ cần tăng số lượng pod.
+
+T000188 [09:24:32] Minh: Ý kiến hay, nhưng cần tính toán. Anh có thể làm đề xuất không?
+
+T000189 [09:24:37] Đức: Tôi sẽ đưa con số crawl từ dashboard. Giao cho tôi.
+
+T000190 [09:24:41] Minh: Vậy tôi tạo task: Đức phân tích capacity payment và đề xuất scale, deadline 05/03.
+
+T000191 [09:24:50] Đức: OK. Nhưng cần Tuấn cung cấp số liệu CPU/memory.
+
+T000192 [09:24:55] Minh: Tuấn, em nghe rồi chứ? Gửi metric cho Đức trước 28/02.
+
+T000193 [09:25:00] Tuấn: Rõ.
+
+T000194 [09:25:02] Lan: Anh Minh, em có một lo ngại. Nếu tập trung quá nhiều vào payment, các task khác như cache và review API sẽ bị trễ.
+
+T000195 [09:25:12] Minh: Em yên tâm, tôi đã phân bổ. Cache do Tuấn và em phối hợp, review API do Hùng và Đức. Em chỉ hỗ trợ khi cần.
+
+T000196 [09:25:20] Lan: Dạ.
+
+T000197 [09:25:23] Đức: Tôi nghĩ chúng ta nên dừng ở đây. Sắp đến 10h, tôi còn họp khác.
+
+T000198 [09:25:28] Minh: Được, chỉ còn vài việc. Tôi muốn xác nhận các task mới và correction:
+
+- Task payment analysis: Lan, deadline 29/02 (sau correction từ 28/02). Hand-off: Lan gửi Đức, Đức review deadline 02/03.
+- Task tắt debug: Hùng, deadline cuối hôm nay (đã tồn tại, chỉ nhắc).
+- Task capacity payment: Đức, deadline 05/03, cần metric từ Tuấn trước 28/02.
+- Task kiểm tra memory sau deploy: Tuấn, hôm nay.
+
+Còn task review API, design placement, export log, metric, alert không thay đổi. Có gì thắc mắc không?
+
+T000199 [09:26:10] Lan: Không ạ.
+
+T000200 [09:26:12] Đức: Không.
+
+T000201 [09:26:14] Minh: Vậy chúng ta kết thúc phiên nhỏ. Mọi người chuẩn bị cho deploy lúc 15h.
+
+T000202 [09:26:20] Lan: Em sẽ ra ngoài làm việc.
+
+T000203 [09:26:22] Đức: Tôi sẽ ghé qua chỗ Tuấn lấy metric.
+
+--- END OF PART P03 ---

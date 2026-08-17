@@ -1,0 +1,14 @@
+.git
+.venv
+venv
+__pycache__
+.pytest_cache
+data
+docs
+clients
+scripts
+.env
+.env.*
+evaluation
+data/power_automate_uploads
+.agents

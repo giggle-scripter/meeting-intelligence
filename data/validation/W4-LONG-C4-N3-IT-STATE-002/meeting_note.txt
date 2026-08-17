@@ -1,0 +1,14 @@
+minutes nháp
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / moi truong / trien khai / release / staging / monitoring
+- Nhưng để tránh trùng, chúng ta gộp vào task "Hoàn thiện tài liệu triển khai" nhé, Lan
+* Còn task "Cập nhật dữ liệu test đăng nhập", tôi sẽ assign tạm cho Khang và ghi chú chờ reviewer
+- Em sẽ cập nhật danh sách task sau meeting
+1) Vậy tôi sẽ assign task "Cấu hình monitoring cho release 05/03" cho Tuấn
+- Chính thức hủy task "Cập nhật dữ liệu test đăng nhập"
+* Tôi sẽ cập nhật danh sách task mới: hủy task dữ liệu test, thêm monitoring, thêm dl cho lỗi đăng nhập
+- Task "Điều tra lỗi đăng nhập" – dl mới là 28/02
+1) Vậy tổng kết các task hiện tại: 4 task active (test môi trường, tài liệu, lỗi đăng nhập, monitoring) và 1 task bị hủy
+- Em sẽ recap: Task 1 – Kiểm tra môi trường test staging, owner Hùng, dl 26/02, reviewer Lan (theo quyết định cũ)
+* Task 2 – Hoàn thiện tài liệu triển khai, owner Hùng, dl 27/02, reviewer Lan
+- Đầu tiên, về môi trường test – Hùng, anh có cập nhật gì về tình hình server staging không? ? chưa chốt

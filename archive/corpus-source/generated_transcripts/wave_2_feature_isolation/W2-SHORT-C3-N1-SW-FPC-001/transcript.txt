@@ -1,0 +1,34 @@
+MEETING_ID: W2-SHORT-C3-N1-SW-FPC-001
+CASE_LABELS: first_person_commitment,negative_context
+MEETING_DATE: 2026-01-26
+PRIMARY_FEATURE: first-person commitment
+TITLE: Rà soát công việc sprint
+[09:00:02] Nam: Chào mọi người, hôm nay mình rà soát lại các task còn đang mở trong sprint này. Đầu tiên, Hoa cho biết task thiết kế giao diện đến đâu rồi?
+[09:00:13] Hoa: Em đang vẽ xong màn hình chính, còn vài chỗ tinh chỉnh nữa. Có lẽ tầm cuối tuần này sẽ xong.
+[09:00:24] Nam: OK, vậy đúng tiến độ. Còn phần tối ưu query database thì có ai thấy chưa? Tôi thấy nó đang nằm im.
+[09:00:36] Lan: Em thấy task đó hơi khó, mà khối lượng công việc của em đang nhiều, em không làm kịp. Chắc phải tạm gác lại.
+[09:00:47] Nam: Ừ, nếu không ai nhận thì cuối sprint mình xem xét đưa sang sprint sau. Không ép đâu.
+[09:00:56] Minh: Em nghĩ có một task quan trọng hơn cần làm ngay: tích hợp API thanh toán cho bên đối tác. Mấy hôm trước họ gửi tài liệu rồi.
+[09:01:07] Nam: À đúng, tôi quên mất. Task này chưa ai đăng ký. Có ai xung phong không?
+[09:01:15] Minh: Để em làm. Em sẽ bắt tay vào chiều nay, chắc hoàn thành trước thứ Sáu. Em đã đọc qua spec rồi.
+[09:01:26] Nam: Tốt, vậy em tự assign nhé. Cần hỗ trợ gì không?
+[09:01:33] Minh: Dạ không, em tự xoay được. Em sẽ cập nhật trên Jira hằng ngày.
+[09:01:40] Hoa: À, nhắc mới nhớ, tuần sau team mình sẽ có buổi demo nội bộ cho sếp, nên các task cần chạy ổn một chút.
+[09:01:50] Nam: Đúng rồi, mọi người lưu ý. Nhưng đó chỉ là mốc để mình căn thời gian, không phải deadline cứng.
+[09:01:59] Lan: Vậy task API đó có ảnh hưởng đến demo không anh?
+[09:02:06] Minh: Em nghĩ không, vì demo tập trung vào luồng chính, API thanh toán là phần mở rộng sau.
+[09:02:13] Nam: OK, vậy cứ triển khai bình thường. Quay lại task tối ưu query, tôi thấy nó vẫn còn nằm trong backlog nhưng hơi nặng, chúng ta sẽ cân nhắc lại vào buổi planning tới.
+[09:02:26] Lan: Em cũng muốn làm nhưng thật sự không có đủ thời gian. Tuần này em còn phải hỗ trợ support khách hàng.
+[09:02:34] Nam: Hiểu rồi, không sao. Thế còn task viết unit test cho module cũ thì sao? Tôi thấy nó bị bỏ ngỏ từ sprint trước.
+[09:02:45] Hoa: Em có thể nhận, nhưng mà để sau khi thiết kế xong đã. Chắc cuối tuần sau em mới rảnh.
+[09:02:55] Nam: Vậy tạm thời chưa assign, để em ghi chú lại. Không cần vội.
+[09:03:01] Minh: Em thấy mình nên ưu tiên các task có tính chất blocking cho release. Như API thanh toán thì em thấy cần, nên em nhận luôn.
+[09:03:13] Nam: Đồng ý. Cảm ơn em. Còn gì nữa không?
+[09:03:18] Lan: Em thấy trong board có task “cập nhật tài liệu hướng dẫn”, mà hình như chưa ai làm. Có nên để sang tuần sau không?
+[09:03:29] Nam: Cũng được, vì nó không gấp. Chúng ta sẽ xem xét lại sau.
+[09:03:34] Hoa: Vậy em tổng kết: task thiết kế của em vẫn đang chạy, task API do Minh mới nhận, còn lại mấy task kia chưa có owner hoặc bị dời. Em sẽ note lại biên bản.
+[09:03:47] Nam: Chính xác. Mọi người còn ý kiến gì không?
+[09:03:51] Minh: Em chỉ muốn xác nhận là em sẽ ưu tiên làm API trước, các task lặt vặt em để sau. Em tự giác hết.
+[09:04:01] Nam: OK, vậy meeting kết thúc ở đây. Cảm ơn mọi người.
+[09:04:05] Lan: Cảm ơn anh.
+[09:04:07] Hoa: Bye mọi người.

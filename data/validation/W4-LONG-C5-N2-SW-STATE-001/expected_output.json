@@ -1,0 +1,37 @@
+{
+  "meeting_title": "Họp điều phối triển khai hệ thống",
+  "tasks": [
+    {
+      "task_name": "Cập nhật tài liệu triển khai",
+      "assignee": "Minh",
+      "start_date": "2026-02-15",
+      "due_date": "2026-02-26",
+      "due_date_text": "deadline 26/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Cập nhật kịch bản kiểm thử triển khai",
+      "assignee": "Hoa",
+      "start_date": "2026-02-15",
+      "due_date": "2026-02-20",
+      "due_date_text": "deadline 20/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Tạo dữ liệu test",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-15",
+      "due_date": "2026-02-19",
+      "due_date_text": "deadline 19/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Lập kế hoạch monitoring",
+      "assignee": "Hùng",
+      "start_date": "2026-02-15",
+      "due_date": "",
+      "due_date_text": "",
+      "status": "Proposed"
+    }
+  ]
+}

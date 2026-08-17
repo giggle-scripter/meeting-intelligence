@@ -1,0 +1,7 @@
+chốt sơ bộ
+chủ đề: Rà soát lỗi đăng nhập
+kw: bao cao / cao / review / day / tien / giao / cuoi
+- Đây là ưu tiên cao. (task 1)
+* Giao cho Lan review PR đó trước cuối ngày hôm nay để loại trừ nguyên nhân. (task 2)
+- tôi sẽ review ngay sau meeting và báo cáo kết quả
+1) Để tôi thêm log chi tiết và commit trong ngày hôm nay

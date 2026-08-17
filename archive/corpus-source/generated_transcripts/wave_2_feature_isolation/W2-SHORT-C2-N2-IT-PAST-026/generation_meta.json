@@ -1,0 +1,102 @@
+{
+  "case": {
+    "wave": 2,
+    "case_index": 26,
+    "meeting_id": "W2-SHORT-C2-N2-IT-PAST-026",
+    "meeting_date": "2026-02-20",
+    "title": "Trao đổi kế hoạch tích hợp",
+    "labels": "past_completed_work,informational_statement",
+    "objective": "{\"name\": \"past completed work\", \"code\": \"PAST\", \"labels\": \"past_completed_work,informational_statement\", \"requirements\": \"Speaker báo cáo các việc đã làm xong; không biến hành động quá khứ thành task mới.\"}"
+  },
+  "model": "deepseek-v4-flash",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 777,
+    "turn_count": 26
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 102.98276509999414
+    },
+    {
+      "attempt": 2,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.0035640999994939193
+    },
+    {
+      "attempt": 3,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005145699993590824
+    },
+    {
+      "attempt": 4,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.003228100002161227
+    },
+    {
+      "attempt": 5,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.004544999988866039
+    },
+    {
+      "attempt": 6,
+      "kind": "api_error",
+      "errors": [
+        "APIConnectionError: Connection error."
+      ],
+      "elapsed_seconds": 0.005130599995027296
+    },
+    {
+      "attempt": 7,
+      "kind": "validation_error",
+      "errors": [
+        "Quá ít turn: 0; cần ít nhất khoảng 25.",
+        "Không tìm thấy timestamp hợp lệ."
+      ],
+      "elapsed_seconds": 339.7358424999984
+    },
+    {
+      "attempt": 8,
+      "kind": "api_error",
+      "errors": [
+        "RuntimeError: DeepSeek trả content rỗng."
+      ],
+      "elapsed_seconds": 204.70927380000649
+    },
+    {
+      "attempt": 9,
+      "kind": "validation_error",
+      "errors": [
+        "Quá ít turn: 0; cần ít nhất khoảng 25.",
+        "Không tìm thấy timestamp hợp lệ."
+      ],
+      "elapsed_seconds": 131.7009659000032
+    },
+    {
+      "attempt": 10,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 98.39565000000584
+    }
+  ]
+}

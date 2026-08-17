@@ -1,0 +1,126 @@
+MEETING_ID: W4-LONG-C4-N2-IT-STATE-010
+PART: P02/5
+
+T000091 [09:32:30] Anh Minh: Tiếp theo, chúng ta bàn về tài liệu triển khai tổng thể. Nhưng trước đó, có ai thấy vấn đề gì về lỗi đăng nhập từ đợt test trước không?
+
+T000092 [09:32:55] Chị Lan: Dạ, em có test thử vài chức năng, thấy lỗi đăng nhập xuất hiện khi dùng tài khoản mới. Hệ thống báo sai mật khẩu dù đã nhập đúng.
+
+T000093 [09:33:20] Anh Tuấn: Lỗi đó có thể do cấu hình session chưa đúng. Tôi đã thấy log ghi lỗi token.
+
+T000094 [09:33:45] Anh Minh: Vậy cần xử lý ngay. Tuấn, em có thể kiểm tra chi tiết và đưa ra giải pháp?
+
+T000095 [09:34:10] Anh Tuấn: Tôi sẽ xem lại code authentication. Nhưng cần truy cập repository của module đó.
+
+T000096 [09:34:35] Chị Hà: Em nhớ bên dev đã có bản fix tạm, nhưng chưa merge.
+
+T000097 [09:35:00] Anh Minh: Thế thì tốt. Tuấn, em phối hợp với dev để merge bản fix. Sau đó chạy thử trên môi trường test.
+
+T000098 [09:35:25] Anh Tuấn: Vậy tôi sẽ giao lại cho bạn Khoa bên dev. Nhưng em cần quyền review code.
+
+T000099 [09:35:50] Anh Minh: Được, em cứ làm. Nhưng ai sẽ chịu trách nhiệm review bản fix đó? Tôi nghĩ Hà có thể review.
+
+T000100 [09:36:15] Chị Hà: Em cũng được, nhưng cần thời gian vì đang làm tài liệu.
+
+T000101 [09:36:40] Anh Minh: Vậy Hà review tạm, nhưng chưa có deadline. Còn Tuấn, em giao cho Khoa sửa lỗi đăng nhập.
+
+T000102 [09:37:05] Anh Tuấn: Vâng. Tôi sẽ email Khoa ngay.
+
+T000103 [09:37:30] Chị Lan: Em muốn test lại sau khi fix, nên cần dữ liệu test phù hợp. Task dữ liệu mẫu của em có thể điều chỉnh để bao gồm các tài khoản test.
+
+T000104 [09:37:55] Anh Minh: Ý hay. Vậy Lan bổ sung dữ liệu test cho lỗi đăng nhập vào task của em.
+
+T000105 [09:38:20] Chị Hà: Vậy tài liệu môi trường test có cần ghi chú về lỗi này không?
+
+T000106 [09:38:45] Anh Minh: Viết luôn vào tài liệu, phần khắc phục sự cố. Nhưng đừng làm chậm tiến độ.
+
+T000107 [09:39:10] Anh Tuấn: Tôi có ý: nên tạo một task riêng cho việc fix lỗi đăng nhập, giao cho Khoa, deadline thứ Sáu.
+
+T000108 [09:39:35] Anh Minh: Ừ, vậy thêm task “Fix lỗi đăng nhập” do Khoa, deadline thứ Sáu. Nhưng Khoa có trong meeting này không?
+
+T000109 [09:40:00] Chị Lan: Không, Khoa bận. Em sẽ chuyển lời.
+
+T000110 [09:40:25] Anh Minh: Lan em nhắc Khoa. Còn ai review fix? Hà đã nhận.
+
+T000111 [09:40:50] Chị Hà: Vâng, nhưng em cần bản fix hoàn chỉnh mới review được.
+
+T000112 [09:41:15] Anh Tuấn: Tôi sẽ đảm bảo Khoa gửi pull request sớm.
+
+T000113 [09:41:40] Anh Minh: Tốt. Bây giờ chuyển sang dữ liệu test. Lan, task của em tiến triển sao?
+
+T000114 [09:42:05] Chị Lan: Em đã bắt đầu tạo dữ liệu mẫu, nhưng chưa xong. Cần thêm thông tin về các trường dữ liệu.
+
+T000115 [09:42:30] Anh Minh: Em cần thông tin gì?
+
+T000116 [09:42:55] Chị Lan: Ví dụ, dữ liệu người dùng test có cần mô phỏng nhiều vai trò không? Và có cần dữ liệu lỗi để test negative?
+
+T000117 [09:43:20] Anh Tuấn: Tôi nghĩ nên có cả hai. Vai trò admin và user thường. Dữ liệu lỗi thì để test login thất bại.
+
+T000118 [09:43:45] Anh Minh: Vậy Lan em thêm vào. Nhưng đừng quá nhiều, tránh mất thời gian.
+
+T000119 [09:44:10] Chị Lan: Vâng. Em sẽ hoàn thành trước thứ Năm như đã hẹn.
+
+T000120 [09:44:35] Chị Hà: Nhân tiện, em muốn hỏi về tài liệu triển khai tổng thể. Có cần bao gồm phần hướng dẫn cài đặt cho người dùng không?
+
+T000121 [09:45:00] Anh Minh: Có, nhưng phần đó để sau. Giờ tập trung vào môi trường test và dữ liệu.
+
+T000122 [09:45:25] Anh Tuấn: Em thấy có vẻ nhiều task quá. Ai sẽ tổng hợp để tránh chồng chéo?
+
+T000123 [09:45:50] Anh Minh: Hà có thể làm việc đó? Em viết một bảng tổng hợp task hiện tại.
+
+T000124 [09:46:15] Chị Hà: Em có thể, nhưng cần thời gian. Em sợ ảnh hưởng đến tài liệu.
+
+T000125 [09:46:40] Anh Minh: Không sao, em làm khi rảnh. Không có deadline.
+
+T000126 [09:47:05] Chị Lan: Vậy task tổng hợp này không có người chịu trách nhiệm rõ ràng.
+
+T000127 [09:47:30] Anh Minh: Tạm thời Hà nhận, nhưng không gấp. Nếu ai cần thì tự theo dõi.
+
+T000128 [09:47:55] Anh Tuấn: Tôi thấy khó kiểm soát. Nhưng thôi, cứ làm.
+
+T000129 [09:48:20] Anh Minh: Chúng ta cần thống nhất ai sẽ review dữ liệu test của Lan?
+
+T000130 [09:48:45] Chị Hà: Nếu em có thời gian, em có thể review.
+
+T000131 [09:49:10] Anh Tuấn: Tôi cũng có thể review phần kỹ thuật.
+
+T000132 [09:49:35] Anh Minh: Vậy Hà và Tuấn cùng review. Nhưng chưa có deadline cho review. Cứ sau khi Lan xong.
+
+T000133 [09:50:00] Chị Lan: Em sẽ gửi bản draft cho mọi người vào thứ Tư.
+
+T000134 [09:50:25] Anh Minh: Tốt. Vậy có ai thấy vấn đề gì với lỗi đăng nhập không?
+
+T000135 [09:50:50] Anh Tuấn: Tôi muốn chắc rằng Khoa sẽ ưu tiên fix này. Nếu không, có thể bị trễ.
+
+T000136 [09:51:15] Anh Minh: Lan nhắc Khoa gấp. Còn Hà, em đã bắt đầu review tài liệu chưa?
+
+T000137 [09:51:40] Chị Hà: Em chưa, vì còn chờ Tuấn setup môi trường.
+
+T000138 [09:52:05] Anh Tuấn: Tôi sẽ xong môi trường vào thứ Năm như đã nói.
+
+T000139 [09:52:30] Anh Minh: Vậy mọi thứ vẫn theo kế hoạch. Còn gì nữa không?
+
+T000140 [09:52:55] Chị Lan: Em có một đề xuất: nên viết test case cho lỗi đăng nhập để dễ dàng kiểm tra.
+
+T000141 [09:53:20] Anh Minh: Ai sẽ viết? Lan hay Tuấn?
+
+T000142 [09:53:45] Chị Lan: Em có thể viết, nhưng cần hướng dẫn kỹ thuật từ Tuấn.
+
+T000143 [09:54:10] Anh Tuấn: Tôi sẽ cung cấp các tình huống cần test. Lan viết test case.
+
+T000144 [09:54:35] Anh Minh: Vậy thêm task “Viết test case đăng nhập” do Lan, không deadline cứng. Nhưng nên hoàn thành trước thứ Sáu.
+
+T000145 [09:55:00] Chị Lan: Vâng. Em sẽ cố gắng.
+
+T000146 [09:55:25] Anh Tuấn: Tôi thấy task nhiều, nhưng chưa có ai chịu trách nhiệm tổng thể.
+
+T000147 [09:55:50] Anh Minh: Tôi sẽ là người theo dõi chung. Mọi người báo cáo tiến độ qua email hàng ngày.
+
+T000148 [09:56:15] Chị Hà: Em đồng ý.
+
+T000149 [09:56:40] Chị Lan: Vâng.
+
+T000150 [09:57:05] Anh Tuấn: Okay. Vậy chúng ta chuyển sang topic khác hay kết thúc part này?
+
+T000151 [09:57:30] Anh Minh: Chưa kết thúc meeting, nhưng tôi nghĩ đã đủ cho phần này. Part sau chúng ta sẽ nói về tài liệu triển khai và các vấn đề còn tồn đọng.
+
+--- END OF PART P02 ---

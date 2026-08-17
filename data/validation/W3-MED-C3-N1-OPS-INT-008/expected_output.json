@@ -1,0 +1,37 @@
+{
+  "meeting_title": "Họp phối hợp triển khai và xử lý vấn đề",
+  "tasks": [
+    {
+      "task_name": "Fix widget overlap",
+      "assignee": "Lan",
+      "start_date": "2026-02-12",
+      "due_date": "2026-02-13",
+      "due_date_text": "thứ Năm 13/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Viết deployment rollback script",
+      "assignee": "Khoa",
+      "start_date": "2026-02-12",
+      "due_date": "2026-02-14",
+      "due_date_text": "thứ Sáu 14/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Update monitoring dashboard",
+      "assignee": "Trang",
+      "start_date": "2026-02-12",
+      "due_date": "2026-02-18",
+      "due_date_text": "trước thứ Năm",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Review release notes",
+      "assignee": "Minh",
+      "start_date": "2026-02-12",
+      "due_date": "2026-02-12",
+      "due_date_text": "trước thứ Sáu",
+      "status": "Proposed"
+    }
+  ]
+}

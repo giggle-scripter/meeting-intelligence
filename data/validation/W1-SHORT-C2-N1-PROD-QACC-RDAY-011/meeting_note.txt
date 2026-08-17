@@ -1,0 +1,8 @@
+ghi vội
+chủ đề: Rà soát lỗi đăng nhập
+kw: test case / staging / production / test / luon / fix / case
+- tôi sẽ kiểm tra log production xem có khác biệt gì không
+* Tôi sẽ debug lại luôn
+- ngày mai tôi sẽ đẩy bản fix lên staging để An test
+1) An chuẩn bị test case cho bản fix đó luôn
+- Anh yên tâm, em sẽ viết test case và test ngay khi có bản build

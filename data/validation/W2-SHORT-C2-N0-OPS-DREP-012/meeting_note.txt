@@ -1,0 +1,9 @@
+note nhanh
+chủ đề: Chuẩn bị bản phát hành nội bộ
+kw: release / note / chuan / khi / dong / goi / cai
+- Vậy chúng ta cần chuẩn bị release note trước khi đóng gói bản cài đặt
+* Minh, em sẽ chịu trách nhiệm mảng release note
+- Em sẽ sắp xếp thời gian làm
+1) Vậy mình sẽ thay thế dl cũ
+- dl mới cho task release note là ngày 13 tháng 2
+* Dự kiến sẽ hoàn tất vào cuối ngày 10 tháng 2 ? chưa chốt

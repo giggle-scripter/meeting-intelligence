@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W2-SHORT-C2-N1-IT-NOOWN-022",
+  "meeting_id": "W2-SHORT-C2-N1-IT-NOOWN-022",
+  "meeting_title": "Trao đổi kế hoạch tích hợp",
+  "meeting_date": "2026-02-16",
+  "wave": 2,
+  "wave_name": "wave_2_feature_isolation",
+  "labels": [
+    "task_without_owner",
+    "unresolved_owner"
+  ],
+  "objective": "{\"name\": \"task without owner\", \"code\": \"NOOWN\", \"labels\": \"task_without_owner,unresolved_owner\", \"requirements\": \"Một action được chốt là cần làm nhưng cuộc họp không chốt ai phụ trách.\"}",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_2_feature_isolation/W2-SHORT-C2-N1-IT-NOOWN-022/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-pro"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 827,
+    "turn_count": 26
+  },
+  "ground_truth": {
+    "available": true,
+    "expected_output_file": "expected_output.json",
+    "reviewer": "Codex",
+    "review_method": "full_transcript_and_final_state_audit",
+    "review_policy_version": "1.0",
+    "review_notes": "Reviewed against full transcript, final recap/state transitions, cancellation/handoff semantics, and deterministic date policy."
+  }
+}

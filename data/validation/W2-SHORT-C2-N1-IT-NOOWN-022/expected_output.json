@@ -1,0 +1,37 @@
+{
+  "meeting_title": "Trao đổi kế hoạch tích hợp",
+  "tasks": [
+    {
+      "task_name": "Xây dựng connector đồng bộ dữ liệu cũ - mới",
+      "assignee": "",
+      "start_date": "2026-02-16",
+      "due_date": "",
+      "due_date_text": "",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Cập nhật bộ tài liệu API cho các endpoint mới",
+      "assignee": "Mai",
+      "start_date": "2026-02-16",
+      "due_date": "2026-02-19",
+      "due_date_text": "trước thứ Sáu tuần này",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Lên danh sách test case cho luồng dữ liệu qua connector",
+      "assignee": "Hương",
+      "start_date": "2026-02-16",
+      "due_date": "",
+      "due_date_text": "",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Migrate dữ liệu mẫu từ DB cũ sang DB mới",
+      "assignee": "",
+      "start_date": "2026-02-16",
+      "due_date": "",
+      "due_date_text": "",
+      "status": "Proposed"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+MEETING_ID: W2-SHORT-C3-N1-PROD-SUGG-007
+CASE_LABELS: suggestion_not_committed,no_active_task
+MEETING_DATE: 2026-02-01
+PRIMARY_FEATURE: suggestion not committed
+TITLE: Theo dõi lỗi và tài liệu
+[09:00:00] Linh: Chào mọi người, buổi họp hôm nay tập trung vào quy trình theo dõi lỗi và tài liệu nội bộ. Tôi nhận thấy chất lượng bug report đang giảm, ảnh hưởng đến tiến độ fix bug.
+[09:00:15] Minh: Chính xác. Tuần trước tôi mất cả buổi chỉ để hỏi lại tester về một lỗi mơ hồ. Tôi nghĩ cần chuẩn hóa ngay cách báo cáo.
+[09:00:28] Trang: Tôi đồng ý. Phía QA cũng muốn cải thiện, nhưng đôi khi áp lực release khiến tụi tôi phải ưu tiên test hơn là viết tài liệu hay mô tả chi tiết.
+[09:00:42] Linh: Vậy vấn đề không chỉ là quy trình mà còn là tài liệu hướng dẫn cho QA. Tài liệu setup môi trường test hiện tại đã lỗi thời, đúng không?
+[09:00:56] Trang: Đúng, tôi phải tự cập nhật script mỗi lần có phiên bản mới. Nếu có một tài liệu chính thức, chúng tôi đỡ mất thời gian.
+[09:01:10] Minh: Tôi cũng thấy vậy. Hơn nữa, tài liệu hướng dẫn test cũng cần bổ sung thêm các kịch bản mới. Trang có thể phụ trách cập nhật không?
+[09:01:24] Trang: Ừ thì... tôi cũng muốn, nhưng hiện tại tôi đang tập trung cho đợt kiểm thử tính năng thanh toán mới, deadline cuối tháng. Có lẽ phải chờ xong đợt đó đã.
+[09:01:40] Linh: Tôi hiểu. Vậy khoản tài liệu setup chúng ta gác lại, không gấp. Còn về bug report, Minh có suggestion gì không?
+[09:01:53] Minh: Tôi nghĩ nên tạo một template bug report với các trường bắt buộc: tiêu đề, môi trường, các bước tái hiện, kết quả thực tế, kết quả mong đợi, mức độ nghiêm trọng. Trang, cô là người có nhiều kinh nghiệm nhất trong việc log bug, liệu cô có thể thiết kế template này không?
+[09:02:16] Trang: Template thì đơn giản, vài phút là xong. Nhưng vấn đề là áp dụng nó vào thực tế. Cần team lead đồng thuận và tất cả tester tuân thủ. Tôi thì không có thẩm quyền bắt buộc mọi người.
+[09:02:32] Linh: Đúng, đó là vấn đề về quản lý và đồng bộ. Có thể đưa vào checklist trong công cụ hiện tại, hoặc tạo một plugin nhỏ để tự động kiểm tra các trường trước khi submit.
+[09:02:48] Minh: Plugin thì hay nhưng cần thời gian phát triển. Còn trước mắt, nếu Trang tạo template và phổ biến trong nhóm QA thì đã cải thiện được phần nào.
+[09:03:03] Trang: Nhưng mà nhóm QA có năm người, tôi không thể bắt họ dùng nếu không có chỉ đạo chính thức. Tôi nghĩ Linh nên ra thông báo chính thức thì hơn.
+[09:03:18] Linh: Được rồi, để tôi xem xét. Tôi sẽ trao đổi với team lead về việc này. Nhưng giờ chưa quyết định gì nhé. Còn ai có ý kiến khác không?
+[09:03:32] Minh: Tôi vẫn nghĩ giải pháp template là nhanh và rẻ nhất. Dù sao cũng nên thử. Nếu Trang quá bận, có thể nhờ Mai hỗ trợ làm cùng, vì Mai cũng có kinh nghiệm viết test case.
+[09:03:48] Trang: Mai cũng đang phụ trách kiểm thử hiệu năng, e là cũng không rảnh. Thôi tạm thời cứ ghi nhận ý tưởng này đã, khi nào có thời gian tôi sẽ ngồi lại với Mai.
+[09:04:02] Linh: OK, ghi nhận. Không cần gấp, quan trọng là chất lượng. Chuyển sang tài liệu API cho bên thứ ba, gần đây có thay đổi nhưng chưa cập nhật. Anh Minh có thông tin gì không?
+[09:04:18] Minh: Đúng, endpoint thanh toán thay đổi response, nhưng tài liệu vẫn ghi cũ. Bên đối tác phàn nàn. Tôi nghĩ cần ai đó cập nhật gấp.
+[09:04:32] Linh: Cái này cần làm sớm. Nhưng hiện tại team backend đang cao điểm, không ai rảnh. Tôi sẽ đưa vào danh sách việc cần làm và phân bổ khi có người.
+[09:04:47] Trang: Có thể tạm thời gửi email thông báo thay đổi cho đối tác, rồi cập nhật tài liệu sau.
+[09:04:59] Linh: Cũng được. Tôi sẽ cân nhắc soạn email đó. Còn tài liệu API thì để backlog. Tóm lại buổi họp hôm nay chúng ta ghi nhận các ý tưởng cải thiện bug report và tài liệu, nhưng chưa có kế hoạch hành động cụ thể do nguồn lực. Để tuần sau mình xem lại.
+[09:05:17] Minh: Đồng ý. Tôi mong là sẽ sớm có cải thiện, chứ tình trạng này khiến dev rất mệt.
+[09:05:28] Trang: Tôi cũng mong vậy. Cảm ơn mọi người.
+[09:05:34] Linh: Cảm ơn, kết thúc buổi họp.
+[09:05:42] Minh: Bye nhé.

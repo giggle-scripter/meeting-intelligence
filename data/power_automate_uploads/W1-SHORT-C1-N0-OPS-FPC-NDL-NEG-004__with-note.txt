@@ -1,0 +1,63 @@
+=== MEETING METADATA ===
+meeting_id: W1-SHORT-C1-N0-OPS-FPC-NDL-NEG-004
+meeting_title: Chuẩn bị bản demo
+meeting_date: 2026-01-19
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+ghi vội
+chủ đề: Chuẩn bị bản demo
+kw: moi truong / api / uat / slide / chuan / demo / truong
+- Lan, em owner phần kỹ thuật, chuẩn bị slide demo các API
+* Vậy em sẽ chuẩn bị môi trường + slide API
+- Lần này em sẽ test offline trước
+1) Vậy em sẽ bắt đầu làm slide API và môi trường
+- Mà Tuấn, anh soạn email gửi khách hàng trước demo
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[00:00:05] Minh: Chào mọi người, hôm nay chúng ta họp để chuẩn bị bản demo cho khách hàng vào tuần sau. Mình cần thống nhất nội dung và phân công.
+[00:00:15] Lan: Em thấy lần trước khách hàng phản hồi demo hơi sơ sài, lần này cần đầu tư hơn.
+[00:00:22] Tuấn: Ừ, mình cần tập trung vào tính năng chính thôi. Mà mình có hai ngày để chuẩn bị đúng không?
+[00:00:28] Minh: Không, thực ra là còn ba ngày, nhưng thứ Sáu phải chốt. Hôm nay thứ Tư rồi.
+[00:00:35] Lan: Vậy gấp quá. Em nghĩ mình nên chia việc ra.
+[00:00:40] Minh: Ý hay. Lan, em phụ trách phần kỹ thuật, chuẩn bị slide demo các API.
+[00:00:48] Lan: Em ok. Em sẽ làm slide API.
+[00:00:52] Minh: Tuấn, anh lo phần tổng quan dự án và lợi ích kinh doanh.
+[00:00:58] Tuấn: Được, anh sẽ lo. Mà có cần demo live hay chỉ slide?
+[00:01:05] Minh: Cả hai, nhưng slide là chính. Mình cần file demo khả quan.
+[00:01:12] Lan: Em đề xuất thêm phần so sánh với đối thủ.
+[00:01:16] Minh: Cũng được, nhưng chưa chốt nhé, để xem thời gian.
+[00:01:22] Tuấn: Anh thấy nên tập trung vào câu chuyện khách hàng hơn.
+[00:01:28] Minh: Ừ, mình cần câu chuyện mạch lạc. Tuấn, anh viết kịch bản demo đi.
+[00:01:34] Tuấn: Ok, anh viết.
+[00:01:38] Lan: Phần demo API có cần chuẩn bị môi trường test không?
+[00:01:44] Minh: Có, em setup môi trường luôn.
+[00:01:48] Lan: Vậy em sẽ chuẩn bị môi trường và slide API.
+[00:01:52] Minh: Nhớ kiểm tra kết nối trước. Hồi trước bị lỗi demo.
+[00:01:58] Tuấn: Anh nhắc, lần trước lỗi mạng suýt hỏng việc.
+[00:02:04] Lan: Lần này em sẽ test offline trước.
+[00:02:08] Minh: Tốt. Còn phần thiết kế slide, mình dùng template cũ hay làm mới?
+[00:02:14] Tuấn: Làm mới đi, khách hàng mới.
+[00:02:18] Lan: Em nghĩ template cũ ổn, chỉ cần chỉnh sửa.
+[00:02:22] Minh: Để em quyết: dùng template cũ nhưng thay banner. Lan, em lo việc đó.
+[00:02:28] Lan: Dạ.
+[00:02:30] Minh: Còn nội dung demo, mình cần highlight tính năng gì?
+[00:02:36] Tuấn: Tính năng tìm kiếm và báo cáo.
+[00:02:40] Lan: Và cả dashboard mới.
+[00:02:44] Minh: Ừ, dashboard mới là điểm nhấn. Tuấn, anh chuẩn bị phần lợi ích của dashboard.
+[00:02:50] Tuấn: Anh ghi nhận.
+[00:02:54] Lan: Em thấy cần thêm số liệu hiệu suất.
+[00:02:58] Minh: Cái đó anh có, để anh gửi em sau.
+[00:03:02] Tuấn: Hay mình thêm một slide so sánh trước sau khi dùng hệ thống?
+[00:03:06] Minh: Ý hay, nhưng để cuối buổi thảo luận thêm. Giờ phân công xong, mỗi người tự làm.
+[00:03:14] Lan: Vậy em sẽ bắt đầu làm slide API và môi trường.
+[00:03:18] Tuấn: Anh làm kịch bản và tổng quan.
+[00:03:22] Minh: Cảm ơn mọi người. Nhớ kiểm tra chéo slide trước khi tổng duyệt.
+[00:03:28] Lan: Khi nào tổng duyệt?
+[00:03:30] Minh: Chiều thứ Sáu. Mọi người cố gắng hoàn thành trước đó.
+[00:03:36] Tuấn: Ok.
+[00:03:38] Lan: Em hỏi tí, có cần chuẩn bị handout giấy không?
+[00:03:42] Minh: Không cần, toàn bộ kỹ thuật số. Mà Tuấn, anh soạn email gửi khách hàng trước demo nhé.
+[00:03:50] Tuấn: Anh làm.
+[00:03:52] Minh: Thế nhé, họp kết thúc. Cố gắng lên!
+[00:03:56] Lan: Dạ.
+[00:03:58] Tuấn: Ok.

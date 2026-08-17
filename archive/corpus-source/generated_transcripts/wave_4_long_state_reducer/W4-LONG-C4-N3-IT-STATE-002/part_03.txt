@@ -1,0 +1,96 @@
+MEETING_ID: W4-LONG-C4-N3-IT-STATE-002
+PART: P03/5
+
+T000111 [09:19:00] Minh: Tiếp tục meeting, tôi muốn quay lại vấn đề tài liệu triển khai mà chúng ta đã thảo luận ở đầu buổi. Lan, tiến độ của task đó thế nào?
+
+T000112 [09:19:12] Lan: Dạ, em đã viết xong phần yêu cầu hệ thống và các bước cài đặt. Phần cấu hình database và rollback đang chờ Tuấn. Tuy nhiên, em đang gặp khó khăn về thời gian vì có nhiều việc khác.
+
+T000113 [09:19:25] Minh: Cụ thể em bận những gì? Có thể ưu tiên tài liệu hơn không?
+
+T000114 [09:19:35] Lan: Em còn phải review code cho team và chuẩn bị cho sprint review. Em sợ không kịp deadline 25/02.
+
+T000115 [09:19:46] Minh: Vậy em có đề xuất gì không?
+
+T000116 [09:19:53] Lan: Em nghĩ nên chuyển task tài liệu cho Hùng, vì Hùng am hiểu môi trường và có thể viết chính xác hơn. Em sẽ hỗ trợ review.
+
+T000117 [09:20:05] Hùng: Ầy, em cũng đang ôm task kiểm tra môi trường test và điều tra lỗi đăng nhập. Liệu có quá tải không?
+
+T000118 [09:20:15] Minh: Tôi thấy ý Lan hợp lý. Hùng, em đã có kiến thức về hệ thống, lại đang làm việc với staging. Việc viết tài liệu triển khai sẽ bổ trợ cho công việc hiện tại.
+
+T000119 [09:20:27] Hùng: Nếu vậy, em nhận, nhưng cần Lan chuyển giao những phần đã viết và hướng dẫn cụ thể.
+
+T000120 [09:20:37] Lan: Dạ, em sẽ gửi email summary và các file draft ngay sau meeting.
+
+T000121 [09:20:47] Minh: Vậy tôi chính thức handoff task "Hoàn thiện tài liệu triển khai" từ Lan sang Hùng. Deadline vẫn giữ nguyên 25/02 nhé.
+
+T000122 [09:20:58] Hùng: Khoan, em muốn hỏi: deadline 25/02 có khả thi không nếu em mới bắt đầu? Em còn phải xử lý lỗi đăng nhập.
+
+T000123 [09:21:08] Lan: Em nghĩ nên đẩy deadline lên 28/02 để Hùng có thời gian. Công việc hiện tại của em cũng bớt.
+
+T000124 [09:21:18] Minh: 28/02 là thứ bảy. Liệu có ổn không? Tốt nhất là 27/02, thứ sáu.
+
+T000125 [09:21:27] Hùng: 27/02 cũng được, nhưng em cần Lan và Tuấn hỗ trợ phần cấu hình database sớm.
+
+T000126 [09:21:36] Lan: Tuấn sẽ gửi phần đó vào ngày mai. Em sẽ đôn đốc.
+
+T000127 [09:21:45] Minh: Đồng ý. Vậy deadline mới cho task tài liệu là 27/02. Điều chỉnh này được ghi nhận.
+
+T000128 [09:21:55] Hùng: Còn task "Kiểm tra môi trường test staging" của em, ban đầu không deadline. Giờ em thấy nên đặt deadline để tránh trễ.
+
+T000129 [09:22:05] Minh: Đúng, lúc trước tôi để mở vì phụ thuộc infra. Nhưng giờ có tiến triển gì chưa?
+
+T000130 [09:22:14] Hùng: Em vừa nhận được quyền truy cập sáng nay. Có thể bắt đầu test ngay.
+
+T000131 [09:22:23] Minh: Vậy em đề xuất deadline cho task test là bao lâu?
+
+T000132 [09:22:31] Hùng: Em nghĩ 26/02 là hợp lý, vì còn phải viết báo cáo.
+
+T000133 [09:22:40] Lan: 26/02 gần với deadline tài liệu 27/02, có thể gây áp lực. Nhưng nếu em làm song song thì ok.
+
+T000134 [09:22:50] Minh: Được, tôi approve deadline 26/02 cho task "Kiểm tra môi trường test staging". Như vậy task cũ từ P01 giờ có deadline rõ ràng.
+
+T000135 [09:23:00] Hùng: Rõ. Em sẽ cập nhật danh sách task.
+
+T000136 [09:23:08] Minh: Vậy chúng ta đã có hai thay đổi: handoff task tài liệu từ Lan sang Hùng, và thêm deadline cho task test môi trường. Còn gì cần thảo luận không?
+
+T000137 [09:23:20] Lan: Em muốn hỏi về chất lượng tài liệu sau handoff: Hùng có cần em review bản cuối không?
+
+T000138 [09:23:30] Hùng: Có, em muốn Lan review trước khi gửi Minh. Vì em không rành phần bảo mật.
+
+T000139 [09:23:40] Minh: Tốt. Vậy Lan sẽ là reviewer cho task tài liệu. Ghi nhận điều đó.
+
+T000140 [09:23:49] Lan: Em ok.
+
+T000141 [09:23:56] Hùng: Như vậy task test môi trường có cần ai review không?
+
+T000142 [09:24:04] Minh: Có thể để Lan xem báo cáo test, nhưng chưa chốt. Tạm thời chưa cần reviewer.
+
+T000143 [09:24:14] Lan: Em thấy nên có, vì kết quả test ảnh hưởng đến tài liệu.
+
+T000144 [09:24:22] Minh: Vậy chúng ta sẽ assign Lan làm reviewer cho cả hai task. Có ý kiến gì không?
+
+T000145 [09:24:30] Hùng: Em ok.
+
+T000146 [09:24:37] Minh: Tốt.
+
+T000147 [09:24:45] Hùng: Em cũng muốn lưu ý: tài liệu triển khai cần đề cập đến lỗi đăng nhập mới phát hiện, liệu có nên đưa vào không?
+
+T000148 [09:24:55] Lan: Nếu lỗi chưa được fix, tài liệu không nên include vì sẽ lỗi thời. Chỉ ghi chú.
+
+T000149 [09:25:03] Minh: Đúng, chỉ ghi chú rằng đang có investigation. Đừng đưa vào hướng dẫn chính thức.
+
+T000150 [09:25:12] Hùng: Vâng.
+
+T000151 [09:25:19] Lan: Em muốn hỏi thêm về nội dung migration trong tài liệu: có cần không? Hay để riêng?
+
+T000152 [09:25:28] Minh: Migration chưa có quyết định, nên tạm thời bỏ qua. Tập trung vào deploy từ đầu.
+
+T000153 [09:25:37] Hùng: Em đồng ý.
+
+T000154 [09:25:44] Minh: Vậy chúng ta khép lại phần này. Có ai có câu hỏi nào khác về tài liệu không?
+
+T000155 [09:25:53] Lan: Dạ không.
+
+T000156 [09:25:59] Minh: Tốt. Chúng ta sẽ chuyển sang các vấn đề khác ở part tiếp theo.
+
+--- END OF PART P03 ---

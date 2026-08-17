@@ -1,0 +1,135 @@
+MEETING_ID: W4-LONG-C4-N3-IT-STATE-002
+PART: P01/5
+CASE_LABELS: long_meeting,long_distance_correction,owner_handoff,task_cancellation,topic_revisited,recap_duplicate_risk
+MEETING_DATE: 2026-02-16
+TITLE: Họp điều phối triển khai hệ thống
+
+T000001 [09:00:00] Minh (PM): Chào mọi người, cảm ơn đã tham gia meeting hôm nay. Chúng ta bắt đầu phiên thảo luận về triển khai hệ thống mới. Trước tiên, tôi muốn điểm qua agenda: hôm nay chúng ta sẽ tập trung vào môi trường test và tài liệu triển khai. Sau đó phân bổ công việc cụ thể.
+
+T000002 [09:00:15] Lan (Tech Lead): Dạ, em sẵn sàng. Bên em đã chuẩn bị một số tài liệu sơ bộ, nhưng còn vài phần chưa review kỹ.
+
+T000003 [09:00:28] Minh: Tốt. Đầu tiên, về môi trường test – Hùng, anh có cập nhật gì về tình hình server staging không?
+
+T000004 [09:00:42] Hùng (Dev): Hiện tại server staging đã được cấp, nhưng chưa config đầy đủ. Em đang chờ team infra bàn giao quyền truy cập. Dự kiến trong tuần này xong.
+
+T000005 [09:00:55] Minh: Okay. Vậy chúng ta cần một task để kiểm tra và xác nhận môi trường test hoạt động ổn định. Tôi muốn giao cho Hùng, nhưng chưa có deadline cụ thể vì còn phụ thuộc vào infra. Chúng ta sẽ ghi nhận task này để theo dõi.
+
+T000006 [09:01:10] Lan: Em nghĩ cũng nên có thời hạn tham khảo, ví dụ cuối tháng 2.
+
+T000007 [09:01:18] Minh: Ừm, nhưng tôi sợ sẽ gây áp lực không cần thiết nếu infra chưa kịp. Thôi, tạm thời để mở, khi nào có tiến triển thì cập nhật sau.
+
+T000008 [09:01:31] Hùng: Vậy em sẽ note lại: "Kiểm tra môi trường test staging" – không deadline.
+
+T000009 [09:01:40] Minh: Chính xác. Tiếp theo, về tài liệu triển khai. Lan, bên em có bản hướng dẫn deploy chưa?
+
+T000010 [09:01:52] Lan: Dạ, có một bản draft, nhưng còn thiếu phần cấu hình database và script rollback. Em đã phân công bạn Tuấn viết thêm.
+
+T000011 [09:02:05] Minh: Tốt. Tôi muốn một task riêng để "Hoàn thiện tài liệu triển khai", giao cho Lan. Deadline đặt vào ngày 25/02 nhé, vì sau đó chúng ta cần review toàn bộ.
+
+T000012 [09:02:18] Lan: Em nhận. Nhưng mà tài liệu này có nhiều phần liên quan đến môi trường test, nếu test chưa ổn thì khó viết chính xác.
+
+T000013 [09:02:30] Minh: Đúng, vậy nên task "Kiểm tra môi trường test" nên xong trước. Nhưng tôi không muốn đặt chồng chéo deadline. Cứ để hai task song song, đến khi có thông tin thì cập nhật.
+
+T000014 [09:02:44] Hùng: Em có một thắc mắc: task tài liệu triển khai có cần bao gồm cả hướng dẫn cho team Ops không? Hay chỉ dành cho dev?
+
+T000015 [09:02:57] Lan: Theo ý Minh, ban đầu nên viết cho dev, sau đó mở rộng cho Ops. Nhưng để em hỏi lại sau.
+
+T000016 [09:03:08] Minh: Ừ, nội dung chính là cho dev, nhưng cần ghi chú những điểm Ops cần biết. Lan, chị ghi nhận ý này vào task nhé.
+
+T000017 [09:03:20] Lan: Vâng.
+
+T000018 [09:03:25] Minh: Còn ai có vấn đề gì về môi trường test hay muốn phản ánh khó khăn không?
+
+T000019 [09:03:35] Hùng: Thực ra em thấy môi trường staging hiện tại không có monitoring, nếu test mà có lỗi thì khó phát hiện sớm.
+
+T000020 [09:03:47] Minh: Đó là một vấn đề. Nhưng phạm vi meeting hôm nay chỉ gói gọn trong môi trường test và tài liệu. Monitoring sẽ bàn sau. Em cứ ghi nhận để tuần sau thảo luận.
+
+T000021 [09:04:01] Lan: Vậy tôi xin phép chốt task thứ hai: "Hoàn thiện tài liệu triển khai", deadline 25/02, owner Lan.
+
+T000022 [09:04:12] Minh: Chính xác. Và task thứ nhất: "Kiểm tra môi trường test staging", owner Hùng, không deadline cố định.
+
+T000023 [09:04:25] Hùng: Em đã note lại. Em sẽ cập nhật khi có quyền truy cập server.
+
+T000024 [09:04:32] Minh: Tốt. Bây giờ tôi muốn chuyển sang chi tiết tài liệu. Lan, chị trình bày sơ lược cấu trúc tài liệu đang dự kiến nhé.
+
+T000025 [09:04:45] Lan: Hiện tại tài liệu gồm 3 phần: yêu cầu hệ thống, các bước cài đặt, và cấu hình sau deploy. Phần cấu hình database mới chỉ có skeleton. Tuấn đang viết nốt.
+
+T000026 [09:05:00] Minh: Có phần rollback không?
+
+T000027 [09:05:07] Lan: Chưa có. Em định thêm sau khi Tuấn xong phần chính.
+
+T000028 [09:05:14] Minh: Tôi nghĩ rollback là quan trọng, nên đưa vào task luôn. Nhưng thôi, để lần sau review.
+
+T000029 [09:05:25] Hùng: Về yêu cầu hệ thống, em thấy tài liệu đang ghi cần Java 11, nhưng môi trường mới của chúng ta đã nâng lên Java 17. Liệu có cập nhật không?
+
+T000030 [09:05:38] Lan: Ồ, cảm ơn Hùng. Đúng là em chưa cập nhật. Em sẽ sửa ngay trong draft.
+
+T000031 [09:05:47] Minh: Như vậy cần bổ sung task phụ là "Cập nhật yêu cầu hệ thống trong tài liệu". Nhưng để tránh trùng, chúng ta gộp vào task "Hoàn thiện tài liệu triển khai" nhé, Lan.
+
+T000032 [09:06:00] Lan: Vâng, em sẽ đưa nội dung đó vào.
+
+T000033 [09:06:07] Minh: Còn vấn đề nào khác không? Hùng, anh có câu hỏi gì về tiến độ tài liệu không?
+
+T000034 [09:06:17] Hùng: Dạ không. Nhưng em muốn hỏi về quy trình test: sau khi môi trường test sẵn sàng, ai sẽ là người chạy test chính?
+
+T000035 [09:06:30] Minh: Tạm thời chưa phân công cụ thể. Lúc đó chúng ta sẽ họp lại. Hôm nay chỉ thiết lập nền tảng thôi.
+
+T000036 [09:06:42] Lan: Em nghĩ nếu môi trường test ổn, em sẽ assign task test cho đợt sau.
+
+T000037 [09:06:50] Minh: Được. Bây giờ tôi muốn kiểm tra schedule tổng thể. Ai thấy có rủi ro về timeline không?
+
+T000038 [09:07:00] Hùng: Em lo là nếu infra giao muộn, task test sẽ bị trễ, ảnh hưởng đến tài liệu vì phải điều chỉnh.
+
+T000039 [09:07:12] Minh: Đúng, đó là negative. Chúng ta sẽ theo dõi sát, nếu quá ngày 20/02 mà chưa có quyền, tôi sẽ lên tiếng với team infra.
+
+T000040 [09:07:25] Lan: Vậy em đề xuất checkpoint: nếu đến 20/02 chưa có thông tin về staging, chúng ta review risk.
+
+T000041 [09:07:34] Minh: Đồng ý, mặc dù chưa phải task chính thức, nhưng hãy ghi nhận lại.
+
+T000042 [09:07:42] Hùng: Vậy em sẽ nhắc trong daily meeting.
+
+T000043 [09:07:50] Minh: Okay. Quay lại chủ đề tài liệu, Lan, khi nào chị có bản draft hoàn chỉnh để team xem trước?
+
+T000044 [09:08:02] Lan: Em dự định cuối tuần này gửi bản nháp, nhưng deadline task là 25/02 nên có thể sớm hơn nếu Tuấn kịp.
+
+T000045 [09:08:14] Minh: Tốt. Tôi muốn mọi người xem qua draft sớm để góp ý.
+
+T000046 [09:08:22] Lan: Dạ. Em sẽ cố gắng.
+
+T000047 [09:08:29] Minh: Còn Hùng, về task test môi trường, em có cần ai support không?
+
+T000048 [09:08:38] Hùng: Có lẽ em cần bạn Tuấn hỗ trợ phần script kiểm tra kết nối database, vì Tuấn rành hơn.
+
+T000049 [09:08:48] Minh: Vậy em sẽ nhắn Tuấn sau meeting. Nhưng Tuấn hiện đang viết tài liệu, liệu có quá tải không?
+
+T000050 [09:08:59] Hùng: Em nghĩ không, vì việc script kết nối chỉ mất vài tiếng.
+
+T000051 [09:09:06] Minh: Được. Vậy tôi sẽ đề nghị Tuấn hỗ trợ Hùng phần đó. Tuy nhiên vẫn ưu tiên tài liệu trước.
+
+T000052 [09:09:18] Lan: Em thấy ok. Em sẽ điều phối Tuấn.
+
+T000053 [09:09:25] Minh: Vâng. Bây giờ tôi muốn lưu ý một điểm: task "Kiểm tra môi trường test staging" và "Hoàn thiện tài liệu triển khai" có nội dung hơi giống nhau ở chỗ đều liên quan đến môi trường. Cần phân biệt rõ.
+
+T000054 [09:09:40] Lan: Đúng, task của em về tài liệu, còn task của Hùng về kiểm tra thực tế. Không bị chồng.
+
+T000055 [09:09:48] Minh: Tốt. Tôi không muốn sau này có nhầm lẫn. Em cũng cảm thấy task test không có deadline nên dễ bị lơ là, nhưng cứ để như vậy.
+
+T000056 [09:10:00] Hùng: Em sẽ báo cáo tiến độ hàng tuần để không bị quên.
+
+T000057 [09:10:08] Minh: Ừ. Ok. Chúng ta có vẻ đã đi qua phần chính. Có ai muốn thảo luận thêm về tài liệu không?
+
+T000058 [09:10:18] Lan: Em muốn hỏi về format tài liệu: nên viết theo mẫu cũ hay dùng template mới?
+
+T000059 [09:10:27] Minh: Dùng template mới, cái mà team UX đã soạn. Em nhé?
+
+T000060 [09:10:34] Lan: Vâng. Em sẽ theo.
+
+T000061 [09:10:39] Hùng: Em có một câu hỏi nhỏ: Khi nào có meeting tiếp theo để review tài liệu?
+
+T000062 [09:10:48] Minh: Dự kiến cuối tháng 2, sau khi tài liệu gần xong. Nhưng hôm nay chưa đặt lịch.
+
+T000063 [09:10:57] Lan: Ok. Em sẽ báo khi nào bản draft sẵn sàng.
+
+T000064 [09:11:04] Minh: Tốt. Như vậy, chúng ta tạm thời kết thúc nội dung hôm nay. Cảm ơn mọi người đã đóng góp. Chúng ta sẽ tiếp tục ở part sau.
+
+--- END OF PART P01 ---

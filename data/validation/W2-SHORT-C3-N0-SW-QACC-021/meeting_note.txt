@@ -1,0 +1,9 @@
+note nhanh
+chủ đề: Rà soát công việc sprint
+kw: du lieu / chac / chan / bao / khi / build / san
+- Chắc chắn rồi, tôi sẽ báo em ngay khi build sẵn sàng
+* Tuyệt, em sẽ test kỹ phần luồng thanh toán với thẻ quốc tế
+- Tôi cần kiểm tra lại workload
+1) tôi sẽ tạo task ngay và cập nhật vào hệ thống
+- Vậy tổng kết: sprint này mình có thêm 1 task phân tích dữ liệu giao cho Minh, các đầu việc khác vẫn theo kế hoạch
+* Có ảnh hưởng đến dl không anh? ? chưa chốt

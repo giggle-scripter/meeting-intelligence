@@ -1,0 +1,106 @@
+MEETING_ID: W4-LONG-C5-N1-SW-STATE-009
+PART: P03/5
+
+T000118 [09:55:05] Minh: Chúng ta tiếp tục. Hôm nay tôi muốn quay lại vấn đề tài liệu triển khai và các task đã giao ở part 1. Lan, tình hình bản draft của em thế nào?
+
+T000119 [09:55:35] Lan: Dạ, em đã viết xong phần staging, gồm hướng dẫn setup và deploy. Tuy nhiên, phần troubleshooting vẫn còn thiếu vì chưa có thông tin từ lỗi đăng nhập.
+
+T000120 [09:56:00] Hà: Em đã test xong lỗi đăng nhập, Tuấn fix ổn. Em có thể cung cấp danh sách lỗi và giải pháp cho Lan ngay bây giờ.
+
+T000121 [09:56:30] Tuấn: Đúng rồi, em vừa deploy bản fix lên staging sáng nay. Hà test qua và OK.
+
+T000122 [09:56:55] Minh: Tốt. Vậy Lan cập nhật luôn phần troubleshooting dựa trên dữ liệu của Hà. Nhưng tôi muốn bàn về việc phân công lại task "Viết tài liệu triển khai chi tiết".
+
+T000123 [09:57:25] Lan: Anh Minh, em có một vấn đề. Tuần sau em bận đào tạo BA mới, không đủ thời gian để hoàn thành bản review 07/03. Em đề xuất chuyển task này cho Hà hoặc Tuấn.
+
+T000124 [09:57:55] Hà: Em có thể nhận, nhưng em không rành về CI/CD và pipeline. Chỉ viết được phần test case và dữ liệu.
+
+T000125 [09:58:25] Tuấn: Em có thể viết phần kỹ thuật, nhưng không biết format tài liệu chuẩn của BA. Có thể cùng làm?
+
+T000126 [09:58:50] Minh: Handoff ở đây: Lan chuyển task "Viết tài liệu triển khai chi tiết" cho Tuấn và Hà cùng đảm nhận. Tuấn viết phần kỹ thuật, Hà viết phần test và dữ liệu, Lan review. Đồng ý?
+
+T000127 [09:59:20] Lan: Em đồng ý. Em sẽ chuyển bản draft hiện tại cho Tuấn và Hà sau meeting.
+
+T000128 [09:59:45] Tuấn: Em OK, nhưng cần thời gian để học format tài liệu. Lan có thể cho em template không?
+
+T000129 [10:00:10] Hà: Em cũng OK. Em sẽ viết phần liên quan đến test case và error handling.
+
+T000130 [10:00:35] Minh: Vậy chúng ta đã có chủ mới. Bây giờ về deadline: trước đó task này chỉ có mục tiêu review 07/03, chưa có deadline chính thức. Tôi muốn đặt deadline chính thức cho bản hoàn chỉnh là 14/03.
+
+T000131 [10:01:05] Hà: 14/03? Hơi gấp, vì em còn task môi trường test với deadline 28/02. Em sợ quá tải.
+
+T000132 [10:01:30] Tuấn: Em cũng có task tạo dataset test đăng nhập chưa deadline. Nếu dồn làm tài liệu, em có thể trễ.
+
+T000133 [10:02:00] Minh: Tôi hiểu. Vậy ta thay đổi deadline của task "Hoàn thiện môi trường test" từ 28/02 lên 05/03 để giảm áp lực. Như vậy, Hà và Tuấn có thêm thời gian.
+
+T000134 [10:02:30] Hà: 05/03 cũng được, nhưng em phải kiểm tra lại các phụ thuộc. Nếu DevOps chưa deploy frontend, vẫn có thể trễ.
+
+T000135 [10:02:55] Tuấn: Em có thể đẩy nhanh phần backend, nhưng frontend phải chờ Phúc.
+
+T000136 [10:03:20] Minh: Vậy deadline mới cho "Hoàn thiện môi trường test" là 05/03, và "Viết tài liệu triển khai chi tiết" là 14/03. Nhưng lưu ý: hai task này có chồng chéo, cần phối hợp.
+
+T000137 [10:03:50] Lan: Em xin phép hỏi: task tài liệu sau khi handoff, em vẫn là reviewer, nhưng deadline 14/03 có áp dụng cho bản em review không?
+
+T000138 [10:04:15] Minh: Áp dụng cho bản hoàn chỉnh. Em review trong vòng 2 ngày sau khi nhận bản draft từ Tuấn và Hà.
+
+T000139 [10:04:40] Hà: Vậy về mặt thời gian, em có thể tập trung vào task môi trường test đến 05/03, sau đó mới làm tài liệu. Nhưng tài liệu deadline 14/03, có kịp không?
+
+T000140 [10:05:05] Tuấn: Nếu Hà làm môi trường test xong trước 05/03, em có thể bắt đầu tài liệu ngay phần kỹ thuật. Thời gian còn 9 ngày cho tài liệu, khả thi.
+
+T000141 [10:05:30] Minh: OK. Như vậy, ta có sự thay đổi: owner task "Viết tài liệu triển khai chi tiết" chuyển từ Lan sang Tuấn và Hà; deadline của task "Hoàn thiện môi trường test" dời từ 28/02 lên 05/03. Mọi người xác nhận?
+
+T000142 [10:06:00] Hà: Em xác nhận.
+
+T000143 [10:06:15] Tuấn: Em xác nhận.
+
+T000144 [10:06:30] Lan: Em xác nhận, em sẽ hỗ trợ review.
+
+T000145 [10:06:50] Minh: Tốt. Nhưng tôi muốn nhấn mạnh: task "Tạo dataset test đăng nhập" vẫn của Tuấn, chưa có deadline. Có cần điều chỉnh không?
+
+T000146 [10:07:15] Tuấn: Em có thể gộp dataset vào task môi trường test, vì khi môi trường test hoàn thiện, dataset đã có sẵn. Nhưng nếu giữ riêng, em nghĩ deadline nên sau 05/03.
+
+T000147 [10:07:40] Hà: Đồng ý, vì dataset đăng nhập là một phần của dữ liệu test tổng thể. Task cũ có thể cover.
+
+T000148 [10:08:00] Minh: Vậy ta không tạo thêm deadline cho task đó. Mọi thay đổi đã được ghi nhận.
+
+T000149 [10:08:20] Hà: Em có một lo ngại: task môi trường test deadline 05/03, nhưng em chưa có log server từ Tuấn ở part 1. Tuấn đã xử lý chưa?
+
+T000150 [10:08:45] Tuấn: Em đã thêm log cho các endpoint chính chiều hôm qua. Còn một số endpoint phụ, em sẽ hoàn thành trong ngày.
+
+T000151 [10:09:10] Minh: Vậy nhắc lại tiến độ: Tuấn xử lý nốt log, Hà hoàn thiện verify môi trường test. Đến 05/03, môi trường test phải sẵn sàng.
+
+T000152 [10:09:35] Lan: Em có thể giúp viết tài liệu phần môi trường test dựa trên kết quả của Hà, nhưng vì handoff rồi nên em chỉ review.
+
+T000153 [10:10:00] Hà: Cảm ơn Lan. Em sẽ chuyển kết quả test cho Tuấn để viết tài liệu phần kỹ thuật.
+
+T000154 [10:10:25] Tuấn: OK. Vậy chúng ta sẽ sync sau ngày 05/03.
+
+T000155 [10:10:50] Minh: Còn vấn đề gì khác về tài liệu hay môi trường test không?
+
+T000156 [10:11:10] Hà: Em có một câu hỏi: deadline 14/03 cho tài liệu, nhưng nếu trong lúc viết phát sinh lỗi mới trên môi trường test, tài liệu có cần cập nhật không?
+
+T000157 [10:11:40] Tuấn: Có, nhưng đó là phiên bản sau. Bản 14/03 là ổn định với trạng thái hiện tại.
+
+T000158 [10:12:00] Minh: Đúng vậy. Chúng ta sẽ có các bản cập nhật sau này.
+
+T000159 [10:12:20] Lan: Em muốn confirm: sau 14/03, ai sẽ maintain tài liệu? Có cần assign chính thức không?
+
+T000160 [10:12:45] Minh: Để sau 14/03 chúng ta bàn tiếp. Có thể Tuấn hoặc Hà maintain, nhưng chưa chốt.
+
+T000161 [10:13:05] Hà: Em nghĩ nên giữ Lan làm maintainer sau khi review vì BA chuyên trách.
+
+T000162 [10:13:25] Tuấn: Em đồng ý.
+
+T000163 [10:13:45] Minh: Vậy tạm thời Lan là maintainer. Nhưng Lan đã handoff owner, nên đây chỉ là dự kiến.
+
+T000164 [10:14:10] Lan: Vâng, em ghi nhận.
+
+T000165 [10:14:30] Minh: Chúng ta đã giải quyết được nhiều việc. Part 3 sắp kết thúc, nhưng còn một điều: task "Hoàn thiện môi trường test" deadline mới 05/03, cần được cập nhật trong Jira.
+
+T000166 [10:15:00] Hà: Em sẽ update.
+
+T000167 [10:15:15] Tuấn: Em cũng sẽ cập nhật task tài liệu.
+
+T000168 [10:15:35] Minh: Vậy chốt. Xin cảm ơn mọi người. Hẹn gặp part 4.
+
+--- END OF PART P03 ---

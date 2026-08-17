@@ -1,0 +1,118 @@
+MEETING_ID: W4-LONG-C5-N2-PROD-STATE-007
+PART: P04/5
+
+T000192 [10:48:55] Linh: Chào cả nhà, chúng ta tiếp tục. Phần này tôi muốn bàn về kế hoạch release và monitoring sau khi triển khai. Đầu tiên, tôi được biết team product yêu cầu release bản payment trong tuần cuối tháng hai.
+
+T000193 [10:49:30] Minh: Dạ, em cũng nghe thông tin. Như vậy task A phải xong trước đó, deadline 23/02 là phù hợp.
+
+T000194 [10:50:05] Hà: Vậy còn môi trường sync? Nó có cần cho release này không?
+
+T000195 [10:50:40] Linh: Theo yêu cầu từ product, release đầu chỉ tập trung payment. Sync module sẽ release sau. Vậy task B – môi trường sync – tôi đề nghị hủy.
+
+T000196 [10:51:15] Duy: Hủy nghĩa là không làm nữa?
+
+T000197 [10:51:48] Linh: Đúng. Không có kế hoạch triển khai sync trong đợt này. Nếu sau này cần, ta sẽ tạo lại task mới.
+
+T000198 [10:52:20] Minh: Vậy em sẽ không dành thời gian cho sync. Tập trung hoàn toàn vào payment.
+
+T000199 [10:52:55] Hà: Như vậy task B chính thức bị hủy. Em đồng ý.
+
+T000200 [10:53:28] Duy: Vâng, em không phản đối.
+
+T000201 [10:54:00] Linh: Về monitoring, tôi muốn thiết lập một dashboards theo dõi payment service ngay sau khi release. Ai có kinh nghiệm?
+
+T000202 [10:54:38] Minh: Em có thể setup Grafana và Prometheus, nhưng cần một server riêng.
+
+T000203 [10:55:12] Hà: Server cho monitoring có thể dùng chung với staging payment, nhưng phải cẩn thận về resource.
+
+T000204 [10:55:48] Duy: Em nghĩ nên tách riêng để không ảnh hưởng performance.
+
+T000205 [10:56:22] Linh: Đồng ý. Vậy ta có task mới: "Thiết lập monitoring dashboard cho payment". Minh làm, deadline trước release một ngày, tức 27/02.
+
+T000206 [10:56:58] Minh: Dạ được. Nhưng em cần Hà support về metrics cần theo dõi.
+
+T000207 [10:57:32] Hà: Em có danh sách các metric cần thiết: request rate, error rate, latency, resource usage. Em sẽ gửi sau meeting.
+
+T000208 [10:58:08] Duy: Vậy deadline của task monitoring là 27/02. Nhưng tôi nhớ task D cũng có deadline tham khảo 27/02. Liệu có xung đột không?
+
+T000209 [10:58:45] Linh: Đúng. Task D xử lý lỗi đăng nhập cũng deadline 27/02. Nhưng ta cần ưu tiên task D hơn vì nó ảnh hưởng trực tiếp đến test.
+
+T000210 [10:59:20] Hà: Em nghĩ task D có thể hoàn thành sớm hơn. Chỉ cần sửa config token expiry, 5 phút là xong.
+
+T000211 [10:59:55] Minh: Vậy em sẽ apply config sau khi Hà gửi. Có thể xong trong ngày mai.
+
+T000212 [11:00:30] Linh: Tốt. Như vậy deadline task D được đặt lại? Hay vẫn giữ 27/02?
+
+T000213 [11:01:05] Hà: Em đề xuất deadline cứng cho task D là 25/02, vì cần có kết quả trước khi release.
+
+T000214 [11:01:40] Linh: Vậy đặt deadline task D là 25/02. Lý do: để kịp test cho release.
+
+T000215 [11:02:12] Duy: Như vậy deadline task D gần với lời bàn về release monitoring. Và nó dựa trên antecedent cũ của task A (deadline 23/02) để đảm bảo kịp.
+
+T000216 [11:02:48] Minh: Rõ rồi. Task D deadline 25/02, task A 23/02, task monitoring 27/02.
+
+T000217 [11:03:20] Hà: Em sẽ bắt đầu sửa config ngay sau khi meeting kết thúc.
+
+T000218 [11:03:55] Duy: Còn task C template tài liệu? Deadline 26/02 có bị ảnh hưởng không?
+
+T000219 [11:04:30] Linh: Task C vẫn giữ 26/02. Nhưng nếu Duy cần, Hà có thể ưu tiên support task D trước.
+
+T000220 [11:05:05] Hà: Vâng, em sẽ làm task D trước.
+
+T000221 [11:05:38] Minh: Em muốn hỏi về monitoring: có cần integrate alerting không? Hay chỉ dashboard?
+
+T000222 [11:06:12] Linh: Có alerting, nhưng có thể làm sau. Trước mắt chỉ dashboard.
+
+T000223 [11:06:45] Duy: Vậy task monitoring chỉ là setup cơ bản.
+
+T000224 [11:07:18] Hà: Minh nhớ dùng template từ dự án cũ để tiết kiệm thời gian.
+
+T000225 [11:07:52] Minh: Em sẽ tìm lại.
+
+T000226 [11:08:25] Linh: Về release schedule, tôi muốn mọi người chuẩn bị cho việc deploy vào ngày 28/02. Ai sẽ là người deploy?
+
+T000227 [11:09:00] Minh: Em có thể deploy, nhưng cần Hà verify trước.
+
+T000228 [11:09:35] Hà: Em sẽ verify sau khi task D và task E hoàn thành.
+
+T000229 [11:10:10] Duy: Còn bước test UAT? Có cần không?
+
+T000230 [11:10:45] Linh: Cần, nhưng sẽ tổ chức riêng. Phần này chỉ setup monitoring.
+
+T000231 [11:11:18] Minh: Vậy task monitoring có thể bắt đầu từ ngày 26/02.
+
+T000232 [11:11:52] Hà: Em đề xuất Minh làm monitoring song song với task A, vì cả hai đều liên quan payment.
+
+T000233 [11:12:28] Linh: Hợp lý. Nhưng phải ưu tiên task A trước.
+
+T000234 [11:13:00] Minh: Em sẽ hoàn thành task A trước, rồi chuyển sang monitoring.
+
+T000235 [11:13:35] Duy: Em thấy deadline task monitoring 27/02, sau task A và D, là khả thi.
+
+T000236 [11:14:08] Linh: Vậy tổng kết: task B đã hủy. Task D deadline 25/02. Task monitoring deadline 27/02. Có ai thắc mắc gì không?
+
+T000237 [11:14:42] Hà: Em không.
+
+T000238 [11:15:15] Minh: Em cũng không.
+
+T000239 [11:15:48] Duy: Em ok.
+
+T000240 [11:16:20] Linh: Tôi muốn kiểm tra lại task E seed dữ liệu. Nó vẫn linh hoạt theo task A đúng không?
+
+T000241 [11:16:55] Minh: Dạ, script đã viết sẵn. Khi có môi trường là chạy ngay.
+
+T000242 [11:17:30] Hà: Tốt. Vậy chúng ta đã có lộ trình cho release.
+
+T000243 [11:18:05] Duy: Em muốn hỏi về monitoring data retention: mình lưu bao lâu?
+
+T000244 [11:18:40] Minh: Em nghĩ lưu 30 ngày là đủ.
+
+T000245 [11:19:10] Linh: Ok. Hà, em có ý kiến gì không?
+
+T000246 [11:19:42] Hà: Không.
+
+T000247 [11:20:12] Duy: Vậy em ghi nhận.
+
+T000248 [11:20:45] Linh: Tôi thấy chúng ta đã thảo luận đủ. Chúng ta sẽ còn một phần nữa. Tạm nghỉ 5 phút rồi vào part cuối.
+
+--- END OF PART P04 ---

@@ -1,0 +1,55 @@
+MEETING_ID: W4-LONG-C5-N3-PROD-STATE-011
+PART: P05/5
+
+T000272 [09:46:02] PM: Chúng ta bước vào part cuối cùng, part 5. Mục tiêu là tổng kết và xử lý các điểm còn tồn đọng. Trước hết, tôi muốn cập nhật tình hình các task từ part 4.
+T000273 [09:46:18] DevLead: Tôi đã nhận được quyền truy cập từ bên vận hành ngay sau khi kết thúc part 4. Copy dữ liệu có thể bắt đầu trong chiều nay.
+T000274 [09:46:32] PM: Tin tốt. Vậy task copy dữ liệu sẽ tiến hành, deadline thứ Năm vẫn giữ nguyên?
+T000275 [09:46:40] DevLead: Đúng, tôi sẽ chạy script vào cuối giờ chiều, dự kiến hoàn thành sáng thứ Năm.
+T000276 [09:46:50] QA: Nếu copy xong sớm, em có thể bắt đầu test với dữ liệu thật sớm hơn.
+T000277 [09:46:58] PM: Tốt. Về task kiểm tra bảo mật, anh Arch đã tiến triển đến đâu?
+T000278 [09:47:06] Arch: Tôi đã rà soát cấu hình mạng xong, đang chờ dữ liệu thật để chạy các kiểm tra cuối. Deadline thứ Sáu vẫn khả thi.
+T000279 [09:47:18] PM: Lưu ý: nếu có vấn đề gì phát sinh, báo ngay để điều chỉnh.
+T000280 [09:47:26] DevLead: Về task monitoring, tôi đã hướng dẫn Nam setup cơ bản. Dashboard dự kiến có sẵn vào thứ Hai.
+T000281 [09:47:36] QA: Em muốn xem thử dashboard để góp ý. Có thể cho em xem bản nháp trước không?
+T000282 [09:47:44] DevLead: Tôi sẽ yêu cầu Nam gửi preview vào thứ Sáu.
+T000283 [09:47:50] PM: Ok. Bây giờ, tôi muốn quay lại vấn đề tài liệu triển khai. Anh DevLead, anh đã bắt đầu viết phần rollback chưa?
+T000284 [09:48:02] DevLead: Tôi đã phác thảo sơ bộ, nhưng cần thêm thông tin từ Arch về quy trình khôi phục dữ liệu.
+T000285 [09:48:10] Arch: Tôi có thể gửi tài liệu tham khảo về rollback database trong ngày hôm nay.
+T000286 [09:48:18] PM: Vậy deadline thứ Hai cho tài liệu triển khai vẫn giữ? Anh có kịp không?
+T000287 [09:48:28] DevLead: Tôi sẽ cố gắng, nhưng nếu copy dữ liệu chiếm nhiều thời gian, có thể phải dời sang thứ Ba.
+T000288 [09:48:38] PM: Tôi không muốn dời thêm. Hãy ưu tiên tài liệu vào cuối tuần. Anh có thể làm vào tối thứ Sáu và thứ Bảy.
+T000289 [09:48:48] DevLead: Vậy tôi sẽ sắp xếp.
+T000290 [09:48:54] QA: Còn tài liệu hướng dẫn triển khai của chị Doc? Deadline thứ Tư tuần sau, chị có cần hỗ trợ gì không?
+T000291 [09:49:04] Doc: Tôi đã nhận được ý kiến review từ QA, đang chỉnh sửa. Cần thêm thông tin từ DevLead về các bước chi tiết.
+T000292 [09:49:14] DevLead: Tôi sẽ gửi phần mô tả các bước triển khai vào thứ Hai, sau khi hoàn thành tài liệu chính.
+T000293 [09:49:22] PM: Vậy chị Doc sẽ có đầu vào từ anh DevLead. Deadline thứ Tư có ổn không?
+T000294 [09:49:30] Doc: Tôi nghĩ được, nhưng nếu chậm từ anh DevLead thì tôi sẽ báo.
+T000295 [09:49:38] PM: Ghi nhận. Chúng ta cũng có task kiểm tra tương thích database, do Arch phụ trách, deadline thứ Sáu. Anh DevLead đã gửi spec chưa?
+T000296 [09:49:50] DevLead: Tôi đã gửi email spec chiều qua. Arch nhận được chưa?
+T000297 [09:49:56] Arch: Tôi đã nhận và bắt đầu phân tích. Sẽ có kết quả sớm.
+T000298 [09:50:04] PM: Vậy tổng thể các task đều có tiến triển. Bây giờ, tôi muốn nhắc lại một task đã bị hủy ở part 4: task tạo dữ liệu test giả. Chúng ta đã hủy đúng không?
+T000299 [09:50:18] QA: Vâng, task đó không còn giá trị. Nhưng em đã viết test case dựa trên dữ liệu giả, có thể sử dụng lại khi có dữ liệu thật.
+T000300 [09:50:28] PM: Không cần tạo duplicate. Test case đó có thể áp dụng cho dữ liệu thật. Tốt.
+T000301 [09:50:36] Arch: Một vấn đề: task fix lỗi đăng nhập từ part 2 vẫn chưa có reviewer chính thức. Chúng ta chưa chốt được ai review.
+T000302 [09:50:48] PM: Đúng, đó là unresolved item. Tôi đề nghị để nguyên, vì hiện tại lỗi đăng nhập đã được debug sơ bộ bởi Tuấn và QA, và có thể không cần review chính thức nếu fix đơn giản.
+T000303 [09:51:00] DevLead: Tôi có thể review nếu cần, nhưng tôi quá tải. Để part sau quyết định.
+T000304 [09:51:08] PM: Vậy unresolved reviewer vẫn tồn tại. Chúng ta không chốt hôm nay.
+T000305 [09:51:16] QA: Em đồng ý, vì lỗi đó có thể tự kiểm tra qua test.
+T000306 [09:51:22] PM: Tốt. Bây giờ tôi muốn điểm qua trạng thái cuối cùng của các task chính:
+- Copy dữ liệu: DevLead, deadline thứ Năm.
+- Kiểm tra bảo mật: Arch, deadline thứ Sáu.
+- Monitoring: DevLead (với Nam), deadline thứ Hai.
+- Tài liệu triển khai hệ thống: DevLead (handoff từ Doc), deadline thứ Hai.
+- Tài liệu hướng dẫn triển khai: Doc (với hỗ trợ DevLead), deadline thứ Tư.
+- Kiểm tra tương thích: Arch, deadline thứ Sáu.
+- Lỗi đăng nhập: Tuấn và QA, chưa có reviewer.
+- Task dữ liệu test giả: đã hủy.
+T000307 [09:52:10] DevLead: Vâng, tôi nắm được.
+T000308 [09:52:16] QA: Em thấy lịch trình vẫn khả thi, nhưng cần theo dõi sát.
+T000309 [09:52:24] Arch: Tôi có một đề xuất: nên có buổi họp nhanh vào đầu tuần sau để review tiến độ, tránh phát sinh.
+T000310 [09:52:34] PM: Ý hay. Tôi sẽ lên lịch part 6 không chính thức hoặc một buổi standup. Nhưng hôm nay chúng ta kết thúc meeting chính.
+T000311 [09:52:46] Doc: Tôi muốn cảm ơn mọi người đã phối hợp. Dù có nhiều khó khăn nhưng đã đi được xa.
+T000312 [09:52:54] DevLead: Đồng cảm. Hy vọng phần còn lại suôn sẻ.
+T000313 [09:53:02] QA: Em cũng vậy. Sẽ cố gắng test nhanh sau khi có dữ liệu.
+T000314 [09:53:10] PM: Cảm ơn tất cả. Buổi họp hôm nay đã thống nhất được nhiều việc. Chúng ta sẽ tiếp tục ở các part sau nếu cần. Chúc mọi người hoàn thành tốt công việc.
+--- END OF PART P05 ---

@@ -1,0 +1,14 @@
+ghi vội
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / moi truong / trien khai / staging / rollback / uat
+- Task thứ nhất: "Hoàn thiện môi trường test staging" – giao cho anh Tuấn làm chính, chị Lan hỗ trợ kỹ thuật
+* Task "Hoàn thiện môi trường test staging" – anh Tuấn chịu trách nhiệm chính, chị Lan hỗ trợ duyệt ngân sách và giám sát, dl 25/2
+- Task "Hoàn thiện tài liệu hướng dẫn triển khai staging" – chị Hà chịu trách nhiệm, không dl cứng
+1) Vậy em sẽ đặt tên task là "Xử lý lỗi lock tài khoản staging"
+- Task C: "Xử lý lỗi lock tài khoản staging" – anh Tuấn chịu trách nhiệm, script hoàn thành ngày mai, tài liệu chị Hà viết, chị Lan test
+* Task A (môi trường test) giờ do chị Lan owner, dl 28/2
+- Em muốn confirm lại: dl task A là 28/2, task B là 5/3, task C xong mai, task D trước 23/2
+1) Vậy tôi quyết định hủy task "Tạo bộ dữ liệu test đăng nhập"
+- Chúng ta hủy task D, điều chỉnh dl task A thành 26/2
+* Task A: Hoàn thiện môi trường test staging – owner chị Lan, dl 26/2, đang triển khai nâng cấp phần cứng
+- Task E: Viết rollback plan – owner chị Lan, dl 22/2

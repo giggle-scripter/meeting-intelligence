@@ -1,0 +1,122 @@
+MEETING_ID: W4-LONG-C4-N1-IT-STATE-006
+PART: P04/5
+
+T000195 [09:35:00] An: Chúng ta sang phần 4, bàn về release và monitoring sau triển khai. Mọi người có ý kiến gì về kế hoạch release chưa?  
+
+T000196 [09:35:12] Bình: Em nghĩ sau khi có staging, chúng ta cần ít nhất một tuần kiểm thử tích hợp. Release có thể dự kiến cuối tháng 3.  
+
+T000197 [09:35:25] Cường: Nhưng cần monitoring trước đó. Hệ thống mới phải có dashboard để theo dõi. Ai sẽ phụ trách?  
+
+T000198 [09:35:35] Dung: Em có thể setup cơ bản, nhưng cần thông số từ team infra.  
+
+T000199 [09:35:42] An: Vậy ta sẽ thảo luận sau. Bây giờ, tôi muốn nhắc lại một vấn đề: task 3 "Sắp xếp meeting với IT hạ tầng". Hình như Bình đã gửi lời mời và IT đã phản hồi qua email, không cần meeting riêng?  
+
+T000200 [09:35:58] Bình: Vâng, họ gửi thông tin qua mail. Em thấy không cần meeting nữa.  
+
+T000201 [09:36:05] An: Vậy ta hủy task 3 đi. Nó không còn giá trị.  
+
+T000202 [09:36:10] Cường: Đồng ý. Tiết kiệm thời gian.  
+
+T000203 [09:36:15] Dung: Em cũng thấy vậy.  
+
+T000204 [09:36:20] An: Vậy task 3 chính thức bị hủy. Chuyển sang monitoring.  
+
+T000205 [09:36:28] Bình: Về monitoring, em có dùng tool Prometheus. Cần cấu hình server.  
+
+T000206 [09:36:38] Cường: Tôi từng dùng Grafana. Dùng chung được.  
+
+T000207 [09:36:45] Dung: Em có thể viết script thu thập log.  
+
+T000208 [09:36:52] An: Tốt. Nhưng chưa tạo task. Trước mắt, tôi thấy tiến độ các task khác cần đẩy. Đặc biệt task 2 "Soạn tài liệu hướng dẫn triển khai" mới chuyển cho Cường. Anh thấy deadline 15/03 có sớm không?  
+
+T000209 [09:37:08] Cường: Tôi nghĩ nếu có staging, tôi có thể hoàn thành sớm hơn. Đặt 10/03 được không?  
+
+T000210 [09:37:16] An: Được, vậy deadline mới cho task 2 là 10/03. Gần lời bàn về monitoring, hợp lý.  
+
+T000211 [09:37:25] Bình: Như vậy task 2 phụ thuộc vào task 1 staging. Nếu staging trễ, tài liệu cũng trễ.  
+
+T000212 [09:37:35] Cường: Tôi sẽ cố gắng.  
+
+T000213 [09:37:40] Dung: Em thấy task 5 "Soạn hướng dẫn cấu hình LDAP" deadline 24/02 sắp tới. Em đã nhận thông số từ anh Cường chưa?  
+
+T000214 [09:37:52] Cường: Tôi gửi lúc chiều qua. Em kiểm tra email.  
+
+T000215 [09:37:58] Dung: Vâng, em thấy rồi. Em sẽ hoàn thành đúng hạn.  
+
+T000216 [09:38:05] An: Tốt. Về release, tôi muốn nghe ý kiến về các mốc.  
+
+T000217 [09:38:12] Bình: Nếu task 1 hoàn thành 05/03, task 2 10/03, thì release có thể 20/03.  
+
+T000218 [09:38:22] Cường: Còn task 4 xử lý lỗi LDAP của Bình, deadline 27/02, có thể ảnh hưởng.  
+
+T000219 [09:38:30] Bình: Em sẽ xong sớm nếu firewall không vấn đề.  
+
+T000220 [09:38:38] An: Giả sử mọi thứ đúng hạn, ta có thể release cuối tháng 3.  
+
+T000221 [09:38:45] Dung: Monitoring cần setup trước release ít nhất một tuần.  
+
+T000222 [09:38:52] An: Đúng. Vậy cần task monitoring. Nhưng chưa assign.  
+
+T000223 [09:38:58] Cường: Tôi có thể phụ trách, nhưng cần nhân lực hỗ trợ từ Bình.  
+
+T000224 [09:39:05] Bình: Em giúp được.  
+
+T000225 [09:39:10] An: Vậy ghi nhận, ta sẽ tạo task monitoring ở phần cuối.  
+
+T000226 [09:39:18] Dung: Em có thắc mắc về dữ liệu test cho monitoring. Cần dữ liệu thực để test dashboard.  
+
+T000227 [09:39:28] Bình: Task 6 của em có dữ liệu, nhưng deadline 28/02. Có thể dùng sớm.  
+
+T000228 [09:39:35] An: Vậy Dung cố gắng hoàn thành sớm để Cường có dữ liệu test monitoring.  
+
+T000229 [09:39:43] Dung: Em sẽ cố.  
+
+T000230 [09:39:48] Cường: Tôi có một điểm: task 2 deadline 10/03 khá gần, nhưng nếu staging trễ, tôi phải viết dựa trên giả định.  
+
+T000231 [09:39:58] An: Đó là rủi ro. Ta có thể update sau.  
+
+T000232 [09:40:05] Bình: Về meeting với IT, dù hủy task 3, nhưng em vẫn cần thông tin firewall. Họ đã gửi mail nhưng chưa chi tiết.  
+
+T000233 [09:40:15] Cường: Em nên email lại hỏi cụ thể.  
+
+T000234 [09:40:20] An: Làm đi. Vậy chúng ta có một unresolved.  
+
+T000235 [09:40:25] Dung: Phần LDAP, em gần xong tài liệu.  
+
+T000236 [09:40:30] An: Tốt. Tôi thấy nội dung ổn.  
+
+T000237 [09:40:35] Bình: Còn kế hoạch release, em đề xuất họp riêng với team infra.  
+
+T000238 [09:40:43] Cường: Có thể cần, nhưng để sau khi có staging.  
+
+T000239 [09:40:48] An: Đồng ý.  
+
+T000240 [09:40:52] Dung: Em thấy phần 4 gần hết, có nên chốt trạng thái không?  
+
+T000241 [09:40:58] An: Chưa, còn ít phút. Tôi muốn nói thêm về monitoring cụ thể.  
+
+T000242 [09:41:05] Cường: Cần quyết định tool. Tôi đề xuất Prometheus+Grafana.  
+
+T000243 [09:41:12] Bình: Em đồng ý. Dễ tích hợp.  
+
+T000244 [09:41:18] Dung: Em sẽ tìm hiểu thêm.  
+
+T000245 [09:41:22] An: Vậy tới khi có staging ta sẽ triển khai.  
+
+T000246 [09:41:28] Bình: Về dữ liệu test, em lo rằng dữ liệu giả không phản ánh đúng.  
+
+T000247 [09:41:35] Cường: Dùng dữ liệu thật đã ẩn danh là tốt nhất.  
+
+T000248 [09:41:40] Dung: Em sẽ ẩn danh cẩn thận.  
+
+T000249 [09:41:45] An: Tốt.  
+
+T000250 [09:41:50] Cường: Tôi có cảm giác task 2 deadline 10/03 hơi sớm, nhưng sẽ cố.  
+
+T000251 [09:41:58] An: Nếu cần, ta điều chỉnh sau.  
+
+T000252 [09:42:02] Bình: Phần 4 như vậy là ổn.  
+
+T000253 [09:42:06] An: Vậy kết thúc phần 4. Hẹn gặp lại ở phần cuối.  
+
+--- END OF PART P04 ---

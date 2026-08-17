@@ -1,0 +1,9 @@
+chốt sơ bộ
+chủ đề: Theo dõi lỗi và tài liệu
+kw: tai lieu / api / viet / tai / lieu / khong / tao
+- Đúng, task “Viết tài liệu API v2.1” đang ở trạng thái Open, assignee là tôi
+* Vậy tôi sẽ ghi vào ghi chú, không tạo task active
+- Như vậy không có task mới nào được tạo hôm nay, chỉ có hủy task cũ
+1) Tôi đã hủy task “Viết unit test” và sắp hủy task “Viết tài liệu API”
+- Tôi vừa thao tác trên Jira, task “Viết tài liệu API v2.1” hiện trạng thái “Cancelled”
+* Task kia đã cancelled từ trước

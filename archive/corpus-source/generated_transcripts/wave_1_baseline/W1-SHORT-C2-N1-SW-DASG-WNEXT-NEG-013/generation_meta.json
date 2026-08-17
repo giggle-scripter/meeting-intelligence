@@ -1,0 +1,28 @@
+{
+  "case": {
+    "wave": 1,
+    "case_index": 13,
+    "meeting_id": "W1-SHORT-C2-N1-SW-DASG-WNEXT-NEG-013",
+    "meeting_date": "2026-01-28",
+    "title": "Chuẩn bị môi trường kiểm thử",
+    "labels": "direct_assignment,weekday_next,negative_context",
+    "objective": "Giao việc trực tiếp với mốc một thứ trong tuần sau; có thông tin tham khảo không tạo task."
+  },
+  "model": "deepseek-v4-pro",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 538,
+    "turn_count": 21
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 194.86184460000368
+    }
+  ]
+}

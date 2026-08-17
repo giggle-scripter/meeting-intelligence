@@ -1,0 +1,13 @@
+{
+  "case_id": "SMOKE-001",
+  "meeting_title": "Weekly Sync",
+  "meeting_date": "2026-07-27",
+  "difficulty": "basic",
+  "tags": [
+    "vietnamese",
+    "english",
+    "before_weekday",
+    "next_weekday",
+    "non_task"
+  ]
+}

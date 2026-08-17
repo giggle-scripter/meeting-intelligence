@@ -1,0 +1,83 @@
+=== MEETING METADATA ===
+meeting_id: W3-MED-C4-N2-PROD-INT-007
+meeting_title: Họp phối hợp triển khai và xử lý vấn đề
+meeting_date: 2026-02-11
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+minutes nháp
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: trien khai / api / spec / flow / 16h / parser / vua
+- Task UI flow em vừa điều chỉnh dl lên 11/02 chiều rồi mà
+* Chốt lại, topic chi phí chưa có quyết định, không có task
+- Anh nhắc, task UI flow của Lan dl hôm nay 11/02 16h
+1) Còn task spec SP365 dl 14/02, cũng Lan
+- Task parser của em vẫn giữ dl 18/02
+* Thứ nhất, task fix API connection: Lan, dl 11/02 16h, đã thay đổi từ dl cũ
+- Em có một clarification nhỏ: task parser dl 18/02, nhưng hôm qua em thấy vẫn chưa có spec chi tiết, đề nghị business bổ sung
+1) Em sẽ sửa trong sáng nay, dl cũ của task này là 12/02 nhưng có thể đẩy lên sớm hơn nếu cần ? chưa chốt
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[00:00:05] Anh Minh: Chào mọi người, hôm nay chúng ta họp để rà soát tiến độ các đầu việc liên quan đến meeting summary flow, parser transcript, và SP365 display. Ngoài ra còn có vấn đề chi phí cần bàn. Mình bắt đầu luôn nhé.
+[00:00:20] Chị Lan: Vâng, em có một số cập nhật về module flow summary. Tuần trước em đã làm xong phần cốt lõi, giờ chỉ còn UI và kết nối API.
+[00:00:35] Anh Tuấn: Phần API đó em test thấy có lỗi kết nối, cụ thể là APIConnectionError khi gọi từ môi trường staging. Có vẻ liên quan đến timeout.
+[00:00:50] Anh Minh: Lỗi đó nghiêm trọng không? Cần ưu tiên xử lý ngay.
+[00:01:05] Chị Lan: Em nghĩ nên tăng timeout và thêm retry logic. Em sẽ sửa trong sáng nay, deadline cũ của task này là 12/02 nhưng có thể đẩy lên sớm hơn nếu cần.
+[00:01:25] Anh Minh: Ý em là thay đổi deadline thành 11/02 hay vẫn giữ? Thôi để xong rồi tính, em cứ fix xong rồi báo lại.
+[00:01:40] Chị Lan: Vâng, em sẽ commit fix trước 16h hôm nay. Vậy coi như deadline mới là 11/02 16h nhé.
+[00:01:55] Anh Minh: Ok, ghi nhận. Chị Hoa, phiên ba có phần nào liên quan đến parser transcript không?
+[00:02:10] Chị Hoa: Có ạ. Parser transcript hiện tại vẫn chưa xử lý được một số định dạng âm thanh lạ. Em đang tìm hiểu thêm. Task này em nhận từ tuần trước, deadline 15/02.
+[00:02:30] Anh Minh: Task đó có cần hỗ trợ gì không? Anh thấy mô tả ban đầu hơi chung chung.
+[00:02:45] Chị Hoa: Em nghĩ mình cần xác định rõ phạm vi các định dạng hỗ trợ. Có thể tham khảo thêm từ phía đối tác.
+[00:03:00] Anh Minh: Chị Hoa, em cần clarification từ bên business thì anh hỗ trợ. Việc đó em chủ động nhé. Còn deadline cũ 15/02, giờ anh thấy cần dời xuống 18/02 vì còn chờ đối tác.
+[00:03:20] Chị Hoa: Vâng, em cập nhật deadline mới. Cảm ơn anh.
+[00:03:35] Anh Tuấn: Em có thắc mắc về phần SP365 display. Hôm qua em nhận yêu cầu sửa giao diện cho màn hình hiển thị lịch sử cuộc họp.
+[00:03:50] Anh Minh: Khoan, phần đó ai giao cho em? Anh chưa thấy trong kế hoạch.
+[00:04:05] Anh Tuấn: Dạ chị Lan có nhờ em hỗ trợ một số chỗ, nhưng chưa có task chính thức.
+[00:04:20] Chị Lan: À, em có nói với Tuấn về việc cập nhật một số đoạn giao diện cho SP365, nhưng em chưa giao hẳn, vì còn chờ anh Minh duyệt spec.
+[00:04:35] Anh Minh: Vậy phần đó chưa phải task chính thức. Đầu việc lúc nãy của Tuấn chỉ là hỗ trợ không chính thức, không phải task. Còn việc cập nhật giao diện SP365 sẽ được giao sau khi có spec, chưa có deadline.
+[00:04:55] Chị Lan: Rõ ạ. Vậy em sẽ hoàn thiện spec trong tuần này, rồi bàn tiếp.
+[00:05:10] Anh Minh: Ok, vậy spec SP365 em làm xong trước thứ Sáu tuần này nhé, deadline 14/02. Sau đó sẽ assign cho người khác.
+[00:05:25] Chị Lan: Deadline 14/02, em nhận. Nhưng mà task cập nhật UI flow hồi nãy em cũng có deadline 12/02, sợ chồng chéo.
+[00:05:40] Anh Minh: Task UI flow em vừa điều chỉnh deadline lên 11/02 chiều rồi mà. Vậy em ưu tiên cái đó trước.
+[00:05:55] Chị Lan: Vâng, đúng rồi. Em sẽ xong UI flow trong hôm nay, rồi chuyển sang spec SP365.
+[00:06:10] Anh Minh: Anh thấy có hai đầu việc gần giống nhau: “cập nhật UI flow” và “cập nhật UI parser”. Cả hai đều do em Lan lo, nhưng khác module. Không sao, anh nhắc để tránh nhầm.
+[00:06:30] Chị Lan: Dạ, UI flow là flow summary, UI parser là cho module parser, khác nhau ạ.
+[00:06:45] Anh Tuấn: Nói về parser, em test thử bản demo hôm qua thấy còn lỗi hiển thị thời gian. Có cần tạo task fix không?
+[00:07:00] Anh Minh: Có lỗi cụ thể nào không? Mô tả chi tiết đi.
+[00:07:15] Anh Tuấn: Khi hiển thị transcript, timestamp bị lệch vài giây so với âm thanh gốc. Nhưng chưa rõ nguyên nhân do parser hay do display.
+[00:07:30] Chị Hoa: Phần đó em nghĩ do parser chưa xử lý được các đoạn ngắt quãng. Em sẽ check lại, nếu cần thì fix trong task parser của em.
+[00:07:45] Anh Minh: Vậy Tuấn và Hoa phối hợp kiểm tra, xác định nguyên nhân. Nếu là lỗi parser thì Hoa fix, nếu là display thì tạo task mới. Nhưng chưa chốt ngay, cần có kết luận trước.
+[00:08:05] Chị Hoa: Ok em sẽ test với dữ liệu mẫu rồi báo lại.
+[00:08:20] Anh Minh: Đây là unresolved item nhé, chưa có hướng giải quyết cụ thể. Để sau meeting này mọi người test xong rồi quyết định.
+[00:08:35] Chị Lan: Em muốn nói thêm về chi phí. Bên finance hỏi estimation cho module integration tháng này.
+[00:08:50] Anh Minh: Chuyển sang topic chi phí nhé. Mọi người đã có số liệu chưa?
+[00:09:05] Chị Lan: Em có bảng dự toán sơ bộ, khoảng 150 triệu cho hai module chính. Nhưng còn phụ thuộc vào việc mua thêm license API.
+[00:09:20] Anh Minh: Đây là topic thảo luận, chưa tạo task. Anh muốn nghe ý kiến của mọi người trước.
+[00:09:35] Anh Tuấn: Em cho rằng nên cắt giảm license vì có thể dùng open source thay thế. Nhưng cần thời gian đánh giá.
+[00:09:50] Anh Minh: Ý hay, nhưng chưa chốt. Chị Hoa có góp ý gì không?
+[00:10:05] Chị Hoa: Em nghĩ chi phí cho module parser có thể tối ưu bằng cách dùng model nhẹ hơn. Tuy nhiên điều đó ảnh hưởng đến accuracy.
+[00:10:20] Anh Minh: Đúng, cần cân nhắc. Chốt lại, topic chi phí chưa có quyết định, không có task. Sẽ đưa vào agenda buổi họp sau.
+[00:10:35] Anh Minh: Quay lại meeting summary flow. Anh nhắc, task UI flow của Lan deadline hôm nay 11/02 16h. Lan đã nhận. Còn task spec SP365 deadline 14/02, cũng Lan.
+[00:10:55] Chị Lan: Vâng, em nhận cả hai. Task parser của em vẫn giữ deadline 18/02 ạ.
+[00:11:10] Anh Minh: Đúng. Và task của Tuấn về test API fix do Lan làm, Tuấn không phải làm gì thêm. Chỉ báo cáo kết quả.
+[00:11:25] Anh Tuấn: Em rõ.
+[00:11:40] Chị Hoa: Em có thắc mắc về phần “cập nhật UI parser” – anh Minh vừa nhắc hồi nãy, hình như em chưa thấy task đó trong list.
+[00:11:55] Anh Minh: À, đó là task cũ từ đợt trước, do Lan nhận, deadline 13/02, nhưng đã hoàn thành rồi. Anh chỉ nhắc để tránh nhầm với UI flow của Lan. Không phải tạo duplicate.
+[00:12:10] Chị Hoa: Vâng, em hiểu.
+[00:12:25] Anh Tuấn: Em muốn đề xuất ý tưởng cho phase sau: tích hợp thêm tính năng tóm tắt bằng AI. Nhưng chưa biết khả thi thế nào.
+[00:12:40] Anh Minh: Đây là distractor – ý tưởng hay nhưng chưa phải task. Để sau phase này tính tiếp.
+[00:12:55] Anh Minh: Bây giờ recap lại toàn bộ công việc nhé. Thứ nhất, task fix API connection: Lan, deadline 11/02 16h, đã thay đổi từ deadline cũ. Thứ hai, task phân tích lỗi timestamp: Hoa và Tuấn phối hợp, chưa có deadline, chưa chốt. Thứ ba, task spec SP365: Lan, deadline 14/02. Thứ tư, task UI flow summary: Lan, deadline hôm nay.
+[00:13:25] Chị Lan: Em confirm các task trên, không thay đổi owner hay deadline so với vừa thống nhất. Chỉ có task parser vẫn deadline 18/02.
+[00:13:40] Anh Minh: Đúng. Và chúng ta có một unresolved item về lỗi timestamp, cần xác định nguyên nhân. Chưa có người chịu trách nhiệm cuối cùng.
+[00:13:55] Chị Hoa: Em sẽ test xong trong ngày mai và báo cáo kết quả, sau đó mới assign.
+[00:14:10] Anh Tuấn: Em hỗ trợ test, sẵn sàng.
+[00:14:25] Anh Minh: Tốt. Còn topic chi phí và ý tưởng phase sau chỉ là thảo luận, không có task.
+[00:14:40] Anh Minh: Trước khi kết thúc, anh muốn kiểm tra có ai thấy bất kỳ duplicate task nào không? Ví dụ task UI flow và task UI parser, mặc dù tên gần giống nhưng khác nhau. Không có duplicate.
+[00:15:00] Chị Lan: Không ạ. Em chỉ có một task UI flow, còn UI parser đã hoàn thành trước đó.
+[00:15:15] Anh Minh: Vậy không có vấn đề gì. Còn phần lỗi API em đã fix xong chưa, Lan?
+[00:15:30] Chị Lan: Em đang fix, đã push lên nhánh feature, 16h sẽ xong.
+[00:15:45] Anh Minh: Ok. Mọi người có câu hỏi gì thêm không?
+[00:15:55] Chị Hoa: Em có một clarification nhỏ: task parser deadline 18/02, nhưng hôm qua em thấy vẫn chưa có spec chi tiết, đề nghị business bổ sung.
+[00:16:10] Anh Minh: Việc đó em tự follow up với bên business nhé. Anh không có thông tin thêm.
+[00:16:25] Chị Hoa: Vâng, em sẽ liên hệ.
+[00:16:40] Anh Minh: Vậy kết thúc meeting. Cảm ơn mọi người.

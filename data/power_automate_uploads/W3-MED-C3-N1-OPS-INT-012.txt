@@ -1,0 +1,109 @@
+=== MEETING METADATA ===
+meeting_id: W3-MED-C3-N1-OPS-INT-012
+meeting_title: Họp phối hợp triển khai và xử lý vấn đề
+meeting_date: 2026-02-16
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:00] An: Chào mọi người, hôm nay chúng ta họp để chuẩn bị release tuần sau. Trước tiên, tôi muốn điểm qua các đầu việc chính.
+[09:00:15] Bình: Vâng, em đã xong phần feature A rồi, chỉ còn chờ review.
+[09:00:25] An: Tốt. Bình, em phải hoàn thành review trước thứ Năm nhé.
+[09:00:35] Bình: Em hiểu.
+[09:00:45] Chi: Phần regression test của em cũng đang tiến hành. Dự kiến xong thứ Sáu.
+[09:00:55] An: Được, Chi cố lên. Dũng, anh đã set up monitoring cho production chưa?
+[09:01:10] Dũng: Em đang gặp vấn đề. Khi em connect vào server thì báo lỗi kết nối APIConnectionError. Em chưa xử lý được.
+[09:01:25] An: Lỗi đó cần được khắc phục sớm. Em có thể nhờ Bình hỗ trợ không?
+[09:01:35] Dũng: Em sẽ thử, nhưng mà e là không kịp nếu không có quyền truy cập.
+[09:01:50] Bình: Để em check giúp Dũng vụ này. Nhưng mà task của em đã nhiều rồi.
+[09:02:00] An: Vậy Bình và Dũng phối hợp, ưu tiên monitoring. Thứ Sáu phải có báo cáo monitor.
+[09:02:15] Dũng: Vâng.
+[09:02:25] Chi: Ngoài ra em tìm thấy một lỗi ở module đăng nhập, khá nghiêm trọng.
+[09:02:35] An: Lỗi đó là gì?
+[09:02:45] Chi: Khi người dùng nhập sai mật khẩu nhiều lần, hệ thống không khóa tài khoản.
+[09:02:55] Bình: Cái này có thể sửa nhanh. Để em fix sau khi xong review.
+[09:03:10] An: Được, Bình nhận việc đó. Nhưng mà em thấy task của Bình khá nhiều, có cần chuyển bớt không?
+[09:03:25] Bình: Thật ra em không thể làm hết được. Việc monitoring để Dũng tự xử lý đi, em tập trung vào bug.
+[09:03:40] An: Vậy chuyển monitoring cho Dũng chủ trì, Bình hỗ trợ kỹ thuật. Dũng, em chịu trách nhiệm chính nhé.
+[09:03:55] Dũng: Dạ, nhưng em cần Bình giải thích cấu hình.
+[09:04:05] Bình: Để em gửi tài liệu hướng dẫn.
+[09:04:15] An: Chốt vậy. Tiếp theo, tài liệu release. Ai đang làm?
+[09:04:25] Chi: Em đã viết draft rồi, cần cập nhật thêm phần change log.
+[09:04:35] An: Chi update đi, tôi sẽ review. Không cần gấp, em làm xong rồi gửi.
+[09:04:50] Bình: À, em có ý kiến. Hay mình thêm tính năng hiển thị thời gian thực trong dashboard? Dễ cho người dùng.
+[09:05:05] An: Cái đó chưa nằm trong scope release. Ghi nhận, để sprint sau.
+[09:05:15] Bình: Vâng.
+[09:05:25] An: Quay lại bug triage. Chi, em ước lượng mức độ ảnh hưởng?
+[09:05:35] Chi: Ảnh hưởng đến tất cả user bị lockout. Cần hotfix nếu có thể.
+[09:05:45] Bình: Em có thể fix trong 2 tiếng. Nhưng mà em phải test kỹ trước khi push.
+[09:05:55] An: Được, Bình fix xong thì Chi test. Deadline cho bug này là cuối ngày mai.
+[09:06:10] Chi: Vâng.
+[09:06:20] Dũng: Về monitoring, em đã thử lại nhưng vẫn lỗi kết nối. Em cần Bình cấp quyền.
+[09:06:30] Bình: Em sẽ cấp ngay sau cuộc họp.
+[09:06:40] An: Chú ý, deadline cho monitoring là thứ Sáu nhé. Báo cáo phải có trước release.
+[09:06:55] Dũng: Em cố gắng.
+[09:07:10] Chi: Anh An, phần documentation của em có cần chốt phần mô tả lỗi không?
+[09:07:20] An: Em nên thêm phần known issues. Tự quyết định nội dung nhé.
+[09:07:35] Bình: Mà em nhớ hôm trước Chi đã nhận task cập nhật tài liệu kỹ thuật rồi, đúng không?
+[09:07:45] Chi: Yeah, cái đó em xong từ tuần trước rồi. Còn tài liệu release là khác.
+[09:07:55] An: Vậy không nhầm. Nhưng nhắc lại, tài liệu kỹ thuật cần review lại vì có thay đổi.
+[09:08:10] Chi: Vậy em sẽ cập nhật thêm, không deadline cụ thể đúng không?
+[09:08:20] An: Ừ, em làm trước release là được.
+[09:08:30] Bình: Anh An, em vừa nghĩ ra việc cần kiểm tra log lỗi sau khi fix bug. Đó có phải task riêng không?
+[09:08:45] An: Đó là việc bình thường, không cần giao riêng.
+[09:08:55] Dũng: Vậy còn phần monitor dashboard, em đang làm nhưng chưa có dữ liệu test.
+[09:09:05] An: Dũng phối hợp với Chi lấy dữ liệu. Chi, em hỗ trợ được không?
+[09:09:15] Chi: Được, em có thể tạo dữ liệu giả.
+[09:09:25] An: Tốt.
+[09:09:35] Bình: Mà thực ra deadline cho task review feature A là thứ Năm, em mới nhận ra hôm qua em đọc nhầm deadline của task đó với task khác.
+[09:09:50] An: Đúng, tôi vừa nhắc rồi. Thứ Năm, không phải thứ Sáu.
+[09:10:00] Chi: Vậy em có thể update bảng task, sửa deadline.
+[09:10:10] An: Ừ, Chi update giúp.
+[09:10:20] Dũng: Anh An, sau khi fix lỗi kết nối, em cần thêm một task là backup config server. Có nên làm không?
+[09:10:35] An: Cần, em làm luôn đi. Không cần deadline.
+[09:10:45] Dũng: Vâng.
+[09:10:55] Bình: Còn bug login nếu fix xong, em nghĩ mình nên có một bản test tự động cho phần đó.
+[09:11:05] An: Đề xuất tốt, nhưng để phát triển sau.
+[09:11:15] Chi: Em có thắc mắc về một lỗi khác khi gọi API từ mobile. Lỗi này xuất hiện ngẫu nhiên, em chưa tái hiện được.
+[09:11:30] An: Lỗi đó có reproduce step không?
+[09:11:40] Chi: Chưa, chỉ thấy trong log.
+[09:11:50] An: Vậy giữ lại unresolved, theo dõi thêm. Không fix bây giờ.
+[09:12:00] Bình: Vậy lỗi đó không có owner à?
+[09:12:10] An: Để mở, ai phát hiện thêm thì update.
+[09:12:20] Dũng: Em xin phép tập trung vào monitoring và backup, không tham gia bug nữa.
+[09:12:30] An: Được.
+[09:12:40] Chi: Sắp tới release, em thấy cần có một buổi review chung, ai làm?
+[09:12:50] An: Tôi sẽ chủ trì. Hẹn thứ Sáu tuần này.
+[09:13:00] Bình: Em có thể chuẩn bị slide demo.
+[09:13:10] An: Không cần slide, chỉ cần các task done là được.
+[09:13:20] Chi: Vậy em tổng hợp danh sách task hoàn thành.
+[09:13:30] An: Tốt.
+[09:13:40] Dũng: Sau khi có monitoring, em cần viết document hướng dẫn vận hành.
+[09:13:50] An: Em tự làm, không giao ai khác.
+[09:14:00] Bình: Hình như có hai task tên giống nhau: "Cập nhật tài liệu kỹ thuật" và "Cập nhật tài liệu release". Liệu có bị duplicate không?
+[09:14:15] Chi: Khác nhau mà, một cái là kỹ thuật, một cái là release.
+[09:14:25] An: Đúng, nhưng cẩn thận khi ghi chép.
+[09:14:35] Bình: Em sợ nhầm.
+[09:14:45] An: Không vấn đề, hai task khác nhau.
+[09:14:55] Chi: Anh An, hồi nãy em có nhận task không deadline cho document. Em đã làm được một phần rồi.
+[09:15:05] An: Tốt, em cứ tiếp tục.
+[09:15:15] Dũng: Em vừa thử lại kết nối, vẫn lỗi APIConnectionError. Bình giúp em với.
+[09:15:25] Bình: Để em check ngay sau đây.
+[09:15:35] An: Việc đó gấp. Bình ưu tiên đi.
+[09:15:45] Bình: Vâng, em sẽ làm luôn.
+[09:15:55] Chi: Em đề xuất thêm task kiểm thử bảo mật cho phần login sau khi fix.
+[09:16:05] An: Em có thể làm, nhưng không cần deadline. Nếu có thời gian thì làm.
+[09:16:15] Chi: Vậy em ghi nhận.
+[09:16:25] An: Recap lại cho mọi người. Hiện tại các task chính: Bình – review feature A (deadline thứ Năm) và fix bug login (cuối ngày mai); Dũng – monitoring (thứ Sáu), backup config (không deadline); Chi – regression test (deadline thứ Sáu), update documentation release (không deadline), tài liệu kỹ thuật (không deadline); tôi – review doc và tổ chức review thứ Sáu.
+[09:17:10] Bình: Em nhắc lại, deadline review feature A là thứ Năm đúng không?
+[09:17:20] An: Đúng.
+[09:17:25] Chi: Lỗi unresolved API mobile vẫn chưa có ai phụ trách.
+[09:17:35] An: Đúng vậy, để đó.
+[09:17:45] Dũng: Sau khi Bình fix lỗi kết nối, em sẽ hoàn thành monitoring.
+[09:17:55] Bình: Em đang làm đây.
+[09:18:05] An: Còn ai có thắc mắc gì không?
+[09:18:15] Chi: Em có một câu hỏi về deadline của bug kia, ngày mai là 17/2 hay 18/2?
+[09:18:25] An: Ngày mai 17/2. Chốt.
+[09:18:35] Bình: OK.
+[09:18:45] An: Vậy kết thúc họp. Mọi người làm việc. Cảm ơn.
+[09:18:55] Dũng: Cảm ơn anh.
+[09:19:00] Chi: Bye.
+[09:19:05] Bình: Bye.

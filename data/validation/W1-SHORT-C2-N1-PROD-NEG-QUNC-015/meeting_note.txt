@@ -1,0 +1,8 @@
+note nhanh
+chủ đề: Rà soát lỗi đăng nhập
+kw: test case / tich / loi / sua / giao / nguyen / nhan
+- Vậy giao cho Anh task phân tích nguyên nhân lỗi, dl cuối ngày mai
+* Để khi có phân tích chi tiết, tôi sẽ assign người phù hợp hoặc thuê ngoài
+- Còn việc sửa lỗi, tôi sẽ báo sau
+1) Vậy em sẽ soạn sẵn test case cho việc sửa sau này
+- Tôi có thể dành chiều nay để phân tích, nhưng cần dữ liệu từ backend ? chưa chốt

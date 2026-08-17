@@ -1,0 +1,100 @@
+[09:00:00] Anh Minh: Chào mọi người, hôm nay chúng ta họp về các đầu việc liên quan đến luồng summary meeting, parser transcript, hiển thị trên SP365 và chi phí. Bắt đầu nào.
+[09:00:25] Chị Lan: Vâng, em đã xem tài liệu MSF rồi. Có mấy chỗ cần làm rõ về cách nhóm dữ liệu.
+[09:00:50] Anh Tuấn: Tôi nghĩ phần parser hiện tại xử lý khá chậm, cần tối ưu.
+[09:01:15] Chị Hoa: Về SP365 display, chúng ta cần thống nhất giao diện trước khi báo giá.
+[09:01:40] Anh Đức: Em copy lại file chi phí từ tuần trước, có thay đổi nhỏ về license.
+[09:02:00] Anh Minh: Được rồi, vào việc. Trước hết là MSF – ai nắm phần này?
+[09:02:20] Chị Hoa: Em đang phụ trách flow tổng thể. Cần thêm module filter.
+[09:02:45] Anh Minh: Vậy chị Hoa, chị hoàn thiện spec MSF và gửi cho nhóm trong tuần này nhé.
+[09:03:10] Chị Hoa: Vâng, em sẽ làm. Nhưng deadline có thể là thứ Sáu không ạ?
+[09:03:35] Anh Minh: Ừ, thứ Sáu – 27/2. Cố gắng sớm hơn nếu được.
+[09:04:00] Chị Lan: Em muốn hỏi là module filter đó có liên quan đến parser không?
+[09:04:30] Anh Minh: Có, lát nữa ta bàn parser. Giờ tập trung MSF đã.
+[09:05:00] Anh Tuấn: Tôi thấy trong spec cũ có phần phân loại, có dùng lại không?
+[09:05:30] Chị Hoa: Cái đó em sẽ update, không giữ nguyên.
+[09:06:00] Anh Minh: Tốt. Chuyển sang parser. Anh Tuấn, anh có đề xuất gì?
+[09:06:30] Anh Tuấn: Tôi đề xuất viết lại logic nhận diện intent, hiện tại bị lỗi timeout.
+[09:07:00] Chị Lan: Cái này em đã test thử, thấy nguyên nhân do regex cũ.
+[09:07:30] Anh Minh: Vậy anh Tuấn – anh phụ trách cải tiến parser và đưa ra plan trong hai ngày.
+[09:08:00] Anh Tuấn: Được, nhưng tôi cần Chị Lan support data test.
+[09:08:30] Chị Lan: Em ok, nhưng tới thứ Tư em mới rảnh.
+[09:09:00] Anh Minh: Vậy anh Tuấn, anh gửi yêu cầu cụ thể cho Lan. Còn deadline cho task này là thứ Hai tuần sau – 2/3.
+[09:09:30] Anh Tuấn: Ok, tôi nhận. Tuy nhiên có một phần nhỏ tôi muốn bàn: tối ưu bộ nhớ. Đó có thể là task riêng?
+[09:10:00] Anh Minh: Ý tưởng đó để sau, hiện tại ưu tiên parser cốt lõi. Hãy ghi nhận lại.
+[09:10:30] Anh Đức: Thực ra tôi đã thử một giải pháp caching cho step parse, có thể giúp ích.
+[09:11:00] Anh Tuấn: Cám ơn, tôi sẽ xem. Nhưng chưa phải task bây giờ.
+[09:11:30] Anh Minh: Đồng ý. Tiếp theo là SP365 display. Chị Hoa, chị báo giá phần layout?
+[09:12:00] Chị Hoa: Em đã ước lượng sơ bộ, khoảng 40 giờ dev. Cần thêm thời gian cho test.
+[09:12:30] Anh Tuấn: Tôi thấy có thể ghép với parser output để hiển thị thời gian thực.
+[09:13:00] Anh Minh: Đúng, nhưng hôm nay chưa bàn chi tiết. Chị Hoa chốt tài liệu display trước.
+[09:13:30] Chị Hoa: Vâng, em sẽ viết spec giao diện trong tuần, nhưng chưa có deadline chính thức.
+[09:14:00] Anh Minh: Vậy chị tạm thời không set deadline, nhưng cố gắng xong sớm để anh Đức ước lượng chi phí.
+[09:14:30] Anh Đức: Về chi phí, tôi có file excel update từ hôm qua. License phần mềm tăng 15%.
+[09:15:00] Chị Lan: Cái đó ảnh hưởng tới ngân sách dự án không?
+[09:15:30] Anh Đức: Có, nhưng tôi chưa biết điều chỉnh thế nào. Tôi sẽ trình bày sau.
+[09:16:00] Anh Minh: Chủ đề chi phí hơi rộng, tạm để sau. Giờ quay lại parser – anh Tuấn đã có task rồi.
+[09:16:30] Chị Hoa: Em muốn hỏi là task tối ưu parser có phải của Tuấn hay không? Em thấy giống phần Lan làm trước đây.
+[09:17:00] Anh Tuấn: Không, task này là mới, vì tôi sửa toàn bộ logic. Phần của Lan là phụ trợ.
+[09:17:30] Anh Minh: Đúng, tránh nhầm lẫn. Lan support test, Tuấn làm chính.
+[09:18:00] Anh Đức: Tôi nghĩ cần một task khác về deployment cho parser mới. Ai lo?
+[09:18:30] Anh Minh: Chưa, để parser xong đã. Đừng tạo task tràn lan.
+[09:19:00] Chị Lan: Vậy tôi nhận việc viết unit test cho functools liên quan? Hay là task riêng?
+[09:19:30] Anh Minh: Cái đó Tuấn tự quyết, có thể gộp vào task chính. Không cần tạo thêm.
+[09:20:00] Anh Tuấn: Tôi sẽ tự làm test trong task của mình.
+[09:20:30] Anh Minh: OK. Tiếp: phần MSF, chị Hoa có thắc mắc gì về filter?
+[09:21:00] Chị Hoa: Về filter, em cần dữ liệu mẫu từ parser cũ. Ai cung cấp?
+[09:21:30] Anh Tuấn: Tôi có thể export tạm, nhưng chưa clean.
+[09:22:00] Anh Minh: Vậy chị Hoa ghi nhận, sẽ hỗ trợ sau. Không làm task vội.
+[09:22:30] Anh Đức: Quay lại chi phí, tôi muốn chốt budget cho license. Có thể cần mua thêm.
+[09:23:00] Anh Minh: Thông tin đó anh đưa vào báo cáo để tuần sau họp riêng.
+[09:23:30] Chị Lan: Em thấy có một phần email parser cũng cần sửa, có nên thêm không?
+[09:24:00] Anh Minh: Cái đó khác với parser transcript. Em cứ liệt kê, nhưng chưa phải task.
+[09:24:30] Anh Tuấn: Tôi đề xuất tối ưu parser bằng cách dùng thư viện mới, dự án phase sau.
+[09:25:00] Anh Minh: Hay đấy, nhưng để phase 2. Distractor thôi.
+[09:25:30] Chị Hoa: Vậy em viết spec display xong, ai review?
+[09:26:00] Anh Minh: Tôi sẽ review cùng Tuấn. Nhưng Tuấn tập trung parser.
+[09:26:30] Chị Lan: Tôi có thể hỗ trợ review phần UI nếu cần.
+[09:27:00] Anh Minh: Được, ghi nhận. Nhưng chưa assign hẳn.
+[09:27:30] Anh Đức: Tôi thấy trong file chi phí có mục "phần đó" – chính là chi phí triển khai, chưa có ai làm.
+[09:28:00] Anh Minh: "Phần đó" là gì? À, cost implementation. Để sau, khi có số liệu cụ thể.
+[09:28:30] Anh Tuấn: Vậy task của tôi có deadline thứ Hai, nhưng cần chốt lại: tôi làm parser mới, Lan hỗ trợ test. Đúng không?
+[09:29:00] Anh Minh: Đúng. Còn task của chị Hoa – spec MSF và spec display. MSF deadline thứ Sáu, display chưa deadline.
+[09:29:30] Chị Hoa: Em confirm. Em sẽ gửi spec MSF thứ Sáu 27/2, spec display vào đầu tuần sau.
+[09:30:00] Anh Minh: Giờ tôi nhắc lại: có task parser do Tuấn (no deadline đã đặt), task MSF do Hoa (deadline 27/2), task display do Hoa (không deadline rõ). Còn chi phí chưa có task.
+[09:30:30] Chị Lan: Task test support của em có deadline không?
+[09:31:00] Anh Minh: Chưa, vì phụ thuộc Tuấn.
+[09:31:30] Anh Tuấn: Tôi đang có một thắc mắc: task về tối ưu parser hồi nãy có giống với task "cải tiến parser" không? Tôi sợ trùng.
+[09:32:00] Anh Minh: Lúc nãy anh nói tối ưu bộ nhớ, nhưng đó là ý tưởng, không phải task. Task chính của anh là "cải tiến parser logic". Vậy không duplicate.
+[09:32:30] Anh Đức: Còn cái "phần đó" về deployment? Tôi thấy chưa rõ.
+[09:33:00] Anh Minh: Không, chưa có ai nhận. Để nguyên unresolved.
+[09:33:30] Chị Hoa: Em muốn sửa deadline spec MSF từ thứ Sáu sang thứ Năm có được không? Em nghĩ sớm hơn tốt.
+[09:34:00] Anh Minh: Chị tự điều chỉnh, miễn đảm bảo. Vậy deadline mới là 26/2.
+[09:34:30] Chị Lan: Nhưng thứ Năm em có việc khác, liệu có ảnh hưởng không?
+[09:35:00] Anh Minh: Chỉ Hoa làm, không ảnh hưởng Lan.
+[09:35:30] Anh Tuấn: Tôi thấy cần recap lại: trình tự hiện tại. Đầu tiên Hoa gửi spec MSF, rồi tôi làm parser, sau đó Hoa hoàn thiện display dựa trên parser. Đúng không?
+[09:36:00] Anh Minh: Gần đúng. Nhưng display song song, không lệ thuộc hoàn toàn.
+[09:36:30] Chị Hoa: Vậy em sẽ làm spec display dựa trên mẫu cũ, không chờ parser mới.
+[09:37:00] Anh Minh: OK. Bây giờ có mục nào còn chưa rõ?
+[09:37:30] Anh Đức: Về chi phí, tôi đã ghi chú, nhưng chưa có hành động. Ít nhất nên assign một người theo dõi.
+[09:38:00] Anh Minh: Anh có thể làm người chốt chi phí không?
+[09:38:30] Anh Đức: Tôi ok. Nhưng chưa biết khi nào cần báo cáo.
+[09:39:00] Anh Minh: Để sau, cuộc họp chi phí riêng. Vậy chưa phải task.
+[09:39:30] Chị Lan: Còn về parser test, em muốn xác nhận: Tuấn sẽ gửi test case trước thứ Tư?
+[09:40:00] Anh Tuấn: Tôi sẽ gửi thứ Ba.
+[09:40:30] Anh Minh: Vậy chúng ta có các đầu việc: 1) Hoa – spec MSF (deadline 26/2, nay điều chỉnh). 2) Tuấn – cải tiến parser (deadline 2/3). 3) Hoa – spec display (chưa deadline). 4) Lan – support test (chưa deadline). 5) Chi phí – chưa ai nhận.
+[09:41:00] Anh Tuấn: Tôi nhắc lại, task parser đã có, không tạo thêm. Và distractor về tối ưu caching đã được ghi nhận.
+[09:41:30] Chị Hoa: Em muốn hỏi, spec MSF có cần update phần filter không? Em sẽ gộp vào.
+[09:42:00] Anh Minh: Có, làm luôn.
+[09:42:30] Anh Đức: Tôi thấy có một task giống nhau: "viết spec MSF" và "viết spec display" – cả hai đều do Hoa. Đó là hai task riêng.
+[09:43:00] Anh Minh: Đúng, hai task riêng, tên gần nhau nhưng khác đối tượng.
+[09:43:30] Chị Lan: Vậy task test support của em có tên riêng chưa?
+[09:44:00] Anh Minh: Có thể gọi là "hỗ trợ test parser". Nhưng nhỏ, gộp vào task Tuấn.
+[09:44:30] Anh Tuấn: Tôi ghi nhận. Còn một điều: phần recap gần cuối này, tôi thấy chưa ai phụ trách issue còn tồn đọng về integration cũ.
+[09:45:00] Anh Minh: Cái đó chưa có ai nhận, tạm để unresolved. Sẽ bàn lại cuộc họp sau.
+[09:45:30] Chị Hoa: Em đồng ý. Vậy kết thúc recap, mọi người có ý kiến gì thêm?
+[09:46:00] Anh Đức: Tôi muốn nhấn mạnh, deadline của parser đã được đặt ở lượt khác với task. Như lúc nãy.
+[09:46:30] Anh Minh: OK. Vậy ai có gì khác không? – không? Hẹn update vào cuối tuần.
+[09:47:00] Chị Lan: Em có một câu hỏi không liên quan: Trong báo cáo cũ có mục "tối ưu", đó là task hay distractor?
+[09:47:30] Anh Minh: Distractor. Đừng nhắc nữa.
+[09:48:00] Anh Tuấn: Vậy tôi xin phép đi làm.
+[09:48:30] Anh Minh: Kết thúc họp. Cảm ơn mọi người.

@@ -1,0 +1,132 @@
+MEETING_ID: W5-XL-C5-N2-OPS-STRESS-004
+PART: P03/10
+
+T000162 [09:36:30] Minh: Chúng ta bắt đầu phần vận hành. Anh muốn xem lại task config staging đã giao cho Tuấn. Tình hình thế nào rồi?
+
+T000163 [09:36:45] Tuấn: Dạ, em đã gửi file config chiều qua. Nhưng bên An nói thiếu một số biến environment cho payment.
+
+T000164 [09:37:00] An: Đúng vậy, file env mẫu chỉ có biến cơ bản. Cần thêm connection string cho database mới.
+
+T000165 [09:37:15] Minh: Vậy deadline 3/3 có kịp không? Tuấn cần bổ sung.
+
+T000166 [09:37:30] Tuấn: Có thể kịp, nhưng em đang bận viết log spec. Em nghĩ nên dời config sang thứ Sáu.
+
+T000167 [09:37:45] Minh: Ừ, deadline correction: chuyển config từ 3/3 lên 5/3. Đồng ý không?
+
+T000168 [09:38:00] An: OK với em. Nhưng cần đảm bảo trước weekend để em test.
+
+T000169 [09:38:15] Lan: Vậy ghi chú lại, deadline mới cho config: 5/3.
+
+T000170 [09:38:30] Tuấn: Còn task migration script cho database, em đã bắt đầu nhưng gặp khó khăn. Có thể chuyển cho An được không?
+
+T000171 [09:38:45] Minh: An, em có nhận không? Tuấn nói cần handoff.
+
+T000172 [09:39:00] An: Em có thể nhận, nhưng cần Tuấn giải thích logic migration. Em chưa nắm hết.
+
+T000173 [09:39:15] Tuấn: Dạ, em sẽ viết doc hướng dẫn trong hôm nay. Sau đó chuyển ownership cho An.
+
+T000174 [09:39:30] Minh: OK, handoff chính thức. Từ hôm nay, task migration script chuyển sang An. Tuấn vẫn hỗ trợ tài liệu.
+
+T000175 [09:39:45] Hà: Vậy deadline cũ 14/3 có còn không? Hay cần điều chỉnh?
+
+T000176 [09:40:00] An: Em cần thời gian học, có thể dời lên 16/3.
+
+T000177 [09:40:15] Minh: Chưa vội, em làm doc trước đã. Deadline correction sẽ bàn sau.
+
+T000178 [09:40:30] Lan: Anh Minh, em muốn hỏi về task ETL data migration cho CRM. Owner vẫn unresolved.
+
+T000179 [09:40:45] Minh: Đúng, chưa ai nhận. Huy và Giang vắng. Có thể tạm thời assign Lan làm coordinator?
+
+T000180 [09:41:00] Lan: Em có thể đứng ra phối hợp, nhưng không viết code. Cần tìm người làm.
+
+T000181 [09:41:15] Minh: Vậy Lan nhận task owner, nhưng việc thực hiện sẽ được assign sau. Ghi là pending.
+
+T000182 [09:41:30] An: Vậy môi trường sandbox cho CRM em đã setup xong. Bên họ có thể test từ mai.
+
+T000183 [09:41:45] Minh: Tốt. Vậy task sandbox hoàn thành trước deadline 3/3.
+
+T000184 [09:42:00] Tuấn: Em đã mở port trên firewall rồi, không vấn đề.
+
+T000185 [09:42:15] Hà: Em có vấn đề về test automation. Công cụ chạy test bị lỗi do thay đổi schema. Em cần Tuấn cập nhật mẫu mock data.
+
+T000186 [09:42:30] Tuấn: Em đã gửi hôm qua, Hà kiểm tra lại inbox nhé.
+
+T000187 [09:42:45] Hà: A, có rồi. Cảm ơn. Em sẽ cập nhật test case.
+
+T000188 [09:43:00] Lan: Anh Minh, chúng ta có task viết doc cho deploy flow. An đã làm slide chưa?
+
+T000189 [09:43:15] An: Em đang làm, dự kiến xong trước workshop thứ Tư 3/3.
+
+T000190 [09:43:30] Minh: Nhưng workshop đã dời sang 5/3 do xung đột lịch? Mọi người có biết không?
+
+T000191 [09:43:45] Lan: Chưa, em mới biết. Ai quyết định dời?
+
+T000192 [09:44:00] Minh: Anh quyết định vì An có việc đột xuất. Vậy workshop chuyển sang thứ Năm 5/3.
+
+T000193 [09:44:15] An: OK, em sẽ kịp slide trước buổi.
+
+T000194 [09:44:30] Hà: Vậy test plan cho workshop thay đổi không? Em không trực tiếp tham gia.
+
+T000195 [09:44:45] Minh: Không, chỉ là training. Test plan giữ nguyên.
+
+T000196 [09:45:00] Tuấn: Em muốn hỏi về task viết log spec. Deadline em đã đẩy lên 4/3. Hiện tại em mới viết xong bản nháp.
+
+T000197 [09:45:15] An: Em cần log spec để viết runbook. Có thể gửi trước 4/3 không?
+
+T000198 [09:45:30] Minh: Tuấn cố gắng gửi trước 3/3 để An có thời gian.
+
+T000199 [09:45:45] Tuấn: Dạ, em sẽ gửi bản draft tối nay.
+
+T000200 [09:46:00] Lan: Như vậy nhiều task sắp xếp lại. Có task nào bị cancel không?
+
+T000201 [09:46:15] Minh: Chưa, tất cả vẫn active. Nhưng có thể gộp một số task nhỏ.
+
+T000202 [09:46:30] An: Em đề xuất gộp task "update log spec" và "write runbook" lại, vì runbook dựa trên log spec.
+
+T000203 [09:46:45] Minh: Không nên, vì hai việc khác nhau. Giữ riêng.
+
+T000204 [09:47:00] Hà: Em có thắc mắc, task review code cho payment API đã ai làm? Tuấn gửi code chưa?
+
+T000205 [09:47:15] Tuấn: Em đã push lên branch review, nhưng chưa có ai review. Anh Minh có thể assign người?
+
+T000206 [09:47:30] Minh: Anh sẽ review sáng mai. Hà cũng cần review từ góc độ QA.
+
+T000207 [09:47:45] Hà: Vâng, em sẽ review sau khi anh xong.
+
+T000208 [09:48:00] Lan: Vậy cần set deadline cho review. Anh Minh, anh có thể hoàn thành trước 4/3?
+
+T000209 [09:48:15] Minh: Anh có thể, nhưng nếu bận thì có thể 5/3.
+
+T000210 [09:48:30] Lan: Vậy đặt deadline 5/3 cho review dev, sau đó Hà review đến 6/3.
+
+T000211 [09:48:45] Hà: OK.
+
+T000212 [09:49:00] An: Em muốn nhấn mạnh, task config staging cần hoàn thành sớm để em test migration script. Nên deadline 5/3 là quan trọng.
+
+T000213 [09:49:15] Tuấn: Dạ, em sẽ ưu tiên.
+
+T000214 [09:49:30] Minh: Chúng ta có vấn đề về nhân sự. Huy chưa backup cho việc CRM integration. Em Lan, em có thể liên hệ Huy được không?
+
+T000215 [09:49:45] Lan: Em đã nhắn tin, Huy bảo mai mới rảnh.
+
+T000216 [09:50:00] Minh: Vậy chờ. Còn Giang, khi nào đi làm lại?
+
+T000217 [09:50:15] Lan: Giang báo ốm đến thứ Năm.
+
+T000218 [09:50:30] Minh: Vậy thứ Năm có mặt. Có ai cần gì không?
+
+T000219 [09:50:45] Hà: Em muốn hỏi, có cần tạo ticket cho việc backup dữ liệu trước khi deploy payment không?
+
+T000220 [09:51:00] Minh: Cần, An lo việc đó. Deadline backup script trước 14/3.
+
+T000221 [09:51:15] An: Em sẽ thêm vào backlog.
+
+T000222 [09:51:30] Tuấn: Em thấy có một số việc lặp lại, như task "update config" và "fix SSL cert" có thể một người làm.
+
+T000223 [09:51:45] Minh: Không chồng chéo. Cứ giữ.
+
+T000224 [09:52:00] Lan: Vậy tổng kết P03: task mới có handoff migration script cho An, deadline correction config thành 5/3, và workshop dời sang 5/3. Còn gì nữa không?
+
+T000225 [09:52:15] Minh: Thêm task review code payment với deadline 5/3. Được rồi, tạm dừng ở đây.
+
+--- END OF PART P03 ---

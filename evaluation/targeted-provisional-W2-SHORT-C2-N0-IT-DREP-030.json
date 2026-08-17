@@ -1,0 +1,214 @@
+{
+  "pipeline_version": "v1",
+  "meeting_context_mode": "assist",
+  "meeting_notes": "sidecar_if_present",
+  "prompt_version": "v1-ledger-mutation-v1",
+  "model": "deterministic",
+  "mode": "local",
+  "endpoint": "",
+  "completed_case_count": 1,
+  "expected_case_count": 1,
+  "metrics_are_partial": false,
+  "dataset_audit": {
+    "reviewed_ground_truth_count": 1,
+    "unreviewed_ground_truth_count": 0,
+    "unreviewed_case_ids": [],
+    "suspect_empty_ground_truth_count": 0,
+    "suspect_empty_ground_truth_case_ids": []
+  },
+  "metrics": {
+    "case_count": 1,
+    "passed_case_count": 0,
+    "failed_case_count": 1,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.5,
+    "task_identity_recall": 0.5,
+    "task_precision": 0.5,
+    "task_recall": 0.5,
+    "field_accuracy": 0.8333333333333334,
+    "assignee_accuracy": 1.0,
+    "due_date_accuracy": 1.0,
+    "due_date_text_exact_accuracy": 0.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "reviewed_metrics": {
+    "case_count": 1,
+    "passed_case_count": 0,
+    "failed_case_count": 1,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 0.5,
+    "task_identity_recall": 0.5,
+    "task_precision": 0.5,
+    "task_recall": 0.5,
+    "field_accuracy": 0.8333333333333334,
+    "assignee_accuracy": 1.0,
+    "due_date_accuracy": 1.0,
+    "due_date_text_exact_accuracy": 0.0,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": 1.0
+  },
+  "exploratory_metrics": {
+    "case_count": 0,
+    "passed_case_count": 0,
+    "failed_case_count": 0,
+    "case_pass_rate": 0.0,
+    "task_identity_precision": 1.0,
+    "task_identity_recall": 1.0,
+    "task_precision": 1.0,
+    "task_recall": 1.0,
+    "field_accuracy": 1.0,
+    "assignee_accuracy": null,
+    "due_date_accuracy": null,
+    "due_date_text_exact_accuracy": null,
+    "date_mention_link_accuracy": null,
+    "date_resolution_status_accuracy": null,
+    "state_link_accuracy": null
+  },
+  "pipeline_diagnostics": {
+    "candidate_window_count": 3,
+    "rule_event_count": 6,
+    "ai_event_count": 0,
+    "ai_window_count": 1,
+    "ai_batch_count": 1,
+    "ai_context_clause_count": 31,
+    "unresolved_window_count": 1,
+    "event_count_before_deduplication": 6,
+    "event_count_after_deduplication": 6,
+    "terminal_replay_blocked_count": 0,
+    "ledger_task_created_count": 2,
+    "ledger_task_updated_count": 3,
+    "exact_id_link_count": 0,
+    "exact_alias_link_count": 1,
+    "semantic_link_count": 2,
+    "unresolved_mutation_count": 1,
+    "duplicate_task_merge_count": 0,
+    "provisional_task_created_count": 1,
+    "provisional_task_promoted_count": 1,
+    "ai_contract_rejection_count": 0,
+    "ai_unknown_task_id_rejection_count": 0,
+    "ai_fallback_error_count": 0,
+    "weighted_ai_call_rate": 0.3333333333333333,
+    "ai_clause_coverage": 0.6595744680851063
+  },
+  "fallback_metrics": {
+    "rule_only": 0,
+    "ai_fallback_not_configured": 1,
+    "ai_fallback_resolved": 0,
+    "ai_fallback_unresolved": 0,
+    "ai_fallback_failed": 0
+  },
+  "job_execution": [],
+  "execution_errors": [],
+  "case_execution": [
+    {
+      "case_id": "W2-SHORT-C2-N0-IT-DREP-030",
+      "route": "ai_fallback_not_configured",
+      "ai_window_count": 1,
+      "ai_provider_call_count": 0,
+      "ai_event_count": 0,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 1,
+      "unresolved_mutation_count": 1,
+      "provisional_task_created_count": 1,
+      "provisional_task_promoted_count": 1,
+      "ai_contract_rejection_count": 0,
+      "ai_unknown_task_id_rejection_count": 0
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "W2-SHORT-C2-N0-IT-DREP-030",
+      "passed": false,
+      "expected_task_count": 2,
+      "actual_task_count": 2,
+      "matched_task_count": 1,
+      "missing_tasks": [
+        {
+          "task_name": "Thông báo deadline mới cho khách hàng",
+          "assignee": "Hoa",
+          "start_date": "2026-02-24",
+          "due_date": "",
+          "due_date_text": "",
+          "status": "Proposed"
+        }
+      ],
+      "unexpected_tasks": [
+        {
+          "task_name": "Điều chỉnh test plan theo mốc này",
+          "assignee": "Tùng",
+          "start_date": "2026-02-24",
+          "due_date": "",
+          "due_date_text": "",
+          "evidence": "Tùng: Em sẽ điều chỉnh test plan theo mốc này.",
+          "status": "Proposed"
+        }
+      ],
+      "field_errors": [
+        {
+          "task_name": "Tích hợp module thanh toán",
+          "field": "due_date_text",
+          "expected": "ngày 5 tháng 3",
+          "actual": "5/3"
+        }
+      ],
+      "checked_field_count": 6,
+      "correct_field_count": 5,
+      "field_counts": {
+        "assignee_accuracy": [
+          1,
+          1
+        ],
+        "due_date_accuracy": [
+          1,
+          1
+        ],
+        "due_date_text_exact_accuracy": [
+          1,
+          0
+        ],
+        "state_link_accuracy": [
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "case_diagnostics": {
+    "W2-SHORT-C2-N0-IT-DREP-030": {
+      "caption_count": 38,
+      "deduplicated_caption_count": 38,
+      "turn_count": 38,
+      "sentence_count": 45,
+      "clause_count": 47,
+      "candidate_window_count": 3,
+      "rule_event_count": 6,
+      "ai_event_count": 0,
+      "ai_window_count": 1,
+      "ai_provider_call_count": 0,
+      "ai_context_clause_count": 31,
+      "ai_fallback_error_count": 0,
+      "unresolved_window_count": 1,
+      "ai_call_rate": 0.3333333333333333,
+      "ai_clause_coverage": 0.6595744680851063,
+      "ai_batch_count": 1,
+      "event_count_before_deduplication": 6,
+      "event_count_after_deduplication": 6,
+      "terminal_replay_blocked_count": 0,
+      "ledger_task_created_count": 2,
+      "ledger_task_updated_count": 3,
+      "exact_id_link_count": 0,
+      "exact_alias_link_count": 1,
+      "semantic_link_count": 2,
+      "unresolved_mutation_count": 1,
+      "duplicate_task_merge_count": 0,
+      "provisional_task_created_count": 1,
+      "provisional_task_promoted_count": 1,
+      "ai_contract_rejection_count": 0,
+      "ai_unknown_task_id_rejection_count": 0,
+      "recap_scope": "PARTIAL"
+    }
+  }
+}

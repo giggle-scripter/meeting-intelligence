@@ -1,0 +1,7 @@
+{
+  "meeting_title": "Theo dõi tiến độ tài liệu",
+  "tasks": [
+    {"task_name":"Hoàn thành tài liệu hướng dẫn sử dụng","assignee":"Lan","start_date":"2026-01-17","due_date":"2026-01-24","due_date_text":"trước ngày 25 tháng 1","status":"Proposed"},
+    {"task_name":"Viết báo cáo kiểm thử","assignee":"Tuấn","start_date":"2026-01-17","due_date":"2026-01-20","due_date_text":"vào ngày 20 tháng 1","status":"Proposed"}
+  ]
+}

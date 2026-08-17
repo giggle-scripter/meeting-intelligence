@@ -1,0 +1,13 @@
+{
+  "meeting_title": "Chuẩn bị môi trường kiểm thử",
+  "tasks": [
+    {
+      "task_name": "Cài đặt môi trường test",
+      "assignee": "Minh",
+      "start_date": "2026-01-28",
+      "due_date": "2026-02-03",
+      "due_date_text": "trước thứ Tư tuần sau",
+      "status": "Proposed"
+    }
+  ]
+}

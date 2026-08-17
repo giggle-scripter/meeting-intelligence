@@ -1,0 +1,21 @@
+{
+  "meeting_title": "Theo dõi lỗi và tài liệu",
+  "tasks": [
+    {
+      "task_name": "Duy trì tài liệu theo dõi lỗi",
+      "assignee": "Linh",
+      "start_date": "2026-02-17",
+      "due_date": "",
+      "due_date_text": "",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Fix lỗi mới",
+      "assignee": "Tuấn",
+      "start_date": "2026-02-17",
+      "due_date": "2026-02-19",
+      "due_date_text": "trước thứ Sáu",
+      "status": "Proposed"
+    }
+  ]
+}

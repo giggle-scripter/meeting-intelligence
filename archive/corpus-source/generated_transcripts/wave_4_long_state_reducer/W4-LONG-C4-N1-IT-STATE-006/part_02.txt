@@ -1,0 +1,144 @@
+MEETING_ID: W4-LONG-C4-N1-IT-STATE-006
+PART: P02/5
+
+T000078 [09:15:00] An: Mọi người, chúng ta tiếp tục phần 2. Phần này tôi muốn chuyển sang vấn đề đang nóng: lỗi đăng nhập trên hệ thống hiện tại và dữ liệu test cho môi trường mới.
+
+T000079 [09:15:15] Bình: Vâng, lỗi đăng nhập đã được báo cáo từ tuần trước. Người dùng không thể đăng nhập bằng tài khoản domain, chỉ dùng được tài khoản local.
+
+T000080 [09:15:28] Cường: Đó là lỗi nghiêm trọng. Nếu triển khai hệ thống mới mà vẫn còn lỗi này, sẽ ảnh hưởng đến toàn bộ người dùng.
+
+T000081 [09:15:40] Dung: Em có thấy log lỗi, nguyên nhân do cấu hình LDAP không đồng bộ. Nhưng chưa có giải pháp chính thức.
+
+T000082 [09:15:52] An: Vậy chúng ta cần một task riêng để xử lý lỗi đăng nhập. Bình, em có thể đảm nhận không?
+
+T000083 [09:16:02] Bình: Em có thể, nhưng cần quyền truy cập vào server xác thực. Hiện tại em chưa có.
+
+T000084 [09:16:12] Cường: Tôi sẽ cấp quyền cho em. Nhưng cần có tài liệu hướng dẫn cấu hình LDAP trước.
+
+T000085 [09:16:22] Dung: Em có thể viết tài liệu đó, vì đã từng tìm hiểu.
+
+T000086 [09:16:30] An: Tốt. Vậy ta tạo task "Xử lý lỗi đăng nhập LDAP", Bình phụ trách, deadline đến cuối tuần? Hay cần thêm thời gian?
+
+T000087 [09:16:45] Bình: Em cần ít nhất 5 ngày để phân tích và sửa. Nếu có tài liệu từ Dung, có thể nhanh hơn.
+
+T000088 [09:16:55] An: Vậy deadline 27/02. Dung, em làm tài liệu LDAP, deadline 24/02, để Bình có thể dùng.
+
+T000089 [09:17:05] Dung: Vâng, em sẽ hoàn thành.
+
+T000090 [09:17:10] Cường: Khoan, tôi thấy task này tên có thể nhầm với "Soạn tài liệu hướng dẫn triển khai" ở phần 1. Đặt rõ là "Hướng dẫn cấu hình LDAP" đi.
+
+T000091 [09:17:22] An: OK. Vậy task 4: "Xử lý lỗi đăng nhập LDAP" – Bình, deadline 27/02. Task 5: "Soạn hướng dẫn cấu hình LDAP" – Dung, deadline 24/02.
+
+T000092 [09:17:38] Bình: Em muốn hỏi, lỗi đăng nhập có liên quan đến dữ liệu test không? Vì nếu không có dữ liệu test, em khó mô phỏng.
+
+T000093 [09:17:50] An: Đó là vấn đề tiếp theo. Chúng ta cần dữ liệu test cho môi trường staging. Ai có thể chuẩn bị?
+
+T000094 [09:18:00] Dung: Em có thể lấy mẫu từ database cũ, nhưng cần làm sạch trước.
+
+T000095 [09:18:08] Cường: Làm sạch dữ liệu là công việc tốn thời gian. Chúng ta cần một task riêng.
+
+T000096 [09:18:18] An: Vậy task 6: "Chuẩn bị dữ liệu test cho staging", Dung phụ trách, deadline 28/02.
+
+T000097 [09:18:30] Dung: Em nghĩ cần có người review dữ liệu sau khi em làm xong. Ai sẽ review?
+
+T000098 [09:18:38] Cường: Tôi có thể review, nhưng cần thấy mẫu trước.
+
+T000099 [09:18:45] An: Vậy Cường sẽ là reviewer cho task 6. Nhưng chưa có deadline review, tạm thời để sau.
+
+T000100 [09:18:55] Bình: Em thấy task 6 hơi giống với task 1 (môi trường staging). Nhưng task 1 là thiết lập môi trường, còn task 6 là dữ liệu. Nên tách biệt.
+
+T000101 [09:19:08] An: Đúng. Bây giờ, về dữ liệu test, chúng ta cần mẫu cho lỗi đăng nhập. Bình, em cần dữ liệu gì?
+
+T000102 [09:19:18] Bình: Em cần tài khoản test với các trường hợp: đúng, sai mật khẩu, hết hạn, bị khóa. Khoảng 10 tài khoản.
+
+T000103 [09:19:28] Dung: Em sẽ tạo trong quá trình chuẩn bị dữ liệu.
+
+T000104 [09:19:35] An: Tốt. Vậy chúng ta đã có task 6. Có ai thấy thiếu gì không?
+
+T000105 [09:19:42] Cường: Tôi nghĩ nên có một distractor: việc cập nhật tài liệu hướng dẫn sử dụng cho người dùng cuối. Đó không phải ưu tiên ngay, nhưng cần lên kế hoạch.
+
+T000106 [09:19:58] An: Ghi nhận. Ta tạo task "Cập nhật tài liệu hướng dẫn sử dụng", nhưng chưa assign ngay. Để sau.
+
+T000107 [09:20:08] Bình: Vậy task đó là distractor? Hay ta sẽ bàn sau?
+
+T000108 [09:20:15] An: Distractor, không ưu tiên. Bây giờ, tôi muốn thảo luận về negative context: lỗi đăng nhập có thể do firewall chặn port LDAP. Bình, em đã kiểm tra chưa?
+
+T000109 [09:20:30] Bình: Em chưa kiểm tra firewall. Cần quyền từ IT hạ tầng. Nhưng meeting với IT chưa diễn ra.
+
+T000110 [09:20:40] Cường: Đó là rủi ro. Nếu firewall chặn, dù sửa cấu hình cũng vô ích.
+
+T000111 [09:20:48] An: Vậy trong task 4, Bình cần kiểm tra cả firewall. Bổ sung vào yêu cầu.
+
+T000112 [09:20:55] Bình: Vâng, em sẽ ghi chú.
+
+T000113 [09:21:00] Dung: Em có thắc mắc về dữ liệu test: nếu dùng dữ liệu thật đã làm sạch, có vi phạm bảo mật không?
+
+T000114 [09:21:10] Cường: Cần ẩn danh thông tin cá nhân. Em nhớ xóa các trường nhạy cảm.
+
+T000115 [09:21:18] An: Đúng vậy. Dung, em thêm bước ẩn danh vào task 6.
+
+T000116 [09:21:25] Dung: Vâng.
+
+T000117 [09:21:30] Bình: Anh ơi, về task 3 "Sắp xếp meeting với IT hạ tầng", em đã gửi lời mời. Dự kiến thứ hai tuần sau.
+
+T000118 [09:21:42] An: Tốt, nhớ cập nhật tiến độ.
+
+T000119 [09:21:48] Cường: Tôi thấy ta đang tạo nhiều task. Cần hệ thống lại. Anh có thể điểm nhanh các task hiện tại không?
+
+T000120 [09:21:58] An: Được. Task 1: Thiết lập môi trường staging – Bình, deadline 25/02. Task 2: Soạn tài liệu hướng dẫn triển khai – Dung, chưa deadline. Task 3: Sắp xếp meeting với IT – Bình, deadline 22/02. Task 4: Xử lý lỗi đăng nhập LDAP – Bình, deadline 27/02. Task 5: Soạn hướng dẫn cấu hình LDAP – Dung, deadline 24/02. Task 6: Chuẩn bị dữ liệu test – Dung, deadline 28/02, reviewer Cường. Và task distractor: Cập nhật tài liệu hướng dẫn sử dụng, chưa assign.
+
+T000121 [09:22:30] Bình: Vậy task 4 và task 1 có phụ thuộc không? Vì lỗi đăng nhập cần môi trường để test.
+
+T000122 [09:22:40] An: Có, nhưng task 1 chưa có môi trường, nên task 4 tạm thời dựa trên phân tích. Khi có môi trường, sẽ kiểm tra lại.
+
+T000123 [09:22:52] Cường: Đó là unresolved: task 4 chưa thể hoàn thành nếu không có môi trường. Ta cần ghi chú phụ thuộc.
+
+T000124 [09:23:00] An: Đúng. Tôi sẽ ghi chú trong hệ thống. Còn gì nữa không?
+
+T000125 [09:23:08] Dung: Về tài liệu LDAP, em cần confirm các thông số từ Cường.
+
+T000126 [09:23:15] Cường: Tôi sẽ gửi qua email chiều nay.
+
+T000127 [09:23:20] Bình: Em muốn hỏi, có cần tạo task phụ "Kiểm tra firewall LDAP" không?
+
+T000128 [09:23:28] An: Có thể gộp vào task 4. Nhưng nếu em muốn tách, cũng được.
+
+T000129 [09:23:35] Bình: Thôi, gộp cho gọn.
+
+T000130 [09:23:40] Cường: Tôi thấy chúng ta đang thiếu một reviewer cho task 4. Ai sẽ review?
+
+T000131 [09:23:48] An: Tôi nghĩ Cường có thể review, vì anh rành về LDAP.
+
+T000132 [09:23:55] Cường: Được, tôi sẽ review sau khi Bình hoàn thành.
+
+T000133 [09:24:00] An: Vậy Cường là reviewer cho task 4. Nhưng deadline review chưa set.
+
+T000134 [09:24:08] Cường: Tôi cần 2 ngày sau khi nhận kết quả.
+
+T000135 [09:24:14] An: OK. Vậy ta tạm ghi. Tiếp theo, tôi muốn thảo luận về dữ liệu test mẫu cho lỗi đăng nhập cụ thể hơn.
+
+T000136 [09:24:28] Bình: Em cần tài khoản với role khác nhau: admin, user, guest. Để test phân quyền.
+
+T000137 [09:24:38] Dung: Em sẽ tạo 15 tài khoản với các role đó.
+
+T000138 [09:24:45] Cường: Chú ý không dùng mật khẩu thật. Dùng mật khẩu test chung.
+
+T000139 [09:24:52] Dung: Vâng.
+
+T000140 [09:24:58] An: Tốt. Vậy phần này đã rõ. Chúng ta còn khoảng 5 phút nữa cho phần 2. Tôi muốn điểm lại các unresolved issue: task 4 phụ thuộc vào task 1, nhưng chưa giải quyết. Có ai muốn bàn thêm không?
+
+T000141 [09:25:12] Bình: Em nghĩ nếu meeting với IT tuần sau có kết quả tốt, ta sẽ có môi trường sớm.
+
+T000142 [09:25:22] Cường: Nhưng chưa chắc. Nếu thất bại, ta cần phương án dự phòng.
+
+T000143 [09:25:30] An: Đúng. Nhưng để phần 2 kết thúc ở đây. Phần 3 ta sẽ bàn về phương án dự phòng và các rủi ro khác.
+
+T000144 [09:25:40] Dung: Vâng, em thấy ổn.
+
+T000145 [09:25:43] Bình: Em không có ý kiến.
+
+T000146 [09:25:46] Cường: Tôi đồng ý.
+
+T000147 [09:25:50] An: Vậy chúng ta kết thúc phần 2. Hẹn gặp lại ở phần 3.
+
+--- END OF PART P02 ---

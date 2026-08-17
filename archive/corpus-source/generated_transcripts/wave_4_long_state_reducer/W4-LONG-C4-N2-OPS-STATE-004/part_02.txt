@@ -1,0 +1,174 @@
+MEETING_ID: W4-LONG-C4-N2-OPS-STATE-004
+PART: P02/5
+
+T000084 [09:24:00] Ms. Lan: Chúng ta quay lại cuộc họp chính. Anh Tuấn và Minh đã giải quyết xong conflict port chưa?
+
+T000085 [09:24:18] Anh Tuấn: Vẫn đang xử lý, nhưng tạm thời tôi muốn báo cáo một vấn đề khác: hệ thống ghi nhận lỗi đăng nhập trên staging sau khi deploy API gateway.
+
+T000086 [09:24:36] Minh: Dạ, em cũng vừa thấy. Lỗi xảy ra khi người dùng nhập đúng thông tin nhưng server vẫn trả về 401.
+
+T000087 [09:24:54] Hoa: Tôi test thử vài case, username/password hợp lệ nhưng không được. Có vẻ liên quan đến JWT token.
+
+T000088 [09:25:12] Ms. Lan: Vậy đây là issue nghiêm trọng. Ai sẽ điều tra và fix?
+
+T000089 [09:25:30] Anh Tuấn: Tôi nghĩ Minh nên lo vụ này, vì em biết cấu hình token.
+
+T000090 [09:25:48] Minh: Em có thể xem, nhưng cần log chi tiết từ cluster. Hiện tại logging chưa đầy đủ.
+
+T000091 [09:26:06] Hoa: Tôi đã ghi lại các bước test, có thể gửi cho Minh.
+
+T000092 [09:26:22] Ms. Lan: Tốt. Vậy giao cho Minh task “Khắc phục lỗi đăng nhập trên staging”. Deadline trong tuần này, thứ Sáu ngày 20/2 được không?
+
+T000093 [09:26:40] Minh: Thứ Sáu 20/2 hơi gấp, vì em còn phải làm tài liệu và staging. Có thể dời sang thứ Hai 23/2?
+
+T000094 [09:26:58] Ms. Lan: Được, thứ Hai 23/2. Hoa hỗ trợ kiểm tra sau khi fix.
+
+T000095 [09:27:16] Hoa: Vâng, nhưng em cần môi trường staging ổn định để test.
+
+T000096 [09:27:34] Anh Tuấn: Staging đang có conflict port, tôi đang fix. Có lẽ xong trưa nay.
+
+T000097 [09:27:52] Ms. Lan: Vậy task này phụ thuộc vào task kia. Cần ưu tiên giải quyết conflict trước.
+
+T000098 [09:28:10] Minh: Em đề xuất dùng OAuth2 thay vì JWT custom, sẽ bền hơn. Nhưng cần thời gian.
+
+T000099 [09:28:28] Hoa: OAuth2 có cần thêm hạ tầng không? Nếu phải thì đây là chuyện lớn.
+
+T000100 [09:28:46] Anh Tuấn: Có vài giải pháp, nhưng tôi nghĩ không nên thay đổi kiến trúc giữa chừng. Tạm thời fix lỗi đúng spec.
+
+T000101 [09:29:04] Minh: Nhưng nếu fix tạm, sau này vẫn lỗi lại. Em thấy bản chất là do secret key không sync.
+
+T000102 [09:29:22] Ms. Lan: Tranh luận về OAuth2 để sau. Giờ tập trung fix lỗi ngay.
+
+T000103 [09:29:40] Minh: Vâng, em sẽ check lại secret key và xác thực việc ký token.
+
+T000104 [09:29:58] Hoa: Ngoài ra, tôi thấy dữ liệu test hiện tại khá ít, chỉ có 10 user sample. Cần tạo thêm dữ liệu mẫu.
+
+T000105 [09:30:16] Ms. Lan: Đó cũng là việc quan trọng. Chúng ta cần một dataset đầy đủ để test toàn diện.
+
+T000106 [09:30:34] Anh Tuấn: Ai sẽ lo phần dữ liệu test? Tôi nghĩ Hoa, vì QA cần data.
+
+T000107 [09:30:52] Hoa: Em có thể viết script tạo dữ liệu, nhưng cần định nghĩa các trường hợp biên.
+
+T000108 [09:31:10] Ms. Lan: Vậy giao thêm task “Chuẩn bị dữ liệu test cho module đăng nhập” cho Hoa. Không có deadline cụ thể, nhưng cần ưu tiên.
+
+T000109 [09:31:28] Hoa: Em muốn có hướng dẫn từ Anh Tuấn về các trường dữ liệu tối thiểu.
+
+T000110 [09:31:46] Anh Tuấn: Tôi sẽ gửi email mô tả schema. Cần bao gồm cả role và permission.
+
+T000111 [09:32:04] Ms. Lan: Lưu ý, dữ liệu test phải giống production nhất có thể. Tránh sai lệch.
+
+T000112 [09:32:22] Minh: Em muốn hỏi, việc dùng SSH key để xác thực có cần test không? Hay chỉ username/password?
+
+T000113 [09:32:40] Hoa: Theo yêu cầu, đợt này chỉ test username/password thôi.
+
+T000114 [09:32:58] Anh Tuấn: Tôi nghĩ cần test cả trường hợp token hết hạn và refresh token.
+
+T000115 [09:33:16] Minh: Phần đó thuộc về task lỗi đăng nhập hay dữ liệu test?
+
+T000116 [09:33:34] Ms. Lan: Là phần của lỗi đăng nhập. Khi fix, em nhớ xử lý thêm refresh token.
+
+T000117 [09:33:52] Minh: Rõ rồi. Nhưng nếu thêm refresh token, deadline thứ Hai 23/2 có kịp không?
+
+T000118 [09:34:10] Ms. Lan: Cố gắng. Nếu không, có thể lùi 2 ngày, tới thứ Tư 25/2.
+
+T000119 [09:34:28] Hoa: Lúc nãy chị nói task 1 deadline 25/2. Giờ task này cũng 25/2, lo quá.
+
+T000120 [09:34:46] Ms. Lan: Đúng, nhiều việc. Nhưng 25/2 là hạn chót, phải sắp xếp.
+
+T000121 [09:35:04] Anh Tuấn: Tôi sẽ hỗ trợ Minh nếu cần, phần conflict port có thể xong sớm.
+
+T000122 [09:35:22] Minh: Em cảm ơn. Vậy em tập trung fix lỗi đăng nhập và sửa tài liệu song song.
+
+T000123 [09:35:40] Hoa: Em hỏi về task dữ liệu test: ai sẽ review dữ liệu sau khi em tạo?
+
+T000124 [09:35:58] Ms. Lan: Anh Tuấn review, vì em quen với schema.
+
+T000125 [09:36:16] Anh Tuấn: Tôi đồng ý, nhưng hiện tại tôi bận với conflict port và review tài liệu.
+
+T000126 [09:36:34] Hoa: Vậy ai review dữ liệu test? Có thể Minh không?
+
+T000127 [09:36:52] Minh: Em có thể review, nhưng em không rõ về mặt nghiệp vụ dữ liệu.
+
+T000128 [09:37:10] Ms. Lan: Vậy để tôi tìm người khác, hoặc tôi sẽ review. Nhưng tôi đang bận với báo cáo cho sếp.
+
+T000129 [09:37:28] Hoa: Thế thì chưa có reviewer ư? Em lo dữ liệu sai sẽ ảnh hưởng test.
+
+T000130 [09:37:46] Anh Tuấn: Tôi có thể thu xếp tối nay, nhưng không hứa trước. Để tôi báo sau.
+
+T000131 [09:38:04] Ms. Lan: Tạm thời chưa assign reviewer. Khi nào có, tôi sẽ báo. Hoa cứ làm trước.
+
+T000132 [09:38:22] Minh: Vậy tóm lại em có task fix lỗi đăng nhập, deadline 25/2. Hoa có task tạo dữ liệu test, chưa có deadline.
+
+T000133 [09:38:40] Hoa: Nhưng em cần biết deadline để ưu tiên. Em có thể làm xong trong 3 ngày.
+
+T000134 [09:38:58] Ms. Lan: Đặt deadline end of this week, 20/2 nhé. Nhưng nếu cần thêm, nói tôi.
+
+T000135 [09:39:16] Hoa: 20/2 được. Vậy em sẽ hoàn thành script và dữ liệu.
+
+T000136 [09:39:34] Anh Tuấn: Tôi khuyên Hoa nên tạo file CSV mẫu trước, rồi import vào DB.
+
+T000137 [09:39:52] Hoa: Em sẽ làm theo hướng đó.
+
+T000138 [09:40:10] Ms. Lan: Về distractor, tôi nhận thấy chúng ta tốn quá nhiều thời gian bàn về OAuth2 mà không đi đến đâu. Giờ quay lại vấn đề chính.
+
+T000139 [09:40:28] Minh: Em xin lỗi, tại em thấy giải pháp OAuth2 tối ưu.
+
+T000140 [09:40:46] Anh Tuấn: Ý của Minh tốt, nhưng thời điểm này không phù hợp. Để sau release.
+
+T000141 [09:41:04] Hoa: Đồng ý. Release sắp tới cần ổn định.
+
+T000142 [09:41:22] Ms. Lan: Vậy chúng ta đã có thêm hai task mới. Cần nhắc lại: task 1 môi trường test staging vẫn giữ nguyên, Hoa và Minh lo, deadline 25/2. Task 2 tài liệu, Minh lo, deadline 5/3. Task 3 lỗi đăng nhập, Minh lo, deadline 25/2. Task 4 dữ liệu test, Hoa lo, deadline 20/2. Còn task nào nữa?
+
+T000143 [09:41:42] Anh Tuấn: Conflict port đang xử lý, không phải task riêng.
+
+T000144 [09:42:00] Minh: Thế còn việc review tài liệu? Ai sẽ review? Lúc nãy chị nói Anh Tuấn.
+
+T000145 [09:42:18] Anh Tuấn: Tôi sẽ review, nhưng muốn Minh gửi sớm.
+
+T000146 [09:42:36] Hoa: Vậy reviewer cho tài liệu đã có. Còn reviewer cho dữ liệu test thì chưa, như chị Lan nói.
+
+T000147 [09:42:54] Ms. Lan: Để tôi assign sau. Có thể nhờ bên BA.
+
+T000148 [09:43:12] Anh Tuấn: BA bận dự án khác, tôi nghĩ không khả thi.
+
+T000149 [09:43:30] Ms. Lan: Vậy tôi sẽ tự review. Nhưng tôi cần Hoa gửi bản nháp sớm.
+
+T000150 [09:43:48] Hoa: Dạ, em sẽ gửi trước 20/2.
+
+T000151 [09:44:06] Minh: Em có thắc mắc: task lỗi đăng nhập và task staging có liên quan đến nhau, vì staging chưa ổn định. Nếu staging không xong, em không test được.
+
+T000152 [09:44:24] Anh Tuấn: Tôi đang fix conflict port, hứa xong trong hôm nay. Sau đó Minh có thể dùng staging.
+
+T000153 [09:44:42] Hoa: Vậy phải đảm bảo timeline không trượt.
+
+T000154 [09:45:00] Ms. Lan: Tất cả đều phụ thuộc lẫn nhau. Các em chủ động phối hợp.
+
+T000155 [09:45:18] Anh Tuấn: Tôi đề nghị cuối giờ chiều nay có một buổi họp ngắn 15 phút để kiểm tra tiến độ.
+
+T000156 [09:45:36] Ms. Lan: Ý hay. 5 giờ chiều nay, mọi người có mặt online. Tôi sẽ gửi invite.
+
+T000157 [09:45:54] Minh: Vâng, em được.
+
+T000158 [09:46:10] Hoa: Em cũng được.
+
+T000159 [09:46:26] Ms. Lan: Có vấn đề gì muốn thảo luận thêm cho phần này không?
+
+T000160 [09:46:44] Anh Tuấn: Tôi có một câu hỏi về dữ liệu test: có cần test với dữ liệu lớn 10.000 bản ghi không? Hay chỉ mẫu nhỏ?
+
+T000161 [09:47:02] Hoa: Em nghĩ cần có test performance nữa, nhưng đó là phần sau.
+
+T000162 [09:47:20] Ms. Lan: Lần này chỉ test chức năng. Performance để phase 2.
+
+T000163 [09:47:38] Minh: Vậy em yên tâm.
+
+T000164 [09:47:56] Ms. Lan: Chúng ta đã đi qua nhiều nội dung. Tôi muốn dừng tại đây, chuẩn bị cho cuộc họp chiều.
+
+T000165 [09:48:14] Hoa: Vâng, em sẽ note lại các task.
+
+T000166 [09:48:30] Anh Tuấn: Tôi tiếp tục fix conflict port.
+
+T000167 [09:48:46] Minh: Em sẽ bắt đầu phân tích lỗi đăng nhập.
+
+T000168 [09:49:02] Ms. Lan: Cảm ơn mọi người. Tạm biệt.
+
+--- END OF PART P02 ---

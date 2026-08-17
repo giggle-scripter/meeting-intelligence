@@ -1,0 +1,40 @@
+=== MEETING METADATA ===
+meeting_id: W1-SHORT-C1-N0-IT-DASG-ABS-018
+meeting_title: Theo dõi tiến độ tài liệu
+meeting_date: 2026-02-02
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+minutes nháp
+chủ đề: Theo dõi tiến độ tài liệu
+kw: tai lieu / chinh / gop / tiet / trong / kip / sua
+- Vậy em sẽ gửi góp ý chi tiết cho Minh trong ngày mai để kịp chỉnh sửa
+* Ý hay đấy, để em soạn thêm khoảng 5-7 câu hỏi thường gặp
+- Minh owner chính, hạn cuối 15/02/2026
+1) Em hoàn thành bản thảo đầy đủ trước ngày 15 tháng 2 năm 2026 nhé? ? chưa chốt
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:00:00] Chị Lan: Chào mọi người, hôm nay chúng ta họp nhanh về tiến độ tài liệu hướng dẫn sử dụng phần mềm CRM.
+[09:00:15] Anh Minh: Chào chị, em đã xem lại bản nháp hôm qua.
+[09:00:30] Chị Hoa: Em cũng có một vài góp ý nhỏ về phần quy trình.
+[09:00:45] Chị Lan: Tốt. Trước hết, Minh cho chị biết đến giờ em đã làm được những gì?
+[09:01:00] Anh Minh: Em đã viết xong phần tổng quan và chức năng chính, khoảng 70% khối lượng. Phần còn lại là hướng dẫn chi tiết từng bước.
+[09:01:15] Chị Lan: Vậy em dự kiến bao giờ hoàn thiện bản thảo lần cuối?
+[09:01:30] Anh Minh: Em nghĩ cuối tuần này, tức ngày 8/2, nhưng còn phụ thuộc vào review từ chị Hoa.
+[09:01:45] Chị Hoa: Phần quy trình em thấy cần bổ sung một số bước về xử lý lỗi.
+[09:02:00] Chị Lan: Chị muốn đẩy nhanh hơn. Em hoàn thành bản thảo đầy đủ trước ngày 15 tháng 2 năm 2026 nhé?
+[09:02:15] Anh Minh: Dạ, được ạ. Em sẽ cố gắng xong trước hạn đó.
+[09:02:30] Chị Hoa: Vậy em sẽ gửi góp ý chi tiết cho Minh trong ngày mai để kịp chỉnh sửa.
+[09:02:45] Chị Lan: Đồng ý. Ngoài ra, Minh lưu ý phần demo cần có ảnh chụp màn hình rõ ràng.
+[09:03:00] Anh Minh: Vâng, em đã chuẩn bị sẵn ảnh cho một số chức năng, thiếu vài chỗ em sẽ bổ sung.
+[09:03:15] Chị Lan: Về nội dung, chị thấy phần mở đầu còn hơi dài dòng. Em rút gọn lại một chút được không?
+[09:03:30] Anh Minh: Có thể ạ, em sẽ viết lại ngắn gọn hơn, tập trung vào mục đích chính.
+[09:03:45] Chị Hoa: Em đề xuất thêm một phần FAQ cuối tài liệu để người dùng dễ tra cứu.
+[09:04:00] Anh Minh: Ý hay đấy, để em soạn thêm khoảng 5-7 câu hỏi thường gặp.
+[09:04:15] Chị Lan: OK. Còn vấn đề gì khác không?
+[09:04:30] Anh Minh: Em muốn hỏi chị về định dạng file cuối cùng: xuất PDF hay Word?
+[09:04:45] Chị Lan: Cả hai. Vì tài liệu sẽ đăng lên hệ thống nội bộ và in ra cho phòng ban.
+[09:05:00] Chị Hoa: Em có thể hỗ trợ Minh kiểm tra lỗi chính tả sau khi em góp ý xong.
+[09:05:15] Chị Lan: Như vậy việc phân công rõ rồi. Minh phụ trách chính, hạn cuối 15/02/2026. Hoa review trước ngày 10/02.
+[09:05:30] Anh Minh: Em xác nhận sẽ hoàn thành bản thảo trước 15/02/2026.
+[09:05:45] Chị Hoa: Em cũng sẽ gửi review vào ngày 10/02.
+[09:06:00] Chị Lan: Tốt. Cuộc họp kết thúc, cảm ơn mọi người. Cố gắng giữ tiến độ nhé.

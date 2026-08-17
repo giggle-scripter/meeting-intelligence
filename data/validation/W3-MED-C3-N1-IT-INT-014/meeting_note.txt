@@ -1,0 +1,11 @@
+note nhanh
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: trien khai / production / api / hoan / thanh / nhe / nam
+- vậy em cứ tập trung hoàn thành tích hợp API, dl là thứ Sáu
+* Được, em hoàn thành bản draft trước thứ Năm, anh sẽ lo reviewer
+- chuyển sang kế hoạch rollout
+1) Vậy em sẽ gửi bản cập nhật vào chiều nay
+- lùi sang thứ Ba, production vào thứ Năm
+* Linh cứ cập nhật theo dl mới
+- Còn Tuấn, việc kiểm tra quyền vẫn giữ dl thứ Tư nhé, không thay đổi
+1) Em dự kiến sẽ xong phần mapping trước thứ Sáu tuần này ? chưa chốt

@@ -1,0 +1,7 @@
+{
+  "meeting_title": "Rà soát lỗi đăng nhập",
+  "tasks": [
+    {"task_name":"Phân tích lỗi timeout","assignee":"Chi","start_date":"2026-01-18","due_date":"2026-01-19","due_date_text":"ngày mai","status":"Proposed"},
+    {"task_name":"Kiểm tra server SMS xác thực","assignee":"Bình","start_date":"2026-01-18","due_date":"2026-01-19","due_date_text":"cuối ngày mai","status":"Proposed"}
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "case": {
+    "wave": 2,
+    "case_index": 13,
+    "meeting_id": "W2-SHORT-C3-N1-SW-RWKD-013",
+    "meeting_date": "2026-02-07",
+    "title": "Rà soát công việc sprint",
+    "labels": "weekday_current,before_day",
+    "objective": "{\"name\": \"relative weekday\", \"code\": \"RWKD\", \"labels\": \"weekday_current,before_day\", \"requirements\": \"Task dùng cách nói deadline liên quan thứ trong tuần, có thể dùng “trước thứ ...”; không tính ngày ISO.\"}"
+  },
+  "model": "deepseek-v4-pro",
+  "thinking": true,
+  "reasoning_effort": "high",
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 880,
+    "turn_count": 26
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "success",
+      "errors": [],
+      "elapsed_seconds": 477.3205280999973
+    }
+  ]
+}

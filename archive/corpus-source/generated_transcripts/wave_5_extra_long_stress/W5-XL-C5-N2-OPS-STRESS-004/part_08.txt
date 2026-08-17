@@ -1,0 +1,104 @@
+MEETING_ID: W5-XL-C5-N2-OPS-STRESS-004
+PART: P08/10
+
+T000474 [10:54:30] Minh: Chúng ta quay lại vấn đề integration với CRM. Ở P02, chúng ta có task API draft do Tuấn phụ trách, nhưng vẫn còn ambiguity về spec từ product. Tuấn, em đã làm gì với draft đó?
+
+T000475 [10:54:45] Tuấn: Dạ, em đã viết bản nháp dựa trên tài liệu cũ. Nhưng có điểm chưa rõ: endpoint cho đồng bộ trạng thái, bên CRM muốn polling hay webhook?
+
+T000476 [10:55:00] Lan: Sáng nay em có trao đổi với Huy, Huy nói product muốn dùng webhook. Nhưng chưa có confirmation chính thức.
+
+T000477 [10:55:15] Minh: Vậy ambiguity ở đây là chọn phương thức. Có thể tạm thời giả định webhook và viết API theo hướng đó. Nếu product thay đổi, sẽ sửa sau.
+
+T000478 [10:55:30] Tuấn: OK, em sẽ update draft thành webhook-based. Nhưng cần thêm endpoint để CRM đăng ký webhook.
+
+T000479 [10:55:45] Hà: Việc đó ảnh hưởng đến test plan. Em cần thêm test case cho webhook registration.
+
+T000480 [10:56:00] Minh: Đúng, nhưng hiện tại chưa phải làm ngay. Chúng ta chỉ xử lý ambiguity này trong part này.
+
+T000481 [10:56:15] An: Em có câu hỏi, webhook có cần xác thực không? Nếu có, cần thêm logic.
+
+T000482 [10:56:30] Tuấn: Có, em sẽ thêm signature verification.
+
+T000483 [10:56:45] Minh: Vậy draft API đã rõ hơn. Tuy nhiên, vẫn còn unresolved reference từ P02: task ETL data migration cho CRM chưa có owner. Đó là vấn đề khác, không giải quyết ở đây.
+
+T000484 [10:57:00] Lan: Em nhắc lại, task đó vẫn pending, chờ Huy và Giang.
+
+T000485 [10:57:15] Hà: Anh Minh, em thấy chúng ta có nhiều task liên quan đến CRM integration. Có thể recap lại để tránh nhầm lẫn.
+
+T000486 [10:57:30] Minh: OK, recap cục bộ. Các task về integration gồm: API draft (Tuấn, chưa có deadline chính thức, nhưng cần trước khi CRM test), webhook registration endpoint (sẽ bổ sung), và ETL data migration (unresolved). Không tạo task mới từ recap.
+
+T000487 [10:57:45] Tuấn: Em xin phép hỏi, draft API có deadline không? Hay em làm xong thì gửi?
+
+T000488 [10:58:00] Minh: Anh nghĩ nên có deadline để tracking. Đặt 13/3, vì sau đó CRM cần test.
+
+T000489 [10:58:15] Lan: Vậy deadline cho draft API là 13/3. Nhưng đây không phải task mới, chỉ update deadline.
+
+T000490 [10:58:30] Hà: Em muốn hỏi, sau khi draft xong, cần review không? Hay gửi thẳng cho CRM?
+
+T000491 [10:58:45] Minh: Cần review nội bộ. Anh sẽ review, sau đó gửi CRM.
+
+T000492 [10:59:00] An: Em có vấn đề về môi trường cho CRM test. Sandbox đã setup, nhưng chưa có endpoint thật.
+
+T000493 [10:59:15] Tuấn: Em sẽ deploy API draft lên sandbox sau khi review.
+
+T000494 [10:59:30] Minh: Vậy dependency: draft -> review -> deploy -> CRM test. Cần đồng bộ.
+
+T000495 [10:59:45] Lan: Chúng ta có thể tạo một task tổng thể cho integration, nhưng không cần, vì đã có các task nhỏ.
+
+T000496 [11:00:00] Hà: Em thấy có ambiguity khác: spec cho webhook chưa có tài liệu chính thức. Product vẫn chưa gửi.
+
+T000497 [11:00:15] Minh: Đó là vấn đề bên ngoài. Chúng ta chỉ xử lý ambiguity về phương thức, còn spec thì chờ product.
+
+T000498 [11:00:30] Tuấn: Em sẽ viết draft dựa trên giả định webhook, nếu product gửi spec sau, em sẽ điều chỉnh.
+
+T000499 [11:00:45] An: Em muốn nhấn mạnh, task CI/CD pipeline của em đang tiến triển, nhưng cần Tuấn config build script.
+
+T000500 [11:01:00] Tuấn: Em sẽ gửi script trong ngày mai.
+
+T000501 [11:01:15] Minh: OK, không liên quan đến integration, nhưng ghi nhận.
+
+T000502 [11:01:30] Lan: Em thấy chúng ta đã xử lý ambiguity về phương thức webhook. Còn unresolved reference là ETL migration, vẫn giữ.
+
+T000503 [11:01:45] Hà: Vậy recap integration: draft API deadline 13/3, review sau đó, deploy lên sandbox. Không tạo task mới.
+
+T000504 [11:02:00] Minh: Đúng. Có ai có thắc mắc gì về integration không?
+
+T000505 [11:02:15] Tuấn: Em có thắc mắc, CRM cần dữ liệu mẫu để test. Ai sẽ tạo?
+
+T000506 [11:02:30] Lan: Em có thể tạo dữ liệu giả, nhưng cần Tuấn hướng dẫn format.
+
+T000507 [11:02:45] Tuấn: Em sẽ gửi sample data.
+
+T000508 [11:03:00] Minh: Vậy task phụ: tạo dữ liệu mẫu, assign Lan, deadline 14/3. Nhưng đây là task hỗ trợ, không phải chính.
+
+T000509 [11:03:15] Hà: Em muốn hỏi, test integration có cần viết riêng không? Hay dùng chung test plan?
+
+T000510 [11:03:30] Minh: Dùng riêng, nhưng chưa cần ngay.
+
+T000511 [11:03:45] An: Em có vấn đề về network, firewall giữa sandbox và CRM chưa mở. Cần Tuấn check.
+
+T000512 [11:04:00] Tuấn: Em sẽ kiểm tra và mở port nếu cần.
+
+T000513 [11:04:15] Minh: Vậy thêm task mở firewall, Tuấn làm, deadline 13/3.
+
+T000514 [11:04:30] Lan: Ghi nhận, nhưng không tạo duplicate nếu đã có task tương tự.
+
+T000515 [11:04:45] Hà: Task mở firewall có thể gộp với task config trước đó? Nhưng config là cho payment, không liên quan.
+
+T000516 [11:05:00] Minh: Riêng, vì CRM là hệ thống khác.
+
+T000517 [11:05:15] Tuấn: Em sẽ update.
+
+T000518 [11:05:30] Minh: Chúng ta sắp hết thời gian cho P08. Còn gì cần thảo luận không?
+
+T000519 [11:05:45] An: Em chỉ muốn nhấn mạnh, task metric define của Tuấn deadline 10/3, cần gấp.
+
+T000520 [11:06:00] Tuấn: Em đang làm, sẽ xong.
+
+T000521 [11:06:15] Hà: Em thấy recap hôm nay có nhiều task, nhưng không tạo mới. Tốt.
+
+T000522 [11:06:30] Lan: Vậy tổng kết P08: xử lý ambiguity webhook cho CRM, giữ unresolved ETL migration. Có thêm task dữ liệu mẫu (Lan, 14/3) và mở firewall (Tuấn, 13/3). Recap không tạo duplicate.
+
+T000523 [11:06:45] Minh: OK, kết thúc P08.
+
+--- END OF PART P08 ---

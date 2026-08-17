@@ -1,0 +1,104 @@
+=== MEETING METADATA ===
+meeting_id: W3-MED-C4-N2-SW-INT-017
+meeting_title: Họp phối hợp triển khai và xử lý vấn đề
+meeting_date: 2026-02-21
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+minutes nháp
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: tai lieu / moi truong / trien khai / fix / doi / khach / hang
+- Vậy task fix môi trường test – Anh owner, dl 28/02
+* dời sang 26/02 thì em có thêm thời gian, nhưng vẫn kịp cho khách hàng
+- Bây giờ em muốn điểm qua các task một lần nữa để chắc chắn. (recap) Task1 – Anh fix môi trường test, dl 28/02
+1) Task2 – Minh fix lỗi đăng nhập, dl 25/02
+- Task3 – Anh viết tài liệu nội bộ, dl 26/02
+* Task4 – Minh viết tài liệu khách hàng, dl 26/02
+- Lưu ý task1 có dl thay đổi từ 25/02 thành 28/02, task3 dl từ 24/02 thành 26/02
+1) Về dl cho task này, mình cần hoàn thành trước thứ Tư 25/02 được không? ? chưa chốt
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:00:00] Lan: Chào mọi người, cảm ơn đã đến họp đúng giờ. Hôm nay chúng ta có ba nội dung chính: môi trường test, lỗi đăng nhập và tài liệu triển khai. Mình sẽ lần lượt đi qua.
+[09:00:12] Minh: Vâng, em đã check log môi trường staging. Có vẻ lỗi nghiêm trọng.
+[09:00:24] Huy: Em cũng thấy khi deploy bị lỗi 500 ngay sau khi chạy script.
+[09:00:36] Lan: Anh, em có cập nhật gì về phần cấu hình không?
+[09:00:48] Anh: Dạ, em mới kiểm tra thì thiếu biến DB_HOST trong tệp .env. Cần thêm vào và restart service.
+[09:01:00] Lan: Vậy em giao cho Anh xử lý việc sửa cấu hình môi trường test. Anh sẽ là người chịu trách nhiệm.
+[09:01:12] Anh: Vâng, em sẽ làm. Em cần quyền truy cập vào server staging.
+[09:01:24] Lan: Em sẽ gửi quyền cho anh sau meeting. Mọi người có thấy vấn đề gì thêm không?
+[09:01:36] Huy: Trước khi fix, em nghĩ cần backup file cấu hình cũ để phòng ngừa.
+[09:01:48] Anh: OK, em sẽ backup trước khi sửa.
+[09:02:00] Lan: Tốt. Về deadline cho task này, mình cần hoàn thành trước thứ Tư 25/02 được không?
+[09:02:12] Minh: Em thấy hơi gấp, vì sau đó còn phải kiểm tra lại toàn bộ.
+[09:02:24] Lan: Vậy em đổi deadline thành thứ Sáu 28/02 để có thêm thời gian. Mọi người đồng ý không?
+[09:02:36] Huy: Đồng ý, 28/02 sẽ an toàn hơn.
+[09:02:48] Lan: Vậy task fix môi trường test – Anh phụ trách, deadline 28/02. Đã rõ nhé.
+[09:03:00] Anh: Rõ ạ.
+[09:03:12] Lan: Chuyển sang vấn đề lỗi đăng nhập. Minh, em đã phân tích ra sao?
+[09:03:24] Minh: Dạ, em xem log thì thấy token hết hạn sau 30 phút, nhưng yêu cầu phải 2 tiếng. Do cấu hình session timeout trong code chưa đúng.
+[09:03:36] Lan: Vậy em có thể sửa trực tiếp không?
+[09:03:48] Minh: Em có thể sửa, cần thay đổi hằng số ở file config rồi build lại.
+[09:04:00] Lan: Được, giao cho Minh fix lỗi đăng nhập. Em muốn task này xong trước 25/02, vì sau đó chúng ta có bản phát hành thử nghiệm.
+[09:04:12] Minh: Em sẽ hoàn thành trong ngày 24/02 để test sớm. Deadline 25/02 ok ạ.
+[09:04:24] Lan: Tốt. Vậy task lỗi đăng nhập – Minh, deadline 25/02.
+[09:04:36] Huy: Em muốn hỏi thêm, liệu có cần điều chỉnh refresh token không? Hay chỉ fix session timeout?
+[09:04:48] Minh: Hiện tại chỉ cần fix session timeout đã, refresh token sẽ xem sau.
+[09:05:00] Lan: Để sau, đừng làm phức tạp thêm.
+[09:05:12] Huy: Hay mình thử giải pháp OAuth cho an toàn hơn? Nó sẽ giải quyết cả việc hết hạn token.
+[09:05:24] Lan: Ý tưởng tốt, nhưng hiện tại ưu tiên fix nhanh bằng cách điều chỉnh thời gian sống. OAuth để sau khi release bản chính thức. (distractor)
+[09:05:36] Huy: OK, em hiểu.
+[09:05:48] Lan: Bây giờ phần tài liệu triển khai. Chúng ta cần hai loại: một cho nội bộ (internal) và một cho khách hàng (external). Mỗi loại có yêu cầu riêng.
+[09:06:00] Anh: Em nghĩ tài liệu nội bộ viết bằng tiếng Việt, khách hàng bằng tiếng Anh?
+[09:06:12] Lan: Đúng. Nội bộ tập trung vào hướng dẫn kỹ thuật cho dev, còn khách hàng là hướng dẫn sử dụng.
+[09:06:24] Huy: Em thấy mình nên ưu tiên tài liệu nội bộ trước vì cần cho team test.
+[09:06:36] Lan: Hợp lý. Giao cho Huy viết tài liệu nội bộ, Huy có đảm nhận được không?
+[09:06:48] Huy: Em có thể viết, nhưng em là QA, phần kỹ thuật sâu em cần support.
+[09:07:00] Lan: Vậy Huy viết bản nháp, rồi Anh xem lại và bổ sung phần hạ tầng. Em sẽ giao chính cho Huy, deadline? Em muốn có bản nháp trước thứ Hai 24/02.
+[09:07:12] Huy: Em sẽ cố gắng, nhưng em cũng bận test. Hay em chỉ viết outline?
+[09:07:24] Lan: Để em suy nghĩ… À, có lẽ giao cho Anh viết tài liệu nội bộ thì phù hợp hơn vì Anh rõ về kiến trúc. Xin phép điều chỉnh. Anh sẽ viết tài liệu nội bộ, Huy support thông tin về các lỗi thường gặp.
+[09:07:36] Anh: Vâng, em sẽ viết. Em cần Huy cung cấp list lỗi test.
+[09:07:48] Huy: Dạ, em sẽ gửi sau meeting. Vậy em không chịu trách nhiệm chính nữa mà chỉ support.
+[09:08:00] Lan: Đúng. Tài liệu nội bộ giao cho Anh, deadline 24/02. Nhưng Anh có muốn dời lại không? Em nghĩ 26/02 cũng được.
+[09:08:12] Anh: Nếu dời sang 26/02 thì em có thêm thời gian, nhưng vẫn kịp cho khách hàng.
+[09:08:24] Lan: Vậy sửa deadline tài liệu nội bộ thành 26/02. Đồng ý nhé.
+[09:08:36] Huy: OK, 26/02.
+[09:08:48] Lan: Còn tài liệu hướng dẫn triển khai cho khách hàng, giao cho Minh. Minh có đảm nhận được không?
+[09:09:00] Minh: Em viết được, nhưng em cần tham khảo tài liệu nội bộ của Anh để có cấu trúc.
+[09:09:12] Lan: Không vấn đề. Deadline cho tài liệu khách hàng là 26/02, cùng ngày với nội bộ. Hai tài liệu này tuy gần giống tên nhưng khác đối tượng và nội dung.
+[09:09:24] Minh: Vậy em sẽ hoàn thành 26/02.
+[09:09:36] Huy: Em nhắc lại, hiện có các task: Anh fix môi trường (28/02), Minh fix đăng nhập (25/02), Anh viết tài liệu nội bộ (26/02), Minh viết tài liệu khách hàng (26/02). Còn em hỗ trợ tài liệu nội bộ, không có deadline cụ thể.
+[09:09:48] Lan: Chính xác. Đó là bốn task chính. Em muốn hỏi, về vấn đề permission trong môi trường test, hình như khi deploy còn lỗi 403. Có ai rõ không?
+[09:10:00] Anh: Em thấy cần phân quyền cho user deploy, nhưng chưa biết cấu hình ở đâu.
+[09:10:12] Huy: Em cũng thấy error log nói không đủ quyền ghi vào thư mục logs.
+[09:10:24] Lan: Vấn đề này hơi phức tạp, chưa có ai chịu trách nhiệm. Em sẽ nghiên cứu và báo lại sau. Tạm thời chưa giao task. (unresolved item)
+[09:10:36] Minh: Hay mình dùng Kubernetes để quản lý permission? Nó dễ dàng hơn.
+[09:10:48] Lan: Cảm ơn ý tưởng, nhưng hiện tại chưa phải lúc. Mình sẽ note lại. (distractor)
+[09:11:00] Huy: Em thắc mắc, trong tài liệu nội bộ có cần đề cập đến permission không?
+[09:11:12] Anh: Em nghĩ nên có mục hướng dẫn cấu hình quyền.
+[09:11:24] Lan: Đúng, Anh nhớ thêm vào phần troubleshooting.
+[09:11:36] Minh: Vậy tài liệu khách hàng có cần phần permission không?
+[09:11:48] Lan: Không, khách hàng không cần biết permission, chỉ cần token và URL.
+[09:12:00] Anh: Em hiểu rồi.
+[09:12:12] Lan: Bây giờ em muốn điểm qua các task một lần nữa để chắc chắn. (recap)
+[09:12:24] Lan: Task1 – Anh fix môi trường test, deadline 28/02. Task2 – Minh fix lỗi đăng nhập, deadline 25/02. Task3 – Anh viết tài liệu nội bộ, deadline 26/02. Task4 – Minh viết tài liệu khách hàng, deadline 26/02. Huy hỗ trợ tài liệu nội bộ. Đúng không?
+[09:12:36] Huy: Đúng ạ. Lưu ý task1 có deadline thay đổi từ 25/02 thành 28/02, task3 deadline từ 24/02 thành 26/02.
+[09:12:48] Lan: Chính xác. Recap không thay đổi gì, chỉ nhắc lại.
+[09:13:00] Minh: Em thấy mọi thứ đã rõ.
+[09:13:12] Anh: Em có thêm thắc mắc, liệu task fix môi trường có liên quan đến vấn đề permission không? Vì em sẽ sửa cấu hình .env nhưng chưa chạm đến quyền.
+[09:13:24] Lan: Không, đó là hai vấn đề riêng. Permission vẫn chưa được giải quyết, em sẽ xử lý sau. (nhấn mạnh unresolved)
+[09:13:36] Huy: Vậy sau meeting em sẽ gửi list lỗi cho Anh ngay để Anh có thể bắt đầu tài liệu.
+[09:13:48] Lan: Cảm ơn Huy. Minh, em cần gì từ Anh không?
+[09:14:00] Minh: Em cần file mẫu tài liệu nội bộ sau khi Anh viết xong.
+[09:14:12] Anh: Em sẽ viết trước ngày 24/02 bản nháp, rồi gửi Minh tham khảo.
+[09:14:24] Lan: Tốt, vậy phối hợp nhịp nhàng.
+[09:14:36] Huy: Em nhận thấy có khả năng task tài liệu nội bộ và tài liệu khách hàng bị trùng nội dung phần cấu hình. Cần tránh.
+[09:14:48] Lan: Đúng, Anh và Minh nên thống nhất phần chung, sau đó mỗi người triển khai cho đối tượng riêng.
+[09:15:00] Minh: Rõ ạ.
+[09:15:12] Lan: Em cũng muốn nói thêm về negative context – môi trường test hiện tại khá yếu, nhiều lỗi phát sinh. Mong mọi người cố gắng.
+[09:15:24] Anh: Vâng, em sẽ backup kỹ trước khi fix.
+[09:15:36] Huy: Em cũng sẽ support tối đa.
+[09:15:48] Minh: Task lỗi đăng nhập em sẽ ưu tiên hoàn thành sớm để clear bớt công việc.
+[09:16:00] Lan: Tuyệt vời. Bây giờ không còn nội dung gì nữa nhỉ?
+[09:16:12] Huy: Em muốn hỏi về lịch trình tiếp theo – sau khi fix môi trường, mình có chạy test tự động không?
+[09:16:24] Lan: Em sẽ bố trí sau, chưa phải task hôm nay.
+[09:16:36] Anh: Vậy mọi người đã nắm rõ. Em không có câu hỏi thêm.
+[09:16:48] Lan: Kết thúc meeting. Cảm ơn mọi người, hẹn họp lại sau deadline.

@@ -1,0 +1,89 @@
+=== MEETING METADATA ===
+meeting_id: W3-MED-C3-N1-OPS-INT-008
+meeting_title: Họp phối hợp triển khai và xử lý vấn đề
+meeting_date: 2026-02-12
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+note nhanh
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: trien khai / release / dashboard / khong / xong / fix / nhe
+- Vậy em fix xong trước thứ Sáu 14/02
+* correction lại: thay vì refactor, em chỉ sửa z-index + position của widget thôi, không động đến layout chính
+- Nhưng hiện tại em đang ngập với task test E2E, không nhận thêm được
+1) Em sẽ viết xong trước thứ Sáu 14/02
+- Vậy là có task cho Minh review release notes – không cần dl, em làm trước ngày release
+* không phải task ai
+- Vậy task dashboard em sẽ hoàn thành trong thứ Năm để kịp release
+1) Làm xong trong hôm thứ Năm 13/02 được không? ? chưa chốt
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[00:00:00] Huy: Chào cả team, hôm nay ngày 12/02, chúng ta họp để rà soát tiến độ release 2.5. Có ba phần chính: bug triage, monitoring, và documentation. Bắt đầu từ bug trước nhé.
+[00:00:25] Lan: Tôi thấy có một bug feature interaction giữa module A và B. Widget của module A bị đè lên popup của module B, gây mất chức năng click. Priority P1.
+[00:00:50] Huy: Được, Lan em chịu trách nhiệm fix bug đó. Dùng approach refactor toàn bộ layout hay chỉnh CSS?
+[00:01:10] Lan: Em nghĩ refactor toàn bộ sẽ an toàn hơn, nhưng mất nhiều thời gian. Có thể làm trong 3 ngày.
+[00:01:25] Huy: Thôi, release đã dời lên ngày 18/02 rồi, deadline tuần này. Vậy em fix xong trước thứ Sáu 14/02 nhé.
+[00:01:40] Lan: Từ giờ đến thứ Sáu hơi gấp, em thử nhưng không chắc kịp nếu phải refactor hết.
+[00:01:55] Huy: Ừ, tôi correction lại: thay vì refactor, em chỉ sửa z-index và position của widget thôi, không động đến layout chính. Làm xong trong hôm thứ Năm 13/02 được không?
+[00:02:15] Lan: Nếu chỉ CSS thì em ok, thứ Năm em sẽ xong. Em sửa luôn.
+[00:02:30] Huy: Tốt. Vậy deadline được thay từ thứ Sáu sang thứ Năm. Chuyển sang bug thứ hai – Minh có gì không?
+[00:02:50] Minh: Có một bug về logic nghiệp vụ ở quy trình đăng ký – khách hàng dùng email có dấu + bị lỗi. Nhưng lỗi này đến từ hệ thống bên thứ ba, team mình không can thiệp được. Em đề xuất ghi nhận và đẩy sang phiên sau.
+[00:03:15] Huy: Đồng ý, đó là unresolved item. Ghi vào backlog, không fix trong đợt này. Còn việc release rollback – nếu triển khai gặp sự cố, chúng ta cần script rollback nhanh.
+[00:03:40] Minh: Em có thể viết script rollback cho toàn bộ microservice. Nhưng hiện tại em đang ngập với task test E2E, không nhận thêm được.
+[00:04:00] Huy: Vậy chuyển cho Khoa nhé. Khoa, em viết deployment rollback script, ưu tiên cho service gateway và auth.
+[00:04:20] Khoa: Em nhận. Em sẽ viết xong trước thứ Sáu 14/02. Nhưng mà tên script viết bằng Bash hay dùng Ansible?
+[00:04:35] Huy: Dùng Ansible, vì đã có playbook rồi. Em update deployment script hiện tại, thêm phần rollback. Lưu ý test thử.
+[00:04:55] Khoa: Rõ.
+[00:05:10] Trang: Về monitoring, dashboard hiện tại thiếu alert cho response time và error rate khi release mới chạy. Em muốn cập nhật thêm các threshold.
+[00:05:30] Huy: Trang em làm việc đó, thiết lập alert cho các metric chính. Tạm thời chưa có deadline cụ thể, em cập nhật trong tuần này là được.
+[00:05:50] Trang: OK, em sẽ update.
+[00:06:05] Minh: Nhân tiện, em nghĩ chúng ta nên thêm metric về memory leak? Release 2.5 thay đổi cache cách, có thể ảnh hưởng.
+[00:06:25] Huy: Đó là một suggestion hay, nhưng để sau khi có số liệu thực tế hãy thêm. Không giao ai làm bây giờ.
+[00:06:40] Lan: Em thấy Khoa vừa nhận việc viết script rollback, còn task tương tự là "update deployment script" – liệu có overlap không?
+[00:06:55] Khoa: Không đâu, việc viết rollback script là file riêng, còn update deployment script là chỉnh sửa playbook chính. Tên gần giống nhưng khác object.
+[00:07:15] Huy: Đúng, hai task khác nhau. Ai lo phần documentation release? Minh, em review và chốt release notes nhé.
+[00:07:35] Minh: Em có thể review, nhưng cần Lan cung cấp thông tin fix bug của module A để ghi vào known issues.
+[00:07:50] Lan: Tôi sẽ gửi cho Minh chi tiết sau khi sửa xong.
+[00:08:05] Huy: Vậy là có task cho Minh review release notes – không cần deadline, em làm trước ngày release.
+[00:08:20] Trang: Về dashboard, em có cần thêm alert cho service không phản hồi không? Hiện tại chưa có.
+[00:08:35] Huy: Em cứ thêm luôn, nhưng đó là phần của task cập nhật dashboard rồi. Không phải task mới.
+[00:08:55] Trang: Rõ ạ.
+[00:09:10] Khoa: Em có thắc mắc: script rollback có cần xử lý DB migration rollback không? Hay chỉ restart container.
+[00:09:30] Huy: Chỉ restart container và reload config. DB migration đã có cơ chế riêng.
+[00:09:45] Khoa: Hiểu rồi.
+[00:10:00] Huy: Quay lại bug widget – Lan, em có gặp khó khăn gì khi dùng CSS z-index không?
+[00:10:15] Lan: Có thể xung đột với overlay của module C, nhưng em sẽ kiểm tra và fix. Nếu cần thêm, em sẽ báo.
+[00:10:35] Huy: Được, nếu phát sinh thêm task thì nhắc.
+[00:10:50] Minh: Về unresolved item bug email, team mình có thể chặn đầu vào hay không? Hay để cho bên thứ ba xử lý?
+[00:11:10] Huy: Không thể chặn, vì đó là chức năng hợp lệ. Chúng ta ghi nhận và chờ bên kia fix. Trong release này không giải quyết.
+[00:11:30] Trang: Em thấy dashboard hiện reactive, nhưng khi release thì cần monitor real-time. Em sẽ cấu hình lại threshold. Task này em nhận rồi.
+[00:11:50] Huy: Ừ, em xong trước ngày release là được.
+[00:12:00] Khoa: Em muốn hỏi, viết script rollback có cần integrate với CI/CD không?
+[00:12:15] Huy: Tốt nhất là em thêm vào pipeline, nhưng nếu không kịp thì có thể manual trước. Em làm sao cho kịp deadline thứ Sáu.
+[00:12:35] Lan: Deadline cho em là thứ Năm, nhưng nếu em sửa xong sớm, em có thể giúp test rollback script.
+[00:12:50] Huy: Hay, em support Khoa kiểm thử. Nhưng đó là phụ trợ, không phải task chính.
+[00:13:05] Minh: Em muốn xác nhận lại nội dung release notes: bao gồm các fix, cập nhật monitoring, rollback script. Em sẽ viết draft trước thứ Tư.
+[00:13:25] Huy: Đúng vậy. Nhưng em không cần write, chỉ review và edit thôi. Lan và Khoa sẽ cung cấp input.
+[00:13:40] Minh: Rõ.
+[00:13:55] Trang: Em cập nhật dashboard xong, có làm demo cho team không?
+[00:14:10] Huy: Sáng thứ Sáu, sau khi release, chúng ta sẽ demo. Việc đó không phải task bây giờ.
+[00:14:25] Lan: Em sắp hoàn thành fix CSS widget. Nhưng cần Huy cho em môi trường staging để test.
+[00:14:40] Huy: Tôi sẽ setup staging chiều nay. Việc đó tôi làm, không phải task ai.
+[00:14:55] Khoa: Em sắp viết xong script, còn chờ thông tin từ Minh về service list.
+[00:15:10] Minh: Em gửi sau cùng với release notes.
+[00:15:25] Huy: Các em lưu ý: task của Lan, deadline thứ Năm. Task của Khoa, deadline thứ Sáu. Task của Trang, không deadline cứng. Task của Minh, review notes, cũng không deadline cứng.
+[00:15:50] Trang: Vậy task dashboard em sẽ hoàn thành trong thứ Năm để kịp release.
+[00:16:05] Huy: Tốt. Bây giờ tổng kết lại một vòng: Lan fix widget overlap, deadline thứ Năm 13/02. Khoa viết deployment rollback script, deadline thứ Sáu 14/02. Trang update monitoring dashboard, xong trước thứ Năm. Minh review release notes, xong trước thứ Sáu.
+[00:16:35] Lan: Việc em nhận rồi, không cần giao lại.
+[00:16:50] Huy: Ừ, đó là recap thôi. Còn unresolved item bug email, ghi backlog. Và suggestion thêm metric để sau.
+[00:17:10] Minh: Vậy ai chịu trách nhiệm theo dõi bug email?
+[00:17:25] Huy: Tôi sẽ theo dõi bên thứ ba, đưa vào ticket. Không ai assign thêm.
+[00:17:40] Khoa: Em có thể viết thêm phần test rollback trong script không? Hay để riêng?
+[00:17:55] Huy: Để riêng, không trộn vào. Nếu test thì em tự verify.
+[00:18:10] Trang: Dashboard em sẽ thêm alert cho memory usage, vì cache thay đổi.
+[00:18:25] Huy: OK, em làm vậy. Ghi chú lại cho documentation.
+[00:18:40] Lan: Em sẵn sàng cho demo chiều thứ Sáu.
+[00:18:55] Huy: Cảm ơn mọi người. Không có thắc mắc gì thêm thì kết thúc họp. Lưu ý tracking trên Jira nhé.
+[00:19:15] Trang: Vâng.
+[00:19:30] Minh: OK.
+[00:19:45] Khoa: Rõ.
+[00:20:00] Huy: Kết thúc.

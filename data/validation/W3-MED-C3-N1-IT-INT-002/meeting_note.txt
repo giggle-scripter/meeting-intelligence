@@ -1,0 +1,11 @@
+chốt sơ bộ
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: du lieu / moi truong / trien khai / api / token / lieu / mau
+- Tiện thể em xin confirm lại task "Hoàn thiện dữ liệu mẫu" em đang làm, dl em đã để cuối ngày hôm nay
+* Em thấy tuần trước có task "Kiểm tra dữ liệu mẫu" do Tuấn làm
+- Vậy task "Mở port cho API" đã chuyển chủ sang anh Đức
+1) Đầu tiên, task "Fix connection error API" – hiện do anh Đức làm, sau khi handoff từ Tuấn
+- Task "Review dữ liệu mẫu" – không dl cụ thể
+* Task "Xử lý adapter token" – Tuấn làm, Đức review, chưa dl
+- Anh Minh, em thấy task "Xử lý adapter token" và "Xử lý refresh token" có vẻ giống nhau
+1) Anh muốn hủy task "Cài đặt môi trường test" vì đã thay đổi hướng tiếp cận

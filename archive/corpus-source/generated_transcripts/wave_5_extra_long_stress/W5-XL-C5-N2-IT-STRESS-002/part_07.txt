@@ -1,0 +1,106 @@
+MEETING_ID: W5-XL-C5-N2-IT-STRESS-002
+PART: P07/10
+
+T000375 [10:07:00] Minh: Mọi người quay lại. Hùng, em có báo cáo gì về tình hình monitoring từ đầu tuần không?
+
+T000376 [10:07:08] Hùng: Dạ, em đang tổng hợp. Sáng nay em thấy có một số cảnh báo về thời gian phản hồi API tăng đột biến, nhưng sau khi tắt debug thì giảm. Tuy nhiên, em vẫn chưa phân loại xong.
+
+T000377 [10:07:22] Minh: Em đã có metric từ Tuấn chưa? Nếu chưa thì em có thể ưu tiên những gì có sẵn.
+
+T000378 [10:07:28] Hùng: Em có một số dashboard cũ, nhưng cần số liệu mới. Tuấn nói sẽ gửi cuối ngày, em chờ.
+
+T000379 [10:07:34] Minh: Vậy em tạm thời phân loại dựa trên alert cũ. Deadline 06/03 vẫn còn xa.
+
+T000380 [10:07:40] Trang: Anh Minh, support ghi nhận thêm một vấn đề: nhiều người dùng phản ánh sau khi reset mật khẩu, họ không nhận được email. Em đã kiểm tra, có vẻ lỗi từ service email.
+
+T000381 [10:07:56] Đức: Vụ đó liên quan đến lỗi reset mật khẩu hôm qua tôi fix, nhưng có thể còn sót. Tôi cần xem log email.
+
+T000382 [10:08:04] Tuấn: Em có thể export log email service. Nhưng cần biết thời gian cụ thể.
+
+T000383 [10:08:10] Trang: Từ ngày 24 đến 26/02, khoảng 50 complaint.
+
+T000384 [10:08:16] Minh: Đức, anh xem giúp có phải lỗi do config redirect không? Anh đã fix rồi mà.
+
+T000385 [10:08:22] Đức: Có thể do email queue bị treo. Tôi sẽ kiểm tra sau, nhưng không phải task mới. Nếu cần, tôi sẽ báo.
+
+T000386 [10:08:30] Minh: Vậy lưu ý, không tạo task.
+
+T000387 [10:08:34] Lan: Anh Minh, liên quan đến task thanh toán của em, Tuấn chưa gửi log mà em cần để kịp deadline 29/02. Em lo.
+
+T000388 [10:08:44] Tuấn: Em đã bắt đầu export, dự kiến gửi trước 10h sáng mai.
+
+T000389 [10:08:50] Minh: Như vậy còn gần 24h. Nếu 10h sáng 27/02, em có đủ thời gian để báo cáo 29/02 không?
+
+T000390 [10:08:58] Lan: Có thể, nhưng em sẽ phải làm việc liên tục. Em nghĩ vẫn kịp.
+
+T000391 [10:09:04] Đức: Tôi muốn hỗ trợ Lan từ xa nếu cần.
+
+T000392 [10:09:08] Hùng: Em thấy deadlne thanh toán gần với deadlne tối ưu image 04/03 của em, nhưng khác nhau.
+
+T000393 [10:09:16] Minh: Đúng, không liên quan. Nhưng lưu ý, long-distance reference: log thanh toán sẽ dùng cho phân tích root cause, mà sau đó Đức review code. Đó là chuỗi.
+
+T000394 [10:09:28] Trang: Anh Minh, em có thể giúp lọc complaint để Lan biết context không? Nhưng em sợ trễ work của em.
+
+T000395 [10:09:36] Minh: Không, em cứ làm việc của em. Spec product placement em gửi chưa?
+
+T000396 [10:09:42] Trang: Em đang hoàn thiện, gửi trong 30 phút nữa.
+
+T000397 [10:09:46] Minh: OK.
+
+T000398 [10:09:48] Đức: Trở lại monitoring, tôi thấy cảnh báo API tăng có thể liên quan đến lỗi cache sắp fix. Sau deploy chiều nay, cần theo dõi.
+
+T000399 [10:10:00] Tuấn: Em có thể set up dashboard realtime cho Hùng.
+
+T000400 [10:10:04] Hùng: Tốt, cảm ơn.
+
+T000401 [10:10:08] Minh: Đó là support cho task alert của Hùng.
+
+T000402 [10:10:12] Lan: Anh Minh, em muốn hỏi về task capacity payment của Đức: deadline 06/03, có cần em cung cấp số liệu từ thanh toán không?
+
+T000403 [10:10:22] Đức: Có, sau khi em có log, tôi sẽ dùng. Nhưng có thể tự lấy từ dashboard.
+
+T000404 [10:10:28] Minh: Vậy phụ thuộc nhẹ.
+
+T000405 [10:10:32] Trang: Support có thêm feedback về UI: nút thanh toán không hiển thị trên một số thiết bị.
+
+T000406 [10:10:40] Hùng: Cái đó là CSS, có thể fix nhanh.
+
+T000407 [10:10:44] Minh: Đưa vào backlog, không tạo task.
+
+T000408 [10:10:48] Đức: Tôi muốn nói về long-distance dependency: task thanh toán và capacity payment có chung nguồn dữ liệu, cần đồng bộ.
+
+T000409 [10:11:00] Minh: Đúng. Lan và Đức phối hợp.
+
+T000410 [10:11:04] Hùng: Anh Minh, em thấy deadline 06/03 cho alert của em gần với deadline capacity payment 06/03. Có thể gây xung đột.
+
+T000411 [10:11:12] Minh: Không, vì khác chủ đề. Em có thể làm song song.
+
+T000412 [10:11:18] Lan: Em xin hỏi, có cần update gì về cache sau khi Tuấn kiểm tra staging không?
+
+T000413 [10:11:24] Tuấn: Staging ổn, em sẽ deploy như kế hoạch 15h.
+
+T000414 [10:11:30] Minh: Tốt. Vậy deploy cả hotfix và cache.
+
+T000415 [10:11:36] Đức: Nhưng nếu cache deploy trễ thì capacity payment deadline 06/03 vẫn ổn.
+
+T000416 [10:11:42] Minh: OK.
+
+T000417 [10:11:46] Trang: Anh Minh, spec product placement em gửi rồi. Có feedback gì không?
+
+T000418 [10:11:52] Minh: Để tôi xem sau. Lan cũng sẽ review.
+
+T000419 [10:11:56] Lan: Em sẽ xem trong tối nay.
+
+T000420 [10:12:00] Hùng: Em thấy khối lượng công việc nhiều, nhưng em nghĩ deadline 06/03 của em có thể bị ảnh hưởng nếu có thêm alert.
+
+T000421 [10:12:10] Minh: Nếu cần dời, em báo.
+
+T000422 [10:12:14] Đức: Tôi có một long-distance reference: task review design placement deadline 04/03 cần spec, nhưng spec đã gửi. OK.
+
+T000423 [10:12:24] Minh: Đúng.
+
+T000424 [10:12:26] Tuấn: Em gửi log và metric sáng mai rõ ràng.
+
+T000425 [10:12:32] Minh: Tạm kết thúc topic monitoring và support. Không có task mới. Mọi người chuẩn bị cho deploy 15h.
+
+--- END OF PART P07 ---

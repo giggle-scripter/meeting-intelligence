@@ -1,0 +1,9 @@
+minutes nháp
+chủ đề: Chuẩn bị bản phát hành nội bộ
+kw: tai lieu / test / thang / tai / lieu / build / product
+- Bên Product đang cần sớm để review giao diện cuối cùng
+* Vậy là em phải test xong trước 16 tháng 2
+- Còn tài liệu em sẽ soạn trước tối thứ Năm
+1) chốt lại: Mai chuẩn bị build nội bộ, dl thứ Sáu 13 tháng 2, kèm tài liệu hướng dẫn
+- Em sẽ tạo task test và link với task build của Mai
+* Còn bug crash khi chọn ngày dự kiến hoàn tất vào chiều mai ? chưa chốt

@@ -1,0 +1,41 @@
+=== MEETING METADATA ===
+meeting_id: W2-SHORT-C2-N0-IT-BRST-006
+meeting_title: Trao đổi kế hoạch tích hợp
+meeting_date: 2026-01-31
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+note nhanh
+chủ đề: Trao đổi kế hoạch tích hợp
+kw: giao / dich / quan / trong / real / time / note
+- Những giao dịch quan trọng thì real-time
+* Ừ, mình sẽ note lại: cần người tìm hiểu webhook
+- Hiện tại tạm thời chưa có đầu việc cụ thể nào được giao
+1) Mình sẽ tiếp tục suy nghĩ thêm về mặt kiến trúc
+- Vậy thì có thể dùng trigger trên database CRM, mỗi khi có insert thì push một event sang ERP ? chưa chốt
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[00:00:00] An: Hôm nay mình họp để cùng nhau nghĩ ra các hướng tích hợp hệ thống CRM với ERP nhé. Chưa cần quyết định gì cả, chỉ cởi mở ý tưởng thôi.
+[00:00:11] Bình: Ừ, tích hợp thì có mấy hướng: hoặc là đồng bộ hai chiều theo batch, hoặc real-time qua API. Cả hai đều có điểm lợi và hại.
+[00:00:24] Chi: Real-time thì ngon nhưng rủi ro về performance khi cao điểm. Batch thì an toàn hơn nhưng dữ liệu không tức thời. Mình đang phân vân.
+[00:00:36] An: Hay ta làm hybrid? Những giao dịch quan trọng thì real-time, còn đồng bộ khối lượng lớn thì batch định kỳ. Ai đó có thể thử hình dung kiến trúc xem.
+[00:00:49] Bình: Kiến trúc hybrid cần một message queue ở giữa, kiểu Kafka hoặc RabbitMQ. Nhưng độ phức tạp tăng lên, đội mình chưa có kinh nghiệm nhiều với queue.
+[00:01:02] Chi: Đúng, queue dễ gây nghẽn nếu không thiết kế tốt. Mình lo là sẽ phát sinh lỗi mất dữ liệu hoặc duplicate. Cần có team DevOps support mạnh, mà hiện tại DevOps đang thiếu người.
+[00:01:16] An: Vậy thì batch hết có phải đỡ đau đầu hơn không? Mình nghĩ dùng ETL truyền thống, cứ mỗi 30 phút đồng bộ một lần. Đơn giản hơn nhiều.
+[00:01:29] Bình: Nhưng yêu cầu từ phòng kinh doanh là dữ liệu khách hàng mới phải có trên ERP gần như ngay lập tức để tạo đơn. Batch 30 phút có thể làm chậm quy trình.
+[00:01:42] Chi: Vậy thì có thể dùng trigger trên database CRM, mỗi khi có insert thì push một event sang ERP. Ai đó phải viết service nhỏ để bắt event đó. Cũng không quá phức tạp.
+[00:01:56] An: Nghe có vẻ khả thi hơn. Nhưng trigger database thì phụ thuộc vào loại DB và dễ gây lock nếu nhiều event. Mình thấy vẫn rủi ro. Cần phải test kỹ.
+[00:02:09] Bình: Mình thì không dám nhận phần đó ngay, vì mình đang full task bảo trì hệ thống cũ. Nếu có thêm người thì may ra. Nhưng ý tưởng trigger cũng đáng để khảo sát thêm.
+[00:02:23] Chi: Hay mình dùng webhook? CRM có sẵn webhook khi tạo khách hàng mới, ERP có endpoint nhận. Chỉ cần cấu hình và xử lý retry khi fail.
+[00:02:36] An: Webhook cũng là một hướng. Nhưng webhook mà fail liên tục thì cần cơ chế lưu log và replay. Cũng cần người thiết kế cái đó. Chưa ai dám chắc làm được ngay.
+[00:02:49] Bình: Đúng, mọi giải pháp đều cần thêm tài nguyên và thời gian nghiên cứu. Mình thấy ý tưởng nào cũng có điểm yếu riêng.
+[00:03:02] Chi: Thực ra còn một cách nữa: dùng iPaaS như Mulesoft hoặc Workato, nhưng chi phí cao và phụ thuộc vào bên thứ ba. Sếp có thể không duyệt.
+[00:03:15] An: Chi phí là vấn đề lớn. Ngân sách năm nay eo hẹp, mình không nghĩ sếp đồng ý mua giải pháp ngoài. Tốt nhất là tự làm bằng công nghệ sẵn có.
+[00:03:28] Bình: Vậy quay lại trigger hoặc webhook, nhưng cần ít nhất một senior dành toàn thời gian để phát triển và test. Mà team mình ai cũng đang quá tải.
+[00:03:41] Chi: Mình có thể hỗ trợ phần kiến trúc và review code, nhưng không thể làm chính vì đang lo mảng bảo mật. Người code chính thì chưa có.
+[00:03:54] An: Xem ra hôm nay mình chỉ dừng ở mức liệt kê ý tưởng thôi. Chưa có ai sẵn sàng nhận ownership phần này. Mình sẽ ghi nhận các hướng: batch, real-time, hybrid, trigger, webhook, iPaaS.
+[00:04:08] Bình: Anh có thể báo cáo lên sếp những gì mình đã bàn, để sếp cân nhắc có nên tuyển thêm người hoặc delay dự án khác để dồn lực không.
+[00:04:21] Chi: Em nghĩ cũng nên tìm hiểu thêm về độ ổn định của webhook CRM, và test thử với môi trường sandbox xem có phát sinh lỗi gì không. Nhưng ai sẽ làm việc đó thì chưa rõ.
+[00:04:35] An: Ừ, mình sẽ note lại: cần người tìm hiểu webhook. Nhưng chưa assign vội. Mình cũng muốn mọi người ngẫm thêm, họp lại tuần sau để xem có thêm ý tưởng nào không.
+[00:04:48] Bình: Ok, vậy để tuần sau mình xem có cao kiến gì mới không. Hiện tại tạm thời chưa có đầu việc cụ thể nào được giao nhé.
+[00:04:59] Chi: Đồng ý. Mình sẽ tiếp tục suy nghĩ thêm về mặt kiến trúc. Hy vọng tuần sau có thể chốt được ít nhất một hướng để thử nghiệm.
+[00:05:11] An: Cảm ơn mọi người. Vậy kết thúc brainstorm hôm nay ở đây. Mình sẽ tổng hợp biên bản ý tưởng, không có task nào active hết. Hẹn gặp lại tuần sau.

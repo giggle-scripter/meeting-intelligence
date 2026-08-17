@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W5-XL-C5-N3-SW-STRESS-001",
+  "meeting_id": "W5-XL-C5-N3-SW-STRESS-001",
+  "meeting_title": "Họp tổng hợp phát triển và vận hành sản phẩm",
+  "meeting_date": "2026-02-25",
+  "wave": 5,
+  "wave_name": "wave_5_extra_long_stress",
+  "labels": [
+    "extra_long_meeting",
+    "multi_step_handoff",
+    "multiple_deadline_corrections",
+    "long_distance_dependency",
+    "ambiguous_reference",
+    "heavy_recoverable_noise"
+  ],
+  "objective": "P01: Mở meeting, thiết lập 5–8 speaker, hai topic đầu, vài task nền và deadline ban đầu; tạo antecedent cho chain sau. | P02: Thêm topic integration và dữ liệu; tạo task gần giống nhau, negative block và unresolved owner. | P03: Topic vận hành; handoff bước một cho một task cũ, deadline correction đầu tiên cho task khác. | P04: Topic sản phẩm; tạo thêm task và event-dependent deadline; không giải quyết unresolved từ P02. | P05: Quay lại topic P01; handoff bước hai và scope update; một repeated mention không tạo duplicate. | P06: Topic release; hủy một task, mở task thay thế khác rõ ràng, correction deadline thứ hai. | P07: Topic monitoring và support; long-distance reference, deadline gần task khác nhưng đúng antecedent. | P08: Quay lại integration; xử lý một ambiguity nhưng giữ một unresolved reference khác; recap cục bộ không tạo task mới. | P09: Chốt các state transition cuối, correction chain cuối và cancellation muộn; chưa closing. | P10: Recap trạng thái cuối toàn meeting, giữ unresolved thật sự, không tạo duplicate, closing ngắn.",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 10,
+  "source_files": [
+    "wave_5_extra_long_stress/W5-XL-C5-N3-SW-STRESS-001/part_01.txt",
+    "wave_5_extra_long_stress/W5-XL-C5-N3-SW-STRESS-001/part_02.txt",
+    "wave_5_extra_long_stress/W5-XL-C5-N3-SW-STRESS-001/part_03.txt",
+    "wave_5_extra_long_stress/W5-XL-C5-N3-SW-STRESS-001/part_04.txt",
+    "wave_5_extra_long_stress/W5-XL-C5-N3-SW-STRESS-001/part_05.txt",
+    "wave_5_extra_long_stress/W5-XL-C5-N3-SW-STRESS-001/part_06.txt",
+    "wave_5_extra_long_stress/W5-XL-C5-N3-SW-STRESS-001/part_07.txt",
+    "wave_5_extra_long_stress/W5-XL-C5-N3-SW-STRESS-001/part_08.txt",
+    "wave_5_extra_long_stress/W5-XL-C5-N3-SW-STRESS-001/part_09.txt",
+    "wave_5_extra_long_stress/W5-XL-C5-N3-SW-STRESS-001/part_10.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-flash"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 13914,
+    "turn_count": 536
+  },
+  "ground_truth": {
+    "available": true,
+    "expected_output_file": "expected_output.json",
+    "reviewer": "Codex",
+    "review_method": "full_transcript_and_final_state_audit",
+    "review_policy_version": "1.0",
+    "review_notes": "Reviewed against full transcript, final recap/state transitions, cancellation/handoff semantics, and deterministic date policy."
+  }
+}

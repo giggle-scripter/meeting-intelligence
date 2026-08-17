@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W2-SHORT-C3-N1-PROD-SUGG-007",
+  "meeting_id": "W2-SHORT-C3-N1-PROD-SUGG-007",
+  "meeting_title": "Theo dõi lỗi và tài liệu",
+  "meeting_date": "2026-02-01",
+  "wave": 2,
+  "wave_name": "wave_2_feature_isolation",
+  "labels": [
+    "suggestion_not_committed",
+    "no_active_task"
+  ],
+  "objective": "{\"name\": \"suggestion not committed\", \"code\": \"SUGG\", \"labels\": \"suggestion_not_committed,no_active_task\", \"requirements\": \"Có suggestion hợp lý và tên người được nhắc, nhưng không có acceptance hoặc assignment cuối.\"}",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_2_feature_isolation/W2-SHORT-C3-N1-PROD-SUGG-007/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-pro"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 851,
+    "turn_count": 25
+  },
+  "ground_truth": {
+    "available": false,
+    "expected_output_file": ""
+  }
+}

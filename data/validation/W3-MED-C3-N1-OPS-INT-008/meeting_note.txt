@@ -1,0 +1,11 @@
+note nhanh
+chủ đề: Họp phối hợp triển khai và xử lý vấn đề
+kw: trien khai / release / dashboard / khong / xong / fix / nhe
+- Vậy em fix xong trước thứ Sáu 14/02
+* correction lại: thay vì refactor, em chỉ sửa z-index + position của widget thôi, không động đến layout chính
+- Nhưng hiện tại em đang ngập với task test E2E, không nhận thêm được
+1) Em sẽ viết xong trước thứ Sáu 14/02
+- Vậy là có task cho Minh review release notes – không cần dl, em làm trước ngày release
+* không phải task ai
+- Vậy task dashboard em sẽ hoàn thành trong thứ Năm để kịp release
+1) Làm xong trong hôm thứ Năm 13/02 được không? ? chưa chốt

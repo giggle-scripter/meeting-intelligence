@@ -1,0 +1,37 @@
+[00:00:05] Minh: Chào mọi người, hôm nay mình họp nhanh để check tiến độ tài liệu dự án nhé.
+[00:00:12] Lan: Ok anh, em đang final phần mô tả quy trình rồi ạ.
+[00:00:18] Huy: Bên em cũng sắp xong phần số liệu, chỉ còn vài biểu đồ cần chỉnh lại.
+[00:00:25] Minh: Tốt. Còn phần draft báo cáo tổng hợp thì sao? Mình thấy chưa thấy update.
+[00:00:33] Lan: Dạ, em nghĩ phần đó vẫn đang đợi số liệu cuối cùng từ Huy.
+[00:00:39] Huy: Ừ, số liệu em gửi anh rồi mà, từ tuần trước ấy.
+[00:00:45] Lan: À, em check lại, chắc em miss mail. Cảm ơn anh.
+[00:00:52] Minh: Vậy Lan nhanh chóng tổng hợp vào draft đi. Còn anh Huy, em cần thêm gì không?
+[00:01:00] Huy: Không, cơ bản đủ rồi. Có điều mấy cái biểu đồ em sẽ gửi bổ sung sáng mai nhé.
+[00:01:08] Minh: Ok. Thế còn deadline chốt tài liệu? Mình định đặt ngày 15/03 được không?
+[00:01:16] Lan: 15/03 á? Em nghĩ cũng ổn, nhưng phần draft chính mình phải xong trước đó vài ngày để review.
+[00:01:25] Minh: Ừm, vậy mình sẽ cam kết hoàn thành draft báo cáo trước ngày 15/03. Sau đó chúng ta có thêm 2 ngày để góp ý.
+[00:01:35] Huy: Ok, thế 15/03 mình sẽ có bản draft cuối? Hay là bản thô?
+[00:01:42] Minh: Bản thô thôi, nhưng đầy đủ nội dung. Rồi anh Lan và anh Huy review, mình sẽ chỉnh sửa.
+[00:01:50] Lan: Vậy em sẽ cố gắng xong phần business logic trong tuần này, để ai cũng có thời gian xem.
+[00:01:58] Huy: Em thấy ổn. Mà mình có cần gửi email thông báo lịch review cho các phòng liên quan không?
+[00:02:06] Minh: Chưa vội, đợi sau khi có draft đã. Anh sẽ lo phần đó.
+[00:02:12] Lan: Anh Minh, bản mẫu số liệu em thấy hơi khác so với quy định, em có nên sửa lại không?
+[00:02:20] Minh: Mẫu nào em? Em show mình xem?
+[00:02:25] Lan: Dạ cái bảng thống kê trong file số 2. Em để ý cột đơn vị tính bị thiếu.
+[00:02:33] Minh: À, cái đó do chuẩn mới. Anh sẽ cập nhật mẫu chung rồi gửi lại, em cứ tạm dùng bản hiện tại.
+[00:02:42] Huy: Ừm, mà nếu chuẩn mới thì em cũng nên cập nhật luôn biểu đồ cho đồng bộ nhỉ?
+[00:02:48] Minh: Đúng, anh sẽ gửi mẫu sớm nhất chiều nay. Huy để ý mail nhé.
+[00:02:55] Huy: Vâng ạ. Em xong biểu đồ sáng mai sẽ chờ mẫu mới để điều chỉnh.
+[00:03:02] Lan: Vậy tổng thể tiến độ vẫn giữ mốc 15/03 chứ ạ?
+[00:03:08] Minh: Đúng rồi. Mình cần bám vào đó để cuối tháng còn gửi báo cáo đối tác. Có vấn đề gì không?
+[00:03:16] Huy: Em không vấn đề. Chỉ sợ phần review kéo dài.
+[00:03:22] Lan: Em cũng nghĩ vậy, nhiều người review sẽ mất thời gian hồi đáp.
+[00:03:29] Minh: Ừm, vậy mình rút gọn quy trình: chỉ review nội bộ team mình thôi, không kéo thêm phòng khác. Anh sẽ cân đối.
+[00:03:38] Huy: Ok thế nhẹ hơn nhiều.
+[00:03:43] Minh: Vậy thống nhất nhé. Mỗi người cố gắng hoàn thành phần mình trước 15/03, mình sẽ tổng hợp.
+[00:03:50] Lan: Rõ ạ.
+[00:03:53] Huy: Ok anh.
+[00:03:57] Minh: Có gì cần hỏi thêm không? Không thì mình kết thúc.
+[00:04:02] Lan: Không ạ.
+[00:04:04] Huy: Em hết rồi.
+[00:04:07] Minh: Ok, cảm ơn mọi người. Chúc cuối tuần vui vẻ.

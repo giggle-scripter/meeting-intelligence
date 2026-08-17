@@ -1,0 +1,8 @@
+minutes nháp
+chủ đề: Chuẩn bị bản demo
+kw: thoi / lai / mock / data / them / gian / chuan
+- Vậy thì em sẽ cần thêm thời gian để chuẩn bị lại mock data, chứ hiện tại nó sai logic nghiệp vụ, khách hàng nhìn vào sẽ thấy ngay
+* Tốt, An cứ rà soát
+- Mình sẽ kiểm tra lại với team infrastructure, xem có nâng cấp tạm thời tài nguyên không
+1) vậy em sẽ ưu tiên làm mock data trước
+- Mình có thể dùng dữ liệu thật từ môi trường staging không chị? ? chưa chốt

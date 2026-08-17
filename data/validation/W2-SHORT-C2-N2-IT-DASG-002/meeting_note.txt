@@ -1,0 +1,9 @@
+ghi vội
+chủ đề: Trao đổi kế hoạch tích hợp
+kw: staging / uat / chieu / doi / kien / vai / diem
+- Tôi đã rà sơ bộ, thấy có vài điểm cần kiểm tra kỹ phần xác thực hai chiều
+* Để tôi trao đổi với anh Kiên bên Security đã
+- vậy em nhận phần test script
+1) Rõ, em sẽ bám sát họ hàng ngày
+- Còn về đề xuất dùng staging của đối tác, tôi sẽ xin ý kiến anh Kiên rồi thông báo lại sau, chưa áp dụng vội
+* Tốt, thứ tư sau 3h chiều tôi sẽ gửi invite

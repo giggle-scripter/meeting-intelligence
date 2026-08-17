@@ -1,0 +1,14 @@
+chốt sơ bộ
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / moi truong / trien khai / test case / release / monitoring
+- Vậy mình thống nhất: task “Chuẩn bị môi trường test” do Tuấn, dl thứ Sáu
+* Ừ, vậy thêm task “Chuẩn bị dữ liệu mẫu test” do Lan, dl thứ Năm
+- Bây giờ em muốn kiểm tra lại danh sách task: Task A – Chuẩn bị môi trường test – Tuấn – dl thứ Năm
+1) Tôi sẽ gửi mail tổng kết sau
+- Ừ, vậy thêm task “Fix lỗi đăng nhập” do Khoa, dl thứ Sáu
+* Vậy tổng kết lại: Task A – môi trường test – Tuấn – dl thứ Sáu
+- Task B – tài liệu môi trường test – Hà – dl thứ Sáu
+1) Em sẽ hủy task dữ liệu mẫu + chuyển hướng sang test case cho đăng nhập
+- Vậy task monitoring này không có dl cụ thể, nhưng em cần hoàn thành trước release
+* Nhân tiện, về task tổng hợp task mà Hà được giao ở part trước, em thấy chưa thấy kết quả
+- Còn task review của em và Tuấn chưa có dl, nhưng em nghĩ sau khi tài liệu hoàn thành sẽ review

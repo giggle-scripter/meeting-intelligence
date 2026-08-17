@@ -1,0 +1,7 @@
+minutes nháp
+chủ đề: Chuẩn bị bản demo
+kw: qua / cap / nhat / tranh / cai / dat / hoi
+- Hôm qua có bản cập nhật mới, mình sẽ tranh thủ cài đặt trước
+* Để mình hỏi bên hành chính xem sao
+- Vậy tóm lại đầu tuần sau mình chạy thử một lượt nhé, trước khi demo chính thức
+1) Bên mình cần demo cả phần backend xử lý dữ liệu luôn hay chỉ giao diện chính thôi anh? ? chưa chốt

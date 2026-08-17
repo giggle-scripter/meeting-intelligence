@@ -1,0 +1,290 @@
+=== MEETING METADATA ===
+meeting_id: W4-LONG-C5-N3-SW-STATE-005
+meeting_title: Họp điều phối triển khai hệ thống
+meeting_date: 2026-02-19
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+ghi vội
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / moi truong / trien khai / staging / rollback / uat
+- Task thứ nhất: "Hoàn thiện môi trường test staging" – giao cho anh Tuấn làm chính, chị Lan hỗ trợ kỹ thuật
+* Task "Hoàn thiện môi trường test staging" – anh Tuấn chịu trách nhiệm chính, chị Lan hỗ trợ duyệt ngân sách và giám sát, dl 25/2
+- Task "Hoàn thiện tài liệu hướng dẫn triển khai staging" – chị Hà chịu trách nhiệm, không dl cứng
+1) Vậy em sẽ đặt tên task là "Xử lý lỗi lock tài khoản staging"
+- Task C: "Xử lý lỗi lock tài khoản staging" – anh Tuấn chịu trách nhiệm, script hoàn thành ngày mai, tài liệu chị Hà viết, chị Lan test
+* Task A (môi trường test) giờ do chị Lan owner, dl 28/2
+- Em muốn confirm lại: dl task A là 28/2, task B là 5/3, task C xong mai, task D trước 23/2
+1) Vậy tôi quyết định hủy task "Tạo bộ dữ liệu test đăng nhập"
+- Chúng ta hủy task D, điều chỉnh dl task A thành 26/2
+* Task A: Hoàn thiện môi trường test staging – owner chị Lan, dl 26/2, đang triển khai nâng cấp phần cứng
+- Task E: Viết rollback plan – owner chị Lan, dl 22/2
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+[09:02:01] Anh Minh: Chào mọi người, cảm ơn đã đến đúng giờ. Hôm nay chúng ta có nhiều việc cần bàn cho đợt triển khai hệ thống mới. Đầu tiên, tôi muốn điểm qua tình hình môi trường test và tài liệu triển khai. Chị Lan, bên em có gì mới không?
+[09:02:34] Chị Lan: Dạ, bên em vừa nhận được yêu cầu từ khách hàng về việc mở rộng staging. Hiện tại môi trường test đang hoạt động nhưng chưa có đủ băng thông để chạy thử nghiệm tải. Anh Tuấn bên infra đã đề xuất một số giải pháp nhưng chưa chốt.
+[09:03:15] Anh Tuấn: Đúng vậy, tôi đã gửi email chi tiết về ba phương án nâng cấp. Phương án một là mở rộng ổ cứng SSD, phương án hai là thuê thêm server ảo, phương án ba là chuyển sang cloud tạm thời. Tôi nghĩ nên chốt sớm để kịp lịch.
+[09:03:52] Anh Minh: Rõ rồi. Chúng ta sẽ quay lại vấn đề đó sau. Trước mắt, tôi muốn tập trung vào hai việc chính: hoàn thiện môi trường test và soạn tài liệu hướng dẫn triển khai. Những việc này cần được phân công rõ ràng.
+[09:04:20] Chị Hà: Em xin phép góp ý. Theo em, việc soạn tài liệu nên song song với việc setup môi trường, vì nếu môi trường chưa ổn thì tài liệu cũng khó chính xác. Nhưng nếu chờ nhau thì lại mất thời gian.
+[09:04:55] Anh Minh: Ý em đúng. Do đó tôi đề xuất chia làm hai task riêng. Task thứ nhất: "Hoàn thiện môi trường test staging" – giao cho anh Tuấn làm chính, chị Lan hỗ trợ kỹ thuật. Task thứ hai: "Hoàn thiện tài liệu hướng dẫn triển khai phiên bản staging" – giao cho chị Hà phụ trách, em có thể tham khảo từ bản cũ.
+[09:05:22] Chị Hà: Anh Minh, task tài liệu đó em thấy tên hơi giống task môi trường, dễ nhầm. Em đề xuất đặt tên rõ hơn, ví dụ "Tài liệu triển khai staging v2".
+[09:05:50] Anh Minh: Ừ, cũng được. Nhưng tôi vẫn giữ nguyên hai tên đó để dễ theo dõi. Về deadline, anh Tuấn cần hoàn thành môi trường test trước ngày 25 tháng 2, vì sau đó chúng ta có đợt kiểm thử. Còn tài liệu thì chưa cần gấp, em Hà cứ làm xong là báo, không ấn định ngày.
+[09:06:18] Anh Tuấn: Deadline 25/2 hơi căng đấy anh. Hiện bên infra đang phải xử lý vài sự cố legacy. Nếu được, em xin thêm ba ngày, đến 28/2.
+[09:06:42] Anh Minh: Không được, 25/2 là hạn chót vì bên QA đã lên lịch test. Em cố gắng sắp xếp lại. Có cần điều chỉnh nhân sự không?
+[09:07:10] Anh Tuấn: Vậy em sẽ bàn với chị Lan để tận dụng thêm một bạn từ team infra hỗ trợ. Chị Lan có đồng ý không?
+[09:07:30] Chị Lan: Em không vấn đề gì, nhưng cần đảm bảo bạn đó không bị cuốn vào dự án khác. Em sẽ check và báo lại sau.
+[09:08:01] Anh Minh: Tốt. Chị Lan ơi, em cũng nhận trách nhiệm theo dõi tiến độ môi trường test, vì sau này em sẽ là người dùng chính. Anh Tuấn báo cáo lại cho chị Lan hàng tuần nhé.
+[09:08:25] Anh Tuấn: Rõ. Tôi sẽ gửi mail update vào thứ Hai và thứ Năm.
+[09:08:45] Chị Hà: Anh Minh, về tài liệu, em thấy bản cũ thiếu phần hướng dẫn cấu hình log và monitoring. Em định bổ sung thêm. Như vậy tài liệu sẽ dài hơn, có cần giới hạn không?
+[09:09:12] Anh Minh: Em cứ bổ sung đầy đủ, nhưng đừng làm quá chi tiết. Tập trung vào các bước chính và các lưu ý về bảo mật. Sau này chúng ta có thể cập nhật thêm.
+[09:09:38] Chị Hà: Vâng. Em cũng muốn hỏi, tài liệu này sẽ dùng cho ai? Nhân viên vận hành hay cả developer?
+[09:09:58] Anh Minh: Chủ yếu cho đội vận hành và support. Developer đã có tài liệu riêng. Em nên viết theo hướng thực hành, dễ đọc.
+[09:10:20] Chị Lan: Em thấy có vấn đề về dữ liệu test. Bên em chưa có bộ data mẫu chuẩn. Nếu không có data thì môi trường test cũng khó kiểm tra.
+[09:10:48] Anh Minh: Vấn đề đó chúng ta sẽ bàn sau. Anh Tuấn, em để ý giúp việc tạo data mẫu. Có thể dùng script copy từ production nhưng ẩn danh.
+[09:11:10] Anh Tuấn: Việc đó cần phê duyệt từ bộ phận pháp lý về bảo mật dữ liệu. Em sẽ làm văn bản đề xuất.
+[09:11:35] Anh Minh: Được. Vậy tạm thời chưa giao việc đó. Chúng ta tập trung vào hai task chính đã. Có ai ý kiến gì thêm không?
+[09:11:57] Chị Hà: Em có thắc mắc. Task tài liệu của em, em có thể tham khảo từ các dự án trước của anh Tuấn không? Hay phải tự viết mới hoàn toàn?
+[09:12:20] Anh Tuấn: Em có thể lấy template từ dự án cũ của anh, nhưng cần điều chỉnh cho phù hợp với phiên bản này. Anh sẽ gửi link cho em sau.
+[09:12:40] Anh Minh: Tốt. Vậy sau cuộc họp, anh Tuấn gửi tài liệu tham khảo cho chị Hà. Chị Hà, em có thể bắt đầu ngay khi nhận được.
+[09:13:05] Chị Hà: Em rõ. Em sẽ cố gắng hoàn thành trong vòng hai tuần, tức khoảng đầu tháng 3.
+[09:13:25] Anh Minh: Chị không đặt deadline cứng, nhưng em nên tự đặt mục tiêu để tránh trễ. Anh Tuấn, về môi trường test, em có kế hoạch chi tiết chưa?
+[09:13:50] Anh Tuấn: Em đã có draft. Trước tiên, em sẽ kiểm tra lại cấu hình hiện tại, sau đó mua thêm ổ SSD nếu ngân sách cho phép. Em sẽ báo giá trong hôm nay.
+[09:14:12] Anh Minh: Ai phê duyệt ngân sách? Có cần lên ban giám đốc không?
+[09:14:30] Anh Tuấn: Khoản nhỏ thôi, dưới 10 triệu, chị Lan có thể duyệt được. Em sẽ gửi chị Lan dự toán.
+[09:14:48] Chị Lan: Ừ, em gửi đi, chị xem rồi ký.
+[09:15:05] Anh Minh: Vậy thống nhất nhé. Task "Hoàn thiện môi trường test staging" – anh Tuấn chịu trách nhiệm chính, chị Lan hỗ trợ duyệt ngân sách và giám sát, deadline 25/2. Task "Hoàn thiện tài liệu hướng dẫn triển khai staging" – chị Hà chịu trách nhiệm, không deadline cứng. Có cần ghi nhận lại vào biên bản không?
+[09:15:30] Chị Hà: Em sẽ ghi lại và gửi mail cho mọi người sau.
+[09:15:48] Anh Minh: Thank em. Nhưng tôi thấy có một điểm cần làm rõ. Tên hai task khá giống nhau, dễ gây nhầm lẫn khi báo cáo. Liệu có cách nào phân biệt rõ hơn không?
+[09:16:10] Anh Tuấn: Em nghĩ nên thêm ký hiệu: Task A là môi trường, Task B là tài liệu. Hoặc dùng từ viết tắt.
+[09:16:28] Chị Hà: Hoặc chúng ta có thể đặt tên task theo mã dự án. Ví dụ "TASK-ENV-STAGING" và "TASK-DOC-STAGING".
+[09:16:52] Anh Minh: Ừ, cách đó được. Anh Tuấn, em đặt mã như vậy nhé. Và khi nhắc đến trong các cuộc họp sau, mọi người nên dùng mã để tránh hiểu lầm.
+[09:17:15] Anh Tuấn: Vâng. Em sẽ cập nhật trong hệ thống quản lý công việc.
+[09:17:30] Chị Lan: Em có một băn khoăn. Task tài liệu không có deadline, liệu có bị trễ không? Vì thường những việc không deadline sẽ bị đẩy xuống cuối.
+[09:17:52] Anh Minh: Chị hiểu, nhưng hiện tại chưa có áp lực thời gian. Nếu cần, sau này chúng ta sẽ điều chỉnh. Chị Hà có thể tự đặt kỳ vọng cho mình.
+[09:18:15] Chị Hà: Em vẫn sẽ cố gắng xong trước ngày 28/2 để đồng bộ với deadline của anh Tuấn. Nếu không kịp thì đầu tháng 3 cũng được.
+[09:18:35] Anh Minh: Đó là tinh thần tốt. Nhưng em đừng hy sinh chất lượng. Có vấn đề gì thì báo ngay.
+[09:18:55] Chị Hà: Vâng ạ.
+[09:19:10] Anh Minh: Chuyển sang vấn đề khác. Về môi trường test, chúng ta cần quyết định xem dùng luôn server cũ hay mua mới. Anh Tuấn, em nghĩ sao?
+[09:19:35] Anh Tuấn: Server cũ vẫn còn khả năng đáp ứng nếu nâng cấp RAM và SSD. Chi phí thấp hơn mua mới. Em khuyên nên nâng cấp.
+[09:19:58] Chị Lan: Em đồng ý. Nhưng cần check lại thời gian bảo hành. Server cũ đã dùng 3 năm, nếu linh kiện hỏng thì sao?
+[09:20:20] Anh Tuấn: Linh kiện SSD và RAM đều có bảo hành riêng. Em sẽ chọn loại có bảo hành 2 năm.
+[09:20:40] Anh Minh: Vậy thống nhất. Tiến hành nâng cấp. Ai sẽ thực hiện việc đặt hàng và lắp đặt?
+[09:20:58] Anh Tuấn: Em có thể tự làm, nhưng cần một người hỗ trợ cài đặt hệ điều hành. Bên em có bạn Khoa rảnh.
+[09:21:15] Anh Minh: Được. Em sắp xếp với bạn Khoa nhé. Nhưng nhớ cập nhật chị Lan về tiến độ.
+[09:21:32] Chị Lan: Em sẽ theo dõi qua mail. Anh Tuấn, em gửi chị báo giá sớm nhé.
+[09:21:50] Anh Tuấn: Trong chiều nay em gửi.
+[09:22:08] Anh Minh: Còn vấn đề gì về môi trường test nữa không? Chị Lan, em có cần thêm gì không?
+[09:22:25] Chị Lan: Em muốn có một bản kiểm tra an ninh mạng trước khi đưa vào sử dụng. Nhưng việc đó có thể để sau khi nâng cấp xong.
+[09:22:45] Anh Minh: Tốt. Vậy tạm thời chưa bàn. Chuyển sang tài liệu triển khai. Chị Hà, em có cần hỗ trợ từ ai không?
+[09:23:05] Chị Hà: Em cần anh Tuấn review kỹ thuật các phần về cấu hình hệ thống. Anh Tuấn có thể dành chút thời gian không?
+[09:23:22] Anh Tuấn: Anh có thể review vào cuối tuần. Em gửi bản nháp trước thứ Sáu.
+[09:23:40] Chị Hà: Vâng, em sẽ cố gắng.
+[09:23:55] Anh Minh: Lưu ý, tài liệu cần có phần khắc phục sự cố thường gặp. Em nhớ bổ sung.
+[09:24:10] Chị Hà: Em sẽ tham khảo từ các dự án cũ.
+[09:24:28] Anh Minh: Được rồi. Tổng kết lại, chúng ta có hai task chính. Anh Tuấn sẽ gửi báo giá và kế hoạch nâng cấp. Chị Hà sẽ bắt đầu soạn tài liệu. Ai còn thắc mắc không?
+[09:24:50] Chị Lan: Em muốn hỏi về việc backup dữ liệu trong quá trình nâng cấp. Nếu ổ cứng mới không tương thích thì sao?
+[09:25:12] Anh Tuấn: Em đã tính đến việc backup toàn bộ trước khi thay thế. Sẽ dùng ổ cứng ngoài. Vấn đề tương thích em đã kiểm tra model.
+[09:25:30] Anh Minh: Vậy là ổn. Không có thắc mắc nào khác? Tốt. Tôi sẽ kết thúc phần này. Cảm ơn mọi người.
+[09:25:48] Chị Hà: Em xin phép hỏi thêm một chút. Trong tài liệu, em có nên đưa phần cài đặt phần mềm giám sát không? Hay để riêng?
+[09:26:05] Anh Minh: Nên đưa vào, vì nó là quy trình chuẩn. Nhưng nhớ đánh dấu là tùy chọn.
+[09:26:20] Chị Hà: Vâng.
+[09:26:30] Anh Minh: Vậy hết. Cuộc họp hôm nay tạm dừng ở đây. Phần còn lại chúng ta sẽ bàn trong các buổi sau. Nhớ gửi mail biên bản.
+[09:26:48] Anh Tuấn: Em sẽ gửi báo giá trong chiều nay.
+[09:27:00] Chị Hà: Em sẽ gửi draft vào thứ Sáu.
+[09:27:12] Anh Minh: Cảm ơn. Kết thúc.
+[09:28:05] Anh Minh: Tiếp theo, tôi muốn bàn về lỗi đăng nhập mà bên QA báo cáo hôm qua trên môi trường staging. Anh Tuấn, em đã xem chưa?
+[09:28:30] Anh Tuấn: Dạ, em có xem sơ qua. Lỗi xảy ra khi người dùng nhập sai mật khẩu quá 5 lần, hệ thống lock tài khoản nhưng không hiển thị thông báo rõ ràng. Người dùng chỉ thấy màn hình trắng.
+[09:28:55] Chị Lan: Em cũng nhận được báo cáo từ bộ phận test. Họ nói rằng không chỉ thiếu thông báo, mà còn không có cách nào để unlock tài khoản tự động. Phải gửi email cho admin.
+[09:29:15] Anh Minh: Vậy đây là lỗi nghiêm trọng. Chúng ta cần xử lý ngay. Anh Tuấn, em đề xuất giải pháp gì?
+[09:29:40] Anh Tuấn: Em nghĩ có hai hướng: một là sửa luôn code để hiển thị thông báo và thêm chức năng unlock tự động sau 30 phút; hai là tạo một script tạm thời để reset lock từ phía admin, rồi sau đó mới sửa code chính thức.
+[09:30:05] Chị Hà: Em thấy phương án hai hợp lý hơn, vì sửa code chính thức cần nhiều thời gian test lại. Nhưng nếu làm script thì em có thể viết tài liệu hướng dẫn admin sử dụng.
+[09:30:28] Anh Tuấn: Script thì em có thể viết trong một ngày, nhưng cần có người test. Chị Lan, bên em có thể test giúp không?
+[09:30:50] Chị Lan: Bên em có thể test, nhưng cần script và môi trường test ổn định. Hiện tại môi trường staging đang có vấn đề về băng thông, nên khó test toàn diện.
+[09:31:15] Anh Minh: Đúng, môi trường test vẫn chưa hoàn thiện. Nhưng chúng ta không thể chờ. Tôi đề xuất: Anh Tuấn viết script tạm thời, chị Hà soạn tài liệu hướng dẫn, và chị Lan test trên một instance nhỏ riêng. Đó sẽ là task mới.
+[09:31:40] Anh Tuấn: Vậy em sẽ đặt tên task là "Xử lý lỗi lock tài khoản staging". Em sẽ hoàn thành script trong ngày mai.
+[09:32:00] Chị Hà: Em đồng ý. Tài liệu em sẽ viết song song. Nhưng em cần anh Tuấn cung cấp thông tin về cú pháp script.
+[09:32:20] Anh Tuấn: Anh sẽ gửi em sau khi viết xong.
+[09:32:38] Chị Lan: Em thấy task này không nên giao cho anh Tuấn một mình. Lỗi đăng nhập liên quan đến module xác thực, mà module đó do anh Khoa viết. Anh Tuấn có thể phối hợp với anh Khoa.
+[09:33:00] Anh Tuấn: Anh Khoa đang bận dự án khác. Em có thể tự xử lý, vì script không phức tạp.
+[09:33:18] Anh Minh: Vậy thôi, anh Tuấn chịu trách nhiệm. Nhưng cần báo cáo cho anh Khoa biết để tránh conflict sau này. Chị Lan, em làm đầu mối liên lạc.
+[09:33:40] Chị Lan: Vâng. Em cũng muốn hỏi về dữ liệu test. Bộ phận QA yêu cầu có bộ dữ liệu mẫu với nhiều tình huống đăng nhập. Hiện tại chúng ta chưa có.
+[09:34:05] Anh Minh: Đó là vấn đề thứ hai. Tôi nghĩ chúng ta cần tạo một bộ dữ liệu test riêng cho lỗi đăng nhập. Anh Tuấn, em có thể dùng script để sinh dữ liệu giả không?
+[09:34:25] Anh Tuấn: Em có thể viết script sinh dữ liệu, nhưng cần xác định các trường hợp: đăng nhập thành công, sai mật khẩu, lock tài khoản, quên mật khẩu. Mất khoảng nửa ngày.
+[09:34:48] Chị Hà: Em thấy việc sinh dữ liệu nên làm sau khi script fix lỗi hoàn thành, vì nếu chưa fix thì dữ liệu cũng vô dụng.
+[09:35:10] Anh Minh: Quan điểm của em có lý. Nhưng tôi muốn tách thành task riêng. Task "Tạo bộ dữ liệu test đăng nhập" giao cho anh Tuấn, không deadline cụ thể, nhưng nên hoàn thành trước khi chúng ta chạy test chính thức.
+[09:35:35] Anh Tuấn: Vậy em sẽ làm sau khi xong script chính. Dự kiến cuối tuần này.
+[09:35:55] Chị Lan: Em xin lưu ý, dữ liệu test không được chứa thông tin nhạy cảm. Cần đảm bảo tuân thủ quy định bảo mật.
+[09:36:15] Anh Minh: Đúng. Anh Tuấn, nhớ dùng dữ liệu giả hoàn toàn. Có thể tham khảo bộ mẫu từ dự án cũ.
+[09:36:35] Chị Hà: Em có một ý kiến. Thay vì tạo dữ liệu test riêng, chúng ta có thể dùng luôn dữ liệu từ production ẩn danh. Như vậy sẽ thực tế hơn.
+[09:36:58] Anh Tuấn: Nhưng chị Lan vừa nói về bảo mật. Việc đó cần phê duyệt pháp lý. Em nghĩ nên làm dữ liệu giả cho an toàn.
+[09:37:20] Anh Minh: Đồng ý với anh Tuấn. Chị Hà, ý em tốt nhưng rủi ro cao. Chúng ta cứ làm dữ liệu giả.
+[09:37:38] Chị Hà: Vâng, em hiểu.
+[09:37:55] Anh Minh: Vậy tổng kết lại, chúng ta có thêm hai task mới. Task C: "Xử lý lỗi lock tài khoản staging" – anh Tuấn chịu trách nhiệm, script hoàn thành ngày mai, tài liệu chị Hà viết, chị Lan test. Task D: "Tạo bộ dữ liệu test đăng nhập" – anh Tuấn thực hiện, không deadline. Có ai thấy vấn đề gì không?
+[09:38:20] Chị Lan: Em có thắc mắc về task C. Ai sẽ là người review giải pháp trước khi triển khai? Em nghĩ cần một người có chuyên môn về bảo mật.
+[09:38:42] Anh Minh: Ý em hay. Anh Tuấn, em có thể nhờ anh Khoa review không? Nếu anh Khoa bận, chúng ta có ai khác?
+[09:39:00] Anh Tuấn: Anh Khoa có thể review qua email. Em sẽ gửi draft cho anh ấy. Nhưng không chắc anh ấy trả lời nhanh.
+[09:39:18] Anh Minh: Vậy em cứ gửi, nếu không kịp thì chúng ta sẽ tự review nội bộ. Tôi tạm thời chưa assign reviewer chính thức. Để sau khi có kết quả script, chúng ta sẽ bàn.
+[09:39:40] Chị Hà: Em thấy việc không có reviewer rõ ràng dễ dẫn đến lỗi. Có thể chỉ định em làm reviewer phần tài liệu, còn phần code để anh Tuấn tự kiểm tra?
+[09:40:00] Anh Minh: Cũng được. Em làm reviewer cho tài liệu task C. Phần code thì anh Tuấn tự rà soát, sau đó gửi cho anh Khoa nếu cần.
+[09:40:18] Chị Hà: Vâng. Em sẽ xem xét kỹ.
+[09:40:35] Anh Tuấn: Em sẽ viết script và gửi cho chị Hà và chị Lan trước 10h sáng mai.
+[09:40:55] Anh Minh: Tốt. Quay lại vấn đề dữ liệu test. Em có nghĩ rằng chúng ta nên gộp task D với task A không? Vì môi trường test cũng cần dữ liệu.
+[09:41:18] Anh Tuấn: Em nghĩ để riêng vì task A đã có deadline chặt. Nếu gộp vào sẽ nặng hơn.
+[09:41:35] Chị Lan: Đồng ý. Để riêng giúp dễ quản lý.
+[09:41:50] Anh Minh: Vậy thôi.
+[09:42:05] Chị Hà: Em có một concern nhỏ. Script fix lỗi đăng nhập có thể ảnh hưởng đến các chức năng khác. Chúng ta có nên làm test hồi quy không? Nhưng test hồi quy cần nhiều thời gian.
+[09:42:30] Anh Tuấn: Em nghĩ chỉ cần test chức năng đăng nhập và unlock. Các module khác không liên quan.
+[09:42:48] Anh Minh: Để an toàn, chị Lan hãy test ít nhất các trường hợp cơ bản. Nếu có thời gian thì làm thêm vài case.
+[09:43:05] Chị Lan: Vâng, em sẽ làm.
+[09:43:20] Anh Minh: Còn vấn đề gì cần bàn thêm về lỗi đăng nhập và dữ liệu test không?
+[09:43:38] Chị Hà: Em có thắc mắc về tài liệu. Ở task B (tài liệu triển khai) em đang viết, liệu có nên lồng ghép phần hướng dẫn xử lý lỗi đăng nhập vào không? Hay để riêng?
+[09:44:00] Anh Minh: Nên để riêng, vì task B là tài liệu triển khai hệ thống, không phải tài liệu xử lý sự cố. Em cứ viết tài liệu cho script lock riêng.
+[09:44:20] Chị Hà: Rõ.
+[09:44:35] Anh Tuấn: Em có một băn khoăn. Môi trường test hiện tại không ổn định, nếu chúng ta deploy script lên đó có thể gây lỗi thêm. Em đề xuất test trên một sandbox riêng.
+[09:45:00] Anh Minh: Sandbox có sẵn không? Anh Tuấn, em kiểm tra xem.
+[09:45:15] Anh Tuấn: Có một sandbox cũ của dự án trước, em có thể cài lại.
+[09:45:30] Anh Minh: Được, dùng sandbox đó. Nhưng nhớ dọn dẹp sau khi xong.
+[09:45:45] Chị Lan: Em sẽ hỗ trợ cấu hình sandbox nếu cần.
+[09:46:00] Anh Minh: Tốt. Vậy mọi việc tạm ổn. Tôi thấy chúng ta đã có ba task chính: task A, B, C, D. Cần nhắc lại tiến độ: task A deadline 25/2, task C script mai, task D cuối tuần. Task B không deadline.
+[09:46:30] Chị Hà: Em muốn confirm lại, task C có cần deadline cho việc test không? Hay chỉ script là xong?
+[09:46:50] Anh Minh: Chúng ta sẽ chốt sau khi script hoàn thành. Tạm thời chưa đặt.
+[09:47:05] Anh Tuấn: Em sẽ cập nhật trạng thái vào hệ thống.
+[09:47:20] Anh Minh: Còn vấn đề gì về lỗi đăng nhập nữa không? Tôi thấy đã đủ. Chuyển sang vấn đề khác nếu có.
+[09:47:38] Chị Lan: Em muốn nhấn mạnh rằng việc thiếu dữ liệu test cũng là một rủi ro. Nếu không có dữ liệu, QA sẽ không thể test kỹ. Hy vọng task D được ưu tiên.
+[09:48:00] Anh Tuấn: Em sẽ cố gắng.
+[09:48:15] Anh Minh: Tốt. Tôi nghĩ chúng ta nên dừng ở đây. Cảm ơn mọi người.
+[09:48:30] Anh Minh: Tôi muốn quay lại vấn đề tài liệu triển khai và môi trường test mà chúng ta đã bàn từ đầu. Sau khi nghe các ý kiến, tôi thấy cần điều chỉnh một số điểm.
+[09:49:00] Anh Tuấn: Anh nói cụ thể hơn được không ạ? Em đang tập trung vào script lock, nên chưa rõ anh muốn thay đổi gì.
+[09:49:25] Anh Minh: Liên quan đến task môi trường test. Tôi thấy anh Tuấn đang có quá nhiều việc: vừa nâng cấp server, vừa viết script, vừa tạo dữ liệu. Tôi nghĩ nên chuyển trách nhiệm task môi trường test cho người khác.
+[09:49:50] Chị Lan: Em có thể đảm nhận phần đó. Em đã theo dõi sát từ đầu, và hiểu rõ các yêu cầu kỹ thuật. Dù không trực tiếp làm infra, nhưng em có thể điều phối.
+[09:50:15] Anh Minh: Ý chị Lan hay. Vậy từ giờ, chị Lan sẽ là owner chính của task "Hoàn thiện môi trường test staging". Anh Tuấn, em chuyển giao lại cho chị Lan nhé. Em vẫn hỗ trợ kỹ thuật khi cần.
+[09:50:40] Anh Tuấn: Vâng, em không vấn đề. Em sẽ gửi lại toàn bộ thông tin hiện trạng cho chị Lan sau cuộc họp.
+[09:51:00] Chị Lan: Cảm ơn anh Tuấn. Em sẽ tiếp quản và đảm bảo deadline 25/2 vẫn được giữ.
+[09:51:18] Anh Minh: Tốt. Về deadline đó, tôi thấy cần xem lại. Chị Lan, em nghĩ 25/2 có khả thi không? Hay cần điều chỉnh?
+[09:51:40] Chị Lan: Em nghĩ 25/2 hơi gấp vì còn phải chờ linh kiện. Nếu được, em xin dời sang 28/2.
+[09:52:00] Anh Minh: Nhưng bên QA đã lên lịch test, nếu dời thì họ cũng phải dời theo. Tôi thấy chấp nhận được. Vậy deadline mới là 28/2 cho task môi trường test.
+[09:52:20] Anh Tuấn: Vậy còn deadline cũ 25/2 của em? Chị Lan sẽ chịu trách nhiệm từ giờ, nên deadline 28/2 áp cho chị Lan.
+[09:52:40] Anh Minh: Đúng vậy. Anh Tuấn, em không còn lo task đó nữa, nhưng vẫn hỗ trợ.
+[09:52:58] Chị Hà: Em có một thắc mắc. Task tài liệu của em hiện không có deadline. Liệu có nên đặt một mốc nào đó không? Vì em thấy mọi task khác đều có hạn.
+[09:53:20] Anh Minh: Đó là ý tốt. Tôi nghĩ chúng ta nên đặt deadline cho task tài liệu, để đồng bộ. Chị Hà, em có thể hoàn thành trước ngày 5/3 được không?
+[09:53:40] Chị Hà: Em nghĩ được. Trước 5/3 em sẽ gửi bản cuối cho mọi người review.
+[09:53:58] Anh Minh: Vậy task B "Hoàn thiện tài liệu hướng dẫn triển khai staging" sẽ có deadline 5/3. Chị Hà, em nhớ cập nhật.
+[09:54:15] Chị Hà: Vâng ạ.
+[09:54:30] Anh Tuấn: Anh Minh, em muốn nhắc lại về task script lock. Hiện tại em đang viết, dự kiến xong sáng mai. Nhưng nếu deadline môi trường test dời, thì việc test script cũng sẽ bị ảnh hưởng.
+[09:54:55] Chị Lan: Em có thể test script trên sandbox riêng, không phụ thuộc vào môi trường staging. Nên không sao.
+[09:55:12] Anh Minh: Vậy ổn. Chúng ta có bốn task chính. Tôi muốn điểm lại trạng thái. Task A (môi trường test) giờ do chị Lan phụ trách, deadline 28/2. Task B (tài liệu) chị Hà, deadline 5/3. Task C (script lock) anh Tuấn, xong mai. Task D (dữ liệu test) anh Tuấn, cuối tuần.
+[09:55:40] Chị Hà: Anh Minh, em xin lưu ý. Task D em thấy chưa có deadline rõ ràng. Nếu chỉ "cuối tuần" thì không cụ thể.
+[09:56:00] Anh Tuấn: Em sẽ hoàn thành trước thứ Hai tuần sau tức 23/2. Như vậy được không?
+[09:56:18] Anh Minh: Được, em tự chốt. Nhưng nếu không kịp thì báo sớm.
+[09:56:35] Chị Lan: Em muốn hỏi về nguồn lực cho task A. Em cần một bạn kỹ thuật hỗ trợ lắp đặt linh kiện. Anh Tuấn có thể giới thiệu không?
+[09:56:55] Anh Tuấn: Bạn Khoa có thể, nhưng đang bận. Em có thể hỗ trợ ngoài giờ nếu cần.
+[09:57:12] Anh Minh: Chị Lan, em có thể làm việc trực tiếp với bạn Khoa. Nếu cần thiết, tôi sẽ nói chuyện với trưởng phòng của bạn ấy.
+[09:57:30] Chị Lan: Vâng, em sẽ liên hệ.
+[09:57:45] Chị Hà: Em có một concern về tài liệu. Do deadline 5/3, em cần anh Tuấn review phần kỹ thuật trước ngày 1/3. Anh Tuấn có thể sắp xếp không?
+[09:58:05] Anh Tuấn: Anh có thể review vào cuối tuần này, nhưng chỉ được hai ngày. Em gửi draft trước thứ Bảy.
+[09:58:22] Chị Hà: Vậy thứ Bảy em gửi, anh review Chủ nhật? Nếu được thì em sẽ điều chỉnh.
+[09:58:40] Anh Tuấn: Ok, em cố gắng.
+[09:58:55] Anh Minh: Như vậy chúng ta đã có kế hoạch rõ ràng. Tôi thấy hài lòng. Có ai muốn bổ sung gì không?
+[09:59:15] Chị Lan: Em muốn hỏi về việc backup dữ liệu khi nâng cấp. Task A cần có bước backup trước. Em sẽ viết kế hoạch.
+[09:59:32] Anh Minh: Viết kế hoạch và gửi cho tôi duyệt. Tốt nhất là trong hai ngày tới.
+[09:59:50] Chị Lan: Vâng.
+[10:00:05] Anh Tuấn: Anh Minh, về task script lock, em muốn thêm một yêu cầu: cần có người review code. Anh Khoa có thể review không ạ?
+[10:00:25] Anh Minh: Trước đó em nói tự review. Nhưng nếu muốn thì em gửi anh Khoa. Tôi không ép.
+[10:00:40] Anh Tuấn: Vậy em gửi, nhưng không chắc có phản hồi kịp.
+[10:00:55] Chị Hà: Em có thể review phần code đơn giản, nhưng chuyên sâu thì không.
+[10:01:10] Anh Minh: Tạm thời cứ gửi đi. Nếu không ai review, em tự chịu trách nhiệm.
+[10:01:25] Anh Tuấn: Vâng.
+[10:01:38] Anh Minh: Còn vấn đề gì khác không? Tôi thấy tiến độ ổn. Chúng ta có thể kết thúc phần này.
+[10:01:55] Chị Lan: Em muốn confirm lại: deadline task A là 28/2, task B là 5/3, task C xong mai, task D trước 23/2. Đúng không ạ?
+[10:02:12] Anh Minh: Chính xác.
+[10:02:25] Chị Hà: Vậy em sẽ cập nhật vào biên bản.
+[10:02:38] Anh Minh: Cảm ơn mọi người. Tạm dừng ở đây.
+[10:03:00] Anh Minh: Chúng ta tiếp tục. Tôi muốn bàn về kế hoạch release và monitoring. Hiện tại, sau khi có script lock và môi trường test, chúng ta cần lên lịch release đầu tháng 3.
+[10:03:30] Chị Lan: Em nghĩ việc monitoring cần được thiết lập ngay từ khi release, để theo dõi lỗi đăng nhập và hiệu năng. Có tool nào sẵn không, anh Tuấn?
+[10:04:00] Anh Tuấn: Em có thể dùng Prometheus và Grafana. Cần cài đặt thêm vài config cho module xác thực. Mất khoảng hai ngày.
+[10:04:25] Chị Hà: Em có thể viết tài liệu hướng dẫn monitoring cho team vận hành. Nhưng cần thông số từ anh Tuấn.
+[10:04:50] Anh Minh: Tốt. Trước khi đi sâu, tôi muốn xem lại các task hiện tại. Có task nào không còn phù hợp không? Anh Tuấn, task D (dữ liệu test) tiến độ thế nào?
+[10:05:15] Anh Tuấn: Em chưa bắt đầu vì đang tập trung script lock. Em nghĩ task D có thể không cần thiết nếu chúng ta dùng dữ liệu từ script lock để test. Script đã bao gồm các case đăng nhập.
+[10:05:40] Chị Hà: Ý em là script lock tạo ra dữ liệu giả rồi ạ? Nếu vậy thì task D trùng lặp.
+[10:06:00] Anh Tuấn: Đúng, script sinh dữ liệu luôn khi chạy test. Nên không cần làm riêng.
+[10:06:15] Anh Minh: Vậy tôi quyết định hủy task "Tạo bộ dữ liệu test đăng nhập" vì không còn giá trị. Anh Tuấn, em tập trung vào script lock và monitoring.
+[10:06:40] Anh Tuấn: Vâng, em đồng ý.
+[10:07:00] Chị Lan: Như vậy chúng ta chỉ còn task A, B, C. Nhưng nếu release vào đầu tháng 3, thì task A (môi trường test) cần hoàn thành sớm hơn deadline 28/2. Em đề xuất 26/2 để có thời gian kiểm tra.
+[10:07:30] Anh Minh: Hợp lý. Chị Lan, em có thể đảm bảo 26/2 không? Bên QA cần test trước 28/2.
+[10:07:50] Chị Lan: Nếu có bạn Khoa hỗ trợ, em có thể làm xong vào 26/2. Em sẽ liên hệ ngay.
+[10:08:10] Anh Tuấn: Anh Khoa đang bận dự án khác, nhưng em có thể hỗ trợ ngoài giờ vào cuối tuần này.
+[10:08:30] Chị Lan: Vậy em sẽ sắp xếp với anh Tuấn. Deadline chính thức của task A là 26/2.
+[10:08:50] Anh Minh: Đồng ý. Vậy cập nhật lại: task A deadline 26/2, task B deadline 5/3, task C script xong mai. Monitoring chưa có deadline.
+[10:09:10] Chị Hà: Em muốn hỏi về monitoring. Ai sẽ chịu trách nhiệm chính? Có nên tạo task riêng không?
+[10:09:30] Anh Tuấn: Em có thể setup monitoring. Nhưng cần deadline cụ thể.
+[10:09:50] Anh Minh: Vậy tạm thời chưa tạo task mới. Sau khi script lock xong, chúng ta sẽ bàn. Hiện tại, tập trung vào release.
+[10:10:10] Chị Lan: Việc release cần có kế hoạch chi tiết. Em xin phép soạn draft kế hoạch release, dự kiến ngày 1/3.
+[10:10:30] Anh Minh: Được, em soạn và gửi tôi duyệt. Nhưng đừng quên monitoring.
+[10:10:50] Anh Tuấn: Em có thể tích hợp monitoring script vào script lock. Tiết kiệm thời gian.
+[10:11:10] Chị Hà: Em thấy ý hay. Nhưng cần kiểm tra xem monitoring có ảnh hưởng đến hiệu năng không.
+[10:11:30] Anh Tuấn: Em sẽ test trên sandbox.
+[10:11:48] Anh Minh: Vậy thống nhất. Anh Tuấn, em gộp việc setup monitoring vào task C. Deadline cho phần monitoring là cuối tuần này, 22/2.
+[10:12:10] Anh Tuấn: Ok, em sẽ cố gắng.
+[10:12:28] Chị Hà: Em có thể viết tài liệu cho monitoring sau khi có kết quả. Nhưng task B đã có deadline 5/3, em sẽ lồng ghép.
+[10:12:48] Anh Minh: Tốt. Như vậy chúng ta có các mốc: 22/2 monitoring, 26/2 môi trường test, 1/3 dự kiến release, 5/3 tài liệu.
+[10:13:10] Chị Lan: Có vẻ khả quan. Nhưng em lo về nguồn lực. Anh Tuấn đang ôm quá nhiều.
+[10:13:30] Anh Tuấn: Em có thể quản lý được, nếu không có phát sinh.
+[10:13:50] Chị Hà: Hy vọng không có sự cố mới.
+[10:14:05] Anh Minh: Đúng. Chúng ta cần theo dõi sát. Tôi sẽ tổ chức họp ngắn vào thứ Hai để kiểm tra tiến độ.
+[10:14:25] Chị Lan: Vâng, em sẽ gửi lịch.
+[10:14:40] Anh Tuấn: Em xin phép hỏi thêm. Về release, chúng ta có cần làm rollback plan không?
+[10:14:58] Anh Minh: Cần, nhưng chưa bây giờ. Tôi sẽ giao sau khi môi trường ổn.
+[10:15:15] Chị Hà: Em thấy nên chuẩn bị trước để tránh rủi ro.
+[10:15:30] Anh Minh: Ý em tốt, nhưng hiện tại tập trung vào các task đã giao. Rollback plan sẽ là việc của tuần sau.
+[10:15:50] Chị Lan: Vậy em sẽ ghi chú lại.
+[10:16:05] Anh Tuấn: Em cũng muốn nhấn mạnh rằng việc monitoring cần được test trước khi release, ít nhất 2 ngày.
+[10:16:25] Anh Minh: Đúng. Nên việc 22/2 là phù hợp.
+[10:16:40] Chị Hà: Em không có ý kiến thêm.
+[10:16:55] Anh Minh: Vậy tôi kết luận. Chúng ta hủy task D, điều chỉnh deadline task A thành 26/2. Cảm ơn mọi người.
+[10:17:10] Anh Minh: Chúng ta còn một số việc cần hoàn tất. Trước khi kết thúc, tôi muốn điểm qua toàn bộ trạng thái và xử lý các vấn đề còn tồn đọng. Chị Lan, bắt đầu từ task A nhé.
+[10:17:35] Chị Lan: Vâng. Task A - môi trường test staging. Em đã tiếp nhận từ anh Tuấn. Hiện tại, em đã liên hệ với bạn Khoa để hỗ trợ lắp đặt linh kiện. Dự kiến nâng cấp SSD và RAM sẽ hoàn thành vào ngày 24/2, sau đó chạy thử 2 ngày, đảm bảo deadline 26/2.
+[10:18:00] Anh Minh: Tốt. Nếu có trục trặc, em báo ngay. Còn vấn đề backup dữ liệu? Em đã viết kế hoạch chưa?
+[10:18:20] Chị Lan: Em đang viết. Sẽ gửi anh trong ngày mai. Kế hoạch bao gồm backup toàn bộ config và dữ liệu test trước khi can thiệp phần cứng.
+[10:18:40] Anh Minh: Được. Task B - tài liệu triển khai. Chị Hà, tiến độ thế nào?
+[10:18:58] Chị Hà: Em đã viết được 70% nội dung. Phần còn lại là hướng dẫn cấu hình log và monitoring, chờ anh Tuấn cung cấp thông số. Em đã gửi draft sơ bộ cho anh Tuấn vào thứ Sáu để review.
+[10:19:20] Anh Tuấn: Anh đã xem qua, phần tổng quan ổn. Cần bổ sung thêm mục khắc phục sự cố thường gặp. Em sẽ góp ý chi tiết bằng email.
+[10:19:40] Chị Hà: Vâng. Em sẽ cập nhật và hoàn thiện trước 5/3.
+[10:20:00] Anh Minh: Task C - script lock. Anh Tuấn, hôm nay là ngày em hẹn hoàn thành script. Thực tế thế nào?
+[10:20:20] Anh Tuấn: Script đã viết xong. Em đã test sơ bộ trên sandbox, thấy hoạt động tốt. Chức năng lock tài khoản sau 5 lần sai mật khẩu, hiển thị thông báo lỗi rõ ràng, và tự động unlock sau 30 phút. Phần monitoring em cũng tích hợp được metric vào Prometheus.
+[10:20:50] Chị Lan: Vậy khi nào em chuyển giao để bên em test?
+[10:21:05] Anh Tuấn: Chiều nay em sẽ deploy lên sandbox riêng và gửi link cho chị Lan. Chị có thể test vào sáng mai. Em đã viết tài liệu hướng dẫn test kèm theo.
+[10:21:25] Chị Lan: Tốt. Em sẽ test vào sáng mai và báo kết quả trong ngày.
+[10:21:45] Anh Minh: Vậy deadline monitoring 22/2 vẫn giữ chứ? Em có kịp không?
+[10:22:00] Anh Tuấn: Dạ, em sẽ hoàn thiện phần dashboard Grafana trong ngày mai, kịp deadline.
+[10:22:18] Chị Hà: Em xin phép hỏi, sau khi monitoring xong, em có thể viết tài liệu hướng dẫn sử dụng cho team vận hành. Việc này có thể gộp vào task B hay tạo task riêng?
+[10:22:40] Anh Minh: Gộp vào task B, vì tài liệu đã có phần monitoring. Em nhớ cập nhật deadline 5/3.
+[10:22:58] Chị Hà: Vâng. Vậy em sẽ bổ sung sau khi nhận thông số từ anh Tuấn.
+[10:23:15] Anh Tuấn: Anh sẽ gửi thông số chi tiết vào cuối ngày mai.
+[10:23:32] Anh Minh: Về vấn đề rollback plan, hồi nãy chúng ta để ngỏ. Tôi nghĩ cần có người phụ trách. Chị Lan, em có thể viết một bản rollback plan sơ bộ cho release không? Không cần chi tiết, chỉ nêu các bước chính.
+[10:24:00] Chị Lan: Em có thể viết, nhưng cần anh Tuấn cung cấp thông tin về cấu hình hệ thống và các module liên quan. Em sẽ làm và gửi anh Minh trong vòng 3 ngày, tức trước ngày 22/2.
+[10:24:25] Anh Minh: Được. Vậy đây sẽ là task E - "Viết rollback plan cho release". Giao cho chị Lan, deadline 22/2. Mọi người có ý kiến gì không?
+[10:24:45] Anh Tuấn: Em chỉ lưu ý, rollback plan cần được review bởi em hoặc anh Khoa về mặt kỹ thuật.
+[10:25:00] Chị Lan: Em sẽ gửi bản nháp cho anh Tuấn review trước khi nộp.
+[10:25:18] Anh Minh: Tốt. Như vậy chúng ta có tổng cộng 4 task chính: A, B, C, E. Task D đã hủy.
+[10:25:35] Chị Hà: Em thấy task E có deadline 22/2, trùng với deadline monitoring của task C. Liệu có quá tải cho chị Lan không?
+[10:25:55] Chị Lan: Không sao, vì rollback plan chỉ là bản draft, không quá nặng. Em có thể làm song song.
+[10:26:10] Anh Minh: Vậy ổn. Tiếp theo, tôi muốn nhắc về vấn đề chưa giải quyết. Đó là chuyện tạo dữ liệu test đã hủy, nhưng bộ phận QA vẫn cần dữ liệu để test. Anh Tuấn, em có thể dùng script lock để sinh dữ liệu tạm thời cho họ không?
+[10:26:40] Anh Tuấn: Script hiện tại chỉ sinh dữ liệu cho module đăng nhập. Nếu QA cần dữ liệu cho các module khác, em phải viết thêm. Nhưng hiện tại em chưa có thời gian.
+[10:27:00] Anh Minh: Vậy tạm thời không giải quyết. Đây sẽ là unresolved item. QA sẽ phải tự tạo dữ liệu thủ công hoặc chờ task D cũ. Chúng ta ghi nhận và để sau.
+[10:27:20] Chị Lan: Em thấy nên thông báo cho QA biết để họ chủ động.
+[10:27:35] Anh Minh: Chị Lan, em làm đầu mối liên lạc. Vậy giờ tôi điểm lại toàn bộ trạng thái cuối.
+[10:27:55] Anh Minh: Task A: Hoàn thiện môi trường test staging – owner chị Lan, deadline 26/2, đang triển khai nâng cấp phần cứng. Task B: Hoàn thiện tài liệu hướng dẫn triển khai staging – owner chị Hà, deadline 5/3, đã viết 70%, chờ review và bổ sung monitoring. Task C: Xử lý lỗi lock tài khoản staging – owner anh Tuấn, script đã xong, test vào mai, monitoring deadline 22/2. Task E: Viết rollback plan – owner chị Lan, deadline 22/2.
+[10:28:30] Chị Hà: Anh Minh, em muốn confirm lại task B có bao gồm cả tài liệu monitoring không? Hay tách riêng?
+[10:28:48] Anh Minh: Gộp chung. Em nhớ cập nhật trong tài liệu triển khai.
+[10:29:00] Chị Hà: Rõ.
+[10:29:12] Anh Tuấn: Em có một băn khoăn về task C. Phần code script, ai sẽ review? Em đã gửi cho anh Khoa nhưng chưa có phản hồi.
+[10:29:30] Anh Minh: Vẫn unresolved. Em tiếp tục theo dõi, nếu không có review thì em tự chịu trách nhiệm. Nhưng em nên test kỹ.
+[10:29:48] Anh Tuấn: Vâng.
+[10:30:00] Chị Lan: Em xin hỏi về release date. Nếu mọi thứ ổn, chúng ta có thể release vào 1/3 không?
+[10:30:18] Anh Minh: Dự kiến vậy, nhưng cần kiểm tra sau khi có kết quả test task C và task A. Chúng ta sẽ quyết định trong họp thứ Hai.
+[10:30:35] Chị Hà: Vậy em sẽ chuẩn bị tài liệu kịp trước release.
+[10:30:50] Anh Minh: Còn vấn đề nào khác cần bàn? Tôi thấy mọi việc đã rõ. Chúng ta có một unresolved item về dữ liệu test cho QA, và reviewer cho task C chưa chốt.
+[10:31:10] Chị Lan: Em có một đề xuất về việc họp ngắn vào thứ Hai để kiểm tra tiến độ. Em sẽ gửi lịch.
+[10:31:28] Anh Minh: Đồng ý. Cảm ơn mọi người vì buổi làm việc hiệu quả. Tôi xin kết thúc cuộc họp tại đây.
+[10:31:45] Anh Tuấn: Cảm ơn anh.
+[10:31:55] Chị Hà: Chúc mọi người cuối tuần vui vẻ.
+[10:32:05] Chị Lan: Cảm ơn mọi người.

@@ -1,0 +1,88 @@
+MEETING_ID: W4-LONG-C5-N3-SW-STATE-005
+PART: P04/5
+
+T000179 [10:03:00] Anh Minh: Chúng ta tiếp tục. Tôi muốn bàn về kế hoạch release và monitoring. Hiện tại, sau khi có script lock và môi trường test, chúng ta cần lên lịch release đầu tháng 3.
+
+T000180 [10:03:30] Chị Lan: Em nghĩ việc monitoring cần được thiết lập ngay từ khi release, để theo dõi lỗi đăng nhập và hiệu năng. Có tool nào sẵn không, anh Tuấn?
+
+T000181 [10:04:00] Anh Tuấn: Em có thể dùng Prometheus và Grafana. Cần cài đặt thêm vài config cho module xác thực. Mất khoảng hai ngày.
+
+T000182 [10:04:25] Chị Hà: Em có thể viết tài liệu hướng dẫn monitoring cho team vận hành. Nhưng cần thông số từ anh Tuấn.
+
+T000183 [10:04:50] Anh Minh: Tốt. Trước khi đi sâu, tôi muốn xem lại các task hiện tại. Có task nào không còn phù hợp không? Anh Tuấn, task D (dữ liệu test) tiến độ thế nào?
+
+T000184 [10:05:15] Anh Tuấn: Em chưa bắt đầu vì đang tập trung script lock. Em nghĩ task D có thể không cần thiết nếu chúng ta dùng dữ liệu từ script lock để test. Script đã bao gồm các case đăng nhập.
+
+T000185 [10:05:40] Chị Hà: Ý em là script lock tạo ra dữ liệu giả rồi ạ? Nếu vậy thì task D trùng lặp.
+
+T000186 [10:06:00] Anh Tuấn: Đúng, script sinh dữ liệu luôn khi chạy test. Nên không cần làm riêng.
+
+T000187 [10:06:15] Anh Minh: Vậy tôi quyết định hủy task "Tạo bộ dữ liệu test đăng nhập" vì không còn giá trị. Anh Tuấn, em tập trung vào script lock và monitoring.
+
+T000188 [10:06:40] Anh Tuấn: Vâng, em đồng ý.
+
+T000189 [10:07:00] Chị Lan: Như vậy chúng ta chỉ còn task A, B, C. Nhưng nếu release vào đầu tháng 3, thì task A (môi trường test) cần hoàn thành sớm hơn deadline 28/2. Em đề xuất 26/2 để có thời gian kiểm tra.
+
+T000190 [10:07:30] Anh Minh: Hợp lý. Chị Lan, em có thể đảm bảo 26/2 không? Bên QA cần test trước 28/2.
+
+T000191 [10:07:50] Chị Lan: Nếu có bạn Khoa hỗ trợ, em có thể làm xong vào 26/2. Em sẽ liên hệ ngay.
+
+T000192 [10:08:10] Anh Tuấn: Anh Khoa đang bận dự án khác, nhưng em có thể hỗ trợ ngoài giờ vào cuối tuần này.
+
+T000193 [10:08:30] Chị Lan: Vậy em sẽ sắp xếp với anh Tuấn. Deadline chính thức của task A là 26/2.
+
+T000194 [10:08:50] Anh Minh: Đồng ý. Vậy cập nhật lại: task A deadline 26/2, task B deadline 5/3, task C script xong mai. Monitoring chưa có deadline.
+
+T000195 [10:09:10] Chị Hà: Em muốn hỏi về monitoring. Ai sẽ chịu trách nhiệm chính? Có nên tạo task riêng không?
+
+T000196 [10:09:30] Anh Tuấn: Em có thể setup monitoring. Nhưng cần deadline cụ thể.
+
+T000197 [10:09:50] Anh Minh: Vậy tạm thời chưa tạo task mới. Sau khi script lock xong, chúng ta sẽ bàn. Hiện tại, tập trung vào release.
+
+T000198 [10:10:10] Chị Lan: Việc release cần có kế hoạch chi tiết. Em xin phép soạn draft kế hoạch release, dự kiến ngày 1/3.
+
+T000199 [10:10:30] Anh Minh: Được, em soạn và gửi tôi duyệt. Nhưng đừng quên monitoring.
+
+T000200 [10:10:50] Anh Tuấn: Em có thể tích hợp monitoring script vào script lock. Tiết kiệm thời gian.
+
+T000201 [10:11:10] Chị Hà: Em thấy ý hay. Nhưng cần kiểm tra xem monitoring có ảnh hưởng đến hiệu năng không.
+
+T000202 [10:11:30] Anh Tuấn: Em sẽ test trên sandbox.
+
+T000203 [10:11:48] Anh Minh: Vậy thống nhất. Anh Tuấn, em gộp việc setup monitoring vào task C. Deadline cho phần monitoring là cuối tuần này, 22/2.
+
+T000204 [10:12:10] Anh Tuấn: Ok, em sẽ cố gắng.
+
+T000205 [10:12:28] Chị Hà: Em có thể viết tài liệu cho monitoring sau khi có kết quả. Nhưng task B đã có deadline 5/3, em sẽ lồng ghép.
+
+T000206 [10:12:48] Anh Minh: Tốt. Như vậy chúng ta có các mốc: 22/2 monitoring, 26/2 môi trường test, 1/3 dự kiến release, 5/3 tài liệu.
+
+T000207 [10:13:10] Chị Lan: Có vẻ khả quan. Nhưng em lo về nguồn lực. Anh Tuấn đang ôm quá nhiều.
+
+T000208 [10:13:30] Anh Tuấn: Em có thể quản lý được, nếu không có phát sinh.
+
+T000209 [10:13:50] Chị Hà: Hy vọng không có sự cố mới.
+
+T000210 [10:14:05] Anh Minh: Đúng. Chúng ta cần theo dõi sát. Tôi sẽ tổ chức họp ngắn vào thứ Hai để kiểm tra tiến độ.
+
+T000211 [10:14:25] Chị Lan: Vâng, em sẽ gửi lịch.
+
+T000212 [10:14:40] Anh Tuấn: Em xin phép hỏi thêm. Về release, chúng ta có cần làm rollback plan không?
+
+T000213 [10:14:58] Anh Minh: Cần, nhưng chưa bây giờ. Tôi sẽ giao sau khi môi trường ổn.
+
+T000214 [10:15:15] Chị Hà: Em thấy nên chuẩn bị trước để tránh rủi ro.
+
+T000215 [10:15:30] Anh Minh: Ý em tốt, nhưng hiện tại tập trung vào các task đã giao. Rollback plan sẽ là việc của tuần sau.
+
+T000216 [10:15:50] Chị Lan: Vậy em sẽ ghi chú lại.
+
+T000217 [10:16:05] Anh Tuấn: Em cũng muốn nhấn mạnh rằng việc monitoring cần được test trước khi release, ít nhất 2 ngày.
+
+T000218 [10:16:25] Anh Minh: Đúng. Nên việc 22/2 là phù hợp.
+
+T000219 [10:16:40] Chị Hà: Em không có ý kiến thêm.
+
+T000220 [10:16:55] Anh Minh: Vậy tôi kết luận. Chúng ta hủy task D, điều chỉnh deadline task A thành 26/2. Cảm ơn mọi người.
+
+--- END OF PART P04 ---

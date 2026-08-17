@@ -1,0 +1,31 @@
+=== MEETING METADATA ===
+meeting_id: W2-SHORT-C2-N0-OPS-DREP-012
+meeting_title: Chuẩn bị bản phát hành nội bộ
+meeting_date: 2026-02-06
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[09:00:00] Lan: Chào cả nhà, hôm nay chúng ta sẽ rà soát các công việc còn lại cho bản phát hành nội bộ. Tình hình là bản vá cuối cùng đã được gửi sang QA.
+[09:00:14] Hương: Đúng rồi, bên QA đang thực hiện regression test. Dự kiến sẽ hoàn tất vào cuối ngày 10 tháng 2.
+[09:00:26] Lan: Vậy chúng ta cần chuẩn bị release note trước khi đóng gói bản cài đặt. Minh, em sẽ chịu trách nhiệm mảng release note nhé.
+[09:00:38] Minh: Vâng, em sẽ tập hợp các thay đổi và viết release note.
+[09:00:46] Lan: Deadline của task release note là ngày 10 tháng 2.
+[09:00:55] Minh: Ok, em ghi nhận deadline 10/02. Em sẽ sắp xếp thời gian làm.
+[09:01:06] Hương: Chị Lan này, em thấy có một điểm bất cập. Nếu QA hoàn thành regression vào cuối ngày 10, thì tới lúc đó mới có danh sách lỗi đã sửa chính thức. Minh sẽ không có đủ thời gian để viết release note trong ngày 10.
+[09:01:21] Minh: Đúng ạ, em cũng nghĩ vậy. Thông thường em cần ít nhất nửa ngày để tổng hợp từ danh sách bug final.
+[09:01:33] Hương: Với tiến độ hiện tại, danh sách đó thường chỉ có vào khoảng 4-5 giờ chiều ngày 10.
+[09:01:45] Lan: Ừ, vậy thì deadline 10/02 thực sự không khả thi. Chúng ta nên điều chỉnh lại. Có ai phản đối việc dời deadline không?
+[09:01:58] Minh: Em thì ủng hộ dời ạ, vì làm gấp dễ thiếu sót.
+[09:02:06] Hương: Tôi cũng đồng ý. Nhưng cần đảm bảo không làm chậm kế hoạch phát hành.
+[09:02:16] Lan: Vậy mình sẽ thay thế deadline cũ. Deadline mới cho task release note là ngày 13 tháng 2.
+[09:02:27] Minh: 13/02, tức là thứ Hai tuần sau. Em có cả ngày 11, 12 và sáng 13 để làm. Ok chị.
+[09:02:38] Lan: Nhưng liệu dời deadline như vậy có ảnh hưởng đến việc QA review release note không?
+[09:02:48] Hương: QA sẽ cần một buổi sáng để kiểm tra release note trước khi đóng gói. Nếu Minh gửi cho tôi bản thảo vào sáng 13, tôi có thể review xong trong chiều 13. Vẫn kịp cho ngày phát hành 14.
+[09:03:03] Lan: Ừ vậy thì ổn. Minh lưu ý nhé, deadline cũ 10/02 sẽ không còn hiệu lực, mình chốt deadline 13/02.
+[09:03:15] Minh: Rõ ràng rồi chị. Em sẽ cập nhật lại task và tập trung làm trong khung thời gian mới.
+[09:03:27] Lan: Tốt. Tôi chỉ muốn nhấn mạnh, việc thay đổi deadline không có nghĩa là chúng ta có thể chậm trễ thêm nữa, deadline mới phải được tuân thủ tuyệt đối.
+[09:03:40] Hương: Chị yên tâm, em sẽ phối hợp chặt chẽ với Minh để đảm bảo release note sẵn sàng trước ngày 14.
+[09:03:52] Lan: OK. Vậy phần release note đã rõ. Còn ai có ý kiến gì khác không?
+[09:04:01] Minh: Em không có gì thêm ạ.
+[09:04:07] Hương: Tôi cũng vậy.
+[09:04:13] Lan: Vậy buổi họp hôm nay kết thúc. Cảm ơn mọi người. Minh nhớ cập nhật lại task và báo lại cho chị khi xong nhé.
+[09:04:26] Minh: Vâng, chào chị Lan, chào chị Hương.

@@ -1,0 +1,14 @@
+ghi vội
+chủ đề: Họp điều phối triển khai hệ thống
+kw: tai lieu / du lieu / trien khai / monitoring / config / lieu / assign
+- Vậy task “Viết tài liệu triển khai hệ thống” assign cho Minh, dl 20/2
+* Hùng, em assign task restore DB này cho em nhé, hoàn thành trước 17h
+- Được, tôi sẽ assign task "Tạo bộ dữ liệu test chuẩn" cho thực tập sinh, khi nào có người sẽ nói sau
+1) Như vậy ta có thêm task: kiểm tra config trên sandbox
+- còn phải xử lý mấy task khác Hùng giao
+* Em sẽ add một mục "Maintenance tasks" nhỏ
+- Để tôi assign task "Setup monitoring alert" cho Hùng, dl 28/2
+1) Thế thì hủy task clean data của Lan
+- còn task monitoring alert cũng 28/2
+* Quyết định hủy task "Tạo bộ dữ liệu test chuẩn"
+- Tôi điểm qua: - Tài liệu triển khai hệ thống: Hùng, dl 25/2

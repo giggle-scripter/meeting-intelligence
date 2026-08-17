@@ -1,0 +1,45 @@
+{
+  "meeting_title": "Họp điều phối triển khai hệ thống",
+  "tasks": [
+    {
+      "task_name": "Triển khai môi trường test module payment",
+      "assignee": "Minh",
+      "start_date": "2026-02-21",
+      "due_date": "2026-02-23",
+      "due_date_text": "deadline đã điều chỉnh thành 23/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Tạo template tài liệu triển khai",
+      "assignee": "Duy",
+      "start_date": "2026-02-21",
+      "due_date": "2026-02-26",
+      "due_date_text": "deadline 26/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Xử lý lỗi đăng nhập staging",
+      "assignee": "Hà",
+      "start_date": "2026-02-21",
+      "due_date": "2026-02-25",
+      "due_date_text": "deadline đã đặt lại thành 25/02",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Seed dữ liệu test payment",
+      "assignee": "Minh",
+      "start_date": "2026-02-21",
+      "due_date": "",
+      "due_date_text": "sau khi môi trường sẵn sàng",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Thiết lập monitoring dashboard cho payment",
+      "assignee": "Minh",
+      "start_date": "2026-02-21",
+      "due_date": "2026-02-27",
+      "due_date_text": "deadline 27/02",
+      "status": "Proposed"
+    }
+  ]
+}

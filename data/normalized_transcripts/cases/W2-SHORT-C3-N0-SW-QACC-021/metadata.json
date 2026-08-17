@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W2-SHORT-C3-N0-SW-QACC-021",
+  "meeting_id": "W2-SHORT-C3-N0-SW-QACC-021",
+  "meeting_title": "Rà soát công việc sprint",
+  "meeting_date": "2026-02-15",
+  "wave": 2,
+  "wave_name": "wave_2_feature_isolation",
+  "labels": [
+    "question_then_acceptance",
+    "task_confirmed_later"
+  ],
+  "objective": "{\"name\": \"question then acceptance\", \"code\": \"QACC\", \"labels\": \"question_then_acceptance,task_confirmed_later\", \"requirements\": \"Câu hỏi giao việc chưa đủ tạo task; người được hỏi đồng ý ở lượt sau.\"}",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_2_feature_isolation/W2-SHORT-C3-N0-SW-QACC-021/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-pro"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 634,
+    "turn_count": 24
+  },
+  "ground_truth": {
+    "available": false,
+    "expected_output_file": ""
+  }
+}

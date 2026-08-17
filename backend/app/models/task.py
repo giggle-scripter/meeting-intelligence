@@ -1,0 +1,89 @@
+"""Reduced task state and public output models."""
+
+from dataclasses import dataclass, field
+
+
+@dataclass
+class TaskState:
+    task_id: str
+    task_name: str
+    assignee: str
+    status: str = "PROPOSED"
+    deadline_mention_id: str = ""
+    deadline_event_ids: list[str] = field(default_factory=list)
+    deadline_mention_history: list[str] = field(default_factory=list)
+    source_clause_ids: list[str] = field(default_factory=list)
+    last_event_time_ms: int | None = None
+    last_order_index: int = 0
+    confidence: float = 0.0
+    extraction_sources: set[str] = field(default_factory=set)
+
+
+@dataclass
+class FinalTask:
+    task_name: str
+    assignee: str
+    start_date: str
+    due_date: str
+    due_date_text: str
+    evidence: str
+    status: str = "Proposed"
+
+
+@dataclass
+class PipelineDiagnostics:
+    caption_count: int = 0
+    deduplicated_caption_count: int = 0
+    turn_count: int = 0
+    sentence_count: int = 0
+    clause_count: int = 0
+    candidate_window_count: int = 0
+    rule_event_count: int = 0
+    ai_event_count: int = 0
+    ai_window_count: int = 0
+    ai_provider_enabled: bool = False
+    ai_provider_call_count: int = 0
+    ai_context_clause_count: int = 0
+    ai_fallback_error_count: int = 0
+    unresolved_window_count: int = 0
+    ai_call_rate: float = 0.0
+    ai_clause_coverage: float = 0.0
+    ai_batch_count: int = 0
+    event_count_before_deduplication: int = 0
+    event_count_after_deduplication: int = 0
+    terminal_replay_blocked_count: int = 0
+    ledger_task_created_count: int = 0
+    ledger_task_updated_count: int = 0
+    exact_id_link_count: int = 0
+    exact_alias_link_count: int = 0
+    semantic_link_count: int = 0
+    unresolved_mutation_count: int = 0
+    duplicate_task_merge_count: int = 0
+    provisional_task_created_count: int = 0
+    provisional_task_promoted_count: int = 0
+    provisional_promotion_blocked_count: int = 0
+    ambiguous_identity_mutation_blocked_count: int = 0
+    sibling_identity_split_count: int = 0
+    ai_contract_rejection_count: int = 0
+    ai_structural_contract_rejection_count: int = 0
+    ai_semantic_rejection_count: int = 0
+    ai_unknown_task_id_rejection_count: int = 0
+    ai_invalid_source_clause_rejection_count: int = 0
+    ai_invalid_anchor_clause_rejection_count: int = 0
+    ai_non_concrete_action_rejection_count: int = 0
+    ai_invalid_assignee_rejection_count: int = 0
+    unauthorized_creation_blocked_count: int = 0
+    ledger_unknown_task_id_rejection_count: int = 0
+    recap_scope: str = "NONE"
+    meeting_date_source: str = "REQUEST"
+    effective_meeting_date: str = ""
+    explicit_task_start_date_count: int = 0
+
+
+@dataclass
+class PipelineResult:
+    meeting_title: str
+    summary: str
+    tasks: list[FinalTask]
+    diagnostics: PipelineDiagnostics
+    unresolved_window_ids: list[str] = field(default_factory=list)

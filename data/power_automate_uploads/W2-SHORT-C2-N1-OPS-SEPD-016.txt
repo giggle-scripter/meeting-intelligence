@@ -1,0 +1,32 @@
+=== MEETING METADATA ===
+meeting_id: W2-SHORT-C2-N1-OPS-SEPD-016
+meeting_title: Chuẩn bị bản phát hành nội bộ
+meeting_date: 2026-02-10
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[00:00:02] Tuan: Chào các bạn, hôm nay chúng ta sẽ bàn kế hoạch phát hành bản build nội bộ cho dự án Delta. Bên Product đang cần sớm để review giao diện cuối cùng.
+[00:00:09] Mai: Em đã sẵn sàng, nhưng có một vấn đề là hai bug P1 đang được fix trên develop, có thể ảnh hưởng đến chất lượng build.
+[00:00:15] Linh: Bên QA đã kiểm tra xong một bug, cái bug login loop sẽ fix xong trong hôm nay. Còn bug crash khi chọn ngày dự kiến hoàn tất vào chiều mai.
+[00:00:22] Tuan: Vậy thì thời gian hơi gấp. Mai, em sẽ là người tạo bản build nội bộ từ nhánh develop. Cố gắng tích hợp code sau khi bug được fix.
+[00:00:29] Mai: Em hiểu. Vậy deadline cho bản build này là khi nào anh?
+[00:00:33] Tuan: Hạn chót cho bản build là thứ Sáu tuần này.
+[00:00:37] Mai: Thứ Sáu tức ngày 13 tháng 2, chỉ còn ba ngày. Em sợ bug có thể fix trễ, hoặc còn bug phát sinh trong quá trình hồi quy.
+[00:00:44] Tuan: Nếu đến sáng thứ Năm mà bug vẫn chưa xong, chúng ta sẽ họp khẩn để quyết định có lùi deadline không. Nhưng hiện tại cứ target thứ Sáu.
+[00:00:50] Linh: Khi nào Mai build xong thì em sẽ chạy test hồi quy. Phần test của em cần bao lâu anh?
+[00:00:55] Tuan: Em nên dành trọn một ngày, nhưng deadline cho phần test của em là cuối ngày thứ Hai tuần sau, tức 16 tháng 2. Tuy nhiên, nếu em làm sớm hơn thì báo cáo ngay để bên Product có thêm thời gian.
+[00:01:02] Linh: Vậy là em phải test xong trước 16 tháng 2. Còn việc chuẩn bị môi trường test cho bản build nội bộ, ai sẽ phụ trách?
+[00:01:08] Tuan: Môi trường test thì em tự setup trên server staging, Mai sẽ cung cấp hướng dẫn nếu cần. Cái đó không cần assign riêng.
+[00:01:14] Mai: À, nhắc đến hướng dẫn, em nghĩ chúng ta cần một tài liệu ngắn về cách cài đặt bản build nội bộ để bên Product không phải hỏi lại. Ai sẽ viết tài liệu đó?
+[00:01:22] Tuan: Tài liệu thì em Mai viết luôn nhé, vì em là người build. Như vậy dễ kiểm soát thông tin.
+[00:01:27] Mai: Em đồng ý, nhưng deadline cho tài liệu này là khi nào?
+[00:01:30] Tuan: Tài liệu cần có trước khi build, tức là trước thứ Sáu. Tốt nhất em hoàn thành trước trưa thứ Sáu để Linh có thể kiểm tra luôn khi nhận build.
+[00:01:37] Linh: Sẵn đây, bên Product có đề xuất thêm bản demo Chatbot vào build nội bộ để demo cho khách hàng tuần sau. Mình có nên không?
+[00:01:43] Tuan: Tính năng Chatbot còn chưa ổn định, chúng ta không thể đưa vào bản nội bộ được. Từ chối thẳng nhé, để tránh rủi ro.
+[00:01:49] Mai: Đồng ý. Như vậy em sẽ chỉ tập trung vào code hiện tại trên develop. Còn việc OT nếu cần, anh có duyệt không?
+[00:01:55] Tuan: Anh sẽ duyệt OT nếu thật sự cần thiết, nhưng ưu tiên tối ưu thời gian trong giờ hành chính. Các bạn cố gắng nhé.
+[00:02:01] Linh: Okey, vậy thì em sẽ kiểm tra lại test case cho bản hồi quy, sẵn sàng khi có build. Nhưng em cần Mai gửi build ít nhất trước 3 giờ chiều thứ Sáu để kịp test, nếu không sẽ trễ deadline của em.
+[00:02:08] Mai: Được rồi, em sẽ cố gắng gửi build sớm, chắc là trưa thứ Sáu. Còn tài liệu em sẽ soạn trước tối thứ Năm.
+[00:02:13] Tuan: Tốt. Vậy chốt lại: Mai chuẩn bị build nội bộ, deadline thứ Sáu 13 tháng 2, kèm tài liệu hướng dẫn. Linh test hồi quy, deadline 16 tháng 2. Không thêm Chatbot. Mọi người cập nhật task lên Jira và theo dõi tiến độ nhé.
+[00:02:20] Linh: Em sẽ tạo task test và link với task build của Mai. Còn task tài liệu thì Mai tự tạo nhé.
+[00:02:25] Mai: Okey, em tạo luôn. Có gì em báo cả nhóm trên Slack.
+[00:02:28] Tuan: Nếu không còn gì thêm, meeting kết thúc ở đây. Cảm ơn mọi người.

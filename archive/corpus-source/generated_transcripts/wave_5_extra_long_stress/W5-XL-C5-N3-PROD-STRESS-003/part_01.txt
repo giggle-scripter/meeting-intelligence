@@ -1,0 +1,206 @@
+MEETING_ID: W5-XL-C5-N3-PROD-STRESS-003
+PART: P01/10
+CASE_LABELS: extra_long_meeting,multi_step_handoff,multiple_deadline_corrections,long_distance_dependency,ambiguous_reference,heavy_recoverable_noise
+MEETING_DATE: 2026-02-27
+TITLE: Họp tổng hợp phát triển và vận hành sản phẩm
+
+T000001 [00:00:05] Thảo: Chào mọi người, họp tổng hợp phát triển và vận hành sản phẩm bắt đầu. Hôm nay chúng ta có nhiều việc cần bàn.
+
+T000002 [00:00:12] Minh: Vâng, em sẵn sàng.
+
+T000003 [00:00:15] Hùng: Có mặt.
+
+T000004 [00:00:18] Linh: Em cũng ở đây.
+
+T000005 [00:00:20] Anh: Ok, mình có mặt. Nhưng trước tiên, cho mình hỏi về timeline của module X? Tuần trước đã có bản update gì chưa?
+
+T000006 [00:00:28] Thảo: Tuần trước team dev đã merge xong core logic, còn chờ tích hợp API bên thứ ba. Minh, em cập nhật cụ thể đi.
+
+T000007 [00:00:37] Minh: Dạ, phần code của module X đã xong, nhưng còn phụ thuộc vào API của đối tác. Họ chưa gửi key và tài liệu đầy đủ.
+
+T000008 [00:00:45] Hùng: Vậy test của tụi em cũng chưa thể bắt đầu. Cần có môi trường thật hoặc mock data đã.
+
+T000009 [00:00:52] Linh: Em hỗ trợ cấu hình môi trồng staging, nhưng cần đầu vào API rõ ràng. Thông số endpoint là gì?
+
+T000010 [00:00:59] Minh: Bên họ chỉ nói "sẽ gửi sau" mà không nói rõ. Em nghĩ mình cần đẩy mạnh email recall lại.
+
+T000011 [00:01:07] Anh: Không được, deadline dự kiến cho bản demonstration là 05/03, mà giờ mới chỉ có hứa hẹn. Phải có kế hoạch backup.
+
+T000012 [00:01:15] Thảo: Đồng ý. Mình cần xác định rõ các bước tiếp theo. Trước hết, ai sẽ là đầu mối liên hệ với đối tác? Anh nghĩ Minh hay em?
+
+T000013 [00:01:24] Minh: Em đã gửi email hai lần rồi, nhưng bên họ chưa trả lời. Có thể cần một người khác gọi trực tiếp.
+
+T000014 [00:01:31] Linh: Em có quen người bên đó qua project cũ, nếu cần em hỗ trợ gọi điện thoại.
+
+T000015 [00:01:38] Thảo: Tốt, Linh giúp việc đó. Trước 17h chiều nay hãy gọi thử và báo lại kết quả.
+
+T000016 [00:01:46] Linh: Vâng, em sẽ làm ngay. Nếu họ hứa gửi trong tuần thì sao?
+
+T000017 [00:01:53] Thảo: Thì chúng ta phải có phương án dự phòng. Minh, em đã tìm hiểu cách mock API chưa? Có thể dùng Postman hoặc tạo server ảo.
+
+T000018 [00:02:02] Minh: Dạ, em đã nghiên cứu rồi. Có thể dùng Mockoon để mô phỏng các endpoint cơ bản. Nhưng cần biết response structure của họ.
+
+T000019 [00:02:12] Hùng: Nếu không có response thật, team QA sẽ khó validate đúng. Có rủi ro khi release.
+
+T000020 [00:02:18] Anh: Đúng, nhưng mình không thể dừng lại. Hãy làm mock tạm thời, sau đó update khi có thông tin thật. Như vậy vẫn giữ được tiến độ.
+
+T000021 [00:02:28] Thảo: Được, thống nhất vậy. Vậy task cho Minh: xây dựng mock server dựa trên tài liệu sơ bộ. Deadline đến thứ Hai tuần sau, tức 02/03.
+
+T000022 [00:02:38] Minh: Thứ Hai 02/03? Em nghĩ cần khảo sát thêm nên có thể cần thêm một ngày. Để chậm nhất 03/03 được không?
+
+T000023 [00:02:46] Thảo: 03/03 cũng ổn, nhưng vậy là sát quá. Tuy nhiên, em cố gắng trước 02/03 nhé, nếu không kịp thì báo.
+
+T000024 [00:02:55] Minh: Vâng, em sẽ cố.
+
+T000025 [00:03:00] Hùng: Còn phần test của em? Em cần mock server chạy được để viết test case.
+
+T000026 [00:03:08] Thảo: Hùng, em có thể chuẩn bị test plan và tạo dữ liệu mẫu dựa trên yêu cầu nghiệp vụ trước khi có mock. Deadline cho test plan là 28/02.
+
+T000027 [00:03:18] Hùng: OK, em làm. Nhưng dữ liệu mẫu thì phải thống nhất format với anh Minh. Hôm qua em hỏi thì chưa thấy trả lời.
+
+T000028 [00:03:26] Minh: Xin lỗi, do em bận việc khác. Bây giờ em gửi spec qua chat luôn. Mọi người check trong vài phút nữa.
+
+T000029 [00:03:34] Anh: (tiếng ồn) Alo, alo? Xin lỗi, loa em hơi rè. Em vừa nói gì thế?
+
+T000030 [00:03:40] Thảo: Anh, loa anh có vấn đề. Minh vừa nói sẽ gửi spec. Anh cần nói gì không?
+
+T000031 [00:03:48] Anh: Ừ, cám ơn. Em muốn nhắc thêm về phần user acceptance test. Bên PO cần môi trường sạch để demo trước 04/03.
+
+T000032 [00:03:57] Linh: Liên quan tới vấn đề API đó, nếu bên họ không gửi kịp, chúng ta có thể dùng mock để demo không?
+
+T000033 [00:04:05] Anh: Tạm được, nhưng phải đảm bảo UI flow đúng. Thảo chốt giúp timeline demo.
+
+T000034 [00:04:12] Thảo: Để sau khi có mock và test plan, mình sẽ review toàn bộ vào 02/03. Hùng, em xem có thể chạy thử nghiệm nhỏ trước 02/03 không?
+
+T000035 [00:04:22] Hùng: Em cần mock trước ít nhất 2 ngày. Nếu Minh gửi mock xong 01/03 thì em có thể test sớm.
+
+T000036 [00:04:30] Minh: Em sẽ cố gắng hoàn thành phần core mock trước 29/02, cuối tháng. Như vậy Hùng có thời gian.
+
+T000037 [00:04:38] Thảo: Chú ý 29/02 không tồn tại năm nay, năm 2026 là năm thường. Em nói 28/02 đúng không?
+
+T000038 [00:04:45] Minh: À, em nhầm. 28/02 – thứ Bảy tuần này. Vâng, em sẽ có bản mock cơ bản vào 28/02.
+
+T000039 [00:04:54] Thảo: Tốt. Hùng, em nhận được chưa? Test plan 28/02, mock core 28/02, sau đó tích hợp. Còn việc gọi đối tác của Linh thì báo ngay hôm nay.
+
+T000040 [00:05:03] Linh: Vâng, em sẽ gọi trong giờ làm việc chiều nay, sau đó update vào group.
+
+T000041 [00:05:10] Anh: Chuyện gì xảy ra với module Y? Hình như tuần trước có issue về database migration chưa giải quyết?
+
+T000042 [00:05:18] Thảo: Module Y là vấn đề của team khác, đã có assignee riêng. Nhưng hôm nay mình tập trung module X trước đã.
+
+T000043 [00:05:27] Anh: OK, nhưng em thấy rủi ro chồng chéo lịch. Có thể ảnh hưởng tới tài nguyên của team dev.
+
+T000044 [00:05:34] Minh: Em nghĩ bọn em xử lý đủ, nhưng nếu cần thêm người thì phải báo sớm.
+
+T000045 [00:05:41] Thảo: Để em review capacity sau cuộc họp. Hiện giờ cứ tập trung vào module X.
+
+T000046 [00:05:48] Hùng: Em có câu hỏi về endpoint cũ. Cái API GET /orders có thay đổi gì không? Hay mình dùng version cũ?
+
+T000047 [00:05:57] Minh: Bên đó nói sẽ update lên v2, nhưng chưa công bố changelog. Tạm thời mình dùng v1 với mock.
+
+T000048 [00:06:05] Hùng: Như thế có gây nhầm lẫn về schema không? Nếu v2 đổi response thì sau này sẽ phải sửa nhiều.
+
+T000049 [00:06:13] Thảo: Đúng, rủi ro đó. Nhưng mình không thể chờ. Linh, khi gọi điện hỏi thêm về version API và dự kiến release.
+
+T000050 [00:06:22] Linh: Em note lại. Hỏi thêm về version và thời gian.
+
+T000051 [00:06:28] Anh: Thảo ơi, còn vụ environment staging có config được chưa? Em cần truy cập để kiểm tra vài luồng.
+
+T000052 [00:06:36] Linh: Em đã tạo xong từ tuần trước, nhưng chưa cập nhật DNS. Ai có thể giúp cập nhật bản ghi?
+
+T000053 [00:06:44] Thảo: Cái đó thường do anh Dũng phụ trách. Anh Dũng có trong meeting không? Hình như vắng.
+
+T000054 [00:06:51] Minh: Dũng báo ốm từ sáng. Có thể nhờ admin system hỗ trợ.
+
+T000055 [00:06:57] Thảo: Linh, em liên hệ với admin trung tâm để cập nhật DNS trước 28/02 nhé. Việc này không mất nhiều thời gian.
+
+T000056 [00:07:05] Linh: Vâng, em làm.
+
+T000057 [00:07:10] Hùng: Em thấy còn một vấn đề nữa: cơ sở dữ liệu test cần dữ liệu mẫu giống production. Ai sẽ sinh data?
+
+T000058 [00:07:19] Thảo: Task đó có thể giao cho anh Huy (BA). Nhưng anh Huy không họp hôm nay. Em ghi note giao sau.
+
+T000059 [00:07:27] Hùng: Có thể em tự làm mẫu sơ bộ dựa trên requirement cũ, nhưng cần confirm.
+
+T000060 [00:07:34] Thảo: Cứ làm, nhưng dùng dữ liệu phi nhạy cảm. Nếu cần insight chi tiết thì chờ Huy.
+
+T000061 [00:07:42] Anh: Nghe nói bên vận hành sắp có maintenance vào cuối tuần. Có ảnh hưởng gì không?
+
+T000062 [00:07:49] Linh: Dạ, dự kiến 22h thứ Bảy 28/02 đến 02h Chủ Nhật, nhưng hệ thống staging không bị ảnh hưởng, chỉ production thôi.
+
+T000063 [00:07:58] Thảo: OK, vậy không sao. Mọi người chú ý không deploy gì vào thời điểm đó.
+
+T000064 [00:08:05] Hùng: Em vẫn chờ spec của Minh. Nếu không nhận được sớm em chưa thể viết test case.
+
+T000065 [00:08:12] Minh: Em gửi rồi, check chat đi. Vừa gửi liên kết Google Doc.
+
+T000066 [00:08:18] Hùng: À, được rồi. Em xem ngay.
+
+T000067 [00:08:23] Anh: Tiện thể, ai sẽ viết integration test cho API mock và real sau này? Đó là khoảng trống.
+
+T000068 [00:08:31] Thảo: Tốt, cần assign. Minh và Hùng cùng phối hợp? Hay mình giao chính cho Hùng?
+
+T000069 [00:08:38] Hùng: Em chỉ làm được phần test tự động cho UI, còn API test cần kiến thức của Minh.
+
+T000070 [00:08:46] Minh: Em có thể viết script test API, nhưng cần thời gian rảnh. Hiện em đang bận mock.
+
+T000071 [00:08:53] Thảo: Thế này nhé: Minh lo mock và script test API cơ bản, Hùng viết test UI và hỗ trợ chạy integration. Deadline cho toàn bộ test pass là 04/03. Nhưng Minh ưu tiên mock trước.
+
+T000072 [00:09:04] Minh: Vâng, rõ.
+
+T000073 [00:09:08] Hùng: Em ok, nhưng nếu script API chưa xong thì em làm UI trước.
+
+T000074 [00:09:15] Thảo: Được. Linh, em còn gì cần hỗ trợ không?
+
+T000075 [00:09:20] Linh: Liên quan đến môi trường, admin hứa sẽ cập nhật DNS trong ngày 27/02. Em sẽ theo dõi.
+
+T000076 [00:09:28] Thảo: Tốt. Anh, anh có yêu cầu gì từ phía PO?
+
+T000077 [00:09:33] Anh: Có, em muốn nhấn mạnh: tính năng thanh toán cần demo trước 05/03. Nếu mock không đủ tin cậy, có thể delay decision. Nhưng hôm nay chưa cần giải quyết.
+
+T000078 [00:09:44] Thảo: Đã ghi nhận. Chúng ta sẽ bàn chi tiết trong part tiếp theo. Còn việc gì nữa không?
+
+T000079 [00:09:51] Minh: Em có một thắc mắc nhỏ: bản mock có cần simulate lỗi từ API không? Hay chỉ response thành công?
+
+T000080 [00:09:59] Hùng: Tốt nhất nên có các case lỗi để test xử lý ngoại lệ.
+
+T000081 [00:10:05] Thảo: Ý hay. Minh thêm các scenario lỗi cơ bản vào mock. Việc đó không mất nhiều thời gian.
+
+T000082 [00:10:13] Minh: Em thêm, nhưng ưu tiên response đúng trước.
+
+T000083 [00:10:18] Anh: À, em nhớ ra còn một dependency với team SRE. Họ cần cập nhật firewall rules cho endpoint mới. Có ai đã nói chưa?
+
+T000084 [00:10:27] Thảo: Chưa, task đó sẽ được tạo và chuyển cho team SRE. Em note lại giao Linh liên hệ sau.
+
+T000085 [00:10:34] Linh: Em ok.
+
+T000086 [00:10:38] Hùng: Em thấy tracking issues trên board đang thiếu nhiều. Có nên cập nhật ngay?
+
+T000087 [00:10:45] Thảo: Cuối ngày em sẽ rà soát và cập nhật. Bây giờ cứ tập trung vào hành động.
+
+T000088 [00:10:52] Minh: Em sắp phải out sớm vì có họp khác. Còn gì cần em nữa không?
+
+T000089 [00:10:59] Thảo: Chờ một lát, sắp xong topic thứ nhất rồi. Mình sẽ chốt lại các task đã assign.
+
+T000090 [00:11:06] Thảo: Tổng kết:
+- Minh: mock server core (deadline 28/02), script test API cơ bản (deadline 02/03).
+- Hùng: test plan (28/02), test UI, hỗ trợ integration.
+- Linh: gọi đối tác (hôm nay), liên hệ admin DNS (28/02), sau này liên lạc SRE.
+- Anh: cập nhật requirement nếu có.
+- Em: review và điều phối.
+
+T000091 [00:11:22] Anh: Rõ ràng rồi. Còn về module Y, em thấy hơi lo.
+
+T000092 [00:11:28] Thảo: Module Y sẽ để topic khác. Hôm nay hết giờ rồi, chúng ta kết thúc phần đầu.
+
+T000093 [00:11:34] Minh: OK em đi đây.
+
+T000094 [00:11:37] Hùng: Em cũng chuẩn bị làm việc.
+
+T000095 [00:11:40] Linh: Em sẽ báo kết quả gọi điện vào group chiều nay.
+
+T000096 [00:11:46] Anh: Cảm ơn mọi người.
+
+T000097 [00:11:50] Thảo: Hẹn quay lại phần tiếp theo sau 15 phút.
+
+--- END OF PART P01 ---

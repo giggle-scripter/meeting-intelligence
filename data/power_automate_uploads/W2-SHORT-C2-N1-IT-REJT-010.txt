@@ -1,0 +1,32 @@
+=== MEETING METADATA ===
+meeting_id: W2-SHORT-C2-N1-IT-REJT-010
+meeting_title: Trao đổi kế hoạch tích hợp
+meeting_date: 2026-02-04
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+[00:00:05] Minh: Chào mọi người, hôm nay chúng ta họp để bàn về kế hoạch tích hợp cổng thanh toán mới. Tôi muốn phân công rõ ràng các đầu việc.
+[00:00:15] Lan: Vâng, tôi đã xem sơ bộ tài liệu yêu cầu. Phần core logic khá phức tạp, cần người có kinh nghiệm về xử lý giao dịch.
+[00:00:25] Minh: Đúng vậy. Tôi dự định giao module xử lý webhook cho Tuấn vì Tuấn đã từng làm tích hợp bên VNPay trước đây.
+[00:00:32] Tuấn: Em cảm ơn anh Minh, nhưng em xin phép từ chối nhiệm vụ này ạ.
+[00:00:38] Minh: Ồ, lý do gì thế? Em có vướng bận dự án khác à?
+[00:00:44] Tuấn: Dạ, không hẳn. Lý do chính là module webhook của cổng mới này yêu cầu xử lý bất đồng bộ theo cơ chế callback, em chưa từng làm kiểu đó. Em sợ nếu làm sẽ ảnh hưởng tiến độ chung.
+[00:00:55] Lan: Nhưng em đã từng tích hợp VNPay rồi mà, cũng có callback tương tự.
+[00:01:05] Tuấn: Dạ không, bên VNPay họ dùng polling, còn bên này là webhook với chữ ký số phức tạp hơn nhiều. Em thấy không tự tin.
+[00:01:15] Minh: Vậy em có đề xuất ai khác có thể đảm nhận không? Anh thấy anh Hùng bên team infra cũng rành về API.
+[00:01:22] Tuấn: Anh Hùng hiện đang full-time cho dự án tối ưu database, không thể nhận thêm việc mới. Vả lại anh ấy cũng chưa xử lý webhook bao giờ.
+[00:01:30] Lan: Chị Hoa bên QA thì sao? Cô ấy từng viết test cho module thanh toán.
+[00:01:36] Minh: Chị Hoa chỉ làm test thôi, không viết code production. Giao cho chị ấy không phù hợp.
+[00:01:42] Tuấn: Em nghĩ team mình hiện tại không ai đủ expertise để nhận việc này nếu không có training trước.
+[00:01:50] Minh: Vậy nếu Tuấn từ chối, chúng ta không có người thay thế. Kế hoạch tích hợp sẽ bị đình trệ.
+[00:01:58] Lan: Hay là anh Minh tự làm? Anh có background về payment.
+[00:02:04] Minh: Anh đang phải lo việc PM cho ba dự án, không thể ngồi code chi tiết được. Thôi thì giải pháp tạm thời là chờ đến khi có người phù hợp.
+[00:02:15] Tuấn: Em xin lỗi vì đã từ chối. Nhưng em nghĩ nếu ép làm, chất lượng sẽ không đảm bảo.
+[00:02:22] Minh: Anh hiểu. Vậy ghi nhận là Tuấn từ chối nhận việc, và chúng ta chưa có nhân sự thay thế. Tạm thời gác lại module webhook.
+[00:02:32] Lan: Vậy các module khác thì sao? Phần tạo đơn hàng và xử lý refund có thể giao cho ai?
+[00:02:40] Minh: Phần đó đơn giản hơn, có thể giao cho em Phúc, nhưng hôm nay em ấy không họp. Anh sẽ trao đổi riêng.
+[00:02:48] Tuấn: Em vẫn sẵn sàng hỗ trợ review code nếu cần ạ.
+[00:02:55] Minh: Cảm ơn em. Vậy kết luận: tạm thời chưa triển khai webhook, chờ tìm người phù hợp hoặc training. Các phần khác vẫn tiến hành.
+[00:03:05] Lan: Em đồng ý. Có cần ghi nhận task rejection này vào biên bản không anh?
+[00:03:12] Minh: Có, ghi rõ: Tuấn từ chối nhận module webhook, lý do thiếu kinh nghiệm, không có người thay thế. Tình trạng: tạm dừng.
+[00:03:20] Tuấn: Một lần nữa em xin lỗi vì sự bất tiện này.
+[00:03:25] Minh: Không sao, quan trọng là trung thực. Vậy hết buổi họp, mọi người tiếp tục công việc hiện tại nhé.

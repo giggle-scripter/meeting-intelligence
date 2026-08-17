@@ -1,0 +1,112 @@
+MEETING_ID: W4-LONG-C4-N1-OPS-STATE-012
+PART: P05/5
+
+T000228 [10:35:02] Linh: Chúng ta bắt đầu phần cuối cùng. Hôm nay em muốn tổng kết lại toàn bộ trạng thái các task và các vấn đề còn tồn tại. Mọi người chuẩn bị nhé.
+
+T000229 [10:35:30] Minh: Dạ, em đã sẵn sàng.
+
+T000230 [10:35:52] Huy: Em cũng vậy.
+
+T000231 [10:36:15] Trang: Ok.
+
+T000232 [10:36:38] Linh: Trước tiên, về task A – “Chuẩn bị môi trường test (cấu hình)”, do Minh phụ trách, deadline đã dời sang 02/03. Minh, tình hình hiện tại thế nào?
+
+T000233 [10:37:05] Minh: Em đã liên hệ với anh Dũng bên IT, họ hứa sẽ cấp quyền trong ngày mai. Vậy khả năng hoàn thành 02/03 là cao.
+
+T000234 [10:37:30] Huy: Nếu chậm, em có thể hỗ trợ, nhưng em cũng đang có task B.
+
+T000235 [10:37:55] Linh: Tốt. Task B – “Thiết lập môi trường test (hướng dẫn)”, đã chuyển từ Trang sang Huy, deadline 05/03, bao gồm cả phần monitoring. Huy, em có tiến triển gì chưa?
+
+T000236 [10:38:25] Huy: Em đã bắt đầu viết outline. Dựa trên kinh nghiệm cũ, em sẽ hoàn thành đúng deadline. Phần monitoring em cũng có tài liệu mẫu.
+
+T000237 [10:38:55] Trang: Em có thể gửi outline cũ cho Huy tham khảo.
+
+T000238 [10:39:15] Huy: Cảm ơn Trang.
+
+T000239 [10:39:35] Linh: Task C – “Review checklist triển khai với anh An”, vẫn do Huy, không deadline. Đã có phản hồi chưa?
+
+T000240 [10:40:00] Huy: Chưa, anh An chưa trả lời. Chị Linh đã nhắc giúp, nhưng vẫn chưa có. Vậy task C vẫn unresolved.
+
+T000241 [10:40:30] Minh: Em nghĩ nếu không có phản hồi, ta có thể tự review.
+
+T000242 [10:40:55] Linh: Để em nhắc lại anh An một lần nữa. Nếu cuối tuần này không có, chúng ta sẽ tự review. Nhưng tạm thời vẫn unresolved.
+
+T000243 [10:41:25] Trang: Vậy ghi nhận.
+
+T000244 [10:41:45] Linh: Task D – “Viết và hoàn thiện tài liệu triển khai”, do Trang, deadline 08/03. Trang, em đang ở đâu?
+
+T000245 [10:42:10] Trang: Em đã viết xong outline và phần lớn nội dung. Còn phần rollback plan em sẽ bổ sung sau khi có thông tin từ task B. Dự kiến hoàn thành trước 08/03.
+
+T000246 [10:42:40] Huy: Em có thể review tài liệu sau khi task D xong.
+
+T000247 [10:43:00] Linh: Tốt. Task E – “Xử lý lỗi đăng nhập”, do Minh, deadline 03/03. Minh, em đã kiểm tra log chưa?
+
+T000248 [10:43:25] Minh: Em đã xem log và xác định nguyên nhân. Lỗi do session timeout không được xử lý đúng. Em đang sửa code, dự kiến xong trong ngày 01/03.
+
+T000249 [10:43:55] Huy: Em có thể review code cho Minh, nhưng còn chưa chốt reviewer.
+
+T000250 [10:44:20] Linh: Đúng, reviewer vẫn chưa xác định. Em đề xuất Huy làm reviewer cho task E, nhưng cần chốt thời gian.
+
+T000251 [10:44:45] Huy: Em đồng ý. Em sẽ review sau 03/03, vì lịch em kín đến 02/03.
+
+T000252 [10:45:10] Minh: Vậy deadline review là 04/03 được không?
+
+T000253 [10:45:30] Huy: Ok, 04/03.
+
+T000254 [10:45:50] Linh: Chốt. Vậy task E có reviewer là Huy, deadline review 04/03. Task F – “Chuẩn bị dữ liệu test cho login”, do Huy, deadline 04/03. Huy, em làm sao?
+
+T000255 [10:46:20] Huy: Em đã thu thập yêu cầu từ Minh và viết script tạo dữ liệu. Em sẽ hoàn thành trước 04/03, nhưng cần test trên môi trường staging.
+
+T000256 [10:46:50] Minh: Môi trường staging sẽ sẵn sàng sau task A, khoảng 02/03.
+
+T000257 [10:47:15] Huy: Vậy em sẽ chạy script vào 03/03 để kịp deadline.
+
+T000258 [10:47:40] Linh: Vậy các task chính đã rõ. Về task G, đã hủy. Bây giờ em muốn recap lại tổng thể.
+
+T000259 [10:48:10] Trang: Em nghĩ nên có bảng tổng kết trong meeting notes.
+
+T000260 [10:48:35] Linh: Đúng, em sẽ ghi lại. Tổng cộng các task hiện tại: A (Minh, deadline 02/03), B (Huy, deadline 05/03), C (Huy, không deadline, unresolved), D (Trang, deadline 08/03), E (Minh, deadline 03/03, reviewer Huy), F (Huy, deadline 04/03). Một mục unresolved là task C vì chưa có phản hồi từ anh An.
+
+T000261 [10:49:10] Minh: Vậy sau khi hoàn thành các task, chúng ta cần lên lịch testing.
+
+T000262 [10:49:35] Huy: Em có thể hỗ trợ testing, nhưng cần xác định scope.
+
+T000263 [10:50:00] Linh: Để part sau nếu có cuộc họp khác. Bây giờ em muốn thảo luận về negative context cuối cùng: rủi ro về deadline.
+
+T000264 [10:50:30] Trang: Rủi ro lớn nhất là task A chậm, ảnh hưởng toàn bộ.
+
+T000265 [10:50:55] Minh: Em sẽ cố gắng, nhưng nếu IT trễ, em đã có kế hoạch nhờ Huy.
+
+T000266 [10:51:20] Huy: Em sẵn sàng.
+
+T000267 [10:51:40] Linh: Rủi ro thứ hai là task C unresolved, có thể thiếu checklist triển khai.
+
+T000268 [10:52:05] Huy: Em có thể tự xây dựng checklist từ kinh nghiệm, nếu anh An không phản hồi.
+
+T000269 [10:52:30] Linh: Vậy nếu đến 28/02 không có phản hồi, em sẽ tự làm. Đó là kế hoạch dự phòng.
+
+T000270 [10:52:55] Trang: Còn rủi ro về tài liệu, em sẽ cố gắng đúng deadline.
+
+T000271 [10:53:20] Linh: Tốt. Vậy chúng ta đã phủ hết các rủi ro. Bây giờ em muốn mọi người xác nhận lại trạng thái.
+
+T000272 [10:53:50] Minh: Em xác nhận task A và E như đã báo.
+
+T000273 [10:54:15] Huy: Em xác nhận task B, C, F.
+
+T000274 [10:54:40] Trang: Em xác nhận task D.
+
+T000275 [10:55:00] Linh: Cảm ơn. Cuối cùng, em muốn nhấn mạnh rằng tất cả deadline đều là dự kiến, nếu có thay đổi cần báo ngay.
+
+T000276 [10:55:30] Minh: Vâng.
+
+T000277 [10:55:50] Huy: Ok.
+
+T000278 [10:56:10] Linh: Vậy em xin kết thúc cuộc họp hôm nay. Cảm ơn mọi người đã tham gia tích cực. Hẹn gặp lại trong các part sau.
+
+T000279 [10:56:35] Minh: Cảm ơn chị.
+
+T000280 [10:56:55] Huy: Cảm ơn mọi người.
+
+T000281 [10:57:15] Trang: Tạm biệt.
+
+--- END OF PART P05 ---

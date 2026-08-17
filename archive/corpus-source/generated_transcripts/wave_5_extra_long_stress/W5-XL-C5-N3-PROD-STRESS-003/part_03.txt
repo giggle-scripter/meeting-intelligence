@@ -1,0 +1,244 @@
+MEETING_ID: W5-XL-C5-N3-PROD-STRESS-003
+PART: P03/10
+
+T000212 [00:30:05] Thảo: Chúng ta tiếp tục. Mọi người đã sẵn sàng? Bây giờ em muốn bàn về vận hành và các vấn đề môi trường.
+
+T000213 [00:30:12] Hùng: Vâng, em có một vấn đề về staging environment. Hôm qua em thử deploy bản build test, nhưng bị lỗi permission. Ai đang quản lý access đó?
+
+T000214 [00:30:22] Linh: Em nghĩ là admin system, nhưng họ mới cập nhật DNS cho em. Có lẽ cần kiểm tra lại.
+
+T000215 [00:30:30] Thảo: Linh, em xem lại ticket DNS – nếu họ đã làm xong thì việc deploy không liên quan.
+
+T000216 [00:30:38] Hùng: Lỗi cụ thể là "403 Forbidden" khi chạy CI/CD pipeline. Có thể token hết hạn.
+
+T000217 [00:30:46] Thảo: Token đó do ai cấp? Minh, em có biết không?
+
+T000218 [00:30:52] Minh: Dạ, token em tạo cho pipeline từ tuần trước, nhưng có thời hạn. Có thể hết hạn hôm qua.
+
+T000219 [00:30:59] Hùng: Vậy em cần refresh token. Ai có quyền đó?
+
+T000220 [00:31:05] Thảo: Minh, em refresh giúp Hùng được không? Và update vào CI/CD config luôn.
+
+T000221 [00:31:13] Minh: Được, em refresh token và push lên repo, Hùng pull về là xong. Deadline hết hôm nay nhé.
+
+T000222 [00:31:22] Hùng: OK, cảm ơn.
+
+T000223 [00:31:26] Linh: Em vừa check mail, SRE team vẫn chưa trả lời về việc firewall rules cho endpoint mới. Em đã gửi reminder.
+
+T000224 [00:31:35] Thảo: Việc đó cần gấp. deadline cho firewall rules là 02/03 mới? Nhưng nếu không có thì deploy staging bị chặn.
+
+T000225 [00:31:44] Linh: Vâng, em nghĩ cần người trực tiếp gặp bên SRE. Em chỉ gọi điện thôi, không đủ.
+
+T000226 [00:31:53] Hùng: Em quen một bạn trong team SRE, tên Phong. Có thể em hỗ trợ.
+
+T000227 [00:32:00] Thảo: Tốt quá. Linh, em chuyển việc này cho Hùng nhé. Hùng, em chịu trách nhiệm liên hệ Phong để lên lịch update rules.
+
+T000228 [00:32:09] Hùng: Vâng, em lo. Deadline mong muốn là 01/03 để kịp test.
+
+T000229 [00:32:16] Thảo: 01/03, được. Linh, em gửi lại toàn bộ thông tin cho Hùng.
+
+T000230 [00:32:22] Linh: Em sẽ gửi email lịch sử.
+
+T000231 [00:32:27] Minh: Về mock server, em đã nhận doc từ đối tác. Tuy nhiên doc hơi khác so với spec em tự xây. Có thể cần sửa core mock.
+
+T000232 [00:32:38] Thảo: Cụ thể khác gì?
+
+T000233 [00:32:42] Minh: Ở endpoint /orders, họ thêm field discount. Còn /auth trả về token khác format.
+
+T000234 [00:32:50] Hùng: Vậy ảnh hưởng tới test plan. Em vừa viết xong draft dựa trên spec cũ.
+
+T000235 [00:32:58] Minh: Em xin lỗi, do họ mới gửi. Em sẽ điều chỉnh mock theo doc mới.
+
+T000236 [00:33:04] Thảo: Deadline core mock vẫn là 28/02? Hay em cần thêm thời gian?
+
+T000237 [00:33:11] Minh: Em nghĩ nếu gấp quá, core mock có thể trễ. Em muốn dời sang 02/03.
+
+T000238 [00:33:19] Hùng: Nếu dời thì test của em cũng bị trễ. Em đã hứa test plan 28/02, còn test execution lùi sau.
+
+T000239 [00:33:28] Thảo: Hiểu. Nhưng nếu mock không chính xác, test cũng vô ích. Đồng ý, deadline mock core chính thức chuyển thành 02/03. Minh, em ghi nhớ.
+
+T000240 [00:33:38] Minh: Vâng, cảm ơn chị. Em sẽ cập nhật task board.
+
+T000241 [00:33:44] Hùng: Vậy em cũng điều chỉnh lịch test. Em sẽ có test plan 28/02, bắt đầu test chạy từ 02/03.
+
+T000242 [00:33:53] Thảo: Ổn. Như vậy deadline correction này ảnh hưởng tới cả Hùng. Chúng ta nhớ theo dõi.
+
+T000243 [00:34:00] Linh: Em vừa gửi mail cho Hùng về firewall. Có thêm thông tin: SRE yêu cầu thời gian bảo trì để update.
+
+T000244 [00:34:09] Hùng: Em sẽ gọi Phong ngay.
+
+T000245 [00:34:14] Thảo: Tốt. Bây giờ em muốn nhắc về task test script API. Minh, em đã bắt đầu chưa?
+
+T000246 [00:34:22] Minh: Em chưa, vì muốn có mock xong trước. Nhưng em có thể viết script skeleton.
+
+T000247 [00:34:30] Thảo: Vậy em viết skeleton trước deadline 28/02, phần body khi mock xong.
+
+T000248 [00:34:38] Minh: Vâng.
+
+T000249 [00:34:42] Hùng: Còn vụ tool cho test script, chúng ta chưa chốt. Họp 02/03 sẽ quyết.
+
+T000250 [00:34:50] Thảo: Đúng, vẫn để ở họp.
+
+T000251 [00:34:54] Linh: Em có thắc mắc: server staging có cần cấu hình thêm gì cho mock không? Hay mock chỉ chạy local?
+
+T000252 [00:35:02] Minh: Em dự định mock chạy container riêng trên staging, để tích hợp dễ.
+
+T000253 [00:35:09] Thảo: Vậy cần Linh hỗ trợ mở port cho container.
+
+T000254 [00:35:15] Linh: Em sẽ làm sau khi có yêu cầu cụ thể.
+
+T000255 [00:35:20] Hùng: Em lo về việc test trên nhiều môi trường. Nếu mock khác production, có rủi ro.
+
+T000256 [00:35:28] Thảo: Đã có plan B: sau khi có API thật, chúng ta chạy regression.
+
+T000257 [00:35:34] Minh: Đúng vậy.
+
+T000258 [00:35:38] Hùng: OK.
+
+T000259 [00:35:42] Thảo: Một vấn đề nữa: task data mẫu của Huy. Huy đã out rồi, nhưng em muốn xác nhận ai sẽ review data đó.
+
+T000260 [00:35:51] Minh: Em có thể review schema, nhưng nội dung thì cần Huy.
+
+T000261 [00:35:58] Thảo: Vậy khi Huy gửi, em xem qua format. Còn content để Huy chịu.
+
+T000262 [00:36:05] Linh: Em có thể test thử data sau khi có.
+
+T000263 [00:36:11] Thảo: Vậy assign Linh kiểm thử dữ liệu mẫu sau 02/03.
+
+T000264 [00:36:18] Linh: Vâng.
+
+T000265 [00:36:22] Hùng: Em đề xuất thêm: cần một document tổng hợp tất cả endpoint và dependency. Ai làm?
+
+T000266 [00:36:31] Thảo: Việc đó thuộc về BA. Huy sẽ làm, nhưng Huy bận. Có thể Minh hỗ trợ? Minh có spec rồi.
+
+T000267 [00:36:39] Minh: Em có thể tạo doc từ spec, nhưng cần ai đó approve.
+
+T000268 [00:36:46] Thảo: Tạm thời em làm, sau đó gửi Huy review. Deadline 02/03.
+
+T000269 [00:36:53] Minh: Vâng.
+
+T000270 [00:36:57] Linh: Em thấy có sự chồng chéo: task document endpoint giống với doc mock. Có thể gộp không?
+
+T000271 [00:37:04] Thảo: Không, mock doc là technical, còn endpoint doc cho BA và test. Giữ riêng.
+
+T000272 [00:37:11] Minh: OK.
+
+T000273 [00:37:15] Hùng: Về môi trường staging, em vừa deploy lại pipeline, token mới hoạt động. Cảm ơn Minh.
+
+T000274 [00:37:23] Minh: Không có gì.
+
+T000275 [00:37:27] Thảo: Tốt. Vậy vấn đề staging tạm ổn. Chuyển sang chủ đề khác? Em muốn bàn về risk mitigation cho demo.
+
+T000276 [00:37:36] Hùng: Em nghĩ mock chưa đủ để demo. Cần ít nhất một vài luồng real data.
+
+T000277 [00:37:44] Thảo: Đúng. Em dự định nếu mock không ổn, sẽ dùng UI prototype kết hợp manual script.
+
+T000278 [00:37:53] Minh: Em có thể chuẩn bị script chạy tay cho demo.
+
+T000279 [00:37:59] Thảo: Vậy giao cho Minh. Deadline 03/03.
+
+T000280 [00:38:04] Minh: Vâng.
+
+T000281 [00:38:08] Linh: Em muốn hỏi về việc backup dữ liệu cho demo. Có cần prepare data đặc biệt không?
+
+T000282 [00:38:16] Thảo: Cần, và đó là task của Huy. Nhưng Huy không ở đây, em sẽ note lại.
+
+T000283 [00:38:23] Hùng: Em thấy mất nhiều thời gian chờ Huy. Có thể giao tạm cho Linh, vì Linh có kiến thức.
+
+T000284 [00:38:31] Thảo: Linh, em có thể làm không? Tạo một bộ data demo nhỏ, 5–7 record.
+
+T000285 [00:38:39] Linh: Em có thể, nhưng cần biết cụ thể scenario.
+
+T000286 [00:38:45] Thảo: Em sẽ gửi scenario sau. Vậy tạm thời assign Linh, deadline 03/03.
+
+T000287 [00:38:53] Linh: Vâng.
+
+T000288 [00:38:57] Minh: Em thấy task này hơi giống task data mẫu của Huy. Có risk trùng lặp.
+
+T000289 [00:39:05] Thảo: Không sao, Huy làm cho test, Linh làm cho demo. Khác mục đích.
+
+T000290 [00:39:12] Hùng: Em muốn nhắc: vụ tool test script vẫn chưa chốt, cần có quyết định sớm.
+
+T000291 [00:39:20] Thảo: Đã hẹn họp 02/03, sẽ quyết.
+
+T000292 [00:39:25] Linh: Em thấy lịch họp 02/03 14h, có ai xung đột không?
+
+T000293 [00:39:31] Minh: Em có họp khác lúc 15h, nhưng 14h em rảnh.
+
+T000294 [00:39:37] Hùng: Em ổn.
+
+T000295 [00:39:41] Thảo: Vậy đúng.
+
+T000296 [00:39:45] Hùng: Em có một phát hiện: check log staging thấy có warning về memory. Có thể ảnh hưởng tới mock.
+
+T000297 [00:39:54] Thảo: Mức độ nghiêm trọng? Linh, em biết không?
+
+T000298 [00:39:59] Linh: Em chưa theo dõi. Để em kiểm tra resource.
+
+T000299 [00:40:05] Hùng: Warning từ container, chưa crash.
+
+T000300 [00:40:10] Thảo: Vậy Linh check và báo lại. Nếu cần tăng resource, liên hệ admin.
+
+T000301 [00:40:17] Linh: Vâng.
+
+T000302 [00:40:21] Minh: Em vừa nhắn với Huy, Huy bảo data mẫu xong sớm, có thể 01/03.
+
+T000303 [00:40:29] Thảo: Vậy tốt, deadline trước.
+
+T000304 [00:40:33] Hùng: Như vậy test của em có thể diễn ra sớm hơn.
+
+T000305 [00:40:39] Thảo: Hy vọng.
+
+T000306 [00:40:43] Linh: Em check resource staging xong. CPU 60%, memory 70%. Ổn, nhưng nếu chạy mock có thể tăng.
+
+T000307 [00:40:52] Thảo: Theo dõi thêm.
+
+T000308 [00:40:56] Minh: Có ai đã liên hệ với SRE về firewall chưa?
+
+T000309 [00:41:01] Hùng: Em gọi Phong rồi. Anh ấy nói sẽ update vào cuối tuần, 28/02.
+
+T000310 [00:41:08] Thảo: Tuyệt. Vậy deadline cho firewall rules là 28/02.
+
+T000311 [00:41:14] Hùng: Nhưng họ cần chúng ta gửi danh sách IP cụ thể.
+
+T000312 [00:41:20] Thảo: Ai có IP? Minh?
+
+T000313 [00:41:24] Minh: Em có IP staging. Em gửi cho Hùng.
+
+T000314 [00:41:29] Hùng: OK, em forward cho Phong.
+
+T000315 [00:41:35] Thảo: Vậy mọi việc đang tiến triển. Còn một vấn đề chưa giải quyết: owner chính thức cho deploy staging. Tạm thời Linh và Minh phối hợp, nhưng em muốn có người chịu trách nhiệm.
+
+T000316 [00:41:47] Hùng: Em đề cử Minh, vì Minh hiểu code nhất.
+
+T000317 [00:41:53] Minh: Em ok, nhưng nếu deploy vào giờ hành chính thì em có mặt.
+
+T000318 [00:41:59] Thảo: Vậy từ giờ, deploy staging task assign cho Minh. Linh hỗ trợ access.
+
+T000319 [00:42:06] Linh: Vâng.
+
+T000320 [00:42:10] Thảo: Như vậy chúng ta đã hoàn thành handoff cho task firewall và deploy. Cần note lại.
+
+T000321 [00:42:18] Hùng: Em thấy deadline mock mới 02/03, nhưng test của em bắt đầu từ 02/03, vậy có overlap ngay.
+
+T000322 [00:42:27] Thảo: Chúng ta sẽ điều chỉnh trong họp 02/03.
+
+T000323 [00:42:32] Linh: Em muốn hỏi về security review cho API mới. Ai sẽ làm?
+
+T000324 [00:42:39] Thảo: Đó là task của team security, chưa assign. Để em liên hệ.
+
+T000325 [00:42:45] Hùng: Có thể ảnh hưởng deadline.
+
+T000326 [00:42:49] Thảo: Sẽ bàn sau.
+
+T000327 [00:42:53] Minh: Em xin phép tập trung vào mock, còn gì không ạ?
+
+T000328 [00:42:59] Thảo: Hết. Cảm ơn mọi người.
+
+T000329 [00:43:03] Hùng: Bye.
+
+T000330 [00:43:06] Linh: Tạm biệt.
+
+T000331 [00:43:10] Thảo: Kết thúc part 3.
+
+--- END OF PART P03 ---

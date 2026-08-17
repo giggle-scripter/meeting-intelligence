@@ -1,0 +1,8 @@
+chốt sơ bộ
+chủ đề: Chuẩn bị môi trường kiểm thử
+kw: du lieu / moi truong / trien khai / kiem thu / uat / cau / cap
+- Minh, cậu cập nhật tình hình giúp mình
+* Chị sẽ liên hệ với bên BA để xin trích xuất dữ liệu
+- Để em kiểm tra lại script triển khai
+1) Cậu cập nhật luôn
+- anh, em sẽ thêm vào checklist

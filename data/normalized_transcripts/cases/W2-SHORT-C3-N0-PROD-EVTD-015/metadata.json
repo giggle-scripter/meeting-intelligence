@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "case_id": "W2-SHORT-C3-N0-PROD-EVTD-015",
+  "meeting_id": "W2-SHORT-C3-N0-PROD-EVTD-015",
+  "meeting_title": "Theo dõi lỗi và tài liệu",
+  "meeting_date": "2026-02-09",
+  "wave": 2,
+  "wave_name": "wave_2_feature_isolation",
+  "labels": [
+    "event_dependent_deadline",
+    "dependency_commitment"
+  ],
+  "objective": "{\"name\": \"event-dependent deadline\", \"code\": \"EVTD\", \"labels\": \"event_dependent_deadline,dependency_commitment\", \"requirements\": \"Deadline phụ thuộc một sự kiện chưa có ngày, ví dụ sau khi nhận spec; không tự đưa ngày cụ thể.\"}",
+  "transcript_file": "transcript.txt",
+  "transcript_format": "[HH:MM:SS] Speaker: text",
+  "part_count": 1,
+  "source_files": [
+    "wave_2_feature_isolation/W2-SHORT-C3-N0-PROD-EVTD-015/transcript.txt"
+  ],
+  "generation": {
+    "models": [
+      "deepseek-v4-flash"
+    ],
+    "thinking": true,
+    "reasoning_effort": [
+      "high"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "word_count": 732,
+    "turn_count": 32
+  },
+  "ground_truth": {
+    "available": false,
+    "expected_output_file": ""
+  }
+}
