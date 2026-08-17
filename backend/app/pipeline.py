@@ -700,6 +700,10 @@ def process_meeting(
     topic_likely_threshold: float = 0.45,
     action_classifier_mode: str = "off",
     action_classifier_model_path: str | None = None,
+    candidate_router_mode: str = "off",
+    action_clear_threshold: float = 0.82,
+    action_ai_threshold: float = 0.45,
+    candidate_threshold_version: str = "candidate-router-thresholds-v1",
 ) -> PipelineResult:
     ai_client = ai_client or DisabledAiClient()
     stages = preprocess_meeting(meeting, speaker_aliases)
@@ -717,6 +721,12 @@ def process_meeting(
         raise ValueError("meeting_context_mode must be off, assist, or shadow")
     if action_classifier_mode not in {"off", "shadow"}:
         raise ValueError("action_classifier_mode must be off or shadow")
+    if candidate_router_mode not in {"off", "shadow"}:
+        raise ValueError("candidate_router_mode must be off or shadow")
+    if candidate_router_mode == "shadow" and action_classifier_mode != "shadow":
+        raise ValueError(
+            "candidate_router_mode=shadow requires action_classifier_mode=shadow"
+        )
     meeting_context = None
     note_cues_by_clause = {}
     if meeting_context_mode != "off":
@@ -743,14 +753,18 @@ def process_meeting(
                 note_cues_by_clause,
             )
     action_classifier_shadow = None
+    action_predictions_by_clause = {}
     action_classifier_error_count = 0
     if action_classifier_mode == "shadow":
         try:
-            from .ml.action_classifier import evaluate_shadow_predictions
+            from .ml.action_classifier import (
+                predict_clause_actions,
+                summarize_shadow_predictions,
+            )
             from .ml.model_registry import get_action_classifier
 
             classifier = get_action_classifier(action_classifier_model_path)
-            action_classifier_shadow = evaluate_shadow_predictions(
+            action_predictions_by_clause = predict_clause_actions(
                 classifier,
                 clauses,
                 annotations,
@@ -759,9 +773,55 @@ def process_meeting(
                 },
                 note_supported_clause_ids=set(note_cues_by_clause),
             )
+            action_classifier_shadow = summarize_shadow_predictions(
+                action_predictions_by_clause,
+                clauses,
+                annotations,
+            )
         except (OSError, RuntimeError, TypeError, ValueError) as exc:
             LOGGER.warning("Action classifier shadow inference failed: %s", exc)
             action_classifier_error_count = 1
+    candidate_evidence_shadow = []
+    candidate_decisions_shadow = []
+    candidate_router_shadow = None
+    candidate_router_error_count = 0
+    if candidate_router_mode == "shadow":
+        if action_classifier_shadow is None:
+            candidate_router_error_count = 1
+        else:
+            try:
+                from .candidate import (
+                    CandidateRouter,
+                    CandidateRouterConfig,
+                    build_candidate_evidence,
+                    summarize_candidate_decisions,
+                )
+
+                candidate_evidence_shadow = build_candidate_evidence(
+                    clauses,
+                    annotations,
+                    predictions_by_clause=action_predictions_by_clause,
+                    note_cues_by_clause=note_cues_by_clause,
+                    meeting_context=meeting_context,
+                )
+                candidate_router = CandidateRouter(
+                    CandidateRouterConfig(
+                        action_clear_threshold=action_clear_threshold,
+                        action_ai_threshold=action_ai_threshold,
+                        threshold_version=candidate_threshold_version,
+                    )
+                )
+                candidate_decisions_shadow = candidate_router.route(
+                    candidate_evidence_shadow
+                )
+                candidate_router_shadow = summarize_candidate_decisions(
+                    candidate_router,
+                    candidate_evidence_shadow,
+                    candidate_decisions_shadow,
+                )
+            except (KeyError, RuntimeError, TypeError, ValueError) as exc:
+                LOGGER.warning("Candidate evidence router shadow failed: %s", exc)
+                candidate_router_error_count = 1
     windows = merge_windows(build_candidate_windows(clauses, annotations))
     clauses_by_id = {clause.clause_id: clause for clause in clauses}
     events = []
@@ -1119,6 +1179,36 @@ def process_meeting(
             else 0
         ),
         action_classifier_error_count=action_classifier_error_count,
+        candidate_router_mode=candidate_router_mode,
+        candidate_router_version=(
+            candidate_router_shadow.router_version
+            if candidate_router_shadow
+            else ("unavailable" if candidate_router_mode == "shadow" else "disabled")
+        ),
+        candidate_threshold_version=(
+            candidate_router_shadow.threshold_version
+            if candidate_router_shadow
+            else (
+                candidate_threshold_version
+                if candidate_router_mode == "shadow"
+                else "disabled"
+            )
+        ),
+        candidate_evidence_count=(
+            candidate_router_shadow.evidence_count if candidate_router_shadow else 0
+        ),
+        candidate_decision_count=(
+            candidate_router_shadow.decision_count if candidate_router_shadow else 0
+        ),
+        candidate_route_counts=(
+            candidate_router_shadow.route_counts if candidate_router_shadow else {}
+        ),
+        candidate_ai_create_check_suppressed_count=(
+            candidate_router_shadow.ai_create_check_suppressed_count
+            if candidate_router_shadow
+            else 0
+        ),
+        candidate_router_error_count=candidate_router_error_count,
     )
     result = build_pipeline_result(
         meeting.meeting_title,
@@ -1156,6 +1246,20 @@ def process_meeting(
             "action_classifier_shadow": (
                 asdict(action_classifier_shadow) if action_classifier_shadow else None
             ),
+            "candidate_router_shadow": {
+                "summary": (
+                    asdict(candidate_router_shadow) if candidate_router_shadow else None
+                ),
+                "evidence": [
+                    item.model_dump(mode="json")
+                    for item in candidate_evidence_shadow
+                ],
+                "decisions": [
+                    item.model_dump(mode="json")
+                    for item in candidate_decisions_shadow
+                ],
+                "executed": False,
+            },
             "context_compaction": {
                 "before_clause_count": ai_context_clause_count_before_pruning,
                 "after_unique_clause_count": len(ai_context_clause_ids),
@@ -1197,6 +1301,10 @@ def process_meeting_by_version(
     topic_likely_threshold: float = 0.45,
     action_classifier_mode: str = "off",
     action_classifier_model_path: str | None = None,
+    candidate_router_mode: str = "off",
+    action_clear_threshold: float = 0.82,
+    action_ai_threshold: float = 0.45,
+    candidate_threshold_version: str = "candidate-router-thresholds-v1",
 ) -> PipelineResult:
     """Select V1/V2 or run V2 in shadow while returning V1's public result."""
 
@@ -1215,6 +1323,10 @@ def process_meeting_by_version(
             topic_likely_threshold=topic_likely_threshold,
             action_classifier_mode=action_classifier_mode,
             action_classifier_model_path=action_classifier_model_path,
+            candidate_router_mode=candidate_router_mode,
+            action_clear_threshold=action_clear_threshold,
+            action_ai_threshold=action_ai_threshold,
+            candidate_threshold_version=candidate_threshold_version,
         )
     if pipeline_version == "v1":
         assert v1_result is not None

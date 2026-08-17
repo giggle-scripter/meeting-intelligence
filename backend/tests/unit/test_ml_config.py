@@ -15,6 +15,10 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
         "EMBEDDING_FALLBACK_DIMENSION",
         "ACTION_CLASSIFIER_MODE",
         "ACTION_CLASSIFIER_MODEL_PATH",
+        "CANDIDATE_ROUTER_MODE",
+        "ACTION_CLEAR_THRESHOLD",
+        "ACTION_AI_THRESHOLD",
+        "CANDIDATE_THRESHOLD_VERSION",
     ):
         monkeypatch.delenv(name, raising=False)
 
@@ -25,6 +29,9 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
     assert settings.embedding_fallback_dimension == 384
     assert settings.action_classifier_mode == "off"
     assert settings.action_classifier_model_path is None
+    assert settings.candidate_router_mode == "off"
+    assert settings.action_clear_threshold == 0.82
+    assert settings.action_ai_threshold == 0.45
 
 
 def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
@@ -34,6 +41,10 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     monkeypatch.setenv("EMBEDDING_FALLBACK_DIMENSION", "128")
     monkeypatch.setenv("ACTION_CLASSIFIER_MODEL_PATH", "artifacts/models/action.joblib")
     monkeypatch.setenv("ACTION_CLASSIFIER_MODE", "shadow")
+    monkeypatch.setenv("CANDIDATE_ROUTER_MODE", "shadow")
+    monkeypatch.setenv("ACTION_CLEAR_THRESHOLD", "0.9")
+    monkeypatch.setenv("ACTION_AI_THRESHOLD", "0.6")
+    monkeypatch.setenv("CANDIDATE_THRESHOLD_VERSION", "candidate-test-v2")
 
     settings = Settings.from_env()
 
@@ -43,6 +54,10 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     assert settings.embedding_fallback_dimension == 128
     assert settings.action_classifier_mode == "shadow"
     assert settings.action_classifier_model_path == "artifacts/models/action.joblib"
+    assert settings.candidate_router_mode == "shadow"
+    assert settings.action_clear_threshold == 0.9
+    assert settings.action_ai_threshold == 0.6
+    assert settings.candidate_threshold_version == "candidate-test-v2"
 
 
 @pytest.mark.parametrize("value", ["0", "-1", "invalid"])
@@ -64,4 +79,28 @@ def test_ml_settings_reject_active_classifier_routing(monkeypatch) -> None:
     monkeypatch.setenv("ACTION_CLASSIFIER_MODE", "assist")
 
     with pytest.raises(RuntimeError, match="must be off or shadow"):
+        Settings.from_env()
+
+
+def test_candidate_router_shadow_requires_classifier_shadow(monkeypatch) -> None:
+    monkeypatch.setenv("ACTION_CLASSIFIER_MODE", "off")
+    monkeypatch.setenv("CANDIDATE_ROUTER_MODE", "shadow")
+
+    with pytest.raises(RuntimeError, match="requires ACTION_CLASSIFIER_MODE=shadow"):
+        Settings.from_env()
+
+
+@pytest.mark.parametrize(
+    ("clear", "ai"),
+    [("1.1", "0.4"), ("0.4", "0.5"), ("invalid", "0.4")],
+)
+def test_candidate_router_rejects_invalid_thresholds(
+    monkeypatch,
+    clear: str,
+    ai: str,
+) -> None:
+    monkeypatch.setenv("ACTION_CLEAR_THRESHOLD", clear)
+    monkeypatch.setenv("ACTION_AI_THRESHOLD", ai)
+
+    with pytest.raises(RuntimeError, match="ACTION_"):
         Settings.from_env()

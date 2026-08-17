@@ -35,6 +35,10 @@ class Settings:
     embedding_fallback_dimension: int = 384
     action_classifier_mode: str = "off"
     action_classifier_model_path: str | None = None
+    candidate_router_mode: str = "off"
+    action_clear_threshold: float = 0.82
+    action_ai_threshold: float = 0.45
+    candidate_threshold_version: str = "candidate-router-thresholds-v1"
     openai_api_key: str | None = None
     openai_model: str = "gpt-5-mini"
     openai_reasoning_effort: str = "medium"
@@ -129,6 +133,33 @@ class Settings:
         ).lower()
         if action_classifier_mode not in {"off", "shadow"}:
             raise RuntimeError("ACTION_CLASSIFIER_MODE must be off or shadow")
+        candidate_router_mode = os.getenv("CANDIDATE_ROUTER_MODE", "off").lower()
+        if candidate_router_mode not in {"off", "shadow"}:
+            raise RuntimeError("CANDIDATE_ROUTER_MODE must be off or shadow")
+        if candidate_router_mode == "shadow" and action_classifier_mode != "shadow":
+            raise RuntimeError(
+                "CANDIDATE_ROUTER_MODE=shadow requires "
+                "ACTION_CLASSIFIER_MODE=shadow"
+            )
+        try:
+            action_clear_threshold = float(
+                os.getenv("ACTION_CLEAR_THRESHOLD", "0.82")
+            )
+            action_ai_threshold = float(os.getenv("ACTION_AI_THRESHOLD", "0.45"))
+        except ValueError as exc:
+            raise RuntimeError(
+                "ACTION_CLEAR_THRESHOLD and ACTION_AI_THRESHOLD must be numbers"
+            ) from exc
+        if not 0.0 <= action_ai_threshold <= action_clear_threshold <= 1.0:
+            raise RuntimeError(
+                "action thresholds must satisfy 0 <= ACTION_AI_THRESHOLD <= "
+                "ACTION_CLEAR_THRESHOLD <= 1"
+            )
+        candidate_threshold_version = os.getenv(
+            "CANDIDATE_THRESHOLD_VERSION", "candidate-router-thresholds-v1"
+        ).strip()
+        if not candidate_threshold_version:
+            raise RuntimeError("CANDIDATE_THRESHOLD_VERSION must not be empty")
 
         return cls(
             power_automate_api_key=os.getenv("POWER_AUTOMATE_API_KEY") or None,
@@ -160,6 +191,10 @@ class Settings:
                 os.getenv("ACTION_CLASSIFIER_MODEL_PATH") or ""
             ).strip()
             or None,
+            candidate_router_mode=candidate_router_mode,
+            action_clear_threshold=action_clear_threshold,
+            action_ai_threshold=action_ai_threshold,
+            candidate_threshold_version=candidate_threshold_version,
             openai_api_key=(os.getenv("OPENAI_API_KEY") or "").strip() or None,
             openai_model=os.getenv("OPENAI_MODEL", "gpt-5-mini"),
             openai_reasoning_effort=reasoning_effort,

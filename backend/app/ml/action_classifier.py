@@ -239,6 +239,26 @@ def evaluate_shadow_predictions(
 ) -> ActionClassifierShadowSummary:
     """Compare shadow classifications to current rule cues without routing."""
 
+    predictions = predict_clause_actions(
+        classifier,
+        clauses,
+        annotations,
+        speaker_names=speaker_names,
+        note_supported_clause_ids=note_supported_clause_ids,
+    )
+    return summarize_shadow_predictions(predictions, clauses, annotations)
+
+
+def predict_clause_actions(
+    classifier: LinearActionClassifier,
+    clauses: Sequence[Clause],
+    annotations: dict[str, ClauseAnnotation],
+    *,
+    speaker_names: Iterable[str] = (),
+    note_supported_clause_ids: set[str] | None = None,
+) -> dict[str, ActionPrediction]:
+    """Predict every clause once so shadow consumers can share the result."""
+
     note_supported_clause_ids = note_supported_clause_ids or set()
     inputs: list[ActionClassifierInput] = []
     for index, clause in enumerate(clauses):
@@ -261,6 +281,20 @@ def evaluate_shadow_predictions(
             )
         )
     predictions = classifier.predict_many(inputs)
+    return {
+        clause.clause_id: prediction
+        for clause, prediction in zip(clauses, predictions, strict=True)
+    }
+
+
+def summarize_shadow_predictions(
+    predictions_by_clause: dict[str, ActionPrediction],
+    clauses: Sequence[Clause],
+    annotations: dict[str, ClauseAnnotation],
+) -> ActionClassifierShadowSummary:
+    """Summarize classifier-vs-rule behavior without changing either path."""
+
+    predictions = [predictions_by_clause[clause.clause_id] for clause in clauses]
     counts = Counter(prediction.label.value for prediction in predictions)
     rule_actions = [
         bool(annotations[clause.clause_id].flags & _RULE_ACTION_FLAGS)
@@ -277,9 +311,13 @@ def evaluate_shadow_predictions(
             rule_actions, classifier_actions, strict=True
         )
     )
+    classifier_version = predictions[0].classifier_version if predictions else "disabled"
+    embedding_model_version = (
+        predictions[0].embedding_model_version if predictions else "disabled"
+    )
     return ActionClassifierShadowSummary(
-        classifier_version=classifier.classifier_version,
-        embedding_model_version=classifier.embedding_model_version,
+        classifier_version=classifier_version,
+        embedding_model_version=embedding_model_version,
         clause_count=len(clauses),
         prediction_counts=dict(sorted(counts.items())),
         would_create_count=counts[ActionLabel.CLEAR_ACTION.value],

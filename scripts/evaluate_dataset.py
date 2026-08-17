@@ -347,6 +347,18 @@ def main() -> None:
         default=Path("data/ml/action-classifier/model/action-clf-v1.json"),
         help="Portable classifier artifact used by local shadow evaluation.",
     )
+    parser.add_argument(
+        "--candidate-router-mode",
+        choices=("off", "shadow"),
+        default="off",
+        help="Local shadow router; requires --action-classifier-mode shadow.",
+    )
+    parser.add_argument("--action-clear-threshold", type=float, default=0.82)
+    parser.add_argument("--action-ai-threshold", type=float, default=0.45)
+    parser.add_argument(
+        "--candidate-threshold-version",
+        default="candidate-router-thresholds-v1",
+    )
     parser.add_argument("--without-meeting-notes", action="store_true")
     parser.add_argument(
         "--reviewed-only",
@@ -365,6 +377,14 @@ def main() -> None:
         help="Run case IDs listed in a CSV column named case_id.",
     )
     args = parser.parse_args()
+    if (
+        args.candidate_router_mode == "shadow"
+        and args.action_classifier_mode != "shadow"
+    ):
+        parser.error(
+            "--candidate-router-mode shadow requires "
+            "--action-classifier-mode shadow"
+        )
     checkpoint_path = (
         args.report.with_suffix(args.report.suffix + ".checkpoint.json")
         if args.report
@@ -471,6 +491,10 @@ def main() -> None:
                         action_classifier_model_path=str(
                             args.action_classifier_model_path
                         ),
+                        candidate_router_mode=args.candidate_router_mode,
+                        action_clear_threshold=args.action_clear_threshold,
+                        action_ai_threshold=args.action_ai_threshold,
+                        candidate_threshold_version=args.candidate_threshold_version,
                     )
                 )
         except FatalBenchmarkError as exc:
@@ -676,6 +700,10 @@ def main() -> None:
         "action_classifier_rule_agreement_count",
         "action_classifier_rule_disagreement_count",
         "action_classifier_error_count",
+        "candidate_evidence_count",
+        "candidate_decision_count",
+        "candidate_ai_create_check_suppressed_count",
+        "candidate_router_error_count",
     ):
         pipeline_diagnostics[name] = sum(
             int(item.get(name, 0)) for item in diagnostic_values
@@ -712,6 +740,27 @@ def main() -> None:
     pipeline_diagnostics["embedding_model_versions"] = sorted(
         {
             str(item.get("embedding_model_version", "disabled"))
+            for item in diagnostic_values
+        }
+    )
+    candidate_route_counts: dict[str, int] = {}
+    for item in diagnostic_values:
+        for route, count in item.get("candidate_route_counts", {}).items():
+            candidate_route_counts[route] = candidate_route_counts.get(
+                route, 0
+            ) + int(count)
+    pipeline_diagnostics["candidate_route_counts"] = dict(
+        sorted(candidate_route_counts.items())
+    )
+    pipeline_diagnostics["candidate_router_versions"] = sorted(
+        {
+            str(item.get("candidate_router_version", "disabled"))
+            for item in diagnostic_values
+        }
+    )
+    pipeline_diagnostics["candidate_threshold_versions"] = sorted(
+        {
+            str(item.get("candidate_threshold_version", "disabled"))
             for item in diagnostic_values
         }
     )
@@ -773,6 +822,10 @@ def main() -> None:
             "meeting_context_mode": args.context_mode,
             "action_classifier_mode": args.action_classifier_mode,
             "action_classifier_model_path": str(args.action_classifier_model_path),
+            "candidate_router_mode": args.candidate_router_mode,
+            "action_clear_threshold": args.action_clear_threshold,
+            "action_ai_threshold": args.action_ai_threshold,
+            "candidate_threshold_version": args.candidate_threshold_version,
             "meeting_notes": "off" if args.without_meeting_notes else "sidecar_if_present",
             "prompt_version": PROMPT_VERSION,
             "model": MODEL_VERSION,

@@ -46,7 +46,7 @@ thật cho người dùng.
 | Backend | FastAPI `backend.app.main:app` |
 | Chế độ kiểm chứng chính | Local deterministic/rule-only |
 | Corpus | 86 reviewed cases, W1-W5 |
-| Automated tests | 259 tests |
+| Automated tests | 272 tests |
 | OpenAI model mặc định khi bật | `gpt-5-mini` |
 | AI role | Optional mutation resolver |
 | Job storage | In-memory |
@@ -692,7 +692,7 @@ lý do audit.
 .\.venv\Scripts\python.exe -m pytest backend\tests -q
 ```
 
-Trạng thái hiện tại: **259 tests passed**.
+Trạng thái hiện tại: **272 tests passed**.
 
 ### 16.2 Action-classifier dataset
 
@@ -834,6 +834,10 @@ call thành công nhưng không tạo accepted event không phải quality impro
 | `EMBEDDING_FALLBACK_DIMENSION` | `384` |
 | `ACTION_CLASSIFIER_MODE` | `off`; chỉ cho phép `off` hoặc `shadow` |
 | `ACTION_CLASSIFIER_MODEL_PATH` | Portable JSON artifact; bắt buộc khi chạy shadow |
+| `CANDIDATE_ROUTER_MODE` | `off`; `shadow` yêu cầu classifier cũng là `shadow` |
+| `ACTION_CLEAR_THRESHOLD` | `0.82`; router config, không hardcode trong logic |
+| `ACTION_AI_THRESHOLD` | `0.45`; router config, không hardcode trong logic |
+| `CANDIDATE_THRESHOLD_VERSION` | `candidate-router-thresholds-v1` |
 
 Optional pricing inputs only estimate trace cost:
 
@@ -905,6 +909,40 @@ PR router sau phải benchmark batching/cache trước khi bật rộng hơn.
 `ACTION_CLASSIFIER_MODE=shadow` chỉ bổ sung diagnostics gồm model/embedding
 version, label counts, would-create/review/update và disagreement với rule cues.
 Không prediction nào được phép tạo event hoặc thay đổi final task trong PR này.
+
+### 21.1 Candidate evidence router shadow baseline
+
+PR4 thêm `CandidateEvidence`, `CandidateDecision` và router version
+`candidate-evidence-router-v1`. Mỗi clause có một evidence envelope hợp nhất:
+
+- raw rule score và cue flags;
+- calibrated classifier probabilities;
+- grounded/ambiguous note score và signal kind;
+- topic ID nếu meeting context có relevance mapping.
+
+Router dùng negative guards trước creation, mutation target policy và hai threshold
+config `0.82/0.45`. Mọi decision chỉ là shadow telemetry; `executed=false`, AI
+create vẫn tắt và reducer không đọc decision này.
+
+Full 86-case shadow, không Meeting Note:
+
+- 17,706 evidence/decisions; zero classifier/router error;
+- routes: DROP 10,707; CONTEXT_ONLY 3,230; LOCAL_CREATE 615;
+  LOCAL_MUTATION 36; AI_CREATE_CHECK 544; AI_MUTATION_CHECK 2,574;
+- cả 544 AI create checks đều suppressed;
+- final metrics/pass-set khớp baseline 16/86 tuyệt đối.
+
+Full 86-case shadow, có Meeting Note:
+
+- 17,706 evidence/decisions; zero classifier/router error;
+- routes: DROP 10,431; CONTEXT_ONLY 3,531; LOCAL_CREATE 572;
+  LOCAL_MUTATION 136; AI_CREATE_CHECK 517; AI_MUTATION_CHECK 2,519;
+- cả 517 AI create checks đều suppressed;
+- final metrics/pass-set khớp baseline 15/86 tuyệt đối.
+
+Route volume còn lớn so với 92 positive training records và 177 task mapping chờ
+review. Không được dùng distribution này để bật AI create hoặc tune production
+threshold trước khi ground-truth mapping được xử lý và PR5 có proposal validator.
 
 ## 22. Quy tắc khi thay đổi project
 

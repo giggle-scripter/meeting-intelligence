@@ -327,6 +327,10 @@ def _submit_job(
             f"context={settings.meeting_context_mode}",
             f"action_classifier={settings.action_classifier_mode}",
             f"action_model={settings.action_classifier_model_path or 'none'}",
+            f"candidate_router={settings.candidate_router_mode}",
+            f"candidate_thresholds={settings.candidate_threshold_version}",
+            f"action_clear={settings.action_clear_threshold}",
+            f"action_ai={settings.action_ai_threshold}",
         )),
     )
     job, created = job_store.submit(
@@ -349,6 +353,10 @@ def _submit_job(
                 topic_likely_threshold=settings.topic_likely_threshold,
                 action_classifier_mode=settings.action_classifier_mode,
                 action_classifier_model_path=settings.action_classifier_model_path,
+                candidate_router_mode=settings.candidate_router_mode,
+                action_clear_threshold=settings.action_clear_threshold,
+                action_ai_threshold=settings.action_ai_threshold,
+                candidate_threshold_version=settings.candidate_threshold_version,
             )
         ),
         pipeline_version=settings.pipeline_version,
@@ -429,6 +437,10 @@ def process_endpoint(
         topic_likely_threshold=settings.topic_likely_threshold,
         action_classifier_mode=settings.action_classifier_mode,
         action_classifier_model_path=settings.action_classifier_model_path,
+        candidate_router_mode=settings.candidate_router_mode,
+        action_clear_threshold=settings.action_clear_threshold,
+        action_ai_threshold=settings.action_ai_threshold,
+        candidate_threshold_version=settings.candidate_threshold_version,
     )
     return asdict(result)
 
@@ -545,6 +557,10 @@ async def process_file_endpoint(
         topic_likely_threshold=settings.topic_likely_threshold,
         action_classifier_mode=settings.action_classifier_mode,
         action_classifier_model_path=settings.action_classifier_model_path,
+        candidate_router_mode=settings.candidate_router_mode,
+        action_clear_threshold=settings.action_clear_threshold,
+        action_ai_threshold=settings.action_ai_threshold,
+        candidate_threshold_version=settings.candidate_threshold_version,
     )
     return asdict(result)
 
