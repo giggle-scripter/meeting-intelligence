@@ -141,6 +141,15 @@ owner/topic và recency. Top-1 chỉ được đánh dấu direct khi đạt c�
 
 Bounded mutation context chạy telemetry-only bằng
 `CONTEXT_RETRIEVAL_MODE=shadow` và yêu cầu semantic linker cũng ở `shadow`.
+
+### Bounded AI mutation router
+
+`AI_MUTATION_ROUTER_MODE=off` là mặc định và giữ nguyên output/legacy fallback.
+`shadow` chỉ tạo top-k task, `ContextBundle` và trace (không provider call hay
+event). `assist` yêu cầu candidate router ở `assist` và semantic/context
+retrieval ở `shadow`; AI chỉ chọn trong tối đa 5 task và context tối đa 30 clause
+/ 12.000 ký tự. Python kiểm tra task ID, clause/anchor, owner span, deadline
+mention, chronology và confidence trước khi thêm `TaskEvent`.
 Topic index phân đoạn theo turn centroid đã smoothing cùng discourse marker,
 sau đó tìm nearest topic trước nearest clause. Bundle luôn ưu tiên local
 `-3/+5`, source evidence của top-k task, same-topic clauses, mutation history và

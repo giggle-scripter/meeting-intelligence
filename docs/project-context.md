@@ -847,6 +847,9 @@ call thành công nhưng không tạo accepted event không phải quality impro
 | `TASK_LINK_TOP_K` | `5`; bounded candidate list |
 | `TASK_LINK_SCORING_VERSION` | `task-link-scoring-v1` |
 | `CONTEXT_RETRIEVAL_MODE` | `off`; `shadow` yêu cầu task semantic linker cũng `shadow` |
+| `AI_MUTATION_ROUTER_MODE` | `off` (an toàn); `shadow` tạo bounded payload không gọi provider; `assist` thay legacy mutation call cùng anchor sau Python validation |
+| `AI_MUTATION_PROMPT_VERSION` | `mutation-resolution-v2` |
+| `AI_MUTATION_MIN_CONFIDENCE` | `0.70`; response thấp hơn bị reject |
 | `CONTEXT_MAX_CLAUSES` | `30`; hard cap, không cho cấu hình cao hơn |
 | `CONTEXT_MAX_CHARACTERS` | `12000`; hard cap, không cho cấu hình cao hơn |
 | `CONTEXT_MAX_TASKS` | `5`; top-k task memory hard cap |

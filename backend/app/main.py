@@ -423,6 +423,9 @@ def _submit_job(
                     settings.context_topic_smoothing_window
                 ),
                 context_retrieval_version=settings.context_retrieval_version,
+                ai_mutation_router_mode=settings.ai_mutation_router_mode,
+                ai_mutation_prompt_version=settings.ai_mutation_prompt_version,
+                ai_mutation_min_confidence=settings.ai_mutation_min_confidence,
             )
         ),
         pipeline_version=settings.pipeline_version,
@@ -544,6 +547,9 @@ def process_endpoint(
         context_topic_boundary_threshold=settings.context_topic_boundary_threshold,
         context_topic_smoothing_window=settings.context_topic_smoothing_window,
         context_retrieval_version=settings.context_retrieval_version,
+        ai_mutation_router_mode=settings.ai_mutation_router_mode,
+        ai_mutation_prompt_version=settings.ai_mutation_prompt_version,
+        ai_mutation_min_confidence=settings.ai_mutation_min_confidence,
     )
     return asdict(result)
 
@@ -701,6 +707,9 @@ async def process_file_endpoint(
         context_topic_boundary_threshold=settings.context_topic_boundary_threshold,
         context_topic_smoothing_window=settings.context_topic_smoothing_window,
         context_retrieval_version=settings.context_retrieval_version,
+        ai_mutation_router_mode=settings.ai_mutation_router_mode,
+        ai_mutation_prompt_version=settings.ai_mutation_prompt_version,
+        ai_mutation_min_confidence=settings.ai_mutation_min_confidence,
     )
     return asdict(result)
 

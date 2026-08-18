@@ -137,6 +137,25 @@ class PipelineDiagnostics:
     context_character_cap_hit_count: int = 0
     context_tier_clause_counts: dict[str, int] = field(default_factory=dict)
     context_retrieval_error_count: int = 0
+    ai_mutation_router_mode: str = "off"
+    ai_mutation_router_version: str = "disabled"
+    ai_mutation_prompt_version: str = "disabled"
+    ai_mutation_candidate_count: int = 0
+    ai_mutation_payload_count: int = 0
+    ai_mutation_call_count: int = 0
+    ai_mutation_event_count: int = 0
+    ai_mutation_unresolved_count: int = 0
+    ai_mutation_rejected_count: int = 0
+    ai_mutation_error_count: int = 0
+    ai_mutation_rejection_reasons: dict[str, int] = field(default_factory=dict)
+    ai_mutation_candidate_task_count: int = 0
+    ai_mutation_context_clause_count: int = 0
+    ai_mutation_context_character_count: int = 0
+    ai_mutation_unknown_task_id_count: int = 0
+    ai_mutation_invalid_source_count: int = 0
+    ai_mutation_invalid_anchor_count: int = 0
+    ai_mutation_invalid_owner_span_count: int = 0
+    ai_mutation_invalid_deadline_count: int = 0
 
 
 @dataclass

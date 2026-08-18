@@ -15,7 +15,7 @@ import httpx
 
 from backend.app.candidate.proposal import TaskCreateProposalResponse
 
-from .schemas import AiEventResponse
+from .schemas import AiEventResponse, MutationResolutionResponse
 
 
 LOGGER = logging.getLogger(__name__)
@@ -93,6 +93,7 @@ class AiClient(Protocol):
     def enabled(self) -> bool: ...
     def extract_events(self, payload: dict) -> AiEventResponse: ...
     def propose_task(self, payload: dict) -> TaskCreateProposalResponse: ...
+    def resolve_mutation(self, payload: dict) -> MutationResolutionResponse: ...
 
 
 @dataclass(frozen=True)
@@ -142,6 +143,12 @@ class DisabledAiClient:
             confidence=0.0,
         )
 
+    def resolve_mutation(self, payload: dict) -> MutationResolutionResponse:
+        return MutationResolutionResponse(
+            decision="UNRESOLVED", confidence=0.0,
+            unresolved_reason="INSUFFICIENT_EXPLICIT_EVIDENCE",
+        )
+
 
 class HttpAiClient:
     """Call a JSON endpoint that implements the constrained AI event contract."""
@@ -176,6 +183,16 @@ class HttpAiClient:
             timeout=self.timeout_seconds,
         )
         return TaskCreateProposalResponse.model_validate(response.json())
+
+    def resolve_mutation(self, payload: dict) -> MutationResolutionResponse:
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["X-API-Key"] = self.api_key
+        response = _post_with_retry(
+            self.endpoint, json={"mode": "MUTATION_RESOLUTION", "payload": payload},
+            headers=headers, timeout=self.timeout_seconds,
+        )
+        return MutationResolutionResponse.model_validate(response.json())
 
 
 class OpenAiResponsesClient:
@@ -240,6 +257,12 @@ class OpenAiResponsesClient:
             prompt=self.create_proposal_prompt,
             schema=TaskCreateProposalResponse,
             schema_name="task_create_proposal",
+        )
+
+    def resolve_mutation(self, payload: dict) -> MutationResolutionResponse:
+        return self._structured_response(
+            payload, prompt=self.system_prompt, schema=MutationResolutionResponse,
+            schema_name="mutation_resolution_v2",
         )
 
     def _structured_response(self, payload: dict, *, prompt: str, schema, schema_name: str):
@@ -432,6 +455,12 @@ class AzureFoundryAiClient:
             prompt=self.create_proposal_prompt,
             schema=TaskCreateProposalResponse,
             schema_name="task_create_proposal",
+        )
+
+    def resolve_mutation(self, payload: dict) -> MutationResolutionResponse:
+        return self._structured_response(
+            payload, prompt=self.system_prompt, schema=MutationResolutionResponse,
+            schema_name="mutation_resolution_v2",
         )
 
     def _structured_response(self, payload: dict, *, prompt: str, schema, schema_name: str):
