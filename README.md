@@ -150,6 +150,13 @@ event). `assist` yêu cầu candidate router ở `assist` và semantic/context
 retrieval ở `shadow`; AI chỉ chọn trong tối đa 5 task và context tối đa 30 clause
 / 12.000 ký tự. Python kiểm tra task ID, clause/anchor, owner span, deadline
 mention, chronology và confidence trước khi thêm `TaskEvent`.
+
+### Meeting Note dual view
+
+`NOTE_DUAL_VIEW_MODE=off` giữ policy note hiện tại. `shadow` tạo claim có ID ổn
+định, retrieved transcript clauses và một trong bốn mức grounding:
+`FULL_GROUNDED`, `PARTIAL_GROUNDED`, `NOTE_ONLY`, `CONTRADICTED`. Trong
+`assist`, note direct-event path bị tắt; transcript chronology luôn là authority.
 Topic index phân đoạn theo turn centroid đã smoothing cùng discourse marker,
 sau đó tìm nearest topic trước nearest clause. Bundle luôn ưu tiên local
 `-3/+5`, source evidence của top-k task, same-topic clauses, mutation history và

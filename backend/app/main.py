@@ -426,6 +426,12 @@ def _submit_job(
                 ai_mutation_router_mode=settings.ai_mutation_router_mode,
                 ai_mutation_prompt_version=settings.ai_mutation_prompt_version,
                 ai_mutation_min_confidence=settings.ai_mutation_min_confidence,
+                note_dual_view_mode=settings.note_dual_view_mode,
+                note_claim_max_transcript_clauses=settings.note_claim_max_transcript_clauses,
+                note_claim_max_topics=settings.note_claim_max_topics,
+                note_claim_grounding_threshold=settings.note_claim_grounding_threshold,
+                note_claim_grounding_margin=settings.note_claim_grounding_margin,
+                note_dual_view_version=settings.note_dual_view_version,
             )
         ),
         pipeline_version=settings.pipeline_version,
@@ -550,6 +556,12 @@ def process_endpoint(
         ai_mutation_router_mode=settings.ai_mutation_router_mode,
         ai_mutation_prompt_version=settings.ai_mutation_prompt_version,
         ai_mutation_min_confidence=settings.ai_mutation_min_confidence,
+        note_dual_view_mode=settings.note_dual_view_mode,
+        note_claim_max_transcript_clauses=settings.note_claim_max_transcript_clauses,
+        note_claim_max_topics=settings.note_claim_max_topics,
+        note_claim_grounding_threshold=settings.note_claim_grounding_threshold,
+        note_claim_grounding_margin=settings.note_claim_grounding_margin,
+        note_dual_view_version=settings.note_dual_view_version,
     )
     return asdict(result)
 
@@ -710,6 +722,12 @@ async def process_file_endpoint(
         ai_mutation_router_mode=settings.ai_mutation_router_mode,
         ai_mutation_prompt_version=settings.ai_mutation_prompt_version,
         ai_mutation_min_confidence=settings.ai_mutation_min_confidence,
+        note_dual_view_mode=settings.note_dual_view_mode,
+        note_claim_max_transcript_clauses=settings.note_claim_max_transcript_clauses,
+        note_claim_max_topics=settings.note_claim_max_topics,
+        note_claim_grounding_threshold=settings.note_claim_grounding_threshold,
+        note_claim_grounding_margin=settings.note_claim_grounding_margin,
+        note_dual_view_version=settings.note_dual_view_version,
     )
     return asdict(result)
 

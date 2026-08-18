@@ -66,6 +66,12 @@ class Settings:
     ai_mutation_router_mode: str = "off"
     ai_mutation_prompt_version: str = "mutation-resolution-v2"
     ai_mutation_min_confidence: float = 0.70
+    note_dual_view_mode: str = "off"
+    note_claim_max_transcript_clauses: int = 8
+    note_claim_max_topics: int = 3
+    note_claim_grounding_threshold: float = 0.72
+    note_claim_grounding_margin: float = 0.12
+    note_dual_view_version: str = "note-dual-view-v1"
     action_clear_threshold: float = 0.82
     action_ai_threshold: float = 0.45
     candidate_threshold_version: str = "candidate-router-thresholds-v1"
@@ -225,6 +231,23 @@ class Settings:
             raise RuntimeError("AI_MUTATION_MIN_CONFIDENCE must be a number") from exc
         if not 0.0 <= ai_mutation_min_confidence <= 1.0:
             raise RuntimeError("AI_MUTATION_MIN_CONFIDENCE must be between zero and one")
+        note_dual_view_mode = os.getenv("NOTE_DUAL_VIEW_MODE", "off").lower()
+        if note_dual_view_mode not in {"off", "shadow", "assist"}:
+            raise RuntimeError("NOTE_DUAL_VIEW_MODE must be off, shadow, or assist")
+        try:
+            note_claim_max_transcript_clauses = int(os.getenv("NOTE_CLAIM_MAX_TRANSCRIPT_CLAUSES", "8"))
+            note_claim_max_topics = int(os.getenv("NOTE_CLAIM_MAX_TOPICS", "3"))
+            note_claim_grounding_threshold = float(os.getenv("NOTE_CLAIM_GROUNDING_THRESHOLD", "0.72"))
+            note_claim_grounding_margin = float(os.getenv("NOTE_CLAIM_GROUNDING_MARGIN", "0.12"))
+        except ValueError as exc:
+            raise RuntimeError("note dual-view limits and thresholds must be numeric") from exc
+        if note_claim_max_transcript_clauses <= 0 or note_claim_max_transcript_clauses > 8 or note_claim_max_topics <= 0 or note_claim_max_topics > 3:
+            raise RuntimeError("note dual-view limits exceed their hard caps")
+        if not 0.0 <= note_claim_grounding_threshold <= 1.0 or not 0.0 <= note_claim_grounding_margin <= 1.0:
+            raise RuntimeError("note dual-view thresholds must be between zero and one")
+        note_dual_view_version = os.getenv("NOTE_DUAL_VIEW_VERSION", "note-dual-view-v1").strip()
+        if not note_dual_view_version:
+            raise RuntimeError("NOTE_DUAL_VIEW_VERSION must not be empty")
         task_link_weight_names = (
             "TASK_LINK_SEMANTIC_WEIGHT",
             "TASK_LINK_LEXICAL_WEIGHT",
@@ -422,6 +445,12 @@ class Settings:
             ai_mutation_router_mode=ai_mutation_router_mode,
             ai_mutation_prompt_version=ai_mutation_prompt_version,
             ai_mutation_min_confidence=ai_mutation_min_confidence,
+            note_dual_view_mode=note_dual_view_mode,
+            note_claim_max_transcript_clauses=note_claim_max_transcript_clauses,
+            note_claim_max_topics=note_claim_max_topics,
+            note_claim_grounding_threshold=note_claim_grounding_threshold,
+            note_claim_grounding_margin=note_claim_grounding_margin,
+            note_dual_view_version=note_dual_view_version,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,
             candidate_threshold_version=candidate_threshold_version,

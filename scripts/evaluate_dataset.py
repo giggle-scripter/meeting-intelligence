@@ -402,6 +402,14 @@ def main() -> None:
         "--ai-mutation-prompt-version", default="mutation-resolution-v2"
     )
     parser.add_argument("--ai-mutation-min-confidence", type=float, default=0.70)
+    parser.add_argument(
+        "--note-dual-view-mode", choices=("off", "shadow", "assist"), default="off"
+    )
+    parser.add_argument("--note-claim-max-transcript-clauses", type=int, default=8)
+    parser.add_argument("--note-claim-max-topics", type=int, default=3)
+    parser.add_argument("--note-claim-grounding-threshold", type=float, default=0.72)
+    parser.add_argument("--note-claim-grounding-margin", type=float, default=0.12)
+    parser.add_argument("--note-dual-view-version", default="note-dual-view-v1")
     parser.add_argument("--action-clear-threshold", type=float, default=0.82)
     parser.add_argument("--action-ai-threshold", type=float, default=0.45)
     parser.add_argument(
@@ -454,6 +462,8 @@ def main() -> None:
         and (args.candidate_router_mode != "assist" or args.task_semantic_linker_mode != "shadow" or args.context_retrieval_mode != "shadow")
     ):
         parser.error("--ai-mutation-router-mode assist requires candidate assist and semantic/context shadow")
+    if args.note_dual_view_mode != "off" and args.context_mode == "off":
+        parser.error("--note-dual-view-mode requires --context-mode shadow or assist")
     checkpoint_path = (
         args.report.with_suffix(args.report.suffix + ".checkpoint.json")
         if args.report
@@ -607,6 +617,12 @@ def main() -> None:
                         ai_mutation_router_mode=args.ai_mutation_router_mode,
                         ai_mutation_prompt_version=args.ai_mutation_prompt_version,
                         ai_mutation_min_confidence=args.ai_mutation_min_confidence,
+                        note_dual_view_mode=args.note_dual_view_mode,
+                        note_claim_max_transcript_clauses=args.note_claim_max_transcript_clauses,
+                        note_claim_max_topics=args.note_claim_max_topics,
+                        note_claim_grounding_threshold=args.note_claim_grounding_threshold,
+                        note_claim_grounding_margin=args.note_claim_grounding_margin,
+                        note_dual_view_version=args.note_dual_view_version,
                     )
                 )
         except FatalBenchmarkError as exc:
@@ -1061,6 +1077,8 @@ def main() -> None:
             "ai_mutation_router_mode": args.ai_mutation_router_mode,
             "ai_mutation_prompt_version": args.ai_mutation_prompt_version,
             "ai_mutation_min_confidence": args.ai_mutation_min_confidence,
+            "note_dual_view_mode": args.note_dual_view_mode,
+            "note_dual_view_version": args.note_dual_view_version,
             "context_limits": {
                 "max_clauses": args.context_max_clauses,
                 "max_characters": args.context_max_characters,
