@@ -770,6 +770,24 @@ def process_meeting(
     task_create_proposal_enabled: bool = False,
     ai_create_proposal_enabled: bool = False,
     ai_create_max_proposals_per_meeting: int = 3,
+    task_semantic_linker_mode: str = "off",
+    task_link_embedding_model_name: str = (
+        "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    ),
+    task_link_embedding_device: str = "cpu",
+    task_link_embedding_fallback_enabled: bool = True,
+    task_link_embedding_fallback_dimension: int = 384,
+    task_link_semantic_weight: float = 0.55,
+    task_link_lexical_weight: float = 0.20,
+    task_link_topic_weight: float = 0.10,
+    task_link_owner_weight: float = 0.10,
+    task_link_recency_weight: float = 0.05,
+    task_link_strong_threshold: float = 0.78,
+    task_link_min_margin: float = 0.12,
+    task_link_ai_threshold: float = 0.60,
+    task_link_recency_horizon_clauses: int = 200,
+    task_link_top_k: int = 5,
+    task_link_scoring_version: str = "task-link-scoring-v1",
 ) -> PipelineResult:
     ai_client = ai_client or DisabledAiClient()
     stages = preprocess_meeting(meeting, speaker_aliases)
@@ -804,6 +822,8 @@ def process_meeting(
         )
     if ai_create_max_proposals_per_meeting <= 0:
         raise ValueError("ai_create_max_proposals_per_meeting must be positive")
+    if task_semantic_linker_mode not in {"off", "shadow"}:
+        raise ValueError("task_semantic_linker_mode must be off or shadow")
     meeting_context = None
     note_cues_by_clause = {}
     if meeting_context_mode != "off":
@@ -1184,6 +1204,53 @@ def process_meeting(
         )
     events_before_deduplication = list(events)
     events = deduplicate_events(events)
+    task_semantic_linker_shadow = None
+    task_semantic_linker_results = []
+    task_semantic_linker_error_count = 0
+    if task_semantic_linker_mode == "shadow":
+        try:
+            from .ml.model_registry import get_model_registry
+            from .retrieval import TaskLinkScoringConfig
+            from .retrieval.shadow import evaluate_task_linker_shadow
+
+            embedding_model = get_model_registry().get_embedding_model(
+                task_link_embedding_model_name,
+                device=task_link_embedding_device,
+                fallback_dimension=task_link_embedding_fallback_dimension,
+                allow_fallback=task_link_embedding_fallback_enabled,
+            )
+            scoring_config = TaskLinkScoringConfig(
+                semantic_weight=task_link_semantic_weight,
+                lexical_weight=task_link_lexical_weight,
+                topic_weight=task_link_topic_weight,
+                owner_weight=task_link_owner_weight,
+                recency_weight=task_link_recency_weight,
+                strong_threshold=task_link_strong_threshold,
+                minimum_margin=task_link_min_margin,
+                ai_threshold=task_link_ai_threshold,
+                recency_horizon_clauses=task_link_recency_horizon_clauses,
+                top_k=task_link_top_k,
+                version=task_link_scoring_version,
+            )
+            topic_ids_by_clause = {}
+            if meeting_context:
+                topic_ids_by_clause = {
+                    clause_id: tuple(relevance.topic_ids)
+                    for clause_id, relevance in meeting_context.clause_relevance.items()
+                }
+            (
+                task_semantic_linker_shadow,
+                task_semantic_linker_results,
+            ) = evaluate_task_linker_shadow(
+                events,
+                clauses_by_id,
+                embedding_model=embedding_model,
+                config=scoring_config,
+                topic_ids_by_clause=topic_ids_by_clause,
+            )
+        except (KeyError, OSError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Task semantic linker shadow failed: %s", exc)
+            task_semantic_linker_error_count = 1
     ledger = reduce_task_events_to_ledger(events)
     reconciliation_operations = build_deterministic_reconciliation_operations(ledger)
     reconciliation = reconcile_ledger(ledger, reconciliation_operations)
@@ -1377,6 +1444,74 @@ def process_meeting(
         task_create_proposal_rejection_reasons=dict(
             sorted(proposal_rejection_reasons.items())
         ),
+        task_semantic_linker_mode=task_semantic_linker_mode,
+        task_semantic_linker_version=(
+            task_semantic_linker_shadow.linker_version
+            if task_semantic_linker_shadow
+            else (
+                "unavailable" if task_semantic_linker_mode == "shadow" else "disabled"
+            )
+        ),
+        task_semantic_index_version=(
+            task_semantic_linker_shadow.index_version
+            if task_semantic_linker_shadow
+            else (
+                "unavailable" if task_semantic_linker_mode == "shadow" else "disabled"
+            )
+        ),
+        task_semantic_scoring_version=(
+            task_semantic_linker_shadow.scoring_version
+            if task_semantic_linker_shadow
+            else (
+                task_link_scoring_version
+                if task_semantic_linker_mode == "shadow"
+                else "disabled"
+            )
+        ),
+        task_semantic_embedding_model_version=(
+            task_semantic_linker_shadow.embedding_model_version
+            if task_semantic_linker_shadow
+            else (
+                "unavailable" if task_semantic_linker_mode == "shadow" else "disabled"
+            )
+        ),
+        task_semantic_query_count=(
+            task_semantic_linker_shadow.query_count
+            if task_semantic_linker_shadow else 0
+        ),
+        task_semantic_scored_query_count=(
+            task_semantic_linker_shadow.scored_query_count
+            if task_semantic_linker_shadow else 0
+        ),
+        task_semantic_route_counts=(
+            task_semantic_linker_shadow.route_counts
+            if task_semantic_linker_shadow else {}
+        ),
+        task_semantic_reason_counts=(
+            task_semantic_linker_shadow.reason_counts
+            if task_semantic_linker_shadow else {}
+        ),
+        task_semantic_production_agreement_count=(
+            task_semantic_linker_shadow.production_agreement_count
+            if task_semantic_linker_shadow else 0
+        ),
+        task_semantic_production_disagreement_count=(
+            task_semantic_linker_shadow.production_disagreement_count
+            if task_semantic_linker_shadow else 0
+        ),
+        task_semantic_ambiguous_sibling_count=(
+            task_semantic_linker_shadow.ambiguous_sibling_count
+            if task_semantic_linker_shadow else 0
+        ),
+        task_semantic_mean_top1_score=(
+            task_semantic_linker_shadow.mean_top1_score
+            if task_semantic_linker_shadow else 0.0
+        ),
+        task_semantic_mean_margin=(
+            task_semantic_linker_shadow.mean_margin
+            if task_semantic_linker_shadow else 0.0
+        ),
+        task_semantic_linker_error_count=task_semantic_linker_error_count,
     )
     result = build_pipeline_result(
         meeting.meeting_title,
@@ -1438,6 +1573,17 @@ def process_meeting(
                 "rejected_count": task_create_proposal_rejected_count,
                 "rejection_reasons": dict(sorted(proposal_rejection_reasons.items())),
             },
+            "task_semantic_linker_shadow": {
+                "summary": (
+                    asdict(task_semantic_linker_shadow)
+                    if task_semantic_linker_shadow else None
+                ),
+                "results": [
+                    item.model_dump(mode="json")
+                    for item in task_semantic_linker_results
+                ],
+                "executed": False,
+            },
             "context_compaction": {
                 "before_clause_count": ai_context_clause_count_before_pruning,
                 "after_unique_clause_count": len(ai_context_clause_ids),
@@ -1486,6 +1632,24 @@ def process_meeting_by_version(
     task_create_proposal_enabled: bool = False,
     ai_create_proposal_enabled: bool = False,
     ai_create_max_proposals_per_meeting: int = 3,
+    task_semantic_linker_mode: str = "off",
+    task_link_embedding_model_name: str = (
+        "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    ),
+    task_link_embedding_device: str = "cpu",
+    task_link_embedding_fallback_enabled: bool = True,
+    task_link_embedding_fallback_dimension: int = 384,
+    task_link_semantic_weight: float = 0.55,
+    task_link_lexical_weight: float = 0.20,
+    task_link_topic_weight: float = 0.10,
+    task_link_owner_weight: float = 0.10,
+    task_link_recency_weight: float = 0.05,
+    task_link_strong_threshold: float = 0.78,
+    task_link_min_margin: float = 0.12,
+    task_link_ai_threshold: float = 0.60,
+    task_link_recency_horizon_clauses: int = 200,
+    task_link_top_k: int = 5,
+    task_link_scoring_version: str = "task-link-scoring-v1",
 ) -> PipelineResult:
     """Select V1/V2 or run V2 in shadow while returning V1's public result."""
 
@@ -1511,6 +1675,28 @@ def process_meeting_by_version(
             task_create_proposal_enabled=task_create_proposal_enabled,
             ai_create_proposal_enabled=ai_create_proposal_enabled,
             ai_create_max_proposals_per_meeting=ai_create_max_proposals_per_meeting,
+            task_semantic_linker_mode=task_semantic_linker_mode,
+            task_link_embedding_model_name=task_link_embedding_model_name,
+            task_link_embedding_device=task_link_embedding_device,
+            task_link_embedding_fallback_enabled=(
+                task_link_embedding_fallback_enabled
+            ),
+            task_link_embedding_fallback_dimension=(
+                task_link_embedding_fallback_dimension
+            ),
+            task_link_semantic_weight=task_link_semantic_weight,
+            task_link_lexical_weight=task_link_lexical_weight,
+            task_link_topic_weight=task_link_topic_weight,
+            task_link_owner_weight=task_link_owner_weight,
+            task_link_recency_weight=task_link_recency_weight,
+            task_link_strong_threshold=task_link_strong_threshold,
+            task_link_min_margin=task_link_min_margin,
+            task_link_ai_threshold=task_link_ai_threshold,
+            task_link_recency_horizon_clauses=(
+                task_link_recency_horizon_clauses
+            ),
+            task_link_top_k=task_link_top_k,
+            task_link_scoring_version=task_link_scoring_version,
         )
     if pipeline_version == "v1":
         assert v1_result is not None

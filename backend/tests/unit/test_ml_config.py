@@ -22,6 +22,18 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
         "TASK_CREATE_PROPOSAL_ENABLED",
         "AI_CREATE_PROPOSAL_ENABLED",
         "AI_CREATE_MAX_PROPOSALS_PER_MEETING",
+        "TASK_SEMANTIC_LINKER_MODE",
+        "TASK_LINK_SEMANTIC_WEIGHT",
+        "TASK_LINK_LEXICAL_WEIGHT",
+        "TASK_LINK_TOPIC_WEIGHT",
+        "TASK_LINK_OWNER_WEIGHT",
+        "TASK_LINK_RECENCY_WEIGHT",
+        "TASK_LINK_STRONG_THRESHOLD",
+        "TASK_LINK_MIN_MARGIN",
+        "TASK_LINK_AI_THRESHOLD",
+        "TASK_LINK_RECENCY_HORIZON_CLAUSES",
+        "TASK_LINK_TOP_K",
+        "TASK_LINK_SCORING_VERSION",
     ):
         monkeypatch.delenv(name, raising=False)
 
@@ -38,6 +50,12 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
     assert settings.task_create_proposal_enabled is False
     assert settings.ai_create_proposal_enabled is False
     assert settings.ai_create_max_proposals_per_meeting == 3
+    assert settings.task_semantic_linker_mode == "off"
+    assert settings.task_link_semantic_weight == 0.55
+    assert settings.task_link_strong_threshold == 0.78
+    assert settings.task_link_min_margin == 0.12
+    assert settings.task_link_ai_threshold == 0.60
+    assert settings.task_link_top_k == 5
 
 
 def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
@@ -51,6 +69,10 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     monkeypatch.setenv("ACTION_CLEAR_THRESHOLD", "0.9")
     monkeypatch.setenv("ACTION_AI_THRESHOLD", "0.6")
     monkeypatch.setenv("CANDIDATE_THRESHOLD_VERSION", "candidate-test-v2")
+    monkeypatch.setenv("TASK_SEMANTIC_LINKER_MODE", "shadow")
+    monkeypatch.setenv("TASK_LINK_STRONG_THRESHOLD", "0.8")
+    monkeypatch.setenv("TASK_LINK_MIN_MARGIN", "0.15")
+    monkeypatch.setenv("TASK_LINK_AI_THRESHOLD", "0.5")
 
     settings = Settings.from_env()
 
@@ -64,6 +86,10 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     assert settings.action_clear_threshold == 0.9
     assert settings.action_ai_threshold == 0.6
     assert settings.candidate_threshold_version == "candidate-test-v2"
+    assert settings.task_semantic_linker_mode == "shadow"
+    assert settings.task_link_strong_threshold == 0.8
+    assert settings.task_link_min_margin == 0.15
+    assert settings.task_link_ai_threshold == 0.5
 
 
 @pytest.mark.parametrize("value", ["0", "-1", "invalid"])
@@ -107,6 +133,20 @@ def test_create_proposal_requires_assist_router(monkeypatch) -> None:
     monkeypatch.setenv("TASK_CREATE_PROPOSAL_ENABLED", "true")
 
     with pytest.raises(RuntimeError, match="CANDIDATE_ROUTER_MODE=assist"):
+        Settings.from_env()
+
+
+def test_task_semantic_linker_rejects_active_mode(monkeypatch) -> None:
+    monkeypatch.setenv("TASK_SEMANTIC_LINKER_MODE", "assist")
+
+    with pytest.raises(RuntimeError, match="must be off or shadow"):
+        Settings.from_env()
+
+
+def test_task_link_weights_must_sum_to_one(monkeypatch) -> None:
+    monkeypatch.setenv("TASK_LINK_SEMANTIC_WEIGHT", "0.50")
+
+    with pytest.raises(RuntimeError, match="sum to one"):
         Settings.from_env()
 
 

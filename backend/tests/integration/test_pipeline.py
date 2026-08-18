@@ -142,6 +142,31 @@ def test_preexisting_task_reference_supplies_ai_deadline_target() -> None:
     assert result.diagnostics.ai_unknown_task_id_rejection_count == 0
 
 
+def test_task_semantic_linker_shadow_records_without_changing_output() -> None:
+    case_dir = VALIDATION_ROOT / "W2-SHORT-C2-N0-IT-DREP-030"
+    metadata = json.loads((case_dir / "metadata.json").read_text(encoding="utf-8"))
+    meeting = MeetingInput(
+        metadata["meeting_id"],
+        metadata["meeting_title"],
+        metadata["meeting_date"],
+        (case_dir / "transcript.txt").read_text(encoding="utf-8"),
+    )
+
+    baseline = process_meeting(meeting, ProvisionalDeadlineAiClient())
+    shadow = process_meeting(
+        meeting,
+        ProvisionalDeadlineAiClient(),
+        task_semantic_linker_mode="shadow",
+        task_link_embedding_model_name="hashing-fallback-v1",
+    )
+
+    assert shadow.tasks == baseline.tasks
+    assert shadow.diagnostics.task_semantic_query_count >= 1
+    assert shadow.diagnostics.task_semantic_route_counts["DIRECT_LINK"] >= 1
+    assert shadow.diagnostics.task_semantic_reason_counts["EXACT_TASK_ID"] >= 1
+    assert shadow.diagnostics.task_semantic_linker_error_count == 0
+
+
 def test_explicit_task_discussion_remains_internal_provisional_state() -> None:
     transcript = (
         "Nam: Về task tích hợp CRM, hôm nay chỉ thảo luận phạm vi. "

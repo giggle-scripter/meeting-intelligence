@@ -138,7 +138,7 @@ def get_model_registry() -> ModelRegistry:
 
 
 def get_embedding_model(settings: Settings | None = None) -> EmbeddingModel:
-    """Resolve the configured embedding model without wiring it into V1."""
+    """Resolve the shared configured embedding model through the process cache."""
 
     if settings is None:
         from backend.app.config import get_settings

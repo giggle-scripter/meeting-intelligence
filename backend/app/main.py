@@ -334,6 +334,14 @@ def _submit_job(
             f"task_create_proposal={settings.task_create_proposal_enabled}",
             f"ai_create_proposal={settings.ai_create_proposal_enabled}",
             f"ai_create_max={settings.ai_create_max_proposals_per_meeting}",
+            f"task_linker={settings.task_semantic_linker_mode}",
+            f"task_link_scoring={settings.task_link_scoring_version}",
+            f"task_link_weights={settings.task_link_semantic_weight},"
+            f"{settings.task_link_lexical_weight},{settings.task_link_topic_weight},"
+            f"{settings.task_link_owner_weight},{settings.task_link_recency_weight}",
+            f"task_link_thresholds={settings.task_link_strong_threshold},"
+            f"{settings.task_link_min_margin},{settings.task_link_ai_threshold}",
+            f"task_link_top_k={settings.task_link_top_k}",
         )),
     )
     job, created = job_store.submit(
@@ -365,6 +373,28 @@ def _submit_job(
                 ai_create_max_proposals_per_meeting=(
                     settings.ai_create_max_proposals_per_meeting
                 ),
+                task_semantic_linker_mode=settings.task_semantic_linker_mode,
+                task_link_embedding_model_name=settings.embedding_model_name,
+                task_link_embedding_device=settings.embedding_device,
+                task_link_embedding_fallback_enabled=(
+                    settings.embedding_fallback_enabled
+                ),
+                task_link_embedding_fallback_dimension=(
+                    settings.embedding_fallback_dimension
+                ),
+                task_link_semantic_weight=settings.task_link_semantic_weight,
+                task_link_lexical_weight=settings.task_link_lexical_weight,
+                task_link_topic_weight=settings.task_link_topic_weight,
+                task_link_owner_weight=settings.task_link_owner_weight,
+                task_link_recency_weight=settings.task_link_recency_weight,
+                task_link_strong_threshold=settings.task_link_strong_threshold,
+                task_link_min_margin=settings.task_link_min_margin,
+                task_link_ai_threshold=settings.task_link_ai_threshold,
+                task_link_recency_horizon_clauses=(
+                    settings.task_link_recency_horizon_clauses
+                ),
+                task_link_top_k=settings.task_link_top_k,
+                task_link_scoring_version=settings.task_link_scoring_version,
             )
         ),
         pipeline_version=settings.pipeline_version,
@@ -454,6 +484,24 @@ def process_endpoint(
         ai_create_max_proposals_per_meeting=(
             settings.ai_create_max_proposals_per_meeting
         ),
+        task_semantic_linker_mode=settings.task_semantic_linker_mode,
+        task_link_embedding_model_name=settings.embedding_model_name,
+        task_link_embedding_device=settings.embedding_device,
+        task_link_embedding_fallback_enabled=settings.embedding_fallback_enabled,
+        task_link_embedding_fallback_dimension=settings.embedding_fallback_dimension,
+        task_link_semantic_weight=settings.task_link_semantic_weight,
+        task_link_lexical_weight=settings.task_link_lexical_weight,
+        task_link_topic_weight=settings.task_link_topic_weight,
+        task_link_owner_weight=settings.task_link_owner_weight,
+        task_link_recency_weight=settings.task_link_recency_weight,
+        task_link_strong_threshold=settings.task_link_strong_threshold,
+        task_link_min_margin=settings.task_link_min_margin,
+        task_link_ai_threshold=settings.task_link_ai_threshold,
+        task_link_recency_horizon_clauses=(
+            settings.task_link_recency_horizon_clauses
+        ),
+        task_link_top_k=settings.task_link_top_k,
+        task_link_scoring_version=settings.task_link_scoring_version,
     )
     return asdict(result)
 
@@ -579,6 +627,24 @@ async def process_file_endpoint(
         ai_create_max_proposals_per_meeting=(
             settings.ai_create_max_proposals_per_meeting
         ),
+        task_semantic_linker_mode=settings.task_semantic_linker_mode,
+        task_link_embedding_model_name=settings.embedding_model_name,
+        task_link_embedding_device=settings.embedding_device,
+        task_link_embedding_fallback_enabled=settings.embedding_fallback_enabled,
+        task_link_embedding_fallback_dimension=settings.embedding_fallback_dimension,
+        task_link_semantic_weight=settings.task_link_semantic_weight,
+        task_link_lexical_weight=settings.task_link_lexical_weight,
+        task_link_topic_weight=settings.task_link_topic_weight,
+        task_link_owner_weight=settings.task_link_owner_weight,
+        task_link_recency_weight=settings.task_link_recency_weight,
+        task_link_strong_threshold=settings.task_link_strong_threshold,
+        task_link_min_margin=settings.task_link_min_margin,
+        task_link_ai_threshold=settings.task_link_ai_threshold,
+        task_link_recency_horizon_clauses=(
+            settings.task_link_recency_horizon_clauses
+        ),
+        task_link_top_k=settings.task_link_top_k,
+        task_link_scoring_version=settings.task_link_scoring_version,
     )
     return asdict(result)
 
