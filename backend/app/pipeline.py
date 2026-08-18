@@ -805,6 +805,12 @@ def process_meeting(
     ai_mutation_router_mode: str = "off",
     ai_mutation_prompt_version: str = "mutation-resolution-v2",
     ai_mutation_min_confidence: float = 0.70,
+    note_dual_view_mode: str = "off",
+    note_claim_max_transcript_clauses: int = 8,
+    note_claim_max_topics: int = 3,
+    note_claim_grounding_threshold: float = 0.72,
+    note_claim_grounding_margin: float = 0.12,
+    note_dual_view_version: str = "note-dual-view-v1",
 ) -> PipelineResult:
     ai_client = ai_client or DisabledAiClient()
     stages = preprocess_meeting(meeting, speaker_aliases)
@@ -855,8 +861,25 @@ def process_meeting(
         raise ValueError("ai_mutation_router assist requires candidate, semantic, and context routing")
     if not 0.0 <= ai_mutation_min_confidence <= 1.0:
         raise ValueError("ai_mutation_min_confidence must be between zero and one")
+    if note_dual_view_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("note_dual_view_mode must be off, shadow, or assist")
+    if note_dual_view_mode != "off" and meeting_context_mode == "off":
+        raise ValueError("note_dual_view_mode requires meeting_context_mode")
+    if not 0 < note_claim_max_transcript_clauses <= 8 or not 0 < note_claim_max_topics <= 3:
+        raise ValueError("note dual-view limits exceed their hard caps")
+    if not 0.0 <= note_claim_grounding_threshold <= 1.0 or not 0.0 <= note_claim_grounding_margin <= 1.0:
+        raise ValueError("note dual-view thresholds must be between zero and one")
+    if not note_dual_view_version:
+        raise ValueError("note_dual_view_version must not be empty")
     meeting_context = None
     note_cues_by_clause = {}
+    note_dual_view_stats = {
+        "claim_count": 0, "full_count": 0, "partial_count": 0, "only_count": 0,
+        "contradicted_count": 0, "retrieval_clause_count": 0, "mean_top1_score": 0.0,
+        "mean_margin": 0.0, "human_proposal_candidate_count": 0,
+        "auto_overview_context_only_count": 0, "direct_event_suppressed_count": 0,
+        "error_count": 0, "reason_counts": {},
+    }
     if meeting_context_mode != "off":
         from .v2.context import (
             apply_note_cues_to_annotations,
@@ -873,8 +896,39 @@ def process_meeting(
             max_topics=max_meeting_topics,
             max_topic_keywords=max_topic_keywords,
             topic_likely_threshold=topic_likely_threshold,
+            note_dual_view_mode=note_dual_view_mode,
+            note_claim_max_transcript_clauses=note_claim_max_transcript_clauses,
+            note_claim_grounding_threshold=note_claim_grounding_threshold,
+            note_claim_grounding_margin=note_claim_grounding_margin,
         )
         note_cues_by_clause = build_note_cue_index(meeting_context)
+        if note_dual_view_mode != "off":
+            from .v2.context import decide_note_authority
+            from .v2.models import NoteGroundingLevel
+
+            claims_by_id = {item.note_claim_id: item for item in meeting_context.note_claims}
+            groundings = meeting_context.note_claim_groundings
+            levels = Counter(item.level.value for item in groundings)
+            reason_counts = Counter(
+                reason for item in groundings for reason in item.reasons
+            )
+            authorities = [
+                decide_note_authority(claims_by_id[item.note_claim_id], item)
+                for item in groundings if item.note_claim_id in claims_by_id
+            ]
+            note_dual_view_stats.update({
+                "claim_count": len(groundings),
+                "full_count": levels[NoteGroundingLevel.FULL_GROUNDED.value],
+                "partial_count": levels[NoteGroundingLevel.PARTIAL_GROUNDED.value],
+                "only_count": levels[NoteGroundingLevel.NOTE_ONLY.value],
+                "contradicted_count": levels[NoteGroundingLevel.CONTRADICTED.value],
+                "retrieval_clause_count": sum(len(item.transcript_clause_ids) for item in groundings),
+                "mean_top1_score": (sum(item.semantic_score for item in groundings) / len(groundings) if groundings else 0.0),
+                "mean_margin": (sum(item.margin for item in groundings) / len(groundings) if groundings else 0.0),
+                "human_proposal_candidate_count": sum(item.candidate_signal == "WEAK" for item in authorities),
+                "auto_overview_context_only_count": sum(item.candidate_signal == "CONTEXT_ONLY" for item in authorities),
+                "reason_counts": dict(sorted(reason_counts.items())),
+            })
         if meeting_context_mode == "assist":
             annotations = apply_note_cues_to_annotations(
                 annotations,
@@ -953,7 +1007,7 @@ def process_meeting(
     windows = merge_windows(build_candidate_windows(clauses, annotations))
     clauses_by_id = {clause.clause_id: clause for clause in clauses}
     events = []
-    if meeting_context_mode == "assist" and meeting.meeting_note:
+    if meeting_context_mode == "assist" and meeting.meeting_note and note_dual_view_mode != "assist":
         note_events, note_clauses = extract_events_from_human_note(
             meeting.meeting_note,
             meeting_context,
@@ -963,6 +1017,11 @@ def process_meeting(
         )
         clauses_by_id.update(note_clauses)
         events.extend(note_events)
+    elif meeting_context_mode == "assist" and meeting.meeting_note and note_dual_view_mode == "assist":
+        # A parsed note is never direct ledger authority in dual-view assist.
+        note_dual_view_stats["direct_event_suppressed_count"] = len(
+            meeting_context.note_claims if meeting_context else ()
+        )
     events.extend(
         extract_provisional_task_references(clauses, start_sequence=len(events))
     )
@@ -1819,6 +1878,21 @@ def process_meeting(
         ai_mutation_invalid_deadline_count=(
             ai_mutation_router_summary.invalid_deadline_count if ai_mutation_router_summary else 0
         ),
+        note_dual_view_mode=note_dual_view_mode,
+        note_dual_view_version=(note_dual_view_version if note_dual_view_mode != "off" else "disabled"),
+        note_claim_count=note_dual_view_stats["claim_count"],
+        note_full_grounded_count=note_dual_view_stats["full_count"],
+        note_partial_grounded_count=note_dual_view_stats["partial_count"],
+        note_only_count=note_dual_view_stats["only_count"],
+        note_contradicted_count=note_dual_view_stats["contradicted_count"],
+        note_claim_retrieval_clause_count=note_dual_view_stats["retrieval_clause_count"],
+        note_claim_mean_top1_score=note_dual_view_stats["mean_top1_score"],
+        note_claim_mean_margin=note_dual_view_stats["mean_margin"],
+        note_human_proposal_candidate_count=note_dual_view_stats["human_proposal_candidate_count"],
+        note_auto_overview_context_only_count=note_dual_view_stats["auto_overview_context_only_count"],
+        note_direct_event_suppressed_count=note_dual_view_stats["direct_event_suppressed_count"],
+        note_dual_view_error_count=note_dual_view_stats["error_count"],
+        note_grounding_reason_counts=note_dual_view_stats["reason_counts"],
     )
     result = build_pipeline_result(
         meeting.meeting_title,
@@ -1849,6 +1923,7 @@ def process_meeting(
             "unresolved_window_ids": unresolved,
             "final_tasks": [asdict(item) for item in result.tasks],
             "meeting_context": asdict(meeting_context) if meeting_context else None,
+            "note_dual_view": note_dual_view_stats,
             "note_cues_by_clause": {
                 clause_id: [asdict(cue) for cue in cues]
                 for clause_id, cues in note_cues_by_clause.items()
@@ -1987,6 +2062,12 @@ def process_meeting_by_version(
     ai_mutation_router_mode: str = "off",
     ai_mutation_prompt_version: str = "mutation-resolution-v2",
     ai_mutation_min_confidence: float = 0.70,
+    note_dual_view_mode: str = "off",
+    note_claim_max_transcript_clauses: int = 8,
+    note_claim_max_topics: int = 3,
+    note_claim_grounding_threshold: float = 0.72,
+    note_claim_grounding_margin: float = 0.12,
+    note_dual_view_version: str = "note-dual-view-v1",
 ) -> PipelineResult:
     """Select V1/V2 or run V2 in shadow while returning V1's public result."""
 
@@ -2049,6 +2130,12 @@ def process_meeting_by_version(
             ai_mutation_router_mode=ai_mutation_router_mode,
             ai_mutation_prompt_version=ai_mutation_prompt_version,
             ai_mutation_min_confidence=ai_mutation_min_confidence,
+            note_dual_view_mode=note_dual_view_mode,
+            note_claim_max_transcript_clauses=note_claim_max_transcript_clauses,
+            note_claim_max_topics=note_claim_max_topics,
+            note_claim_grounding_threshold=note_claim_grounding_threshold,
+            note_claim_grounding_margin=note_claim_grounding_margin,
+            note_dual_view_version=note_dual_view_version,
         )
     if pipeline_version == "v1":
         assert v1_result is not None

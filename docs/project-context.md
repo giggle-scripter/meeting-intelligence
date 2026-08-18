@@ -850,6 +850,9 @@ call thành công nhưng không tạo accepted event không phải quality impro
 | `AI_MUTATION_ROUTER_MODE` | `off` (an toàn); `shadow` tạo bounded payload không gọi provider; `assist` thay legacy mutation call cùng anchor sau Python validation |
 | `AI_MUTATION_PROMPT_VERSION` | `mutation-resolution-v2` |
 | `AI_MUTATION_MIN_CONFIDENCE` | `0.70`; response thấp hơn bị reject |
+| `NOTE_DUAL_VIEW_MODE` | `off`; `shadow` chỉ audit claims/grounding; `assist` suppress note direct events |
+| `NOTE_CLAIM_MAX_TRANSCRIPT_CLAUSES` | `8` hard cap cho mỗi claim |
+| `NOTE_CLAIM_GROUNDING_THRESHOLD` / `NOTE_CLAIM_GROUNDING_MARGIN` | `0.72` / `0.12` |
 | `CONTEXT_MAX_CLAUSES` | `30`; hard cap, không cho cấu hình cao hơn |
 | `CONTEXT_MAX_CHARACTERS` | `12000`; hard cap, không cho cấu hình cao hơn |
 | `CONTEXT_MAX_TASKS` | `5`; top-k task memory hard cap |

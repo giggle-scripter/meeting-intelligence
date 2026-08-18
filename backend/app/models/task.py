@@ -156,6 +156,21 @@ class PipelineDiagnostics:
     ai_mutation_invalid_anchor_count: int = 0
     ai_mutation_invalid_owner_span_count: int = 0
     ai_mutation_invalid_deadline_count: int = 0
+    note_dual_view_mode: str = "off"
+    note_dual_view_version: str = "disabled"
+    note_claim_count: int = 0
+    note_full_grounded_count: int = 0
+    note_partial_grounded_count: int = 0
+    note_only_count: int = 0
+    note_contradicted_count: int = 0
+    note_claim_retrieval_clause_count: int = 0
+    note_claim_mean_top1_score: float = 0.0
+    note_claim_mean_margin: float = 0.0
+    note_human_proposal_candidate_count: int = 0
+    note_auto_overview_context_only_count: int = 0
+    note_direct_event_suppressed_count: int = 0
+    note_dual_view_error_count: int = 0
+    note_grounding_reason_counts: dict[str, int] = field(default_factory=dict)
 
 
 @dataclass
