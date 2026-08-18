@@ -846,6 +846,16 @@ call thành công nhưng không tạo accepted event không phải quality impro
 | `TASK_LINK_RECENCY_HORIZON_CLAUSES` | `200` |
 | `TASK_LINK_TOP_K` | `5`; bounded candidate list |
 | `TASK_LINK_SCORING_VERSION` | `task-link-scoring-v1` |
+| `CONTEXT_RETRIEVAL_MODE` | `off`; `shadow` yêu cầu task semantic linker cũng `shadow` |
+| `CONTEXT_MAX_CLAUSES` | `30`; hard cap, không cho cấu hình cao hơn |
+| `CONTEXT_MAX_CHARACTERS` | `12000`; hard cap, không cho cấu hình cao hơn |
+| `CONTEXT_MAX_TASKS` | `5`; top-k task memory hard cap |
+| `CONTEXT_LOCAL_BEFORE` / `CONTEXT_LOCAL_AFTER` | `3/5` clause quanh focus |
+| `CONTEXT_MAX_TOPIC_CLAUSES` / `CONTEXT_MAX_TOPICS` | `12/3` |
+| `CONTEXT_MAX_HISTORY_EVENTS_PER_TASK` | `3` mutation gần nhất mỗi task |
+| `CONTEXT_TOPIC_BOUNDARY_THRESHOLD` | `0.42` |
+| `CONTEXT_TOPIC_SMOOTHING_WINDOW` | `3`; chỉ cho phép `2` hoặc `3` turn |
+| `CONTEXT_RETRIEVAL_VERSION` | `context-retriever-v1` |
 | `ACTION_CLEAR_THRESHOLD` | `0.82`; router config, không hardcode trong logic |
 | `ACTION_AI_THRESHOLD` | `0.45`; router config, không hardcode trong logic |
 | `CANDIDATE_THRESHOLD_VERSION` | `candidate-router-thresholds-v1` |
@@ -1023,6 +1033,49 @@ Full 86-case MiniLM shadow, with Meeting Note:
 Không tune threshold production từ distribution này: 177 task mapping vẫn chờ
 review, và default weights chưa tạo semantic direct-link trên full corpus. Đây
 là fail-closed shadow baseline, không phải bằng chứng đủ để bật assist.
+
+### 21.4 Bounded context retrieval shadow baseline
+
+PR7 thêm `TopicIndex`, `ContextBundle` và chronological context shadow trong
+`backend/app/retrieval/`. Topic boundary dùng centroid của turn, rolling smoothing
+2–3 turn và discourse markers như `chuyển sang`, `tiếp theo`, `moving on`;
+một short semantic outlier không tự tách topic. Mutation retrieval luôn tìm
+nearest topic trước rồi mới nearest clause trong topic, không lấy global nearest
+clauses tùy ý.
+
+Context được chọn đúng thứ tự: focus và local `-3/+5` → source evidence của
+top-k task candidates → same-topic semantic clauses → mutation history gần nhất
+→ grounded/ambiguous note cues gắn với các clause đã chọn. Bundle lưu task/history/
+note provenance và bị chặn cứng ở 30 clause, 12.000 raw characters, 5 task. Replay
+xây bundle trước khi apply mutation hiện tại, nên task hoặc history tương lai
+không thể lọt vào memory. Đây vẫn là shadow (`executed=false`), chưa thay payload
+AI hoặc production reducer.
+
+Verification: 313 backend tests pass, gồm explicit topic boundary, smoothed
+outlier guard, topic-first retrieval, priority under cap, note cues, chronology
+và pipeline output invariance.
+
+Full 86-case MiniLM shadow, without Meeting Note:
+
+- 273/273 mutation có bundle, zero context error;
+- tổng 6.816 selected clauses, 331.041 characters, 969 related-task references,
+  63 history-event references; không có note cue;
+- max quan sát 30 clauses và 2.068 characters; clause cap hit 36 lần,
+  character cap hit 0;
+- final output giữ nguyên baseline 16/86, precision `0.4074`, recall `0.5560`,
+  field accuracy `0.8604`.
+
+Full 86-case MiniLM shadow, with Meeting Note:
+
+- 273/273 mutation có bundle, zero context error;
+- tổng 6.830 selected clauses, 333.348 characters, 975 related-task references,
+  72 history-event references và 719 note-cue references;
+- max quan sát 30 clauses và 2.173 characters; clause cap hit 43 lần,
+  character cap hit 0;
+- final output giữ nguyên baseline 15/86, precision `0.4271`, recall `0.6029`,
+  field accuracy `0.8573`.
+
+Report runtime chỉ dùng để xác nhận PR và không commit. Chưa gọi paid provider.
 
 ## 22. Quy tắc khi thay đổi project
 

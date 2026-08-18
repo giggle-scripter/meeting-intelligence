@@ -5,6 +5,8 @@ from __future__ import annotations
 from collections import Counter
 from dataclasses import dataclass, field
 
+from pydantic import BaseModel, ConfigDict, Field
+
 from backend.app.models import Clause, TaskEvent
 from backend.app.reduction.task_ledger import LedgerTask, TaskLedger
 
@@ -42,6 +44,17 @@ class TaskLinkerShadowSummary:
     ambiguous_sibling_count: int = 0
     mean_top1_score: float = 0.0
     mean_margin: float = 0.0
+
+
+class TaskLinkerShadowRecord(BaseModel):
+    """One mutation query/result pair retained for downstream shadow consumers."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    event_id: str = Field(min_length=1)
+    source_clause_ids: tuple[str, ...]
+    query: MutationQuery
+    result: TaskRetrievalResult
 
 
 def _topics_for_clauses(
@@ -111,14 +124,14 @@ def evaluate_task_linker_shadow(
     embedding_model,
     config: TaskLinkScoringConfig,
     topic_ids_by_clause: dict[str, tuple[str, ...]] | None = None,
-) -> tuple[TaskLinkerShadowSummary, list[TaskRetrievalResult]]:
+) -> tuple[TaskLinkerShadowSummary, list[TaskLinkerShadowRecord]]:
     """Replay production chronology while recording non-authoritative retrieval."""
 
     topic_ids_by_clause = topic_ids_by_clause or {}
     ledger = TaskLedger()
     index = TaskIndex(embedding_model)
     retriever = TaskRetriever(index, config)
-    results: list[TaskRetrievalResult] = []
+    records: list[TaskLinkerShadowRecord] = []
     route_counts: Counter[str] = Counter()
     reason_counts: Counter[str] = Counter()
     agreement = 0
@@ -135,10 +148,16 @@ def evaluate_task_linker_shadow(
                 for task in ledger.candidate_tasks()
                 if task.canonical_action.strip()
             )
-            result = retriever.retrieve(
-                build_mutation_query(event, clauses_by_id, topic_ids_by_clause)
+            query = build_mutation_query(event, clauses_by_id, topic_ids_by_clause)
+            result = retriever.retrieve(query)
+            records.append(
+                TaskLinkerShadowRecord(
+                    event_id=event.event_id,
+                    source_clause_ids=tuple(event.source_clause_ids),
+                    query=query,
+                    result=result,
+                )
             )
-            results.append(result)
             route_counts[result.status] += 1
             reason_counts[result.reason] += 1
             siblings += int(result.reason == "MULTIPLE_EXACT_ALIAS_MATCHES")
@@ -153,7 +172,7 @@ def evaluate_task_linker_shadow(
             else:
                 disagreement += 1
 
-    count = len(results)
+    count = len(records)
     return (
         TaskLinkerShadowSummary(
             linker_version=retriever.VERSION,
@@ -170,5 +189,5 @@ def evaluate_task_linker_shadow(
             mean_top1_score=(sum(top_scores) / len(top_scores) if top_scores else 0.0),
             mean_margin=(sum(margins) / len(margins) if margins else 0.0),
         ),
-        results,
+        records,
     )

@@ -788,6 +788,18 @@ def process_meeting(
     task_link_recency_horizon_clauses: int = 200,
     task_link_top_k: int = 5,
     task_link_scoring_version: str = "task-link-scoring-v1",
+    context_retrieval_mode: str = "off",
+    context_max_clauses: int = 30,
+    context_max_characters: int = 12_000,
+    context_max_tasks: int = 5,
+    context_local_before: int = 3,
+    context_local_after: int = 5,
+    context_max_topic_clauses: int = 12,
+    context_max_topics: int = 3,
+    context_max_history_events_per_task: int = 3,
+    context_topic_boundary_threshold: float = 0.42,
+    context_topic_smoothing_window: int = 3,
+    context_retrieval_version: str = "context-retriever-v1",
 ) -> PipelineResult:
     ai_client = ai_client or DisabledAiClient()
     stages = preprocess_meeting(meeting, speaker_aliases)
@@ -824,6 +836,12 @@ def process_meeting(
         raise ValueError("ai_create_max_proposals_per_meeting must be positive")
     if task_semantic_linker_mode not in {"off", "shadow"}:
         raise ValueError("task_semantic_linker_mode must be off or shadow")
+    if context_retrieval_mode not in {"off", "shadow"}:
+        raise ValueError("context_retrieval_mode must be off or shadow")
+    if context_retrieval_mode == "shadow" and task_semantic_linker_mode != "shadow":
+        raise ValueError(
+            "context_retrieval_mode=shadow requires task_semantic_linker_mode=shadow"
+        )
     meeting_context = None
     note_cues_by_clause = {}
     if meeting_context_mode != "off":
@@ -1207,13 +1225,14 @@ def process_meeting(
     task_semantic_linker_shadow = None
     task_semantic_linker_results = []
     task_semantic_linker_error_count = 0
+    task_link_embedding_model = None
     if task_semantic_linker_mode == "shadow":
         try:
             from .ml.model_registry import get_model_registry
             from .retrieval import TaskLinkScoringConfig
             from .retrieval.shadow import evaluate_task_linker_shadow
 
-            embedding_model = get_model_registry().get_embedding_model(
+            task_link_embedding_model = get_model_registry().get_embedding_model(
                 task_link_embedding_model_name,
                 device=task_link_embedding_device,
                 fallback_dimension=task_link_embedding_fallback_dimension,
@@ -1244,13 +1263,63 @@ def process_meeting(
             ) = evaluate_task_linker_shadow(
                 events,
                 clauses_by_id,
-                embedding_model=embedding_model,
+                embedding_model=task_link_embedding_model,
                 config=scoring_config,
                 topic_ids_by_clause=topic_ids_by_clause,
             )
         except (KeyError, OSError, RuntimeError, TypeError, ValueError) as exc:
             LOGGER.warning("Task semantic linker shadow failed: %s", exc)
             task_semantic_linker_error_count = 1
+    context_retrieval_shadow = None
+    context_retrieval_records = []
+    context_retrieval_error_count = 0
+    if context_retrieval_mode == "shadow":
+        try:
+            from .retrieval import (
+                ContextRetrievalConfig,
+                ContextRetriever,
+                TopicIndex,
+                evaluate_context_retrieval_shadow,
+            )
+
+            if task_link_embedding_model is None:
+                raise RuntimeError("task semantic embedding model is unavailable")
+            topic_index = TopicIndex(
+                clauses,
+                task_link_embedding_model,
+                boundary_threshold=context_topic_boundary_threshold,
+                smoothing_window=context_topic_smoothing_window,
+            )
+            context_retriever = ContextRetriever(
+                clauses,
+                topic_index,
+                ContextRetrievalConfig(
+                    max_clauses=context_max_clauses,
+                    max_characters=context_max_characters,
+                    max_tasks=context_max_tasks,
+                    local_before=context_local_before,
+                    local_after=context_local_after,
+                    max_topic_clauses=context_max_topic_clauses,
+                    max_topics=context_max_topics,
+                    max_history_events_per_task=(
+                        context_max_history_events_per_task
+                    ),
+                    version=context_retrieval_version,
+                ),
+            )
+            (
+                context_retrieval_shadow,
+                context_retrieval_records,
+            ) = evaluate_context_retrieval_shadow(
+                events,
+                clauses_by_id,
+                task_semantic_linker_results,
+                retriever=context_retriever,
+                note_cues_by_clause=note_cues_by_clause,
+            )
+        except (KeyError, OSError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Context retrieval shadow failed: %s", exc)
+            context_retrieval_error_count = 1
     ledger = reduce_task_events_to_ledger(events)
     reconciliation_operations = build_deterministic_reconciliation_operations(ledger)
     reconciliation = reconcile_ledger(ledger, reconciliation_operations)
@@ -1512,6 +1581,69 @@ def process_meeting(
             if task_semantic_linker_shadow else 0.0
         ),
         task_semantic_linker_error_count=task_semantic_linker_error_count,
+        context_retrieval_mode=context_retrieval_mode,
+        context_retrieval_version=(
+            context_retrieval_shadow.retriever_version
+            if context_retrieval_shadow
+            else ("unavailable" if context_retrieval_mode == "shadow" else "disabled")
+        ),
+        context_topic_index_version=(
+            context_retrieval_shadow.topic_index_version
+            if context_retrieval_shadow
+            else ("unavailable" if context_retrieval_mode == "shadow" else "disabled")
+        ),
+        context_embedding_model_version=(
+            context_retrieval_shadow.embedding_model_version
+            if context_retrieval_shadow
+            else ("unavailable" if context_retrieval_mode == "shadow" else "disabled")
+        ),
+        context_bundle_count=(
+            context_retrieval_shadow.bundle_count if context_retrieval_shadow else 0
+        ),
+        context_total_clause_count=(
+            context_retrieval_shadow.total_clause_count
+            if context_retrieval_shadow else 0
+        ),
+        context_total_character_count=(
+            context_retrieval_shadow.total_character_count
+            if context_retrieval_shadow else 0
+        ),
+        context_total_task_count=(
+            context_retrieval_shadow.total_task_count
+            if context_retrieval_shadow else 0
+        ),
+        context_total_history_event_count=(
+            context_retrieval_shadow.total_history_event_count
+            if context_retrieval_shadow else 0
+        ),
+        context_total_note_cue_count=(
+            context_retrieval_shadow.total_note_cue_count
+            if context_retrieval_shadow else 0
+        ),
+        context_max_clause_count_observed=(
+            context_retrieval_shadow.max_clause_count_observed
+            if context_retrieval_shadow else 0
+        ),
+        context_max_character_count_observed=(
+            context_retrieval_shadow.max_character_count_observed
+            if context_retrieval_shadow else 0
+        ),
+        context_clause_cap_hit_count=(
+            context_retrieval_shadow.clause_cap_hit_count
+            if context_retrieval_shadow else 0
+        ),
+        context_character_cap_hit_count=(
+            context_retrieval_shadow.character_cap_hit_count
+            if context_retrieval_shadow else 0
+        ),
+        context_tier_clause_counts=(
+            context_retrieval_shadow.tier_clause_counts
+            if context_retrieval_shadow else {}
+        ),
+        context_retrieval_error_count=(
+            context_retrieval_error_count
+            + (context_retrieval_shadow.error_count if context_retrieval_shadow else 0)
+        ),
     )
     result = build_pipeline_result(
         meeting.meeting_title,
@@ -1584,6 +1716,17 @@ def process_meeting(
                 ],
                 "executed": False,
             },
+            "context_retrieval_shadow": {
+                "summary": (
+                    asdict(context_retrieval_shadow)
+                    if context_retrieval_shadow else None
+                ),
+                "bundles": [
+                    item.model_dump(mode="json")
+                    for item in context_retrieval_records
+                ],
+                "executed": False,
+            },
             "context_compaction": {
                 "before_clause_count": ai_context_clause_count_before_pruning,
                 "after_unique_clause_count": len(ai_context_clause_ids),
@@ -1650,6 +1793,18 @@ def process_meeting_by_version(
     task_link_recency_horizon_clauses: int = 200,
     task_link_top_k: int = 5,
     task_link_scoring_version: str = "task-link-scoring-v1",
+    context_retrieval_mode: str = "off",
+    context_max_clauses: int = 30,
+    context_max_characters: int = 12_000,
+    context_max_tasks: int = 5,
+    context_local_before: int = 3,
+    context_local_after: int = 5,
+    context_max_topic_clauses: int = 12,
+    context_max_topics: int = 3,
+    context_max_history_events_per_task: int = 3,
+    context_topic_boundary_threshold: float = 0.42,
+    context_topic_smoothing_window: int = 3,
+    context_retrieval_version: str = "context-retriever-v1",
 ) -> PipelineResult:
     """Select V1/V2 or run V2 in shadow while returning V1's public result."""
 
@@ -1697,6 +1852,18 @@ def process_meeting_by_version(
             ),
             task_link_top_k=task_link_top_k,
             task_link_scoring_version=task_link_scoring_version,
+            context_retrieval_mode=context_retrieval_mode,
+            context_max_clauses=context_max_clauses,
+            context_max_characters=context_max_characters,
+            context_max_tasks=context_max_tasks,
+            context_local_before=context_local_before,
+            context_local_after=context_local_after,
+            context_max_topic_clauses=context_max_topic_clauses,
+            context_max_topics=context_max_topics,
+            context_max_history_events_per_task=context_max_history_events_per_task,
+            context_topic_boundary_threshold=context_topic_boundary_threshold,
+            context_topic_smoothing_window=context_topic_smoothing_window,
+            context_retrieval_version=context_retrieval_version,
         )
     if pipeline_version == "v1":
         assert v1_result is not None

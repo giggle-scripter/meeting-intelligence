@@ -51,6 +51,18 @@ class Settings:
     task_link_recency_horizon_clauses: int = 200
     task_link_top_k: int = 5
     task_link_scoring_version: str = "task-link-scoring-v1"
+    context_retrieval_mode: str = "off"
+    context_max_clauses: int = 30
+    context_max_characters: int = 12_000
+    context_max_tasks: int = 5
+    context_local_before: int = 3
+    context_local_after: int = 5
+    context_max_topic_clauses: int = 12
+    context_max_topics: int = 3
+    context_max_history_events_per_task: int = 3
+    context_topic_boundary_threshold: float = 0.42
+    context_topic_smoothing_window: int = 3
+    context_retrieval_version: str = "context-retriever-v1"
     action_clear_threshold: float = 0.82
     action_ai_threshold: float = 0.45
     candidate_threshold_version: str = "candidate-router-thresholds-v1"
@@ -185,6 +197,15 @@ class Settings:
         ).lower()
         if task_semantic_linker_mode not in {"off", "shadow"}:
             raise RuntimeError("TASK_SEMANTIC_LINKER_MODE must be off or shadow")
+        context_retrieval_mode = os.getenv(
+            "CONTEXT_RETRIEVAL_MODE", "off"
+        ).lower()
+        if context_retrieval_mode not in {"off", "shadow"}:
+            raise RuntimeError("CONTEXT_RETRIEVAL_MODE must be off or shadow")
+        if context_retrieval_mode == "shadow" and task_semantic_linker_mode != "shadow":
+            raise RuntimeError(
+                "CONTEXT_RETRIEVAL_MODE=shadow requires TASK_SEMANTIC_LINKER_MODE=shadow"
+            )
         task_link_weight_names = (
             "TASK_LINK_SEMANTIC_WEIGHT",
             "TASK_LINK_LEXICAL_WEIGHT",
@@ -239,6 +260,64 @@ class Settings:
         ).strip()
         if not task_link_scoring_version:
             raise RuntimeError("TASK_LINK_SCORING_VERSION must not be empty")
+        context_integer_defaults = {
+            "CONTEXT_MAX_CLAUSES": 30,
+            "CONTEXT_MAX_CHARACTERS": 12_000,
+            "CONTEXT_MAX_TASKS": 5,
+            "CONTEXT_LOCAL_BEFORE": 3,
+            "CONTEXT_LOCAL_AFTER": 5,
+            "CONTEXT_MAX_TOPIC_CLAUSES": 12,
+            "CONTEXT_MAX_TOPICS": 3,
+            "CONTEXT_MAX_HISTORY_EVENTS_PER_TASK": 3,
+            "CONTEXT_TOPIC_SMOOTHING_WINDOW": 3,
+        }
+        try:
+            context_integers = {
+                name: int(os.getenv(name, str(default)))
+                for name, default in context_integer_defaults.items()
+            }
+            context_topic_boundary_threshold = float(
+                os.getenv("CONTEXT_TOPIC_BOUNDARY_THRESHOLD", "0.42")
+            )
+        except ValueError as exc:
+            raise RuntimeError("context retrieval limits must be numeric") from exc
+        if not 1 <= context_integers["CONTEXT_MAX_CLAUSES"] <= 30:
+            raise RuntimeError("CONTEXT_MAX_CLAUSES must be between 1 and 30")
+        if not 1 <= context_integers["CONTEXT_MAX_CHARACTERS"] <= 12_000:
+            raise RuntimeError(
+                "CONTEXT_MAX_CHARACTERS must be between 1 and 12000"
+            )
+        if not 1 <= context_integers["CONTEXT_MAX_TASKS"] <= 5:
+            raise RuntimeError("CONTEXT_MAX_TASKS must be between 1 and 5")
+        if any(
+            context_integers[name] < 0
+            for name in (
+                "CONTEXT_LOCAL_BEFORE",
+                "CONTEXT_LOCAL_AFTER",
+                "CONTEXT_MAX_TOPIC_CLAUSES",
+                "CONTEXT_MAX_HISTORY_EVENTS_PER_TASK",
+            )
+        ):
+            raise RuntimeError("context window limits must not be negative")
+        if context_integers["CONTEXT_MAX_TOPIC_CLAUSES"] > 30:
+            raise RuntimeError("CONTEXT_MAX_TOPIC_CLAUSES must not exceed 30")
+        if context_integers["CONTEXT_MAX_HISTORY_EVENTS_PER_TASK"] > 10:
+            raise RuntimeError(
+                "CONTEXT_MAX_HISTORY_EVENTS_PER_TASK must not exceed 10"
+            )
+        if not 1 <= context_integers["CONTEXT_MAX_TOPICS"] <= 12:
+            raise RuntimeError("CONTEXT_MAX_TOPICS must be between 1 and 12")
+        if context_integers["CONTEXT_TOPIC_SMOOTHING_WINDOW"] not in {2, 3}:
+            raise RuntimeError("CONTEXT_TOPIC_SMOOTHING_WINDOW must be 2 or 3")
+        if not 0.0 <= context_topic_boundary_threshold <= 1.0:
+            raise RuntimeError(
+                "CONTEXT_TOPIC_BOUNDARY_THRESHOLD must be between zero and one"
+            )
+        context_retrieval_version = os.getenv(
+            "CONTEXT_RETRIEVAL_VERSION", "context-retriever-v1"
+        ).strip()
+        if not context_retrieval_version:
+            raise RuntimeError("CONTEXT_RETRIEVAL_VERSION must not be empty")
         try:
             action_clear_threshold = float(
                 os.getenv("ACTION_CLEAR_THRESHOLD", "0.82")
@@ -305,6 +384,22 @@ class Settings:
             task_link_recency_horizon_clauses=task_link_recency_horizon,
             task_link_top_k=task_link_top_k,
             task_link_scoring_version=task_link_scoring_version,
+            context_retrieval_mode=context_retrieval_mode,
+            context_max_clauses=context_integers["CONTEXT_MAX_CLAUSES"],
+            context_max_characters=context_integers["CONTEXT_MAX_CHARACTERS"],
+            context_max_tasks=context_integers["CONTEXT_MAX_TASKS"],
+            context_local_before=context_integers["CONTEXT_LOCAL_BEFORE"],
+            context_local_after=context_integers["CONTEXT_LOCAL_AFTER"],
+            context_max_topic_clauses=context_integers["CONTEXT_MAX_TOPIC_CLAUSES"],
+            context_max_topics=context_integers["CONTEXT_MAX_TOPICS"],
+            context_max_history_events_per_task=(
+                context_integers["CONTEXT_MAX_HISTORY_EVENTS_PER_TASK"]
+            ),
+            context_topic_boundary_threshold=context_topic_boundary_threshold,
+            context_topic_smoothing_window=(
+                context_integers["CONTEXT_TOPIC_SMOOTHING_WINDOW"]
+            ),
+            context_retrieval_version=context_retrieval_version,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,
             candidate_threshold_version=candidate_threshold_version,
