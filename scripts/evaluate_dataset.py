@@ -395,6 +395,13 @@ def main() -> None:
     parser.add_argument("--context-topic-boundary-threshold", type=float, default=0.42)
     parser.add_argument("--context-topic-smoothing-window", type=int, default=3)
     parser.add_argument("--context-retrieval-version", default="context-retriever-v1")
+    parser.add_argument(
+        "--ai-mutation-router-mode", choices=("off", "shadow", "assist"), default="off"
+    )
+    parser.add_argument(
+        "--ai-mutation-prompt-version", default="mutation-resolution-v2"
+    )
+    parser.add_argument("--ai-mutation-min-confidence", type=float, default=0.70)
     parser.add_argument("--action-clear-threshold", type=float, default=0.82)
     parser.add_argument("--action-ai-threshold", type=float, default=0.45)
     parser.add_argument(
@@ -437,6 +444,16 @@ def main() -> None:
         parser.error(
             "--context-retrieval-mode shadow requires --task-semantic-linker-mode shadow"
         )
+    if (
+        args.ai_mutation_router_mode == "shadow"
+        and (args.task_semantic_linker_mode != "shadow" or args.context_retrieval_mode != "shadow")
+    ):
+        parser.error("--ai-mutation-router-mode shadow requires semantic/context shadow")
+    if (
+        args.ai_mutation_router_mode == "assist"
+        and (args.candidate_router_mode != "assist" or args.task_semantic_linker_mode != "shadow" or args.context_retrieval_mode != "shadow")
+    ):
+        parser.error("--ai-mutation-router-mode assist requires candidate assist and semantic/context shadow")
     checkpoint_path = (
         args.report.with_suffix(args.report.suffix + ".checkpoint.json")
         if args.report
@@ -587,6 +604,9 @@ def main() -> None:
                             args.context_topic_smoothing_window
                         ),
                         context_retrieval_version=args.context_retrieval_version,
+                        ai_mutation_router_mode=args.ai_mutation_router_mode,
+                        ai_mutation_prompt_version=args.ai_mutation_prompt_version,
+                        ai_mutation_min_confidence=args.ai_mutation_min_confidence,
                     )
                 )
         except FatalBenchmarkError as exc:
@@ -1038,6 +1058,9 @@ def main() -> None:
             "task_link_top_k": args.task_link_top_k,
             "context_retrieval_mode": args.context_retrieval_mode,
             "context_retrieval_version": args.context_retrieval_version,
+            "ai_mutation_router_mode": args.ai_mutation_router_mode,
+            "ai_mutation_prompt_version": args.ai_mutation_prompt_version,
+            "ai_mutation_min_confidence": args.ai_mutation_min_confidence,
             "context_limits": {
                 "max_clauses": args.context_max_clauses,
                 "max_characters": args.context_max_characters,

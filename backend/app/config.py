@@ -63,6 +63,9 @@ class Settings:
     context_topic_boundary_threshold: float = 0.42
     context_topic_smoothing_window: int = 3
     context_retrieval_version: str = "context-retriever-v1"
+    ai_mutation_router_mode: str = "off"
+    ai_mutation_prompt_version: str = "mutation-resolution-v2"
+    ai_mutation_min_confidence: float = 0.70
     action_clear_threshold: float = 0.82
     action_ai_threshold: float = 0.45
     candidate_threshold_version: str = "candidate-router-thresholds-v1"
@@ -206,6 +209,22 @@ class Settings:
             raise RuntimeError(
                 "CONTEXT_RETRIEVAL_MODE=shadow requires TASK_SEMANTIC_LINKER_MODE=shadow"
             )
+        ai_mutation_router_mode = os.getenv("AI_MUTATION_ROUTER_MODE", "off").lower()
+        if ai_mutation_router_mode not in {"off", "shadow", "assist"}:
+            raise RuntimeError("AI_MUTATION_ROUTER_MODE must be off, shadow, or assist")
+        if ai_mutation_router_mode == "shadow" and (task_semantic_linker_mode != "shadow" or context_retrieval_mode != "shadow"):
+            raise RuntimeError("AI_MUTATION_ROUTER_MODE=shadow requires semantic and context shadow modes")
+        if ai_mutation_router_mode == "assist" and (candidate_router_mode != "assist" or task_semantic_linker_mode != "shadow" or context_retrieval_mode != "shadow"):
+            raise RuntimeError("AI_MUTATION_ROUTER_MODE=assist requires candidate, semantic, and context routing")
+        ai_mutation_prompt_version = os.getenv("AI_MUTATION_PROMPT_VERSION", "mutation-resolution-v2").strip()
+        if not ai_mutation_prompt_version:
+            raise RuntimeError("AI_MUTATION_PROMPT_VERSION must not be empty")
+        try:
+            ai_mutation_min_confidence = float(os.getenv("AI_MUTATION_MIN_CONFIDENCE", "0.70"))
+        except ValueError as exc:
+            raise RuntimeError("AI_MUTATION_MIN_CONFIDENCE must be a number") from exc
+        if not 0.0 <= ai_mutation_min_confidence <= 1.0:
+            raise RuntimeError("AI_MUTATION_MIN_CONFIDENCE must be between zero and one")
         task_link_weight_names = (
             "TASK_LINK_SEMANTIC_WEIGHT",
             "TASK_LINK_LEXICAL_WEIGHT",
@@ -400,6 +419,9 @@ class Settings:
                 context_integers["CONTEXT_TOPIC_SMOOTHING_WINDOW"]
             ),
             context_retrieval_version=context_retrieval_version,
+            ai_mutation_router_mode=ai_mutation_router_mode,
+            ai_mutation_prompt_version=ai_mutation_prompt_version,
+            ai_mutation_min_confidence=ai_mutation_min_confidence,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,
             candidate_threshold_version=candidate_threshold_version,

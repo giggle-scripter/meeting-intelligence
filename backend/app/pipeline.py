@@ -189,6 +189,8 @@ def _event_reason(event) -> str:
         return "AI_AMBIGUOUS"
     if event.extraction_source == "AI_CREATE_PROPOSAL":
         return "AI_GROUNDED_CREATE_PROPOSAL"
+    if event.extraction_source == "AI_MUTATION_ROUTER":
+        return "AI_BOUNDED_MUTATION_ROUTER"
     if event.extraction_source == "HUMAN_NOTE":
         return "TRUSTED_HUMAN_NOTE_POSITIVE"
     if event.extraction_source == "RULE_CONTEXT":
@@ -800,6 +802,9 @@ def process_meeting(
     context_topic_boundary_threshold: float = 0.42,
     context_topic_smoothing_window: int = 3,
     context_retrieval_version: str = "context-retriever-v1",
+    ai_mutation_router_mode: str = "off",
+    ai_mutation_prompt_version: str = "mutation-resolution-v2",
+    ai_mutation_min_confidence: float = 0.70,
 ) -> PipelineResult:
     ai_client = ai_client or DisabledAiClient()
     stages = preprocess_meeting(meeting, speaker_aliases)
@@ -842,6 +847,14 @@ def process_meeting(
         raise ValueError(
             "context_retrieval_mode=shadow requires task_semantic_linker_mode=shadow"
         )
+    if ai_mutation_router_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("ai_mutation_router_mode must be off, shadow, or assist")
+    if ai_mutation_router_mode == "shadow" and (task_semantic_linker_mode != "shadow" or context_retrieval_mode != "shadow"):
+        raise ValueError("ai_mutation_router shadow requires semantic and context shadow modes")
+    if ai_mutation_router_mode == "assist" and (candidate_router_mode != "assist" or task_semantic_linker_mode != "shadow" or context_retrieval_mode != "shadow"):
+        raise ValueError("ai_mutation_router assist requires candidate, semantic, and context routing")
+    if not 0.0 <= ai_mutation_min_confidence <= 1.0:
+        raise ValueError("ai_mutation_min_confidence must be between zero and one")
     meeting_context = None
     note_cues_by_clause = {}
     if meeting_context_mode != "off":
@@ -1157,12 +1170,119 @@ def process_meeting(
         recap_scope=recap_scope,
     )
 
+    # The routed path is deliberately built before legacy provider calls.  It
+    # replays only deterministic events before each anchor, so provider output
+    # can never supply its own retrieval memory.
+    ai_mutation_router_summary = None
+    ai_mutation_router_traces: list[dict] = []
+    router_owned_primary_clause_ids: set[str] = set()
+    if ai_mutation_router_mode != "off":
+        try:
+            from .ai.router import MutationRouter, MutationRouterSummary
+            from .ml.model_registry import get_model_registry
+            from .retrieval import ContextRetrievalConfig, ContextRetriever, TopicIndex
+            from .retrieval import TaskLinkScoringConfig
+
+            embedding_model = get_model_registry().get_embedding_model(
+                task_link_embedding_model_name,
+                device=task_link_embedding_device,
+                fallback_dimension=task_link_embedding_fallback_dimension,
+                allow_fallback=task_link_embedding_fallback_enabled,
+            )
+            context_retriever = ContextRetriever(
+                clauses,
+                TopicIndex(
+                    clauses, embedding_model,
+                    boundary_threshold=context_topic_boundary_threshold,
+                    smoothing_window=context_topic_smoothing_window,
+                ),
+                ContextRetrievalConfig(
+                    max_clauses=context_max_clauses,
+                    max_characters=context_max_characters,
+                    max_tasks=context_max_tasks,
+                    local_before=context_local_before,
+                    local_after=context_local_after,
+                    max_topic_clauses=context_max_topic_clauses,
+                    max_topics=context_max_topics,
+                    max_history_events_per_task=context_max_history_events_per_task,
+                    version=context_retrieval_version,
+                ),
+            )
+            scoring = TaskLinkScoringConfig(
+                semantic_weight=task_link_semantic_weight,
+                lexical_weight=task_link_lexical_weight,
+                topic_weight=task_link_topic_weight,
+                owner_weight=task_link_owner_weight,
+                recency_weight=task_link_recency_weight,
+                strong_threshold=task_link_strong_threshold,
+                minimum_margin=task_link_min_margin,
+                ai_threshold=task_link_ai_threshold,
+                recency_horizon_clauses=task_link_recency_horizon_clauses,
+                top_k=task_link_top_k,
+                version=task_link_scoring_version,
+            )
+            router = MutationRouter(
+                minimum_confidence=ai_mutation_min_confidence,
+                prompt_version=ai_mutation_prompt_version,
+            )
+            aggregate = MutationRouterSummary(
+                mode=ai_mutation_router_mode,
+                prompt_version=ai_mutation_prompt_version,
+            )
+            evidence_by_candidate = {
+                item.candidate_id: item for item in candidate_evidence_shadow
+            }
+            for decision in candidate_decisions_shadow:
+                if decision.route != CandidateRoute.AI_MUTATION_CHECK:
+                    continue
+                evidence = evidence_by_candidate[decision.candidate_id]
+                event, trace, summary = router.execute(
+                    meeting=meeting, decision=decision, evidence=evidence,
+                    deterministic_events=events, clauses_by_id=clauses_by_id,
+                    annotations=annotations, mentions=mentions,
+                    context_retriever=context_retriever, embedding_model=embedding_model,
+                    scoring=scoring, ai_client=ai_client, mode=ai_mutation_router_mode,
+                    start_sequence=len(events),
+                )
+                ai_mutation_router_traces.append(trace)
+                for name in (
+                    "candidate_count", "payload_count", "call_count", "event_count",
+                    "unresolved_count", "rejected_count", "error_count",
+                    "unknown_task_id_count", "invalid_source_count", "invalid_anchor_count",
+                    "invalid_owner_span_count", "invalid_deadline_count", "candidate_task_count",
+                    "context_clause_count", "context_character_count",
+                ):
+                    setattr(aggregate, name, getattr(aggregate, name) + getattr(summary, name))
+                aggregate.rejection_reasons.update(summary.rejection_reasons)
+                if event is not None:
+                    events.append(event)
+                if ai_mutation_router_mode == "assist":
+                    router_owned_primary_clause_ids.update(evidence.clause_ids)
+            ai_mutation_router_summary = aggregate
+        except (KeyError, OSError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("AI mutation router failed closed: %s", exc)
+            from .ai.router import MutationRouterSummary
+            ai_mutation_router_summary = MutationRouterSummary(
+                mode=ai_mutation_router_mode, prompt_version=ai_mutation_prompt_version,
+                error_count=1,
+            )
+
     ai_batches = batch_ai_windows(
         pending_ai_windows,
         ai_max_batch_context_clauses,
         group_keys=ai_group_keys,
     )
+    if ai_mutation_router_summary is not None:
+        ai_provider_call_count += ai_mutation_router_summary.call_count
     for batch in ai_batches:
+        if (
+            ai_mutation_router_mode == "assist"
+            and set(batch.window.primary_clause_ids) & router_owned_primary_clause_ids
+        ):
+            # The new router owns the candidate; never call the legacy provider
+            # path for the same anchor, including when it fail-closes.
+            unresolved.extend(batch.source_window_ids)
+            continue
         task_memory = (
             _build_ai_task_memory(events, batch.window, clauses_by_id)
             if ai_client.enabled
@@ -1345,7 +1465,7 @@ def process_meeting(
             event.extraction_source.startswith("RULE") for event in events
         ),
         ai_event_count=sum(
-            event.extraction_source in {"AI", "AI_CREATE_PROPOSAL"}
+            event.extraction_source in {"AI", "AI_CREATE_PROPOSAL", "AI_MUTATION_ROUTER"}
             for event in events
         ),
         ai_window_count=ai_window_count,
@@ -1644,6 +1764,61 @@ def process_meeting(
             context_retrieval_error_count
             + (context_retrieval_shadow.error_count if context_retrieval_shadow else 0)
         ),
+        ai_mutation_router_mode=ai_mutation_router_mode,
+        ai_mutation_router_version=(
+            ai_mutation_router_summary.version if ai_mutation_router_summary else "disabled"
+        ),
+        ai_mutation_prompt_version=(
+            ai_mutation_router_summary.prompt_version if ai_mutation_router_summary else "disabled"
+        ),
+        ai_mutation_candidate_count=(
+            ai_mutation_router_summary.candidate_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_payload_count=(
+            ai_mutation_router_summary.payload_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_call_count=(
+            ai_mutation_router_summary.call_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_event_count=(
+            ai_mutation_router_summary.event_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_unresolved_count=(
+            ai_mutation_router_summary.unresolved_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_rejected_count=(
+            ai_mutation_router_summary.rejected_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_error_count=(
+            ai_mutation_router_summary.error_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_rejection_reasons=(
+            ai_mutation_router_summary.rejection_reasons if ai_mutation_router_summary else {}
+        ),
+        ai_mutation_candidate_task_count=(
+            ai_mutation_router_summary.candidate_task_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_context_clause_count=(
+            ai_mutation_router_summary.context_clause_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_context_character_count=(
+            ai_mutation_router_summary.context_character_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_unknown_task_id_count=(
+            ai_mutation_router_summary.unknown_task_id_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_invalid_source_count=(
+            ai_mutation_router_summary.invalid_source_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_invalid_anchor_count=(
+            ai_mutation_router_summary.invalid_anchor_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_invalid_owner_span_count=(
+            ai_mutation_router_summary.invalid_owner_span_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_invalid_deadline_count=(
+            ai_mutation_router_summary.invalid_deadline_count if ai_mutation_router_summary else 0
+        ),
     )
     result = build_pipeline_result(
         meeting.meeting_title,
@@ -1694,6 +1869,10 @@ def process_meeting(
                     for item in candidate_decisions_shadow
                 ],
                 "executed": candidate_router_mode == "assist",
+            },
+            "ai_mutation_router": {
+                "summary": asdict(ai_mutation_router_summary) if ai_mutation_router_summary else None,
+                "candidates": ai_mutation_router_traces,
             },
             "task_create_proposals": {
                 "enabled": task_create_proposal_enabled,
@@ -1805,6 +1984,9 @@ def process_meeting_by_version(
     context_topic_boundary_threshold: float = 0.42,
     context_topic_smoothing_window: int = 3,
     context_retrieval_version: str = "context-retriever-v1",
+    ai_mutation_router_mode: str = "off",
+    ai_mutation_prompt_version: str = "mutation-resolution-v2",
+    ai_mutation_min_confidence: float = 0.70,
 ) -> PipelineResult:
     """Select V1/V2 or run V2 in shadow while returning V1's public result."""
 
@@ -1864,6 +2046,9 @@ def process_meeting_by_version(
             context_topic_boundary_threshold=context_topic_boundary_threshold,
             context_topic_smoothing_window=context_topic_smoothing_window,
             context_retrieval_version=context_retrieval_version,
+            ai_mutation_router_mode=ai_mutation_router_mode,
+            ai_mutation_prompt_version=ai_mutation_prompt_version,
+            ai_mutation_min_confidence=ai_mutation_min_confidence,
         )
     if pipeline_version == "v1":
         assert v1_result is not None
