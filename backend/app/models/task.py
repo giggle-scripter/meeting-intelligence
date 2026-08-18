@@ -98,6 +98,14 @@ class PipelineDiagnostics:
     candidate_route_counts: dict[str, int] = field(default_factory=dict)
     candidate_ai_create_check_suppressed_count: int = 0
     candidate_router_error_count: int = 0
+    task_create_proposal_call_count: int = 0
+    task_create_proposal_accepted_count: int = 0
+    task_create_proposal_no_action_count: int = 0
+    task_create_proposal_unresolved_count: int = 0
+    task_create_proposal_rejected_count: int = 0
+    task_create_proposal_rejection_reasons: dict[str, int] = field(
+        default_factory=dict
+    )
 
 
 @dataclass

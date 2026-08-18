@@ -124,8 +124,12 @@ Hạ tầng embedding local nằm trong `backend/app/ml/` và load model lazily,
 một lần cho mỗi cấu hình trong một process. Có thể đặt `EMBEDDING_MODEL_NAME`,
 `EMBEDDING_DEVICE` và `EMBEDDING_FALLBACK_DIMENSION`; nếu backend semantic không
 khả dụng, registry đánh dấu rõ và dùng hashing embedding deterministic. Hạ tầng
-này chưa được nối vào quyết định task của V1 nên không thay đổi output hiện tại.
-Model artifact lớn phải đặt trong `artifacts/models/`, không commit vào Git.
+này mặc định `off` nên không thay đổi output hiện tại. Create-proposal assist chỉ
+được chạy cho uncertain band khi classifier/router cùng ở `assist` và cả
+`TASK_CREATE_PROPOSAL_ENABLED=true`, `AI_CREATE_PROPOSAL_ENABLED=true`. Provider
+chỉ đề xuất grounded spans; Python validator mới được promote `TASK_CREATE`, tối
+đa `AI_CREATE_MAX_PROPOSALS_PER_MEETING` (mặc định `3`) mỗi meeting. Model artifact
+lớn phải đặt trong `artifacts/models/`, không commit vào Git.
 
 Khi debug fallback trên máy local, đặt `AI_FALLBACK_DEBUG=true`. Terminal sẽ log
 JSON event thô từ model và lý do event bị Python từ chối. Không bật cờ này ở môi

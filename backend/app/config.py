@@ -36,6 +36,9 @@ class Settings:
     action_classifier_mode: str = "off"
     action_classifier_model_path: str | None = None
     candidate_router_mode: str = "off"
+    task_create_proposal_enabled: bool = False
+    ai_create_proposal_enabled: bool = False
+    ai_create_max_proposals_per_meeting: int = 3
     action_clear_threshold: float = 0.82
     action_ai_threshold: float = 0.45
     candidate_threshold_version: str = "candidate-router-thresholds-v1"
@@ -131,15 +134,39 @@ class Settings:
         action_classifier_mode = os.getenv(
             "ACTION_CLASSIFIER_MODE", "off"
         ).lower()
-        if action_classifier_mode not in {"off", "shadow"}:
-            raise RuntimeError("ACTION_CLASSIFIER_MODE must be off or shadow")
+        if action_classifier_mode not in {"off", "shadow", "assist"}:
+            raise RuntimeError("ACTION_CLASSIFIER_MODE must be off, shadow, or assist")
         candidate_router_mode = os.getenv("CANDIDATE_ROUTER_MODE", "off").lower()
-        if candidate_router_mode not in {"off", "shadow"}:
-            raise RuntimeError("CANDIDATE_ROUTER_MODE must be off or shadow")
-        if candidate_router_mode == "shadow" and action_classifier_mode != "shadow":
+        if candidate_router_mode not in {"off", "shadow", "assist"}:
+            raise RuntimeError("CANDIDATE_ROUTER_MODE must be off, shadow, or assist")
+        if candidate_router_mode != "off" and action_classifier_mode != candidate_router_mode:
             raise RuntimeError(
-                "CANDIDATE_ROUTER_MODE=shadow requires "
-                "ACTION_CLASSIFIER_MODE=shadow"
+                f"CANDIDATE_ROUTER_MODE={candidate_router_mode} requires "
+                f"ACTION_CLASSIFIER_MODE={candidate_router_mode}"
+            )
+        task_create_proposal_enabled = env_bool(
+            "TASK_CREATE_PROPOSAL_ENABLED", False
+        )
+        ai_create_proposal_enabled = env_bool("AI_CREATE_PROPOSAL_ENABLED", False)
+        try:
+            ai_create_max_proposals = int(
+                os.getenv("AI_CREATE_MAX_PROPOSALS_PER_MEETING", "3")
+            )
+        except ValueError as exc:
+            raise RuntimeError(
+                "AI_CREATE_MAX_PROPOSALS_PER_MEETING must be an integer"
+            ) from exc
+        if ai_create_max_proposals <= 0:
+            raise RuntimeError(
+                "AI_CREATE_MAX_PROPOSALS_PER_MEETING must be greater than zero"
+            )
+        if ai_create_proposal_enabled and not task_create_proposal_enabled:
+            raise RuntimeError(
+                "AI_CREATE_PROPOSAL_ENABLED requires TASK_CREATE_PROPOSAL_ENABLED=true"
+            )
+        if task_create_proposal_enabled and candidate_router_mode != "assist":
+            raise RuntimeError(
+                "TASK_CREATE_PROPOSAL_ENABLED requires CANDIDATE_ROUTER_MODE=assist"
             )
         try:
             action_clear_threshold = float(
@@ -192,6 +219,9 @@ class Settings:
             ).strip()
             or None,
             candidate_router_mode=candidate_router_mode,
+            task_create_proposal_enabled=task_create_proposal_enabled,
+            ai_create_proposal_enabled=ai_create_proposal_enabled,
+            ai_create_max_proposals_per_meeting=ai_create_max_proposals,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,
             candidate_threshold_version=candidate_threshold_version,

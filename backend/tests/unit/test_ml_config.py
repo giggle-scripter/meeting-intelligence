@@ -19,6 +19,9 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
         "ACTION_CLEAR_THRESHOLD",
         "ACTION_AI_THRESHOLD",
         "CANDIDATE_THRESHOLD_VERSION",
+        "TASK_CREATE_PROPOSAL_ENABLED",
+        "AI_CREATE_PROPOSAL_ENABLED",
+        "AI_CREATE_MAX_PROPOSALS_PER_MEETING",
     ):
         monkeypatch.delenv(name, raising=False)
 
@@ -32,6 +35,9 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
     assert settings.candidate_router_mode == "off"
     assert settings.action_clear_threshold == 0.82
     assert settings.action_ai_threshold == 0.45
+    assert settings.task_create_proposal_enabled is False
+    assert settings.ai_create_proposal_enabled is False
+    assert settings.ai_create_max_proposals_per_meeting == 3
 
 
 def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
@@ -75,11 +81,16 @@ def test_ml_settings_reject_ambiguous_boolean(monkeypatch) -> None:
         Settings.from_env()
 
 
-def test_ml_settings_reject_active_classifier_routing(monkeypatch) -> None:
+def test_ml_settings_accept_matching_assist_modes(monkeypatch) -> None:
     monkeypatch.setenv("ACTION_CLASSIFIER_MODE", "assist")
+    monkeypatch.setenv("CANDIDATE_ROUTER_MODE", "assist")
+    monkeypatch.setenv("TASK_CREATE_PROPOSAL_ENABLED", "true")
+    monkeypatch.setenv("AI_CREATE_PROPOSAL_ENABLED", "true")
 
-    with pytest.raises(RuntimeError, match="must be off or shadow"):
-        Settings.from_env()
+    settings = Settings.from_env()
+
+    assert settings.task_create_proposal_enabled is True
+    assert settings.ai_create_proposal_enabled is True
 
 
 def test_candidate_router_shadow_requires_classifier_shadow(monkeypatch) -> None:
@@ -87,6 +98,15 @@ def test_candidate_router_shadow_requires_classifier_shadow(monkeypatch) -> None
     monkeypatch.setenv("CANDIDATE_ROUTER_MODE", "shadow")
 
     with pytest.raises(RuntimeError, match="requires ACTION_CLASSIFIER_MODE=shadow"):
+        Settings.from_env()
+
+
+def test_create_proposal_requires_assist_router(monkeypatch) -> None:
+    monkeypatch.setenv("ACTION_CLASSIFIER_MODE", "shadow")
+    monkeypatch.setenv("CANDIDATE_ROUTER_MODE", "shadow")
+    monkeypatch.setenv("TASK_CREATE_PROPOSAL_ENABLED", "true")
+
+    with pytest.raises(RuntimeError, match="CANDIDATE_ROUTER_MODE=assist"):
         Settings.from_env()
 
 

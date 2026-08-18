@@ -318,7 +318,7 @@ def _submit_job(
     job_key = versioned_idempotency_key(
         effective_content_hash,
         settings.pipeline_version,
-        "v1-ledger-mutation-v1",
+        "v1-ledger-proposal-v1",
         model_name,
         "|".join((
             f"batch={settings.ai_max_batch_context_clauses}",
@@ -331,6 +331,9 @@ def _submit_job(
             f"candidate_thresholds={settings.candidate_threshold_version}",
             f"action_clear={settings.action_clear_threshold}",
             f"action_ai={settings.action_ai_threshold}",
+            f"task_create_proposal={settings.task_create_proposal_enabled}",
+            f"ai_create_proposal={settings.ai_create_proposal_enabled}",
+            f"ai_create_max={settings.ai_create_max_proposals_per_meeting}",
         )),
     )
     job, created = job_store.submit(
@@ -357,10 +360,15 @@ def _submit_job(
                 action_clear_threshold=settings.action_clear_threshold,
                 action_ai_threshold=settings.action_ai_threshold,
                 candidate_threshold_version=settings.candidate_threshold_version,
+                task_create_proposal_enabled=settings.task_create_proposal_enabled,
+                ai_create_proposal_enabled=settings.ai_create_proposal_enabled,
+                ai_create_max_proposals_per_meeting=(
+                    settings.ai_create_max_proposals_per_meeting
+                ),
             )
         ),
         pipeline_version=settings.pipeline_version,
-        prompt_version="v1-ledger-mutation-v1",
+        prompt_version="v1-ledger-proposal-v1",
         model=model_name,
         content_hash=effective_content_hash,
         timeout_seconds=settings.job_timeout_seconds,
@@ -441,6 +449,11 @@ def process_endpoint(
         action_clear_threshold=settings.action_clear_threshold,
         action_ai_threshold=settings.action_ai_threshold,
         candidate_threshold_version=settings.candidate_threshold_version,
+        task_create_proposal_enabled=settings.task_create_proposal_enabled,
+        ai_create_proposal_enabled=settings.ai_create_proposal_enabled,
+        ai_create_max_proposals_per_meeting=(
+            settings.ai_create_max_proposals_per_meeting
+        ),
     )
     return asdict(result)
 
@@ -561,6 +574,11 @@ async def process_file_endpoint(
         action_clear_threshold=settings.action_clear_threshold,
         action_ai_threshold=settings.action_ai_threshold,
         candidate_threshold_version=settings.candidate_threshold_version,
+        task_create_proposal_enabled=settings.task_create_proposal_enabled,
+        ai_create_proposal_enabled=settings.ai_create_proposal_enabled,
+        ai_create_max_proposals_per_meeting=(
+            settings.ai_create_max_proposals_per_meeting
+        ),
     )
     return asdict(result)
 
