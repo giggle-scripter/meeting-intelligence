@@ -131,6 +131,14 @@ chỉ đề xuất grounded spans; Python validator mới được promote `TASK
 đa `AI_CREATE_MAX_PROPOSALS_PER_MEETING` (mặc định `3`) mỗi meeting. Model artifact
 lớn phải đặt trong `artifacts/models/`, không commit vào Git.
 
+Semantic task identity retrieval có thể chạy telemetry-only bằng
+`TASK_SEMANTIC_LINKER_MODE=shadow`. Index biểu diễn action, aliases, owners,
+topic và entities; embedding cache nằm ngoài ledger domain object. Retrieval
+luôn ưu tiên exact task ID rồi exact alias, sau đó mới tính lexical/semantic,
+owner/topic và recency. Top-1 chỉ được đánh dấu direct khi đạt cả
+`TASK_LINK_STRONG_THRESHOLD` và `TASK_LINK_MIN_MARGIN`; sibling gần nhau không
+được merge. Shadow mode không thay target của reducer hay public output.
+
 Khi debug fallback trên máy local, đặt `AI_FALLBACK_DEBUG=true`. Terminal sẽ log
 JSON event thô từ model và lý do event bị Python từ chối. Không bật cờ này ở môi
 trường có transcript thật vì log có thể chứa nội dung meeting.

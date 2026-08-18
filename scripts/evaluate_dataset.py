@@ -356,6 +356,31 @@ def main() -> None:
     parser.add_argument("--task-create-proposal", action="store_true")
     parser.add_argument("--ai-create-proposal", action="store_true")
     parser.add_argument("--ai-create-max-proposals", type=int, default=3)
+    parser.add_argument(
+        "--task-semantic-linker-mode",
+        choices=("off", "shadow"),
+        default="off",
+    )
+    parser.add_argument(
+        "--task-link-embedding-model-name",
+        default=os.getenv(
+            "EMBEDDING_MODEL_NAME",
+            "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        ),
+    )
+    parser.add_argument("--task-link-semantic-weight", type=float, default=0.55)
+    parser.add_argument("--task-link-lexical-weight", type=float, default=0.20)
+    parser.add_argument("--task-link-topic-weight", type=float, default=0.10)
+    parser.add_argument("--task-link-owner-weight", type=float, default=0.10)
+    parser.add_argument("--task-link-recency-weight", type=float, default=0.05)
+    parser.add_argument("--task-link-strong-threshold", type=float, default=0.78)
+    parser.add_argument("--task-link-min-margin", type=float, default=0.12)
+    parser.add_argument("--task-link-ai-threshold", type=float, default=0.60)
+    parser.add_argument("--task-link-recency-horizon", type=int, default=200)
+    parser.add_argument("--task-link-top-k", type=int, default=5)
+    parser.add_argument(
+        "--task-link-scoring-version", default="task-link-scoring-v1"
+    )
     parser.add_argument("--action-clear-threshold", type=float, default=0.82)
     parser.add_argument("--action-ai-threshold", type=float, default=0.45)
     parser.add_argument(
@@ -506,6 +531,23 @@ def main() -> None:
                         ai_create_max_proposals_per_meeting=(
                             args.ai_create_max_proposals
                         ),
+                        task_semantic_linker_mode=args.task_semantic_linker_mode,
+                        task_link_embedding_model_name=(
+                            args.task_link_embedding_model_name
+                        ),
+                        task_link_semantic_weight=args.task_link_semantic_weight,
+                        task_link_lexical_weight=args.task_link_lexical_weight,
+                        task_link_topic_weight=args.task_link_topic_weight,
+                        task_link_owner_weight=args.task_link_owner_weight,
+                        task_link_recency_weight=args.task_link_recency_weight,
+                        task_link_strong_threshold=args.task_link_strong_threshold,
+                        task_link_min_margin=args.task_link_min_margin,
+                        task_link_ai_threshold=args.task_link_ai_threshold,
+                        task_link_recency_horizon_clauses=(
+                            args.task_link_recency_horizon
+                        ),
+                        task_link_top_k=args.task_link_top_k,
+                        task_link_scoring_version=args.task_link_scoring_version,
                     )
                 )
         except FatalBenchmarkError as exc:
@@ -720,6 +762,12 @@ def main() -> None:
         "task_create_proposal_no_action_count",
         "task_create_proposal_unresolved_count",
         "task_create_proposal_rejected_count",
+        "task_semantic_query_count",
+        "task_semantic_scored_query_count",
+        "task_semantic_production_agreement_count",
+        "task_semantic_production_disagreement_count",
+        "task_semantic_ambiguous_sibling_count",
+        "task_semantic_linker_error_count",
     ):
         pipeline_diagnostics[name] = sum(
             int(item.get(name, 0)) for item in diagnostic_values
@@ -779,6 +827,43 @@ def main() -> None:
     pipeline_diagnostics["task_create_proposal_rejection_reasons"] = dict(
         sorted(proposal_rejection_reasons.items())
     )
+    task_semantic_route_counts: dict[str, int] = {}
+    task_semantic_reason_counts: dict[str, int] = {}
+    for item in diagnostic_values:
+        for route, count in item.get("task_semantic_route_counts", {}).items():
+            task_semantic_route_counts[route] = (
+                task_semantic_route_counts.get(route, 0) + int(count)
+            )
+        for reason, count in item.get("task_semantic_reason_counts", {}).items():
+            task_semantic_reason_counts[reason] = (
+                task_semantic_reason_counts.get(reason, 0) + int(count)
+            )
+    pipeline_diagnostics["task_semantic_route_counts"] = dict(
+        sorted(task_semantic_route_counts.items())
+    )
+    pipeline_diagnostics["task_semantic_reason_counts"] = dict(
+        sorted(task_semantic_reason_counts.items())
+    )
+    semantic_query_count = pipeline_diagnostics["task_semantic_query_count"]
+    semantic_scored_count = pipeline_diagnostics["task_semantic_scored_query_count"]
+    pipeline_diagnostics["task_semantic_mean_top1_score"] = (
+        sum(
+            float(item.get("task_semantic_mean_top1_score", 0.0))
+            * int(item.get("task_semantic_scored_query_count", 0))
+            for item in diagnostic_values
+        )
+        / semantic_scored_count
+        if semantic_scored_count else 0.0
+    )
+    pipeline_diagnostics["task_semantic_mean_margin"] = (
+        sum(
+            float(item.get("task_semantic_mean_margin", 0.0))
+            * int(item.get("task_semantic_query_count", 0))
+            for item in diagnostic_values
+        )
+        / semantic_query_count
+        if semantic_query_count else 0.0
+    )
     pipeline_diagnostics["candidate_router_versions"] = sorted(
         {
             str(item.get("candidate_router_version", "disabled"))
@@ -791,6 +876,18 @@ def main() -> None:
             for item in diagnostic_values
         }
     )
+    for output_name, source_name in (
+        ("task_semantic_linker_versions", "task_semantic_linker_version"),
+        ("task_semantic_index_versions", "task_semantic_index_version"),
+        ("task_semantic_scoring_versions", "task_semantic_scoring_version"),
+        (
+            "task_semantic_embedding_model_versions",
+            "task_semantic_embedding_model_version",
+        ),
+    ):
+        pipeline_diagnostics[output_name] = sorted(
+            {str(item.get(source_name, "disabled")) for item in diagnostic_values}
+        )
     pipeline_diagnostics["ai_clause_coverage"] = (
         pipeline_diagnostics["ai_context_clause_count"] / total_clause_count
         if total_clause_count
@@ -853,6 +950,21 @@ def main() -> None:
             "task_create_proposal_enabled": args.task_create_proposal,
             "ai_create_proposal_enabled": args.ai_create_proposal,
             "ai_create_max_proposals_per_meeting": args.ai_create_max_proposals,
+            "task_semantic_linker_mode": args.task_semantic_linker_mode,
+            "task_link_embedding_model_name": args.task_link_embedding_model_name,
+            "task_link_scoring_version": args.task_link_scoring_version,
+            "task_link_weights": {
+                "semantic": args.task_link_semantic_weight,
+                "lexical": args.task_link_lexical_weight,
+                "topic": args.task_link_topic_weight,
+                "owner": args.task_link_owner_weight,
+                "recency": args.task_link_recency_weight,
+            },
+            "task_link_strong_threshold": args.task_link_strong_threshold,
+            "task_link_min_margin": args.task_link_min_margin,
+            "task_link_ai_threshold": args.task_link_ai_threshold,
+            "task_link_recency_horizon_clauses": args.task_link_recency_horizon,
+            "task_link_top_k": args.task_link_top_k,
             "action_clear_threshold": args.action_clear_threshold,
             "action_ai_threshold": args.action_ai_threshold,
             "candidate_threshold_version": args.candidate_threshold_version,

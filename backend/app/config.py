@@ -39,6 +39,18 @@ class Settings:
     task_create_proposal_enabled: bool = False
     ai_create_proposal_enabled: bool = False
     ai_create_max_proposals_per_meeting: int = 3
+    task_semantic_linker_mode: str = "off"
+    task_link_semantic_weight: float = 0.55
+    task_link_lexical_weight: float = 0.20
+    task_link_topic_weight: float = 0.10
+    task_link_owner_weight: float = 0.10
+    task_link_recency_weight: float = 0.05
+    task_link_strong_threshold: float = 0.78
+    task_link_min_margin: float = 0.12
+    task_link_ai_threshold: float = 0.60
+    task_link_recency_horizon_clauses: int = 200
+    task_link_top_k: int = 5
+    task_link_scoring_version: str = "task-link-scoring-v1"
     action_clear_threshold: float = 0.82
     action_ai_threshold: float = 0.45
     candidate_threshold_version: str = "candidate-router-thresholds-v1"
@@ -168,6 +180,65 @@ class Settings:
             raise RuntimeError(
                 "TASK_CREATE_PROPOSAL_ENABLED requires CANDIDATE_ROUTER_MODE=assist"
             )
+        task_semantic_linker_mode = os.getenv(
+            "TASK_SEMANTIC_LINKER_MODE", "off"
+        ).lower()
+        if task_semantic_linker_mode not in {"off", "shadow"}:
+            raise RuntimeError("TASK_SEMANTIC_LINKER_MODE must be off or shadow")
+        task_link_weight_names = (
+            "TASK_LINK_SEMANTIC_WEIGHT",
+            "TASK_LINK_LEXICAL_WEIGHT",
+            "TASK_LINK_TOPIC_WEIGHT",
+            "TASK_LINK_OWNER_WEIGHT",
+            "TASK_LINK_RECENCY_WEIGHT",
+        )
+        task_link_weight_defaults = ("0.55", "0.20", "0.10", "0.10", "0.05")
+        try:
+            task_link_weights = tuple(
+                float(os.getenv(name, default))
+                for name, default in zip(
+                    task_link_weight_names,
+                    task_link_weight_defaults,
+                    strict=True,
+                )
+            )
+            task_link_strong_threshold = float(
+                os.getenv("TASK_LINK_STRONG_THRESHOLD", "0.78")
+            )
+            task_link_min_margin = float(
+                os.getenv("TASK_LINK_MIN_MARGIN", "0.12")
+            )
+            task_link_ai_threshold = float(
+                os.getenv("TASK_LINK_AI_THRESHOLD", "0.60")
+            )
+        except ValueError as exc:
+            raise RuntimeError("task-link weights and thresholds must be numbers") from exc
+        if any(value < 0.0 or value > 1.0 for value in task_link_weights):
+            raise RuntimeError("task-link weights must be between zero and one")
+        if abs(sum(task_link_weights) - 1.0) > 1e-6:
+            raise RuntimeError("task-link weights must sum to one")
+        if not 0.0 <= task_link_ai_threshold <= task_link_strong_threshold <= 1.0:
+            raise RuntimeError(
+                "task-link thresholds must satisfy 0 <= AI <= STRONG <= 1"
+            )
+        if not 0.0 <= task_link_min_margin <= 1.0:
+            raise RuntimeError("TASK_LINK_MIN_MARGIN must be between zero and one")
+        try:
+            task_link_recency_horizon = int(
+                os.getenv("TASK_LINK_RECENCY_HORIZON_CLAUSES", "200")
+            )
+            task_link_top_k = int(os.getenv("TASK_LINK_TOP_K", "5"))
+        except ValueError as exc:
+            raise RuntimeError("task-link horizon and top-k must be integers") from exc
+        if task_link_recency_horizon <= 0:
+            raise RuntimeError("TASK_LINK_RECENCY_HORIZON_CLAUSES must be positive")
+        if not 1 <= task_link_top_k <= 20:
+            raise RuntimeError("TASK_LINK_TOP_K must be between 1 and 20")
+        task_link_scoring_version = os.getenv(
+            "TASK_LINK_SCORING_VERSION", "task-link-scoring-v1"
+        ).strip()
+        if not task_link_scoring_version:
+            raise RuntimeError("TASK_LINK_SCORING_VERSION must not be empty")
         try:
             action_clear_threshold = float(
                 os.getenv("ACTION_CLEAR_THRESHOLD", "0.82")
@@ -222,6 +293,18 @@ class Settings:
             task_create_proposal_enabled=task_create_proposal_enabled,
             ai_create_proposal_enabled=ai_create_proposal_enabled,
             ai_create_max_proposals_per_meeting=ai_create_max_proposals,
+            task_semantic_linker_mode=task_semantic_linker_mode,
+            task_link_semantic_weight=task_link_weights[0],
+            task_link_lexical_weight=task_link_weights[1],
+            task_link_topic_weight=task_link_weights[2],
+            task_link_owner_weight=task_link_weights[3],
+            task_link_recency_weight=task_link_weights[4],
+            task_link_strong_threshold=task_link_strong_threshold,
+            task_link_min_margin=task_link_min_margin,
+            task_link_ai_threshold=task_link_ai_threshold,
+            task_link_recency_horizon_clauses=task_link_recency_horizon,
+            task_link_top_k=task_link_top_k,
+            task_link_scoring_version=task_link_scoring_version,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,
             candidate_threshold_version=candidate_threshold_version,

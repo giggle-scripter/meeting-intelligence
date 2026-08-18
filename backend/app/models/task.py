@@ -106,6 +106,21 @@ class PipelineDiagnostics:
     task_create_proposal_rejection_reasons: dict[str, int] = field(
         default_factory=dict
     )
+    task_semantic_linker_mode: str = "off"
+    task_semantic_linker_version: str = "disabled"
+    task_semantic_index_version: str = "disabled"
+    task_semantic_scoring_version: str = "disabled"
+    task_semantic_embedding_model_version: str = "disabled"
+    task_semantic_query_count: int = 0
+    task_semantic_scored_query_count: int = 0
+    task_semantic_route_counts: dict[str, int] = field(default_factory=dict)
+    task_semantic_reason_counts: dict[str, int] = field(default_factory=dict)
+    task_semantic_production_agreement_count: int = 0
+    task_semantic_production_disagreement_count: int = 0
+    task_semantic_ambiguous_sibling_count: int = 0
+    task_semantic_mean_top1_score: float = 0.0
+    task_semantic_mean_margin: float = 0.0
+    task_semantic_linker_error_count: int = 0
 
 
 @dataclass

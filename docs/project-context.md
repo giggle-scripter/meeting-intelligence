@@ -838,6 +838,14 @@ call thành công nhưng không tạo accepted event không phải quality impro
 | `TASK_CREATE_PROPOSAL_ENABLED` | `false`; master gate cho create-proposal path |
 | `AI_CREATE_PROPOSAL_ENABLED` | `false`; cho phép provider xử lý `AI_CREATE_CHECK` |
 | `AI_CREATE_MAX_PROPOSALS_PER_MEETING` | `3`; chặn fan-out/cost ngoài ý muốn |
+| `TASK_SEMANTIC_LINKER_MODE` | `off`; chỉ cho phép `off` hoặc telemetry-only `shadow` |
+| `TASK_LINK_*_WEIGHT` | `0.55/0.20/0.10/0.10/0.05` cho semantic/lexical/topic/owner/recency |
+| `TASK_LINK_STRONG_THRESHOLD` | `0.78`; top-1 direct-link candidate threshold |
+| `TASK_LINK_MIN_MARGIN` | `0.12`; chặn auto-link khi top-1/top-2 gần nhau |
+| `TASK_LINK_AI_THRESHOLD` | `0.60`; uncertain candidate chuyển AI check |
+| `TASK_LINK_RECENCY_HORIZON_CLAUSES` | `200` |
+| `TASK_LINK_TOP_K` | `5`; bounded candidate list |
+| `TASK_LINK_SCORING_VERSION` | `task-link-scoring-v1` |
 | `ACTION_CLEAR_THRESHOLD` | `0.82`; router config, không hardcode trong logic |
 | `ACTION_AI_THRESHOLD` | `0.45`; router config, không hardcode trong logic |
 | `CANDIDATE_THRESHOLD_VERSION` | `candidate-router-thresholds-v1` |
@@ -974,6 +982,47 @@ grounded proposal được promote và provider failure không tạo heuristic t
 Full default-off 86-case giữ nguyên baseline: without note 16/86 (precision
 `0.4074`, recall `0.5560`, field accuracy `0.8604`), with note 15/86 (precision
 `0.4271`, recall `0.6029`, field accuracy `0.8573`). Chưa gọi paid provider.
+
+### 21.3 Semantic task linker shadow baseline
+
+PR6 thêm index riêng trong `backend/app/retrieval/`; ledger task không phụ thuộc
+NumPy. Task representation gồm action, identity-safe aliases, owners, topic IDs
+và entity tokens. Mutation query gồm action reference, mutation text, speaker,
+owner refs và topic. Index chỉ embed task mới/thay đổi và bỏ terminal task khỏi
+candidate set.
+
+Verification tại PR6: 300 backend tests pass, gồm exact hierarchy, embedding
+cache, threshold/margin, sibling ambiguity và pipeline output invariance.
+
+Retrieval hierarchy là exact task ID → unique exact alias → weighted
+lexical/semantic/topic/owner/recency. Semantic candidate chỉ được đánh dấu direct
+khi top-1 đạt threshold và margin; nhiều exact alias hoặc sibling gần nhau không
+được auto-link. PR này chỉ replay chronology để ghi diagnostics rồi vẫn dùng
+production linker/reducer hiện tại.
+
+Full 86-case MiniLM shadow, without Meeting Note:
+
+- 273 mutation query, 234 đi tới weighted scoring; zero linker error;
+- routes: DIRECT_LINK 22 (đều exact alias), AI_MUTATION_CHECK 23,
+  UNRESOLVED 228;
+- target/null agreement với production linker 225, disagreement 48;
+- mean top-1 trên scored queries `0.4639`, mean margin `0.1693`;
+- final output giữ nguyên baseline 16/86, precision `0.4074`, recall `0.5560`,
+  field accuracy `0.8604`.
+
+Full 86-case MiniLM shadow, with Meeting Note:
+
+- 273 mutation query, 234 đi tới weighted scoring; zero linker error;
+- routes: DIRECT_LINK 24 (đều exact alias), AI_MUTATION_CHECK 31,
+  UNRESOLVED 218;
+- target/null agreement với production linker 227, disagreement 46;
+- mean top-1 trên scored queries `0.4632`, mean margin `0.1766`;
+- final output giữ nguyên baseline 15/86, precision `0.4271`, recall `0.6029`,
+  field accuracy `0.8573`.
+
+Không tune threshold production từ distribution này: 177 task mapping vẫn chờ
+review, và default weights chưa tạo semantic direct-link trên full corpus. Đây
+là fail-closed shadow baseline, không phải bằng chứng đủ để bật assist.
 
 ## 22. Quy tắc khi thay đổi project
 
