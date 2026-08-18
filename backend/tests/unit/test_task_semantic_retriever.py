@@ -217,6 +217,6 @@ def test_shadow_replay_never_retrieves_a_future_sibling_task() -> None:
     )
 
     assert summary.query_count == 1
-    assert results[0].status == "DIRECT_LINK"
-    assert results[0].task_id == "TASK-000001"
-    assert results[0].reason == "EXACT_ALIAS"
+    assert results[0].result.status == "DIRECT_LINK"
+    assert results[0].result.task_id == "TASK-000001"
+    assert results[0].result.reason == "EXACT_ALIAS"

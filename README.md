@@ -139,6 +139,16 @@ owner/topic và recency. Top-1 chỉ được đánh dấu direct khi đạt c�
 `TASK_LINK_STRONG_THRESHOLD` và `TASK_LINK_MIN_MARGIN`; sibling gần nhau không
 được merge. Shadow mode không thay target của reducer hay public output.
 
+Bounded mutation context chạy telemetry-only bằng
+`CONTEXT_RETRIEVAL_MODE=shadow` và yêu cầu semantic linker cũng ở `shadow`.
+Topic index phân đoạn theo turn centroid đã smoothing cùng discourse marker,
+sau đó tìm nearest topic trước nearest clause. Bundle luôn ưu tiên local
+`-3/+5`, source evidence của top-k task, same-topic clauses, mutation history và
+grounded note cues; không gửi full transcript. Hard caps không thể tăng quá
+`CONTEXT_MAX_CLAUSES=30`, `CONTEXT_MAX_CHARACTERS=12000` và
+`CONTEXT_MAX_TASKS=5`. Shadow chỉ ghi diagnostics/trace, không thay AI payload,
+ledger, reducer hay public output.
+
 Khi debug fallback trên máy local, đặt `AI_FALLBACK_DEBUG=true`. Terminal sẽ log
 JSON event thô từ model và lý do event bị Python từ chối. Không bật cờ này ở môi
 trường có transcript thật vì log có thể chứa nội dung meeting.

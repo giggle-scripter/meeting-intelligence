@@ -121,6 +121,22 @@ class PipelineDiagnostics:
     task_semantic_mean_top1_score: float = 0.0
     task_semantic_mean_margin: float = 0.0
     task_semantic_linker_error_count: int = 0
+    context_retrieval_mode: str = "off"
+    context_retrieval_version: str = "disabled"
+    context_topic_index_version: str = "disabled"
+    context_embedding_model_version: str = "disabled"
+    context_bundle_count: int = 0
+    context_total_clause_count: int = 0
+    context_total_character_count: int = 0
+    context_total_task_count: int = 0
+    context_total_history_event_count: int = 0
+    context_total_note_cue_count: int = 0
+    context_max_clause_count_observed: int = 0
+    context_max_character_count_observed: int = 0
+    context_clause_cap_hit_count: int = 0
+    context_character_cap_hit_count: int = 0
+    context_tier_clause_counts: dict[str, int] = field(default_factory=dict)
+    context_retrieval_error_count: int = 0
 
 
 @dataclass

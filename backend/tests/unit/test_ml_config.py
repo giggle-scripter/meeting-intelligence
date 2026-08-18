@@ -34,6 +34,18 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
         "TASK_LINK_RECENCY_HORIZON_CLAUSES",
         "TASK_LINK_TOP_K",
         "TASK_LINK_SCORING_VERSION",
+        "CONTEXT_RETRIEVAL_MODE",
+        "CONTEXT_MAX_CLAUSES",
+        "CONTEXT_MAX_CHARACTERS",
+        "CONTEXT_MAX_TASKS",
+        "CONTEXT_LOCAL_BEFORE",
+        "CONTEXT_LOCAL_AFTER",
+        "CONTEXT_MAX_TOPIC_CLAUSES",
+        "CONTEXT_MAX_TOPICS",
+        "CONTEXT_MAX_HISTORY_EVENTS_PER_TASK",
+        "CONTEXT_TOPIC_BOUNDARY_THRESHOLD",
+        "CONTEXT_TOPIC_SMOOTHING_WINDOW",
+        "CONTEXT_RETRIEVAL_VERSION",
     ):
         monkeypatch.delenv(name, raising=False)
 
@@ -56,6 +68,10 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
     assert settings.task_link_min_margin == 0.12
     assert settings.task_link_ai_threshold == 0.60
     assert settings.task_link_top_k == 5
+    assert settings.context_retrieval_mode == "off"
+    assert settings.context_max_clauses == 30
+    assert settings.context_max_characters == 12_000
+    assert settings.context_max_tasks == 5
 
 
 def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
@@ -140,6 +156,35 @@ def test_task_semantic_linker_rejects_active_mode(monkeypatch) -> None:
     monkeypatch.setenv("TASK_SEMANTIC_LINKER_MODE", "assist")
 
     with pytest.raises(RuntimeError, match="must be off or shadow"):
+        Settings.from_env()
+
+
+def test_context_shadow_requires_semantic_linker_shadow(monkeypatch) -> None:
+    monkeypatch.setenv("TASK_SEMANTIC_LINKER_MODE", "off")
+    monkeypatch.setenv("CONTEXT_RETRIEVAL_MODE", "shadow")
+
+    with pytest.raises(RuntimeError, match="requires TASK_SEMANTIC_LINKER_MODE=shadow"):
+        Settings.from_env()
+
+
+@pytest.mark.parametrize(
+    ("name", "value", "message"),
+    [
+        ("CONTEXT_MAX_CLAUSES", "31", "CONTEXT_MAX_CLAUSES"),
+        ("CONTEXT_MAX_CHARACTERS", "12001", "CONTEXT_MAX_CHARACTERS"),
+        ("CONTEXT_MAX_TASKS", "6", "CONTEXT_MAX_TASKS"),
+        ("CONTEXT_TOPIC_SMOOTHING_WINDOW", "4", "SMOOTHING_WINDOW"),
+    ],
+)
+def test_context_hard_caps_are_not_configurable_above_contract(
+    monkeypatch,
+    name: str,
+    value: str,
+    message: str,
+) -> None:
+    monkeypatch.setenv(name, value)
+
+    with pytest.raises(RuntimeError, match=message):
         Settings.from_env()
 
 

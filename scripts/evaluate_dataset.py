@@ -381,6 +381,20 @@ def main() -> None:
     parser.add_argument(
         "--task-link-scoring-version", default="task-link-scoring-v1"
     )
+    parser.add_argument(
+        "--context-retrieval-mode", choices=("off", "shadow"), default="off"
+    )
+    parser.add_argument("--context-max-clauses", type=int, default=30)
+    parser.add_argument("--context-max-characters", type=int, default=12_000)
+    parser.add_argument("--context-max-tasks", type=int, default=5)
+    parser.add_argument("--context-local-before", type=int, default=3)
+    parser.add_argument("--context-local-after", type=int, default=5)
+    parser.add_argument("--context-max-topic-clauses", type=int, default=12)
+    parser.add_argument("--context-max-topics", type=int, default=3)
+    parser.add_argument("--context-max-history-events", type=int, default=3)
+    parser.add_argument("--context-topic-boundary-threshold", type=float, default=0.42)
+    parser.add_argument("--context-topic-smoothing-window", type=int, default=3)
+    parser.add_argument("--context-retrieval-version", default="context-retriever-v1")
     parser.add_argument("--action-clear-threshold", type=float, default=0.82)
     parser.add_argument("--action-ai-threshold", type=float, default=0.45)
     parser.add_argument(
@@ -416,6 +430,13 @@ def main() -> None:
         parser.error("--task-create-proposal requires --candidate-router-mode assist")
     if args.ai_create_proposal and not args.task_create_proposal:
         parser.error("--ai-create-proposal requires --task-create-proposal")
+    if (
+        args.context_retrieval_mode == "shadow"
+        and args.task_semantic_linker_mode != "shadow"
+    ):
+        parser.error(
+            "--context-retrieval-mode shadow requires --task-semantic-linker-mode shadow"
+        )
     checkpoint_path = (
         args.report.with_suffix(args.report.suffix + ".checkpoint.json")
         if args.report
@@ -548,6 +569,24 @@ def main() -> None:
                         ),
                         task_link_top_k=args.task_link_top_k,
                         task_link_scoring_version=args.task_link_scoring_version,
+                        context_retrieval_mode=args.context_retrieval_mode,
+                        context_max_clauses=args.context_max_clauses,
+                        context_max_characters=args.context_max_characters,
+                        context_max_tasks=args.context_max_tasks,
+                        context_local_before=args.context_local_before,
+                        context_local_after=args.context_local_after,
+                        context_max_topic_clauses=args.context_max_topic_clauses,
+                        context_max_topics=args.context_max_topics,
+                        context_max_history_events_per_task=(
+                            args.context_max_history_events
+                        ),
+                        context_topic_boundary_threshold=(
+                            args.context_topic_boundary_threshold
+                        ),
+                        context_topic_smoothing_window=(
+                            args.context_topic_smoothing_window
+                        ),
+                        context_retrieval_version=args.context_retrieval_version,
                     )
                 )
         except FatalBenchmarkError as exc:
@@ -768,6 +807,15 @@ def main() -> None:
         "task_semantic_production_disagreement_count",
         "task_semantic_ambiguous_sibling_count",
         "task_semantic_linker_error_count",
+        "context_bundle_count",
+        "context_total_clause_count",
+        "context_total_character_count",
+        "context_total_task_count",
+        "context_total_history_event_count",
+        "context_total_note_cue_count",
+        "context_clause_cap_hit_count",
+        "context_character_cap_hit_count",
+        "context_retrieval_error_count",
     ):
         pipeline_diagnostics[name] = sum(
             int(item.get(name, 0)) for item in diagnostic_values
@@ -864,6 +912,26 @@ def main() -> None:
         / semantic_query_count
         if semantic_query_count else 0.0
     )
+    pipeline_diagnostics["context_max_clause_count_observed"] = max(
+        (int(item.get("context_max_clause_count_observed", 0)) for item in diagnostic_values),
+        default=0,
+    )
+    pipeline_diagnostics["context_max_character_count_observed"] = max(
+        (
+            int(item.get("context_max_character_count_observed", 0))
+            for item in diagnostic_values
+        ),
+        default=0,
+    )
+    context_tier_clause_counts: dict[str, int] = {}
+    for item in diagnostic_values:
+        for tier, count in item.get("context_tier_clause_counts", {}).items():
+            context_tier_clause_counts[tier] = (
+                context_tier_clause_counts.get(tier, 0) + int(count)
+            )
+    pipeline_diagnostics["context_tier_clause_counts"] = dict(
+        sorted(context_tier_clause_counts.items())
+    )
     pipeline_diagnostics["candidate_router_versions"] = sorted(
         {
             str(item.get("candidate_router_version", "disabled"))
@@ -884,6 +952,9 @@ def main() -> None:
             "task_semantic_embedding_model_versions",
             "task_semantic_embedding_model_version",
         ),
+        ("context_retrieval_versions", "context_retrieval_version"),
+        ("context_topic_index_versions", "context_topic_index_version"),
+        ("context_embedding_model_versions", "context_embedding_model_version"),
     ):
         pipeline_diagnostics[output_name] = sorted(
             {str(item.get(source_name, "disabled")) for item in diagnostic_values}
@@ -965,6 +1036,22 @@ def main() -> None:
             "task_link_ai_threshold": args.task_link_ai_threshold,
             "task_link_recency_horizon_clauses": args.task_link_recency_horizon,
             "task_link_top_k": args.task_link_top_k,
+            "context_retrieval_mode": args.context_retrieval_mode,
+            "context_retrieval_version": args.context_retrieval_version,
+            "context_limits": {
+                "max_clauses": args.context_max_clauses,
+                "max_characters": args.context_max_characters,
+                "max_tasks": args.context_max_tasks,
+                "local_before": args.context_local_before,
+                "local_after": args.context_local_after,
+                "max_topic_clauses": args.context_max_topic_clauses,
+                "max_topics": args.context_max_topics,
+                "max_history_events": args.context_max_history_events,
+            },
+            "context_topic_boundary_threshold": (
+                args.context_topic_boundary_threshold
+            ),
+            "context_topic_smoothing_window": args.context_topic_smoothing_window,
             "action_clear_threshold": args.action_clear_threshold,
             "action_ai_threshold": args.action_ai_threshold,
             "candidate_threshold_version": args.candidate_threshold_version,

@@ -342,6 +342,16 @@ def _submit_job(
             f"task_link_thresholds={settings.task_link_strong_threshold},"
             f"{settings.task_link_min_margin},{settings.task_link_ai_threshold}",
             f"task_link_top_k={settings.task_link_top_k}",
+            f"context_retrieval={settings.context_retrieval_mode}",
+            f"context_limits={settings.context_max_clauses},"
+            f"{settings.context_max_characters},{settings.context_max_tasks}",
+            f"context_local={settings.context_local_before},"
+            f"{settings.context_local_after}",
+            f"context_topic={settings.context_topic_boundary_threshold},"
+            f"{settings.context_topic_smoothing_window},"
+            f"{settings.context_max_topics},{settings.context_max_topic_clauses}",
+            f"context_history={settings.context_max_history_events_per_task}",
+            f"context_version={settings.context_retrieval_version}",
         )),
     )
     job, created = job_store.submit(
@@ -395,6 +405,24 @@ def _submit_job(
                 ),
                 task_link_top_k=settings.task_link_top_k,
                 task_link_scoring_version=settings.task_link_scoring_version,
+                context_retrieval_mode=settings.context_retrieval_mode,
+                context_max_clauses=settings.context_max_clauses,
+                context_max_characters=settings.context_max_characters,
+                context_max_tasks=settings.context_max_tasks,
+                context_local_before=settings.context_local_before,
+                context_local_after=settings.context_local_after,
+                context_max_topic_clauses=settings.context_max_topic_clauses,
+                context_max_topics=settings.context_max_topics,
+                context_max_history_events_per_task=(
+                    settings.context_max_history_events_per_task
+                ),
+                context_topic_boundary_threshold=(
+                    settings.context_topic_boundary_threshold
+                ),
+                context_topic_smoothing_window=(
+                    settings.context_topic_smoothing_window
+                ),
+                context_retrieval_version=settings.context_retrieval_version,
             )
         ),
         pipeline_version=settings.pipeline_version,
@@ -502,6 +530,20 @@ def process_endpoint(
         ),
         task_link_top_k=settings.task_link_top_k,
         task_link_scoring_version=settings.task_link_scoring_version,
+        context_retrieval_mode=settings.context_retrieval_mode,
+        context_max_clauses=settings.context_max_clauses,
+        context_max_characters=settings.context_max_characters,
+        context_max_tasks=settings.context_max_tasks,
+        context_local_before=settings.context_local_before,
+        context_local_after=settings.context_local_after,
+        context_max_topic_clauses=settings.context_max_topic_clauses,
+        context_max_topics=settings.context_max_topics,
+        context_max_history_events_per_task=(
+            settings.context_max_history_events_per_task
+        ),
+        context_topic_boundary_threshold=settings.context_topic_boundary_threshold,
+        context_topic_smoothing_window=settings.context_topic_smoothing_window,
+        context_retrieval_version=settings.context_retrieval_version,
     )
     return asdict(result)
 
@@ -645,6 +687,20 @@ async def process_file_endpoint(
         ),
         task_link_top_k=settings.task_link_top_k,
         task_link_scoring_version=settings.task_link_scoring_version,
+        context_retrieval_mode=settings.context_retrieval_mode,
+        context_max_clauses=settings.context_max_clauses,
+        context_max_characters=settings.context_max_characters,
+        context_max_tasks=settings.context_max_tasks,
+        context_local_before=settings.context_local_before,
+        context_local_after=settings.context_local_after,
+        context_max_topic_clauses=settings.context_max_topic_clauses,
+        context_max_topics=settings.context_max_topics,
+        context_max_history_events_per_task=(
+            settings.context_max_history_events_per_task
+        ),
+        context_topic_boundary_threshold=settings.context_topic_boundary_threshold,
+        context_topic_smoothing_window=settings.context_topic_smoothing_window,
+        context_retrieval_version=settings.context_retrieval_version,
     )
     return asdict(result)
 
