@@ -1,192 +1,415 @@
-# Meeting Task Pipeline
+# Meeting Intelligent
 
-PoC chuyển transcript cuộc họp `.txt`, `.vtt` hoặc `.srt` thành meeting summary
-và task proposal. Kiến trúc **Python-first, AI-last**: Python xử lý dữ liệu và
-quy tắc xác định; AI chỉ hỗ trợ các đoạn thực sự mơ hồ.
+Pipeline **Python-first, AI-last** dùng để chuyển transcript cuộc họp tiếng Việt/Anh thành các **đề xuất công việc (task proposals)** có thể kiểm tra và truy vết lại nguồn.
 
-Tài liệu onboarding đầy đủ cho developer hoặc phiên chat mới:
-[docs/project-context.md](docs/project-context.md).
+Backend hỗ trợ transcript định dạng `.txt`, `.vtt`, `.srt` và trả về:
 
-## Flow Tổng Quát
+- tiêu đề và tóm tắt cuộc họp;
+- danh sách task còn hiệu lực;
+- người được giao việc, ngày bắt đầu và deadline;
+- cụm từ deadline gốc và evidence tương ứng;
+- diagnostics và các vùng chưa thể xử lý chắc chắn.
+
+> **Trạng thái: experimental / pre-production.**  
+> Rule-only hiện là baseline chính để validation. AI chỉ đóng vai trò **optional mutation resolver** và chưa nên bật mặc định trong Power Automate cho tới khi paired evaluation chứng minh được cải thiện thực sự trên final output.
+
+---
+
+## Kiến trúc
+
+Nguyên tắc chính của project là **Python-first, AI-last**.
 
 ```text
-Người dùng upload transcript
-  -> OneDrive / SharePoint trigger
-  -> Power Automate lấy file content
-  -> HTTP POST /meetings/jobs/process-file
-  -> FastAPI trả 202 + job_id ngay
-  -> Python chạy nền: parse, chuẩn hóa, deduplicate và tách clause
-  -> Rule engine trích task, liên kết trạng thái và resolve ngày
-  -> Gom candidate window mơ hồ theo batch giới hạn kích thước
-  -> AI fallback chỉ cho các batch mơ hồ (nếu được cấu hình)
-  -> Power Automate poll GET /meetings/jobs/{job_id}
-  -> Job succeeded trả JSON meeting + tasks
-  -> Power Automate tạo item trong MI Meetings
-  -> Power Automate lặp tasks, tạo item trong MI Task Proposals
+Meeting input
+  -> parse TXT / VTT / SRT hoặc self-contained meeting package
+  -> chuẩn hóa caption, speaker, turn, sentence, clause
+  -> annotate semantic cues và date mentions
+  -> build MeetingContext và Meeting Note cues nếu có
+  -> tạo candidate windows
+  -> local rule extraction
+  -> khôi phục task references / commitments
+  -> optional bounded AI mutation resolution
+  -> deduplicate và áp dụng event authority
+  -> reduce toàn bộ events qua global Task Ledger
+  -> reconcile final active state
+  -> resolve start date và deadline
+  -> build evidence, summary, diagnostics
+  -> PipelineResult
 ```
 
-Người dùng chỉ cần upload file; không cần copy/paste transcript để chạy flow.
+Python chịu trách nhiệm cho:
 
-## Quy Tắc Trích Task
+- task creation;
+- stable task identity;
+- chronology;
+- date arithmetic;
+- evidence;
+- reducer state;
+- final serialization.
 
-Pipeline chỉ tạo task khi có bằng chứng cho một hành động cụ thể:
+AI chỉ được dùng để xử lý một số **mutation mơ hồ** dựa trên các **task candidate đã tồn tại**.
 
-- Người nói tự cam kết thực hiện công việc.
-- Người phụ trách được giao việc rõ ràng và việc giao đó còn hiệu lực.
-- Một công việc bị thay deadline, đổi người phụ trách, từ chối hoặc hủy.
-- Ý tưởng, khả năng, thảo luận cho phase/cuộc họp sau và công việc đã hoàn thành
-  không tạo task.
-- Khi một việc bị sửa hoặc giao lại, thông tin rõ ràng xuất hiện sau cùng được ưu
-  tiên. Task bị hủy hoặc bị từ chối không được giữ lại trong output cuối.
-- Một câu có thể chứa nhiều action độc lập; mỗi action tạo một task riêng.
-- `evidence` mặc định lấy từ clause gốc trong transcript. Một Meeting Note tích
-  cực, cụ thể từ `SECRETARY`, `PARTICIPANT` hoặc `MANUAL` là trusted additive
-  evidence và có thể tạo `HUMAN_NOTE` task; evidence sẽ ghi rõ nguồn Meeting
-  Note. Question, uncertainty và `AUTO_OVERVIEW` không tạo task.
+AI **không** được:
 
-## Quy Tắc Ngày
+- tạo task identity mới;
+- tính calendar date;
+- tạo clause ID hoặc task ID;
+- trực tiếp quyết định final task list;
+- trực tiếp tạo summary hoặc evidence.
 
-- `start_date` mặc định là ngày họp.
-- Với flow upload file thiếu meeting date, backend tìm meeting-context date đầy
-  đủ trong transcript rồi Meeting Note; nếu không có hoặc mâu thuẫn mới dùng
-  ngày xử lý/upload.
-- Khi nguồn có metadata chuẩn, có thể gửi `X-Meeting-Date: YYYY-MM-DD` để dùng
-  ngày họp thực tế.
-- Các mốc tuyệt đối không có năm được resolve theo ngày họp. Nếu mốc đó đã qua,
-  pipeline hiểu là năm kế tiếp.
-- `start_date` ưu tiên ngày bắt đầu explicit của task; nếu không có thì dùng
-  effective meeting date và không bao giờ để rỗng.
-- `trước ngày X` lưu `due_date` là ngày trước X; mốc có giờ như `trước 18h ngày X`
-  vẫn có `due_date` là ngày X.
-- Deadline phụ thuộc sự kiện, ví dụ `hai ngày sau khi nhận API spec`, không tự bịa
-  ngày; pipeline giữ `due_date` trống và lưu nguyên `due_date_text`.
+Public output giữ contract cấp cao sau:
 
-## Vai Trò AI Fallback
+```text
+meeting_title
+summary
+tasks
+diagnostics
+unresolved_window_ids
+```
 
-Prompt tại
-[power-automate/prompts/ambiguous-event-extractor.txt](power-automate/prompts/ambiguous-event-extractor.txt)
-không tạo final task. AI chỉ nhận các candidate window mơ hồ đã được gộp vào batch
-giới hạn kích thước và trả event có schema cố định, ví dụ
-`TASK_COMMITMENT`, `OWNER_REASSIGN`, `DEADLINE_REPLACE` hoặc
-`TASK_CANCEL`.
+Task do pipeline sinh ra chỉ là **proposal**. Hệ thống không tự động phê duyệt hoặc giao việc thật cho người dùng.
 
-Prompt phải tuân thủ các nguyên tắc sau:
+---
 
-- Chỉ dùng clause ID và date mention ID có trong input; không tự tạo ID hoặc tính
-  ngày.
-- Chỉ emit event khi có bằng chứng cụ thể; không suy đoán từ câu mơ hồ.
-- Liên kết câu xác nhận, sửa, giao lại, từ chối hoặc hủy với action cùng window.
-- Giữ trạng thái hiệu lực cuối cùng trong window; thông tin sửa sau ghi đè thông
-  tin cũ.
-- Trả JSON thuần theo schema `events`; không trả summary, evidence, date hay final
-  task object.
+## Trạng thái hiện tại
 
-Python kiểm tra schema, liên kết event toàn transcript, tính ngày, tạo evidence và
-serialize output. Vì vậy pipeline vẫn chạy rule-only khi AI Builder không có
-capacity; các window chưa giải quyết được được trả trong `unresolved_window_ids`.
+| Thành phần | Trạng thái |
+| --- | --- |
+| Pipeline | `v1` |
+| Meeting context | `assist` |
+| Backend | FastAPI — `backend.app.main:app` |
+| Chế độ validation chính | Local deterministic / rule-only |
+| Validation corpus | 86 reviewed cases, W1–W5 |
+| Automated tests | 236 |
+| OpenAI model mặc định khi bật | `gpt-5-mini` |
+| Vai trò AI | Optional mutation resolver |
+| Async job storage | In-memory |
+| Power Automate | Đã có contract; rollout đang tạm dừng để hoàn thiện local quality |
 
-Meeting metadata và Meeting Note có thể được đóng gói cùng file upload bằng
-marker `=== MEETING METADATA ===`, optional `=== MEETING NOTE ===` và
-`=== TRANSCRIPT ===`. Note được
-compact thành cue cho AI; mọi event do AI trả về vẫn phải có clause transcript
-hỗ trợ. Chi tiết policy: [docs/meeting-note-policy.md](docs/meeting-note-policy.md).
+Các rule-only report gần nhất:
 
-## Chạy Local
+```text
+evaluation/runtime/logic-fix-full-without-notes.json
+evaluation/runtime/logic-fix-full-with-notes.json
+```
+
+| Mode | Pass | Precision | Recall | Field accuracy |
+| --- | ---: | ---: | ---: | ---: |
+| Without Meeting Note | 16/86 | 0.4074 | 0.5560 | 0.8604 |
+| With Meeting Note | 15/86 | 0.4271 | 0.6029 | 0.8573 |
+
+Các chỉ số trên **chưa đạt mức production**.
+
+Những nhóm lỗi chính hiện tại gồm:
+
+- false task creation;
+- missed task creation;
+- task identity;
+- owner/date mutation;
+- long-distance state;
+- recap scope và mutation target trong transcript dài.
+
+Chi tiết implementation, evaluation semantics và error analysis nên được lưu ở:
+
+```text
+docs/project-context.md
+```
+
+---
+
+## Cấu trúc repository
+
+```text
+meeting-intelligent/
+├── backend/
+│   ├── app/
+│   │   ├── main.py              # FastAPI, auth, providers, async jobs
+│   │   ├── pipeline.py          # V1 orchestration
+│   │   ├── config.py
+│   │   ├── jobs.py
+│   │   ├── ingestion/           # TXT/VTT/SRT + meeting package
+│   │   ├── preprocessing/       # captions -> turns -> sentences -> clauses
+│   │   ├── annotation/          # semantic cues + date mentions
+│   │   ├── candidate/           # routing, windows, compaction, batching
+│   │   ├── ai/                  # rule extractors + provider clients
+│   │   ├── reduction/           # linking, Task Ledger, reducer, reconciliation
+│   │   ├── dates/               # start/deadline resolution
+│   │   ├── output/              # evidence, summary, serializer
+│   │   └── models/
+│   ├── tests/
+│   ├── function_app.py          # Azure Functions ASGI entrypoint
+│   └── requirements.txt
+├── data/
+│   ├── validation/              # reviewed ground truth
+│   ├── fixtures/
+│   └── power_automate_uploads/
+├── evaluation/
+├── scripts/
+├── power-automate/
+├── sp365/
+├── Dockerfile
+├── pyproject.toml
+├── .env.example
+└── README.md
+```
+
+Đọc `docs/project-context.md` trước khi thay đổi:
+
+- kiến trúc;
+- rule/reducer behavior;
+- evaluation;
+- AI boundary;
+- Power Automate integration.
+
+---
+
+# Bắt đầu nhanh
+
+Các lệnh bên dưới giả định đang dùng **Windows PowerShell** và chạy từ thư mục root của repository.
+
+## 1. Tạo virtual environment
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r backend\requirements.txt
-
-$env:POWER_AUTOMATE_API_KEY="mi-demo-secret"
-$env:AI_FALLBACK_ENDPOINT=""
-$env:OPENAI_API_KEY="<key-nhận-từ-lead>"
-$env:OPENAI_MODEL="gpt-5-mini"
-$env:OPENAI_REASONING_EFFORT="medium"
-$env:AI_TIMEOUT_SECONDS="3600"
-$env:AI_MAX_BATCH_CONTEXT_CLAUSES="56"
-uvicorn backend.app.main:app --host 127.0.0.1 --port 8010
+python -m pip install -r backend\requirements.txt
 ```
 
-`OPENAI_REASONING_EFFORT` nhận `minimal`, `low`, `medium` hoặc `high`. Mặc định
-`medium`; chỉ đặt `high` khi cần ưu tiên xử lý window mơ hồ phức tạp hơn latency
-và chi phí. `OPENAI_API_KEY` chỉ đặt trong terminal, `.env` local hoặc Application Settings;
-không dán vào source code, Power Automate hay Git. Khi có key, backend gọi OpenAI
-Responses API cho window mơ hồ; không cần AI Builder capacity.
+---
 
-`AI_MAX_BATCH_CONTEXT_CLAUSES` mặc định là `56`: chỉ các window mơ hồ cách nhau
-không quá 3 clause mới được gộp khi tổng context không vượt giới hạn. Window xa
-nhau luôn thành request riêng để tránh coreference xuyên đoạn; đổi lại transcript
-dài có thể cần nhiều provider call hơn. `AI_TIMEOUT_SECONDS=3600` chỉ là timeout **giữa backend và
-OpenAI**; Power Automate phải dùng job API bên dưới để không chờ quá giới hạn HTTP.
+## 2. Cấu hình local rule-only
 
-Khi debug fallback trên máy local, đặt `AI_FALLBACK_DEBUG=true`. Terminal sẽ log
-JSON event thô từ model và lý do event bị Python từ chối. Không bật cờ này ở môi
-trường có transcript thật vì log có thể chứa nội dung meeting.
+```powershell
+$env:POWER_AUTOMATE_API_KEY = "mi-demo-secret"
+$env:PIPELINE_VERSION = "v1"
+$env:MEETING_CONTEXT_MODE = "assist"
+$env:AI_TIMEOUT_SECONDS = "3600"
+$env:JOB_TIMEOUT_SECONDS = "3600"
+```
 
-- Health check: `http://127.0.0.1:8010/health`
-- Swagger UI: `http://127.0.0.1:8010/docs`
-- Khi dùng Cloudflare Quick Tunnel hoặc Azure Function, Power Automate gọi endpoint
-  công khai tương ứng đến `/api/v1/meetings/jobs/process-file`. Endpoint đồng bộ
-  `/api/v1/meetings/process-file` chỉ phù hợp test ngắn từ local/Swagger; không
-  dùng cho transcript dài qua Power Automate.
+Nếu muốn chắc chắn pipeline chạy **deterministic-only**, không đặt các biến:
 
-## API Chính
+```text
+OPENAI_API_KEY
+AZURE_AI_FOUNDRY_CHAT_ENDPOINT
+AI_FALLBACK_ENDPOINT
+```
 
-- `GET /health`: kiểm tra service.
-- `POST /api/v1/transcripts/preprocess`: xem caption, turn, sentence, clause và
-  số liệu deduplication.
-- `POST /api/v1/meetings/process`: nhận JSON đầy đủ từ client.
-- `POST /api/v1/meetings/process-file`: nhận binary transcript và chờ xử lý xong;
-  chỉ dùng cho test ngắn từ local/Swagger.
-- `POST /api/v1/meetings/jobs/process`: nhận JSON và trả `202`/`job_id` ngay.
-- `POST /api/v1/meetings/jobs/process-file`: nhận file và trả `202`/`job_id` ngay;
-  dùng cho transcript dài có AI fallback.
-- `GET /api/v1/meetings/jobs/{job_id}`: poll trạng thái job; khi `succeeded`, field
-  `result` chứa cùng JSON như `process-file`.
+Trong local development, có thể để `POWER_AUTOMATE_API_KEY` rỗng. Khi đó authentication ở processing endpoints sẽ được bỏ qua.
 
-Main flow phải dùng job endpoint. `POST` chỉ submit file và luôn kết thúc nhanh;
-Power Automate poll mỗi 15 giây đến khi job `succeeded` hoặc `failed`, sau đó Parse
-JSON field `result` trước khi ghi Lists. Job store hiện là in-memory cho PoC local:
-nếu restart Uvicorn thì các job `queued`/`running` bị mất, cần upload lại file.
+---
 
-Upload endpoint cần:
+# Chạy backend bằng Uvicorn
+
+Khởi động FastAPI:
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn backend.app.main:app `
+  --host 127.0.0.1 `
+  --port 8010
+```
+
+Sau khi chạy thành công:
+
+```text
+Health:  http://127.0.0.1:8010/health
+Swagger: http://127.0.0.1:8010/docs
+```
+
+Kiểm tra health endpoint:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8010/health
+```
+
+Giữ terminal này chạy trong suốt quá trình test.
+
+---
+
+# Mở backend local qua tunnel
+
+Tunnel cần thiết khi **Power Automate hoặc một service bên ngoài cần gọi vào backend đang chạy trên máy local**.
+
+Luồng kết nối:
+
+```text
+Power Automate / External client
+            |
+            v
+    Public HTTPS tunnel
+            |
+            v
+http://127.0.0.1:8010
+            |
+            v
+        FastAPI
+```
+
+## Cloudflare Quick Tunnel
+
+Trước tiên phải đảm bảo Uvicorn đang chạy tại:
+
+```text
+http://127.0.0.1:8010
+```
+
+Sau đó mở **terminal thứ hai** và chạy:
+
+```powershell
+cloudflared tunnel --url http://127.0.0.1:8010
+```
+
+`cloudflared` sẽ trả về một public HTTPS URL dạng:
+
+```text
+https://<random-name>.trycloudflare.com
+```
+
+Ví dụ:
+
+```text
+https://meeting-task-example.trycloudflare.com
+```
+
+Kiểm tra tunnel:
+
+```powershell
+Invoke-RestMethod https://meeting-task-example.trycloudflare.com/health
+```
+
+Nếu health endpoint trả response bình thường thì backend local đã có thể được gọi từ Internet.
+
+---
+
+## Cách chạy khi test Power Automate
+
+Nên dùng hai terminal song song.
+
+### Terminal 1 — Uvicorn
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn backend.app.main:app `
+  --host 127.0.0.1 `
+  --port 8010
+```
+
+### Terminal 2 — Cloudflare Tunnel
+
+```powershell
+cloudflared tunnel --url http://127.0.0.1:8010
+```
+
+Cả hai terminal phải được giữ mở trong suốt quá trình test.
+
+> Quick Tunnel chỉ phù hợp cho development/testing. Public URL có thể thay đổi mỗi lần restart tunnel.
+
+---
+
+## API Base URL trong Power Automate
+
+Giả sử tunnel sinh URL:
+
+```text
+https://abc-example.trycloudflare.com
+```
+
+thì dùng chính URL này làm API base URL:
+
+```text
+https://abc-example.trycloudflare.com
+```
+
+**Không thêm dấu `/` ở cuối.**
+
+Ví dụ `status_url` backend trả về:
+
+```text
+/api/v1/meetings/jobs/job-123
+```
+
+URL đúng:
+
+```text
+https://abc-example.trycloudflare.com/api/v1/meetings/jobs/job-123
+```
+
+URL sai:
+
+```text
+https://abc-example.trycloudflare.com//api/v1/meetings/jobs/job-123
+```
+
+---
+
+# API
+
+| Method | Endpoint | Chức năng |
+| --- | --- | --- |
+| `GET` | `/health` | Health check |
+| `POST` | `/api/v1/transcripts/preprocess` | Kiểm tra parser và clauses |
+| `POST` | `/api/v1/meetings/process` | Xử lý JSON đồng bộ |
+| `POST` | `/api/v1/meetings/process-file` | Xử lý binary đồng bộ |
+| `POST` | `/api/v1/meetings/jobs/process` | Submit async JSON job |
+| `POST` | `/api/v1/meetings/jobs/process-file` | Submit async binary job |
+| `GET` | `/api/v1/meetings/jobs/{job_id}` | Poll trạng thái async job |
+
+Khi `POWER_AUTOMATE_API_KEY` có giá trị, các processing endpoint yêu cầu:
+
+```text
+X-API-Key: <secret>
+```
+
+---
+
+## Ví dụ JSON input
+
+```json
+{
+  "meeting_id": "meeting-001",
+  "meeting_title": "Weekly Release Sync",
+  "meeting_date": "2026-08-17",
+  "file_name": "meeting.txt",
+  "transcript": "[09:00:00] Lan: Em sẽ cập nhật dashboard trước thứ Sáu.",
+  "speaker_aliases": {},
+  "meeting_note": {
+    "content": "- Lan cập nhật dashboard trước thứ Sáu.",
+    "author": "Thư ký",
+    "source": "SECRETARY"
+  }
+}
+```
+
+---
+
+## Header khi gửi binary file
 
 ```text
 Content-Type: application/octet-stream
 X-API-Key: <secret>
-X-File-Name-Base64: <Base64 UTF-8 dynamic file name>
+X-File-Name-Base64: <Base64 UTF-8 file name>
+X-Meeting-Id: <optional override>
+X-Meeting-Title-Base64: <optional override>
+X-Meeting-Date: YYYY-MM-DD <optional override>
 ```
 
-Generated Power Automate fixtures là self-contained package, nên flow không cần
-gửi ID/title/date ở header. `X-Meeting-Id`, `X-Meeting-Title-Base64` và
-`X-Meeting-Date` vẫn là optional override cho raw client cũ. Header Base64 hỗ
-trợ Unicode mà không vi phạm giới hạn ASCII của HTTP client. Nếu cả package lẫn
-header đều thiếu date, API mới dùng transcript/note context rồi processing date.
+Nên dùng Base64 cho filename/title khi cần truyền Unicode an toàn qua Power Automate.
 
-Test đúng file package qua local job API trước khi đưa vào flow:
+---
 
-```powershell
-.\.venv\Scripts\python.exe scripts\smoke_upload_package.py `
-  data\power_automate_uploads\W1-SHORT-C1-N0-IT-DASG-ABS-002.txt `
-  --expect-task-count 2 `
-  --output evaluation\runtime\local-package-smoke.json
-```
-
-Response có dạng:
+## Ví dụ output
 
 ```json
 {
-  "meeting_title": "Weekly Sync",
-  "summary": "Cuộc họp thống nhất ...",
+  "meeting_title": "Weekly Release Sync",
+  "summary": "Cuộc họp tập trung vào Weekly Release Sync...",
   "tasks": [
     {
-      "task_name": "Chuẩn bị hồ sơ",
-      "assignee": "Phương",
-      "start_date": "2026-07-29",
-      "due_date": "2026-07-30",
+      "task_name": "Cập nhật dashboard",
+      "assignee": "Lan",
+      "start_date": "2026-08-17",
+      "due_date": "2026-08-20",
       "due_date_text": "trước thứ Sáu",
-      "evidence": "Phương: Em sẽ chuẩn bị hồ sơ trước thứ Sáu.",
+      "evidence": "Lan: Em sẽ cập nhật dashboard trước thứ Sáu.",
       "status": "Proposed"
     }
   ],
@@ -195,132 +418,399 @@ Response có dạng:
 }
 ```
 
-Chi tiết request/response: [docs/api.md](docs/api.md). Hướng dẫn Power Automate,
-Azure và fallback: [docs/azure-power-automate.md](docs/azure-power-automate.md).
+Quy ước:
 
-## Test Và Đánh Giá
+- `start_date` luôn phải có giá trị;
+- `due_date` có thể rỗng nếu pipeline không thể resolve deadline một cách an toàn;
+- `due_date_text` giữ lại cụm deadline gốc để audit;
+- nhiều assignee được serialize bằng `; `.
+
+---
+
+# Async jobs
+
+Async submit endpoint trả HTTP `202`:
+
+```json
+{
+  "job_id": "job-...",
+  "status": "queued",
+  "created": true,
+  "status_url": "/api/v1/meetings/jobs/job-..."
+}
+```
+
+Lifecycle:
+
+```text
+queued -> running -> succeeded
+                  -> failed
+```
+
+Khi `succeeded`, final output nằm trong:
+
+```text
+result
+```
+
+Khi `failed`, đọc:
+
+```text
+error
+```
+
+và **không tạo downstream task proposal**.
+
+Hiện tại job store là **in-memory**.
+
+Do đó:
+
+```text
+restart backend
+    -> mất các job đang lưu
+    -> poll job cũ có thể trả 404
+```
+
+---
+
+# Self-contained upload package
+
+Fixture dùng cho Power Automate hoặc evaluator có thể chứa metadata, Meeting Note và transcript trong cùng một file:
+
+```text
+=== MEETING METADATA ===
+meeting_id: <id>
+meeting_title: <title>
+meeting_date: YYYY-MM-DD
+=== END MEETING METADATA ===
+=== MEETING NOTE ===
+<optional human note>
+=== END MEETING NOTE ===
+=== TRANSCRIPT ===
+<transcript>
+```
+
+Nếu không có Meeting Note thì bỏ toàn bộ section đó.
+
+Regenerate Power Automate fixtures từ reviewed ground truth:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\prepare_power_automate_uploads.py
+```
+
+Không chỉnh sửa thủ công các generated file trong:
+
+```text
+data/power_automate_uploads/
+```
+
+---
+
+# Chạy pipeline local và debug
+
+Có thể chạy trực tiếp một transcript mà **không cần Uvicorn hoặc Power Automate**.
+
+```powershell
+.\.venv\Scripts\python.exe scripts\run_pipeline.py meeting.txt `
+  --meeting-id local-001 `
+  --title "Local Meeting" `
+  --date 2026-08-17
+```
+
+---
+
+## Inspect preprocessing
+
+```powershell
+.\.venv\Scripts\python.exe scripts\preprocess_transcript.py meeting.txt `
+  --date 2026-08-17
+```
+
+---
+
+## Inspect candidate generation
+
+```powershell
+.\.venv\Scripts\python.exe scripts\generate_candidates.py meeting.txt `
+  --date 2026-08-17
+```
+
+---
+
+# Test và evaluation
+
+## Automated tests
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest backend\tests -q
-python scripts\evaluate_dataset.py data\validation --report evaluation\latest-validation-report.json
 ```
 
-Test local trực tiếp với OpenAI, không cần Uvicorn và không đi qua Power Automate:
+Trạng thái trong project context hiện tại:
 
-```powershell
-$env:OPENAI_API_KEY="<key>"
-$env:OPENAI_MODEL="gpt-5-mini"
-$env:OPENAI_REASONING_EFFORT="medium"
-$env:AI_TIMEOUT_SECONDS="3600"
-
-.\scripts\run_local_openai.ps1
+```text
+236 tests passed
 ```
 
-Script chạy automated tests trong môi trường test cô lập trước (không dùng API
-key và không phát sinh provider call), sau đó chạy cùng case A/B không note rồi
-có note bằng `--local-openai`. Hai lượt A/B này mới gọi OpenAI. Report nằm dưới
-`evaluation/runtime/local-openai-*`.
+---
 
-Vì pipeline là AI-last, một variant rõ ràng có thể kết thúc bằng route
-`rule_only` hoặc `ai_fallback_skipped_no_candidate` và không phát sinh provider
-call. Script coi đây là skip hợp lệ; các route khác mà không gọi provider vẫn
-làm smoke fail. Tổng số OpenAI call thực tế luôn được in ở dòng cuối.
-
-Mặc định mismatch với ground truth vẫn trả exit code fail. Khi chỉ khảo sát một
-case đã biết chưa pass và vẫn muốn hoàn tất A/B, thêm `-AllowQualityFailures`;
-report vẫn ghi đầy đủ mismatch và terminal vẫn hiển thị warning.
-
-Chạy regression theo từng đợt qua API local:
-
-```powershell
-.\scripts\run_validation_batches.ps1 -Batch targeted
-.\scripts\run_validation_batches.ps1 -Batch w1
-.\scripts\run_validation_batches.ps1 -Batch w2
-.\scripts\run_validation_batches.ps1 -Batch w3
-.\scripts\run_validation_batches.ps1 -Batch w4
-.\scripts\run_validation_batches.ps1 -Batch w5
-```
-
-Đối với W3/W4/W5, thêm `-JobApi` để dùng submit/poll thay vì request đồng bộ:
-
-```powershell
-.\scripts\run_validation_batches.ps1 -Batch w4 -JobApi -TimeoutSeconds 3600
-```
-
-Với case dài (W3 trở lên), dùng job API thay cho endpoint đồng bộ `/process`.
-Script submit file, nhận `job_id`, rồi poll kết quả nên không giữ một HTTP request
-mở trong toàn bộ thời gian OpenAI xử lý:
+## Chạy một validation case
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\evaluate_dataset.py data\validation `
-  --job-endpoint "http://127.0.0.1:8010/api/v1/meetings/jobs/process-file" `
-  --api-key "mi-demo-secret" `
-  --timeout 3600 `
-  --poll-interval 15 `
-  --case-id "W4-LONG-C5-N2-SW-STATE-001" `
-  --report "evaluation\validation-w4-job.json"
+  --pipeline-version v1 `
+  --context-mode assist `
+  --without-meeting-notes `
+  --case-id W3-MED-C4-N2-PROD-INT-007 `
+  --report evaluation\runtime\targeted.json
 ```
 
-Các lệnh trên gọi trực tiếp FastAPI và ghi report vào `evaluation`; chúng không
-trigger Power Automate và không ghi Microsoft Lists. Dùng `-RuleOnly` để chạy
-baseline không gọi OpenAI, hoặc `-Batch all` để chạy toàn bộ corpus sau khi các
-đợt nhỏ đã ổn định.
+---
 
-`data/validation` là corpus chuẩn đã review. Chỉ dùng metric từ các case đã được
-review làm số liệu chính thức. Thư mục `data/power_automate_uploads` chứa 172 file
-phẳng: 86 transcript-only giữ tên `<case-id>.txt` và 86 bản A/B có tên
-`<case-id>__with-note.txt`; upload bản copy có tên mới để trigger lại flow.
+## Full rule-only A/B
 
-Report có hai nhóm metric độc lập:
-
-- **Chất lượng trích xuất:** `task_precision`, `task_recall`, `field_accuracy`,
-  `case_pass_rate`. Chỉ công bố số liệu từ reviewed ground truth.
-- **Tuyến xử lý:** mỗi case được gắn một `route` trong `case_execution`:
-  `rule_only` (không cần AI), `ai_fallback_not_configured` (cần AI nhưng provider
-  chưa cấu hình), `ai_fallback_resolved` (AI xử lý được window mơ hồ),
-  `ai_fallback_unresolved` (AI không tạo được event có bằng chứng), hoặc
-  `ai_fallback_failed` (lỗi provider/network). `fallback_metrics` đếm số case
-  theo từng tuyến; `ai_window_count` là số window cần AI, còn
-  `ai_provider_call_count` là số batch thực sự gọi OpenAI/provider. Vì vậy một
-  transcript dài có thể có nhiều `ai_window_count` nhưng ít provider call hơn.
-
-Khi sửa rule, prompt hoặc model, chạy lại toàn bộ suite. Không chỉnh prompt theo
-từng transcript; chỉ thay đổi khi một **nhóm lỗi lặp lại** xuất hiện trong report.
-
-### Live V1 gates qua API: smoke, W4/W5, full corpus
-
-Script sau khởi động V1 local, tự tạo rule-only baseline đúng cùng subset, upload
-case qua Job API, đóng gói Meeting Note, bắt buộc có provider call và kiểm tra
-precision/recall/field-accuracy, contract, call và token thresholds. Model,
-reasoning effort và prompt version được pin cho cả baseline và live report. Mặc
-định chỉ chạy contract smoke 4 case.
+### Không dùng Meeting Note
 
 ```powershell
-$env:OPENAI_API_KEY="<key-nhận-từ-lead>"
-.\scripts\test_v1_live_full.ps1 -Scope smoke
-
-# Chỉ sau khi smoke pass:
-.\scripts\test_v1_live_full.ps1 -Scope gate-b
-
-# Chỉ sau khi Gate B cải thiện trên matched baseline:
-.\scripts\test_v1_live_full.ps1 -Scope full
+.\.venv\Scripts\python.exe scripts\evaluate_dataset.py data\validation `
+  --pipeline-version v1 `
+  --context-mode assist `
+  --without-meeting-notes `
+  --report evaluation\runtime\full-without-notes.json
 ```
 
-`-RequireAllCasesPass` là điều kiện bổ sung; quantitative baseline gate luôn
-được áp dụng. Mỗi lần chạy tạo thư mục
-`evaluation/live-v1-<UTC timestamp>/`, gồm `v1-with-meeting-notes.json`,
-`openai-usage.json` và trace riêng cho run đó. Pricing trong usage chỉ xuất hiện
-khi cũng đặt các biến `OPENAI_*_USD_PER_1M`.
+### Có Meeting Note
 
-## Cấu Trúc Thư Mục
+```powershell
+.\.venv\Scripts\python.exe scripts\evaluate_dataset.py data\validation `
+  --pipeline-version v1 `
+  --context-mode assist `
+  --report evaluation\runtime\full-with-notes.json
+```
+
+Evaluator ghi report trước khi trả exit code.
+
+Vì vậy, exit code khác `0` có thể chỉ có nghĩa là vẫn còn **quality mismatch**, không nhất thiết là runtime execution failure.
+
+Luôn đọc report được sinh ra trước khi kết luận run bị lỗi.
+
+---
+
+# Optional OpenAI path
+
+AI hiện vẫn là experimental.
+
+Khi đánh giá AI-backed và rule-only, hai run phải dùng cùng:
+
+- code revision;
+- selected cases;
+- meeting metadata;
+- Meeting Note mode;
+- context mode;
+- prompt version;
+- evaluator configuration.
+
+Ví dụ local OpenAI smoke:
+
+```powershell
+$env:OPENAI_API_KEY = "<secret>"
+$env:OPENAI_MODEL = "gpt-5-mini"
+$env:OPENAI_REASONING_EFFORT = "medium"
+$env:AI_TIMEOUT_SECONDS = "3600"
+
+.\scripts\run_local_openai.ps1 `
+  -CaseId W4-LONG-C5-N1-SW-STATE-009
+```
+
+Nếu đang chạy diagnostic và chấp nhận expected-output mismatch:
+
+```powershell
+.\scripts\run_local_openai.ps1 `
+  -CaseId W4-LONG-C5-N1-SW-STATE-009 `
+  -AllowQualityFailures
+```
+
+Provider/schema/contract error vẫn phải làm run fail.
+
+AI-backed chỉ được coi là có giá trị khi **accepted AI events cải thiện final output**.
+
+Provider call thành công nhưng không tạo accepted event không được tính là quality improvement.
+
+---
+
+# Tích hợp Power Automate
+
+Power Automate chỉ đóng vai trò **orchestration layer**.
+
+Không port các phần sau sang Power Automate:
+
+- parser;
+- preprocessing;
+- rule engine;
+- Task Ledger;
+- reducer;
+- date resolver;
+- task reconciliation.
+
+Flow chuẩn:
 
 ```text
-backend/app/       API, pipeline, rule engine, AI adapter, date/output logic
-backend/tests/     unit, integration và end-to-end tests
-data/              fixtures, validation corpus và file upload cho Power Automate
-scripts/           CLI preprocessing, evaluation và data preparation
-power-automate/    prompt, schema và solution integration artifacts
-sp365/             SharePoint List contracts
-clients/csharp/    client C# gửi transcript file vào API
-docs/              API, deployment và integration documentation
+SharePoint / OneDrive file trigger
+  -> đánh dấu source = Processing
+  -> Get file content
+  -> POST /api/v1/meetings/jobs/process-file
+  -> lưu job_id + status_url
+  -> poll GET status_url
+  -> nếu succeeded:
+       upsert MI Meetings bằng MeetingId
+       parse result.tasks
+       upsert MI Task Proposals bằng ProposalKey
+       đánh dấu Success
+  -> nếu failed / timeout / 404:
+       lưu error
+       đánh dấu Failed
 ```
+
+Các nguyên tắc quan trọng:
+
+- gửi binary file content;
+- gửi `X-API-Key` nếu authentication đang bật;
+- ưu tiên `X-File-Name-Base64` khi filename có Unicode;
+- chỉ ghi proposal sau khi backend job ở trạng thái `succeeded`;
+- dùng idempotent upsert thay vì blind create;
+- API base URL không có trailing slash;
+- test file package local trước khi test Power Automate;
+- chưa bật OpenAI mặc định trong flow cho tới khi AI-backed evaluation chứng minh được final-output uplift.
+
+Schemas:
+
+```text
+power-automate/schemas/job-submit.schema.json
+power-automate/schemas/job-status.schema.json
+power-automate/schemas/pipeline-output.schema.json
+```
+
+---
+
+# Local file-package smoke test
+
+Chỉ chạy khi backend local đã sẵn sàng.
+
+```powershell
+.\.venv\Scripts\python.exe scripts\smoke_upload_package.py `
+  data\power_automate_uploads\W1-SHORT-C1-N0-IT-DASG-ABS-002.txt `
+  --expect-task-count 2 `
+  --output evaluation\runtime\local-package-smoke.json
+```
+
+Nên chạy bước này trước khi upload cùng file vào Power Automate flow.
+
+---
+
+# Docker
+
+Build image:
+
+```powershell
+docker build -t meeting-task-pipeline .
+```
+
+Run:
+
+```powershell
+docker run --rm -p 8000:8000 --env-file .env meeting-task-pipeline
+```
+
+---
+
+# Azure Functions
+
+Azure Functions dùng cùng FastAPI application qua:
+
+```text
+backend/function_app.py
+```
+
+`backend/function_app.py` wrap FastAPI app bằng `func.AsgiFunctionApp`.
+
+Business logic không được duplicate sang Azure Functions hoặc Power Automate.
+
+---
+
+# Biến môi trường quan trọng
+
+| Variable | Ý nghĩa / giá trị mặc định hiện tại |
+| --- | --- |
+| `POWER_AUTOMATE_API_KEY` | Shared secret; để rỗng sẽ disable auth ở local |
+| `PIPELINE_VERSION` | `v1` |
+| `MEETING_CONTEXT_MODE` | `assist` |
+| `MAX_TRANSCRIPT_CHARACTERS` | `500000` |
+| `MEETING_NOTE_MAX_CHARACTERS` | `50000` |
+| `AI_MAX_BATCH_CONTEXT_CLAUSES` | `56` |
+| `AI_TIMEOUT_SECONDS` | `3600` |
+| `JOB_TIMEOUT_SECONDS` | `3600` |
+| `PIPELINE_TRACE_ENABLED` | `false` |
+| `PIPELINE_TRACE_DIRECTORY` | `evaluation/traces` |
+| `OPENAI_MODEL` | `gpt-5-mini` |
+| `OPENAI_REASONING_EFFORT` | `medium` |
+
+Không commit:
+
+```text
+.env
+API keys
+real meeting transcripts
+sensitive trace output
+```
+
+---
+
+# Hạn chế hiện tại
+
+- Exact case pass của rule-only trên reviewed corpus vẫn thấp.
+- AI không thể sửa một missed task identity nếu Python chưa tạo được identity đó.
+- Chưa có full paired run mới nhất chứng minh chắc chắn AI tốt hơn rule-only sau các logic fix hiện tại.
+- Async jobs chưa persistent qua backend restart.
+- Vẫn cần blind corpus từ meeting thực tế để đánh giá generalization.
+- Transcript dài vẫn khó ở task identity, recap scope và mutation target.
+- Trace có thể chứa nội dung cuộc họp nhạy cảm.
+- Working-day duration chưa có đầy đủ calendar implementation thì `due_date` có thể để rỗng.
+
+---
+
+# Workflow phát triển
+
+Trước khi thay đổi runtime behavior:
+
+1. Xem code/tests và reviewed ground truth trong `data/validation` là source of truth chính.
+2. Không hardcode case ID hoặc nguyên văn transcript cụ thể vào runtime rules.
+3. Mỗi positive rule nên có negative regression test tương ứng.
+4. Không coi Meeting Note là complete final snapshot.
+5. Không cho AI tính ngày, tạo ID, tạo task identity hoặc quyết định final state.
+6. Giữ public output backward compatible.
+7. Test local trước khi test transport hoặc Power Automate.
+8. Không sửa `expected_output.json` chỉ để rule pass.
+
+Thứ tự validation khuyến nghị:
+
+```text
+pytest
+  -> targeted positive + negative regressions
+  -> full rule-only without Meeting Notes
+  -> full rule-only with Meeting Notes
+  -> paired AI evaluation nếu AI boundary thay đổi
+  -> local file-package smoke
+  -> Power Automate submit / poll / upsert test
+```
+
+---
+
+# Source of truth
+
+Khi các nguồn thông tin mâu thuẫn, ưu tiên theo thứ tự:
+
+1. Code và automated tests trong `backend/`.
+2. Reviewed ground truth trong `data/validation/`.
+3. Report của đúng lần chạy đang được phân tích.
+4. `docs/project-context.md` và README này.
+
+Đọc `docs/project-context.md` trước khi thay đổi kiến trúc, evaluation logic hoặc Power Automate integration.
