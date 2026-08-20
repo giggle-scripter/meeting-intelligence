@@ -811,6 +811,10 @@ def process_meeting(
     note_claim_grounding_threshold: float = 0.72,
     note_claim_grounding_margin: float = 0.12,
     note_dual_view_version: str = "note-dual-view-v1",
+    temporal_semantics_mode: str = "off",
+    temporal_parser_version: str = "temporal-parser-v1",
+    temporal_working_day_policy: str = "weekdays-only-v1",
+    temporal_min_confidence: float = 1.0,
 ) -> PipelineResult:
     ai_client = ai_client or DisabledAiClient()
     stages = preprocess_meeting(meeting, speaker_aliases)
@@ -871,6 +875,30 @@ def process_meeting(
         raise ValueError("note dual-view thresholds must be between zero and one")
     if not note_dual_view_version:
         raise ValueError("note_dual_view_version must not be empty")
+    if temporal_semantics_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("temporal_semantics_mode must be off, shadow, or assist")
+    if not temporal_parser_version:
+        raise ValueError("temporal_parser_version must not be empty")
+    if temporal_working_day_policy != "weekdays-only-v1":
+        raise ValueError("temporal_working_day_policy must be weekdays-only-v1")
+    if temporal_min_confidence != 1.0:
+        raise ValueError("temporal_min_confidence must be exactly 1.0")
+    temporal_summary = None
+    temporal_due_dates: dict[str, str] = {}
+    if temporal_semantics_mode != "off":
+        try:
+            from .dates.temporal import evaluate_temporal_semantics
+
+            temporal_summary, temporal_due_dates = evaluate_temporal_semantics(
+                mentions,
+                meeting_date=meeting.meeting_date,
+                parser_version=temporal_parser_version,
+                working_day_policy=temporal_working_day_policy,
+            )
+            if temporal_semantics_mode != "assist":
+                temporal_due_dates = {}
+        except (KeyError, TypeError, ValueError) as exc:
+            LOGGER.warning("Temporal semantics evaluation failed: %s", exc)
     meeting_context = None
     note_cues_by_clause = {}
     note_dual_view_stats = {
@@ -1893,6 +1921,21 @@ def process_meeting(
         note_direct_event_suppressed_count=note_dual_view_stats["direct_event_suppressed_count"],
         note_dual_view_error_count=note_dual_view_stats["error_count"],
         note_grounding_reason_counts=note_dual_view_stats["reason_counts"],
+        temporal_semantics_mode=temporal_semantics_mode,
+        temporal_parser_version=(temporal_parser_version if temporal_semantics_mode != "off" else "disabled"),
+        temporal_working_day_policy=(temporal_working_day_policy if temporal_semantics_mode != "off" else "disabled"),
+        temporal_expression_count=(temporal_summary.expression_count if temporal_summary else 0),
+        temporal_type_counts=(temporal_summary.type_counts if temporal_summary else {}),
+        temporal_existing_resolved_count=(temporal_summary.existing_resolved_count if temporal_summary else 0),
+        temporal_ast_resolved_count=(temporal_summary.ast_resolved_count if temporal_summary else 0),
+        temporal_ast_unresolved_count=(temporal_summary.ast_unresolved_count if temporal_summary else 0),
+        temporal_unresolved_anchor_count=(temporal_summary.unresolved_anchor_count if temporal_summary else 0),
+        temporal_agreement_count=(temporal_summary.agreement_count if temporal_summary else 0),
+        temporal_disagreement_count=(temporal_summary.disagreement_count if temporal_summary else 0),
+        temporal_improve_count=(temporal_summary.improve_count if temporal_summary else 0),
+        temporal_regress_count=(temporal_summary.regress_count if temporal_summary else 0),
+        temporal_parser_error_count=(temporal_summary.parser_error_count if temporal_summary else 0),
+        temporal_resolution_status_counts=(temporal_summary.resolution_status_counts if temporal_summary else {}),
     )
     result = build_pipeline_result(
         meeting.meeting_title,
@@ -1905,6 +1948,7 @@ def process_meeting(
         summary_topic=summary_topic,
         no_active_reason=no_active_reason,
         meeting_note_present=meeting.meeting_note is not None,
+        temporal_due_dates=temporal_due_dates,
     )
     if trace_enabled:
         write_pipeline_trace(trace_directory, meeting.meeting_id, "v1", {
@@ -2068,6 +2112,10 @@ def process_meeting_by_version(
     note_claim_grounding_threshold: float = 0.72,
     note_claim_grounding_margin: float = 0.12,
     note_dual_view_version: str = "note-dual-view-v1",
+    temporal_semantics_mode: str = "off",
+    temporal_parser_version: str = "temporal-parser-v1",
+    temporal_working_day_policy: str = "weekdays-only-v1",
+    temporal_min_confidence: float = 1.0,
 ) -> PipelineResult:
     """Select V1/V2 or run V2 in shadow while returning V1's public result."""
 
@@ -2136,6 +2184,10 @@ def process_meeting_by_version(
             note_claim_grounding_threshold=note_claim_grounding_threshold,
             note_claim_grounding_margin=note_claim_grounding_margin,
             note_dual_view_version=note_dual_view_version,
+            temporal_semantics_mode=temporal_semantics_mode,
+            temporal_parser_version=temporal_parser_version,
+            temporal_working_day_policy=temporal_working_day_policy,
+            temporal_min_confidence=temporal_min_confidence,
         )
     if pipeline_version == "v1":
         assert v1_result is not None

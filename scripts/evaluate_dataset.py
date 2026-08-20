@@ -410,6 +410,12 @@ def main() -> None:
     parser.add_argument("--note-claim-grounding-threshold", type=float, default=0.72)
     parser.add_argument("--note-claim-grounding-margin", type=float, default=0.12)
     parser.add_argument("--note-dual-view-version", default="note-dual-view-v1")
+    parser.add_argument(
+        "--temporal-semantics-mode", choices=("off", "shadow", "assist"), default="off"
+    )
+    parser.add_argument("--temporal-parser-version", default="temporal-parser-v1")
+    parser.add_argument("--temporal-working-day-policy", default="weekdays-only-v1")
+    parser.add_argument("--temporal-min-confidence", type=float, default=1.0)
     parser.add_argument("--action-clear-threshold", type=float, default=0.82)
     parser.add_argument("--action-ai-threshold", type=float, default=0.45)
     parser.add_argument(
@@ -464,6 +470,10 @@ def main() -> None:
         parser.error("--ai-mutation-router-mode assist requires candidate assist and semantic/context shadow")
     if args.note_dual_view_mode != "off" and args.context_mode == "off":
         parser.error("--note-dual-view-mode requires --context-mode shadow or assist")
+    if args.temporal_working_day_policy != "weekdays-only-v1":
+        parser.error("--temporal-working-day-policy must be weekdays-only-v1")
+    if args.temporal_min_confidence != 1.0:
+        parser.error("--temporal-min-confidence must be exactly 1.0")
     checkpoint_path = (
         args.report.with_suffix(args.report.suffix + ".checkpoint.json")
         if args.report
@@ -623,6 +633,10 @@ def main() -> None:
                         note_claim_grounding_threshold=args.note_claim_grounding_threshold,
                         note_claim_grounding_margin=args.note_claim_grounding_margin,
                         note_dual_view_version=args.note_dual_view_version,
+                        temporal_semantics_mode=args.temporal_semantics_mode,
+                        temporal_parser_version=args.temporal_parser_version,
+                        temporal_working_day_policy=args.temporal_working_day_policy,
+                        temporal_min_confidence=args.temporal_min_confidence,
                     )
                 )
         except FatalBenchmarkError as exc:
@@ -1079,6 +1093,10 @@ def main() -> None:
             "ai_mutation_min_confidence": args.ai_mutation_min_confidence,
             "note_dual_view_mode": args.note_dual_view_mode,
             "note_dual_view_version": args.note_dual_view_version,
+            "temporal_semantics_mode": args.temporal_semantics_mode,
+            "temporal_parser_version": args.temporal_parser_version,
+            "temporal_working_day_policy": args.temporal_working_day_policy,
+            "temporal_min_confidence": args.temporal_min_confidence,
             "context_limits": {
                 "max_clauses": args.context_max_clauses,
                 "max_characters": args.context_max_characters,

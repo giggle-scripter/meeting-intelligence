@@ -144,6 +144,7 @@ def build_pipeline_result(
     summary_topic: str | None = None,
     no_active_reason: str | None = None,
     meeting_note_present: bool | None = None,
+    temporal_due_dates: dict[str, str] | None = None,
 ) -> PipelineResult:
     final_tasks: list[FinalTask] = []
     explicit_start_count = 0
@@ -169,7 +170,10 @@ def build_pipeline_result(
                 state.task_name,
                 state.assignee,
                 start_date,
-                resolve_date_mention(meeting_date, start_date, mention),
+                (temporal_due_dates or {}).get(
+                    state.deadline_mention_id,
+                    resolve_date_mention(meeting_date, start_date, mention),
+                ),
                 text_mention.raw_text if text_mention else "",
                 build_evidence(state.source_clause_ids, clauses_by_id),
             )

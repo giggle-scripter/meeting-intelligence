@@ -853,6 +853,10 @@ call thành công nhưng không tạo accepted event không phải quality impro
 | `NOTE_DUAL_VIEW_MODE` | `off`; `shadow` chỉ audit claims/grounding; `assist` suppress note direct events |
 | `NOTE_CLAIM_MAX_TRANSCRIPT_CLAUSES` | `8` hard cap cho mỗi claim |
 | `NOTE_CLAIM_GROUNDING_THRESHOLD` / `NOTE_CLAIM_GROUNDING_MARGIN` | `0.72` / `0.12` |
+| `TEMPORAL_SEMANTICS_MODE` | `off`; `shadow` chỉ so sánh AST với legacy, `assist` chỉ fallback cho legacy-unresolved supported durations |
+| `TEMPORAL_PARSER_VERSION` | `temporal-parser-v1` |
+| `TEMPORAL_WORKING_DAY_POLICY` | `weekdays-only-v1`; không có holiday calendar |
+| `TEMPORAL_MIN_CONFIDENCE` | `1.0`; chỉ deterministic parser/resolver được phép promote |
 | `CONTEXT_MAX_CLAUSES` | `30`; hard cap, không cho cấu hình cao hơn |
 | `CONTEXT_MAX_CHARACTERS` | `12000`; hard cap, không cho cấu hình cao hơn |
 | `CONTEXT_MAX_TASKS` | `5`; top-k task memory hard cap |

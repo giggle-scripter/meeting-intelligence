@@ -171,6 +171,21 @@ class PipelineDiagnostics:
     note_direct_event_suppressed_count: int = 0
     note_dual_view_error_count: int = 0
     note_grounding_reason_counts: dict[str, int] = field(default_factory=dict)
+    temporal_semantics_mode: str = "off"
+    temporal_parser_version: str = "disabled"
+    temporal_working_day_policy: str = "disabled"
+    temporal_expression_count: int = 0
+    temporal_type_counts: dict[str, int] = field(default_factory=dict)
+    temporal_existing_resolved_count: int = 0
+    temporal_ast_resolved_count: int = 0
+    temporal_ast_unresolved_count: int = 0
+    temporal_unresolved_anchor_count: int = 0
+    temporal_agreement_count: int = 0
+    temporal_disagreement_count: int = 0
+    temporal_improve_count: int = 0
+    temporal_regress_count: int = 0
+    temporal_parser_error_count: int = 0
+    temporal_resolution_status_counts: dict[str, int] = field(default_factory=dict)
 
 
 @dataclass
