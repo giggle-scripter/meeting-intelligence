@@ -432,6 +432,10 @@ def _submit_job(
                 note_claim_grounding_threshold=settings.note_claim_grounding_threshold,
                 note_claim_grounding_margin=settings.note_claim_grounding_margin,
                 note_dual_view_version=settings.note_dual_view_version,
+                temporal_semantics_mode=settings.temporal_semantics_mode,
+                temporal_parser_version=settings.temporal_parser_version,
+                temporal_working_day_policy=settings.temporal_working_day_policy,
+                temporal_min_confidence=settings.temporal_min_confidence,
             )
         ),
         pipeline_version=settings.pipeline_version,
@@ -562,6 +566,10 @@ def process_endpoint(
         note_claim_grounding_threshold=settings.note_claim_grounding_threshold,
         note_claim_grounding_margin=settings.note_claim_grounding_margin,
         note_dual_view_version=settings.note_dual_view_version,
+        temporal_semantics_mode=settings.temporal_semantics_mode,
+        temporal_parser_version=settings.temporal_parser_version,
+        temporal_working_day_policy=settings.temporal_working_day_policy,
+        temporal_min_confidence=settings.temporal_min_confidence,
     )
     return asdict(result)
 
@@ -728,6 +736,10 @@ async def process_file_endpoint(
         note_claim_grounding_threshold=settings.note_claim_grounding_threshold,
         note_claim_grounding_margin=settings.note_claim_grounding_margin,
         note_dual_view_version=settings.note_dual_view_version,
+        temporal_semantics_mode=settings.temporal_semantics_mode,
+        temporal_parser_version=settings.temporal_parser_version,
+        temporal_working_day_policy=settings.temporal_working_day_policy,
+        temporal_min_confidence=settings.temporal_min_confidence,
     )
     return asdict(result)
 

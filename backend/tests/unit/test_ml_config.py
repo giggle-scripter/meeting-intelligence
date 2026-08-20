@@ -46,6 +46,10 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
         "CONTEXT_TOPIC_BOUNDARY_THRESHOLD",
         "CONTEXT_TOPIC_SMOOTHING_WINDOW",
         "CONTEXT_RETRIEVAL_VERSION",
+        "TEMPORAL_SEMANTICS_MODE",
+        "TEMPORAL_PARSER_VERSION",
+        "TEMPORAL_WORKING_DAY_POLICY",
+        "TEMPORAL_MIN_CONFIDENCE",
     ):
         monkeypatch.delenv(name, raising=False)
 
@@ -72,6 +76,10 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
     assert settings.context_max_clauses == 30
     assert settings.context_max_characters == 12_000
     assert settings.context_max_tasks == 5
+    assert settings.temporal_semantics_mode == "off"
+    assert settings.temporal_parser_version == "temporal-parser-v1"
+    assert settings.temporal_working_day_policy == "weekdays-only-v1"
+    assert settings.temporal_min_confidence == 1.0
 
 
 def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
@@ -89,6 +97,7 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     monkeypatch.setenv("TASK_LINK_STRONG_THRESHOLD", "0.8")
     monkeypatch.setenv("TASK_LINK_MIN_MARGIN", "0.15")
     monkeypatch.setenv("TASK_LINK_AI_THRESHOLD", "0.5")
+    monkeypatch.setenv("TEMPORAL_SEMANTICS_MODE", "shadow")
 
     settings = Settings.from_env()
 
@@ -106,6 +115,7 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     assert settings.task_link_strong_threshold == 0.8
     assert settings.task_link_min_margin == 0.15
     assert settings.task_link_ai_threshold == 0.5
+    assert settings.temporal_semantics_mode == "shadow"
 
 
 @pytest.mark.parametrize("value", ["0", "-1", "invalid"])
@@ -208,4 +218,21 @@ def test_candidate_router_rejects_invalid_thresholds(
     monkeypatch.setenv("ACTION_AI_THRESHOLD", ai)
 
     with pytest.raises(RuntimeError, match="ACTION_"):
+        Settings.from_env()
+
+
+@pytest.mark.parametrize(
+    ("name", "value"),
+    [
+        ("TEMPORAL_SEMANTICS_MODE", "active"),
+        ("TEMPORAL_WORKING_DAY_POLICY", "holiday-v1"),
+        ("TEMPORAL_MIN_CONFIDENCE", "0.99"),
+    ],
+)
+def test_temporal_settings_reject_non_deterministic_configuration(
+    monkeypatch, name: str, value: str,
+) -> None:
+    monkeypatch.setenv(name, value)
+
+    with pytest.raises(RuntimeError, match="TEMPORAL_"):
         Settings.from_env()

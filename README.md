@@ -169,6 +169,15 @@ Khi debug fallback trên máy local, đặt `AI_FALLBACK_DEBUG=true`. Terminal s
 JSON event thô từ model và lý do event bị Python từ chối. Không bật cờ này ở môi
 trường có transcript thật vì log có thể chứa nội dung meeting.
 
+### Deterministic temporal semantics
+
+`TEMPORAL_SEMANTICS_MODE=off` giữ resolver cũ. `shadow` parse mỗi date mention
+thành AST và so sánh kết quả nhưng không đổi output. `assist` chỉ bổ sung due
+date cho duration đã được grammar hỗ trợ mà legacy resolver không giải được;
+không bao giờ ghi đè ngày exact của legacy. Date được tính hoàn toàn trong
+Python, anchor event phải là ID exact do caller cung cấp, và working day hiện
+tại chỉ bỏ thứ Bảy/CN (`TEMPORAL_WORKING_DAY_POLICY=weekdays-only-v1`).
+
 - Health check: `http://127.0.0.1:8010/health`
 - Swagger UI: `http://127.0.0.1:8010/docs`
 - Khi dùng Cloudflare Quick Tunnel hoặc Azure Function, Power Automate gọi endpoint

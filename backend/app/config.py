@@ -72,6 +72,10 @@ class Settings:
     note_claim_grounding_threshold: float = 0.72
     note_claim_grounding_margin: float = 0.12
     note_dual_view_version: str = "note-dual-view-v1"
+    temporal_semantics_mode: str = "off"
+    temporal_parser_version: str = "temporal-parser-v1"
+    temporal_working_day_policy: str = "weekdays-only-v1"
+    temporal_min_confidence: float = 1.0
     action_clear_threshold: float = 0.82
     action_ai_threshold: float = 0.45
     candidate_threshold_version: str = "candidate-router-thresholds-v1"
@@ -248,6 +252,27 @@ class Settings:
         note_dual_view_version = os.getenv("NOTE_DUAL_VIEW_VERSION", "note-dual-view-v1").strip()
         if not note_dual_view_version:
             raise RuntimeError("NOTE_DUAL_VIEW_VERSION must not be empty")
+        temporal_semantics_mode = os.getenv("TEMPORAL_SEMANTICS_MODE", "off").lower()
+        if temporal_semantics_mode not in {"off", "shadow", "assist"}:
+            raise RuntimeError("TEMPORAL_SEMANTICS_MODE must be off, shadow, or assist")
+        temporal_parser_version = os.getenv(
+            "TEMPORAL_PARSER_VERSION", "temporal-parser-v1"
+        ).strip()
+        if not temporal_parser_version:
+            raise RuntimeError("TEMPORAL_PARSER_VERSION must not be empty")
+        temporal_working_day_policy = os.getenv(
+            "TEMPORAL_WORKING_DAY_POLICY", "weekdays-only-v1"
+        ).strip()
+        if temporal_working_day_policy != "weekdays-only-v1":
+            raise RuntimeError("TEMPORAL_WORKING_DAY_POLICY must be weekdays-only-v1")
+        try:
+            temporal_min_confidence = float(
+                os.getenv("TEMPORAL_MIN_CONFIDENCE", "1.0")
+            )
+        except ValueError as exc:
+            raise RuntimeError("TEMPORAL_MIN_CONFIDENCE must be a number") from exc
+        if temporal_min_confidence != 1.0:
+            raise RuntimeError("TEMPORAL_MIN_CONFIDENCE must be exactly 1.0")
         task_link_weight_names = (
             "TASK_LINK_SEMANTIC_WEIGHT",
             "TASK_LINK_LEXICAL_WEIGHT",
@@ -451,6 +476,10 @@ class Settings:
             note_claim_grounding_threshold=note_claim_grounding_threshold,
             note_claim_grounding_margin=note_claim_grounding_margin,
             note_dual_view_version=note_dual_view_version,
+            temporal_semantics_mode=temporal_semantics_mode,
+            temporal_parser_version=temporal_parser_version,
+            temporal_working_day_policy=temporal_working_day_policy,
+            temporal_min_confidence=temporal_min_confidence,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,
             candidate_threshold_version=candidate_threshold_version,
