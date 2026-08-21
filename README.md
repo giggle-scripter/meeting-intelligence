@@ -444,6 +444,20 @@ Candidate evidence router cũng chỉ chạy shadow và yêu cầu classifier sh
   --report evaluation\candidate-router-shadow.json
 ```
 
+### Span-grounded action candidates (Q1)
+
+`ACTION_CANDIDATE_BUILDER_MODE=shadow` tạo `ActionCandidate` có action/owner
+span, deadline mention ID, loại candidate và trạng thái evidence. Đây là telemetry
+độc lập với candidate router cũ: không tạo event, không đổi task output và trace
+ghi dưới `action_candidates_v2`. Dùng để đo candidate coverage trước khi bật
+commitment routing ở PR sau:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\evaluate_dataset.py data\validation `
+  --action-candidate-builder-mode shadow `
+  --report evaluation\action-candidate-shadow.json
+```
+
 Router hợp nhất rule/classifier/note evidence thành route có reasons, nhưng PR4
 không execute bất kỳ route nào. `AI_CREATE_CHECK` chỉ tăng suppressed diagnostics;
 AI create vẫn tắt và final task output vẫn do pipeline hiện tại quyết định.

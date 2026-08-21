@@ -90,6 +90,13 @@ class PipelineDiagnostics:
     action_classifier_rule_agreement_count: int = 0
     action_classifier_rule_disagreement_count: int = 0
     action_classifier_error_count: int = 0
+    action_candidate_builder_mode: str = "off"
+    action_candidate_builder_version: str = "disabled"
+    action_candidate_count: int = 0
+    action_candidate_action_span_count: int = 0
+    action_candidate_kind_counts: dict[str, int] = field(default_factory=dict)
+    action_candidate_state_counts: dict[str, int] = field(default_factory=dict)
+    action_candidate_builder_error_count: int = 0
     candidate_router_mode: str = "off"
     candidate_router_version: str = "disabled"
     candidate_threshold_version: str = "disabled"

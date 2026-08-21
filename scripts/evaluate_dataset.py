@@ -348,6 +348,12 @@ def main() -> None:
         help="Portable classifier artifact used by local shadow evaluation.",
     )
     parser.add_argument(
+        "--action-candidate-builder-mode", choices=("off", "shadow"), default="off"
+    )
+    parser.add_argument(
+        "--action-candidate-builder-version", default="action-candidate-v2"
+    )
+    parser.add_argument(
         "--candidate-router-mode",
         choices=("off", "shadow", "assist"),
         default="off",
@@ -580,6 +586,8 @@ def main() -> None:
                         action_classifier_model_path=str(
                             args.action_classifier_model_path
                         ),
+                        action_candidate_builder_mode=args.action_candidate_builder_mode,
+                        action_candidate_builder_version=args.action_candidate_builder_version,
                         candidate_router_mode=args.candidate_router_mode,
                         action_clear_threshold=args.action_clear_threshold,
                         action_ai_threshold=args.action_ai_threshold,
@@ -1067,6 +1075,8 @@ def main() -> None:
             "meeting_context_mode": args.context_mode,
             "action_classifier_mode": args.action_classifier_mode,
             "action_classifier_model_path": str(args.action_classifier_model_path),
+            "action_candidate_builder_mode": args.action_candidate_builder_mode,
+            "action_candidate_builder_version": args.action_candidate_builder_version,
             "candidate_router_mode": args.candidate_router_mode,
             "task_create_proposal_enabled": args.task_create_proposal,
             "ai_create_proposal_enabled": args.ai_create_proposal,

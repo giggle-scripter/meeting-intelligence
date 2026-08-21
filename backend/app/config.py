@@ -35,6 +35,8 @@ class Settings:
     embedding_fallback_dimension: int = 384
     action_classifier_mode: str = "off"
     action_classifier_model_path: str | None = None
+    action_candidate_builder_mode: str = "off"
+    action_candidate_builder_version: str = "action-candidate-v2"
     candidate_router_mode: str = "off"
     task_create_proposal_enabled: bool = False
     ai_create_proposal_enabled: bool = False
@@ -173,6 +175,16 @@ class Settings:
         ).lower()
         if action_classifier_mode not in {"off", "shadow", "assist"}:
             raise RuntimeError("ACTION_CLASSIFIER_MODE must be off, shadow, or assist")
+        action_candidate_builder_mode = os.getenv(
+            "ACTION_CANDIDATE_BUILDER_MODE", "off"
+        ).lower()
+        if action_candidate_builder_mode not in {"off", "shadow"}:
+            raise RuntimeError("ACTION_CANDIDATE_BUILDER_MODE must be off or shadow")
+        action_candidate_builder_version = os.getenv(
+            "ACTION_CANDIDATE_BUILDER_VERSION", "action-candidate-v2"
+        ).strip()
+        if not action_candidate_builder_version:
+            raise RuntimeError("ACTION_CANDIDATE_BUILDER_VERSION must not be empty")
         candidate_router_mode = os.getenv("CANDIDATE_ROUTER_MODE", "off").lower()
         if candidate_router_mode not in {"off", "shadow", "assist"}:
             raise RuntimeError("CANDIDATE_ROUTER_MODE must be off, shadow, or assist")
@@ -435,6 +447,8 @@ class Settings:
                 os.getenv("ACTION_CLASSIFIER_MODEL_PATH") or ""
             ).strip()
             or None,
+            action_candidate_builder_mode=action_candidate_builder_mode,
+            action_candidate_builder_version=action_candidate_builder_version,
             candidate_router_mode=candidate_router_mode,
             task_create_proposal_enabled=task_create_proposal_enabled,
             ai_create_proposal_enabled=ai_create_proposal_enabled,

@@ -15,6 +15,8 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
         "EMBEDDING_FALLBACK_DIMENSION",
         "ACTION_CLASSIFIER_MODE",
         "ACTION_CLASSIFIER_MODEL_PATH",
+        "ACTION_CANDIDATE_BUILDER_MODE",
+        "ACTION_CANDIDATE_BUILDER_VERSION",
         "CANDIDATE_ROUTER_MODE",
         "ACTION_CLEAR_THRESHOLD",
         "ACTION_AI_THRESHOLD",
@@ -60,6 +62,8 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
     assert settings.embedding_fallback_dimension == 384
     assert settings.action_classifier_mode == "off"
     assert settings.action_classifier_model_path is None
+    assert settings.action_candidate_builder_mode == "off"
+    assert settings.action_candidate_builder_version == "action-candidate-v2"
     assert settings.candidate_router_mode == "off"
     assert settings.action_clear_threshold == 0.82
     assert settings.action_ai_threshold == 0.45
@@ -89,6 +93,8 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     monkeypatch.setenv("EMBEDDING_FALLBACK_DIMENSION", "128")
     monkeypatch.setenv("ACTION_CLASSIFIER_MODEL_PATH", "artifacts/models/action.joblib")
     monkeypatch.setenv("ACTION_CLASSIFIER_MODE", "shadow")
+    monkeypatch.setenv("ACTION_CANDIDATE_BUILDER_MODE", "shadow")
+    monkeypatch.setenv("ACTION_CANDIDATE_BUILDER_VERSION", "action-candidate-test-v2")
     monkeypatch.setenv("CANDIDATE_ROUTER_MODE", "shadow")
     monkeypatch.setenv("ACTION_CLEAR_THRESHOLD", "0.9")
     monkeypatch.setenv("ACTION_AI_THRESHOLD", "0.6")
@@ -107,6 +113,8 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     assert settings.embedding_fallback_dimension == 128
     assert settings.action_classifier_mode == "shadow"
     assert settings.action_classifier_model_path == "artifacts/models/action.joblib"
+    assert settings.action_candidate_builder_mode == "shadow"
+    assert settings.action_candidate_builder_version == "action-candidate-test-v2"
     assert settings.candidate_router_mode == "shadow"
     assert settings.action_clear_threshold == 0.9
     assert settings.action_ai_threshold == 0.6
