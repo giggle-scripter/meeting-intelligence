@@ -344,6 +344,7 @@ def _submit_job(
             f"task_create_proposal={settings.task_create_proposal_enabled}",
             f"ai_create_proposal={settings.ai_create_proposal_enabled}",
             f"ai_create_max={settings.ai_create_max_proposals_per_meeting}",
+            f"ai_quality_uplift={settings.ai_quality_uplift_mode}",
             f"task_linker={settings.task_semantic_linker_mode}",
             f"task_link_scoring={settings.task_link_scoring_version}",
             f"task_link_weights={settings.task_link_semantic_weight},"
@@ -403,6 +404,7 @@ def _submit_job(
                 ai_create_max_proposals_per_meeting=(
                     settings.ai_create_max_proposals_per_meeting
                 ),
+                ai_quality_uplift_mode=settings.ai_quality_uplift_mode,
                 task_semantic_linker_mode=settings.task_semantic_linker_mode,
                 task_link_embedding_model_name=settings.embedding_model_name,
                 task_link_embedding_device=settings.embedding_device,
@@ -555,6 +557,7 @@ def process_endpoint(
         ai_create_max_proposals_per_meeting=(
             settings.ai_create_max_proposals_per_meeting
         ),
+        ai_quality_uplift_mode=settings.ai_quality_uplift_mode,
         task_semantic_linker_mode=settings.task_semantic_linker_mode,
         task_link_embedding_model_name=settings.embedding_model_name,
         task_link_embedding_device=settings.embedding_device,
@@ -735,6 +738,7 @@ async def process_file_endpoint(
         ai_create_max_proposals_per_meeting=(
             settings.ai_create_max_proposals_per_meeting
         ),
+        ai_quality_uplift_mode=settings.ai_quality_uplift_mode,
         task_semantic_linker_mode=settings.task_semantic_linker_mode,
         task_link_embedding_model_name=settings.embedding_model_name,
         task_link_embedding_device=settings.embedding_device,

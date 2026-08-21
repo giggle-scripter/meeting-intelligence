@@ -494,6 +494,15 @@ assignment. It never chooses a previous speaker as a fallback owner.
 the action source, by an explicit task label, by an adjacent support clause,
 or remains unresolved. It never attaches a date by arbitrary nearest task.
 
+### AI uncertain-candidate preflight (Q7)
+
+`AI_QUALITY_UPLIFT_MODE=shadow` audits only candidate-router `AI_CREATE_CHECK`
+rows that also have a grounded CREATE span and no hard-negative commitment
+decision. It records eligible and excluded rows in `ai_quality_uplift_v1`, caps
+the selected candidates using `AI_CREATE_MAX_PROPOSALS_PER_MEETING`, and never
+calls a provider or changes output. Run it with all four prerequisite modes in
+`shadow`; live assist remains disabled until paired quality evidence passes.
+
 Router hợp nhất rule/classifier/note evidence thành route có reasons, nhưng PR4
 không execute bất kỳ route nào. `AI_CREATE_CHECK` chỉ tăng suppressed diagnostics;
 AI create vẫn tắt và final task output vẫn do pipeline hiện tại quyết định.
