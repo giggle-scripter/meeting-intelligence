@@ -80,6 +80,10 @@ class PipelineDiagnostics:
     owner_evidence_count: int = 0
     owner_ungrounded_event_count: int = 0
     owner_evidence_type_counts: dict[str, int] = field(default_factory=dict)
+    deadline_grounding_mode: str = "off"
+    deadline_attachment_count: int = 0
+    deadline_unresolved_attachment_count: int = 0
+    deadline_attachment_type_counts: dict[str, int] = field(default_factory=dict)
     recap_scope: str = "NONE"
     meeting_date_source: str = "REQUEST"
     effective_meeting_date: str = ""
