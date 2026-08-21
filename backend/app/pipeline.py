@@ -765,6 +765,8 @@ def process_meeting(
     topic_likely_threshold: float = 0.45,
     action_classifier_mode: str = "off",
     action_classifier_model_path: str | None = None,
+    action_candidate_builder_mode: str = "off",
+    action_candidate_builder_version: str = "action-candidate-v2",
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -832,6 +834,10 @@ def process_meeting(
         raise ValueError("meeting_context_mode must be off, assist, or shadow")
     if action_classifier_mode not in {"off", "shadow", "assist"}:
         raise ValueError("action_classifier_mode must be off, shadow, or assist")
+    if action_candidate_builder_mode not in {"off", "shadow"}:
+        raise ValueError("action_candidate_builder_mode must be off or shadow")
+    if not action_candidate_builder_version:
+        raise ValueError("action_candidate_builder_version must not be empty")
     if candidate_router_mode not in {"off", "shadow", "assist"}:
         raise ValueError("candidate_router_mode must be off, shadow, or assist")
     if candidate_router_mode != "off" and action_classifier_mode != candidate_router_mode:
@@ -991,6 +997,21 @@ def process_meeting(
         except (OSError, RuntimeError, TypeError, ValueError) as exc:
             LOGGER.warning("Action classifier shadow inference failed: %s", exc)
             action_classifier_error_count = 1
+    action_candidates_shadow = []
+    action_candidate_builder_error_count = 0
+    if action_candidate_builder_mode == "shadow":
+        try:
+            from .candidate import build_action_candidates
+
+            action_candidates_shadow = build_action_candidates(
+                clauses,
+                annotations,
+                mentions,
+                builder_version=action_candidate_builder_version,
+            )
+        except (KeyError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Action candidate builder shadow failed: %s", exc)
+            action_candidate_builder_error_count = 1
     candidate_evidence_shadow = []
     candidate_decisions_shadow = []
     candidate_router_shadow = None
@@ -1684,6 +1705,22 @@ def process_meeting(
             else 0
         ),
         action_classifier_error_count=action_classifier_error_count,
+        action_candidate_builder_mode=action_candidate_builder_mode,
+        action_candidate_builder_version=(
+            action_candidate_builder_version
+            if action_candidate_builder_mode == "shadow" else "disabled"
+        ),
+        action_candidate_count=len(action_candidates_shadow),
+        action_candidate_action_span_count=sum(
+            len(item.action_spans) for item in action_candidates_shadow
+        ),
+        action_candidate_kind_counts=dict(sorted(Counter(
+            item.candidate_kind for item in action_candidates_shadow
+        ).items())),
+        action_candidate_state_counts=dict(sorted(Counter(
+            item.state.value for item in action_candidates_shadow
+        ).items())),
+        action_candidate_builder_error_count=action_candidate_builder_error_count,
         candidate_router_mode=candidate_router_mode,
         candidate_router_version=(
             candidate_router_shadow.router_version
@@ -1975,6 +2012,15 @@ def process_meeting(
             "action_classifier_shadow": (
                 asdict(action_classifier_shadow) if action_classifier_shadow else None
             ),
+            "action_candidates_v2": {
+                "mode": action_candidate_builder_mode,
+                "version": action_candidate_builder_version,
+                "error_count": action_candidate_builder_error_count,
+                "records": [
+                    item.model_dump(mode="json") for item in action_candidates_shadow
+                ],
+                "executed": False,
+            },
             "candidate_router_shadow": {
                 "summary": (
                     asdict(candidate_router_shadow) if candidate_router_shadow else None
@@ -2066,6 +2112,8 @@ def process_meeting_by_version(
     topic_likely_threshold: float = 0.45,
     action_classifier_mode: str = "off",
     action_classifier_model_path: str | None = None,
+    action_candidate_builder_mode: str = "off",
+    action_candidate_builder_version: str = "action-candidate-v2",
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -2134,6 +2182,8 @@ def process_meeting_by_version(
             topic_likely_threshold=topic_likely_threshold,
             action_classifier_mode=action_classifier_mode,
             action_classifier_model_path=action_classifier_model_path,
+            action_candidate_builder_mode=action_candidate_builder_mode,
+            action_candidate_builder_version=action_candidate_builder_version,
             candidate_router_mode=candidate_router_mode,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,
