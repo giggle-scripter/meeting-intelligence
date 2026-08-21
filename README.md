@@ -482,6 +482,12 @@ action is actually recap metadata (for example an owner or deadline fragment).
 It does not alter output yet: the first constrained active experiment improved
 F1 only from `0.534` to `0.535`, below the Q4 slice gate.
 
+### Owner grounding (Q5)
+
+`OWNER_GROUNDING_MODE=shadow` audits explicit owner spans and classifies them
+as direct assignment, self-commitment, acceptance, reassignment, or role
+assignment. It never chooses a previous speaker as a fallback owner.
+
 Router hợp nhất rule/classifier/note evidence thành route có reasons, nhưng PR4
 không execute bất kỳ route nào. `AI_CREATE_CHECK` chỉ tăng suppressed diagnostics;
 AI create vẫn tắt và final task output vẫn do pipeline hiện tại quyết định.

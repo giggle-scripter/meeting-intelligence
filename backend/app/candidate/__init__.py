@@ -3,6 +3,7 @@
 from .ai_batcher import AiWindowBatch, batch_ai_windows
 from .action_candidates import ActionCandidate, CandidateState, GroundedSpan, build_action_candidates, summarize_action_candidates
 from .action_canonicalization import ActionFrame, build_action_frame
+from .owner_grounding import OwnerEvidence, OwnerEvidenceType, build_owner_evidence
 from .commitment_router import AuthorityKind, CommitmentDecision, CommitmentRoute, route_commitments, summarize_commitment_decisions
 from .evidence import CandidateEvidence, build_candidate_evidence
 from .router import (
@@ -20,11 +21,11 @@ from .window_merger import merge_windows
 
 __all__ = [
     "ActionCandidate", "ActionFrame", "AiWindowBatch", "AuthorityKind", "CandidateDecision", "CandidateEvidence", "CandidateRoute",
-    "CandidateState", "CommitmentDecision", "CommitmentRoute", "GroundedSpan",
+    "CandidateState", "CommitmentDecision", "CommitmentRoute", "GroundedSpan", "OwnerEvidence", "OwnerEvidenceType",
     "CandidateRouter", "CandidateRouterConfig", "CandidateRouterShadowSummary",
     "TaskCreateProposal", "TaskCreateProposalResponse",
     "batch_ai_windows",
-    "build_action_candidates", "build_action_frame", "build_candidate_evidence", "build_candidate_windows",
+    "build_action_candidates", "build_action_frame", "build_candidate_evidence", "build_candidate_windows", "build_owner_evidence",
     "choose_extraction_strategy", "is_candidate", "merge_windows", "route_commitments",
     "summarize_action_candidates", "summarize_candidate_decisions", "summarize_commitment_decisions",
 ]
