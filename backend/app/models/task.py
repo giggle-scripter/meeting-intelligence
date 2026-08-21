@@ -97,6 +97,13 @@ class PipelineDiagnostics:
     action_candidate_kind_counts: dict[str, int] = field(default_factory=dict)
     action_candidate_state_counts: dict[str, int] = field(default_factory=dict)
     action_candidate_builder_error_count: int = 0
+    commitment_router_mode: str = "off"
+    commitment_router_version: str = "disabled"
+    commitment_router_decision_count: int = 0
+    commitment_router_route_counts: dict[str, int] = field(default_factory=dict)
+    commitment_router_authority_counts: dict[str, int] = field(default_factory=dict)
+    commitment_router_suppressed_event_count: int = 0
+    commitment_router_error_count: int = 0
     candidate_router_mode: str = "off"
     candidate_router_version: str = "disabled"
     candidate_threshold_version: str = "disabled"

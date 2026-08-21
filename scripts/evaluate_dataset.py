@@ -354,6 +354,17 @@ def main() -> None:
         "--action-candidate-builder-version", default="action-candidate-v2"
     )
     parser.add_argument(
+        "--commitment-router-mode", choices=("off", "shadow", "assist"), default="off"
+    )
+    parser.add_argument(
+        "--commitment-router-version", default="commitment-router-v2"
+    )
+    parser.add_argument(
+        "--commitment-router-active-types",
+        default="DIRECT_ASSIGNMENT,SELF_COMMITMENT",
+        help="Comma-separated positive authority types for local create.",
+    )
+    parser.add_argument(
         "--candidate-router-mode",
         choices=("off", "shadow", "assist"),
         default="off",
@@ -588,6 +599,13 @@ def main() -> None:
                         ),
                         action_candidate_builder_mode=args.action_candidate_builder_mode,
                         action_candidate_builder_version=args.action_candidate_builder_version,
+                        commitment_router_mode=args.commitment_router_mode,
+                        commitment_router_version=args.commitment_router_version,
+                        commitment_router_active_types=tuple(
+                            value.strip().upper()
+                            for value in args.commitment_router_active_types.split(",")
+                            if value.strip()
+                        ),
                         candidate_router_mode=args.candidate_router_mode,
                         action_clear_threshold=args.action_clear_threshold,
                         action_ai_threshold=args.action_ai_threshold,
@@ -1077,6 +1095,9 @@ def main() -> None:
             "action_classifier_model_path": str(args.action_classifier_model_path),
             "action_candidate_builder_mode": args.action_candidate_builder_mode,
             "action_candidate_builder_version": args.action_candidate_builder_version,
+            "commitment_router_mode": args.commitment_router_mode,
+            "commitment_router_version": args.commitment_router_version,
+            "commitment_router_active_types": args.commitment_router_active_types,
             "candidate_router_mode": args.candidate_router_mode,
             "task_create_proposal_enabled": args.task_create_proposal,
             "ai_create_proposal_enabled": args.ai_create_proposal,

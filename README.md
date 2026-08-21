@@ -458,6 +458,15 @@ commitment routing ở PR sau:
   --report evaluation\action-candidate-shadow.json
 ```
 
+### Commitment authority router (Q2)
+
+`COMMITMENT_ROUTER_MODE=assist` enforces the authority matrix before legacy
+create events are reduced. Hard negatives, conditional work, and bounded
+coordination follow-ups are retained in trace evidence but cannot mint a task.
+The default active authorities are `DIRECT_ASSIGNMENT,SELF_COMMITMENT`; no AI
+call is made by this router. Review `commitment_router_v2` in the opt-in trace
+before changing `COMMITMENT_ROUTER_ACTIVE_TYPES`.
+
 Router hợp nhất rule/classifier/note evidence thành route có reasons, nhưng PR4
 không execute bất kỳ route nào. `AI_CREATE_CHECK` chỉ tăng suppressed diagnostics;
 AI create vẫn tắt và final task output vẫn do pipeline hiện tại quyết định.

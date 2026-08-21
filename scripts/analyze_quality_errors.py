@@ -48,6 +48,11 @@ def analyze_dataset(
     with_notes: bool = True,
     action_candidate_builder_mode: str = "off",
     action_candidate_builder_version: str = "action-candidate-v2",
+    commitment_router_mode: str = "off",
+    commitment_router_version: str = "commitment-router-v2",
+    commitment_router_active_types: tuple[str, ...] = (
+        "DIRECT_ASSIGNMENT", "SELF_COMMITMENT",
+    ),
 ) -> dict[str, Any]:
     records = []
     comparisons = []
@@ -72,6 +77,9 @@ def analyze_dataset(
             trace_directory=str(trace_directory),
             action_candidate_builder_mode=action_candidate_builder_mode,
             action_candidate_builder_version=action_candidate_builder_version,
+            commitment_router_mode=commitment_router_mode,
+            commitment_router_version=commitment_router_version,
+            commitment_router_active_types=commitment_router_active_types,
         )
         actual = asdict(result)
         comparison = compare_case(case_id, expected, actual)
@@ -93,6 +101,9 @@ def analyze_dataset(
         "with_meeting_notes": with_notes,
         "action_candidate_builder_mode": action_candidate_builder_mode,
         "action_candidate_builder_version": action_candidate_builder_version,
+        "commitment_router_mode": commitment_router_mode,
+        "commitment_router_version": commitment_router_version,
+        "commitment_router_active_types": list(commitment_router_active_types),
         "action_candidate_summary": {
             "count": action_candidate_count,
             "kind_counts": dict(sorted(action_candidate_kind_counts.items())),
@@ -119,12 +130,26 @@ def main() -> None:
     parser.add_argument(
         "--action-candidate-builder-version", default="action-candidate-v2"
     )
+    parser.add_argument(
+        "--commitment-router-mode", choices=("off", "shadow", "assist"), default="off"
+    )
+    parser.add_argument("--commitment-router-version", default="commitment-router-v2")
+    parser.add_argument(
+        "--commitment-router-active-types", default="DIRECT_ASSIGNMENT,SELF_COMMITMENT"
+    )
     args = parser.parse_args()
     report = analyze_dataset(
         args.dataset, trace_directory=args.trace_directory,
         with_notes=not args.without_meeting_notes,
         action_candidate_builder_mode=args.action_candidate_builder_mode,
         action_candidate_builder_version=args.action_candidate_builder_version,
+        commitment_router_mode=args.commitment_router_mode,
+        commitment_router_version=args.commitment_router_version,
+        commitment_router_active_types=tuple(
+            value.strip().upper()
+            for value in args.commitment_router_active_types.split(",")
+            if value.strip()
+        ),
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
