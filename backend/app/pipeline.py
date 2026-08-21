@@ -775,6 +775,7 @@ def process_meeting(
     action_canonicalization_mode: str = "off",
     action_canonicalization_version: str = "action-canonicalization-v2",
     recap_reconciliation_mode: str = "off",
+    owner_grounding_mode: str = "off",
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -856,6 +857,8 @@ def process_meeting(
         raise ValueError("action_canonicalization_version must not be empty")
     if recap_reconciliation_mode not in {"off", "shadow"}:
         raise ValueError("recap_reconciliation_mode must be off or shadow")
+    if owner_grounding_mode not in {"off", "shadow"}:
+        raise ValueError("owner_grounding_mode must be off or shadow")
     if candidate_router_mode not in {"off", "shadow", "assist"}:
         raise ValueError("candidate_router_mode must be off, shadow, or assist")
     if candidate_router_mode != "off" and action_classifier_mode != candidate_router_mode:
@@ -1553,6 +1556,25 @@ def process_meeting(
         except (RuntimeError, TypeError, ValueError) as exc:
             LOGGER.warning("Action canonicalization failed: %s", exc)
             action_canonicalization_error_count = 1
+    owner_grounding_records: list[dict] = []
+    owner_grounding_error_count = 0
+    if owner_grounding_mode == "shadow":
+        try:
+            from .candidate import build_owner_evidence
+
+            for event in events:
+                if event.event_type not in POSITIVE_TASK_EVENTS | {"OWNER_REASSIGN"} or not event.assignee:
+                    continue
+                evidence = build_owner_evidence(event, clauses_by_id)
+                owner_grounding_records.append({
+                    "event_id": event.event_id,
+                    "event_type": event.event_type,
+                    "assignee": event.assignee,
+                    "evidence": [item.model_dump(mode="json") for item in evidence],
+                })
+        except (RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Owner grounding shadow failed: %s", exc)
+            owner_grounding_error_count = 1
     events_before_deduplication = list(events)
     events = deduplicate_events(events)
     task_semantic_linker_shadow = None
@@ -1764,6 +1786,18 @@ def process_meeting(
         recap_fragment_shadow_count=reduction_diagnostics.get(
             "recap_fragment_shadow_count", 0
         ),
+        owner_grounding_mode=owner_grounding_mode,
+        owner_evidence_count=sum(
+            len(item["evidence"]) for item in owner_grounding_records
+        ),
+        owner_ungrounded_event_count=sum(
+            not item["evidence"] for item in owner_grounding_records
+        ),
+        owner_evidence_type_counts=dict(sorted(Counter(
+            evidence["evidence_type"]
+            for item in owner_grounding_records
+            for evidence in item["evidence"]
+        ).items())),
         recap_scope=recap_scope,
         meeting_date_source=meeting.meeting_date_source,
         effective_meeting_date=meeting.meeting_date,
@@ -2196,6 +2230,12 @@ def process_meeting(
                 ),
                 "executed": False,
             },
+            "owner_grounding_v2": {
+                "mode": owner_grounding_mode,
+                "error_count": owner_grounding_error_count,
+                "records": owner_grounding_records,
+                "executed": False,
+            },
             "candidate_router_shadow": {
                 "summary": (
                     asdict(candidate_router_shadow) if candidate_router_shadow else None
@@ -2297,6 +2337,7 @@ def process_meeting_by_version(
     action_canonicalization_mode: str = "off",
     action_canonicalization_version: str = "action-canonicalization-v2",
     recap_reconciliation_mode: str = "off",
+    owner_grounding_mode: str = "off",
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -2373,6 +2414,7 @@ def process_meeting_by_version(
             action_canonicalization_mode=action_canonicalization_mode,
             action_canonicalization_version=action_canonicalization_version,
             recap_reconciliation_mode=recap_reconciliation_mode,
+            owner_grounding_mode=owner_grounding_mode,
             candidate_router_mode=candidate_router_mode,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,

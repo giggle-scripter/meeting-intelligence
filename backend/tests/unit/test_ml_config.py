@@ -23,6 +23,7 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
         "ACTION_CANONICALIZATION_MODE",
         "ACTION_CANONICALIZATION_VERSION",
         "RECAP_RECONCILIATION_MODE",
+        "OWNER_GROUNDING_MODE",
         "CANDIDATE_ROUTER_MODE",
         "ACTION_CLEAR_THRESHOLD",
         "ACTION_AI_THRESHOLD",
@@ -78,6 +79,7 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
     assert settings.action_canonicalization_mode == "off"
     assert settings.action_canonicalization_version == "action-canonicalization-v2"
     assert settings.recap_reconciliation_mode == "off"
+    assert settings.owner_grounding_mode == "off"
     assert settings.candidate_router_mode == "off"
     assert settings.action_clear_threshold == 0.82
     assert settings.action_ai_threshold == 0.45
@@ -115,6 +117,7 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     monkeypatch.setenv("ACTION_CANONICALIZATION_MODE", "shadow")
     monkeypatch.setenv("ACTION_CANONICALIZATION_VERSION", "action-canonicalization-test-v2")
     monkeypatch.setenv("RECAP_RECONCILIATION_MODE", "shadow")
+    monkeypatch.setenv("OWNER_GROUNDING_MODE", "shadow")
     monkeypatch.setenv("CANDIDATE_ROUTER_MODE", "shadow")
     monkeypatch.setenv("ACTION_CLEAR_THRESHOLD", "0.9")
     monkeypatch.setenv("ACTION_AI_THRESHOLD", "0.6")
@@ -143,6 +146,7 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     assert settings.action_canonicalization_mode == "shadow"
     assert settings.action_canonicalization_version == "action-canonicalization-test-v2"
     assert settings.recap_reconciliation_mode == "shadow"
+    assert settings.owner_grounding_mode == "shadow"
     assert settings.candidate_router_mode == "shadow"
     assert settings.action_clear_threshold == 0.9
     assert settings.action_ai_threshold == 0.6
@@ -207,6 +211,13 @@ def test_task_semantic_linker_rejects_active_mode(monkeypatch) -> None:
 
 def test_recap_reconciliation_rejects_active_mode(monkeypatch) -> None:
     monkeypatch.setenv("RECAP_RECONCILIATION_MODE", "assist")
+
+    with pytest.raises(RuntimeError, match="must be off or shadow"):
+        Settings.from_env()
+
+
+def test_owner_grounding_rejects_active_mode(monkeypatch) -> None:
+    monkeypatch.setenv("OWNER_GROUNDING_MODE", "assist")
 
     with pytest.raises(RuntimeError, match="must be off or shadow"):
         Settings.from_env()

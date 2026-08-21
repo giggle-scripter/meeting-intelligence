@@ -45,6 +45,7 @@ class Settings:
     action_canonicalization_mode: str = "off"
     action_canonicalization_version: str = "action-canonicalization-v2"
     recap_reconciliation_mode: str = "off"
+    owner_grounding_mode: str = "off"
     candidate_router_mode: str = "off"
     task_create_proposal_enabled: bool = False
     ai_create_proposal_enabled: bool = False
@@ -216,6 +217,9 @@ class Settings:
         ).lower()
         if recap_reconciliation_mode not in {"off", "shadow"}:
             raise RuntimeError("RECAP_RECONCILIATION_MODE must be off or shadow")
+        owner_grounding_mode = os.getenv("OWNER_GROUNDING_MODE", "off").lower()
+        if owner_grounding_mode not in {"off", "shadow"}:
+            raise RuntimeError("OWNER_GROUNDING_MODE must be off or shadow")
         commitment_router_active_types = tuple(
             value.strip().upper()
             for value in os.getenv(
@@ -499,6 +503,7 @@ class Settings:
             action_canonicalization_mode=action_canonicalization_mode,
             action_canonicalization_version=action_canonicalization_version,
             recap_reconciliation_mode=recap_reconciliation_mode,
+            owner_grounding_mode=owner_grounding_mode,
             candidate_router_mode=candidate_router_mode,
             task_create_proposal_enabled=task_create_proposal_enabled,
             ai_create_proposal_enabled=ai_create_proposal_enabled,

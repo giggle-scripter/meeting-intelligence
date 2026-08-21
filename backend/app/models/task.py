@@ -76,6 +76,10 @@ class PipelineDiagnostics:
     ledger_unknown_task_id_rejection_count: int = 0
     recap_reconciliation_mode: str = "off"
     recap_fragment_shadow_count: int = 0
+    owner_grounding_mode: str = "off"
+    owner_evidence_count: int = 0
+    owner_ungrounded_event_count: int = 0
+    owner_evidence_type_counts: dict[str, int] = field(default_factory=dict)
     recap_scope: str = "NONE"
     meeting_date_source: str = "REQUEST"
     effective_meeting_date: str = ""
