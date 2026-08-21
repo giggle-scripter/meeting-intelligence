@@ -374,6 +374,7 @@ def main() -> None:
         "--recap-reconciliation-mode", choices=("off", "shadow"), default="off"
     )
     parser.add_argument("--owner-grounding-mode", choices=("off", "shadow"), default="off")
+    parser.add_argument("--deadline-grounding-mode", choices=("off", "shadow"), default="off")
     parser.add_argument(
         "--candidate-router-mode",
         choices=("off", "shadow", "assist"),
@@ -620,6 +621,7 @@ def main() -> None:
                         action_canonicalization_version=args.action_canonicalization_version,
                         recap_reconciliation_mode=args.recap_reconciliation_mode,
                         owner_grounding_mode=args.owner_grounding_mode,
+                        deadline_grounding_mode=args.deadline_grounding_mode,
                         candidate_router_mode=args.candidate_router_mode,
                         action_clear_threshold=args.action_clear_threshold,
                         action_ai_threshold=args.action_ai_threshold,
@@ -1116,6 +1118,7 @@ def main() -> None:
             "action_canonicalization_version": args.action_canonicalization_version,
             "recap_reconciliation_mode": args.recap_reconciliation_mode,
             "owner_grounding_mode": args.owner_grounding_mode,
+            "deadline_grounding_mode": args.deadline_grounding_mode,
             "candidate_router_mode": args.candidate_router_mode,
             "task_create_proposal_enabled": args.task_create_proposal,
             "ai_create_proposal_enabled": args.ai_create_proposal,

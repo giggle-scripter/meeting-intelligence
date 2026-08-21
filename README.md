@@ -488,6 +488,12 @@ F1 only from `0.534` to `0.535`, below the Q4 slice gate.
 as direct assignment, self-commitment, acceptance, reassignment, or role
 assignment. It never chooses a previous speaker as a fallback owner.
 
+### Deadline grounding (Q6)
+
+`DEADLINE_GROUNDING_MODE=shadow` records whether a date mention is attached in
+the action source, by an explicit task label, by an adjacent support clause,
+or remains unresolved. It never attaches a date by arbitrary nearest task.
+
 Router hợp nhất rule/classifier/note evidence thành route có reasons, nhưng PR4
 không execute bất kỳ route nào. `AI_CREATE_CHECK` chỉ tăng suppressed diagnostics;
 AI create vẫn tắt và final task output vẫn do pipeline hiện tại quyết định.

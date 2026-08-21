@@ -776,6 +776,7 @@ def process_meeting(
     action_canonicalization_version: str = "action-canonicalization-v2",
     recap_reconciliation_mode: str = "off",
     owner_grounding_mode: str = "off",
+    deadline_grounding_mode: str = "off",
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -859,6 +860,8 @@ def process_meeting(
         raise ValueError("recap_reconciliation_mode must be off or shadow")
     if owner_grounding_mode not in {"off", "shadow"}:
         raise ValueError("owner_grounding_mode must be off or shadow")
+    if deadline_grounding_mode not in {"off", "shadow"}:
+        raise ValueError("deadline_grounding_mode must be off or shadow")
     if candidate_router_mode not in {"off", "shadow", "assist"}:
         raise ValueError("candidate_router_mode must be off, shadow, or assist")
     if candidate_router_mode != "off" and action_classifier_mode != candidate_router_mode:
@@ -1575,6 +1578,21 @@ def process_meeting(
         except (RuntimeError, TypeError, ValueError) as exc:
             LOGGER.warning("Owner grounding shadow failed: %s", exc)
             owner_grounding_error_count = 1
+    deadline_grounding_records: list[dict] = []
+    deadline_grounding_error_count = 0
+    if deadline_grounding_mode == "shadow":
+        try:
+            from .candidate import build_deadline_attachment_evidence
+
+            for event in events:
+                evidence = build_deadline_attachment_evidence(
+                    event, mentions, clauses_by_id
+                )
+                if evidence is not None:
+                    deadline_grounding_records.append(evidence.model_dump(mode="json"))
+        except (RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Deadline grounding shadow failed: %s", exc)
+            deadline_grounding_error_count = 1
     events_before_deduplication = list(events)
     events = deduplicate_events(events)
     task_semantic_linker_shadow = None
@@ -1797,6 +1815,15 @@ def process_meeting(
             evidence["evidence_type"]
             for item in owner_grounding_records
             for evidence in item["evidence"]
+        ).items())),
+        deadline_grounding_mode=deadline_grounding_mode,
+        deadline_attachment_count=len(deadline_grounding_records),
+        deadline_unresolved_attachment_count=sum(
+            item["attachment_type"] == "UNRESOLVED"
+            for item in deadline_grounding_records
+        ),
+        deadline_attachment_type_counts=dict(sorted(Counter(
+            item["attachment_type"] for item in deadline_grounding_records
         ).items())),
         recap_scope=recap_scope,
         meeting_date_source=meeting.meeting_date_source,
@@ -2236,6 +2263,12 @@ def process_meeting(
                 "records": owner_grounding_records,
                 "executed": False,
             },
+            "deadline_grounding_v2": {
+                "mode": deadline_grounding_mode,
+                "error_count": deadline_grounding_error_count,
+                "records": deadline_grounding_records,
+                "executed": False,
+            },
             "candidate_router_shadow": {
                 "summary": (
                     asdict(candidate_router_shadow) if candidate_router_shadow else None
@@ -2338,6 +2371,7 @@ def process_meeting_by_version(
     action_canonicalization_version: str = "action-canonicalization-v2",
     recap_reconciliation_mode: str = "off",
     owner_grounding_mode: str = "off",
+    deadline_grounding_mode: str = "off",
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -2415,6 +2449,7 @@ def process_meeting_by_version(
             action_canonicalization_version=action_canonicalization_version,
             recap_reconciliation_mode=recap_reconciliation_mode,
             owner_grounding_mode=owner_grounding_mode,
+            deadline_grounding_mode=deadline_grounding_mode,
             candidate_router_mode=candidate_router_mode,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,
