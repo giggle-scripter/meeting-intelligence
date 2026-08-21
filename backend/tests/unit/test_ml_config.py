@@ -32,6 +32,7 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
         "TASK_CREATE_PROPOSAL_ENABLED",
         "AI_CREATE_PROPOSAL_ENABLED",
         "AI_CREATE_MAX_PROPOSALS_PER_MEETING",
+        "AI_QUALITY_UPLIFT_MODE",
         "TASK_SEMANTIC_LINKER_MODE",
         "TASK_LINK_SEMANTIC_WEIGHT",
         "TASK_LINK_LEXICAL_WEIGHT",
@@ -88,6 +89,7 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
     assert settings.task_create_proposal_enabled is False
     assert settings.ai_create_proposal_enabled is False
     assert settings.ai_create_max_proposals_per_meeting == 3
+    assert settings.ai_quality_uplift_mode == "off"
     assert settings.task_semantic_linker_mode == "off"
     assert settings.task_link_semantic_weight == 0.55
     assert settings.task_link_strong_threshold == 0.78
@@ -113,7 +115,7 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     monkeypatch.setenv("ACTION_CLASSIFIER_MODE", "shadow")
     monkeypatch.setenv("ACTION_CANDIDATE_BUILDER_MODE", "shadow")
     monkeypatch.setenv("ACTION_CANDIDATE_BUILDER_VERSION", "action-candidate-test-v2")
-    monkeypatch.setenv("COMMITMENT_ROUTER_MODE", "assist")
+    monkeypatch.setenv("COMMITMENT_ROUTER_MODE", "shadow")
     monkeypatch.setenv("COMMITMENT_ROUTER_VERSION", "commitment-router-test-v2")
     monkeypatch.setenv("COMMITMENT_ROUTER_ACTIVE_TYPES", "DIRECT_ASSIGNMENT,EXPLICIT_ACCEPTANCE")
     monkeypatch.setenv("ACTION_CANONICALIZATION_MODE", "shadow")
@@ -122,6 +124,7 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     monkeypatch.setenv("OWNER_GROUNDING_MODE", "shadow")
     monkeypatch.setenv("DEADLINE_GROUNDING_MODE", "shadow")
     monkeypatch.setenv("CANDIDATE_ROUTER_MODE", "shadow")
+    monkeypatch.setenv("AI_QUALITY_UPLIFT_MODE", "shadow")
     monkeypatch.setenv("ACTION_CLEAR_THRESHOLD", "0.9")
     monkeypatch.setenv("ACTION_AI_THRESHOLD", "0.6")
     monkeypatch.setenv("CANDIDATE_THRESHOLD_VERSION", "candidate-test-v2")
@@ -141,7 +144,7 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     assert settings.action_classifier_model_path == "artifacts/models/action.joblib"
     assert settings.action_candidate_builder_mode == "shadow"
     assert settings.action_candidate_builder_version == "action-candidate-test-v2"
-    assert settings.commitment_router_mode == "assist"
+    assert settings.commitment_router_mode == "shadow"
     assert settings.commitment_router_version == "commitment-router-test-v2"
     assert settings.commitment_router_active_types == (
         "DIRECT_ASSIGNMENT", "EXPLICIT_ACCEPTANCE",
@@ -152,6 +155,7 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     assert settings.owner_grounding_mode == "shadow"
     assert settings.deadline_grounding_mode == "shadow"
     assert settings.candidate_router_mode == "shadow"
+    assert settings.ai_quality_uplift_mode == "shadow"
     assert settings.action_clear_threshold == 0.9
     assert settings.action_ai_threshold == 0.6
     assert settings.candidate_threshold_version == "candidate-test-v2"
@@ -203,6 +207,20 @@ def test_create_proposal_requires_assist_router(monkeypatch) -> None:
     monkeypatch.setenv("TASK_CREATE_PROPOSAL_ENABLED", "true")
 
     with pytest.raises(RuntimeError, match="CANDIDATE_ROUTER_MODE=assist"):
+        Settings.from_env()
+
+
+def test_ai_quality_uplift_shadow_requires_all_evidence_modes(monkeypatch) -> None:
+    monkeypatch.setenv("AI_QUALITY_UPLIFT_MODE", "shadow")
+
+    with pytest.raises(RuntimeError, match="AI_QUALITY_UPLIFT_MODE=shadow"):
+        Settings.from_env()
+
+
+def test_ai_quality_uplift_rejects_active_mode(monkeypatch) -> None:
+    monkeypatch.setenv("AI_QUALITY_UPLIFT_MODE", "assist")
+
+    with pytest.raises(RuntimeError, match="AI_QUALITY_UPLIFT_MODE"):
         Settings.from_env()
 
 

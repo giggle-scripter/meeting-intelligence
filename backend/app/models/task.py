@@ -136,6 +136,13 @@ class PipelineDiagnostics:
     task_create_proposal_rejection_reasons: dict[str, int] = field(
         default_factory=dict
     )
+    ai_quality_uplift_mode: str = "off"
+    ai_quality_create_candidate_count: int = 0
+    ai_quality_create_eligible_count: int = 0
+    ai_quality_create_selected_count: int = 0
+    ai_quality_create_exclusion_reasons: dict[str, int] = field(
+        default_factory=dict
+    )
     task_semantic_linker_mode: str = "off"
     task_semantic_linker_version: str = "disabled"
     task_semantic_index_version: str = "disabled"

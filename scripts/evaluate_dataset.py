@@ -385,6 +385,9 @@ def main() -> None:
     parser.add_argument("--ai-create-proposal", action="store_true")
     parser.add_argument("--ai-create-max-proposals", type=int, default=3)
     parser.add_argument(
+        "--ai-quality-uplift-mode", choices=("off", "shadow"), default="off"
+    )
+    parser.add_argument(
         "--task-semantic-linker-mode",
         choices=("off", "shadow"),
         default="off",
@@ -479,6 +482,16 @@ def main() -> None:
         parser.error("--task-create-proposal requires --candidate-router-mode assist")
     if args.ai_create_proposal and not args.task_create_proposal:
         parser.error("--ai-create-proposal requires --task-create-proposal")
+    if args.ai_quality_uplift_mode == "shadow" and (
+        args.action_classifier_mode != "shadow"
+        or args.candidate_router_mode != "shadow"
+        or args.action_candidate_builder_mode != "shadow"
+        or args.commitment_router_mode != "shadow"
+    ):
+        parser.error(
+            "--ai-quality-uplift-mode shadow requires classifier, candidate, "
+            "action-candidate, and commitment-router shadow modes"
+        )
     if (
         args.context_retrieval_mode == "shadow"
         and args.task_semantic_linker_mode != "shadow"
@@ -631,6 +644,7 @@ def main() -> None:
                         ai_create_max_proposals_per_meeting=(
                             args.ai_create_max_proposals
                         ),
+                        ai_quality_uplift_mode=args.ai_quality_uplift_mode,
                         task_semantic_linker_mode=args.task_semantic_linker_mode,
                         task_link_embedding_model_name=(
                             args.task_link_embedding_model_name
@@ -757,6 +771,18 @@ def main() -> None:
                 "ledger_unknown_task_id_rejection_count": int(
                     diagnostics.get("ledger_unknown_task_id_rejection_count", 0)
                 ),
+                "ai_quality_create_candidate_count": int(
+                    diagnostics.get("ai_quality_create_candidate_count", 0)
+                ),
+                "ai_quality_create_eligible_count": int(
+                    diagnostics.get("ai_quality_create_eligible_count", 0)
+                ),
+                "ai_quality_create_selected_count": int(
+                    diagnostics.get("ai_quality_create_selected_count", 0)
+                ),
+                "ai_quality_create_exclusion_reasons": diagnostics.get(
+                    "ai_quality_create_exclusion_reasons", {}
+                ),
             }
         )
         if (
@@ -808,6 +834,15 @@ def main() -> None:
         diagnostics = execution_details.get(str(item.get("case_id", "")), {})
         for name in rejection_diagnostic_names:
             item[name] = int(diagnostics.get(name, 0))
+        for name in (
+            "ai_quality_create_candidate_count",
+            "ai_quality_create_eligible_count",
+            "ai_quality_create_selected_count",
+        ):
+            item[name] = int(diagnostics.get(name, 0))
+        item["ai_quality_create_exclusion_reasons"] = diagnostics.get(
+            "ai_quality_create_exclusion_reasons", {}
+        )
 
     metrics = aggregate_results(comparisons)
     reviewed_metrics = (
@@ -908,10 +943,20 @@ def main() -> None:
         "context_clause_cap_hit_count",
         "context_character_cap_hit_count",
         "context_retrieval_error_count",
+        "ai_quality_create_candidate_count",
+        "ai_quality_create_eligible_count",
+        "ai_quality_create_selected_count",
     ):
         pipeline_diagnostics[name] = sum(
             int(item.get(name, 0)) for item in diagnostic_values
         )
+    ai_quality_exclusions: dict[str, int] = {}
+    for item in diagnostic_values:
+        for reason, count in item.get("ai_quality_create_exclusion_reasons", {}).items():
+            ai_quality_exclusions[reason] = ai_quality_exclusions.get(reason, 0) + int(count)
+    pipeline_diagnostics["ai_quality_create_exclusion_reasons"] = dict(
+        sorted(ai_quality_exclusions.items())
+    )
     candidate_count = pipeline_diagnostics["candidate_window_count"]
     pipeline_diagnostics["weighted_ai_call_rate"] = (
         sum(
@@ -1123,6 +1168,7 @@ def main() -> None:
             "task_create_proposal_enabled": args.task_create_proposal,
             "ai_create_proposal_enabled": args.ai_create_proposal,
             "ai_create_max_proposals_per_meeting": args.ai_create_max_proposals,
+            "ai_quality_uplift_mode": args.ai_quality_uplift_mode,
             "task_semantic_linker_mode": args.task_semantic_linker_mode,
             "task_link_embedding_model_name": args.task_link_embedding_model_name,
             "task_link_scoring_version": args.task_link_scoring_version,

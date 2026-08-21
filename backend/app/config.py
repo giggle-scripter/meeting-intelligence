@@ -51,6 +51,7 @@ class Settings:
     task_create_proposal_enabled: bool = False
     ai_create_proposal_enabled: bool = False
     ai_create_max_proposals_per_meeting: int = 3
+    ai_quality_uplift_mode: str = "off"
     task_semantic_linker_mode: str = "off"
     task_link_semantic_weight: float = 0.55
     task_link_lexical_weight: float = 0.20
@@ -268,6 +269,19 @@ class Settings:
         if task_create_proposal_enabled and candidate_router_mode != "assist":
             raise RuntimeError(
                 "TASK_CREATE_PROPOSAL_ENABLED requires CANDIDATE_ROUTER_MODE=assist"
+            )
+        ai_quality_uplift_mode = os.getenv("AI_QUALITY_UPLIFT_MODE", "off").lower()
+        if ai_quality_uplift_mode not in {"off", "shadow"}:
+            raise RuntimeError("AI_QUALITY_UPLIFT_MODE must be off or shadow")
+        if ai_quality_uplift_mode == "shadow" and (
+            action_classifier_mode != "shadow"
+            or candidate_router_mode != "shadow"
+            or action_candidate_builder_mode != "shadow"
+            or commitment_router_mode != "shadow"
+        ):
+            raise RuntimeError(
+                "AI_QUALITY_UPLIFT_MODE=shadow requires classifier, candidate, "
+                "action-candidate, and commitment-router shadow modes"
             )
         task_semantic_linker_mode = os.getenv(
             "TASK_SEMANTIC_LINKER_MODE", "off"
@@ -513,6 +527,7 @@ class Settings:
             task_create_proposal_enabled=task_create_proposal_enabled,
             ai_create_proposal_enabled=ai_create_proposal_enabled,
             ai_create_max_proposals_per_meeting=ai_create_max_proposals,
+            ai_quality_uplift_mode=ai_quality_uplift_mode,
             task_semantic_linker_mode=task_semantic_linker_mode,
             task_link_semantic_weight=task_link_weights[0],
             task_link_lexical_weight=task_link_weights[1],

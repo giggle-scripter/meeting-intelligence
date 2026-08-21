@@ -784,6 +784,7 @@ def process_meeting(
     task_create_proposal_enabled: bool = False,
     ai_create_proposal_enabled: bool = False,
     ai_create_max_proposals_per_meeting: int = 3,
+    ai_quality_uplift_mode: str = "off",
     task_semantic_linker_mode: str = "off",
     task_link_embedding_model_name: str = (
         "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
@@ -828,6 +829,8 @@ def process_meeting(
     temporal_working_day_policy: str = "weekdays-only-v1",
     temporal_min_confidence: float = 1.0,
 ) -> PipelineResult:
+    if ai_quality_uplift_mode not in {"off", "shadow"}:
+        raise ValueError("ai_quality_uplift_mode must be off or shadow")
     ai_client = ai_client or DisabledAiClient()
     stages = preprocess_meeting(meeting, speaker_aliases)
     clauses = stages["clauses"]
@@ -1138,6 +1141,25 @@ def process_meeting(
         ai_create_decisions,
         key=lambda item: (-item.confidence, candidate_order.get(item.candidate_id, 0)),
     )[:ai_create_max_proposals_per_meeting]
+    ai_quality_create_records = []
+    ai_quality_selected_create_ids: list[str] = []
+    ai_quality_create_error_count = 0
+    if ai_quality_uplift_mode == "shadow":
+        try:
+            from .ai.quality_uplift import preflight_ai_create_checks
+
+            ai_quality_create_records, ai_quality_selected_create_ids = (
+                preflight_ai_create_checks(
+                    candidate_decisions_shadow,
+                    candidate_evidence_shadow,
+                    action_candidates_shadow,
+                    commitment_decisions_shadow,
+                    maximum=ai_create_max_proposals_per_meeting,
+                )
+            )
+        except (RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("AI quality uplift preflight failed: %s", exc)
+            ai_quality_create_error_count = 1
     proposal_method = getattr(ai_client, "propose_task", None)
     if (
         task_create_proposal_enabled
@@ -1957,6 +1979,15 @@ def process_meeting(
         task_create_proposal_rejection_reasons=dict(
             sorted(proposal_rejection_reasons.items())
         ),
+        ai_quality_uplift_mode=ai_quality_uplift_mode,
+        ai_quality_create_candidate_count=len(ai_quality_create_records),
+        ai_quality_create_eligible_count=sum(
+            item.eligible for item in ai_quality_create_records
+        ),
+        ai_quality_create_selected_count=len(ai_quality_selected_create_ids),
+        ai_quality_create_exclusion_reasons=dict(sorted(Counter(
+            item.reason for item in ai_quality_create_records if not item.eligible
+        ).items())),
         task_semantic_linker_mode=task_semantic_linker_mode,
         task_semantic_linker_version=(
             task_semantic_linker_shadow.linker_version
@@ -2297,6 +2328,21 @@ def process_meeting(
                 "rejected_count": task_create_proposal_rejected_count,
                 "rejection_reasons": dict(sorted(proposal_rejection_reasons.items())),
             },
+            "ai_quality_uplift_v1": {
+                "mode": ai_quality_uplift_mode,
+                "error_count": ai_quality_create_error_count,
+                "create_checks": [
+                    {
+                        "candidate_id": item.candidate_id,
+                        "focus_clause_id": item.focus_clause_id,
+                        "eligible": item.eligible,
+                        "reason": item.reason,
+                    }
+                    for item in ai_quality_create_records
+                ],
+                "selected_create_candidate_ids": ai_quality_selected_create_ids,
+                "executed": False,
+            },
             "task_semantic_linker_shadow": {
                 "summary": (
                     asdict(task_semantic_linker_shadow)
@@ -2379,6 +2425,7 @@ def process_meeting_by_version(
     task_create_proposal_enabled: bool = False,
     ai_create_proposal_enabled: bool = False,
     ai_create_max_proposals_per_meeting: int = 3,
+    ai_quality_uplift_mode: str = "off",
     task_semantic_linker_mode: str = "off",
     task_link_embedding_model_name: str = (
         "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
@@ -2457,6 +2504,7 @@ def process_meeting_by_version(
             task_create_proposal_enabled=task_create_proposal_enabled,
             ai_create_proposal_enabled=ai_create_proposal_enabled,
             ai_create_max_proposals_per_meeting=ai_create_max_proposals_per_meeting,
+            ai_quality_uplift_mode=ai_quality_uplift_mode,
             task_semantic_linker_mode=task_semantic_linker_mode,
             task_link_embedding_model_name=task_link_embedding_model_name,
             task_link_embedding_device=task_link_embedding_device,
