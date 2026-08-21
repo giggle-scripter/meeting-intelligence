@@ -178,6 +178,25 @@ không bao giờ ghi đè ngày exact của legacy. Date được tính hoàn to
 Python, anchor event phải là ID exact do caller cung cấp, và working day hiện
 tại chỉ bỏ thứ Bảy/CN (`TEMPORAL_WORKING_DAY_POLICY=weekdays-only-v1`).
 
+### Quality attribution (Q0)
+
+Để phân tích regression corpus mà không thay đổi output, chạy:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\analyze_quality_errors.py data\validation `
+  --output evaluation\runtime\quality-attribution.json `
+  --csv evaluation\runtime\quality-attribution.csv
+.\.venv\Scripts\python.exe scripts\build_evidence_review_queue.py `
+  evaluation\runtime\quality-attribution.json `
+  --output evaluation\runtime\quality-review-queue.json `
+  --csv evaluation\runtime\quality-review-queue.csv
+```
+
+Các taxonomy/evidence trong report là gợi ý deterministic có trạng thái
+`NEEDS_REVIEW`; chúng không được dùng làm ground truth hoặc input production.
+`evaluate_dataset.py` hiện report task identity F1 cùng expected/actual/matched,
+missing và unexpected task counts.
+
 - Health check: `http://127.0.0.1:8010/health`
 - Swagger UI: `http://127.0.0.1:8010/docs`
 - Khi dùng Cloudflare Quick Tunnel hoặc Azure Function, Power Automate gọi endpoint

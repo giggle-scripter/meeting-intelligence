@@ -1040,7 +1040,7 @@ def main() -> None:
         print(f"ERROR: {len(execution_errors)} case(s) could not be evaluated.")
     print(
         "Cases: {passed_case_count}/{case_count} | "
-        "precision={task_precision:.3f} recall={task_recall:.3f} "
+        "precision={task_precision:.3f} recall={task_recall:.3f} f1={task_identity_f1:.3f} "
         "field_accuracy={field_accuracy:.3f}".format(**metrics)
     )
     print(
@@ -1054,7 +1054,7 @@ def main() -> None:
     if reviewed_metrics:
         print(
             "Reviewed: {passed_case_count}/{case_count} | "
-            "precision={task_precision:.3f} recall={task_recall:.3f} "
+            "precision={task_precision:.3f} recall={task_recall:.3f} f1={task_identity_f1:.3f} "
             "field_accuracy={field_accuracy:.3f}".format(**reviewed_metrics)
         )
     else:

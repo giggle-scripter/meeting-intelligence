@@ -867,6 +867,23 @@ call thành công nhưng không tạo accepted event không phải quality impro
 | `CONTEXT_TOPIC_SMOOTHING_WINDOW` | `3`; chỉ cho phép `2` hoặc `3` turn |
 | `CONTEXT_RETRIEVAL_VERSION` | `context-retriever-v1` |
 | `ACTION_CLEAR_THRESHOLD` | `0.82`; router config, không hardcode trong logic |
+
+### Quality Track Q0 — attribution và evidence review
+
+`backend.app.quality` chỉ dùng cho evaluation. Nó tạo suggestion deterministic
+cho missing/unexpected/field-error records, liên kết tới source clause,
+candidate window, event và task-state provenance khi có. Mọi record mặc định
+`NEEDS_REVIEW`; không record nào được dùng để thay output, training data hay
+production routing trước khi reviewer xác nhận.
+
+Chạy `scripts/analyze_quality_errors.py` để tạo
+`evaluation/runtime/quality-attribution.json`, sau đó
+`scripts/build_evidence_review_queue.py` để xuất JSON/CSV review queue. Cả
+attribution report lẫn queue đều xuất JSON/CSV runtime. Report tổng hợp
+first-divergence taxonomy theo wave, source coverage của toàn bộ expected task
+và candidate/event/task-state provenance của missing task.
+`evaluate_dataset.py` báo task identity F1 cùng expected/actual/matched, missing
+và unexpected counts; F1 là primary metric cho các PR Quality Track.
 | `ACTION_AI_THRESHOLD` | `0.45`; router config, không hardcode trong logic |
 | `CANDIDATE_THRESHOLD_VERSION` | `candidate-router-thresholds-v1` |
 
