@@ -767,6 +767,11 @@ def process_meeting(
     action_classifier_model_path: str | None = None,
     action_candidate_builder_mode: str = "off",
     action_candidate_builder_version: str = "action-candidate-v2",
+    commitment_router_mode: str = "off",
+    commitment_router_version: str = "commitment-router-v2",
+    commitment_router_active_types: tuple[str, ...] = (
+        "DIRECT_ASSIGNMENT", "SELF_COMMITMENT",
+    ),
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -838,6 +843,10 @@ def process_meeting(
         raise ValueError("action_candidate_builder_mode must be off or shadow")
     if not action_candidate_builder_version:
         raise ValueError("action_candidate_builder_version must not be empty")
+    if commitment_router_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("commitment_router_mode must be off, shadow, or assist")
+    if not commitment_router_version:
+        raise ValueError("commitment_router_version must not be empty")
     if candidate_router_mode not in {"off", "shadow", "assist"}:
         raise ValueError("candidate_router_mode must be off, shadow, or assist")
     if candidate_router_mode != "off" and action_classifier_mode != candidate_router_mode:
@@ -999,7 +1008,7 @@ def process_meeting(
             action_classifier_error_count = 1
     action_candidates_shadow = []
     action_candidate_builder_error_count = 0
-    if action_candidate_builder_mode == "shadow":
+    if action_candidate_builder_mode == "shadow" or commitment_router_mode != "off":
         try:
             from .candidate import build_action_candidates
 
@@ -1012,6 +1021,28 @@ def process_meeting(
         except (KeyError, RuntimeError, TypeError, ValueError) as exc:
             LOGGER.warning("Action candidate builder shadow failed: %s", exc)
             action_candidate_builder_error_count = 1
+    clauses_by_id = {clause.clause_id: clause for clause in clauses}
+    commitment_decisions_shadow = []
+    commitment_router_summary = {"route_counts": {}, "authority_counts": {}}
+    commitment_router_error_count = 0
+    if commitment_router_mode != "off":
+        try:
+            from .candidate import AuthorityKind, route_commitments, summarize_commitment_decisions
+
+            active_authorities = frozenset(
+                AuthorityKind(value) for value in commitment_router_active_types
+            )
+            commitment_decisions_shadow = route_commitments(
+                action_candidates_shadow,
+                clauses_by_id,
+                active_authorities=active_authorities,
+            )
+            commitment_router_summary = summarize_commitment_decisions(
+                commitment_decisions_shadow
+            )
+        except (KeyError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Commitment router failed: %s", exc)
+            commitment_router_error_count = 1
     candidate_evidence_shadow = []
     candidate_decisions_shadow = []
     candidate_router_shadow = None
@@ -1054,7 +1085,6 @@ def process_meeting(
                 LOGGER.warning("Candidate evidence router shadow failed: %s", exc)
                 candidate_router_error_count = 1
     windows = merge_windows(build_candidate_windows(clauses, annotations))
-    clauses_by_id = {clause.clause_id: clause for clause in clauses}
     events = []
     if meeting_context_mode == "assist" and meeting.meeting_note and note_dual_view_mode != "assist":
         note_events, note_clauses = extract_events_from_human_note(
@@ -1162,6 +1192,21 @@ def process_meeting(
     ai_context_clause_ids: set[str] = set()
     ai_context_clause_count_before_pruning = 0
     ai_fallback_error_count = 0
+    commitment_router_suppressed_event_count = 0
+    commitment_route_by_clause: dict[str, str] = {}
+    commitment_noncreate_flags = {
+        "ROOT_QUESTION", "SUGGESTION_ONLY", "BRAINSTORM", "HYPOTHETICAL",
+        "PAST_COMPLETED", "PROGRESS_UPDATE", "FUTURE_DISCUSSION",
+        "ADMIN_FOLLOWUP", "REJECTION", "CANCELLATION",
+    }
+    if commitment_router_mode == "assist":
+        candidates_by_id = {item.candidate_id: item for item in action_candidates_shadow}
+        for decision in commitment_decisions_shadow:
+            candidate = candidates_by_id[decision.candidate_id]
+            for clause_id in candidate.primary_clause_ids:
+                previous = commitment_route_by_clause.get(clause_id)
+                if previous != "LOCAL_CREATE":
+                    commitment_route_by_clause[clause_id] = decision.route.value
     ai_contract_diagnostics = {
         "rejection_count": 0,
         "structural_rejection_count": 0,
@@ -1185,6 +1230,26 @@ def process_meeting(
                 note_cues_by_clause if meeting_context_mode == "assist" else {}
             ),
         )
+        if commitment_route_by_clause:
+            retained_rule_events = []
+            for event in rule_events:
+                route = commitment_route_by_clause.get(event.source_clause_ids[0])
+                has_noncreate_authority = any(
+                    annotations[clause_id].flags & commitment_noncreate_flags
+                    for clause_id in event.source_clause_ids
+                    if clause_id in annotations
+                )
+                if (
+                    (
+                        has_noncreate_authority
+                        or (route is not None and route != "LOCAL_CREATE")
+                    )
+                    and event.event_type in {"TASK_COMMITMENT", "OWNER_ASSIGN"}
+                ):
+                    commitment_router_suppressed_event_count += 1
+                    continue
+                retained_rule_events.append(event)
+            rule_events = retained_rule_events
         events.extend(rule_events)
         covered_clause_ids = {clause_id for event in rule_events for clause_id in event.source_clause_ids}
         ai_primary_clause_ids = [
@@ -1705,10 +1770,15 @@ def process_meeting(
             else 0
         ),
         action_classifier_error_count=action_classifier_error_count,
-        action_candidate_builder_mode=action_candidate_builder_mode,
+        action_candidate_builder_mode=(
+            "shadow"
+            if action_candidate_builder_mode == "shadow" or commitment_router_mode != "off"
+            else "off"
+        ),
         action_candidate_builder_version=(
             action_candidate_builder_version
-            if action_candidate_builder_mode == "shadow" else "disabled"
+            if action_candidate_builder_mode == "shadow" or commitment_router_mode != "off"
+            else "disabled"
         ),
         action_candidate_count=len(action_candidates_shadow),
         action_candidate_action_span_count=sum(
@@ -1721,6 +1791,15 @@ def process_meeting(
             item.state.value for item in action_candidates_shadow
         ).items())),
         action_candidate_builder_error_count=action_candidate_builder_error_count,
+        commitment_router_mode=commitment_router_mode,
+        commitment_router_version=(
+            commitment_router_version if commitment_router_mode != "off" else "disabled"
+        ),
+        commitment_router_decision_count=len(commitment_decisions_shadow),
+        commitment_router_route_counts=commitment_router_summary["route_counts"],
+        commitment_router_authority_counts=commitment_router_summary["authority_counts"],
+        commitment_router_suppressed_event_count=commitment_router_suppressed_event_count,
+        commitment_router_error_count=commitment_router_error_count,
         candidate_router_mode=candidate_router_mode,
         candidate_router_version=(
             candidate_router_shadow.router_version
@@ -2013,13 +2092,35 @@ def process_meeting(
                 asdict(action_classifier_shadow) if action_classifier_shadow else None
             ),
             "action_candidates_v2": {
-                "mode": action_candidate_builder_mode,
+                "mode": (
+                    "shadow"
+                    if action_candidate_builder_mode == "shadow" or commitment_router_mode != "off"
+                    else "off"
+                ),
                 "version": action_candidate_builder_version,
                 "error_count": action_candidate_builder_error_count,
                 "records": [
                     item.model_dump(mode="json") for item in action_candidates_shadow
                 ],
-                "executed": False,
+                "executed": bool(action_candidates_shadow),
+            },
+            "commitment_router_v2": {
+                "mode": commitment_router_mode,
+                "version": commitment_router_version,
+                "active_types": list(commitment_router_active_types),
+                "error_count": commitment_router_error_count,
+                "suppressed_event_count": commitment_router_suppressed_event_count,
+                "summary": commitment_router_summary,
+                "decisions": [
+                    {
+                        "candidate_id": item.candidate_id,
+                        "route": item.route.value,
+                        "authority_kind": item.authority_kind.value,
+                        "reasons": list(item.reasons),
+                    }
+                    for item in commitment_decisions_shadow
+                ],
+                "executed": commitment_router_mode == "assist",
             },
             "candidate_router_shadow": {
                 "summary": (
@@ -2114,6 +2215,11 @@ def process_meeting_by_version(
     action_classifier_model_path: str | None = None,
     action_candidate_builder_mode: str = "off",
     action_candidate_builder_version: str = "action-candidate-v2",
+    commitment_router_mode: str = "off",
+    commitment_router_version: str = "commitment-router-v2",
+    commitment_router_active_types: tuple[str, ...] = (
+        "DIRECT_ASSIGNMENT", "SELF_COMMITMENT",
+    ),
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -2184,6 +2290,9 @@ def process_meeting_by_version(
             action_classifier_model_path=action_classifier_model_path,
             action_candidate_builder_mode=action_candidate_builder_mode,
             action_candidate_builder_version=action_candidate_builder_version,
+            commitment_router_mode=commitment_router_mode,
+            commitment_router_version=commitment_router_version,
+            commitment_router_active_types=commitment_router_active_types,
             candidate_router_mode=candidate_router_mode,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,

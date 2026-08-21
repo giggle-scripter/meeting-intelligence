@@ -75,7 +75,10 @@ _NEGATIVE_FLAGS = {
 _MUTATION_FLAGS = {"CORRECTION", "CANCELLATION", "REJECTION"}
 _RECAP_RE = re.compile(r"\b(?:tổng kết|chốt lại|recap|final list|final recap)\b", re.I)
 _ACCEPT_RE = re.compile(r"^(?:dạ|vâng|ok(?:ay)?|được|em nhận|tôi nhận|mình nhận)\b", re.I)
-_ACTION_PREFIX_RE = re.compile(r"\b(?:em|tôi|mình|chúng tôi|we)\s+(?:sẽ|will|nhận)\s+", re.I)
+_ACTION_PREFIX_RE = re.compile(
+    r"\b(?:em|tôi|mình|anh|chị|chúng\s+tôi|we|i)\s+(?:sẽ|will|nhận)\s+",
+    re.I,
+)
 _DIRECT_ASSIGNMENT_RE = re.compile(
     r"\b(?:giao\s+cho\s+)?(?P<owner>[A-ZÀ-Ỹ][\wÀ-ỹ'-]+)\s*,?\s*"
     r"(?:em|anh|chị|bạn)?\s*(?P<action>(?:hoàn thành|chuẩn bị|viết|gửi|review|"
@@ -143,6 +146,16 @@ def build_action_candidates(
             pending_question = None
             continue
         if "ROOT_QUESTION" in annotation.flags and action:
+            if pending_question is not None:
+                proposal, proposal_action = pending_question
+                candidates.append(ActionCandidate(
+                    candidate_id=_candidate_id((proposal.clause_id,), proposal_action.text),
+                    primary_clause_ids=(proposal.clause_id,), action_spans=(proposal_action,),
+                    candidate_kind="UNKNOWN", state=CandidateState.REFERENCE_ONLY,
+                    commitment_signals=("QUESTION_UNCONFIRMED",), negative_signals=("ROOT_QUESTION",),
+                    first_order_index=proposal.order_index, last_order_index=proposal.order_index,
+                    builder_version=builder_version,
+                ))
             pending_question = (clause, action)
             continue
         if action and (positive or "ACTION_VERB" in annotation.flags):
@@ -170,6 +183,16 @@ def build_action_candidates(
                     "deadline_mention_ids": tuple(sorted(set(previous.deadline_mention_ids) | set(mentions_by_clause[clause.clause_id]))),
                     "last_order_index": clause.order_index,
                 })
+    if pending_question is not None:
+        proposal, proposal_action = pending_question
+        candidates.append(ActionCandidate(
+            candidate_id=_candidate_id((proposal.clause_id,), proposal_action.text),
+            primary_clause_ids=(proposal.clause_id,), action_spans=(proposal_action,),
+            candidate_kind="UNKNOWN", state=CandidateState.REFERENCE_ONLY,
+            commitment_signals=("QUESTION_UNCONFIRMED",), negative_signals=("ROOT_QUESTION",),
+            first_order_index=proposal.order_index, last_order_index=proposal.order_index,
+            builder_version=builder_version,
+        ))
     return candidates
 
 
