@@ -74,6 +74,8 @@ class PipelineDiagnostics:
     ai_invalid_assignee_rejection_count: int = 0
     unauthorized_creation_blocked_count: int = 0
     ledger_unknown_task_id_rejection_count: int = 0
+    recap_reconciliation_mode: str = "off"
+    recap_fragment_shadow_count: int = 0
     recap_scope: str = "NONE"
     meeting_date_source: str = "REQUEST"
     effective_meeting_date: str = ""
