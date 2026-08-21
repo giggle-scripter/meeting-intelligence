@@ -467,6 +467,14 @@ The default active authorities are `DIRECT_ASSIGNMENT,SELF_COMMITMENT`; no AI
 call is made by this router. Review `commitment_router_v2` in the opt-in trace
 before changing `COMMITMENT_ROUTER_ACTIVE_TYPES`.
 
+### Action canonicalization (Q3)
+
+`ACTION_CANONICALIZATION_MODE=shadow` records a deterministic `ActionFrame`
+with raw span, normalized verb/object, proposed canonical action and rejection
+reason. Q3 does not change task names: its initial active experiment regressed
+the Q2 F1 baseline, so promotion is deferred until the trace has reviewed
+split/merge evidence.
+
 Router hợp nhất rule/classifier/note evidence thành route có reasons, nhưng PR4
 không execute bất kỳ route nào. `AI_CREATE_CHECK` chỉ tăng suppressed diagnostics;
 AI create vẫn tắt và final task output vẫn do pipeline hiện tại quyết định.

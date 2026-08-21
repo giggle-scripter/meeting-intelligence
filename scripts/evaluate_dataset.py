@@ -365,6 +365,12 @@ def main() -> None:
         help="Comma-separated positive authority types for local create.",
     )
     parser.add_argument(
+        "--action-canonicalization-mode", choices=("off", "shadow"), default="off"
+    )
+    parser.add_argument(
+        "--action-canonicalization-version", default="action-canonicalization-v2"
+    )
+    parser.add_argument(
         "--candidate-router-mode",
         choices=("off", "shadow", "assist"),
         default="off",
@@ -606,6 +612,8 @@ def main() -> None:
                             for value in args.commitment_router_active_types.split(",")
                             if value.strip()
                         ),
+                        action_canonicalization_mode=args.action_canonicalization_mode,
+                        action_canonicalization_version=args.action_canonicalization_version,
                         candidate_router_mode=args.candidate_router_mode,
                         action_clear_threshold=args.action_clear_threshold,
                         action_ai_threshold=args.action_ai_threshold,
@@ -1098,6 +1106,8 @@ def main() -> None:
             "commitment_router_mode": args.commitment_router_mode,
             "commitment_router_version": args.commitment_router_version,
             "commitment_router_active_types": args.commitment_router_active_types,
+            "action_canonicalization_mode": args.action_canonicalization_mode,
+            "action_canonicalization_version": args.action_canonicalization_version,
             "candidate_router_mode": args.candidate_router_mode,
             "task_create_proposal_enabled": args.task_create_proposal,
             "ai_create_proposal_enabled": args.ai_create_proposal,

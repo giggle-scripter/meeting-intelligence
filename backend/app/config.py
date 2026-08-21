@@ -42,6 +42,8 @@ class Settings:
     commitment_router_active_types: tuple[str, ...] = (
         "DIRECT_ASSIGNMENT", "SELF_COMMITMENT",
     )
+    action_canonicalization_mode: str = "off"
+    action_canonicalization_version: str = "action-canonicalization-v2"
     candidate_router_mode: str = "off"
     task_create_proposal_enabled: bool = False
     ai_create_proposal_enabled: bool = False
@@ -198,6 +200,16 @@ class Settings:
         ).strip()
         if not commitment_router_version:
             raise RuntimeError("COMMITMENT_ROUTER_VERSION must not be empty")
+        action_canonicalization_mode = os.getenv(
+            "ACTION_CANONICALIZATION_MODE", "off"
+        ).lower()
+        if action_canonicalization_mode not in {"off", "shadow"}:
+            raise RuntimeError("ACTION_CANONICALIZATION_MODE must be off or shadow")
+        action_canonicalization_version = os.getenv(
+            "ACTION_CANONICALIZATION_VERSION", "action-canonicalization-v2"
+        ).strip()
+        if not action_canonicalization_version:
+            raise RuntimeError("ACTION_CANONICALIZATION_VERSION must not be empty")
         commitment_router_active_types = tuple(
             value.strip().upper()
             for value in os.getenv(
@@ -478,6 +490,8 @@ class Settings:
             commitment_router_mode=commitment_router_mode,
             commitment_router_version=commitment_router_version,
             commitment_router_active_types=commitment_router_active_types,
+            action_canonicalization_mode=action_canonicalization_mode,
+            action_canonicalization_version=action_canonicalization_version,
             candidate_router_mode=candidate_router_mode,
             task_create_proposal_enabled=task_create_proposal_enabled,
             ai_create_proposal_enabled=ai_create_proposal_enabled,

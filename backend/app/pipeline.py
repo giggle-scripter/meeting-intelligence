@@ -772,6 +772,8 @@ def process_meeting(
     commitment_router_active_types: tuple[str, ...] = (
         "DIRECT_ASSIGNMENT", "SELF_COMMITMENT",
     ),
+    action_canonicalization_mode: str = "off",
+    action_canonicalization_version: str = "action-canonicalization-v2",
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -847,6 +849,10 @@ def process_meeting(
         raise ValueError("commitment_router_mode must be off, shadow, or assist")
     if not commitment_router_version:
         raise ValueError("commitment_router_version must not be empty")
+    if action_canonicalization_mode not in {"off", "shadow"}:
+        raise ValueError("action_canonicalization_mode must be off or shadow")
+    if not action_canonicalization_version:
+        raise ValueError("action_canonicalization_version must not be empty")
     if candidate_router_mode not in {"off", "shadow", "assist"}:
         raise ValueError("candidate_router_mode must be off, shadow, or assist")
     if candidate_router_mode != "off" and action_classifier_mode != candidate_router_mode:
@@ -1513,6 +1519,37 @@ def process_meeting(
             for source_window_id in batch.source_window_ids
             if source_window_id not in resolved_window_ids
         )
+    action_canonicalization_records: list[dict] = []
+    action_canonicalization_error_count = 0
+    if action_canonicalization_mode != "off":
+        try:
+            from .candidate import build_action_frame
+
+            canonicalized_events = []
+            for event in events:
+                if (
+                    event.event_type not in POSITIVE_TASK_EVENTS
+                    or event.extraction_source != "RULE"
+                    or not event.action_text
+                ):
+                    canonicalized_events.append(event)
+                    continue
+                frame = build_action_frame(
+                    event.action_text,
+                    tuple(event.source_clause_ids),
+                )
+                changed = frame.valid and frame.canonical_action != event.action_text
+                action_canonicalization_records.append({
+                    "event_id": event.event_id,
+                    "event_type": event.event_type,
+                    "frame": frame.model_dump(mode="json"),
+                    "changed": changed,
+                })
+                canonicalized_events.append(event)
+            events = canonicalized_events
+        except (RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Action canonicalization failed: %s", exc)
+            action_canonicalization_error_count = 1
     events_before_deduplication = list(events)
     events = deduplicate_events(events)
     task_semantic_linker_shadow = None
@@ -1800,6 +1837,19 @@ def process_meeting(
         commitment_router_authority_counts=commitment_router_summary["authority_counts"],
         commitment_router_suppressed_event_count=commitment_router_suppressed_event_count,
         commitment_router_error_count=commitment_router_error_count,
+        action_canonicalization_mode=action_canonicalization_mode,
+        action_canonicalization_version=(
+            action_canonicalization_version
+            if action_canonicalization_mode != "off" else "disabled"
+        ),
+        action_canonicalization_frame_count=len(action_canonicalization_records),
+        action_canonicalization_changed_count=sum(
+            item["changed"] for item in action_canonicalization_records
+        ),
+        action_canonicalization_rejected_count=sum(
+            not item["frame"]["valid"] for item in action_canonicalization_records
+        ),
+        action_canonicalization_error_count=action_canonicalization_error_count,
         candidate_router_mode=candidate_router_mode,
         candidate_router_version=(
             candidate_router_shadow.router_version
@@ -2122,6 +2172,13 @@ def process_meeting(
                 ],
                 "executed": commitment_router_mode == "assist",
             },
+            "action_canonicalization_v2": {
+                "mode": action_canonicalization_mode,
+                "version": action_canonicalization_version,
+                "error_count": action_canonicalization_error_count,
+                "records": action_canonicalization_records,
+                "executed": False,
+            },
             "candidate_router_shadow": {
                 "summary": (
                     asdict(candidate_router_shadow) if candidate_router_shadow else None
@@ -2220,6 +2277,8 @@ def process_meeting_by_version(
     commitment_router_active_types: tuple[str, ...] = (
         "DIRECT_ASSIGNMENT", "SELF_COMMITMENT",
     ),
+    action_canonicalization_mode: str = "off",
+    action_canonicalization_version: str = "action-canonicalization-v2",
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -2293,6 +2352,8 @@ def process_meeting_by_version(
             commitment_router_mode=commitment_router_mode,
             commitment_router_version=commitment_router_version,
             commitment_router_active_types=commitment_router_active_types,
+            action_canonicalization_mode=action_canonicalization_mode,
+            action_canonicalization_version=action_canonicalization_version,
             candidate_router_mode=candidate_router_mode,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,

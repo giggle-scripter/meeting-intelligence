@@ -104,6 +104,12 @@ class PipelineDiagnostics:
     commitment_router_authority_counts: dict[str, int] = field(default_factory=dict)
     commitment_router_suppressed_event_count: int = 0
     commitment_router_error_count: int = 0
+    action_canonicalization_mode: str = "off"
+    action_canonicalization_version: str = "disabled"
+    action_canonicalization_frame_count: int = 0
+    action_canonicalization_changed_count: int = 0
+    action_canonicalization_rejected_count: int = 0
+    action_canonicalization_error_count: int = 0
     candidate_router_mode: str = "off"
     candidate_router_version: str = "disabled"
     candidate_threshold_version: str = "disabled"
