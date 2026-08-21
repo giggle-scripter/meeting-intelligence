@@ -348,6 +348,33 @@ Report có hai nhóm metric độc lập:
 
 - **Chất lượng trích xuất:** `task_precision`, `task_recall`, `field_accuracy`,
   `case_pass_rate`. Chỉ công bố số liệu từ reviewed ground truth.
+
+### Locked validation và blind release gate (Q8)
+
+`data/evaluation_splits/locked_validation_v1.json` cố định 20 case đại diện và
+digest của toàn bộ transcript/metadata/expected output. Đây là locked validation
+từ corpus phát triển, không phải blind set. Sau khi chạy evaluator đúng 20 case,
+kiểm tra report bằng:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\export_evaluation_split.py `
+  data\evaluation_splits\locked_validation_v1.json `
+  --output evaluation\locked-validation-cases.csv
+
+.\.venv\Scripts\python.exe scripts\evaluate_dataset.py data\validation `
+  --case-csv evaluation\locked-validation-cases.csv `
+  --report evaluation\locked-validation.json
+
+.\.venv\Scripts\python.exe scripts\verify_quality_gate.py `
+  --locked-manifest data\evaluation_splits\locked_validation_v1.json `
+  --locked-report evaluation\locked-validation.json `
+  --output evaluation\quality-gate.json
+```
+
+Release gate dùng `--require-blind` chỉ pass khi có blind manifest/report đủ
+20 meeting, được reviewer độc lập freeze và đạt precision/recall blind mặc định
+0.80. `data/blind_test` hiện chưa có corpus; không được gắn nhãn blind cho các
+case từ `data/validation`.
 - **Tuyến xử lý:** mỗi case được gắn một `route` trong `case_execution`:
   `rule_only` (không cần AI), `ai_fallback_not_configured` (cần AI nhưng provider
   chưa cấu hình), `ai_fallback_resolved` (AI xử lý được window mơ hồ),

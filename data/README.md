@@ -3,6 +3,8 @@
 ```text
 data/
   validation/               corpus chuẩn (source of truth)
+  evaluation_splits/        manifest locked-validation và digest corpus
+  blind_test/               chỉ chứa blind corpus độc lập đã review/freeze
   ml/action-classifier/     dataset clause-level sinh từ validation
   fixtures/                 fixture nhỏ cho unit/integration test
   power_automate_uploads/   fixture upload A/B sinh từ validation
@@ -44,3 +46,9 @@ Dataset classifier được regenerate, không sửa tay:
 grouped 5-fold và limitation. Không sửa tay hai file này. Model hiện dùng
 multilingual MiniLM embedding, chỉ hợp lệ cho shadow evaluation và chưa được tune
 production threshold.
+
+`evaluation_splits/locked_validation_v1.json` khóa 20 case đại diện cùng
+SHA-256 digest của source/expected output. Đây vẫn là development corpus đã
+từng được xem, vì vậy chỉ gọi là **locked validation**, không gọi là blind.
+`blind_test/` chỉ được điền bằng meeting độc lập đã review theo contract trong
+thư mục đó.
