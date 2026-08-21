@@ -32,6 +32,20 @@ CREATION_ALLOWED_SOURCES = {
     "AI_CREATE_PROPOSAL",
 }
 UPDATE_ONLY_SOURCES = {"RULE_CONTEXT", "AI"}
+# ``RULE_RECAP`` is a broad, in-line recap heuristic. It may recover owner
+# phrases from a progress summary, unlike ``RULE_FINAL_RECAP`` which is the
+# structured final-list extractor and is allowed to establish an identity.
+RECAP_UPDATE_SOURCES = {"RULE_RECAP"}
+
+
+def _is_unresolved_recap_fragment(action: str) -> bool:
+    """Return whether a generic recap parse contains metadata, not an action."""
+
+    normalized = normalize_for_match(action)
+    return bool(re.search(
+        r"(?:\bowner\b|^dieu\s+chinh\b|^deadline\b|^task\s+[a-z0-9]+\b)",
+        normalized,
+    ))
 
 
 def _assignee_values(value: str) -> set[str]:
@@ -160,6 +174,7 @@ class LedgerTask:
 
 @dataclass
 class TaskLedger:
+    recap_reconciliation_mode: str = "off"
     tasks: dict[str, LedgerTask] = field(default_factory=dict)
     alias_index: dict[str, set[str]] = field(default_factory=dict)
     unresolved_events: list[TaskEvent] = field(default_factory=list)
@@ -181,6 +196,7 @@ class TaskLedger:
             "sibling_identity_split_count": 0,
             "unauthorized_creation_blocked_count": 0,
             "ledger_unknown_task_id_rejection_count": 0,
+            "recap_fragment_shadow_count": 0,
         }
     )
 
@@ -307,6 +323,13 @@ class TaskLedger:
         return result
 
     def apply(self, event: TaskEvent) -> LinkResult:
+        if (
+            self.recap_reconciliation_mode == "shadow"
+            and event.extraction_source in RECAP_UPDATE_SOURCES
+            and event.event_type == "OWNER_ASSIGN"
+            and _is_unresolved_recap_fragment(event.action_text)
+        ):
+            self.diagnostics["recap_fragment_shadow_count"] += 1
         result = self.resolve(event)
         if result.status == "TERMINAL_REPLAY":
             self.blocked_events.append(event)

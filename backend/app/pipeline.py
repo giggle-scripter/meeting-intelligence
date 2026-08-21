@@ -774,6 +774,7 @@ def process_meeting(
     ),
     action_canonicalization_mode: str = "off",
     action_canonicalization_version: str = "action-canonicalization-v2",
+    recap_reconciliation_mode: str = "off",
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -853,6 +854,8 @@ def process_meeting(
         raise ValueError("action_canonicalization_mode must be off or shadow")
     if not action_canonicalization_version:
         raise ValueError("action_canonicalization_version must not be empty")
+    if recap_reconciliation_mode not in {"off", "shadow"}:
+        raise ValueError("recap_reconciliation_mode must be off or shadow")
     if candidate_router_mode not in {"off", "shadow", "assist"}:
         raise ValueError("candidate_router_mode must be off, shadow, or assist")
     if candidate_router_mode != "off" and action_classifier_mode != candidate_router_mode:
@@ -1650,7 +1653,10 @@ def process_meeting(
         except (KeyError, OSError, RuntimeError, TypeError, ValueError) as exc:
             LOGGER.warning("Context retrieval shadow failed: %s", exc)
             context_retrieval_error_count = 1
-    ledger = reduce_task_events_to_ledger(events)
+    ledger = reduce_task_events_to_ledger(
+        events,
+        recap_reconciliation_mode=recap_reconciliation_mode,
+    )
     reconciliation_operations = build_deterministic_reconciliation_operations(ledger)
     reconciliation = reconcile_ledger(ledger, reconciliation_operations)
     reduction_diagnostics: dict[str, int] = dict(ledger.diagnostics)
@@ -1753,6 +1759,10 @@ def process_meeting(
         ),
         ledger_unknown_task_id_rejection_count=reduction_diagnostics.get(
             "ledger_unknown_task_id_rejection_count", 0
+        ),
+        recap_reconciliation_mode=recap_reconciliation_mode,
+        recap_fragment_shadow_count=reduction_diagnostics.get(
+            "recap_fragment_shadow_count", 0
         ),
         recap_scope=recap_scope,
         meeting_date_source=meeting.meeting_date_source,
@@ -2179,6 +2189,13 @@ def process_meeting(
                 "records": action_canonicalization_records,
                 "executed": False,
             },
+            "recap_reconciliation_v2": {
+                "mode": recap_reconciliation_mode,
+                "fragment_shadow_count": reduction_diagnostics.get(
+                    "recap_fragment_shadow_count", 0
+                ),
+                "executed": False,
+            },
             "candidate_router_shadow": {
                 "summary": (
                     asdict(candidate_router_shadow) if candidate_router_shadow else None
@@ -2279,6 +2296,7 @@ def process_meeting_by_version(
     ),
     action_canonicalization_mode: str = "off",
     action_canonicalization_version: str = "action-canonicalization-v2",
+    recap_reconciliation_mode: str = "off",
     candidate_router_mode: str = "off",
     action_clear_threshold: float = 0.82,
     action_ai_threshold: float = 0.45,
@@ -2354,6 +2372,7 @@ def process_meeting_by_version(
             commitment_router_active_types=commitment_router_active_types,
             action_canonicalization_mode=action_canonicalization_mode,
             action_canonicalization_version=action_canonicalization_version,
+            recap_reconciliation_mode=recap_reconciliation_mode,
             candidate_router_mode=candidate_router_mode,
             action_clear_threshold=action_clear_threshold,
             action_ai_threshold=action_ai_threshold,

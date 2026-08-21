@@ -475,6 +475,13 @@ reason. Q3 does not change task names: its initial active experiment regressed
 the Q2 F1 baseline, so promotion is deferred until the trace has reviewed
 split/merge evidence.
 
+### Recap lifecycle reconciliation (Q4)
+
+`RECAP_RECONCILIATION_MODE=shadow` records generic recap rows whose proposed
+action is actually recap metadata (for example an owner or deadline fragment).
+It does not alter output yet: the first constrained active experiment improved
+F1 only from `0.534` to `0.535`, below the Q4 slice gate.
+
 Router hợp nhất rule/classifier/note evidence thành route có reasons, nhưng PR4
 không execute bất kỳ route nào. `AI_CREATE_CHECK` chỉ tăng suppressed diagnostics;
 AI create vẫn tắt và final task output vẫn do pipeline hiện tại quyết định.
