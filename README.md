@@ -421,6 +421,19 @@ $env:OPENAI_API_KEY="<key-nhận-từ-lead>"
 `openai-usage.json` và trace riêng cho run đó. Pricing trong usage chỉ xuất hiện
 khi cũng đặt các biến `OPENAI_*_USD_PER_1M`.
 
+### Power Automate regression (Q10)
+
+Trước khi publish flow hoặc upload test package mới, chạy:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\audit_power_automate_uploads.py `
+  --report evaluation\power-automate-upload-audit.json
+```
+
+Gate xác nhận package/index tự chứa đúng transcript, Meeting Note và metadata
+cho mọi source case. Test suite còn smoke `process-file → job submit → poll →
+succeeded` với package Power Automate thật.
+
 ## Cấu Trúc Thư Mục
 
 ```text
