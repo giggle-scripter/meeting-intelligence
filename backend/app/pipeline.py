@@ -1045,13 +1045,17 @@ def process_meeting(
     action_candidate_builder_error_count = 0
     if action_candidate_builder_mode == "shadow" or commitment_router_mode != "off":
         try:
-            from .candidate import build_action_candidates
+            from .candidate import build_action_candidates, build_action_proposals_v3
 
-            action_candidates_shadow = build_action_candidates(
-                clauses,
-                annotations,
-                mentions,
+            builder = (
+                build_action_proposals_v3
+                if action_candidate_builder_version == "action-proposal-v3"
+                else build_action_candidates
+            )
+            action_candidates_shadow = builder(
+                clauses, annotations, mentions,
                 builder_version=action_candidate_builder_version,
+                **({"note_supported_clause_ids": set(note_cues_by_clause)} if builder is build_action_proposals_v3 else {}),
             )
         except (KeyError, RuntimeError, TypeError, ValueError) as exc:
             LOGGER.warning("Action candidate builder shadow failed: %s", exc)

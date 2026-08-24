@@ -1,6 +1,6 @@
 from dataclasses import asdict
 
-from backend.app.candidate import CandidateState, build_action_candidates
+from backend.app.candidate import CandidateState, build_action_candidates, build_action_proposals_v3
 from backend.app.models import Clause, ClauseAnnotation, DateMention, MeetingInput
 from backend.app.pipeline import process_meeting
 
@@ -87,3 +87,25 @@ def test_shadow_builder_never_changes_v1_tasks_or_events() -> None:
     assert shadow.diagnostics.action_candidate_action_span_count == 1
     assert shadow.diagnostics.action_candidate_kind_counts == {"CREATE": 1}
     assert shadow.diagnostics.action_candidate_builder_error_count == 0
+
+
+def test_v3_proposal_keeps_grounded_multiclause_contract_and_recap_reference() -> None:
+    clauses = [
+        _clause("C-1", "Lan, em hoàn thành tài liệu.", 0),
+        _clause("C-2", "Deadline thứ Sáu.", 1),
+        _clause("C-3", "Tổng kết: Em sẽ hoàn thành tài liệu.", 2),
+    ]
+    annotations = {
+        "C-1": ClauseAnnotation("C-1", {"DIRECT_ASSIGNMENT", "ACTION_VERB"}),
+        "C-2": ClauseAnnotation("C-2", {"DATE_MENTION"}),
+        "C-3": ClauseAnnotation("C-3", {"ACTION_VERB"}),
+    }
+
+    proposals = build_action_proposals_v3(clauses, annotations, {"DATE-1": _mention("C-2")})
+
+    create = proposals[0]
+    assert create.proposal_kind == "CREATE"
+    assert create.chronological_anchor_clause_id == "C-1"
+    assert create.support_clause_ids == ("C-2",)
+    assert create.confidence_components["grounded_action"] == 1.0
+    assert proposals[1].proposal_kind == "REFERENCE"

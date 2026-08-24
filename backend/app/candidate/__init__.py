@@ -1,7 +1,7 @@
 """Candidate scoring and context windows."""
 
 from .ai_batcher import AiWindowBatch, batch_ai_windows
-from .action_candidates import ActionCandidate, CandidateState, GroundedSpan, build_action_candidates, summarize_action_candidates
+from .action_candidates import ActionCandidate, CandidateState, GroundedSpan, build_action_candidates, build_action_proposals_v3, summarize_action_candidates
 from .action_canonicalization import ActionFrame, build_action_frame
 from .deadline_grounding import DeadlineAttachmentEvidence, DeadlineAttachmentType, build_deadline_attachment_evidence
 from .owner_grounding import OwnerEvidence, OwnerEvidenceType, build_owner_evidence
@@ -26,7 +26,7 @@ __all__ = [
     "CandidateRouter", "CandidateRouterConfig", "CandidateRouterShadowSummary",
     "TaskCreateProposal", "TaskCreateProposalResponse",
     "batch_ai_windows",
-    "build_action_candidates", "build_action_frame", "build_candidate_evidence", "build_candidate_windows", "build_deadline_attachment_evidence", "build_owner_evidence",
+    "build_action_candidates", "build_action_proposals_v3", "build_action_frame", "build_candidate_evidence", "build_candidate_windows", "build_deadline_attachment_evidence", "build_owner_evidence",
     "choose_extraction_strategy", "is_candidate", "merge_windows", "route_commitments",
     "summarize_action_candidates", "summarize_candidate_decisions", "summarize_commitment_decisions",
 ]

@@ -52,6 +52,10 @@ class ActionCandidate(BaseModel):
     commitment_signals: tuple[str, ...] = ()
     negative_signals: tuple[str, ...] = ()
     topic_ids: tuple[str, ...] = ()
+    proposal_kind: Literal["CREATE", "UPDATE", "REFERENCE"] = "REFERENCE"
+    authority_evidence: tuple[str, ...] = ()
+    confidence_components: dict[str, float] = Field(default_factory=dict)
+    chronological_anchor_clause_id: str = ""
     first_order_index: int
     last_order_index: int
     builder_version: str
@@ -194,6 +198,54 @@ def build_action_candidates(
             builder_version=builder_version,
         ))
     return candidates
+
+
+def build_action_proposals_v3(
+    clauses: list[Clause], annotations: dict[str, ClauseAnnotation],
+    mentions: dict[str, DateMention], *, builder_version: str = "action-proposal-v3",
+    note_supported_clause_ids: set[str] | None = None,
+) -> list[ActionCandidate]:
+    """Build grounded, multi-clause V3 proposals in shadow mode.
+
+    V3 keeps the stable V2 span/negative rules, then makes the proposal contract
+    explicit.  It is deliberately not a router: callers may inspect its
+    confidence and authority evidence but cannot create a ledger event from it.
+    """
+
+    note_supported_clause_ids = note_supported_clause_ids or set()
+    base = build_action_candidates(
+        clauses, annotations, mentions, builder_version=builder_version,
+    )
+    enriched: list[ActionCandidate] = []
+    for candidate in base:
+        if candidate.candidate_kind == "CREATE":
+            proposal_kind = "CREATE"
+        elif candidate.candidate_kind == "MUTATION":
+            proposal_kind = "UPDATE"
+        else:
+            proposal_kind = "REFERENCE"
+        authority = tuple(sorted(set(candidate.commitment_signals)))
+        primary_flags = set()
+        for clause_id in candidate.primary_clause_ids:
+            primary_flags.update(annotations[clause_id].flags)
+        confidence = {
+            "rule_cue": 1.0 if authority else 0.35,
+            "grounded_action": 1.0 if candidate.action_spans else 0.0,
+            "negative_guard": 0.0 if candidate.negative_signals else 1.0,
+            "multi_clause_support": 1.0 if len(candidate.primary_clause_ids) + len(candidate.support_clause_ids) > 1 else 0.0,
+            "note_grounding": 1.0 if set(candidate.primary_clause_ids) & note_supported_clause_ids else 0.0,
+        }
+        # A recap can support an existing identity but is never a V3 create.
+        if candidate.candidate_kind == "RECAP_ITEM":
+            proposal_kind = "REFERENCE"
+            authority = tuple(sorted(set(authority) | {"RECAP_REFERENCE"}))
+        enriched.append(candidate.model_copy(update={
+            "proposal_kind": proposal_kind,
+            "authority_evidence": authority or tuple(sorted(primary_flags & _POSITIVE_FLAGS)),
+            "confidence_components": confidence,
+            "chronological_anchor_clause_id": candidate.primary_clause_ids[0],
+        }))
+    return enriched
 
 
 def summarize_action_candidates(candidates: list[ActionCandidate]) -> dict[str, int]:
