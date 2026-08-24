@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "split_id": "locked-validation-v1",
+  "split_kind": "LOCKED_VALIDATION",
+  "frozen_at": "2026-08-21",
+  "purpose": "Post-Q8 regression validation. This is a locked subset of the existing development corpus, not a blind set.",
+  "corpus_sha256": "276446975d45cfd178a59f284644ca42d6323091a7d6fcd27d75ca9f69b077f1",
+  "cases": [
+    {"case_id": "W1-SHORT-C1-N0-IT-DASG-ABS-002"},
+    {"case_id": "W1-SHORT-C1-N0-IT-FPC-DM-006"},
+    {"case_id": "W1-SHORT-C2-N1-PROD-NEG-QUNC-007"},
+    {"case_id": "W1-SHORT-C2-N1-PROD-QACC-RDAY-003"},
+    {"case_id": "W2-SHORT-C2-N0-IT-DREP-030"},
+    {"case_id": "W2-SHORT-C2-N0-IT-DUPR-018"},
+    {"case_id": "W2-SHORT-C2-N1-IT-REJT-010"},
+    {"case_id": "W2-SHORT-C3-N0-PROD-CANC-027"},
+    {"case_id": "W2-SHORT-C3-N1-PROD-SUGG-007"},
+    {"case_id": "W2-SHORT-C3-N2-PROD-HOFF-011"},
+    {"case_id": "W3-MED-C3-N1-IT-INT-002"},
+    {"case_id": "W3-MED-C3-N1-OPS-INT-004"},
+    {"case_id": "W3-MED-C4-N2-PROD-INT-003"},
+    {"case_id": "W3-MED-C4-N2-SW-INT-001"},
+    {"case_id": "W4-LONG-C4-N1-IT-STATE-006"},
+    {"case_id": "W4-LONG-C4-N2-OPS-STATE-004"},
+    {"case_id": "W4-LONG-C5-N1-PROD-STATE-003"},
+    {"case_id": "W4-LONG-C5-N3-SW-STATE-005"},
+    {"case_id": "W5-XL-C5-N2-IT-STRESS-002"},
+    {"case_id": "W5-XL-C5-N3-PROD-STRESS-003"}
+  ]
+}
