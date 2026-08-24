@@ -322,6 +322,7 @@ def _submit_job(
         model_name,
         "|".join((
             f"batch={settings.ai_max_batch_context_clauses}",
+            f"ai_cost_gate={settings.ai_cost_gate_mode}",
             f"timeout={settings.ai_timeout_seconds}",
             f"job_timeout={settings.job_timeout_seconds}",
             f"context={settings.meeting_context_mode}",
@@ -375,6 +376,16 @@ def _submit_job(
                 speaker_aliases=speaker_aliases,
                 summary_topic=summary_topic,
                 ai_max_batch_context_clauses=settings.ai_max_batch_context_clauses,
+                ai_cost_gate_mode=settings.ai_cost_gate_mode,
+                ai_cost_max_provider_calls_per_meeting=(
+                    settings.ai_cost_max_provider_calls_per_meeting
+                ),
+                ai_cost_max_payload_characters=(
+                    settings.ai_cost_max_payload_characters
+                ),
+                ai_cost_max_estimated_usd_per_meeting=(
+                    settings.ai_cost_max_estimated_usd_per_meeting
+                ),
                 trace_enabled=settings.pipeline_trace_enabled,
                 trace_directory=settings.pipeline_trace_directory,
                 meeting_context_mode=settings.meeting_context_mode,
@@ -528,6 +539,14 @@ def process_endpoint(
             or None
         ),
         ai_max_batch_context_clauses=settings.ai_max_batch_context_clauses,
+        ai_cost_gate_mode=settings.ai_cost_gate_mode,
+        ai_cost_max_provider_calls_per_meeting=(
+            settings.ai_cost_max_provider_calls_per_meeting
+        ),
+        ai_cost_max_payload_characters=settings.ai_cost_max_payload_characters,
+        ai_cost_max_estimated_usd_per_meeting=(
+            settings.ai_cost_max_estimated_usd_per_meeting
+        ),
         trace_enabled=settings.pipeline_trace_enabled,
         trace_directory=settings.pipeline_trace_directory,
         meeting_context_mode=settings.meeting_context_mode,
@@ -709,6 +728,14 @@ async def process_file_endpoint(
         speaker_aliases={},
         summary_topic=summary_topic,
         ai_max_batch_context_clauses=settings.ai_max_batch_context_clauses,
+        ai_cost_gate_mode=settings.ai_cost_gate_mode,
+        ai_cost_max_provider_calls_per_meeting=(
+            settings.ai_cost_max_provider_calls_per_meeting
+        ),
+        ai_cost_max_payload_characters=settings.ai_cost_max_payload_characters,
+        ai_cost_max_estimated_usd_per_meeting=(
+            settings.ai_cost_max_estimated_usd_per_meeting
+        ),
         trace_enabled=settings.pipeline_trace_enabled,
         trace_directory=settings.pipeline_trace_directory,
         meeting_context_mode=settings.meeting_context_mode,

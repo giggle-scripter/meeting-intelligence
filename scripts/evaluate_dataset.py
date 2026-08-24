@@ -335,6 +335,10 @@ def main() -> None:
         help="Minimum task recall for the V2 quality gate.",
     )
     parser.add_argument("--context-mode", choices=("off", "assist", "shadow"), default="assist")
+    parser.add_argument("--ai-cost-gate-mode", choices=("off", "enforce"), default="off")
+    parser.add_argument("--ai-cost-max-provider-calls", type=int, default=3)
+    parser.add_argument("--ai-cost-max-payload-characters", type=int, default=20_000)
+    parser.add_argument("--ai-cost-max-estimated-usd", type=float)
     parser.add_argument(
         "--action-classifier-mode",
         choices=("off", "shadow", "assist"),
@@ -515,6 +519,10 @@ def main() -> None:
         parser.error("--temporal-working-day-policy must be weekdays-only-v1")
     if args.temporal_min_confidence != 1.0:
         parser.error("--temporal-min-confidence must be exactly 1.0")
+    if args.ai_cost_max_provider_calls <= 0 or args.ai_cost_max_payload_characters <= 0:
+        parser.error("AI cost gate limits must be positive")
+    if args.ai_cost_max_estimated_usd is not None and args.ai_cost_max_estimated_usd < 0:
+        parser.error("--ai-cost-max-estimated-usd must be non-negative")
     checkpoint_path = (
         args.report.with_suffix(args.report.suffix + ".checkpoint.json")
         if args.report
@@ -615,6 +623,16 @@ def main() -> None:
                         pipeline_version=args.pipeline_version,
                         ai_client=(
                             _local_openai_client() if args.local_openai else None
+                        ),
+                        ai_cost_gate_mode=args.ai_cost_gate_mode,
+                        ai_cost_max_provider_calls_per_meeting=(
+                            args.ai_cost_max_provider_calls
+                        ),
+                        ai_cost_max_payload_characters=(
+                            args.ai_cost_max_payload_characters
+                        ),
+                        ai_cost_max_estimated_usd_per_meeting=(
+                            args.ai_cost_max_estimated_usd
                         ),
                         meeting_context_mode=args.context_mode,
                         action_classifier_mode=args.action_classifier_mode,
@@ -1169,6 +1187,10 @@ def main() -> None:
             "ai_create_proposal_enabled": args.ai_create_proposal,
             "ai_create_max_proposals_per_meeting": args.ai_create_max_proposals,
             "ai_quality_uplift_mode": args.ai_quality_uplift_mode,
+            "ai_cost_gate_mode": args.ai_cost_gate_mode,
+            "ai_cost_max_provider_calls_per_meeting": args.ai_cost_max_provider_calls,
+            "ai_cost_max_payload_characters": args.ai_cost_max_payload_characters,
+            "ai_cost_max_estimated_usd_per_meeting": args.ai_cost_max_estimated_usd,
             "task_semantic_linker_mode": args.task_semantic_linker_mode,
             "task_link_embedding_model_name": args.task_link_embedding_model_name,
             "task_link_scoring_version": args.task_link_scoring_version,

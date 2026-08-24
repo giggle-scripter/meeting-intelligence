@@ -13,6 +13,10 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
         "EMBEDDING_DEVICE",
         "EMBEDDING_FALLBACK_ENABLED",
         "EMBEDDING_FALLBACK_DIMENSION",
+        "AI_COST_GATE_MODE",
+        "AI_COST_MAX_PROVIDER_CALLS_PER_MEETING",
+        "AI_COST_MAX_PAYLOAD_CHARACTERS",
+        "AI_COST_MAX_ESTIMATED_USD_PER_MEETING",
         "ACTION_CLASSIFIER_MODE",
         "ACTION_CLASSIFIER_MODEL_PATH",
         "ACTION_CANDIDATE_BUILDER_MODE",
@@ -69,6 +73,10 @@ def test_ml_settings_have_safe_inactive_defaults(monkeypatch) -> None:
     assert settings.embedding_device == "cpu"
     assert settings.embedding_fallback_enabled is True
     assert settings.embedding_fallback_dimension == 384
+    assert settings.ai_cost_gate_mode == "off"
+    assert settings.ai_cost_max_provider_calls_per_meeting == 3
+    assert settings.ai_cost_max_payload_characters == 20_000
+    assert settings.ai_cost_max_estimated_usd_per_meeting is None
     assert settings.action_classifier_mode == "off"
     assert settings.action_classifier_model_path is None
     assert settings.action_candidate_builder_mode == "off"
@@ -111,6 +119,10 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     monkeypatch.setenv("EMBEDDING_DEVICE", "cuda:0")
     monkeypatch.setenv("EMBEDDING_FALLBACK_ENABLED", "false")
     monkeypatch.setenv("EMBEDDING_FALLBACK_DIMENSION", "128")
+    monkeypatch.setenv("AI_COST_GATE_MODE", "enforce")
+    monkeypatch.setenv("AI_COST_MAX_PROVIDER_CALLS_PER_MEETING", "2")
+    monkeypatch.setenv("AI_COST_MAX_PAYLOAD_CHARACTERS", "1000")
+    monkeypatch.setenv("AI_COST_MAX_ESTIMATED_USD_PER_MEETING", "0.05")
     monkeypatch.setenv("ACTION_CLASSIFIER_MODEL_PATH", "artifacts/models/action.joblib")
     monkeypatch.setenv("ACTION_CLASSIFIER_MODE", "shadow")
     monkeypatch.setenv("ACTION_CANDIDATE_BUILDER_MODE", "shadow")
@@ -140,6 +152,10 @@ def test_ml_settings_read_explicit_environment(monkeypatch) -> None:
     assert settings.embedding_device == "cuda:0"
     assert settings.embedding_fallback_enabled is False
     assert settings.embedding_fallback_dimension == 128
+    assert settings.ai_cost_gate_mode == "enforce"
+    assert settings.ai_cost_max_provider_calls_per_meeting == 2
+    assert settings.ai_cost_max_payload_characters == 1000
+    assert settings.ai_cost_max_estimated_usd_per_meeting == 0.05
     assert settings.action_classifier_mode == "shadow"
     assert settings.action_classifier_model_path == "artifacts/models/action.joblib"
     assert settings.action_candidate_builder_mode == "shadow"
@@ -178,6 +194,22 @@ def test_ml_settings_reject_ambiguous_boolean(monkeypatch) -> None:
     monkeypatch.setenv("EMBEDDING_FALLBACK_ENABLED", "sometimes")
 
     with pytest.raises(RuntimeError, match="must be true or false"):
+        Settings.from_env()
+
+
+@pytest.mark.parametrize(
+    ("name", "value"),
+    [
+        ("AI_COST_GATE_MODE", "shadow"),
+        ("AI_COST_MAX_PROVIDER_CALLS_PER_MEETING", "0"),
+        ("AI_COST_MAX_PAYLOAD_CHARACTERS", "60001"),
+        ("AI_COST_MAX_ESTIMATED_USD_PER_MEETING", "-0.01"),
+    ],
+)
+def test_ml_settings_reject_invalid_ai_cost_gate(monkeypatch, name: str, value: str) -> None:
+    monkeypatch.setenv(name, value)
+
+    with pytest.raises(RuntimeError, match="AI_COST"):
         Settings.from_env()
 
 

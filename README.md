@@ -120,6 +120,15 @@ nhau luôn thành request riêng để tránh coreference xuyên đoạn; đổi
 dài có thể cần nhiều provider call hơn. `AI_TIMEOUT_SECONDS=3600` chỉ là timeout **giữa backend và
 OpenAI**; Power Automate phải dùng job API bên dưới để không chờ quá giới hạn HTTP.
 
+### Provider cost gates (Q9)
+
+`AI_COST_GATE_MODE=enforce` đặt hard cap per-meeting trước mọi provider call:
+`AI_COST_MAX_PROVIDER_CALLS_PER_MEETING` (mặc định 3) và
+`AI_COST_MAX_PAYLOAD_CHARACTERS` (mặc định 20,000). Call vượt cap bị fail-closed
+và rule result vẫn trả về. `AI_COST_MAX_ESTIMATED_USD_PER_MEETING` là optional;
+khi đặt, pricing `OPENAI_*_USD_PER_1M` phải đầy đủ, nếu không provider call bị
+chặn. Trace/diagnostics ghi counter và block reason, không ghi prompt hay key.
+
 Hạ tầng embedding local nằm trong `backend/app/ml/` và load model lazily, tối đa
 một lần cho mỗi cấu hình trong một process. Có thể đặt `EMBEDDING_MODEL_NAME`,
 `EMBEDDING_DEVICE` và `EMBEDDING_FALLBACK_DIMENSION`; nếu backend semantic không
