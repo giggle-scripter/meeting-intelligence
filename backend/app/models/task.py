@@ -143,6 +143,11 @@ class PipelineDiagnostics:
     ai_quality_create_exclusion_reasons: dict[str, int] = field(
         default_factory=dict
     )
+    ai_cost_gate_mode: str = "off"
+    ai_cost_gate_provider_call_count: int = 0
+    ai_cost_gate_blocked_call_count: int = 0
+    ai_cost_gate_payload_characters_sent: int = 0
+    ai_cost_gate_block_reasons: dict[str, int] = field(default_factory=dict)
     task_semantic_linker_mode: str = "off"
     task_semantic_linker_version: str = "disabled"
     task_semantic_index_version: str = "disabled"

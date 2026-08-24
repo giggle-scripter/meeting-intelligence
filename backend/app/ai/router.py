@@ -145,7 +145,7 @@ class MutationRouter:
             summary.call_count = 1
             trace["provider_called"] = True
             trace["provider_response"] = {"decision": response.decision, "event_type": response.event_type, "related_task_id": response.related_task_id}
-        except (httpx.HTTPError, ValueError) as exc:
+        except (httpx.HTTPError, RuntimeError, ValueError) as exc:
             summary.error_count = 1
             summary.unresolved_count = 1
             trace["validation"]["reasons"] = ["PROVIDER_ERROR"]

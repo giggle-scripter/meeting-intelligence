@@ -17,6 +17,10 @@ class Settings:
     ai_timeout_seconds: float = 3600.0
     job_timeout_seconds: float = 3600.0
     ai_max_batch_context_clauses: int = 56
+    ai_cost_gate_mode: str = "off"
+    ai_cost_max_provider_calls_per_meeting: int = 3
+    ai_cost_max_payload_characters: int = 20_000
+    ai_cost_max_estimated_usd_per_meeting: float | None = None
     pipeline_version: str = "v1"
     pipeline_trace_enabled: bool = False
     pipeline_trace_directory: str = "evaluation/traces"
@@ -148,6 +152,25 @@ class Settings:
             raise RuntimeError(
                 "AI_MAX_BATCH_CONTEXT_CLAUSES must be greater than zero"
             )
+        ai_cost_gate_mode = os.getenv("AI_COST_GATE_MODE", "off").lower()
+        if ai_cost_gate_mode not in {"off", "enforce"}:
+            raise RuntimeError("AI_COST_GATE_MODE must be off or enforce")
+        try:
+            ai_cost_max_provider_calls = int(
+                os.getenv("AI_COST_MAX_PROVIDER_CALLS_PER_MEETING", "3")
+            )
+            ai_cost_max_payload_characters = int(
+                os.getenv("AI_COST_MAX_PAYLOAD_CHARACTERS", "20000")
+            )
+        except ValueError as exc:
+            raise RuntimeError("AI cost gate limits must be integers") from exc
+        if not 1 <= ai_cost_max_provider_calls <= 10:
+            raise RuntimeError("AI_COST_MAX_PROVIDER_CALLS_PER_MEETING must be between 1 and 10")
+        if not 1 <= ai_cost_max_payload_characters <= 60_000:
+            raise RuntimeError("AI_COST_MAX_PAYLOAD_CHARACTERS must be between 1 and 60000")
+        ai_cost_max_estimated_usd_per_meeting = optional_nonnegative_float(
+            "AI_COST_MAX_ESTIMATED_USD_PER_MEETING"
+        )
 
         pipeline_version = os.getenv("PIPELINE_VERSION", "v1").lower()
         if pipeline_version not in {"v1", "v2", "shadow"}:
@@ -491,6 +514,12 @@ class Settings:
             ai_timeout_seconds=float(os.getenv("AI_TIMEOUT_SECONDS", "3600")),
             job_timeout_seconds=float(os.getenv("JOB_TIMEOUT_SECONDS", "3600")),
             ai_max_batch_context_clauses=batch_limit,
+            ai_cost_gate_mode=ai_cost_gate_mode,
+            ai_cost_max_provider_calls_per_meeting=ai_cost_max_provider_calls,
+            ai_cost_max_payload_characters=ai_cost_max_payload_characters,
+            ai_cost_max_estimated_usd_per_meeting=(
+                ai_cost_max_estimated_usd_per_meeting
+            ),
             pipeline_version=pipeline_version,
             pipeline_trace_enabled=os.getenv("PIPELINE_TRACE_ENABLED", "").lower()
             in {"1", "true", "yes"},

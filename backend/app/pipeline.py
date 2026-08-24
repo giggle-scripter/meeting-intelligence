@@ -755,6 +755,10 @@ def process_meeting(
     speaker_aliases: dict[str, str] | None = None,
     summary_topic: str | None = None,
     ai_max_batch_context_clauses: int = 56,
+    ai_cost_gate_mode: str = "off",
+    ai_cost_max_provider_calls_per_meeting: int = 3,
+    ai_cost_max_payload_characters: int = 20_000,
+    ai_cost_max_estimated_usd_per_meeting: float | None = None,
     trace_enabled: bool = False,
     trace_directory: str = "evaluation/traces",
     meeting_context_mode: str = "assist",
@@ -831,7 +835,20 @@ def process_meeting(
 ) -> PipelineResult:
     if ai_quality_uplift_mode not in {"off", "shadow"}:
         raise ValueError("ai_quality_uplift_mode must be off or shadow")
+    if ai_cost_gate_mode not in {"off", "enforce"}:
+        raise ValueError("ai_cost_gate_mode must be off or enforce")
     ai_client = ai_client or DisabledAiClient()
+    if ai_cost_gate_mode == "enforce":
+        from .ai.cost_gate import AiCostBudget, BudgetedAiClient
+
+        ai_client = BudgetedAiClient(
+            ai_client,
+            AiCostBudget(
+                max_provider_calls=ai_cost_max_provider_calls_per_meeting,
+                max_payload_characters=ai_cost_max_payload_characters,
+                max_estimated_cost_usd=ai_cost_max_estimated_usd_per_meeting,
+            ),
+        )
     stages = preprocess_meeting(meeting, speaker_aliases)
     clauses = stages["clauses"]
     mentions = extract_date_mentions(clauses)
@@ -1216,7 +1233,7 @@ def process_meeting(
                     exc.response.status_code,
                 )
                 task_create_proposal_unresolved_count += 1
-            except (httpx.HTTPError, ValueError) as exc:
+            except (httpx.HTTPError, RuntimeError, ValueError) as exc:
                 LOGGER.warning(
                     "AI create proposal failed candidate %s: %s",
                     decision.candidate_id,
@@ -1532,7 +1549,7 @@ def process_meeting(
             ai_fallback_error_count += 1
             unresolved.extend(batch.source_window_ids)
             continue
-        except (httpx.HTTPError, ValueError) as exc:
+        except (httpx.HTTPError, RuntimeError, ValueError) as exc:
             LOGGER.warning("AI fallback failed for batch %s: %s", batch.window.window_id, exc)
             ai_fallback_error_count += 1
             unresolved.extend(batch.source_window_ids)
@@ -1734,6 +1751,12 @@ def process_meeting(
         if any("CANCELLATION" in annotation.flags for annotation in annotations.values()):
             no_active_reason = "cancelled"
         states = []
+    cost_gate_snapshot_method = getattr(ai_client, "cost_gate_snapshot", None)
+    cost_gate_snapshot = (
+        asdict(cost_gate_snapshot_method())
+        if callable(cost_gate_snapshot_method)
+        else {}
+    )
     diagnostics = PipelineDiagnostics(
         caption_count=stages["original_caption_count"],
         deduplicated_caption_count=len(stages["captions"]),
@@ -1988,6 +2011,17 @@ def process_meeting(
         ai_quality_create_exclusion_reasons=dict(sorted(Counter(
             item.reason for item in ai_quality_create_records if not item.eligible
         ).items())),
+        ai_cost_gate_mode=ai_cost_gate_mode,
+        ai_cost_gate_provider_call_count=int(
+            cost_gate_snapshot.get("provider_call_count", 0)
+        ),
+        ai_cost_gate_blocked_call_count=int(
+            cost_gate_snapshot.get("blocked_call_count", 0)
+        ),
+        ai_cost_gate_payload_characters_sent=int(
+            cost_gate_snapshot.get("payload_characters_sent", 0)
+        ),
+        ai_cost_gate_block_reasons=cost_gate_snapshot.get("block_reasons", {}),
         task_semantic_linker_mode=task_semantic_linker_mode,
         task_semantic_linker_version=(
             task_semantic_linker_shadow.linker_version
@@ -2343,6 +2377,15 @@ def process_meeting(
                 "selected_create_candidate_ids": ai_quality_selected_create_ids,
                 "executed": False,
             },
+            "ai_cost_gate": {
+                "mode": ai_cost_gate_mode,
+                "budget": {
+                    "max_provider_calls": ai_cost_max_provider_calls_per_meeting,
+                    "max_payload_characters": ai_cost_max_payload_characters,
+                    "max_estimated_cost_usd": ai_cost_max_estimated_usd_per_meeting,
+                },
+                "snapshot": cost_gate_snapshot,
+            },
             "task_semantic_linker_shadow": {
                 "summary": (
                     asdict(task_semantic_linker_shadow)
@@ -2396,6 +2439,10 @@ def process_meeting_by_version(
     speaker_aliases: dict[str, str] | None = None,
     summary_topic: str | None = None,
     ai_max_batch_context_clauses: int = 56,
+    ai_cost_gate_mode: str = "off",
+    ai_cost_max_provider_calls_per_meeting: int = 3,
+    ai_cost_max_payload_characters: int = 20_000,
+    ai_cost_max_estimated_usd_per_meeting: float | None = None,
     trace_enabled: bool = False,
     trace_directory: str = "evaluation/traces",
     meeting_context_mode: str = "assist",
@@ -2477,7 +2524,10 @@ def process_meeting_by_version(
     v1_result = None
     if pipeline_version in {"v1", "shadow"}:
         v1_result = process_meeting(
-            meeting, ai_client, speaker_aliases, summary_topic, ai_max_batch_context_clauses,
+            meeting, ai_client, speaker_aliases, summary_topic,
+            ai_max_batch_context_clauses,
+            ai_cost_gate_mode, ai_cost_max_provider_calls_per_meeting,
+            ai_cost_max_payload_characters, ai_cost_max_estimated_usd_per_meeting,
             trace_enabled=trace_enabled, trace_directory=trace_directory,
             meeting_context_mode=meeting_context_mode,
             note_grounding_threshold=note_grounding_threshold,
