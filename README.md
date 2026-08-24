@@ -555,3 +555,26 @@ calls a provider or changes output. Run it with all four prerequisite modes in
 Router hợp nhất rule/classifier/note evidence thành route có reasons, nhưng PR4
 không execute bất kỳ route nào. `AI_CREATE_CHECK` chỉ tăng suppressed diagnostics;
 AI create vẫn tắt và final task output vẫn do pipeline hiện tại quyết định.
+
+### Quality oracle evidence (PR #29)
+
+PR #29 pins the Q2-assist baseline to explicit expected-task evidence and a
+reviewed error budget before V2 changes routing. It remains evaluation-only:
+none of these scripts are imported by the production pipeline. Recreate the
+trace, evidence bundle, independent stage ceilings and gate as follows:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\analyze_quality_errors.py data\validation `
+  --action-candidate-builder-mode shadow --commitment-router-mode assist `
+  --output evaluation\runtime\q2-attribution.json `
+  --trace-directory evaluation\runtime\q2-traces
+
+.\.venv\Scripts\python.exe scripts\build_quality_oracle_review.py `
+  evaluation\runtime\q2-attribution.json --traces evaluation\runtime\q2-traces `
+  --output evaluation\runtime\q2-reviewed-evidence.json `
+  --oracle-output evaluation\runtime\q2-oracle-ceilings.json
+```
+
+The review gate also requires a complete Q7 shadow report with a valid
+classifier artifact and zero classifier/router errors. Its ceilings are
+independent intervention bounds, not claims of achieved model quality.
