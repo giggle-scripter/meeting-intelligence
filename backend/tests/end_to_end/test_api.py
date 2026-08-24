@@ -1,5 +1,7 @@
 from base64 import b64encode
 from datetime import date
+from pathlib import Path
+import time
 
 from fastapi.testclient import TestClient
 
@@ -214,6 +216,39 @@ def test_file_job_accepts_unicode_metadata_through_base64_headers() -> None:
 
     assert response.status_code == 202
     assert response.json()["created"] is True
+
+
+def test_power_automate_upload_package_completes_through_job_polling() -> None:
+    package = Path(
+        "data/power_automate_uploads/W1-SHORT-C1-N0-IT-DASG-ABS-002__with-note.txt"
+    )
+    # The job store creates an asyncio task, so its client must keep one
+    # application lifespan/event loop alive for both submit and polling.
+    with TestClient(app) as job_client:
+        response = job_client.post(
+            "/api/v1/meetings/jobs/process-file",
+            content=package.read_bytes(),
+            headers={
+                "Content-Type": "application/octet-stream",
+                "X-File-Name-Base64": b64encode(package.name.encode()).decode(),
+            },
+        )
+
+        assert response.status_code == 202
+        status_url = response.json()["status_url"]
+        deadline = time.monotonic() + 10.0
+        while time.monotonic() < deadline:
+            status = job_client.get(status_url)
+            if status.json()["status"] in {"succeeded", "failed"}:
+                break
+            time.sleep(0.02)
+        else:  # pragma: no cover - assertion explains a failed async contract
+            raise AssertionError("Power Automate job did not reach a terminal state")
+
+    body = status.json()
+    assert body["status"] == "succeeded"
+    assert body["result"]["meeting_title"] == "Theo dõi tiến độ tài liệu"
+    assert body["result"]["diagnostics"]["meeting_date_source"] == "PACKAGE_METADATA"
 
 
 def test_file_job_rejects_invalid_base64_metadata() -> None:

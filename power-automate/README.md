@@ -52,3 +52,14 @@ Các sửa bắt buộc trước demo:
 
 Contract JSON nằm trong `schemas/`: `job-submit.schema.json`,
 `job-status.schema.json`, `pipeline-output.schema.json`.
+
+Trước khi export/upload flow artifact, chạy regression package để xác nhận mọi
+file phẳng vẫn chứa transcript, Meeting Note và metadata khớp corpus nguồn:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\audit_power_automate_uploads.py `
+  --report evaluation\power-automate-upload-audit.json
+```
+
+Audit này kiểm 86 source cases/172 variants hiện tại; không dùng expected task
+count làm transport gate. Quality vẫn được đánh giá bằng evaluator riêng.
