@@ -13,14 +13,14 @@ def _bundle() -> dict:
     return {
         "schema_version": "quality-oracle-review-v2",
         "expected_tasks": [{
-            "case_id": "CASE", "expected_task_index": 0, "status": "CONFIRMED",
+            "case_id": "CASE", "expected_task_index": 0, "review_status": "HUMAN_CONFIRMED", "reviewer": "QA",
             "source_clause_ids": ["C-1"], "authority": "DIRECT_ASSIGNMENT",
             "action_spans": [{"clause_id": "C-1", "start": 0, "end": 4}],
         }],
         "error_reviews": [
-            {"attribution_record_id": "M-1", "kind": "MISSING", "category": "SOURCE_CANDIDATE_ROUTED_DROP", "status": "CONFIRMED"},
-            {"attribution_record_id": "U-1", "kind": "UNEXPECTED", "category": "FALSE_SOURCE_CANDIDATE", "status": "CONFIRMED"},
-            {"attribution_record_id": "F-1", "kind": "FIELD_ERROR", "category": "FIELD_DUE_DATE_MISMATCH", "status": "CONFIRMED"},
+            {"attribution_record_id": "M-1", "kind": "MISSING", "category": "SOURCE_CANDIDATE_ROUTED_DROP", "review_status": "HUMAN_CONFIRMED", "reviewer": "QA"},
+            {"attribution_record_id": "U-1", "kind": "UNEXPECTED", "category": "FALSE_SOURCE_CANDIDATE", "review_status": "HUMAN_CONFIRMED", "reviewer": "QA"},
+            {"attribution_record_id": "F-1", "kind": "FIELD_ERROR", "category": "FIELD_DUE_DATE_MISMATCH", "review_status": "HUMAN_CONFIRMED", "reviewer": "QA"},
         ],
     }
 
@@ -40,7 +40,7 @@ def test_review_bundle_handles_repeated_legacy_record_ids_by_occurrence() -> Non
     duplicated = _bundle()
     duplicated["error_reviews"].append({
         "attribution_record_id": "U-1", "kind": "UNEXPECTED",
-        "category": "FALSE_SOURCE_CANDIDATE", "status": "CONFIRMED",
+        "category": "FALSE_SOURCE_CANDIDATE", "review_status": "HUMAN_CONFIRMED", "reviewer": "QA",
     })
 
     assert validate_review_bundle(duplicated, expected_task_count=1, baseline_records=records) == []

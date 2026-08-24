@@ -110,8 +110,8 @@ def _expected_reviews(report: dict[str, Any], traces: Path, dataset: Path) -> li
                 "deadline_mention_ids": _deadline_ids(task, dates),
                 "lifecycle_clause_ids": [],
                 "recap_clause_ids": [primary] if "tổng kết" in _normalize(source_text) else [],
-                "status": "CONFIRMED",
-                "review_basis": "TRANSCRIPT_AND_FINAL_STATE_AUDIT",
+                "review_status": "SUGGESTED",
+                "review_basis": "LEXICAL_TRACE_SUGGESTION_ONLY",
             })
     return result
 
@@ -131,8 +131,8 @@ def _error_reviews(report: dict[str, Any]) -> list[dict[str, Any]]:
             "source_clause_ids": [
                 item["clause_id"] for item in record.get("suggested_source_evidence", [])
             ],
-            "status": "CONFIRMED",
-            "review_basis": "Q2_TRACE_PROVENANCE_AUDIT",
+            "review_status": "SUGGESTED",
+            "review_basis": "Q2_TRACE_HEURISTIC_SUGGESTION_ONLY",
         })
     return rows
 

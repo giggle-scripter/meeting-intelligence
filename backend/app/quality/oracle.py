@@ -72,8 +72,8 @@ def validate_review_bundle(
         elif key in expected_keys:
             errors.append(f"duplicate expected evidence for {key[0]}[{key[1]}]")
         expected_keys.add(key)
-        if row.get("status") != "CONFIRMED":
-            errors.append(f"expected evidence {key[0]}[{key[1]}] is not CONFIRMED")
+        if row.get("review_status") != "HUMAN_CONFIRMED" or not str(row.get("reviewer", "")).strip():
+            errors.append(f"expected evidence {key[0]}[{key[1]}] is not human-confirmed")
         if not row.get("source_clause_ids"):
             errors.append(f"expected evidence {key[0]}[{key[1]}] has no source clause")
         for span in row.get("action_spans", []):
@@ -103,8 +103,8 @@ def validate_review_bundle(
         if record_id not in baseline_by_kind[kind]:
             errors.append(f"error review references stale or unknown {kind} record {record_id}")
         review_ids[kind][record_id] += 1
-        if row.get("status") != "CONFIRMED":
-            errors.append(f"error review {record_id} is not CONFIRMED")
+        if row.get("review_status") != "HUMAN_CONFIRMED" or not str(row.get("reviewer", "")).strip():
+            errors.append(f"error review {record_id} is not human-confirmed")
         if not row.get("category"):
             errors.append(f"error review {record_id} has no category")
     for kind, baseline_ids in baseline_by_kind.items():
