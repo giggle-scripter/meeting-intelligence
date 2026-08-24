@@ -117,6 +117,40 @@ def validate_review_bundle(
     return errors
 
 
+def validate_grounded_task_evidence(
+    rows: list[dict[str, Any]], traces: dict[str, dict[str, Any]],
+) -> list[str]:
+    """Validate role-specific human evidence against immutable trace text."""
+    errors: list[str] = []
+    for row in rows:
+        key = f"{row.get('case_id', '')}[{row.get('expected_task_index', '')}]"
+        trace = traces.get(str(row.get("case_id", "")), {})
+        clauses = {item.get("clause_id"): item for item in trace.get("clauses", [])}
+        dates = trace.get("date_mentions", {})
+        action = row.get("action_evidence") or {}
+        clause = clauses.get(action.get("clause_id"))
+        start, end = action.get("start"), action.get("end")
+        if not clause or not isinstance(start, int) or not isinstance(end, int):
+            errors.append(f"{key}: action evidence is not grounded")
+        elif start < 0 or end <= start or end > len(clause.get("text_raw", "")) or action.get("text") != clause["text_raw"][start:end]:
+            errors.append(f"{key}: action span does not match raw transcript")
+        authority = row.get("authority_evidence") or {}
+        if not authority.get("clause_id") or authority.get("clause_id") not in clauses or not authority.get("type"):
+            errors.append(f"{key}: authority evidence is invalid")
+        owner = row.get("owner_evidence")
+        if owner and (owner.get("clause_id") not in clauses or owner.get("basis") == "TASK_FINAL_STATE"):
+            errors.append(f"{key}: owner evidence is invalid")
+        deadline = row.get("deadline_evidence")
+        if deadline:
+            mention = dates.get(deadline.get("mention_id"), {})
+            if not mention or mention.get("clause_id") != deadline.get("clause_id"):
+                errors.append(f"{key}: deadline evidence is invalid")
+        if row.get("review_status") == "HUMAN_CONFIRMED":
+            if not row.get("reviewer") or not row.get("reviewed_at") or "SUGGESTION" in str(row.get("review_basis", "")):
+                errors.append(f"{key}: human confirmation metadata is invalid")
+    return errors
+
+
 def _stage_count(reviews: list[dict[str, Any]], *, kind: str, stage: str) -> int:
     mapping = _MISSING_STAGE if kind == "MISSING" else _UNEXPECTED_STAGE
     return sum(

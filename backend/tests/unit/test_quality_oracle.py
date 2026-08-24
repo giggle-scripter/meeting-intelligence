@@ -1,4 +1,4 @@
-from backend.app.quality.oracle import build_oracle_report, validate_review_bundle
+from backend.app.quality.oracle import build_oracle_report, validate_grounded_task_evidence, validate_review_bundle
 
 
 def _baseline_records() -> list[dict]:
@@ -58,3 +58,11 @@ def test_oracle_reports_stage_specific_accounting_ceiling() -> None:
     assert candidate["actual_task_count"] == 13
     assert authority["matched_task_count"] == 6
     assert authority["actual_task_count"] == 11
+
+
+def test_grounded_evidence_rejects_broad_or_stale_spans() -> None:
+    row = {"case_id": "CASE", "expected_task_index": 0, "action_evidence": {"clause_id": "C-1", "start": 0, "end": 4, "text": "làm x"}, "authority_evidence": {"clause_id": "C-1", "type": "DIRECT_ASSIGNMENT"}, "review_status": "HUMAN_CONFIRMED", "reviewer": "QA", "reviewed_at": "2026-08-24T10:00:00Z", "review_basis": "TRANSCRIPT_AUDIT"}
+    traces = {"CASE": {"clauses": [{"clause_id": "C-1", "text_raw": "làm x"}], "date_mentions": {}}}
+    assert validate_grounded_task_evidence([row], traces) == []
+    row["action_evidence"]["text"] = "wrong"
+    assert "CASE[0]: action span does not match raw transcript" in validate_grounded_task_evidence([row], traces)
