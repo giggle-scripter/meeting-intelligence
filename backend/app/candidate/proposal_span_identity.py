@@ -9,7 +9,7 @@ from pydantic import BaseModel, ConfigDict
 
 from backend.app.models import Clause, ClauseAnnotation
 
-from .action_candidates import GroundedSpan, extract_action_span
+from .action_candidates import GroundedSpan, extract_action_spans
 from .evidence_seeds import EvidenceSeed
 from .proposal_clusters import ProposalCluster, ProposalKind
 
@@ -52,19 +52,29 @@ def build_proposal_span_identities(
         if cluster.nucleus_seed_id not in seed_ids:
             raise ValueError(f"cluster {cluster.cluster_id} has an unknown nucleus seed")
         clause = clauses_by_id[cluster.nucleus_clause_id]
-        span = extract_action_span(clause, annotations[clause.clause_id])
-        normalized = _normalize_action(span.text) if span else ""
-        is_create = cluster.proposal_kind is ProposalKind.CREATE and span is not None
-        kind = ProposalKind.CREATE if is_create else ProposalKind.REFERENCE
-        result.append(
-            ProposalSpanIdentity(
-                cluster_id=cluster.cluster_id,
-                primary_clause_id=clause.clause_id,
-                proposal_kind=kind,
-                state="PROPOSED" if is_create else "REFERENCE",
-                identity_key=_identity_key(kind, clause.clause_id, normalized),
-                normalized_action=normalized,
-                action_span=span,
+        spans = extract_action_spans(clause, annotations[clause.clause_id])
+        if cluster.proposal_kind is ProposalKind.CREATE and spans:
+            for span in spans:
+                normalized = _normalize_action(span.text)
+                result.append(
+                    ProposalSpanIdentity(
+                        cluster_id=cluster.cluster_id,
+                        primary_clause_id=clause.clause_id,
+                        proposal_kind=ProposalKind.CREATE,
+                        state="PROPOSED",
+                        identity_key=_identity_key(ProposalKind.CREATE, clause.clause_id, normalized),
+                        normalized_action=normalized,
+                        action_span=span,
+                    )
+                )
+        else:
+            result.append(
+                ProposalSpanIdentity(
+                    cluster_id=cluster.cluster_id,
+                    primary_clause_id=clause.clause_id,
+                    proposal_kind=ProposalKind.REFERENCE,
+                    state="REFERENCE",
+                    identity_key=_identity_key(ProposalKind.REFERENCE, clause.clause_id, ""),
+                )
             )
-        )
     return result
