@@ -10,11 +10,17 @@ from pathlib import Path
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("reviewed_jsonl", type=Path)
+    parser.add_argument("--override", type=Path, action="append", default=[])
     parser.add_argument("--output", type=Path, default=Path("data/quality/task-evidence-v2.jsonl"))
     args = parser.parse_args()
     raw_rows = [json.loads(line) for line in args.reviewed_jsonl.read_text(encoding="utf-8").splitlines() if line.strip()]
+    overrides = {}
+    for path in args.override:
+        item = json.loads(path.read_text(encoding="utf-8"))
+        overrides[(item["case_id"], item["expected_task_index"])] = item
     rows = []
     for row in raw_rows:
+        row = {**row, **overrides.get((row.get("case_id"), row.get("expected_task_index")), {})}
         action = {
             "clause_id": row.get("action_clause_id", ""), "text": row.get("action_text", ""),
             "start": int(row.get("action_start", -1)), "end": int(row.get("action_end", -1)),

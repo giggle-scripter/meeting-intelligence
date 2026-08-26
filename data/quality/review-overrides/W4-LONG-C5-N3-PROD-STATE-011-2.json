@@ -1,0 +1,17 @@
+{
+  "case_id": "W4-LONG-C5-N3-PROD-STATE-011",
+  "expected_task_index": 2,
+  "action_clause_id": "CLAUSE-000399",
+  "action_text": "thiết lập monitoring",
+  "action_start": "27",
+  "action_end": "47",
+  "authority_clause_id": "CLAUSE-000399",
+  "authority_type": "DIRECT_ASSIGNMENT",
+  "owner_clause_id": "CLAUSE-000399",
+  "owner_participant": "DevLead",
+  "deadline_clause_id": "CLAUSE-000604",
+  "deadline_mention_id": "DATE-000077",
+  "proposal_kind": "CREATE",
+  "review_note": "Source-grounded correction: C399 creates and assigns monitoring; C604 final recap confirms Monday deadline.",
+  "review_basis": "TRANSCRIPT_AUDIT"
+}
