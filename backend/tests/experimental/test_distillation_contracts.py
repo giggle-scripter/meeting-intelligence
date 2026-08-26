@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-import importlib
 import json
 from pathlib import Path
+import subprocess
 import sys
 
 import pytest
@@ -48,9 +48,10 @@ def test_output_paths_fail_closed_outside_locked_roots(tmp_path: Path) -> None:
 
 
 def test_experiment_import_does_not_eagerly_import_ml_frameworks() -> None:
-    for name in [name for name in sys.modules if name == "torch" or name.startswith("transformers")]:
-        sys.modules.pop(name)
-    module = importlib.reload(importlib.import_module("experiments.distilled_proposal_ranker"))
-    assert module is not None
-    assert "torch" not in sys.modules
-    assert not any(name.startswith("transformers") for name in sys.modules)
+    script = (
+        "import sys; import experiments.distilled_proposal_ranker; "
+        "assert 'torch' not in sys.modules; "
+        "assert not any(name.startswith('transformers') for name in sys.modules)"
+    )
+    completed = subprocess.run([sys.executable, "-c", script], check=False, capture_output=True, text=True)
+    assert completed.returncode == 0, completed.stderr

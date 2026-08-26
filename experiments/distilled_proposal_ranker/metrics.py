@@ -1,0 +1,34 @@
+"""Deterministic span and ranking metric primitives."""
+
+from __future__ import annotations
+
+from typing import Iterable
+
+from .contracts import GroundedSpan
+
+
+def prf(matched: int, predicted: int, expected: int) -> dict[str, float]:
+    precision = matched / predicted if predicted else 0.0
+    recall = matched / expected if expected else 0.0
+    f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+    return {"precision": precision, "recall": recall, "f1": f1}
+
+
+def token_prf(predictions: Iterable[list[int]], labels: Iterable[list[int]]) -> dict[str, float]:
+    true_positive = predicted_positive = expected_positive = 0
+    for predicted, expected in zip(predictions, labels, strict=True):
+        for left, right in zip(predicted, expected, strict=True):
+            if right == -100:
+                continue
+            left_positive = left in (1, 2)
+            right_positive = right in (1, 2)
+            predicted_positive += int(left_positive)
+            expected_positive += int(right_positive)
+            true_positive += int(left_positive and right_positive)
+    return prf(true_positive, predicted_positive, expected_positive)
+
+
+def exact_span_prf(predicted: Iterable[tuple[str, GroundedSpan]], expected: Iterable[tuple[str, GroundedSpan]]) -> dict[str, float]:
+    predicted_set = {(case_id, item.clause_id, item.start, item.end, item.text) for case_id, item in predicted}
+    expected_set = {(case_id, item.clause_id, item.start, item.end, item.text) for case_id, item in expected}
+    return prf(len(predicted_set & expected_set), len(predicted_set), len(expected_set))
