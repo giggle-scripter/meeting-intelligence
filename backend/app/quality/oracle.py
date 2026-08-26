@@ -72,8 +72,8 @@ def validate_review_bundle(
         elif key in expected_keys:
             errors.append(f"duplicate expected evidence for {key[0]}[{key[1]}]")
         expected_keys.add(key)
-        if row.get("status") != "CONFIRMED":
-            errors.append(f"expected evidence {key[0]}[{key[1]}] is not CONFIRMED")
+        if row.get("review_status") != "HUMAN_CONFIRMED" or not str(row.get("reviewer", "")).strip():
+            errors.append(f"expected evidence {key[0]}[{key[1]}] is not human-confirmed")
         if not row.get("source_clause_ids"):
             errors.append(f"expected evidence {key[0]}[{key[1]}] has no source clause")
         for span in row.get("action_spans", []):
@@ -103,8 +103,8 @@ def validate_review_bundle(
         if record_id not in baseline_by_kind[kind]:
             errors.append(f"error review references stale or unknown {kind} record {record_id}")
         review_ids[kind][record_id] += 1
-        if row.get("status") != "CONFIRMED":
-            errors.append(f"error review {record_id} is not CONFIRMED")
+        if row.get("review_status") != "HUMAN_CONFIRMED" or not str(row.get("reviewer", "")).strip():
+            errors.append(f"error review {record_id} is not human-confirmed")
         if not row.get("category"):
             errors.append(f"error review {record_id} has no category")
     for kind, baseline_ids in baseline_by_kind.items():
@@ -114,6 +114,71 @@ def validate_review_bundle(
             errors.append(f"{kind} reviews missing {sum(missing.values())} baseline records")
         if extra:
             errors.append(f"{kind} reviews contain {sum(extra.values())} unknown baseline records")
+    return errors
+
+
+def validate_grounded_task_evidence(
+    rows: list[dict[str, Any]], traces: dict[str, dict[str, Any]],
+) -> list[str]:
+    """Validate role-specific human evidence against immutable trace text."""
+    errors: list[str] = []
+    for row in rows:
+        key = f"{row.get('case_id', '')}[{row.get('expected_task_index', '')}]"
+        trace = traces.get(str(row.get("case_id", "")), {})
+        clauses = {item.get("clause_id"): item for item in trace.get("clauses", [])}
+        dates = trace.get("date_mentions", {})
+        action = row.get("action_evidence") or {}
+        clause = clauses.get(action.get("clause_id"))
+        start, end = action.get("start"), action.get("end")
+        if not clause or not isinstance(start, int) or not isinstance(end, int):
+            errors.append(f"{key}: action evidence is not grounded")
+        elif start < 0 or end <= start or end > len(clause.get("text_raw", "")) or action.get("text") != clause["text_raw"][start:end]:
+            errors.append(f"{key}: action span does not match raw transcript")
+        authority = row.get("authority_evidence") or {}
+        if not authority.get("clause_id") or authority.get("clause_id") not in clauses or not authority.get("type"):
+            errors.append(f"{key}: authority evidence is invalid")
+        owner = row.get("owner_evidence")
+        if owner and (owner.get("clause_id") not in clauses or owner.get("basis") == "TASK_FINAL_STATE"):
+            errors.append(f"{key}: owner evidence is invalid")
+        deadline = row.get("deadline_evidence")
+        if deadline:
+            mention = dates.get(deadline.get("mention_id"), {})
+            if not mention or mention.get("clause_id") != deadline.get("clause_id"):
+                errors.append(f"{key}: deadline evidence is invalid")
+        if row.get("review_status") == "HUMAN_CONFIRMED":
+            if not row.get("reviewer") or not row.get("reviewed_at") or "SUGGESTION" in str(row.get("review_basis", "")):
+                errors.append(f"{key}: human confirmation metadata is invalid")
+    return errors
+
+
+def validate_task_evidence_coverage(
+    rows: list[dict[str, Any]], expected_keys: set[tuple[str, int]],
+) -> list[str]:
+    """Ensure reviewed evidence covers the immutable validation task inventory."""
+
+    errors: list[str] = []
+    actual_keys: set[tuple[str, int]] = set()
+    for row in rows:
+        case_id = str(row.get("case_id", ""))
+        try:
+            task_index = int(row.get("expected_task_index", -1))
+        except (TypeError, ValueError):
+            task_index = -1
+        key = (case_id, task_index)
+        if not case_id or task_index < 0:
+            errors.append("task evidence has invalid case_id or expected_task_index")
+            continue
+        if key in actual_keys:
+            errors.append(f"duplicate task evidence for {case_id}[{task_index}]")
+        actual_keys.add(key)
+        if row.get("review_status") != "HUMAN_CONFIRMED":
+            errors.append(f"{case_id}[{task_index}]: review is not human-confirmed")
+    missing = expected_keys - actual_keys
+    extra = actual_keys - expected_keys
+    if missing:
+        errors.append(f"task evidence missing {len(missing)} expected task(s)")
+    if extra:
+        errors.append(f"task evidence contains {len(extra)} unknown task(s)")
     return errors
 
 

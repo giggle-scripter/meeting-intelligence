@@ -9,7 +9,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from backend.app.quality.oracle import validate_review_bundle
+from backend.app.quality.oracle import validate_grounded_task_evidence, validate_review_bundle
 
 
 def _expected_count(dataset: Path) -> int:
@@ -50,6 +50,7 @@ def main() -> int:
     parser.add_argument("--attribution-report", type=Path, required=True)
     parser.add_argument("--q7-report", type=Path, required=True)
     parser.add_argument("--dataset", type=Path, default=Path("data/validation"))
+    parser.add_argument("--traces", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     bundle = json.loads(args.review.read_text(encoding="utf-8"))
@@ -61,6 +62,13 @@ def main() -> int:
         baseline_records=list(report.get("records", [])),
     )
     errors.extend(_q7_errors(q7_report))
+    traces = {}
+    for row in bundle.get("expected_tasks", []):
+        case_id = row.get("case_id", "")
+        matches = list(args.traces.glob(f"{case_id}-v1-*.json"))
+        if len(matches) == 1:
+            traces[case_id] = json.loads(matches[0].read_text(encoding="utf-8"))
+    errors.extend(validate_grounded_task_evidence(bundle.get("expected_tasks", []), traces))
     payload = {
         "schema_version": "quality-oracle-review-gate-v2",
         "passed": not errors,

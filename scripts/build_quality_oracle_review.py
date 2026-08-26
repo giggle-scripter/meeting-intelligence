@@ -110,8 +110,8 @@ def _expected_reviews(report: dict[str, Any], traces: Path, dataset: Path) -> li
                 "deadline_mention_ids": _deadline_ids(task, dates),
                 "lifecycle_clause_ids": [],
                 "recap_clause_ids": [primary] if "tổng kết" in _normalize(source_text) else [],
-                "status": "CONFIRMED",
-                "review_basis": "TRANSCRIPT_AND_FINAL_STATE_AUDIT",
+                "review_status": "SUGGESTED",
+                "review_basis": "LEXICAL_TRACE_SUGGESTION_ONLY",
             })
     return result
 
@@ -131,8 +131,8 @@ def _error_reviews(report: dict[str, Any]) -> list[dict[str, Any]]:
             "source_clause_ids": [
                 item["clause_id"] for item in record.get("suggested_source_evidence", [])
             ],
-            "status": "CONFIRMED",
-            "review_basis": "Q2_TRACE_PROVENANCE_AUDIT",
+            "review_status": "SUGGESTED",
+            "review_basis": "Q2_TRACE_HEURISTIC_SUGGESTION_ONLY",
         })
     return rows
 
@@ -143,7 +143,8 @@ def main() -> None:
     parser.add_argument("--traces", type=Path, required=True)
     parser.add_argument("--dataset", type=Path, default=Path("data/validation"))
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--oracle-output", type=Path, required=True)
+    parser.add_argument("--oracle-output", type=Path)
+    parser.add_argument("--allow-provisional-oracle", action="store_true")
     args = parser.parse_args()
 
     report_bytes = args.attribution_report.read_bytes()
@@ -161,10 +162,14 @@ def main() -> None:
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(bundle, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    oracle = build_oracle_report(report["final_metrics"], bundle)
-    oracle["baseline_attribution_sha256"] = bundle["baseline_attribution_sha256"]
-    args.oracle_output.parent.mkdir(parents=True, exist_ok=True)
-    args.oracle_output.write_text(json.dumps(oracle, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if args.oracle_output:
+        if not args.allow_provisional_oracle:
+            raise ValueError("oracle output requires --allow-provisional-oracle; SUGGESTED evidence is not official")
+        oracle = build_oracle_report(report["final_metrics"], bundle)
+        oracle["status"] = "PROVISIONAL_UNREVIEWED"
+        oracle["baseline_attribution_sha256"] = bundle["baseline_attribution_sha256"]
+        args.oracle_output.parent.mkdir(parents=True, exist_ok=True)
+        args.oracle_output.write_text(json.dumps(oracle, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(
         f"Quality review: expected={len(bundle['expected_tasks'])} "
         f"errors={len(bundle['error_reviews'])} output={args.output}"
