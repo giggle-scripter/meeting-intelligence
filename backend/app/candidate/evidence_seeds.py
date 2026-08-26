@@ -17,6 +17,7 @@ class EvidenceSeed(BaseModel):
     clause_id: str
     turn_id: str
     speaker_name: str
+    order_index: int
     roles: tuple[SeedRole, ...]=Field(min_length=1)
     flags: tuple[str, ...]=()
     date_mention_ids: tuple[str, ...]=()
@@ -46,5 +47,5 @@ def build_evidence_seeds(clauses:list[Clause], annotations:dict[str,ClauseAnnota
         if _RECAP.search(clause.text_raw): roles.add(SeedRole.RECAP)
         if _REFERENCE.search(clause.text_raw): roles.add(SeedRole.TASK_REFERENCE)
         if roles:
-            result.append(EvidenceSeed(seed_id=f"SEED-{clause.clause_id}",clause_id=clause.clause_id,turn_id=clause.sentence_id,speaker_name=clause.speaker_name,roles=tuple(sorted(roles,key=lambda x:x.value)),flags=tuple(sorted(flags)),date_mention_ids=tuple(sorted(dates.get(clause.clause_id,[]))),rule_score=annotation.rule_confidence))
+            result.append(EvidenceSeed(seed_id=f"SEED-{clause.clause_id}",clause_id=clause.clause_id,turn_id=clause.sentence_id,speaker_name=clause.speaker_name,order_index=clause.order_index,roles=tuple(sorted(roles,key=lambda x:x.value)),flags=tuple(sorted(flags)),date_mention_ids=tuple(sorted(dates.get(clause.clause_id,[]))),rule_score=annotation.rule_confidence))
     return result

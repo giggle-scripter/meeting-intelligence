@@ -1043,6 +1043,8 @@ def process_meeting(
             action_classifier_error_count = 1
     action_candidates_shadow = []
     evidence_seeds_shadow = []
+    proposal_relations_shadow = []
+    proposal_clusters_shadow = []
     action_candidate_builder_error_count = 0
     if action_candidate_builder_mode == "shadow" or commitment_router_mode != "off":
         try:
@@ -1061,6 +1063,10 @@ def process_meeting(
             if action_candidate_builder_version == "action-proposal-v3":
                 from .candidate import build_evidence_seeds
                 evidence_seeds_shadow = build_evidence_seeds(clauses, annotations, mentions)
+                from .candidate import build_proposal_relations
+                proposal_relations_shadow = build_proposal_relations(evidence_seeds_shadow)
+                from .candidate import build_proposal_clusters
+                proposal_clusters_shadow = build_proposal_clusters(evidence_seeds_shadow, proposal_relations_shadow)
         except (KeyError, RuntimeError, TypeError, ValueError) as exc:
             LOGGER.warning("Action candidate builder shadow failed: %s", exc)
             action_candidate_builder_error_count = 1
@@ -2303,6 +2309,8 @@ def process_meeting(
                 "count": len(evidence_seeds_shadow),
                 "records": [item.model_dump(mode="json") for item in evidence_seeds_shadow],
             },
+            "proposal_relations_v3": {"count": len(proposal_relations_shadow), "records": [item.model_dump(mode="json") for item in proposal_relations_shadow]},
+            "proposal_clusters_v3": {"count": len(proposal_clusters_shadow), "records": [item.model_dump(mode="json") for item in proposal_clusters_shadow]},
             "commitment_router_v2": {
                 "mode": commitment_router_mode,
                 "version": commitment_router_version,
