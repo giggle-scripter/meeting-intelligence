@@ -22,4 +22,4 @@ def test_relations_keep_deadline_relation_when_clause_is_also_an_acceptance() ->
         _seed(1, (SeedRole.ACTION,)),
         _seed(2, (SeedRole.ACCEPTANCE, SeedRole.DEADLINE)),
     ])
-    assert any(item.relation_type is RelationType.HAS_DEADLINE for item in rows)
+    assert {item.relation_type for item in rows} >= {RelationType.ACCEPTS, RelationType.HAS_DEADLINE}

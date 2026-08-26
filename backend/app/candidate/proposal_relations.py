@@ -46,4 +46,8 @@ def build_proposal_relations(seeds:list[EvidenceSeed], *, local_clause_radius:in
             radius=local_clause_radius if scope is RelationScope.LOCAL else (response_clause_radius if scope is RelationScope.RESPONSE else same_speaker_follow_up_radius)
             score=round(1.0-(distance/(radius+1))*0.25,3)
             result.append(ProposalRelation(relation_type=typ,nucleus_seed_id=nucleus.seed_id,support_seed_id=support.seed_id,distance=distance,score=score,scope=scope))
+            if SeedRole.DEADLINE in support.roles and typ is not RelationType.HAS_DEADLINE:
+                result.append(ProposalRelation(relation_type=RelationType.HAS_DEADLINE,nucleus_seed_id=nucleus.seed_id,support_seed_id=support.seed_id,distance=distance,score=score,scope=scope))
+            if SeedRole.ACCEPTANCE in support.roles and typ is not RelationType.ACCEPTS and support.order_index>=nucleus.order_index and distance<=response_clause_radius:
+                result.append(ProposalRelation(relation_type=RelationType.ACCEPTS,nucleus_seed_id=nucleus.seed_id,support_seed_id=support.seed_id,distance=distance,score=score,scope=RelationScope.RESPONSE))
     return result
