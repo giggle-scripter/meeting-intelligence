@@ -41,7 +41,7 @@ def test_builder_links_question_then_acceptance_without_creating_from_question_a
     assert len(candidates) == 1
     assert candidates[0].state is CandidateState.ACCEPTED
     assert candidates[0].primary_clause_ids == ("C-1", "C-2")
-    assert candidates[0].action_spans[0].text == "làm báo cáo được không"
+    assert candidates[0].action_spans[0].text == "làm báo cáo"
 
 
 def test_builder_keeps_negative_action_like_sentence_non_create() -> None:

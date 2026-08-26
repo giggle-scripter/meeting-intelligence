@@ -89,27 +89,64 @@ _DIRECT_ASSIGNMENT_RE = re.compile(
     r"kiểm tra|cập nhật|phân tích|triển khai|fix|sửa|làm)\b.+)", re.I,
 )
 _TRAILER_RE = re.compile(r"\s*(?:,|;)?\s*(?:trước|vào|đến|deadline|hạn(?:\s+chót)?|by|on)\b.*$", re.I)
+_ACTION_VERB_RE = re.compile(
+    r"\b(?:hoàn thành|chuẩn bị|viết|gửi|review|kiểm tra|cập nhật|phân tích|"
+    r"triển khai|fix|sửa|làm|hỗ trợ|setup|soạn|tạo|cấp|cài đặt|xác định|"
+    r"test|chụp|khảo sát|debug|thiết lập|cấu hình)\b",
+    re.I,
+)
+_ACTION_STOP_RE = re.compile(
+    r"(?=\s*(?:,\s*(?:vì|chứ|mà|để)\b|[,;]\s*(?:deadline|hạn)\b|"
+    r"\s+(?:trước|vào|đến|deadline|hạn(?:\s+chót)?|trong|ngày|thứ)\b|"
+    r"\s+(?:nhé|nhá|ạ|đi)\b|\s+(?:được không|thế nào)\b|\s*[.?!;]|"
+    r"\s*(?:–|-)\s*deadline\b|\s+và\s+(?:hoàn thành|chuẩn bị|viết|gửi|"
+    r"review|kiểm tra|cập nhật|phân tích|triển khai|fix|sửa|làm|test)\b))",
+    re.I,
+)
 
 
 def _candidate_id(primary_ids: tuple[str, ...], action: str) -> str:
     return "ACAND-" + sha256("|".join((*primary_ids, action.casefold().strip())).encode("utf-8")).hexdigest()[:16]
 
 
-def _action_span(clause: Clause, annotation: ClauseAnnotation) -> GroundedSpan | None:
+def _span_from_action_match(clause: Clause, start: int) -> GroundedSpan | None:
     text = clause.text_raw
-    match = _ACTION_PREFIX_RE.search(text)
-    if match:
-        start = match.end()
-        action = _TRAILER_RE.sub("", text[start:]).strip(" ,.;:!?")
-        if action:
-            return GroundedSpan(clause_id=clause.clause_id, start=start, end=start + len(action), text=action)
+    suffix = text[start:]
+    stop = _ACTION_STOP_RE.search(suffix)
+    end = start + (stop.start() if stop else len(suffix))
+    action = text[start:end].strip(" ,.;:!?")
+    if not action:
+        return None
+    offset = text.find(action, start, end)
+    return GroundedSpan(clause_id=clause.clause_id, start=offset, end=offset + len(action), text=action)
+
+
+def extract_action_spans(clause: Clause, annotation: ClauseAnnotation) -> tuple[GroundedSpan, ...]:
+    """Return every independently bounded action phrase present in a clause."""
+
+    text = clause.text_raw
+    spans: list[GroundedSpan] = []
+    for match in _ACTION_VERB_RE.finditer(text):
+        span = _span_from_action_match(clause, match.start())
+        if span and span not in spans:
+            spans.append(span)
     assignment = _DIRECT_ASSIGNMENT_RE.search(text)
     if assignment and annotation.flags & {"DIRECT_ASSIGNMENT", "ROOT_QUESTION"}:
-        start, end = assignment.span("action")
-        action = _TRAILER_RE.sub("", text[start:end]).strip(" ,.;:!?")
-        if action:
-            return GroundedSpan(clause_id=clause.clause_id, start=start, end=start + len(action), text=action)
-    return None
+        span = _span_from_action_match(clause, assignment.start("action"))
+        if span and span not in spans:
+            spans.append(span)
+    return tuple(spans)
+
+
+def extract_action_span(clause: Clause, annotation: ClauseAnnotation) -> GroundedSpan | None:
+    spans = extract_action_spans(clause, annotation)
+    return spans[0] if spans else None
+
+
+def _action_span(clause: Clause, annotation: ClauseAnnotation) -> GroundedSpan | None:
+    """Backward-compatible private alias for the V2 candidate builder."""
+
+    return extract_action_span(clause, annotation)
 
 
 def _owner_span(clause: Clause) -> GroundedSpan | None:
