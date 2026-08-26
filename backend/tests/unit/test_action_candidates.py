@@ -1,6 +1,6 @@
 from dataclasses import asdict
 
-from backend.app.candidate import CandidateState, build_action_candidates, build_action_proposals_v3
+from backend.app.candidate import CandidateState, build_action_candidates, build_action_proposals_v3, extract_action_spans
 from backend.app.models import Clause, ClauseAnnotation, DateMention, MeetingInput
 from backend.app.pipeline import process_meeting
 
@@ -42,6 +42,14 @@ def test_builder_links_question_then_acceptance_without_creating_from_question_a
     assert candidates[0].state is CandidateState.ACCEPTED
     assert candidates[0].primary_clause_ids == ("C-1", "C-2")
     assert candidates[0].action_spans[0].text == "làm báo cáo"
+
+
+def test_extract_action_spans_stops_at_a_quoted_task_boundary() -> None:
+    clause = _clause("C-1", 'Vậy task: “Xử lý lỗi đăng nhập LDAP” – Bình.', 0)
+
+    spans = extract_action_spans(clause, ClauseAnnotation("C-1", {"ACTION_VERB"}))
+
+    assert [item.text for item in spans] == ["Xử lý lỗi đăng nhập LDAP"]
 
 
 def test_builder_keeps_negative_action_like_sentence_non_create() -> None:

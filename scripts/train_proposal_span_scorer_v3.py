@@ -69,26 +69,30 @@ def main() -> int:
     args = parser.parse_args()
     rows = [json.loads(line) for line in args.corpus.read_text(encoding="utf-8").splitlines() if line.strip()]
     train = [row for row in rows if row["split"] == "train"]
-    heldout = [row for row in rows if row["split"] == "held_out"]
+    calibration = [row for row in rows if row["split"] == "calibration"]
+    test = [row for row in rows if row["split"] == "test"]
     weights, intercept = _fit(train)
     candidates = [index / 20 for index in range(1, 20)]
-    threshold = max(candidates, key=lambda value: (_metrics(train, weights, intercept, value)["f1"], value))
+    threshold = max(candidates, key=lambda value: (_metrics(calibration, weights, intercept, value)["f1"], value))
     payload = {
-        "schema_version": "proposal-span-logistic-scorer-v3",
+        "schema_version": "proposal-span-logistic-scorer-v4",
         "corpus_sha256": sha256(args.corpus.read_bytes()).hexdigest(),
         "training_split": "W1,W2,W3",
-        "heldout_split": "W4,W5",
+        "calibration_split": "W4",
+        "test_split": "W5",
         "feature_count": len(weights),
         "threshold": threshold,
         "intercept": intercept,
         "weights": dict(sorted(weights.items())),
         "train_metrics": _metrics(train, weights, intercept, threshold),
-        "heldout_metrics": _metrics(heldout, weights, intercept, threshold),
-        "heldout_was_not_used_for_training_or_threshold_selection": True,
+        "calibration_metrics": _metrics(calibration, weights, intercept, threshold),
+        "test_metrics": _metrics(test, weights, intercept, threshold),
+        "calibration_was_not_used_for_training": True,
+        "test_was_not_used_for_training_or_threshold_selection": True,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Proposal span scorer: threshold={threshold:.2f} train_f1={payload['train_metrics']['f1']:.3f} heldout_f1={payload['heldout_metrics']['f1']:.3f}")
+    print(f"Proposal span scorer: threshold={threshold:.2f} train_f1={payload['train_metrics']['f1']:.3f} test_f1={payload['test_metrics']['f1']:.3f}")
     return 0
 
 

@@ -25,9 +25,13 @@ def main() -> int:
     parser.add_argument("--evidence", type=Path, default=Path("data/quality/task-evidence-v2.jsonl"))
     parser.add_argument("--traces", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--waves", default="")
     args = parser.parse_args()
 
     rows = [json.loads(line) for line in args.evidence.read_text(encoding="utf-8").splitlines() if line.strip()]
+    requested_waves = {item.strip().upper() for item in args.waves.split(",") if item.strip()}
+    if requested_waves:
+        rows = [row for row in rows if str(row["case_id"]).split("-", 1)[0].upper() in requested_waves]
     traces = _trace_by_case(args.traces)
     counters: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     errors: list[str] = []
@@ -111,6 +115,7 @@ def main() -> int:
     payload = {
         "schema_version": "action-proposal-v3-shadow-audit-v1",
         "passed": not errors,
+        "waves": sorted(requested_waves) if requested_waves else "ALL",
         "traces": len(traces),
         "overall": summarize(totals),
         "by_wave": by_wave,

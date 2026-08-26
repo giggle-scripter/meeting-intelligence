@@ -92,13 +92,14 @@ _TRAILER_RE = re.compile(r"\s*(?:,|;)?\s*(?:trước|vào|đến|deadline|hạn(
 _ACTION_VERB_RE = re.compile(
     r"\b(?:hoàn thành|chuẩn bị|viết|gửi|review|kiểm tra|cập nhật|phân tích|"
     r"triển khai|fix|sửa|làm|hỗ trợ|setup|soạn|tạo|cấp|cài đặt|xác định|"
-    r"test|chụp|khảo sát|debug|thiết lập|cấu hình)\b",
+    r"test|chụp|khảo sát|debug|thiết lập|cấu hình|xử lý|ẩn danh|update|"
+    r"lập|check|yêu cầu|seed)\b",
     re.I,
 )
 _ACTION_STOP_RE = re.compile(
     r"(?=\s*(?:,\s*(?:vì|chứ|mà|để)\b|[,;]\s*(?:deadline|hạn)\b|"
     r"\s+(?:trước|vào|đến|deadline|hạn(?:\s+chót)?|trong|ngày|thứ)\b|"
-    r"\s+(?:nhé|nhá|ạ|đi)\b|\s+(?:được không|thế nào)\b|\s*[.?!;]|"
+    r"\s+(?:nhé|nhá|ạ|đi)\b|\s+(?:được không|thế nào)\b|\s*[.?!;]|\s*[\"”»]|"
     r"\s*(?:–|-)\s*deadline\b|\s+và\s+(?:hoàn thành|chuẩn bị|viết|gửi|"
     r"review|kiểm tra|cập nhật|phân tích|triển khai|fix|sửa|làm|test)\b))",
     re.I,
