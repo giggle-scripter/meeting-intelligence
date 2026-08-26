@@ -15,3 +15,11 @@ def test_relations_link_bounded_same_speaker_follow_up_without_crossing_new_acti
     new_action = _seed(4, (SeedRole.ACTION,))
     blocked = build_proposal_relations([action, new_action, deadline])
     assert not any(item.nucleus_seed_id == "S1" and item.support_seed_id == "S12" for item in blocked)
+
+
+def test_relations_keep_deadline_relation_when_clause_is_also_an_acceptance() -> None:
+    rows = build_proposal_relations([
+        _seed(1, (SeedRole.ACTION,)),
+        _seed(2, (SeedRole.ACCEPTANCE, SeedRole.DEADLINE)),
+    ])
+    assert any(item.relation_type is RelationType.HAS_DEADLINE for item in rows)

@@ -28,10 +28,10 @@ def build_proposal_relations(seeds:list[EvidenceSeed], *, local_clause_radius:in
             scope=RelationScope.LOCAL
             if distance<=local_clause_radius and SeedRole.AUTHORITY in support.roles:
                 typ=RelationType.AUTHORIZES
-            elif distance<=response_clause_radius and SeedRole.ACCEPTANCE in support.roles and support.order_index>=nucleus.order_index:
-                typ=RelationType.ACCEPTS; scope=RelationScope.RESPONSE
             elif distance<=local_clause_radius and SeedRole.DEADLINE in support.roles:
                 typ=RelationType.HAS_DEADLINE
+            elif distance<=response_clause_radius and SeedRole.ACCEPTANCE in support.roles and support.order_index>=nucleus.order_index:
+                typ=RelationType.ACCEPTS; scope=RelationScope.RESPONSE
             elif distance<=local_clause_radius and SeedRole.OWNER in support.roles:
                 typ=RelationType.OWNS
             elif distance<=local_clause_radius and support.speaker_name==nucleus.speaker_name and distance<=1:
