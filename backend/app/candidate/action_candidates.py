@@ -95,7 +95,7 @@ def _candidate_id(primary_ids: tuple[str, ...], action: str) -> str:
     return "ACAND-" + sha256("|".join((*primary_ids, action.casefold().strip())).encode("utf-8")).hexdigest()[:16]
 
 
-def _action_span(clause: Clause, annotation: ClauseAnnotation) -> GroundedSpan | None:
+def extract_action_span(clause: Clause, annotation: ClauseAnnotation) -> GroundedSpan | None:
     text = clause.text_raw
     match = _ACTION_PREFIX_RE.search(text)
     if match:
@@ -110,6 +110,12 @@ def _action_span(clause: Clause, annotation: ClauseAnnotation) -> GroundedSpan |
         if action:
             return GroundedSpan(clause_id=clause.clause_id, start=start, end=start + len(action), text=action)
     return None
+
+
+def _action_span(clause: Clause, annotation: ClauseAnnotation) -> GroundedSpan | None:
+    """Backward-compatible private alias for the V2 candidate builder."""
+
+    return extract_action_span(clause, annotation)
 
 
 def _owner_span(clause: Clause) -> GroundedSpan | None:

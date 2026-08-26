@@ -43,6 +43,7 @@ def main() -> int:
         seeds = {item["clause_id"]: item for item in trace.get("proposal_evidence_seeds_v3", {}).get("records", [])}
         clusters = {item["nucleus_clause_id"] for item in trace.get("proposal_clusters_v3", {}).get("records", [])}
         relations = trace.get("proposal_relations_v3", {}).get("records", [])
+        span_identities = trace.get("proposal_span_identities_v3", {}).get("records", [])
         action_clause = row["action_evidence"]["clause_id"]
         authority_clause = row["authority_evidence"]["clause_id"]
         deadline = row.get("deadline_evidence") or {}
@@ -51,6 +52,21 @@ def main() -> int:
             metric["seed_source_matched"] += 1
         if action_clause in clusters:
             metric["cluster_source_matched"] += 1
+        action = row["action_evidence"]
+        if any(
+            item["primary_clause_id"] == action_clause and item.get("action_span")
+            for item in span_identities
+        ):
+            metric["span_clause_matched"] += 1
+        if any(
+            item["primary_clause_id"] == action_clause
+            and item.get("action_span") == {
+                "clause_id": action_clause, "start": action["start"],
+                "end": action["end"], "text": action["text"],
+            }
+            for item in span_identities
+        ):
+            metric["span_exact_matched"] += 1
         if action_clause == authority_clause or any(
             item["nucleus_seed_id"] == seeds.get(action_clause, {}).get("seed_id")
             and item["support_seed_id"] == seeds.get(authority_clause, {}).get("seed_id")
@@ -76,6 +92,10 @@ def main() -> int:
             "seed_source_recall": _rate(metric["seed_source_matched"], total),
             "cluster_source_matched": metric["cluster_source_matched"],
             "cluster_source_recall": _rate(metric["cluster_source_matched"], total),
+            "span_clause_matched": metric["span_clause_matched"],
+            "span_clause_recall": _rate(metric["span_clause_matched"], total),
+            "span_exact_matched": metric["span_exact_matched"],
+            "span_exact_recall": _rate(metric["span_exact_matched"], total),
             "authority_link_matched": metric["authority_link_matched"],
             "authority_link_recall": _rate(metric["authority_link_matched"], total),
             "deadline_expected": metric["deadline_expected"],
@@ -103,6 +123,7 @@ def main() -> int:
         "V3 shadow audit: "
         f"seed={payload['overall']['seed_source_recall']:.3f} "
         f"cluster={payload['overall']['cluster_source_recall']:.3f} "
+        f"exact_span={payload['overall']['span_exact_recall']:.3f} "
         f"authority={payload['overall']['authority_link_recall']:.3f}"
     )
     return 0 if not errors else 1
