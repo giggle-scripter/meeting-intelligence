@@ -24,7 +24,7 @@ def build_proposal_relations(seeds:list[EvidenceSeed], *, local_clause_radius:in
             if distance>local_clause_radius: continue
             if SeedRole.AUTHORITY in support.roles:
                 typ=RelationType.AUTHORIZES
-            elif SeedRole.ACCEPTANCE in support.roles and support.order_index>=action.order_index:
+            elif SeedRole.ACCEPTANCE in support.roles and support.order_index>=nucleus.order_index:
                 typ=RelationType.ACCEPTS
             elif SeedRole.DEADLINE in support.roles:
                 typ=RelationType.HAS_DEADLINE
