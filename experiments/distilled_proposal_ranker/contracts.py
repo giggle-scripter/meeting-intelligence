@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -103,3 +103,100 @@ class ProtocolSnapshot(StrictModel):
 def load_protocol(path: Path) -> ProtocolSnapshot:
     protocol = DistillationProtocol.model_validate_json(path.read_text(encoding="utf-8-sig"))
     return ProtocolSnapshot(protocol=protocol, sha256=sha256_file(path))
+
+
+class GroundedSpan(StrictModel):
+    clause_id: str
+    start: int
+    end: int
+    text: str
+
+    @model_validator(mode="after")
+    def validate_boundary(self) -> "GroundedSpan":
+        if self.start < 0 or self.end <= self.start or not self.text.strip():
+            raise ValueError("invalid grounded span boundary")
+        return self
+
+
+class ContextClause(StrictModel):
+    clause_id: str
+    speaker: str
+    text_raw: str
+    order_index: int
+    context_start: int
+    text_start: int
+    text_end: int
+
+
+class SpanExample(StrictModel):
+    schema_version: Literal["action-span-example-v1"] = "action-span-example-v1"
+    example_id: str
+    input_hash: str
+    case_id: str
+    fold_id: int
+    target_clause_id: str
+    target_clause_text: str
+    context: str
+    context_clauses: list[ContextClause]
+    target_start_in_context: int
+    target_end_in_context: int
+    gold_spans: list[GroundedSpan]
+    source_label: Literal[
+        "human_confirmed",
+        "teacher_consensus",
+        "teacher_single",
+        "deterministic_hard_negative",
+        "weak_regex",
+        "unlabeled",
+    ]
+    weight: float
+    overlap_group_id: str | None = None
+
+
+class SpanPrediction(StrictModel):
+    schema_version: Literal["action-span-prediction-v1"] = "action-span-prediction-v1"
+    prediction_id: str
+    input_hash: str
+    case_id: str
+    target_clause_id: str
+    start: int
+    end: int
+    text: str
+    start_logit: float
+    end_logit: float
+    span_score: float
+    no_action_score: float
+    model_name: str
+    outer_fold: int
+    training_seed: int
+    checkpoint_hash: str
+
+
+class TypedRelation(StrictModel):
+    relation_type: str
+    nucleus_clause_id: str
+    support_clause_id: str
+    distance: int
+    chronology: Literal["BEFORE", "SAME", "AFTER"]
+
+
+class ProposalRecord(StrictModel):
+    schema_version: Literal["proposal-record-v1"] = "proposal-record-v1"
+    proposal_id: str
+    input_hash: str
+    case_id: str
+    kind: Literal["CREATE", "UPDATE", "REFERENCE", "DROP", "UNRESOLVED"]
+    cluster_identity: str
+    action_span: GroundedSpan
+    authority_refs: list[str]
+    acceptance_refs: list[str]
+    owner_refs: list[str]
+    deadline_refs: list[str]
+    negative_refs: list[str]
+    relations: list[TypedRelation]
+    deterministic_score: float
+    deterministic_reasons: list[str]
+    neural_span_score: float
+    source_type: Literal["LATTICE", "NEURAL", "BOTH"]
+    ambiguity_flags: list[str]
+    order_index: int
