@@ -29,6 +29,16 @@ def test_exact_positive_and_near_boundary_soft_label() -> None:
     assert labels["exact"].label == 1.0
     assert labels["near"].label == 0.9
     assert labels["wrong"].label == 0.0
+
+
+def test_update_reference_and_drop_are_never_positive_create_labels() -> None:
+    gold = GroundedSpan(clause_id="C1", start=0, end=10, text="x" * 10)
+    proposals = [
+        _proposal(kind.casefold(), 0, 10).model_copy(update={"kind": kind})
+        for kind in ("UPDATE", "REFERENCE", "DROP")
+    ]
+    labels = label_training_proposals(proposals, [gold])
+    assert [item.label for item in labels] == [0.0, 0.0, 0.0]
     assert character_iou(gold, GroundedSpan(clause_id="C2", start=0, end=10, text="x" * 10)) == 0.0
 
 

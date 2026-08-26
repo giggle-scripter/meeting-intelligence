@@ -21,11 +21,17 @@ def validate_prediction(prediction: SpanPrediction, trace: dict[str, Any]) -> No
         raise ValueError("prediction is not exact grounded text")
 
 
-def _relation_support(trace: dict[str, Any], cluster_id: str) -> tuple[list[TypedRelation], dict[str, list[str]]]:
+def _relation_support(trace: dict[str, Any], cluster_id: str, clause_id: str) -> tuple[list[TypedRelation], dict[str, list[str]]]:
     seeds = {item["seed_id"]: item for item in records(trace.get("proposal_evidence_seeds_v3"))}
     clusters = {item["cluster_id"]: item for item in records(trace.get("proposal_clusters_v3"))}
     cluster = clusters.get(cluster_id, {})
     nucleus_id = cluster.get("nucleus_seed_id")
+    if nucleus_id is None:
+        matching_seeds = sorted(
+            (item for item in seeds.values() if item.get("clause_id") == clause_id),
+            key=lambda item: item["seed_id"],
+        )
+        nucleus_id = matching_seeds[0]["seed_id"] if matching_seeds else None
     nucleus = seeds.get(nucleus_id, {})
     nucleus_clause = nucleus.get("clause_id", cluster.get("nucleus_clause_id", ""))
     result: list[TypedRelation] = []
@@ -120,10 +126,10 @@ def build_candidate_pool(
         value["neural_score"] = max(value["neural_score"], prediction.span_score)
     proposals: list[ProposalRecord] = []
     for (clause_id, start, end, text), value in candidates.items():
-        relations, refs = _relation_support(trace, value["cluster"])
+        relations, refs = _relation_support(trace, value["cluster"], clause_id)
         annotation_flags = set(trace.get("annotations", {}).get(clause_id, {}).get("flags", []))
         negative_refs = [clause_id] if annotation_flags & {
-            "QUESTION", "SUGGESTION", "HYPOTHETICAL", "PAST_COMPLETED", "PROGRESS_ONLY", "RECAP_ITEM", "MUTATION_ONLY"
+            "ROOT_QUESTION", "SUGGESTION_ONLY", "HYPOTHETICAL", "PAST_COMPLETED", "PROGRESS_UPDATE", "RECAP_ITEM", "MUTATION_ONLY"
         } else []
         source = "BOTH" if value["lattice"] and value["neural"] else "LATTICE" if value["lattice"] else "NEURAL"
         input_value = {"case_id": case_id, "clause_id": clause_id, "start": start, "end": end, "text": text, "cluster": value["cluster"]}

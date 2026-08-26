@@ -52,6 +52,7 @@ def choose_threshold_topk(
     threshold_grid: list[float],
     precision_floor: float = 0.48,
     top_k_grid: tuple[int, ...] = (3, 5, 8),
+    expected_positive_by_case: dict[str, int] | None = None,
 ) -> Selection:
     if not (len(case_ids) == len(probabilities) == len(labels)):
         raise ValueError("inner OOF calibration arrays differ in length")
@@ -65,7 +66,11 @@ def choose_threshold_topk(
             for indices in by_case.values():
                 ranked = sorted(indices, key=lambda index: (-probabilities[index], index))
                 selected.update(index for index in ranked[:top_k] if probabilities[index] >= threshold)
-            expected = sum(value >= 0.8 for value in labels)
+            expected = (
+                sum(expected_positive_by_case.get(case_id, 0) for case_id in by_case)
+                if expected_positive_by_case is not None
+                else sum(value >= 0.8 for value in labels)
+            )
             matched = sum(labels[index] >= 0.8 for index in selected)
             values = prf(matched, len(selected), expected)
             candidates.append(Selection(threshold, top_k, values["precision"], values["recall"], values["f1"], values["precision"] >= precision_floor))

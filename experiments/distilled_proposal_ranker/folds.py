@@ -9,6 +9,7 @@ from typing import Any
 
 from .contracts import ProtocolSnapshot
 from .hashing import canonical_json_hash, sha256_file
+from .inventory import build_trace_manifest
 from .trace_reader import load_trace_set
 
 
@@ -76,6 +77,8 @@ def build_case_table(repo_root: Path, snapshot: ProtocolSnapshot) -> list[dict[s
 def build_fold_manifest(repo_root: Path, snapshot: ProtocolSnapshot) -> dict[str, Any]:
     protocol = snapshot.protocol
     cases = build_case_table(repo_root, snapshot)
+    trace_rows, _ = build_trace_manifest(repo_root, protocol.trace_path)
+    baseline_trace_rows, _ = build_trace_manifest(repo_root, protocol.baseline_trace_path)
     outer = assign_folds(cases, protocol.outer_folds, protocol.fold_seed)
     if len(outer) != protocol.expected_cases or set(outer) != {row["case_id"] for row in cases}:
         raise ValueError("outer fold coverage failure")
@@ -102,9 +105,8 @@ def build_fold_manifest(repo_root: Path, snapshot: ProtocolSnapshot) -> dict[str
         "protocol_sha256": snapshot.sha256,
         "dataset_hash": canonical_json_hash(cases),
         "evidence_sha256": sha256_file(repo_root / protocol.evidence_path),
-        "trace_manifest_sha256": canonical_json_hash(
-            [sha256_file(path) for path in sorted((repo_root / protocol.trace_path).glob("*-v1-*.json"))]
-        ),
+        "trace_manifest_sha256": canonical_json_hash(trace_rows),
+        "baseline_trace_manifest_sha256": canonical_json_hash(baseline_trace_rows),
         "case_count": len(cases),
         "cases": cases,
         "outer_fold_by_case": dict(sorted(outer.items())),

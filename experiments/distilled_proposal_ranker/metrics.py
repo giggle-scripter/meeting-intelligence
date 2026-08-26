@@ -34,7 +34,13 @@ def exact_span_prf(predicted: Iterable[tuple[str, GroundedSpan]], expected: Iter
     return prf(len(predicted_set & expected_set), len(predicted_set), len(expected_set))
 
 
-def ranking_metrics(case_ids: list[str], probabilities: list[float], labels: list[float]) -> dict[str, float | None]:
+def ranking_metrics(
+    case_ids: list[str],
+    probabilities: list[float],
+    labels: list[float],
+    *,
+    expected_positive_count: int | None = None,
+) -> dict[str, float | None]:
     from sklearn.metrics import average_precision_score, brier_score_loss, roc_auc_score
 
     binary = [int(value >= 0.8) for value in labels]
@@ -44,10 +50,23 @@ def ranking_metrics(case_ids: list[str], probabilities: list[float], labels: lis
         "roc_auc": float(roc_auc_score(binary, probabilities)) if both_classes else None,
         "brier_score": float(brier_score_loss(binary, probabilities)),
     }
+    calibration_error = 0.0
+    for bin_index in range(10):
+        lower = bin_index / 10
+        upper = (bin_index + 1) / 10
+        indices = [
+            index for index, value in enumerate(probabilities)
+            if lower <= value < upper or (bin_index == 9 and value == 1.0)
+        ]
+        if indices:
+            confidence = sum(probabilities[index] for index in indices) / len(indices)
+            accuracy = sum(binary[index] for index in indices) / len(indices)
+            calibration_error += len(indices) / len(probabilities) * abs(confidence - accuracy)
+    result["expected_calibration_error"] = calibration_error
     by_case: dict[str, list[int]] = {}
     for index, case_id in enumerate(case_ids):
         by_case.setdefault(case_id, []).append(index)
-    expected = sum(binary)
+    expected = expected_positive_count if expected_positive_count is not None else sum(binary)
     for k in (1, 3, 5, 10, 30):
         selected = set()
         for indices in by_case.values():

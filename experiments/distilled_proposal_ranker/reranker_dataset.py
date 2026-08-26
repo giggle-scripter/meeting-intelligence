@@ -37,7 +37,10 @@ def label_training_proposals(
     for proposal in proposals:
         exact = any(proposal.action_span == gold for gold in gold_spans)
         best_iou = max((character_iou(proposal.action_span, gold) for gold in gold_spans), default=0.0)
-        label = 1.0 if exact else best_iou if best_iou >= 0.8 else 0.0
+        if proposal.kind in {"UPDATE", "REFERENCE", "DROP"}:
+            label = 0.0
+        else:
+            label = 1.0 if exact else best_iou if best_iou >= 0.8 else 0.0
         raw_labels[proposal.proposal_id] = label
         if label == 1.0:
             positive_ids.append(proposal.proposal_id)

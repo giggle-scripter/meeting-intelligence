@@ -69,3 +69,13 @@ def atomic_write_json(path: Path, value: Any, *, pretty: bool = True) -> str:
         os.fsync(handle.fileno())
     os.replace(temporary, path)
     return sha256_bytes(payload)
+
+
+def completed_manifest_reusable(path: Path, signature: dict[str, Any]) -> bool:
+    if not path.exists():
+        return False
+    try:
+        value = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    return value.get("status") == "complete" and value.get("signature") == signature

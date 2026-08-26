@@ -40,3 +40,11 @@ def test_no_precision_feasible_marks_constraint_failure() -> None:
     selection = choose_threshold_topk(["A"], [0.9], [0.0], threshold_grid=[0.2, 0.5])
     assert selection.precision_constraint_met is False
     assert selection.threshold == 0.5
+
+
+def test_threshold_recall_counts_gold_missing_from_candidate_pool() -> None:
+    selection = choose_threshold_topk(
+        ["A"], [0.9], [1.0], threshold_grid=[0.5],
+        expected_positive_by_case={"A": 2},
+    )
+    assert selection.recall == 0.5

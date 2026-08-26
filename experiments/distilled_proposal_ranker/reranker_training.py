@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import json
 import math
 from pathlib import Path
 from typing import Any
@@ -51,7 +52,7 @@ class RerankerTrainingResult:
     manifest_path: str
 
 
-def _evaluate(model: ProposalReranker, dataset: EncodedRerankerDataset, loader: DataLoader, device: torch.device) -> tuple[float, float]:
+def _evaluate(model: ProposalReranker, dataset: EncodedRerankerDataset, loader: DataLoader, device: torch.device, expected_positive_count: int | None) -> tuple[float, float]:
     model.eval()
     logits = []
     labels = []
@@ -60,7 +61,10 @@ def _evaluate(model: ProposalReranker, dataset: EncodedRerankerDataset, loader: 
             logits.extend(model(batch["input_ids"].to(device), batch["attention_mask"].to(device)).cpu().tolist())
             labels.extend(batch["label"].tolist())
     probabilities = torch.sigmoid(torch.tensor(logits)).tolist()
-    values = ranking_metrics([item.case_id for item in dataset.examples], probabilities, labels)
+    values = ranking_metrics(
+        [item.case_id for item in dataset.examples], probabilities, labels,
+        expected_positive_count=expected_positive_count,
+    )
     return float(values["pr_auc"] or 0.0), float(values["recall_at_30"] or 0.0)
 
 
@@ -80,6 +84,8 @@ def train_reranker(
     max_length: int,
     checkpoint_dir: Path,
     manifest_values: dict[str, Any],
+    select_best_checkpoint: bool = True,
+    valid_expected_positive_count: int | None = None,
 ) -> RerankerTrainingResult:
     set_deterministic_seed(seed)
     settings = resource_settings()
@@ -123,8 +129,12 @@ def train_reranker(
                 scaler.update()
                 scheduler.step()
                 optimizer.zero_grad(set_to_none=True)
-        pr_auc, recall = _evaluate(model, valid_data, valid_loader, device)
+        pr_auc, recall = _evaluate(model, valid_data, valid_loader, device, valid_expected_positive_count)
         score = (pr_auc, recall, -epoch)
+        if not select_best_checkpoint:
+            best = score
+            best_state = {key: value.detach().cpu().clone() for key, value in model.state_dict().items()}
+            continue
         if best is None or score > best:
             best = score
             best_state = {key: value.detach().cpu().clone() for key, value in model.state_dict().items()}
@@ -139,7 +149,59 @@ def train_reranker(
     weights_path = checkpoint_dir / "model.pt"
     torch.save(best_state, weights_path)
     checkpoint_hash = sha256_file(weights_path)
-    manifest = {"schema_version": "reranker-checkpoint-manifest-v1", **manifest_values, "seed": seed, "learning_rate": learning_rate, "epoch": -best[2], "pr_auc": best[0], "recall_at_30": best[1], "checkpoint_hash": checkpoint_hash, "device": settings.device}
+    manifest = {"schema_version": "reranker-checkpoint-manifest-v1", **manifest_values, "seed": seed, "learning_rate": learning_rate, "epoch": -best[2], "pr_auc": best[0], "recall_at_30": best[1], "checkpoint_hash": checkpoint_hash, "device": settings.device, "selection": "inner_validation" if select_best_checkpoint else "fixed_epoch", "requested_max_epochs": max_epochs, "status": "complete"}
     manifest_path = checkpoint_dir / "manifest.json"
     atomic_write_json(manifest_path, manifest)
     return RerankerTrainingResult(-best[2], best[0], best[1], checkpoint_hash, str(manifest_path))
+
+
+def reuse_reranker_checkpoint(
+    model: ProposalReranker,
+    checkpoint_dir: Path,
+    required_manifest_values: dict[str, Any],
+) -> RerankerTrainingResult | None:
+    manifest_path = checkpoint_dir / "manifest.json"
+    weights_path = checkpoint_dir / "model.pt"
+    if not manifest_path.exists() or not weights_path.exists():
+        return None
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if manifest.get("status") != "complete" or any(
+        manifest.get(key) != value for key, value in required_manifest_values.items()
+    ):
+        return None
+    checkpoint_hash = sha256_file(weights_path)
+    if checkpoint_hash != manifest.get("checkpoint_hash"):
+        return None
+    model.load_state_dict(torch.load(weights_path, map_location="cpu", weights_only=True))
+    return RerankerTrainingResult(
+        int(manifest["epoch"]),
+        float(manifest["pr_auc"]),
+        float(manifest["recall_at_30"]),
+        checkpoint_hash,
+        str(manifest_path),
+    )
+
+
+def predict_reranker_logits(
+    model: ProposalReranker,
+    tokenizer: Any,
+    examples: list[RerankerExample],
+    *,
+    max_length: int,
+) -> list[float]:
+    settings = resource_settings()
+    device = torch.device(settings.device)
+    model.to(device)
+    dataset = EncodedRerankerDataset(examples, tokenizer, max_length)
+    loader = DataLoader(dataset, batch_size=settings.eval_batch_size)
+    logits: list[float] = []
+    model.eval()
+    with torch.no_grad():
+        for batch in loader:
+            logits.extend(
+                model(batch["input_ids"].to(device), batch["attention_mask"].to(device)).cpu().tolist()
+            )
+    return logits

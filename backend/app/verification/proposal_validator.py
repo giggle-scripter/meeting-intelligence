@@ -71,6 +71,7 @@ def validate_task_create_proposal(
     start_sequence: int,
     allowed_source_clause_ids: set[str] | None = None,
     required_primary_clause_ids: set[str] | None = None,
+    structured_acceptance_overrides: dict[str, frozenset[str]] | None = None,
 ) -> ProposalValidationResult:
     """Validate evidence in a fixed order and promote only grounded proposals."""
 
@@ -109,9 +110,22 @@ def validate_task_create_proposal(
         if annotation is None:
             return ProposalValidationResult(False, ("MISSING_SOURCE_ANNOTATION",))
         for flag, reason in NEGATIVE_GUARDS.items():
+            if (
+                reason in {"QUESTION", "SUGGESTION"}
+                and reason in (structured_acceptance_overrides or {}).get(
+                    clause.clause_id, frozenset()
+                )
+            ):
+                continue
             if flag in annotation.flags and reason not in guard_reasons:
                 guard_reasons.append(reason)
-        if clause.text_raw.rstrip().endswith("?") and "QUESTION" not in guard_reasons:
+        if (
+            clause.text_raw.rstrip().endswith("?")
+            and "QUESTION" not in guard_reasons
+            and "QUESTION" not in (structured_acceptance_overrides or {}).get(
+                clause.clause_id, frozenset()
+            )
+        ):
             guard_reasons.append("QUESTION")
     if guard_reasons:
         return ProposalValidationResult(False, tuple(guard_reasons))

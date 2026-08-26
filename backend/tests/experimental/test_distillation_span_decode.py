@@ -9,7 +9,7 @@ from torch import nn
 from experiments.distilled_proposal_ranker.span_decode import DecodedSpan, decode_bio_spans, nms_spans
 from experiments.distilled_proposal_ranker.contracts import GroundedSpan, SpanExample
 from experiments.distilled_proposal_ranker.span_model import ActionSpanModel, combined_span_loss, set_deterministic_seed
-from experiments.distilled_proposal_ranker.span_training import train_span_model
+from experiments.distilled_proposal_ranker.span_training import reuse_span_checkpoint, train_span_model
 
 
 class TinyBackbone(nn.Module):
@@ -92,9 +92,14 @@ def test_tiny_fixture_training_writes_checkpoint_manifest(tmp_path) -> None:
     result = train_span_model(
         ActionSpanModel(TinyBackbone(), 4), TinyTokenizer(), [positive, negative], [positive],
         seed=17, learning_rate=0.001, weight_decay=0.01, warmup_ratio=0.1,
-        max_epochs=1, patience=1, gradient_clip_norm=1.0, max_length=8,
+        max_epochs=2, patience=3, gradient_clip_norm=1.0, max_length=8,
         checkpoint_dir=tmp_path / "checkpoint",
         manifest_values={"protocol_hash": "p", "data_hash": "d", "model_name": "tiny", "code_hash": "c"},
+        select_best_checkpoint=False,
     )
+    assert result.epoch == 2
     assert len(result.checkpoint_hash) == 64
     assert (tmp_path / "checkpoint" / "manifest.json").exists()
+    assert reuse_span_checkpoint(
+        ActionSpanModel(TinyBackbone(), 4), tmp_path / "checkpoint", {"protocol_hash": "wrong"}
+    ) is None

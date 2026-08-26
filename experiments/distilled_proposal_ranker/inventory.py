@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from backend.app.evaluation import aggregate_results, compare_case
+from backend.app.quality.oracle import validate_grounded_task_evidence, validate_task_evidence_coverage
 
 from .contracts import ProtocolSnapshot
 from .hashing import atomic_write_json, canonical_json_hash, sha256_file
@@ -98,6 +99,37 @@ def run_preflight(repo_root: Path, snapshot: ProtocolSnapshot, output_root: Path
         manifest_hash = canonical_json_hash(rows)
         atomic_write_json(output_root / "preflight" / f"{name}-trace-manifest.json", rows, pretty=False)
         manifests[name] = {"count": len(rows), "sha256": manifest_hash}
+
+    evidence_rows = [
+        json.loads(line)
+        for line in (repo_root / protocol.evidence_path).read_text(encoding="utf-8-sig").splitlines()
+        if line.strip()
+    ]
+    expected_keys = {
+        (case_id, index)
+        for case_id, value in expected_by_case.items()
+        for index, _ in enumerate(value.get("tasks", []))
+    }
+    evidence_errors = validate_task_evidence_coverage(evidence_rows, expected_keys)
+    evidence_errors.extend(validate_grounded_task_evidence(evidence_rows, trace_sets["pr38"]))
+    evidence_gate = {
+        "schema_version": "task-evidence-gate-v1",
+        "passed": not evidence_errors,
+        "expected_task_count": len(expected_keys),
+        "reviewed_task_count": len(evidence_rows),
+        "trace_count": len(evidence_ids),
+        "errors": evidence_errors,
+    }
+    atomic_write_json(output_root / "preflight" / "task-evidence-gate.json", evidence_gate)
+    if evidence_gate != {
+        "schema_version": "task-evidence-gate-v1",
+        "passed": True,
+        "expected_task_count": protocol.expected_tasks,
+        "reviewed_task_count": protocol.expected_tasks,
+        "trace_count": protocol.expected_evidence_cases,
+        "errors": [],
+    }:
+        raise IntegrityStop("STOP_TASK_EVIDENCE_GATE_FAILED")
 
     comparisons = [
         compare_case(case_id, expected_by_case[case_id], {"tasks": trace_sets["pr29"][case_id].get("final_tasks", [])})

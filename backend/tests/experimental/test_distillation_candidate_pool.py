@@ -60,6 +60,24 @@ def test_outer_valid_gold_is_never_injected() -> None:
         build_candidate_pool("CASE", _trace(), [], gold_spans=[GroundedSpan(clause_id="C1", start=0, end=3, text="Làm")], evaluation=True)
 
 
+def test_neural_only_span_inherits_grounded_relations_from_its_clause_seed() -> None:
+    trace = _trace()
+    trace["proposal_span_identities_v3"]["records"] = []
+    trace["clauses"].append({"clause_id": "C2", "text_raw": "Tôi nhận", "order_index": 1})
+    trace["annotations"]["C2"] = {"flags": ["FIRST_PERSON_COMMITMENT"]}
+    trace["proposal_evidence_seeds_v3"]["records"] = [
+        {"seed_id": "S1", "clause_id": "C1", "order_index": 0, "roles": ["ACTION"], "date_mention_ids": []},
+        {"seed_id": "S2", "clause_id": "C2", "order_index": 1, "roles": ["ACCEPTANCE", "AUTHORITY"], "date_mention_ids": []},
+    ]
+    trace["proposal_relations_v3"]["records"] = [
+        {"relation_type": "ACCEPTS", "nucleus_seed_id": "S1", "support_seed_id": "S2", "distance": 1}
+    ]
+    proposal = build_candidate_pool("CASE", trace, [_prediction()])[0]
+    assert proposal.source_type == "NEURAL"
+    assert proposal.acceptance_refs == ["C2"]
+    assert proposal.relations[0].chronology == "AFTER"
+
+
 def test_top_60_prune_is_deterministic() -> None:
     trace = _trace()
     trace["clauses"][0]["text_raw"] = "a" * 70

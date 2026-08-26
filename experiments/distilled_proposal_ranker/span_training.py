@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import json
 import math
 from pathlib import Path
 from typing import Any
@@ -13,9 +14,11 @@ from torch.optim.lr_scheduler import LambdaLR
 from torch.utils.data import DataLoader, Dataset
 
 from .contracts import SpanExample
-from .hashing import atomic_write_json, sha256_file
+from .contracts import SpanPrediction
+from .hashing import atomic_write_json, sha256_bytes, sha256_file
 from .metrics import token_prf
 from .span_dataset import bio_labels
+from .span_decode import decode_bio_spans
 from .span_model import ActionSpanModel, capped_token_class_weights, combined_span_loss, resource_settings, set_deterministic_seed
 
 
@@ -94,6 +97,7 @@ def train_span_model(
     max_length: int,
     checkpoint_dir: Path,
     manifest_values: dict[str, Any],
+    select_best_checkpoint: bool = True,
 ) -> SpanTrainingResult:
     set_deterministic_seed(seed)
     settings = resource_settings()
@@ -145,6 +149,10 @@ def train_span_model(
                 optimizer.zero_grad(set_to_none=True)
         token_f1, exact_recall = _evaluate(model, valid_loader, device)
         score = (token_f1, exact_recall, -epoch)
+        if not select_best_checkpoint:
+            best = score
+            best_state = {key: value.detach().cpu().clone() for key, value in model.state_dict().items()}
+            continue
         if best is None or score > best:
             best = score
             best_state = {key: value.detach().cpu().clone() for key, value in model.state_dict().items()}
@@ -170,7 +178,109 @@ def train_span_model(
         "exact_recall": best[1],
         "checkpoint_hash": checkpoint_hash,
         "device": settings.device,
+        "selection": "inner_validation" if select_best_checkpoint else "fixed_epoch",
+        "requested_max_epochs": max_epochs,
+        "status": "complete",
     }
     manifest_path = checkpoint_dir / "manifest.json"
     atomic_write_json(manifest_path, manifest)
     return SpanTrainingResult(epoch, best[0], best[1], checkpoint_hash, str(manifest_path))
+
+
+def reuse_span_checkpoint(
+    model: ActionSpanModel,
+    checkpoint_dir: Path,
+    required_manifest_values: dict[str, Any],
+) -> SpanTrainingResult | None:
+    manifest_path = checkpoint_dir / "manifest.json"
+    weights_path = checkpoint_dir / "model.pt"
+    if not manifest_path.exists() or not weights_path.exists():
+        return None
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if manifest.get("status") != "complete" or any(
+        manifest.get(key) != value for key, value in required_manifest_values.items()
+    ):
+        return None
+    checkpoint_hash = sha256_file(weights_path)
+    if checkpoint_hash != manifest.get("checkpoint_hash"):
+        return None
+    model.load_state_dict(torch.load(weights_path, map_location="cpu", weights_only=True))
+    return SpanTrainingResult(
+        int(manifest["epoch"]),
+        float(manifest["token_f1"]),
+        float(manifest["exact_recall"]),
+        checkpoint_hash,
+        str(manifest_path),
+    )
+
+
+def predict_span_examples(
+    model: ActionSpanModel,
+    tokenizer: Any,
+    examples: list[SpanExample],
+    *,
+    max_length: int,
+    model_name: str,
+    outer_fold: int,
+    training_seed: int,
+    checkpoint_hash: str,
+) -> list[SpanPrediction]:
+    settings = resource_settings()
+    device = torch.device(settings.device)
+    model.to(device)
+    model.eval()
+    predictions: list[SpanPrediction] = []
+    with torch.no_grad():
+        for example in examples:
+            encoded = tokenizer(
+                example.context,
+                truncation=True,
+                max_length=max_length,
+                return_offsets_mapping=True,
+                padding="max_length",
+                return_tensors="pt",
+            )
+            offsets = [tuple(item) for item in encoded.pop("offset_mapping")[0].tolist()]
+            token_logits, clause_logit = model(
+                encoded["input_ids"].to(device), encoded["attention_mask"].to(device)
+            )
+            probabilities = torch.softmax(token_logits[0], dim=-1)
+            labels = probabilities.argmax(dim=-1).cpu().tolist()
+            scores = probabilities.max(dim=-1).values.cpu().tolist()
+            has_action = float(torch.sigmoid(clause_logit[0]).cpu())
+            decoded = decode_bio_spans(
+                labels,
+                scores,
+                offsets,
+                raw_text=example.target_clause_text,
+                target_start_in_context=example.target_start_in_context,
+                target_end_in_context=example.target_end_in_context,
+                has_action_probability=has_action,
+            )
+            for span in decoded:
+                prediction_id = sha256_bytes(
+                    f"{example.case_id}\0{example.target_clause_id}\0{span.start}\0{span.end}\0{training_seed}".encode()
+                )
+                predictions.append(
+                    SpanPrediction(
+                        prediction_id=prediction_id,
+                        input_hash=example.input_hash,
+                        case_id=example.case_id,
+                        target_clause_id=example.target_clause_id,
+                        start=span.start,
+                        end=span.end,
+                        text=span.text,
+                        start_logit=span.score,
+                        end_logit=span.score,
+                        span_score=span.score * has_action,
+                        no_action_score=1.0 - has_action,
+                        model_name=model_name,
+                        outer_fold=outer_fold,
+                        training_seed=training_seed,
+                        checkpoint_hash=checkpoint_hash,
+                    )
+                )
+    return predictions
