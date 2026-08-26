@@ -23,3 +23,13 @@ def test_trainer_fits_weighted_binary_signal_deterministically() -> None:
 
     assert weights["variant=FULL_BOUNDARY"] > weights["variant=TOKEN_PREFIX"]
     assert metrics["matched"] == 3
+
+
+def test_trainer_is_invariant_to_correlated_candidate_row_order() -> None:
+    module = _trainer_module()
+    rows = [_row(1, "FULL_BOUNDARY") for _ in range(3)] + [_row(0, "TOKEN_PREFIX") for _ in range(9)]
+
+    forward = module._fit(rows, epochs=30)
+    reverse = module._fit(list(reversed(rows)), epochs=30)
+
+    assert forward == reverse
