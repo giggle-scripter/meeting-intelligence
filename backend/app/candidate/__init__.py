@@ -19,7 +19,7 @@ from .proposal import TaskCreateProposal, TaskCreateProposalResponse
 from .evidence_seeds import EvidenceSeed, SeedRole, build_evidence_seeds
 from .proposal_relations import ProposalRelation, RelationScope, RelationType, build_proposal_relations
 from .proposal_clusters import ProposalCluster, ProposalKind, build_proposal_clusters
-from .proposal_span_identity import ProposalSpanIdentity, build_proposal_span_identities
+from .proposal_span_identity import ProposalSpanIdentity, build_action_span_lattice, build_proposal_span_identities
 from .proposal_ranking import ProposalDecision, RankedProposal, build_ranked_proposals
 from .proposal_semantic_scoring import SemanticProposalScore, build_semantic_proposal_scores
 from .scorer import choose_extraction_strategy, is_candidate
@@ -34,7 +34,7 @@ __all__ = [
     "EvidenceSeed", "SeedRole", "build_evidence_seeds",
     "ProposalRelation", "RelationScope", "RelationType", "build_proposal_relations",
     "ProposalCluster", "ProposalKind", "build_proposal_clusters",
-    "ProposalSpanIdentity", "build_proposal_span_identities",
+    "ProposalSpanIdentity", "build_action_span_lattice", "build_proposal_span_identities",
     "ProposalDecision", "RankedProposal", "build_ranked_proposals",
     "SemanticProposalScore", "build_semantic_proposal_scores",
     "batch_ai_windows",
