@@ -20,9 +20,13 @@ def main() -> int:
     parser.add_argument("--evidence", type=Path, default=Path("data/quality/task-evidence-v2.jsonl"))
     parser.add_argument("--traces", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--waves", default="", help="Comma-separated wave IDs, for example W1,W2,W3")
     args = parser.parse_args()
 
+    waves = {item.strip().upper() for item in args.waves.split(",") if item.strip()}
     rows = [json.loads(line) for line in args.evidence.read_text(encoding="utf-8").splitlines() if line.strip()]
+    if waves:
+        rows = [row for row in rows if row["case_id"].split("-", 1)[0].upper() in waves]
     gold = {
         (row["case_id"], item["clause_id"], item["start"], item["end"], item["text"])
         for row in rows for item in [row["action_evidence"]]
@@ -30,6 +34,8 @@ def main() -> int:
     selected: set[tuple[str, str, int, int, str]] = set()
     errors: list[str] = []
     for case_id, trace in _traces(args.traces).items():
+        if waves and case_id.split("-", 1)[0].upper() not in waves:
+            continue
         identities = {
             (item["identity_key"], item["primary_clause_id"]): item
             for item in trace.get("proposal_span_identities_v3", {}).get("records", [])
@@ -49,6 +55,7 @@ def main() -> int:
     payload = {
         "schema_version": "action-proposal-v3-exact-evidence-ranking-v1",
         "passed": not errors,
+        "waves": sorted(waves),
         "expected_evidence_count": len(gold),
         "selected_evidence_count": len(selected),
         "matched_evidence_count": len(matched),
