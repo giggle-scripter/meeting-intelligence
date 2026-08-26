@@ -29,6 +29,9 @@ _MUTATION={"CORRECTION","CANCELLATION","REJECTION"}
 _RECAP=re.compile(r"\b(?:tổng kết|chốt lại|recap|trạng thái cuối)\b",re.I)
 _REFERENCE=re.compile(r"\b(?:task|công việc|phần đó|việc đó|deadline|lỗi|ý em|integration spec)\b",re.I)
 _EXPLICIT_ACTION=re.compile(r"\b(?:tập trung|debug|khảo sát|thiết lập|cấu hình|triển khai)\b",re.I)
+_EXPLICIT_ACCEPTANCE=re.compile(r"\b(?:dạ|vâng|ok|được|đồng ý|ghi nhận|rõ|commit|ý hay)\b",re.I)
+_EXPLICIT_COMMITMENT=re.compile(r"\b(?:cam kết)\b",re.I)
+_EXPLICIT_ASSIGNMENT=re.compile(r"\b(?:ưu tiên|owner|handoff|wireframe)\b",re.I)
 
 
 def build_evidence_seeds(clauses:list[Clause], annotations:dict[str,ClauseAnnotation], mentions:dict[str,DateMention]) -> list[EvidenceSeed]:
@@ -39,8 +42,8 @@ def build_evidence_seeds(clauses:list[Clause], annotations:dict[str,ClauseAnnota
     for clause in clauses:
         annotation=annotations[clause.clause_id]; flags=set(annotation.flags); roles=set()
         if "ACTION_VERB" in flags or _EXPLICIT_ACTION.search(clause.text_raw): roles.add(SeedRole.ACTION)
-        if flags & {"DIRECT_ASSIGNMENT","FIRST_PERSON_COMMITMENT"}: roles|={SeedRole.AUTHORITY,SeedRole.OWNER}
-        if "CONFIRMATION" in flags: roles.add(SeedRole.ACCEPTANCE)
+        if flags & {"DIRECT_ASSIGNMENT","FIRST_PERSON_COMMITMENT"} or _EXPLICIT_COMMITMENT.search(clause.text_raw) or _EXPLICIT_ASSIGNMENT.search(clause.text_raw): roles|={SeedRole.AUTHORITY,SeedRole.OWNER}
+        if "CONFIRMATION" in flags or _EXPLICIT_ACCEPTANCE.search(clause.text_raw): roles.add(SeedRole.ACCEPTANCE)
         if dates.get(clause.clause_id): roles.add(SeedRole.DEADLINE)
         if flags & _MUTATION: roles.add(SeedRole.MUTATION)
         if flags & _NEGATIVE: roles.add(SeedRole.NEGATIVE)
