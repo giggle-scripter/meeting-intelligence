@@ -31,7 +31,13 @@ def _score(features: tuple[str, ...], weights: dict[str, float], intercept: floa
     return _sigmoid(intercept + sum(weights.get(item, 0.0) for item in features))
 
 
-def _fit(rows: list[dict], *, epochs: int = 80, learning_rate: float = 0.04, l2: float = 0.002) -> tuple[dict[str, float], float]:
+def _fit(rows: list[dict], *, epochs: int = 240, learning_rate: float = 0.2, l2: float = 0.002) -> tuple[dict[str, float], float]:
+    """Fit balanced logistic weights with batch updates.
+
+    Corpus rows contain many correlated prefix variants for each grounded span.
+    Batch gradients make every epoch independent of their input order and avoid
+    the unstable, very large weights produced by one-row-at-a-time updates.
+    """
     positives = sum(int(row["exact_span_label"]) for row in rows)
     if not positives or positives == len(rows):
         raise ValueError("training split needs both positive and negative labels")
@@ -40,13 +46,19 @@ def _fit(rows: list[dict], *, epochs: int = 80, learning_rate: float = 0.04, l2:
     intercept = 0.0
     prepared = [(_features(row), int(row["exact_span_label"])) for row in rows]
     for _ in range(epochs):
+        intercept_gradient = 0.0
+        gradients: Counter[str] = Counter()
         for features, label in prepared:
             probability = _score(features, weights, intercept)
             sample_weight = positive_weight if label else 1.0
             error = sample_weight * (label - probability)
-            intercept += learning_rate * error
-            for name in features:
-                weights[name] = weights.get(name, 0.0) + learning_rate * (error - l2 * weights.get(name, 0.0))
+            intercept_gradient += error
+            gradients.update({name: error for name in features})
+        intercept += learning_rate * intercept_gradient / len(prepared)
+        for name, gradient in gradients.items():
+            weights[name] = weights.get(name, 0.0) + learning_rate * (
+                gradient / len(prepared) - l2 * weights.get(name, 0.0)
+            )
     return {name: round(value, 8) for name, value in weights.items()}, round(intercept, 8)
 
 
