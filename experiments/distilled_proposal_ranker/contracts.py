@@ -200,3 +200,79 @@ class ProposalRecord(StrictModel):
     source_type: Literal["LATTICE", "NEURAL", "BOTH"]
     ambiguity_flags: list[str]
     order_index: int
+
+
+TeacherDecision = Literal["CREATE", "UPDATE", "REFERENCE", "DROP", "UNRESOLVED"]
+TeacherReason = Literal[
+    "DIRECT_ASSIGNMENT",
+    "SELF_COMMITMENT",
+    "QUESTION_ACCEPTED",
+    "ASSIGNMENT_ACKNOWLEDGED",
+    "ACTION_CONTINUATION",
+    "OWNER_CONTINUATION",
+    "DEADLINE_CONTINUATION",
+    "SUGGESTION_ONLY",
+    "QUESTION_UNACCEPTED",
+    "HYPOTHETICAL",
+    "PAST_COMPLETED",
+    "PROGRESS_ONLY",
+    "RECAP_DUPLICATE",
+    "MUTATION_ONLY",
+    "REFERENCE_ONLY",
+    "INSUFFICIENT_EVIDENCE",
+    "SIBLING_AMBIGUITY",
+]
+
+
+class TeacherClause(StrictModel):
+    clause_id: str
+    speaker: str
+    order_index: int
+    text_raw: str
+
+
+class TeacherProposal(StrictModel):
+    proposal_id: str
+    action_span: GroundedSpan
+    kind: TeacherDecision
+    authority_refs: list[str]
+    acceptance_refs: list[str]
+    owner_refs: list[str]
+    deadline_refs: list[str]
+    negative_refs: list[str]
+    relation_types: list[str]
+
+
+class TeacherPayload(StrictModel):
+    schema_version: Literal["teacher-payload-v1"] = "teacher-payload-v1"
+    payload_id: str
+    input_hash: str
+    case_id: str
+    outer_fold: int
+    shard_index: int
+    clauses: list[TeacherClause]
+    proposals: list[TeacherProposal]
+    allowed_date_mention_ids: list[str]
+    allowed_existing_task_refs: list[str]
+
+
+class TeacherDecisionRecord(StrictModel):
+    proposal_id: str
+    decision: TeacherDecision
+    action_span_ref: str
+    authority_clause_ids: list[str]
+    owner_clause_id: str | None
+    deadline_mention_id: str | None
+    existing_task_ref: str | None = None
+    confidence: float = Field(ge=0.0, le=1.0)
+    reason_codes: list[TeacherReason]
+
+
+class TeacherResponse(StrictModel):
+    schema_version: Literal["teacher-response-v1"] = "teacher-response-v1"
+    payload_id: str
+    prompt_version: Literal["teacher-a-v1", "teacher-b-v1"]
+    payload_hash: str
+    prompt_hash: str
+    model_hash: str
+    records: list[TeacherDecisionRecord]
