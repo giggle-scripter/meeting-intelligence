@@ -21,6 +21,7 @@ from .proposal_relations import ProposalRelation, RelationScope, RelationType, b
 from .proposal_clusters import ProposalCluster, ProposalKind, build_proposal_clusters
 from .proposal_span_identity import ProposalSpanIdentity, build_proposal_span_identities
 from .proposal_ranking import ProposalDecision, RankedProposal, build_ranked_proposals
+from .proposal_semantic_scoring import SemanticProposalScore, build_semantic_proposal_scores
 from .scorer import choose_extraction_strategy, is_candidate
 from .window_builder import build_candidate_windows
 from .window_merger import merge_windows
@@ -35,6 +36,7 @@ __all__ = [
     "ProposalCluster", "ProposalKind", "build_proposal_clusters",
     "ProposalSpanIdentity", "build_proposal_span_identities",
     "ProposalDecision", "RankedProposal", "build_ranked_proposals",
+    "SemanticProposalScore", "build_semantic_proposal_scores",
     "batch_ai_windows",
     "build_action_candidates", "build_action_proposals_v3", "build_action_frame", "build_candidate_evidence", "build_candidate_windows", "build_deadline_attachment_evidence", "build_owner_evidence", "extract_action_span", "extract_action_spans",
     "choose_extraction_strategy", "is_candidate", "merge_windows", "route_commitments",
