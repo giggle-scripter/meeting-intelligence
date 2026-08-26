@@ -39,7 +39,7 @@ def build_ranked_proposals(
     relations: list[ProposalRelation],
     seeds: list[EvidenceSeed],
     *,
-    selection_threshold: float = 0.75,
+    selection_threshold: float = 0.90,
 ) -> list[RankedProposal]:
     """Rank only concrete CREATE spans; references remain visible but held out."""
 
@@ -74,11 +74,15 @@ def build_ranked_proposals(
             score += 0.05; reasons.append("OWNER_LINK")
         if RelationType.HAS_DEADLINE in links:
             score += 0.05; reasons.append("DEADLINE_LINK")
+        has_nucleus_authority = SeedRole.AUTHORITY in nucleus.roles
+        if has_nucleus_authority:
+            reasons.append("NUCLEUS_AUTHORITY")
         if SeedRole.NEGATIVE in nucleus.roles or SeedRole.RECAP in nucleus.roles:
             score = 0.0; reasons.append("NON_CREATE_GUARD")
         score = round(min(score, 1.0), 3)
         selected = bool(
-            frame and frame.valid and identity.state == "PROPOSED" and score >= selection_threshold
+            frame and frame.valid and identity.state == "PROPOSED" and has_nucleus_authority
+            and score >= selection_threshold
         )
         canonical = frame.canonical_action if frame and frame.valid else ""
         result.append(

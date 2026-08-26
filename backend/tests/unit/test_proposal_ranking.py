@@ -27,11 +27,19 @@ def _identity() -> ProposalSpanIdentity:
 def test_ranker_selects_concrete_grounded_action_with_authority() -> None:
     cluster = ProposalCluster(cluster_id="CLUSTER-C1", nucleus_seed_id="S1", nucleus_clause_id="C1", proposal_kind=ProposalKind.CREATE)
     relation = ProposalRelation(relation_type=RelationType.AUTHORIZES, nucleus_seed_id="S1", support_seed_id="S2", distance=1, score=1.0)
-    record = build_ranked_proposals([_identity()], [cluster], [relation], [_seed((SeedRole.ACTION,))])[0]
+    record = build_ranked_proposals([_identity()], [cluster], [relation], [_seed((SeedRole.ACTION, SeedRole.AUTHORITY))])[0]
 
     assert record.decision is ProposalDecision.SELECTED
     assert record.score >= 0.75
     assert record.canonical_action == "Viết báo cáo"
+
+
+def test_ranker_holds_out_action_without_nucleus_authority() -> None:
+    cluster = ProposalCluster(cluster_id="CLUSTER-C1", nucleus_seed_id="S1", nucleus_clause_id="C1", proposal_kind=ProposalKind.CREATE)
+    relation = ProposalRelation(relation_type=RelationType.AUTHORIZES, nucleus_seed_id="S1", support_seed_id="S2", distance=1, score=1.0)
+    record = build_ranked_proposals([_identity()], [cluster], [relation], [_seed((SeedRole.ACTION,))])[0]
+
+    assert record.decision is ProposalDecision.HELD_OUT
 
 
 def test_ranker_holds_out_negative_nucleus_even_with_grounded_span() -> None:
