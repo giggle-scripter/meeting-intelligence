@@ -17,7 +17,7 @@ from .router import (
 )
 from .proposal import TaskCreateProposal, TaskCreateProposalResponse
 from .evidence_seeds import EvidenceSeed, SeedRole, build_evidence_seeds
-from .proposal_relations import ProposalRelation, RelationType, build_proposal_relations
+from .proposal_relations import ProposalRelation, RelationScope, RelationType, build_proposal_relations
 from .proposal_clusters import ProposalCluster, ProposalKind, build_proposal_clusters
 from .scorer import choose_extraction_strategy, is_candidate
 from .window_builder import build_candidate_windows
@@ -29,7 +29,7 @@ __all__ = [
     "CandidateRouter", "CandidateRouterConfig", "CandidateRouterShadowSummary",
     "TaskCreateProposal", "TaskCreateProposalResponse",
     "EvidenceSeed", "SeedRole", "build_evidence_seeds",
-    "ProposalRelation", "RelationType", "build_proposal_relations",
+    "ProposalRelation", "RelationScope", "RelationType", "build_proposal_relations",
     "ProposalCluster", "ProposalKind", "build_proposal_clusters",
     "batch_ai_windows",
     "build_action_candidates", "build_action_proposals_v3", "build_action_frame", "build_candidate_evidence", "build_candidate_windows", "build_deadline_attachment_evidence", "build_owner_evidence",
