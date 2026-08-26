@@ -22,7 +22,9 @@ def test_corpus_builder_preserves_wave_split_and_exact_label() -> None:
         "proposal_span_identities_v3": {"records": [{"identity_key": "P1", "cluster_id": "CL1", "primary_clause_id": "C1", "action_span": {"clause_id": "C1", "start": 0, "end": 4, "text": "làm x"}}]},
     }}
 
-    rows, errors = module.build_rows(evidence, traces, train_waves={"W1"}, heldout_waves={"W4"})
+    rows, errors = module.build_rows(
+        evidence, traces, train_waves={"W1"}, calibration_waves={"W4"}, test_waves={"W5"},
+    )
 
     assert errors == []
     assert rows[0]["split"] == "train"

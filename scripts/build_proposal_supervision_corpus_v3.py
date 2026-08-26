@@ -22,7 +22,7 @@ def _waves(value: str) -> set[str]:
 
 
 def build_rows(
-    evidence_rows: list[dict], traces: dict[str, dict], *, train_waves: set[str], heldout_waves: set[str],
+    evidence_rows: list[dict], traces: dict[str, dict], *, train_waves: set[str], calibration_waves: set[str], test_waves: set[str],
 ) -> tuple[list[dict], list[str]]:
     exact_gold = {
         (row["case_id"], item["clause_id"], item["start"], item["end"], item["text"])
@@ -33,7 +33,12 @@ def build_rows(
     errors: list[str] = []
     for case_id, trace in sorted(traces.items()):
         wave = case_id.split("-", 1)[0].upper()
-        split = "train" if wave in train_waves else "held_out" if wave in heldout_waves else "excluded"
+        split = (
+            "train" if wave in train_waves else
+            "calibration" if wave in calibration_waves else
+            "test" if wave in test_waves else
+            "excluded"
+        )
         if split == "excluded":
             continue
         clusters = {item["cluster_id"]: item for item in trace.get("proposal_clusters_v3", {}).get("records", [])}
@@ -88,20 +93,27 @@ def main() -> int:
     parser.add_argument("--traces", type=Path, required=True)
     parser.add_argument("--output", type=Path, default=Path("data/quality/proposal-span-supervision-v3.jsonl"))
     parser.add_argument("--train-waves", default="W1,W2,W3")
-    parser.add_argument("--heldout-waves", default="W4,W5")
+    parser.add_argument("--calibration-waves", default="W4")
+    parser.add_argument("--test-waves", default="W5")
     args = parser.parse_args()
-    train_waves, heldout_waves = _waves(args.train_waves), _waves(args.heldout_waves)
-    if train_waves & heldout_waves:
-        raise ValueError("train and held-out waves must not overlap")
+    train_waves = _waves(args.train_waves)
+    calibration_waves = _waves(args.calibration_waves)
+    test_waves = _waves(args.test_waves)
+    if train_waves & calibration_waves or train_waves & test_waves or calibration_waves & test_waves:
+        raise ValueError("train, calibration, and test waves must not overlap")
     evidence = [json.loads(line) for line in args.evidence.read_text(encoding="utf-8").splitlines() if line.strip()]
-    rows, errors = build_rows(evidence, _load_traces(args.traces), train_waves=train_waves, heldout_waves=heldout_waves)
+    rows, errors = build_rows(
+        evidence, _load_traces(args.traces), train_waves=train_waves,
+        calibration_waves=calibration_waves, test_waves=test_waves,
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows), encoding="utf-8")
     counts = Counter((row["split"], row["exact_span_label"]) for row in rows)
     manifest = {
         "schema_version": "proposal-span-supervision-manifest-v3",
         "train_waves": sorted(train_waves),
-        "heldout_waves": sorted(heldout_waves),
+        "calibration_waves": sorted(calibration_waves),
+        "test_waves": sorted(test_waves),
         "row_count": len(rows),
         "label_counts": {f"{split}:{label}": count for (split, label), count in sorted(counts.items())},
         "sha256": sha256(args.output.read_bytes()).hexdigest(),
