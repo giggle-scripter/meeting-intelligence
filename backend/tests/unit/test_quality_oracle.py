@@ -1,4 +1,4 @@
-from backend.app.quality.oracle import build_oracle_report, validate_grounded_task_evidence, validate_review_bundle
+from backend.app.quality.oracle import build_oracle_report, validate_grounded_task_evidence, validate_review_bundle, validate_task_evidence_coverage
 
 
 def _baseline_records() -> list[dict]:
@@ -66,3 +66,11 @@ def test_grounded_evidence_rejects_broad_or_stale_spans() -> None:
     assert validate_grounded_task_evidence([row], traces) == []
     row["action_evidence"]["text"] = "wrong"
     assert "CASE[0]: action span does not match raw transcript" in validate_grounded_task_evidence([row], traces)
+
+
+def test_task_evidence_coverage_requires_exact_human_confirmed_inventory() -> None:
+    rows = [{"case_id": "CASE", "expected_task_index": 0, "review_status": "HUMAN_CONFIRMED"}]
+    assert validate_task_evidence_coverage(rows, {("CASE", 0)}) == []
+
+    errors = validate_task_evidence_coverage(rows, {("CASE", 0), ("CASE", 1)})
+    assert "task evidence missing 1 expected task(s)" in errors

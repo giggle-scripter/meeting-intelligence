@@ -151,6 +151,37 @@ def validate_grounded_task_evidence(
     return errors
 
 
+def validate_task_evidence_coverage(
+    rows: list[dict[str, Any]], expected_keys: set[tuple[str, int]],
+) -> list[str]:
+    """Ensure reviewed evidence covers the immutable validation task inventory."""
+
+    errors: list[str] = []
+    actual_keys: set[tuple[str, int]] = set()
+    for row in rows:
+        case_id = str(row.get("case_id", ""))
+        try:
+            task_index = int(row.get("expected_task_index", -1))
+        except (TypeError, ValueError):
+            task_index = -1
+        key = (case_id, task_index)
+        if not case_id or task_index < 0:
+            errors.append("task evidence has invalid case_id or expected_task_index")
+            continue
+        if key in actual_keys:
+            errors.append(f"duplicate task evidence for {case_id}[{task_index}]")
+        actual_keys.add(key)
+        if row.get("review_status") != "HUMAN_CONFIRMED":
+            errors.append(f"{case_id}[{task_index}]: review is not human-confirmed")
+    missing = expected_keys - actual_keys
+    extra = actual_keys - expected_keys
+    if missing:
+        errors.append(f"task evidence missing {len(missing)} expected task(s)")
+    if extra:
+        errors.append(f"task evidence contains {len(extra)} unknown task(s)")
+    return errors
+
+
 def _stage_count(reviews: list[dict[str, Any]], *, kind: str, stage: str) -> int:
     mapping = _MISSING_STAGE if kind == "MISSING" else _UNEXPECTED_STAGE
     return sum(
