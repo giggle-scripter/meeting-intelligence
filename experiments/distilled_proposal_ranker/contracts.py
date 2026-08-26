@@ -276,3 +276,16 @@ class TeacherResponse(StrictModel):
     prompt_hash: str
     model_hash: str
     records: list[TeacherDecisionRecord]
+
+
+class RerankerExample(StrictModel):
+    schema_version: Literal["reranker-example-v1"] = "reranker-example-v1"
+    example_id: str
+    input_hash: str
+    case_id: str
+    outer_fold: int
+    proposal_id: str
+    serialized_input: str
+    label: float = Field(ge=0.0, le=1.0)
+    sample_weight: float = Field(gt=0.0)
+    paired_negative_ids: list[str]

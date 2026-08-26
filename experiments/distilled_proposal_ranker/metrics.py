@@ -32,3 +32,25 @@ def exact_span_prf(predicted: Iterable[tuple[str, GroundedSpan]], expected: Iter
     predicted_set = {(case_id, item.clause_id, item.start, item.end, item.text) for case_id, item in predicted}
     expected_set = {(case_id, item.clause_id, item.start, item.end, item.text) for case_id, item in expected}
     return prf(len(predicted_set & expected_set), len(predicted_set), len(expected_set))
+
+
+def ranking_metrics(case_ids: list[str], probabilities: list[float], labels: list[float]) -> dict[str, float | None]:
+    from sklearn.metrics import average_precision_score, brier_score_loss, roc_auc_score
+
+    binary = [int(value >= 0.8) for value in labels]
+    both_classes = len(set(binary)) == 2
+    result: dict[str, float | None] = {
+        "pr_auc": float(average_precision_score(binary, probabilities)) if both_classes else None,
+        "roc_auc": float(roc_auc_score(binary, probabilities)) if both_classes else None,
+        "brier_score": float(brier_score_loss(binary, probabilities)),
+    }
+    by_case: dict[str, list[int]] = {}
+    for index, case_id in enumerate(case_ids):
+        by_case.setdefault(case_id, []).append(index)
+    expected = sum(binary)
+    for k in (1, 3, 5, 10, 30):
+        selected = set()
+        for indices in by_case.values():
+            selected.update(sorted(indices, key=lambda index: (-probabilities[index], index))[:k])
+        result[f"recall_at_{k}"] = sum(binary[index] for index in selected) / expected if expected else 0.0
+    return result

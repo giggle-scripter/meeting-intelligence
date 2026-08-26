@@ -1,7 +1,14 @@
 from __future__ import annotations
 
 from experiments.distilled_proposal_ranker.contracts import GroundedSpan, ProposalRecord
-from experiments.distilled_proposal_ranker.reranker_dataset import character_iou, label_training_proposals
+from types import SimpleNamespace
+
+import pytest
+import torch
+from torch import nn
+
+from experiments.distilled_proposal_ranker.reranker_dataset import character_iou, label_training_proposals, serialize_proposal
+from experiments.distilled_proposal_ranker.reranker_model import ProposalReranker, reranker_loss
 
 
 def _proposal(identifier: str, start: int, end: int) -> ProposalRecord:
@@ -28,3 +35,54 @@ def test_exact_positive_and_near_boundary_soft_label() -> None:
 def test_expected_task_name_cannot_enter_dataset_contract() -> None:
     proposal = _proposal("p", 0, 3)
     assert "task_name" not in proposal.model_dump_json()
+
+
+class WordTokenizer:
+    def __init__(self, multiplier: int = 1) -> None:
+        self.multiplier = multiplier
+
+    def __call__(self, text, **_kwargs):
+        return {"input_ids": list(range(max(1, len(text.split()) * self.multiplier)))}
+
+
+def test_cross_encoder_serialization_marks_action_and_contains_no_gold() -> None:
+    proposal = _proposal("p", 0, 3).model_copy(update={"action_span": GroundedSpan(clause_id="C1", start=0, end=3, text="Làm")})
+    trace = {
+        "clauses": [{"clause_id": "C1", "speaker_name": "Lan", "text_raw": "Làm báo cáo", "order_index": 0}],
+        "date_mentions": {},
+    }
+    serialized = serialize_proposal(proposal, trace, WordTokenizer())
+    assert "[ACTION]" in serialized and "[ACT]Làm[/ACT]" in serialized
+    assert "[AUTHORITY]" in serialized and "[NEGATIVE]" in serialized and "[CONTEXT]" in serialized
+    assert "expected task" not in serialized.casefold()
+
+
+def test_oversized_core_evidence_fails_without_truncating_action() -> None:
+    proposal = _proposal("p", 0, 3).model_copy(update={"action_span": GroundedSpan(clause_id="C1", start=0, end=3, text="Làm")})
+    trace = {"clauses": [{"clause_id": "C1", "speaker_name": "Lan", "text_raw": "Làm báo cáo", "order_index": 0}], "date_mentions": {}}
+    with pytest.raises(ValueError, match="STOP_OVERSIZED_CORE_EVIDENCE"):
+        serialize_proposal(proposal, trace, WordTokenizer(multiplier=100), max_length=10)
+
+
+class TinyBackbone(nn.Module):
+    def __init__(self) -> None:
+        super().__init__()
+        self.embedding = nn.Embedding(8, 4)
+
+    def forward(self, input_ids, attention_mask=None):
+        del attention_mask
+        return SimpleNamespace(last_hidden_state=self.embedding(input_ids))
+
+
+def test_cross_encoder_pairwise_margin_loss_smoke() -> None:
+    model = ProposalReranker(TinyBackbone(), 4)
+    logits = model(torch.tensor([[1, 2], [2, 1]]))
+    loss = reranker_loss(
+        logits,
+        torch.tensor([1.0, 0.0]),
+        torch.tensor([1.0, 0.25]),
+        torch.tensor(1.0),
+        [(0, 1)],
+    )
+    loss.backward()
+    assert torch.isfinite(loss)
