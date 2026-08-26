@@ -68,6 +68,7 @@ def build_rows(
                 "cluster_id": identity["cluster_id"],
                 "primary_clause_id": identity["primary_clause_id"],
                 "span": span,
+                "span_variant": identity.get("span_variant", "FULL_BOUNDARY"),
                 "nucleus_roles": nucleus["roles"],
                 "nucleus_flags": nucleus["flags"],
                 "semantic_score": semantic_item.get("score", 0.0),
