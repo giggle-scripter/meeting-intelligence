@@ -26,7 +26,7 @@ def test_clusters_keep_action_nuclei_separate_and_attach_local_support() -> None
         [first, authority, second], build_proposal_relations([first, authority, second])
     )
 
-    assert [item.action_seed_id for item in clusters] == ["S1", "S6"]
+    assert [item.nucleus_seed_id for item in clusters] == ["S1", "S2", "S6"]
     assert clusters[0].support_seed_ids == ("S2",)
-    assert clusters[1].support_seed_ids == ()
+    assert clusters[2].support_seed_ids == ()
     assert clusters[0].proposal_kind is ProposalKind.CREATE

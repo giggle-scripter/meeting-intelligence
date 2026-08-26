@@ -1,4 +1,4 @@
-"""Constrained V3 proposal clusters built around one action nucleus."""
+"""Constrained V3 proposal clusters built around one typed source nucleus."""
 from __future__ import annotations
 
 from enum import Enum
@@ -21,17 +21,17 @@ class ProposalCluster(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
     cluster_id: str
-    action_seed_id: str
-    action_clause_id: str
+    nucleus_seed_id: str
+    nucleus_clause_id: str
     proposal_kind: ProposalKind
     support_seed_ids: tuple[str, ...] = ()
     relation_types: tuple[RelationType, ...] = ()
 
 
-def _proposal_kind(action: EvidenceSeed) -> ProposalKind:
-    if SeedRole.MUTATION in action.roles:
+def _proposal_kind(nucleus: EvidenceSeed) -> ProposalKind:
+    if SeedRole.MUTATION in nucleus.roles:
         return ProposalKind.UPDATE
-    if SeedRole.NEGATIVE in action.roles or SeedRole.RECAP in action.roles:
+    if SeedRole.ACTION not in nucleus.roles or SeedRole.NEGATIVE in nucleus.roles or SeedRole.RECAP in nucleus.roles:
         return ProposalKind.REFERENCE
     return ProposalKind.CREATE
 
@@ -41,24 +41,22 @@ def build_proposal_clusters(
 ) -> list[ProposalCluster]:
     """Build one cluster per action seed; unrelated actions are never merged."""
 
-    by_action: dict[str, list[ProposalRelation]] = {}
+    by_nucleus: dict[str, list[ProposalRelation]] = {}
     for relation in relations:
-        by_action.setdefault(relation.action_seed_id, []).append(relation)
+        by_nucleus.setdefault(relation.nucleus_seed_id, []).append(relation)
 
     clusters: list[ProposalCluster] = []
-    for action in seeds:
-        if SeedRole.ACTION not in action.roles:
-            continue
+    for nucleus in seeds:
         attached = sorted(
-            by_action.get(action.seed_id, []),
+            by_nucleus.get(nucleus.seed_id, []),
             key=lambda item: (item.distance, item.support_seed_id, item.relation_type.value),
         )
         clusters.append(
             ProposalCluster(
-                cluster_id=f"CLUSTER-{action.clause_id}",
-                action_seed_id=action.seed_id,
-                action_clause_id=action.clause_id,
-                proposal_kind=_proposal_kind(action),
+                cluster_id=f"CLUSTER-{nucleus.clause_id}",
+                nucleus_seed_id=nucleus.seed_id,
+                nucleus_clause_id=nucleus.clause_id,
+                proposal_kind=_proposal_kind(nucleus),
                 support_seed_ids=tuple(item.support_seed_id for item in attached),
                 relation_types=tuple(item.relation_type for item in attached),
             )
