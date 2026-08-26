@@ -11,6 +11,7 @@ from .evidence_seeds import EvidenceSeed, SeedRole
 from .proposal_clusters import ProposalCluster
 from .proposal_relations import ProposalRelation, RelationType
 from .proposal_span_identity import ProposalSpanIdentity
+from .proposal_semantic_scoring import SemanticProposalScore, build_semantic_proposal_scores
 
 
 class ProposalDecision(str, Enum):
@@ -38,6 +39,7 @@ def build_ranked_proposals(
     clusters: list[ProposalCluster],
     relations: list[ProposalRelation],
     seeds: list[EvidenceSeed],
+    semantic_scores: list[SemanticProposalScore] | None = None,
     *,
     selection_threshold: float = 0.90,
 ) -> list[RankedProposal]:
@@ -45,6 +47,11 @@ def build_ranked_proposals(
 
     clusters_by_id = {item.cluster_id: item for item in clusters}
     seeds_by_id = {item.seed_id: item for item in seeds}
+    resolved_semantic_scores = semantic_scores if semantic_scores is not None else build_semantic_proposal_scores(identities)
+    semantic_by_identity = {
+        (item.identity_key, item.primary_clause_id): item
+        for item in resolved_semantic_scores
+    }
     relation_types: dict[str, set[RelationType]] = {}
     for relation in relations:
         relation_types.setdefault(relation.nucleus_seed_id, set()).add(relation.relation_type)
@@ -62,12 +69,15 @@ def build_ranked_proposals(
             (identity.primary_clause_id,),
         ) if identity.action_span else None
         links = relation_types.get(nucleus.seed_id, set())
+        semantic = semantic_by_identity.get((identity.identity_key, identity.primary_clause_id))
         score = 0.0
         reasons: list[str] = []
         if identity.state == "PROPOSED" and identity.action_span:
             score += 0.55; reasons.append("GROUNDED_SPAN")
         if frame and frame.valid:
             score += 0.20; reasons.append("CONCRETE_ACTION")
+        if semantic and semantic.score >= 0.75:
+            score += 0.05; reasons.append("SEMANTIC_QUALITY")
         if RelationType.AUTHORIZES in links or RelationType.ACCEPTS in links:
             score += 0.15; reasons.append("AUTHORITY_LINK")
         if RelationType.OWNS in links:
@@ -82,6 +92,7 @@ def build_ranked_proposals(
         score = round(min(score, 1.0), 3)
         selected = bool(
             frame and frame.valid and identity.state == "PROPOSED" and has_nucleus_authority
+            and semantic is not None and semantic.score >= 0.75
             and score >= selection_threshold
         )
         canonical = frame.canonical_action if frame and frame.valid else ""
