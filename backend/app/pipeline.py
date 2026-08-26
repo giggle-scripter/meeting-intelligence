@@ -1042,6 +1042,7 @@ def process_meeting(
             LOGGER.warning("Action classifier shadow inference failed: %s", exc)
             action_classifier_error_count = 1
     action_candidates_shadow = []
+    evidence_seeds_shadow = []
     action_candidate_builder_error_count = 0
     if action_candidate_builder_mode == "shadow" or commitment_router_mode != "off":
         try:
@@ -1057,6 +1058,9 @@ def process_meeting(
                 builder_version=action_candidate_builder_version,
                 **({"note_supported_clause_ids": set(note_cues_by_clause)} if builder is build_action_proposals_v3 else {}),
             )
+            if action_candidate_builder_version == "action-proposal-v3":
+                from .candidate import build_evidence_seeds
+                evidence_seeds_shadow = build_evidence_seeds(clauses, annotations, mentions)
         except (KeyError, RuntimeError, TypeError, ValueError) as exc:
             LOGGER.warning("Action candidate builder shadow failed: %s", exc)
             action_candidate_builder_error_count = 1
@@ -2293,6 +2297,11 @@ def process_meeting(
                     item.model_dump(mode="json") for item in action_candidates_shadow
                 ],
                 "executed": bool(action_candidates_shadow),
+            },
+            "proposal_evidence_seeds_v3": {
+                "executed": bool(evidence_seeds_shadow),
+                "count": len(evidence_seeds_shadow),
+                "records": [item.model_dump(mode="json") for item in evidence_seeds_shadow],
             },
             "commitment_router_v2": {
                 "mode": commitment_router_mode,

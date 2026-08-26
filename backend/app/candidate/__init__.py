@@ -16,6 +16,7 @@ from .router import (
     summarize_candidate_decisions,
 )
 from .proposal import TaskCreateProposal, TaskCreateProposalResponse
+from .evidence_seeds import EvidenceSeed, SeedRole, build_evidence_seeds
 from .scorer import choose_extraction_strategy, is_candidate
 from .window_builder import build_candidate_windows
 from .window_merger import merge_windows
@@ -25,6 +26,7 @@ __all__ = [
     "CandidateState", "CommitmentDecision", "CommitmentRoute", "DeadlineAttachmentEvidence", "DeadlineAttachmentType", "GroundedSpan", "OwnerEvidence", "OwnerEvidenceType",
     "CandidateRouter", "CandidateRouterConfig", "CandidateRouterShadowSummary",
     "TaskCreateProposal", "TaskCreateProposalResponse",
+    "EvidenceSeed", "SeedRole", "build_evidence_seeds",
     "batch_ai_windows",
     "build_action_candidates", "build_action_proposals_v3", "build_action_frame", "build_candidate_evidence", "build_candidate_windows", "build_deadline_attachment_evidence", "build_owner_evidence",
     "choose_extraction_strategy", "is_candidate", "merge_windows", "route_commitments",
