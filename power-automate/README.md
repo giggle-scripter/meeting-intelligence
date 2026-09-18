@@ -82,20 +82,27 @@ count làm transport gate. Quality vẫn được đánh giá bằng evaluator r
 
 Flow staging V2 phải giữ các bước theo đúng thứ tự sau:
 
-1. Gửi transcript/audio tới V2.27 staging và poll `status_url` tới
-   `succeeded` hoặc `failed`.
-2. Với `succeeded`, đưa `result.tasks` và bằng chứng liên quan vào bước human
-   review. Reviewer được sửa **task list cuối** (`task_name`, `assignee`, ngày,
-   evidence, status) trong vùng staging trước khi bấm Approval. Endpoint hiện
-   tại không nhận corrected transcript, corrected speaker hoặc audio/STT edit;
-   lỗi loại này phải được ghi nhận để xử lý riêng và không được giả vờ đưa vào
-   feedback training.
-3. Nếu reviewer chọn Approve, POST đúng danh sách đã sửa tới endpoint feedback.
-   Nếu Reject, lưu review outcome ở staging rồi kết thúc; không POST feedback.
-4. Chỉ sau khi POST feedback trả `201` hoặc phản hồi idempotent `200`, gửi email
-   **danh sách task đã approved**. Không email `result.tasks` chưa được duyệt.
-5. Nếu cần lưu danh sách trong SharePoint/Lists cho demo, dùng site/list staging
-   riêng. Flow này không có nhánh ghi trực tiếp vào V1 production Lists.
+1. Submit transcript/audio tới V2.27 staging; lưu `job_id` và `status_url` từ
+   response submit.
+2. Poll `status_url` tới `succeeded` hoặc `failed`. Khi `succeeded`, lấy
+   `content_hash` và `result.tasks` từ response poll.
+3. Ghi toàn bộ `result.tasks` vào **SharePoint List staging** để human review.
+   Reviewer có thể thêm, xóa hoặc sửa các row task cuối. Bước Approval rõ ràng
+   phải trả về `reviewer` và thời điểm duyệt (`reviewed_at`). Backend không tự
+   xác minh danh tính reviewer; backend tin vào flow đã kiểm soát quyền và gửi
+   metadata đó.
+4. Khi Approve, flow đọc **toàn bộ list cuối** (sau cả thêm/xóa/sửa), rồi POST
+   JSON tới feedback endpoint. `corrected_final_tasks` là cả danh sách cuối,
+   không phải chỉ các task đã thay đổi. Payload mẫu và schema ở
+   [`examples/v227-feedback-request.json`](examples/v227-feedback-request.json)
+   và [`schemas/v227-feedback-request.schema.json`](schemas/v227-feedback-request.schema.json).
+   Endpoint hiện tại không nhận corrected transcript, corrected speaker hoặc
+   audio/STT edit; lỗi loại này phải xử lý riêng.
+5. Nếu reviewer chọn Reject, hoặc submit/poll thất bại, flow kết thúc với
+   trạng thái lỗi/reject: **không POST feedback và không gửi email**. Chỉ sau
+   feedback trả `201` (hoặc idempotent `200`) mới gửi email danh sách task đã
+   approved; không email `result.tasks` chưa được duyệt. SharePoint List và
+   endpoint đều ở staging, không ghi trực tiếp V1 production Lists.
 
 Các nhánh lỗi bắt buộc:
 
@@ -134,6 +141,8 @@ X-API-Key: <cùng key của V2.27>
 ```
 
 Thiếu hoặc sai metadata bị từ chối; `job_id` và `content_hash` phải khớp job.
+Schema chỉ khóa các trường task và metadata cần dùng; server hiện không từ chối
+các property lạ ở top-level, nên không mô tả sai rằng chúng bị reject.
 Một job chỉ nhận một bản correction: gửi lại đúng payload là idempotent, gửi
 nội dung khác sẽ bị từ chối. Dữ liệu feedback giữ theo chính sách retention
 của tenant và phải xóa định kỳ khỏi thư mục private sau khi hết hạn; không xóa
@@ -141,6 +150,7 @@ hay sửa giữa chừng bản ghi append-only để dùng lại cho training.
 
 `POST /feedback` chỉ ghi correction record; nó không gọi
 `train_v227_feedback.py`. Trong local MVP, trainer là CLI offline do operator
-chạy thủ công sau Approval. Managed continual learning chỉ có thể bắt đầu sau
+chạy thủ công sau Approval; flow không tự khởi động training. Managed continual
+learning chỉ có thể bắt đầu sau
 khi triển khai queue/blob event, consumer/job, retry và idempotency riêng; không
 được suy ra từ việc API đã nhận feedback.

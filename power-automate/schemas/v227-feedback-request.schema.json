@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "V2.27 feedback request",
+  "description": "Preferred nested payload for POST /api/v1/meetings/jobs/{job_id}/feedback. The API currently ignores unknown top-level properties, so this schema intentionally leaves them open.",
+  "type": "object",
+  "required": ["job_id", "content_hash", "corrected_final_tasks", "approval_metadata"],
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "corrected_final_tasks": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "required": [
+          "task_name",
+          "assignee",
+          "start_date",
+          "due_date",
+          "due_date_text",
+          "evidence",
+          "status"
+        ],
+        "properties": {
+          "task_name": {"type": "string"},
+          "assignee": {"type": "string"},
+          "start_date": {"type": "string"},
+          "due_date": {"type": "string"},
+          "due_date_text": {"type": "string"},
+          "evidence": {"type": "string"},
+          "status": {"const": "Proposed"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "approval_metadata": {
+      "type": "object",
+      "required": ["reviewer", "reviewed_at", "approval"],
+      "properties": {
+        "reviewer": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "reviewed_at": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "format": "date-time"
+        },
+        "approval": {"const": true}
+      }
+    }
+  }
+}
