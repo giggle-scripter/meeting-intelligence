@@ -1,12 +1,12 @@
-# Kế hoạch triển khai Azure + Power Automate theo cổng
+# Kế hoạch triển khai V1/V2 theo cổng (Azure tùy chọn)
 
 Kế hoạch này chia rollout thành các cổng có thể kiểm tra. Với ngày hiện tại
 2026-09-18, mục tiêu trong tuần này chỉ là **đóng băng và demo prototype local
 đến hết 2026-09-20**: V1 submit/poll, V2 staging approval và feedback thủ công
 đều chạy được trên release worktree. Năm ngày dưới đây là thứ tự công việc,
-không phải cam kết năm ngày lịch đã trôi qua trong tuần này. Các bước managed
-Azure bắt đầu sau 2026-09-20 và chỉ được mở khi cổng trước đã đạt; không bật V2
-làm production model trong giai đoạn này.
+không phải cam kết năm ngày lịch đã trôi qua trong tuần này. Azure là nhánh
+managed tùy chọn sau pilot; tenant không đăng ký được Azure vẫn đi theo đường
+Windows + Cloudflare named tunnel trong [runbook không cần Azure](deployment-without-azure-vi.md).
 
 ## Nguyên tắc và điều kiện trước
 
@@ -16,12 +16,11 @@ làm production model trong giai đoạn này.
   phải durable database, chưa có backup/retention/replication và chưa deploy-ready
   cho multi-replica. Không trỏ Power Automate production vào process local hoặc
   Quick Tunnel dài hạn.
-- Azure region, SKU, network egress, log retention và Power Automate
-  license/connector cần quote từ tenant. Xem [Container Apps billing](https://learn.microsoft.com/en-us/azure/container-apps/billing)
+- Power Automate license/connector vẫn cần được xác nhận theo tenant. Azure
+  region/SKU/network egress chỉ cần quote nếu sau này chọn nhánh managed; Azure
+  không phải điều kiện pass của MVP. Xem [Container Apps billing](https://learn.microsoft.com/en-us/azure/container-apps/billing)
   và [Power Automate user license/service principal/flow](https://learn.microsoft.com/en-us/power-automate/assign-user-license-service-principal-flow).
-- Container Apps Jobs phù hợp cho CPU training theo event/run; xem
-  [Container Apps jobs](https://learn.microsoft.com/en-us/azure/container-apps/jobs).
-  GPU là nhánh tùy chọn sau tuần này, không chạy liên tục.
+- CPU trainer chỉ chạy one-shot sau human approval; GPU không cần cho MVP.
 
 ## Lịch theo cổng
 
@@ -57,27 +56,32 @@ thủ công) và xác nhận V1 production path không bị thay đổi.
 **Pass:** prototype local được freeze/demo trước hoặc trong ngày 2026-09-20;
 mọi lỗi có failure branch và không có direct write vào V1 production Lists.
 
-### Ngày 4 — sau 2026-09-20, gated: managed V1 foundation
+### Ngày 4 — sau 2026-09-20: pilot Windows + named tunnel
 
-Chỉ mở sau khi prototype local pass. Build image từ release worktree, chạy API
-trong Azure Container App/managed container với một revision. Đưa API key/OpenAI
-key vào Key Vault hoặc secret reference của app; bật HTTPS ingress giới hạn,
-Secure inputs/outputs ở flow và không gửi OpenAI key qua Power Automate. Dùng
-private Blob cho source, job payload/result và retention; thay in-memory job
-status bằng store/queue durable trước khi mở replica.
+Sau khi prototype local pass, chạy V1 trên một máy Windows luôn bật trong cửa
+sổ pilot. Uvicorn chỉ bind `127.0.0.1:8010`; Cloudflare named tunnel cung cấp
+hostname ổn định nếu người dùng có domain/account, còn Quick Tunnel chỉ dành
+cho demo ngắn. Dùng `X-API-Key`; có thể thêm Cloudflare Access service token.
+Bật Secure inputs/outputs cho submit, poll và Parse JSON. Không tạo service
+Windows hay scheduled task theo runbook; operator mở hai terminal và kiểm
+`/health` trước khi bật flow. Xem [pilot không cần Azure](deployment-without-azure-vi.md).
 
-**Pass/gate:** `/health`, submit/poll, restart và retry vẫn giữ trạng thái; log
-không có transcript/token/key; private storage có quyền tối thiểu và retention
-đã ghi. Nếu gate fail, giữ prototype local và không mở Ngày 5.
+**Pass:** V1 submit/poll, retry, failure branch và flow staging chạy đúng;
+hostname và key được kiểm tra; mọi người hiểu giới hạn uptime/sleep/restart.
+Đây là pilot có operator, không phải 24/7 unattended.
 
-### Ngày 5 — sau managed V1 pass, gated: V2 event job và operator handoff
+### Ngày 5 — sau pilot pass: V2 review và đường dài hạn tùy chọn
 
-Đặt V2 API ở app/hostname riêng, tenant và storage prefix riêng; không ghi thẳng
-Lists production. Sau feedback approved, managed wiring mới được phép phát event
-từ private storage/queue để chạy Azure Container Apps Job trên CPU. Job đọc
-append-only feedback, reconstruct trace, replay ranker deterministic và ghi
-challenger package bất biến. Job không có provider key, không gọi mạng và ghi
-manifest với `gpu_used: false`.
+V2 vẫn dùng app/hostname và storage prefix staging riêng; không ghi thẳng Lists
+production. Sau feedback approved, operator chạy CPU trainer one-shot bằng CLI,
+review challenger rồi mới activate/restart thủ công. Không auto-promotion,
+không GPU và không cần Azure Container Apps Job. Nếu cần chạy lâu hơn, chuyển
+API sang Windows host always-on hoặc VPS tại region người dùng đủ điều kiện;
+Azure Container Apps/Functions chỉ là lựa chọn managed về sau.
+
+Trước khi tuyên bố unattended/24/7 phải thay job store in-memory và local
+feedback/pointer bằng persistent store có lock, backup, retention và restore;
+chạy restore/restart smoke, kiểm idempotency/multi-replica và có rollback.
 
 Reviewer xem `coverage.json`, diagnostics, manifest/hash và danh sách case. Một
 operator có quyền riêng chạy activation CLI cho tenant staging, restart app,
@@ -98,15 +102,11 @@ continual learning tự động.
 OneDrive/SharePoint
         │ trigger + file content
         ▼
-Power Automate ──HTTPS──> Managed V1 API (Container App, durable job store)
+Power Automate ──HTTPS──> Windows V1 API (Uvicorn + named tunnel, pilot)
         │                         │
-        │                         ├── private Blob/source + result
-        │                         └── Key Vault / app secrets
+        │                         └── local files (operator-managed, not durable)
         │
-        └── V2 staging API ──approved feedback──> Queue/Blob event
-                                             │
-                                             ▼
-                                  Container Apps Job (CPU trainer)
+        └── V2 staging API ──approved feedback──> CPU trainer CLI (one-shot)
                                              │
                                   challenger package + diagnostics
                                              │
@@ -124,13 +124,14 @@ training logic vẫn ở backend/job để tránh nhân đôi logic trong flow.
 V1 provider cost phụ thuộc token/call và chịu cost gates; V2 text inference và
 CPU trainer không có provider charge. Audio diarization tính theo token của
 provider, **$2.50/1M input tokens và $10/1M output tokens**, không suy ra giá mỗi
-phút. Azure Container Apps, Blob, queue, Key Vault, logs, bandwidth và region
-được báo giá riêng; Power Automate license/connector/service principal cũng
-được quote riêng theo tenant. Tạm thời không dành ngân sách cho GPU chạy liên
-tục.
+phút. Pilot Windows + named tunnel không cần Azure account; vẫn cần tính chi
+phí máy, điện, mạng và Power Automate license/connector theo tenant. Azure
+Container Apps, Blob, queue, Key Vault, logs, bandwidth và region chỉ quote khi
+chọn nhánh managed. Tạm thời không dành ngân sách cho GPU chạy liên tục.
 
-Các rủi ro phải giữ ở trạng thái rõ ràng: job store in-memory nếu chưa thay bằng
-durable store, replica race nếu chưa có idempotent lock, transcript nhạy cảm nếu
-retention chưa được phê duyệt, và model drift nếu activation không qua reviewer.
-Nếu một cổng fail, giữ V1 local/managed ở trạng thái đã pass và dừng V2 ở
-staging; không bypass approval để “cho chạy thử”.
+Các rủi ro phải giữ ở trạng thái rõ ràng: job store in-memory và feedback/pointer
+local nếu chưa thay bằng durable store, host sleep/restart làm mất job, replica
+race nếu chưa có idempotent lock, transcript nhạy cảm nếu retention chưa được
+phê duyệt, và model drift nếu activation không qua reviewer. Nếu một cổng fail,
+giữ V1 pilot ở trạng thái đã pass và dừng V2 ở staging; không bypass approval để
+“cho chạy thử”.

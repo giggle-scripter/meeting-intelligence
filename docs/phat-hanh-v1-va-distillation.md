@@ -17,6 +17,12 @@ còn là holdout sạch. Final-dev18 và outer17 vẫn đóng.
 
 ## V1 đang chạy như thế nào
 
+Pilot không bị chặn bởi Azure. Nếu tenant không đăng ký được Azure, dùng
+[runbook Windows + Cloudflare không cần Azure](deployment-without-azure-vi.md):
+Uvicorn bind `127.0.0.1`, named tunnel cung cấp hostname ổn định khi có domain
+và Cloudflare account, còn Quick Tunnel chỉ dành cho demo ngắn. Không tìm cách
+vượt qua điều kiện Azure eligibility.
+
 Người dùng tải `.txt`, `.vtt` hoặc `.srt` lên OneDrive/SharePoint. Power
 Automate lấy nội dung file, gọi job API và poll `status_url`. FastAPI đọc
 transcript và metadata, tách turn/clause, khử lặp, nhận diện sự kiện giao việc,
@@ -113,10 +119,12 @@ Mở PowerShell thứ hai và giữ cửa sổ này chạy:
   --url http://127.0.0.1:8010
 ```
 
-Lấy URL `https://...trycloudflare.com` **của lần chạy hiện tại** từ terminal
-tunnel. Quick Tunnel đổi URL sau mỗi lần tạo lại và không có cam kết uptime;
-flow dài hạn cần hostname/tunnel ổn định. Kiểm tra `GET {ApiBaseUrl}/health`
-trước khi bật flow. Trong Power Automate, `ApiBaseUrl` là URL đó, `ApiKey` là
+Lệnh trên là Quick Tunnel cho demo ngắn. URL `https://...trycloudflare.com`
+đổi sau mỗi lần tạo lại, không có cam kết uptime và **không bao giờ là
+hostname production ổn định**. Pilot dài hơn phải dùng named tunnel với domain;
+xem [runbook không cần Azure](deployment-without-azure-vi.md). Kiểm tra
+`GET {ApiBaseUrl}/health` trước khi bật flow. Trong Power Automate,
+`ApiBaseUrl` là hostname hiện tại, `ApiKey` là
 nội dung file private. Trigger OneDrive/SharePoint → Get file content → HTTP
 `POST {ApiBaseUrl}/api/v1/meetings/jobs/process-file` với body binary,
 `Content-Type: application/octet-stream`, `X-API-Key: {ApiKey}` và

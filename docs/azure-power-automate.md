@@ -1,5 +1,11 @@
 # Azure và Power Automate
 
+Azure là phương án managed tùy chọn, không phải điều kiện của MVP. Nếu tenant
+không đăng ký được Azure do khu vực, dùng [pilot Windows + Cloudflare không cần
+Azure](deployment-without-azure-vi.md); không tìm cách vượt qua điều kiện
+eligibility. Quick Tunnel chỉ dành cho demo ngắn, còn named tunnel cần domain
+và Cloudflare account để có hostname ổn định.
+
 Tài liệu này triển khai luồng tự động từ transcript file đến hai SharePoint
 Lists. Người dùng chỉ upload file; không copy/paste transcript vào flow.
 

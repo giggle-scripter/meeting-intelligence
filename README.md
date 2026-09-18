@@ -20,7 +20,9 @@ Tài liệu chia sẻ bằng tiếng Việt về [V1, V2 MVP và chi phí](docs/
 có kèm hai infographic SVG: [V1 end-to-end](docs/assets/v1-end-to-end.svg) và
 [V2 continual-learning loop](docs/assets/v2-mvp-continual-learning-loop.svg).
 Kế hoạch triển khai theo từng cổng trong tuần nằm tại
-[Azure + Power Automate deployment plan](docs/deployment-week-plan-vi.md).
+[kế hoạch triển khai (Azure tùy chọn)](docs/deployment-week-plan-vi.md); đường
+pilot Windows không cần Azure nằm tại
+[Pilot V1 không cần Azure](docs/deployment-without-azure-vi.md).
 
 ## Flow Tổng Quát
 
@@ -124,9 +126,12 @@ uvicorn backend.app.main:app --host 127.0.0.1 --port 8010
 ```
 
 Để chạy **đúng flow Power Automate trên máy local**, cần thêm terminal thứ hai
-chạy HTTPS tunnel và cập nhật URL của phiên tunnel vào flow. Lệnh tạo/đọc khóa,
-chạy Uvicorn, tunnel, header upload và poll job đều được ghi theo thứ tự tại
+chạy HTTPS tunnel và cập nhật URL của phiên tunnel vào flow. Named Tunnel với
+hostname ổn định là đường pilot khuyến nghị nếu có domain/account; Quick Tunnel
+chỉ dành cho demo ngắn. Lệnh tạo/đọc khóa, chạy Uvicorn, tunnel, header upload
+và poll job đều được ghi theo thứ tự tại
 [hướng dẫn bản chốt](docs/phat-hanh-v1-va-distillation.md#cách-chạy-v1-với-power-automate).
+Xem thêm [runbook không cần Azure](docs/deployment-without-azure-vi.md).
 Các lệnh trong README không tự khởi chạy dịch vụ.
 
 `OPENAI_REASONING_EFFORT` nhận `minimal`, `low`, `medium` hoặc `high`. Mặc định
@@ -229,8 +234,9 @@ missing và unexpected task counts.
 
 - Health check: `http://127.0.0.1:8010/health`
 - Swagger UI: `http://127.0.0.1:8010/docs`
-- Khi dùng Cloudflare Quick Tunnel hoặc Azure Function, Power Automate gọi endpoint
-  công khai tương ứng đến `/api/v1/meetings/jobs/process-file`. Endpoint đồng bộ
+- Khi dùng Cloudflare named tunnel (pilot khuyến nghị), Quick Tunnel (demo ngắn)
+  hoặc Azure Function tùy chọn, Power Automate gọi endpoint công khai tương ứng
+  đến `/api/v1/meetings/jobs/process-file`. Endpoint đồng bộ
   `/api/v1/meetings/process-file` chỉ phù hợp test ngắn từ local/Swagger; không
   dùng cho transcript dài qua Power Automate.
 
@@ -299,7 +305,8 @@ Response có dạng:
 ```
 
 Chi tiết request/response: [docs/api.md](docs/api.md). Hướng dẫn Power Automate,
-Azure và fallback: [docs/azure-power-automate.md](docs/azure-power-automate.md).
+Azure tùy chọn và fallback: [docs/azure-power-automate.md](docs/azure-power-automate.md).
+Pilot Windows không cần Azure: [docs/deployment-without-azure-vi.md](docs/deployment-without-azure-vi.md).
 
 ## Test Và Đánh Giá
 

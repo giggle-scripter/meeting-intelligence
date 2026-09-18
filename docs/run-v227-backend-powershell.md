@@ -37,6 +37,11 @@ một worker vì job store nằm trong bộ nhớ. Cổng `8011` tách khỏi V1
 
 ## Terminal PowerShell 2: HTTPS tunnel
 
+Đây là tunnel cho staging V2.27, không phải V1 production. Nếu cần hostname
+ổn định cho pilot, xem [runbook không cần Azure](deployment-without-azure-vi.md)
+và dùng named tunnel; Quick Tunnel bên dưới chỉ dành cho demo ngắn. Không cài
+Windows service hoặc scheduled task theo runbook này.
+
 ```powershell
 & "$env:LOCALAPPDATA\cloudflared\cloudflared.exe" tunnel `
   --protocol http2 `
@@ -44,8 +49,8 @@ một worker vì job store nằm trong bộ nhớ. Cổng `8011` tách khỏi V1
 ```
 
 Đọc URL `https://...trycloudflare.com` **mới** trong terminal thứ hai. URL
-Quick Tunnel thay đổi khi khởi tạo lại và không đảm bảo uptime. Không dùng
-URL cũ từ lần chạy V1 trước. Nên dùng bản sao flow thử nghiệm và không ghi
+Quick Tunnel thay đổi khi khởi tạo lại, không đảm bảo uptime và không bao giờ
+là hostname production ổn định. Không dùng URL cũ từ lần chạy V1 trước. Nên dùng bản sao flow thử nghiệm và không ghi
 task thử vào Lists production.
 
 ## Kiểm tra trước khi nối flow

@@ -3,10 +3,13 @@
 Backend dùng trong flow phát hành là **V1** (`PIPELINE_VERSION=v1`). Lệnh
 PowerShell để tự chạy Uvicorn, HTTPS tunnel và quản lý `X-API-Key` nằm tại
 [hướng dẫn bản chốt](../docs/phat-hanh-v1-va-distillation.md#cách-chạy-v1-với-power-automate).
+Pilot Windows không cần Azure, named tunnel và Access service token xem tại
+[runbook triển khai không cần Azure](../docs/deployment-without-azure-vi.md).
 V2.27/V3.1 không được nối vào endpoint hoặc Lists production của flow V1; nếu
 chạy thử, phải dùng app/hostname và vùng staging riêng như phần dưới.
 
-Tổng quan V1/V2 MVP, ranh giới bằng chứng và kế hoạch Azure theo tuần xem
+Tổng quan V1/V2 MVP, ranh giới bằng chứng và kế hoạch triển khai theo tuần (Azure
+tùy chọn) xem
 [tài liệu chia sẻ](../docs/v1-v2-mvp-vi.md) và
 [kế hoạch triển khai](../docs/deployment-week-plan-vi.md).
 
@@ -41,7 +44,8 @@ variant A/B dùng cùng base metadata trong package; thêm variant vào key lưu
 nếu cần giữ đồng thời hai kết quả. `index.csv` chỉ là manifest/audit.
 
 Không copy/paste transcript vào manual trigger. Custom Connector chỉ được tạo
-sau khi HTTP action chạy ổn với Azure endpoint.
+sau khi HTTP action chạy ổn với public HTTPS endpoint (named tunnel là đường
+pilot khuyến nghị; Azure là lựa chọn tùy chọn).
 
 Submit trả `202` với `job_id`, `status=queued` và `status_url`. Poll bằng
 `GET /api/v1/meetings/jobs/{job_id}` với cùng `X-API-Key`; trạng thái hợp lệ là

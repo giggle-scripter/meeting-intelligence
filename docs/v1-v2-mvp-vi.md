@@ -7,6 +7,12 @@ vòng này chưa tự chạy liên tục: trainer chỉ chạy khi operator gọ
 feedback được duyệt. Điểm số trong
 tài liệu nghiên cứu không phải độ chính xác production của API.
 
+Azure không phải điều kiện để chạy MVP. Khi tenant không đăng ký được Azure,
+pilot V1 dùng máy Windows hiện có, Uvicorn bind loopback và Cloudflare named
+tunnel nếu có domain/account; Quick Tunnel chỉ dành cho demo ngắn. Xem
+[runbook triển khai không cần Azure](deployment-without-azure-vi.md). Không
+được bypass điều kiện eligibility của Azure.
+
 ## 1. V1: từ transcript đến task proposal
 
 ![Infographic V1 end-to-end](assets/v1-end-to-end.svg)
@@ -55,8 +61,11 @@ Các lệnh local trong release worktree chỉ là demo/runbook. Job store hiệ
 ở local là in-memory: restart process làm mất job đang xử lý. File local,
 pointer và feedback directory chưa phải database bền vững có backup, lock và
 replication; một worker local cũng chưa phải dịch vụ multi-replica. Vì vậy
-chưa được gọi là deployment Azure production và chưa được bật như service
-remote trong tuần này nếu chưa hoàn tất Stage 1 ở kế hoạch triển khai.
+pilot Windows chỉ có operator, chưa được gọi là unattended 24/7 hay
+multi-replica. Trước khi claim vận hành liên tục phải có persistent store,
+backup/retention, restore/restart smoke và idempotency/locking. Azure là nhánh
+managed tùy chọn trong [kế hoạch triển khai](deployment-week-plan-vi.md), không
+phải gate của MVP.
 
 ## 2. V2: lịch sử nghiên cứu và ranh giới bằng chứng
 
