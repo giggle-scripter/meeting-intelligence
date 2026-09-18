@@ -1,0 +1,5 @@
+# V2.27 DEV42 volume adaptive policy
+
+V2.27 uses the frozen V2.26 `final_plus_bridge_plus_intermediate` runtime pool and one epoch of the sparse ranker per held-out template. A meeting policy adapts threshold and budget from candidate volume, baseline/bridge/intermediate source mix, score distribution, and assignee/due/status completeness. Template, family, case-id, expected labels, diagnostic, final-dev, outer, teacher/provider, and Kaggle inputs are excluded from policy features.
+
+The output package is `evaluation/runtime/experimental-distillation-v2/v227-dev42-volume-adaptive-policy/`. It persists compact metrics, coverage, fold policies, runtime contexts and errors, tests, split access, status, and a report. Fold and family stability summaries report support explicitly; zero-expected families and folds are excluded from worst-support accounting. Families with at least five expected tasks must reach F1 0.40. The run passes aggregate identity F1 0.57 and field regression tolerance 0.03 on the locked DEV42 development set.
