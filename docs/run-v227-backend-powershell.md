@@ -2,6 +2,10 @@
 
 V2.27 **không** được bật bằng `PIPELINE_VERSION=v227`. Endpoint mới là một
 ASGI app opt-in riêng: `scripts.experimental_distillation.v227_api:app`.
+
+Tenant challenger chỉ được chọn sau CLI activate/rollback và restart app; xem
+[`run-v227-feedback-activation.md`](run-v227-feedback-activation.md). API chỉ
+đọc `V227_FEEDBACK_TENANT_ID`, không có HTTP admin endpoint hay auto promotion.
 Nó giữ route submit/poll của Power Automate nhưng dùng runner V2.27 với
 model full-fit và policy private V2.28. Backend V1 tại
 `backend.app.main:app` không thay đổi. V2.28 từng trượt gate diagnostic;

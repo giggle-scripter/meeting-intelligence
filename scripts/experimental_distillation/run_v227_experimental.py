@@ -51,6 +51,18 @@ ARTIFACT_DIR = ROOT / "evaluation/runtime/experimental-distillation-v2/v228-froz
 MODEL_NAME = "model.json"
 POLICY_NAME = "frozen-policy.json"
 MANIFEST_NAME = "manifest.json"
+CHALLENGER_ARTIFACTS = (
+    MODEL_NAME,
+    POLICY_NAME,
+    "source-hashes.json",
+    "coverage.json",
+    "holdout-diagnostics.json",
+)
+REQUIRED_POLICY_FIELDS = {
+    "adaptive_budget", "adaptive_threshold", "base_budget", "base_threshold",
+    "bridge_weight", "field_completeness_min", "intermediate_share_min",
+    "intermediate_weight", "score_mean_cap", "volume_cutoff",
+}
 DATE_RE = re.compile(
     r"(?<!\d)(?P<year>20\d{2})[-/.](?P<month>\d{1,2})[-/.](?P<day>\d{1,2})"
     r"|(?<!\d)(?P<day2>\d{1,2})[/-](?P<month2>\d{1,2})[/-](?P<year2>20\d{2})(?!\d)"
@@ -84,43 +96,67 @@ def _load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
-def _artifact_bundle(directory: Path) -> tuple[dict[str, Any], dict[str, Any], dict[str, str]]:
-    """Load and verify only the two runtime artifacts named by the manifest."""
+def _artifact_bundle(
+    directory: Path,
+    *,
+    expected_tenant: str | None = None,
+    expected_base_hashes: dict[str, str] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, str]]:
+    """Load a frozen base or an immutable tenant challenger.
+
+    The candidate construction and selection below deliberately receive only
+    the returned model and policy.  This keeps challenger serving on exactly
+    the existing runner path while making every artifact load fail closed.
+    """
 
     paths = {name: (directory / name).resolve() for name in (MODEL_NAME, POLICY_NAME, MANIFEST_NAME)}
     if any(not path.is_file() for path in paths.values()):
         missing = [name for name, path in paths.items() if not path.is_file()]
         raise RuntimeError("STOP_MISSING_PRIVATE_ARTIFACT:" + ",".join(missing))
     manifest = _load_json(paths[MANIFEST_NAME])
-    if manifest.get("schema_version") != "v228-manifest-v1" or manifest.get("immutable") is not True:
-        raise RuntimeError("STOP_INVALID_V228_MANIFEST")
+    schema = manifest.get("schema_version")
+    if manifest.get("immutable") is not True:
+        raise RuntimeError("STOP_INVALID_V228_MANIFEST" if manifest.get("schema_version") == "v228-manifest-v1" else "STOP_INVALID_RUNTIME_MANIFEST")
     hashes = manifest.get("artifact_hashes")
     if not isinstance(hashes, dict):
-        raise RuntimeError("STOP_MISSING_V228_ARTIFACT_HASHES")
-    actual = {name: _sha256(paths[name]) for name in (MODEL_NAME, POLICY_NAME)}
+        raise RuntimeError("STOP_MISSING_V228_ARTIFACT_HASHES" if manifest.get("schema_version") == "v228-manifest-v1" else "STOP_MISSING_RUNTIME_ARTIFACT_HASHES")
+    if schema == "v228-manifest-v1":
+        expected_artifacts = (MODEL_NAME, POLICY_NAME)
+    elif schema == "v227-tenant-challenger-manifest-v1":
+        expected_artifacts = CHALLENGER_ARTIFACTS
+        if expected_tenant is not None and manifest.get("tenant_id") != expected_tenant:
+            raise RuntimeError("STOP_CHALLENGER_TENANT_MISMATCH")
+        if manifest.get("auto_promotion") is not False or manifest.get("active_model_mutated") is not False:
+            raise RuntimeError("STOP_INVALID_CHALLENGER_POLICY")
+        if expected_base_hashes is not None and manifest.get("base_artifact_hashes") != expected_base_hashes:
+            raise RuntimeError("STOP_CHALLENGER_BASE_MISMATCH")
+    else:
+        raise RuntimeError("STOP_INVALID_RUNTIME_MANIFEST")
+    if any(not (directory / name).is_file() for name in expected_artifacts):
+        raise RuntimeError("STOP_MISSING_RUNTIME_ARTIFACT")
+    if set(hashes) != set(expected_artifacts):
+        raise RuntimeError("STOP_INVALID_RUNTIME_ARTIFACT_SET")
+    actual = {name: _sha256((directory / name).resolve()) for name in expected_artifacts}
     for name, digest in actual.items():
         if hashes.get(name) != digest:
             raise RuntimeError(f"STOP_ARTIFACT_HASH_MISMATCH:{name}")
     model = _load_json(paths[MODEL_NAME])
     policy = _load_json(paths[POLICY_NAME])
-    if model.get("schema_version") != "v228-frozen-model-v1":
-        raise RuntimeError("STOP_INVALID_V228_MODEL")
+    expected_model_schema = "v228-frozen-model-v1" if schema == "v228-manifest-v1" else "v227-tenant-challenger-model-v1"
+    expected_policy_schema = "v228-frozen-policy-v1" if schema == "v228-manifest-v1" else "v227-tenant-challenger-policy-v1"
+    if model.get("schema_version") != expected_model_schema:
+        raise RuntimeError("STOP_INVALID_RUNTIME_MODEL")
     weights = model.get("weights")
     if model.get("feature_dimensions") != 768 or not isinstance(weights, list) or len(weights) != 768:
-        raise RuntimeError("STOP_INVALID_V228_MODEL_DIMENSIONS")
+        raise RuntimeError("STOP_INVALID_RUNTIME_MODEL_DIMENSIONS")
     if not all(isinstance(value, (int, float)) and math.isfinite(float(value)) for value in weights):
-        raise RuntimeError("STOP_INVALID_V228_MODEL_WEIGHTS")
+        raise RuntimeError("STOP_INVALID_RUNTIME_MODEL_WEIGHTS")
     if not isinstance(model.get("bias"), (int, float)) or not math.isfinite(float(model["bias"])):
-        raise RuntimeError("STOP_INVALID_V228_MODEL_BIAS")
-    if policy.get("schema_version") != "v228-frozen-policy-v1" or not isinstance(policy.get("policy"), dict):
-        raise RuntimeError("STOP_INVALID_V228_POLICY")
-    required_policy = {
-        "adaptive_budget", "adaptive_threshold", "base_budget", "base_threshold",
-        "bridge_weight", "field_completeness_min", "intermediate_share_min",
-        "intermediate_weight", "score_mean_cap", "volume_cutoff",
-    }
-    if set(policy["policy"]) != required_policy:
-        raise RuntimeError("STOP_INVALID_V228_POLICY_FIELDS")
+        raise RuntimeError("STOP_INVALID_RUNTIME_MODEL_BIAS")
+    if policy.get("schema_version") != expected_policy_schema or not isinstance(policy.get("policy"), dict):
+        raise RuntimeError("STOP_INVALID_RUNTIME_POLICY")
+    if set(policy["policy"]) != REQUIRED_POLICY_FIELDS:
+        raise RuntimeError("STOP_INVALID_RUNTIME_POLICY_FIELDS")
     return model, policy["policy"], {
         "model": actual[MODEL_NAME],
         "policy": actual[POLICY_NAME],

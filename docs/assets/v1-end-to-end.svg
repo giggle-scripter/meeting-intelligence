@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">V1 Meeting Task Pipeline end-to-end</title>
+  <desc id="desc">Sơ đồ từ file transcript qua Power Automate và Python backend tới Meeting và Task Proposal.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0b1220"/><stop offset="1" stop-color="#14213d"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-opacity=".28"/></filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#8ed6ff"/></marker>
+    <style>
+      .title{font:700 42px Arial,sans-serif;fill:#f6f9ff}.sub{font:400 20px Arial,sans-serif;fill:#b8c7df}
+      .head{font:700 24px Arial,sans-serif;fill:#fff}.body{font:400 18px Arial,sans-serif;fill:#d7e3f6}.small{font:400 16px Arial,sans-serif;fill:#a8bad6}
+      .card{filter:url(#shadow);stroke-width:2}.arrow{stroke:#8ed6ff;stroke-width:4;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="80" y="82" class="title">V1 · TỪ TRANSCRIPT ĐẾN TASK PROPOSAL</text>
+  <text x="80" y="120" class="sub">Python-first, AI-last · Power Automate orchestration · task luôn bắt đầu ở trạng thái Proposed</text>
+
+  <g class="card">
+    <rect x="80" y="205" width="250" height="185" rx="22" fill="#17405b" stroke="#4eb7e9"/>
+    <text x="110" y="250" class="head">1 · Nguồn</text>
+    <text x="110" y="292" class="body">OneDrive / SharePoint</text>
+    <text x="110" y="325" class="body">.txt · .vtt · .srt</text>
+    <text x="110" y="360" class="small">file content + metadata</text>
+  </g>
+  <path d="M330 297 H405" class="arrow"/>
+  <g class="card">
+    <rect x="405" y="205" width="250" height="185" rx="22" fill="#29446d" stroke="#779cf2"/>
+    <text x="435" y="250" class="head">2 · Flow</text>
+    <text x="435" y="292" class="body">HTTP POST process-file</text>
+    <text x="435" y="325" class="body">202 + job_id</text>
+    <text x="435" y="360" class="small">poll status_url</text>
+  </g>
+  <path d="M655 297 H730" class="arrow"/>
+  <g class="card">
+    <rect x="730" y="205" width="250" height="185" rx="22" fill="#3b3265" stroke="#ac8cff"/>
+    <text x="760" y="250" class="head">3 · Chuẩn hóa</text>
+    <text x="760" y="292" class="body">parse · turn · clause</text>
+    <text x="760" y="325" class="body">deduplicate · evidence</text>
+    <text x="760" y="360" class="small">Python backend</text>
+  </g>
+  <path d="M980 297 H1055" class="arrow"/>
+  <g class="card">
+    <rect x="1055" y="205" width="250" height="185" rx="22" fill="#5a3a4f" stroke="#ed9baf"/>
+    <text x="1085" y="250" class="head">4 · Rule reducer</text>
+    <text x="1085" y="292" class="body">commitment · owner</text>
+    <text x="1085" y="325" class="body">deadline · cancel</text>
+    <text x="1085" y="360" class="small">giữ quyết định cuối</text>
+  </g>
+  <path d="M1305 297 H1380" class="arrow"/>
+  <g class="card">
+    <rect x="1380" y="205" width="140" height="185" rx="22" fill="#285649" stroke="#75dbb7"/>
+    <text x="1402" y="250" class="head">5 · Kết quả</text>
+    <text x="1402" y="296" class="body">Meeting</text>
+    <text x="1402" y="330" class="body">Task</text>
+    <text x="1402" y="364" class="small">Proposed</text>
+  </g>
+
+  <rect x="165" y="505" width="1270" height="235" rx="28" fill="#101c31" stroke="#2d5076" stroke-width="2"/>
+  <text x="210" y="555" class="head">AI fallback chỉ ở vùng mơ hồ (tùy chọn)</text>
+  <text x="210" y="600" class="body">Gom batch giới hạn → provider trả event theo schema → Python kiểm ID, schema, date và bằng chứng</text>
+  <text x="210" y="650" class="body">Có OPENAI_API_KEY: provider cost thay đổi theo token/call · Không có key: rule-only vẫn chạy</text>
+  <text x="210" y="700" class="body">Cost gate: giới hạn provider calls, payload characters và estimated USD; không đạt thì fail-closed</text>
+  <circle cx="1370" cy="610" r="35" fill="#204b57" stroke="#71e5d2" stroke-width="3"/>
+  <path d="M1354 610 l12 12 24-29" fill="none" stroke="#71e5d2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="80" y="835" class="small">V1 là production path hiện tại. Job store local in-memory; managed durable deployment là cổng tiếp theo.</text>
+</svg>

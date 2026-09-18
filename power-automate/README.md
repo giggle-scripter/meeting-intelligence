@@ -3,7 +3,12 @@
 Backend dùng trong flow phát hành là **V1** (`PIPELINE_VERSION=v1`). Lệnh
 PowerShell để tự chạy Uvicorn, HTTPS tunnel và quản lý `X-API-Key` nằm tại
 [hướng dẫn bản chốt](../docs/phat-hanh-v1-va-distillation.md#cách-chạy-v1-với-power-automate).
-V2.27/V3.1 không được nối vào endpoint này.
+V2.27/V3.1 không được nối vào endpoint hoặc Lists production của flow V1; nếu
+chạy thử, phải dùng app/hostname và vùng staging riêng như phần dưới.
+
+Tổng quan V1/V2 MVP, ranh giới bằng chứng và kế hoạch Azure theo tuần xem
+[tài liệu chia sẻ](../docs/v1-v2-mvp-vi.md) và
+[kế hoạch triển khai](../docs/deployment-week-plan-vi.md).
 
 Job endpoint đã qua full Gate C/replay contract. Power Automate tiếp tục là lớp
 orchestration; không port parsing, rule, date hoặc reducer vào flow.
@@ -68,3 +73,70 @@ file phẳng vẫn chứa transcript, Meeting Note và metadata khớp corpus ng
 
 Audit này kiểm 86 source cases/172 variants hiện tại; không dùng expected task
 count làm transport gate. Quality vẫn được đánh giá bằng evaluator riêng.
+
+## Flow staging V2.27 (opt-in, không ghi V1 production Lists)
+
+Flow staging V2 phải giữ các bước theo đúng thứ tự sau:
+
+1. Gửi transcript/audio tới V2.27 staging và poll `status_url` tới
+   `succeeded` hoặc `failed`.
+2. Với `succeeded`, đưa `result.tasks` và bằng chứng liên quan vào bước human
+   review. Reviewer được sửa **task list cuối** (`task_name`, `assignee`, ngày,
+   evidence, status) trong vùng staging trước khi bấm Approval. Endpoint hiện
+   tại không nhận corrected transcript, corrected speaker hoặc audio/STT edit;
+   lỗi loại này phải được ghi nhận để xử lý riêng và không được giả vờ đưa vào
+   feedback training.
+3. Nếu reviewer chọn Approve, POST đúng danh sách đã sửa tới endpoint feedback.
+   Nếu Reject, lưu review outcome ở staging rồi kết thúc; không POST feedback.
+4. Chỉ sau khi POST feedback trả `201` hoặc phản hồi idempotent `200`, gửi email
+   **danh sách task đã approved**. Không email `result.tasks` chưa được duyệt.
+5. Nếu cần lưu danh sách trong SharePoint/Lists cho demo, dùng site/list staging
+   riêng. Flow này không có nhánh ghi trực tiếp vào V1 production Lists.
+
+Các nhánh lỗi bắt buộc:
+
+- Submit trả non-2xx, poll timeout/`failed`, hoặc job `404`: đánh dấu source
+  `Failed`, lưu error/job id và không tạo task, không POST feedback, không email.
+- Feedback trả `4xx`: giữ review ở trạng thái cần sửa; không retry bằng payload
+  khác cho cùng job. Feedback trả `5xx`/timeout chỉ retry cùng payload và giữ
+  email ở trạng thái chờ.
+- Email lỗi sau khi feedback đã accepted: giữ bằng chứng feedback approved,
+  retry email approved; không quay lại gửi output chưa duyệt.
+
+Intake chỉ bật khi service V2.27 được chạy với biến môi trường server
+`V227_FEEDBACK_TENANT_ID` (không nhận tenant từ request). Có thể đặt thư mục
+lưu riêng bằng `V227_FEEDBACK_DIRECTORY`; mặc định là
+`evaluation/runtime/v227-feedback/<tenant>`. V1 không có route này và không bị
+thay đổi. Transcript gốc được lưu trước khi submit job, theo `content_hash`
+ổn định; bản ghi là append-only, không commit lên Git và không ghi transcript
+vào log.
+
+Sau khi poll job V2.27 ở trạng thái `succeeded`, Power Automate phải dừng ở một
+bước human approval. Chỉ khi người duyệt chọn **Approve**, flow mới gọi:
+
+```text
+POST /api/v1/meetings/jobs/{job_id}/feedback
+X-API-Key: <cùng key của V2.27>
+{
+  "job_id": "job-...",
+  "content_hash": "<giá trị từ job status>",
+  "corrected_final_tasks": [...],
+  "approval_metadata": {
+    "reviewer": "person@example.com",
+    "reviewed_at": "2026-09-18T10:00:00+07:00",
+    "approval": true
+  }
+}
+```
+
+Thiếu hoặc sai metadata bị từ chối; `job_id` và `content_hash` phải khớp job.
+Một job chỉ nhận một bản correction: gửi lại đúng payload là idempotent, gửi
+nội dung khác sẽ bị từ chối. Dữ liệu feedback giữ theo chính sách retention
+của tenant và phải xóa định kỳ khỏi thư mục private sau khi hết hạn; không xóa
+hay sửa giữa chừng bản ghi append-only để dùng lại cho training.
+
+`POST /feedback` chỉ ghi correction record; nó không gọi
+`train_v227_feedback.py`. Trong local MVP, trainer là CLI offline do operator
+chạy thủ công sau Approval. Managed continual learning chỉ có thể bắt đầu sau
+khi triển khai queue/blob event, consumer/job, retry và idempotency riêng; không
+được suy ra từ việc API đã nhận feedback.

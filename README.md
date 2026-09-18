@@ -13,6 +13,14 @@ CLI/ASGI app thử nghiệm opt-in, V3.1 là kết quả so sánh trên tập de
 được hiểu điểm F1 của hai mốc nghiên cứu là chất lượng API production.
 Lệnh PowerShell để **tự chạy** V2.27 như backend thử nghiệm nằm tại
 [hướng dẫn V2.27 API](docs/run-v227-backend-powershell.md).
+Lớp audio-to-text opt-in và giới hạn upload nằm tại
+[hướng dẫn V2.27 audio](docs/run-v227-audio-powershell.md).
+
+Tài liệu chia sẻ bằng tiếng Việt về [V1, V2 MVP và chi phí](docs/v1-v2-mvp-vi.md)
+có kèm hai infographic SVG: [V1 end-to-end](docs/assets/v1-end-to-end.svg) và
+[V2 continual-learning loop](docs/assets/v2-mvp-continual-learning-loop.svg).
+Kế hoạch triển khai theo từng cổng trong tuần nằm tại
+[Azure + Power Automate deployment plan](docs/deployment-week-plan-vi.md).
 
 ## Flow Tổng Quát
 

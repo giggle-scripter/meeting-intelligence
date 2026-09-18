@@ -10,6 +10,7 @@ evaluation/traces*/
 evaluation/tmptrace/
 evaluation/live-v1-*/
 evaluation/runtime/*/
+evaluation/runtime/v227-feedback/
 evaluation/**/*.checkpoint.json
 evaluation/**/*.checkpoint.json.tmp
 evaluation/**/*.tmp
