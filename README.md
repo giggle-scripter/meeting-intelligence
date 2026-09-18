@@ -504,7 +504,7 @@ Candidate evidence router cũng chỉ chạy shadow và yêu cầu classifier sh
   --report evaluation\candidate-router-shadow.json
 ```
 
-### Span-grounded action candidates (Q1)
+### Ứng viên hành động có span làm bằng chứng (Q1)
 
 `ACTION_CANDIDATE_BUILDER_MODE=shadow` tạo `ActionCandidate` có action/owner
 span, deadline mention ID, loại candidate và trạng thái evidence. Đây là telemetry
@@ -518,61 +518,59 @@ commitment routing ở PR sau:
   --report evaluation\action-candidate-shadow.json
 ```
 
-### Commitment authority router (Q2)
+### Bộ định tuyến thẩm quyền cam kết (Q2)
 
-`COMMITMENT_ROUTER_MODE=assist` enforces the authority matrix before legacy
-create events are reduced. Hard negatives, conditional work, and bounded
-coordination follow-ups are retained in trace evidence but cannot mint a task.
-The default active authorities are `DIRECT_ASSIGNMENT,SELF_COMMITMENT`; no AI
-call is made by this router. Review `commitment_router_v2` in the opt-in trace
-before changing `COMMITMENT_ROUTER_ACTIVE_TYPES`.
+`COMMITMENT_ROUTER_MODE=assist` áp ma trận thẩm quyền trước khi reducer xử lý
+legacy create event. Hard negative, việc có điều kiện và trao đổi phối hợp
+được giữ trong trace nhưng không được tạo task. Thẩm quyền mặc định là
+`DIRECT_ASSIGNMENT,SELF_COMMITMENT`; router này không gọi AI. Cần review
+`commitment_router_v2` trong trace opt-in trước khi đổi
+`COMMITMENT_ROUTER_ACTIVE_TYPES`.
 
-### Action canonicalization (Q3)
+### Chuẩn hóa tên hành động (Q3)
 
-`ACTION_CANONICALIZATION_MODE=shadow` records a deterministic `ActionFrame`
-with raw span, normalized verb/object, proposed canonical action and rejection
-reason. Q3 does not change task names: its initial active experiment regressed
-the Q2 F1 baseline, so promotion is deferred until the trace has reviewed
-split/merge evidence.
+`ACTION_CANONICALIZATION_MODE=shadow` ghi `ActionFrame` xác định gồm raw span,
+động từ/tân ngữ đã chuẩn hóa, tên hành động đề xuất và lý do từ chối. Q3 không
+đổi tên task: thử nghiệm active ban đầu làm giảm F1 so với Q2, nên chưa
+promote cho đến khi review bằng chứng split/merge trong trace.
 
-### Recap lifecycle reconciliation (Q4)
+### Đối chiếu recap với vòng đời task (Q4)
 
-`RECAP_RECONCILIATION_MODE=shadow` records generic recap rows whose proposed
-action is actually recap metadata (for example an owner or deadline fragment).
-It does not alter output yet: the first constrained active experiment improved
-F1 only from `0.534` to `0.535`, below the Q4 slice gate.
+`RECAP_RECONCILIATION_MODE=shadow` ghi những dòng recap mà action đề xuất thực
+ra chỉ là metadata, ví dụ mảnh owner hoặc deadline. Cờ này chưa đổi output:
+thử nghiệm active đầu tiên chỉ nâng F1 từ `0.534` lên `0.535`, dưới gate Q4.
 
-### Owner grounding (Q5)
+### Gắn người phụ trách với bằng chứng (Q5)
 
-`OWNER_GROUNDING_MODE=shadow` audits explicit owner spans and classifies them
-as direct assignment, self-commitment, acceptance, reassignment, or role
-assignment. It never chooses a previous speaker as a fallback owner.
+`OWNER_GROUNDING_MODE=shadow` kiểm tra owner span rõ ràng và phân loại giao
+việc trực tiếp, tự cam kết, chấp nhận, giao lại hoặc giao theo vai trò. Không
+lấy người nói trước làm owner dự phòng.
 
-### Deadline grounding (Q6)
+### Gắn hạn với bằng chứng (Q6)
 
-`DEADLINE_GROUNDING_MODE=shadow` records whether a date mention is attached in
-the action source, by an explicit task label, by an adjacent support clause,
-or remains unresolved. It never attaches a date by arbitrary nearest task.
+`DEADLINE_GROUNDING_MODE=shadow` ghi date mention gắn ngay trong action source,
+qua nhãn task rõ ràng, qua clause hỗ trợ liền kề hay còn chưa giải quyết.
+Không gắn ngày vào task gần nhất một cách tùy tiện.
 
-### AI uncertain-candidate preflight (Q7)
+### Kiểm tra trước ứng viên mơ hồ có AI (Q7)
 
-`AI_QUALITY_UPLIFT_MODE=shadow` audits only candidate-router `AI_CREATE_CHECK`
-rows that also have a grounded CREATE span and no hard-negative commitment
-decision. It records eligible and excluded rows in `ai_quality_uplift_v1`, caps
-the selected candidates using `AI_CREATE_MAX_PROPOSALS_PER_MEETING`, and never
-calls a provider or changes output. Run it with all four prerequisite modes in
-`shadow`; live assist remains disabled until paired quality evidence passes.
+`AI_QUALITY_UPLIFT_MODE=shadow` chỉ kiểm tra dòng `AI_CREATE_CHECK` có CREATE
+span được grounding và không bị hard-negative commitment chặn. Nó ghi dòng
+hợp lệ/bị loại vào `ai_quality_uplift_v1`, giới hạn số ứng viên qua
+`AI_CREATE_MAX_PROPOSALS_PER_MEETING`, không gọi provider và không đổi output.
+Chạy cùng bốn mode tiên quyết ở `shadow`; live assist vẫn tắt cho đến khi qua
+gate chất lượng cặp.
 
 Router hợp nhất rule/classifier/note evidence thành route có reasons, nhưng PR4
 không execute bất kỳ route nào. `AI_CREATE_CHECK` chỉ tăng suppressed diagnostics;
 AI create vẫn tắt và final task output vẫn do pipeline hiện tại quyết định.
 
-### Quality oracle evidence (PR #29)
+### Bằng chứng oracle chất lượng (PR #29)
 
-PR #29 pins the Q2-assist baseline to explicit expected-task evidence and a
-reviewed error budget before V2 changes routing. It remains evaluation-only:
-none of these scripts are imported by the production pipeline. Recreate the
-trace, evidence bundle, independent stage ceilings and gate as follows:
+PR #29 khóa baseline Q2-assist bằng expected-task evidence rõ ràng và error
+budget đã review trước khi V2 đổi routing. Nó chỉ phục vụ đánh giá; pipeline
+production không import các script này. Tái tạo trace, evidence bundle, các
+stage ceiling độc lập và gate bằng lệnh sau:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\analyze_quality_errors.py data\validation `
@@ -586,6 +584,6 @@ trace, evidence bundle, independent stage ceilings and gate as follows:
   --oracle-output evaluation\runtime\q2-oracle-ceilings.json
 ```
 
-The review gate also requires a complete Q7 shadow report with a valid
-classifier artifact and zero classifier/router errors. Its ceilings are
-independent intervention bounds, not claims of achieved model quality.
+Gate review còn yêu cầu Q7 shadow report hoàn chỉnh, classifier artifact hợp
+lệ và không có lỗi classifier/router. Các ceiling là giới hạn can thiệp độc
+lập, không phải chất lượng mô hình đã đạt.
