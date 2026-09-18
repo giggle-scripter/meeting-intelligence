@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from experiments.distilled_proposal_ranker.contracts import load_protocol
 from experiments.distilled_proposal_ranker.folds import (
     assert_no_fold_leakage,
@@ -25,6 +27,10 @@ def test_fold_assignment_is_deterministic_and_grouped() -> None:
 def test_real_manifest_has_no_outer_or_inner_case_leakage() -> None:
     root = Path.cwd()
     snapshot = load_protocol(Path("experiments/distilled_proposal_ranker/config/protocol-v1.json"))
+    private_traces = root / snapshot.protocol.trace_path
+    private_baseline = root / snapshot.protocol.baseline_trace_path
+    if not private_traces.is_dir() or not private_baseline.is_dir():
+        pytest.skip("private runtime traces are unavailable in a clean checkout")
     first = build_fold_manifest(root, snapshot)
     second = build_fold_manifest(root, snapshot)
     assert canonical_json_hash(first) == canonical_json_hash(second)

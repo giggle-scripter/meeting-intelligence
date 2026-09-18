@@ -7,6 +7,11 @@ quy tắc xác định; AI chỉ hỗ trợ các đoạn thực sự mơ hồ.
 Tài liệu onboarding đầy đủ cho developer hoặc phiên chat mới:
 [docs/project-context.md](docs/project-context.md).
 
+**Bản chốt để review/merge:** [V1, hai mốc distillation và cách chạy Power
+Automate](docs/phat-hanh-v1-va-distillation.md). API đang chạy V1; V2.27 là
+CLI nghiên cứu nội bộ, V3.1 là kết quả so sánh trên tập development. Không
+được hiểu điểm F1 của hai mốc nghiên cứu là chất lượng API production.
+
 ## Flow Tổng Quát
 
 ```text
@@ -98,7 +103,7 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r backend\requirements.txt
 
-$env:POWER_AUTOMATE_API_KEY="mi-demo-secret"
+$env:POWER_AUTOMATE_API_KEY="<khóa riêng đủ mạnh, giống giá trị trong flow>"
 $env:AI_FALLBACK_ENDPOINT=""
 $env:OPENAI_API_KEY="<key-nhận-từ-lead>"
 $env:OPENAI_MODEL="gpt-5-mini"
@@ -107,6 +112,12 @@ $env:AI_TIMEOUT_SECONDS="3600"
 $env:AI_MAX_BATCH_CONTEXT_CLAUSES="56"
 uvicorn backend.app.main:app --host 127.0.0.1 --port 8010
 ```
+
+Để chạy **đúng flow Power Automate trên máy local**, cần thêm terminal thứ hai
+chạy HTTPS tunnel và cập nhật URL của phiên tunnel vào flow. Lệnh tạo/đọc khóa,
+chạy Uvicorn, tunnel, header upload và poll job đều được ghi theo thứ tự tại
+[hướng dẫn bản chốt](docs/phat-hanh-v1-va-distillation.md#cách-chạy-v1-với-power-automate).
+Các lệnh trong README không tự khởi chạy dịch vụ.
 
 `OPENAI_REASONING_EFFORT` nhận `minimal`, `low`, `medium` hoặc `high`. Mặc định
 `medium`; chỉ đặt `high` khi cần ưu tiên xử lý window mơ hồ phức tạp hơn latency

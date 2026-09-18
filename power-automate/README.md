@@ -1,4 +1,9 @@
-# Power Automate Integration
+# Tích hợp Power Automate
+
+Backend dùng trong flow phát hành là **V1** (`PIPELINE_VERSION=v1`). Lệnh
+PowerShell để tự chạy Uvicorn, HTTPS tunnel và quản lý `X-API-Key` nằm tại
+[hướng dẫn bản chốt](../docs/phat-hanh-v1-va-distillation.md#cách-chạy-v1-với-power-automate).
+V2.27/V3.1 không được nối vào endpoint này.
 
 Job endpoint đã qua full Gate C/replay contract. Power Automate tiếp tục là lớp
 orchestration; không port parsing, rule, date hoặc reducer vào flow.

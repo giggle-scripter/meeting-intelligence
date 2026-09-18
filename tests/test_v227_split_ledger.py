@@ -4,6 +4,8 @@ import hashlib
 import json
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).parents[1]
 LEDGER = ROOT / "docs/experiments/v227_split_ledger.md"
@@ -17,6 +19,11 @@ def _sha256(relative: str) -> str:
     return hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
 
 
+def _require_private_artifacts(*relatives: str) -> None:
+    if any(not (ROOT / relative).is_file() for relative in relatives):
+        pytest.skip("private runtime artifacts are unavailable in a clean checkout")
+
+
 def test_v227_split_ledger_matches_recorded_scope_and_hashes() -> None:
     ledger = LEDGER.read_text(encoding="utf-8")
     expected_hashes = {
@@ -24,6 +31,7 @@ def test_v227_split_ledger_matches_recorded_scope_and_hashes() -> None:
         "evaluation/runtime/experimental-distillation-v2/v227-dev42-volume-adaptive-policy/split-access-audit.json": "8011cd721eb5e82b7e55dae337b51108ac48894c90bed054b474d0bcaeeeb132",
         "evaluation/runtime/experimental-distillation-v2/v224-dev42-crossfit-gate/split-access-audit.json": "47a6c95b88771651a60bca20d1e5d2048762456f74c384306c69b27c2cf5acce",
     }
+    _require_private_artifacts(*expected_hashes)
     for relative, expected in expected_hashes.items():
         assert _sha256(relative) == expected
         assert expected in ledger
@@ -43,6 +51,11 @@ def test_v227_split_ledger_matches_recorded_scope_and_hashes() -> None:
 
 def test_later_split_history_is_consistent_with_the_ledger() -> None:
     ledger = LEDGER.read_text(encoding="utf-8")
+    _require_private_artifacts(
+        "evaluation/runtime/experimental-distillation-v2/v224-dev42-crossfit-gate/split-access-audit.json",
+        "evaluation/runtime/experimental-distillation-v2/v228-frozen-promotion/metrics.json",
+        "evaluation/runtime/experimental-distillation-v2/v229-dev51-final-gate/metrics.json",
+    )
     v224 = _load(
         "evaluation/runtime/experimental-distillation-v2/"
         "v224-dev42-crossfit-gate/split-access-audit.json"
@@ -73,11 +86,10 @@ def test_later_split_history_is_consistent_with_the_ledger() -> None:
     assert v229["split_access"]["final_dev_case_ids_read"] == []
     assert v229["split_access"]["outer_validation_case_ids_read"] == []
     for phrase in (
-        "V2.24 evaluated diagnostic9 once",
-        "V2.28 evaluated it",
-        "once again as a confirmation",
-        "V2.29 includes it",
-        "in DEV51",
-        "Final-dev18 and outer17 remain unopened",
+        "V2.24 đánh giá diagnostic9 một lần",
+        "V2.28 đọc lại để",
+        "V2.29 đưa diagnostic9 vào DEV51",
+        "Final-dev18",
+        "outer17 vẫn chưa được mở",
     ):
         assert phrase in ledger

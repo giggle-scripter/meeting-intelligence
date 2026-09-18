@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import json
 import inspect
+import hashlib
 from pathlib import Path
-import shutil
 
 import pytest
 
@@ -11,14 +11,43 @@ from backend.app.ai.client import DisabledAiClient
 from backend.app.models import MeetingInput
 from backend.app.pipeline import process_meeting_by_version
 import scripts.experimental_distillation.run_v227_experimental as v227
-from scripts.experimental_distillation.run_v227_experimental import ARTIFACT_DIR, run
+from scripts.experimental_distillation.run_v227_experimental import run
 
 
 def _artifacts(tmp_path: Path) -> Path:
     target = tmp_path / "artifacts"
     target.mkdir()
-    for name in ("model.json", "frozen-policy.json", "manifest.json"):
-        shutil.copy2(ARTIFACT_DIR / name, target / name)
+    # Tests must pass in a clean Git checkout with no private model package.
+    model = {
+        "schema_version": "v228-frozen-model-v1",
+        "feature_dimensions": 768,
+        "weights": [0.0] * 768,
+        "bias": 0.0,
+    }
+    policy = {
+        "schema_version": "v228-frozen-policy-v1",
+        "policy": {
+            "adaptive_budget": 20,
+            "adaptive_threshold": 0.15,
+            "base_budget": 8,
+            "base_threshold": 0.35,
+            "bridge_weight": 0.5,
+            "field_completeness_min": 0.5,
+            "intermediate_share_min": 0.33,
+            "intermediate_weight": 0.75,
+            "score_mean_cap": 0.3,
+            "volume_cutoff": 30,
+        },
+    }
+    hashes = {}
+    for name, payload in (("model.json", model), ("frozen-policy.json", policy)):
+        path = target / name
+        path.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+        hashes[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    (target / "manifest.json").write_text(
+        json.dumps({"schema_version": "v228-manifest-v1", "immutable": True, "artifact_hashes": hashes}),
+        encoding="utf-8",
+    )
     return target
 
 

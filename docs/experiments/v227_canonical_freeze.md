@@ -1,53 +1,43 @@
-# V2.27 canonical internal baseline
+# Mốc V2.27 canonical dành cho nghiên cứu nội bộ
 
-The canonical V2.27 baseline is the immutable package at
+Package bất biến nằm tại
 `evaluation/runtime/experimental-distillation-v2/v227-canonical-freeze/`.
-Runtime artifacts remain private and ignored by Git. The package is created by
-`scripts/experimental_distillation/freeze_v227_baseline.py`, which refuses to
-write into a non-empty output directory and records SHA-256 hashes for the
-source chain, dependency manifest, split manifest, and copied artifacts.
+Runtime artifact được giữ private và Git ignore. Script
+`scripts/experimental_distillation/freeze_v227_baseline.py` từ chối ghi vào
+thư mục output không rỗng và ghi SHA-256 cho source, dependency, split và
+artifact đã sao chép. Phân loại: **`PROMISING_INTERNAL_ONLY`**.
 
-Classification: **PROMISING_INTERNAL_ONLY**.
+V2.27 là thí nghiệm DEV42 leave-template-out: candidate union của V2.25
+(`final_plus_bridge_plus_intermediate`), nested template/family holdout của
+V2.26 và volume-adaptive policy của V2.27. Mỗi template có một sparse hashed
+ranker 768 feature, một epoch, learning rate 0.15. Chọn policy chỉ trên
+meeting thuộc phần fit; feature policy chỉ được dựa vào lượng candidate,
+source mix, phân phối score và mức đầy đủ assignee/due/status. Cấm template,
+family, case ID và nhãn expected làm feature. Identity được so bằng Hungarian
+matching theo từng meeting.
 
-The frozen result is a DEV42 leave-template-out experiment. It uses the V2.25
-candidate construction (`final_plus_bridge_plus_intermediate`), the V2.26
-nested template/family holdout, and the V2.27 volume-adaptive policy. Each
-template has one sparse hashed ranker fit (768 features, one epoch, learning
-rate 0.15). Policy tuning uses fit meetings only and can use meeting-local
-candidate volume, source mix, score distribution, and assignee/due/status
-completeness. Template, family, case ID, and expected labels are forbidden
-policy features. Candidate identity uses one meeting-local Hungarian match.
+DEV42 có 42 meeting (TRAIN34 + calibration8), 15 template holdout và 27
+family. Precision **0.52410**, recall **0.62590**, F1 **0.57049**, field
+accuracy **0.84483**, worst supported-family F1 **0.44444** (OPS-FPC).
+Aggregate gate F1 `>=0.57`, supported-family gate `>=0.40` và dung sai field
+accuracy tối đa 0.03 so với expanded-pool baseline đều đạt. Run không gọi
+teacher, provider hay Kaggle.
 
-DEV42 metrics are identity precision **0.52410**, identity recall **0.62590**,
-identity F1 **0.57049**, field accuracy **0.84483**, and supported-family worst
-F1 **0.44444** for `OPS-FPC` (10 supported families; minimum support is five
-expected tasks). The aggregate identity gate is 0.57, the supported-family
-gate is 0.40, and field accuracy may regress by at most 0.03 against the
-expanded-pool baseline. All three gates passed.
+Diagnostic9, final-dev18 và outer17 không được mở trong source run V2.27;
+không được dùng kết quả về sau để tuyên bố validation cho package này. Lịch
+sử đọc diagnostic9 sau đó được ghi tại
+[split ledger](v227_split_ledger.md): V2.24 đọc một lần, V2.28 đọc lại làm
+confirmation, V2.29 đưa vào DEV51. Final-dev18 và outer17 vẫn đóng.
 
-The split audit is DEV42 only: 34 train meetings plus 8 calibration meetings,
-15 held-out templates, and 27 families. Diagnostic9, final-dev, and outer
-validation were not opened; their results are not validation evidence for this
-frozen baseline. The run made zero teacher, provider, or Kaggle calls.
+`source-hashes.json` giữ con trỏ nguồn/hash; thư mục `canonical/` chứa
+metrics, coverage, policy từng fold, split-access audit, test, status và
+report. Kiểm tra package private bằng:
 
-## Audit clarification
-
-The current cross-version split history is recorded in the separate
-[V2.27 current split ledger](v227_split_ledger.md). The V2.27 source run is
-DEV42 only and did not open diagnostic9, final-dev18, or outer17. Later
-protocols consumed diagnostic9: V2.24 evaluated it once, V2.28 evaluated it
-once again as a confirmation of that prior consumption, and V2.29 includes it
-in DEV51. Those later reads do not change the V2.27 freeze boundary. Final-dev18
-and outer17 remain unopened.
-
-Canonical source pointers and hashes are in `source-hashes.json`; copied
-metrics, coverage, fold policies, split access, tests, status, and report are
-under `canonical/`. Verify the package with:
-
-```text
-python scripts/experimental_distillation/freeze_v227_baseline.py --verify
+```powershell
+.\.venv\Scripts\python.exe scripts\experimental_distillation\freeze_v227_baseline.py --verify
 ```
 
-The retained `evaluation/runtime/experimental-distillation-v2/v227-debug4/`
-directory is explicitly marked noncanonical for debugging and must not be
-cited as the baseline.
+`evaluation/runtime/experimental-distillation-v2/v227-debug4/` chỉ là bản
+debug, không được trích dẫn làm baseline. Cách chạy thử trên transcript mới
+ở [hướng dẫn V2.27](../run-v227-experimental.md); bản full-fit dùng ở CLI
+thuộc V2.28 và đã trượt diagnostic gate, vì thế chưa thể triển khai vào API.

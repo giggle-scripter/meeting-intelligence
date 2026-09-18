@@ -1,49 +1,38 @@
-# Run the frozen V2.27 experimental ranker
+# Chạy thử phương pháp V2.27 trên transcript mới
 
-This path is opt in and local CPU only. It runs the existing V1 rule pipeline
-with the AI client disabled, writes a fresh in memory V1 trace, builds the
-`final_plus_bridge_plus_intermediate` candidate pool from that trace, and
-applies the frozen V2.27 full fit model and modal policy packaged under the
-private V2.28 promotion directory.
+Đây là lệnh **thử nghiệm opt-in trên CPU**, không phải endpoint Power Automate.
+Backend mặc định vẫn chạy V1. Lệnh này chạy V1 với AI tắt để tạo trace mới,
+lấy tập ứng viên `final_plus_bridge_plus_intermediate`, rồi áp mô hình full-fit
+và policy đã đóng băng trong package private V2.28. Các bản ghi shadow của
+action-candidate và commitment-router chỉ phục vụ tạo candidate; chúng không
+thay output V1 và không gọi provider.
 
-The command enables V1's deterministic action-candidate and commitment-router
-shadow records solely so the frozen runtime candidate chain has its required
-trace fields; both remain provider-free and the public V1 extraction is not
-replaced.
+Package private cần đủ `model.json`, `frozen-policy.json`, `manifest.json` tại
+`evaluation/runtime/experimental-distillation-v2/v228-frozen-promotion/`.
+Runner kiểm SHA-256 model và policy theo manifest trước khi xử lý. Nếu thiếu
+hoặc hash sai, lệnh dừng. Có thể dùng `--artifact-directory` trỏ đến bản sao
+private. Không commit model, transcript, nhãn hoặc manifest chứa runtime data.
 
-The result is explicitly experimental. The V2.28 diagnostic gate failed, so
-the output includes `experimental.experimental_not_validated: true` and must
-not be described as a validated production model. V1 remains the default
-route and this command never makes provider calls.
-
-The private artifact directory must contain `model.json`, `frozen-policy.json`,
-and `manifest.json` from:
-
-```text
-evaluation/runtime/experimental-distillation-v2/v228-frozen-promotion/
-```
-
-The runner verifies the model and policy SHA256 values against the V2.28
-manifest before processing any transcript. If the directory is absent or an
-artifact changes, it stops. These files are intentionally ignored by Git;
-retain them in the private runtime directory (or pass a private copy with
-`--artifact-directory`) and never add them to source control.
-
-PowerShell example:
+Từ root dự án:
 
 ```powershell
-python scripts/experimental_distillation/run_v227_experimental.py `
+.\.venv\Scripts\python.exe scripts\experimental_distillation\run_v227_experimental.py `
   .\new-meeting.vtt `
   --meeting-date 2026-09-18 `
-  --meeting-title "Weekly delivery review" `
+  --meeting-title 'Weekly delivery review' `
   --output .\backend\outputs\new-meeting-v227.json
 ```
 
-`.txt`, `.vtt`, and `.srt` inputs are accepted. `--meeting-date` is preferred;
-when it is omitted, the command accepts an explicit ISO or day/month/year date
-found on a meeting/date context line in the transcript and otherwise stops. It never uses a case ID,
-validation metadata, expected output, or a hardcoded date fallback.
+Nhận `.txt`, `.vtt`, `.srt`. Nên cung cấp `--meeting-date`. Nếu bỏ qua, lệnh chỉ
+nhận ngày ISO hoặc ngày/tháng/năm rõ ràng trên dòng ngữ cảnh cuộc họp; không
+có thì dừng. Lệnh không dùng case ID, nhãn validation, expected output hoặc
+ngày fallback cố định. JSON trả các trường meeting/task thông thường và phần
+`experimental` gồm hash artifact/trace, số candidate và số task được chọn,
+policy, `provider_call_count: 0` và cảnh báo chất lượng.
 
-The JSON keeps the normal meeting/task fields and adds experimental diagnostics
-including artifact hashes, fresh trace hash, candidate and selected counts,
-policy context, `provider_call_count: 0`, and the validation warning.
+**Giới hạn quan trọng:** V2.27 DEV42 OOF F1 0.57049 là bằng chứng development.
+Mô hình full-fit từ V2.28 đã trượt gate diagnostic. Vì vậy output ghi
+`experimental_not_validated: true`; không dùng để thay task của V1 hay tự động
+ghi Power Automate. V3.1 chỉ là comparator trên DEV42 + DeepSeek DEV13, chưa
+có runner inference được chốt. Xem
+[tài liệu bản phát hành](phat-hanh-v1-va-distillation.md).
