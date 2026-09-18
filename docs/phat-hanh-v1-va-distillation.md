@@ -71,10 +71,11 @@ official score. Đây là lý do không chọn các bản đó làm mốc releas
 
 Manifest, model, transcript, nhãn và phản hồi provider nằm trong
 `evaluation/runtime/`, được Git ignore; **không push** các file đó. V2.27 có
-CLI opt-in để chạy trên transcript mới, nhưng CLI dùng model full-fit và policy
-trong private package V2.28. V2.28 đã trượt gate diagnostic, nên kết quả CLI
-luôn mang cờ `experimental_not_validated`; xem
-[hướng dẫn V2.27](run-v227-experimental.md). V3.1 chỉ được chốt là bằng chứng
+CLI và ASGI app opt-in để chạy trên transcript mới. Cả hai dùng model full-fit
+và policy trong private package V2.28. V2.28 đã trượt gate diagnostic, nên
+kết quả luôn mang cờ `experimental_not_validated`; xem
+[CLI V2.27](run-v227-experimental.md) và
+[backend V2.27 thử nghiệm](run-v227-backend-powershell.md). V3.1 chỉ được chốt là bằng chứng
 development và chưa có endpoint/runner inference ổn định. Không được quảng
 cáo một trong hai là bản thay V1 trong Power Automate.
 

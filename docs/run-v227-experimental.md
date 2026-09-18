@@ -1,7 +1,8 @@
 # Chạy thử phương pháp V2.27 trên transcript mới
 
-Đây là lệnh **thử nghiệm opt-in trên CPU**, không phải endpoint Power Automate.
-Backend mặc định vẫn chạy V1. Lệnh này chạy V1 với AI tắt để tạo trace mới,
+Đây là lệnh **thử nghiệm opt-in trên CPU**. Backend mặc định vẫn chạy V1;
+muốn thử V2.27 qua endpoint Power Automate, dùng
+[ASGI app riêng](run-v227-backend-powershell.md). Lệnh CLI này chạy V1 với AI tắt để tạo trace mới,
 lấy tập ứng viên `final_plus_bridge_plus_intermediate`, rồi áp mô hình full-fit
 và policy đã đóng băng trong package private V2.28. Các bản ghi shadow của
 action-candidate và commitment-router chỉ phục vụ tạo candidate; chúng không

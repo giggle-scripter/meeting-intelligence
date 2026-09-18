@@ -9,8 +9,10 @@ Tài liệu onboarding đầy đủ cho developer hoặc phiên chat mới:
 
 **Bản chốt để review/merge:** [V1, hai mốc distillation và cách chạy Power
 Automate](docs/phat-hanh-v1-va-distillation.md). API đang chạy V1; V2.27 là
-CLI nghiên cứu nội bộ, V3.1 là kết quả so sánh trên tập development. Không
+CLI/ASGI app thử nghiệm opt-in, V3.1 là kết quả so sánh trên tập development. Không
 được hiểu điểm F1 của hai mốc nghiên cứu là chất lượng API production.
+Lệnh PowerShell để **tự chạy** V2.27 như backend thử nghiệm nằm tại
+[hướng dẫn V2.27 API](docs/run-v227-backend-powershell.md).
 
 ## Flow Tổng Quát
 
