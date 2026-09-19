@@ -307,6 +307,8 @@ Response có dạng:
 Chi tiết request/response: [docs/api.md](docs/api.md). Hướng dẫn Power Automate,
 Azure tùy chọn và fallback: [docs/azure-power-automate.md](docs/azure-power-automate.md).
 Pilot Windows không cần Azure: [docs/deployment-without-azure-vi.md](docs/deployment-without-azure-vi.md).
+Operator local cho API V2.27 đã chạy sẵn (submit/poll, human review và feedback
+sau approval): [docs/run-local-v227-operator-vi.md](docs/run-local-v227-operator-vi.md).
 
 ## Test Và Đánh Giá
 
