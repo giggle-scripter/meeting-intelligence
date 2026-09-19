@@ -22,18 +22,31 @@ dẫn `.venv` bằng project gốc; vẫn giữ artifact private ngoài Git.
 ```powershell
 cd 'C:\Intern AI SPS\meeting-intelligent-release'
 $env:POWER_AUTOMATE_API_KEY = (Get-Content 'C:\Intern AI SPS\meeting-intelligent\evaluation\runtime\power-automate-local\api-key.txt' -Raw).Trim()
+$env:V227_FEEDBACK_TENANT_ID = 'pilot-tenant'
+$env:V227_FEEDBACK_DIRECTORY = 'evaluation\runtime\v227-feedback'
 $env:V227_ARTIFACT_DIRECTORY = 'C:\Intern AI SPS\meeting-intelligent\evaluation\runtime\experimental-distillation-v2\v228-frozen-promotion'
+$env:MEETING_JOB_SQLITE_PATH = 'evaluation\runtime\v227-feedback\meeting-jobs.sqlite3'
+$python = 'C:\Intern AI SPS\meeting-intelligent\.venv\Scripts\python.exe'
+& $python scripts\local_v227_preflight.py --text
 & 'C:\Intern AI SPS\meeting-intelligent\.venv\Scripts\uvicorn.exe' `
   scripts.experimental_distillation.v227_api:app `
-  --host 127.0.0.1 --port 8011
+  --host 127.0.0.1 --port 8011 --workers 1
 ```
 
-API từ chối khởi động nếu thiếu `POWER_AUTOMATE_API_KEY` hoặc nếu model,
+Preflight phải báo `V227_PREFLIGHT PASS` trước khi chạy Uvicorn. Nó chỉ đọc
+cấu hình và artifact local, không gọi service, provider hoặc tunnel. API từ
+chối khởi động nếu thiếu `POWER_AUTOMATE_API_KEY` hoặc nếu model,
 policy, manifest private thiếu/sai hash. Manifest V2.28 được khóa bằng
 SHA-256 `7f1dc956fb30def28eb97ade562b7a8aa9b69345b530f6a79f122d180c416ca3`.
-**Không cần `OPENAI_API_KEY`**:
-runner V2.27 luôn tắt provider và số lần gọi provider bằng 0. Chỉ dùng
-một worker vì job store nằm trong bộ nhớ. Cổng `8011` tách khỏi V1 `8010`.
+Khi audio tắt, **không cần `OPENAI_API_KEY`**: runner V2.27 luôn tắt
+provider và số lần gọi provider bằng 0. Nếu bật `V227_AUDIO_TO_TEXT_ENABLED`,
+preflight yêu cầu `OPENAI_API_KEY` server-side cho bước transcription. Chỉ
+dùng một worker vì SQLite job store là file local, không dùng chung cho nhiều
+replica. Cổng `8011` tách khỏi V1 `8010`.
+
+Sau khi backend chạy, dùng [local V2.27 operator CLI](run-local-v227-operator-vi.md)
+để submit, poll và gửi feedback đã được reviewer phê duyệt. CLI không khởi
+động backend hay tunnel.
 
 ## Terminal PowerShell 2: HTTPS tunnel
 
