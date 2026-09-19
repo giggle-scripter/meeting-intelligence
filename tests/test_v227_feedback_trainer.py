@@ -10,6 +10,7 @@ from fastapi.testclient import TestClient
 import pytest
 from backend.app.ingestion import build_meeting_package
 from backend.tests.experimental.test_v227_experimental import _artifacts
+import scripts.experimental_distillation.v227_api as v227_api
 import scripts.experimental_distillation.train_v227_feedback as trainer
 from scripts.experimental_distillation.train_v227_feedback import train
 from scripts.experimental_distillation.v227_api import create_app
@@ -126,6 +127,145 @@ def test_api_utf16_intake_persists_raw_identity_and_trains(tmp_path: Path, monke
         (Path(result["output"]) / "source-hashes.json").read_text(encoding="utf-8")
     )
     assert source_hashes["meetings"][next(iter(source_hashes["meetings"]))]["raw_upload_sha256"] == hashlib.sha256(raw).hexdigest()
+
+
+def test_api_sqlite_feedback_and_idempotency_survive_restart(tmp_path: Path, monkeypatch) -> None:
+    """Completed V2.27 jobs remain reviewable and idempotent after an app restart."""
+    monkeypatch.setenv("V227_FEEDBACK_TENANT_ID", "tenant-restart")
+    # Keep this test independent from operator settings that may be present in
+    # a developer shell or CI worker.  Every path and secret used by the app is
+    # supplied explicitly below.
+    for name in (
+        "V227_FEEDBACK_DIRECTORY",
+        "V227_ARTIFACT_DIRECTORY",
+        "V227_AUDIO_TO_TEXT_ENABLED",
+        "V227_TRANSCRIPTION_ENABLED",
+        "V227_AUDIO_ENABLED",
+        "POWER_AUTOMATE_API_KEY",
+        "OPENAI_API_KEY",
+        "MEETING_JOB_SQLITE_PATH",
+    ):
+        monkeypatch.delenv(name, raising=False)
+
+    artifacts = _artifacts(tmp_path)
+    expected_manifest_sha256 = hashlib.sha256((artifacts / "manifest.json").read_bytes()).hexdigest()
+    feedback_directory = tmp_path / "feedback"
+    sqlite_path = tmp_path / "jobs.sqlite3"
+    api_key = "restart-test-secret"
+    transcript = (
+        "Lan: Please prepare the rollout checklist by Friday.\n"
+        "Minh: I will review the checklist.\n"
+    )
+    raw = transcript.encode("utf-8")
+    headers = {
+        "X-API-Key": api_key,
+        "X-File-Name-Base64": b64encode(b"restart-meeting.txt").decode("ascii"),
+        "X-Meeting-Id": "restart-meeting-1",
+        "X-Meeting-Title": "Restart integration",
+        "X-Meeting-Date": "2026-09-18",
+    }
+    calls = 0
+    original_run = v227_api.run
+
+    def counted_run(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        return original_run(*args, **kwargs)
+
+    monkeypatch.setattr(v227_api, "run", counted_run)
+    app = create_app(
+        artifact_directory=artifacts,
+        feedback_directory=feedback_directory,
+        api_key=api_key,
+        expected_manifest_sha256=expected_manifest_sha256,
+        job_sqlite_path=sqlite_path,
+    )
+    with TestClient(app) as client:
+        submitted = client.post(
+            "/api/v1/meetings/jobs/process-file",
+            content=raw,
+            headers=headers,
+        )
+        assert submitted.status_code == 202, submitted.text
+        submission = submitted.json()
+        deadline = time.monotonic() + 5
+        while True:
+            response = client.get(submission["status_url"], headers={"X-API-Key": api_key})
+            job = response.json()
+            if job["status"] in {"succeeded", "failed"} or time.monotonic() > deadline:
+                break
+            time.sleep(0.02)
+        assert job["status"] == "succeeded", job["error"]
+        assert job["content_hash"]
+        assert job["result"]
+        assert job["result"]["tasks"]
+        original_job = job
+        original_job_id = submission["job_id"]
+        original_status_url = submission["status_url"]
+    assert calls == 1
+
+    # TestClient closes the first app/lifespan here.  The second app must load
+    # the same completed row and source record from the supplied paths.
+    restarted_app = create_app(
+        artifact_directory=artifacts,
+        feedback_directory=feedback_directory,
+        api_key=api_key,
+        expected_manifest_sha256=expected_manifest_sha256,
+        job_sqlite_path=sqlite_path,
+    )
+    with TestClient(restarted_app) as client:
+        restored_response = client.get(original_status_url, headers={"X-API-Key": api_key})
+        assert restored_response.status_code == 200
+        restored = restored_response.json()
+        assert restored["job_id"] == original_job_id
+        assert restored["content_hash"] == original_job["content_hash"]
+        assert restored["result"] == original_job["result"]
+        assert restored["result"]["tasks"] == original_job["result"]["tasks"]
+
+        feedback = {
+            "job_id": original_job_id,
+            "content_hash": restored["content_hash"],
+            "corrected_final_tasks": [],
+            "approval_metadata": {
+                "reviewer": "restart-reviewer",
+                "reviewed_at": "2026-09-19T00:00:00+00:00",
+                "approval": True,
+            },
+        }
+        feedback_response = client.post(
+            f"/api/v1/meetings/jobs/{original_job_id}/feedback",
+            json=feedback,
+            headers={"X-API-Key": api_key},
+        )
+        assert feedback_response.status_code == 201, feedback_response.text
+        receipt = feedback_response.json()
+        assert receipt["job_id"] == original_job_id
+        assert receipt["created"] is True
+        assert receipt["feedback_hash"]
+
+        feedback_path = feedback_directory / "tenant-restart" / "feedback" / f"{original_job_id}.json"
+        persisted_feedback = json.loads(feedback_path.read_text(encoding="utf-8"))
+        assert persisted_feedback["feedback_hash"] == receipt["feedback_hash"]
+        before = feedback_path.read_bytes()
+        repeat_feedback = client.post(
+            f"/api/v1/meetings/jobs/{original_job_id}/feedback",
+            json=feedback,
+            headers={"X-API-Key": api_key},
+        )
+        assert repeat_feedback.status_code == 200
+        assert repeat_feedback.json() == {**receipt, "created": False}
+        assert feedback_path.read_bytes() == before
+
+        retried = client.post(
+            "/api/v1/meetings/jobs/process-file",
+            content=raw,
+            headers=headers,
+        )
+        assert retried.status_code == 202, retried.text
+        assert retried.json()["job_id"] == original_job_id
+        assert retried.json()["created"] is False
+        assert retried.json()["status_url"] == original_status_url
+        assert calls == 1
 
 
 @pytest.mark.parametrize(
