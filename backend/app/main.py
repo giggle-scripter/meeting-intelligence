@@ -6,6 +6,7 @@ from hashlib import sha256
 from base64 import b64decode
 from binascii import Error as BinasciiError
 import json
+import os
 import re
 from secrets import compare_digest
 from typing import Annotated, Literal
@@ -57,7 +58,9 @@ app = FastAPI(
     version="1.0.0",
     description="Python-first transcript-to-task pipeline with selective AI fallback.",
 )
-job_store = MeetingJobStore()
+# SQLite is opt-in for the one-process local Uvicorn deployment.  Leaving the
+# variable unset preserves the existing in-memory behavior used by tests.
+job_store = MeetingJobStore(sqlite_path=os.getenv("MEETING_JOB_SQLITE_PATH") or None)
 
 
 def verify_api_key(

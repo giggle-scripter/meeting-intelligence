@@ -523,6 +523,7 @@ def create_app(
     audio_enabled: bool | None = None,
     audio_transcriber: AudioTranscriber | None = None,
     openai_api_key: str | None = None,
+    job_sqlite_path: str | Path | None = None,
 ) -> FastAPI:
     artifacts = Path(artifact_directory or os.getenv("V227_ARTIFACT_DIRECTORY") or ARTIFACT_DIR)
     configured_feedback_directory = Path(feedback_directory or os.getenv(FEEDBACK_DIRECTORY_ENV) or DEFAULT_FEEDBACK_DIRECTORY)
@@ -530,7 +531,10 @@ def create_app(
     expected_key = api_key if api_key is not None else os.getenv("POWER_AUTOMATE_API_KEY", "")
     audio_opt_in = _audio_enabled_from_environment() if audio_enabled is None else audio_enabled
     configured_audio_transcriber = audio_transcriber
-    jobs = MeetingJobStore()
+    # SQLite is opt-in and scoped to this single local worker.  Passing a path
+    # is useful for tests and operators who do not want to mutate the process
+    # environment; otherwise MeetingJobStore reads MEETING_JOB_SQLITE_PATH.
+    jobs = MeetingJobStore(sqlite_path=job_sqlite_path)
     active_artifacts = artifacts.resolve()
     active_model_kind = "base"
     active_base_hashes: dict[str, str] = {}
