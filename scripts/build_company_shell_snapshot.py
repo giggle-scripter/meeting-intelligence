@@ -33,6 +33,7 @@ EXCLUDED_ROOTS = {
     "artifacts",
     "datasets",
     "scripts/experimental_distillation",
+    "experiments/distilled_proposal_ranker/v2",
 }
 EXCLUDED_FILES = {
     "backend/app/core/v2_adaptive.py",

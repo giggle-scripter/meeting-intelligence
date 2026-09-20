@@ -1,0 +1,152 @@
+{
+  "schema_version": "private-v2-extraction-boundary-v1",
+  "boundary_id": "meeting-intelligent-private-v2",
+  "fixed_ids": {
+    "public_package": "meeting-task-pipeline",
+    "private_package": "meeting_v2_adaptive",
+    "public_core_id": "v1-frozen",
+    "private_core_id": "v2-adaptive",
+    "private_runtime_model_ids": [
+      "v228-frozen-full-fit",
+      "v227-tenant-challenger"
+    ]
+  },
+  "canonical_v228_manifest_sha256": "7f1dc956fb30def28eb97ade562b7a8aa9b69345b530f6a79f122d180c416ca3",
+  "stable_public_shell": {
+    "roots": [
+      "backend/app",
+      "scripts",
+      "docs",
+      "power-automate",
+      "sp365",
+      "clients"
+    ],
+    "files": [
+      "backend/app/core/contracts.py",
+      "backend/app/core/registry.py",
+      "backend/app/core/v1_frozen.py",
+      "backend/app/core_api.py",
+      "pyproject.toml",
+      "scripts/build_company_shell_snapshot.py"
+    ],
+    "interfaces": [
+      "backend.app.core.registry.get_core",
+      "backend.app.core.registry.available_core_ids",
+      "backend.app.core.contracts.MeetingCore",
+      "backend.app.core_api:create_app"
+    ]
+  },
+  "private_v2": {
+    "source_roots": [
+      "backend/app/core/v2_adaptive.py",
+      "meeting_v2_adaptive",
+      "scripts/experimental_distillation",
+      "experiments/distilled_proposal_ranker/v2"
+    ],
+    "source_files": [
+      "backend/app/core/v2_adaptive.py",
+      "meeting_v2_adaptive/__init__.py",
+      "meeting_v2_adaptive/core.py",
+      "scripts/experimental_distillation/audit_v225_upstream_candidates.py",
+      "scripts/experimental_distillation/run_v222_task_proposal_reranker_oof.py",
+      "scripts/experimental_distillation/run_v223_union_proposal_oof.py",
+      "scripts/experimental_distillation/run_v226_dev42_template_family_holdout.py",
+      "scripts/experimental_distillation/run_v227_dev42_volume_adaptive_policy.py",
+      "scripts/experimental_distillation/run_v227_experimental.py",
+      "scripts/experimental_distillation/train_v227_feedback.py",
+      "scripts/experimental_distillation/v227_api.py",
+      "experiments/distilled_proposal_ranker/v2/protocol_bridge_v217.py",
+      "experiments/distilled_proposal_ranker/v2/protocol_bridge_v218.py",
+      "experiments/distilled_proposal_ranker/v2/protocol_bridge_v219.py"
+    ],
+    "required_capability_groups": {
+      "inference": [
+        "meeting_v2_adaptive/__init__.py",
+        "meeting_v2_adaptive/core.py",
+        "scripts/experimental_distillation/audit_v225_upstream_candidates.py",
+        "scripts/experimental_distillation/run_v222_task_proposal_reranker_oof.py",
+        "scripts/experimental_distillation/run_v223_union_proposal_oof.py",
+        "scripts/experimental_distillation/run_v226_dev42_template_family_holdout.py",
+        "scripts/experimental_distillation/run_v227_dev42_volume_adaptive_policy.py",
+        "scripts/experimental_distillation/run_v227_experimental.py",
+        "experiments/distilled_proposal_ranker/v2/protocol_bridge_v217.py",
+        "experiments/distilled_proposal_ranker/v2/protocol_bridge_v218.py",
+        "experiments/distilled_proposal_ranker/v2/protocol_bridge_v219.py"
+      ],
+      "feedback_training": [
+        "scripts/experimental_distillation/train_v227_feedback.py",
+        "scripts/experimental_distillation/run_v227_experimental.py",
+        "scripts/experimental_distillation/run_v222_task_proposal_reranker_oof.py",
+        "scripts/experimental_distillation/run_v223_union_proposal_oof.py",
+        "scripts/experimental_distillation/run_v226_dev42_template_family_holdout.py",
+        "scripts/experimental_distillation/run_v227_dev42_volume_adaptive_policy.py",
+        "experiments/distilled_proposal_ranker/v2/protocol_bridge_v217.py",
+        "experiments/distilled_proposal_ranker/v2/protocol_bridge_v218.py",
+        "experiments/distilled_proposal_ranker/v2/protocol_bridge_v219.py"
+      ],
+      "activation_rollback": [
+        "scripts/experimental_distillation/v227_api.py",
+        "scripts/experimental_distillation/run_v227_experimental.py"
+      ],
+      "adapter": [
+        "backend/app/core/v2_adaptive.py",
+        "meeting_v2_adaptive/__init__.py",
+        "meeting_v2_adaptive/core.py",
+        "scripts/experimental_distillation/v227_api.py",
+        "scripts/experimental_distillation/run_v227_experimental.py"
+      ]
+    }
+  },
+  "forbidden_artifact_data_roots": [
+    ".git",
+    "data",
+    "datasets",
+    "artifacts",
+    "runtime",
+    "evaluation/artifacts",
+    "evaluation/datasets",
+    "evaluation/runtime",
+    "evaluation/runtime/v227-feedback",
+    "evaluation/runtime/experimental-distillation-v2"
+  ],
+  "runtime_artifact_data_roots": [
+    "artifacts",
+    "datasets",
+    "runtime",
+    "evaluation/artifacts",
+    "evaluation/datasets",
+    "evaluation/runtime/v227-feedback",
+    "evaluation/runtime/experimental-distillation-v2"
+  ],
+  "forbidden_file_patterns": [
+    ".env",
+    ".pem",
+    ".key",
+    ".p12",
+    ".pfx",
+    "secret",
+    "credential",
+    "password",
+    "token",
+    "api_key",
+    "private_key"
+  ],
+  "company_shell_snapshot": {
+    "tool": "scripts/build_company_shell_snapshot.py",
+    "excluded_roots_must_include": [
+      "meeting_v2_adaptive",
+      "scripts/experimental_distillation",
+      "experiments/distilled_proposal_ranker/v2",
+      "evaluation/runtime",
+      "evaluation/artifacts",
+      "evaluation/datasets",
+      "data",
+      "runtime",
+      "artifacts",
+      "datasets"
+    ],
+    "excluded_files_must_include": [
+      "backend/app/core/v2_adaptive.py"
+    ]
+  }
+}
