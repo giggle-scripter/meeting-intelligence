@@ -1,0 +1,77 @@
+name: Manual Pilot CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: "Chọn bộ kiểm tra cho pilot"
+        required: true
+        default: targeted
+        type: choice
+        options:
+          - targeted
+          - full
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: windows-latest
+    steps:
+      - name: Check out selected commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install checked-in requirements
+        shell: pwsh
+        run: python -m pip install -r backend/requirements.txt
+
+      - name: Compile Python sources
+        shell: pwsh
+        run: python -m compileall -q backend scripts tests
+
+      - name: Parse PowerShell wrappers
+        shell: pwsh
+        run: |
+          $files = @(
+            'scripts/run_local_meeting_core.ps1',
+            'scripts/run_unified_core_smoke.ps1',
+            'scripts/pilot_runtime_protection.ps1'
+          )
+          foreach ($file in $files) {
+            $path = Join-Path $env:GITHUB_WORKSPACE $file
+            $tokens = $null
+            $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($path, [ref]$tokens, [ref]$errors) | Out-Null
+            if ($errors.Count -gt 0) {
+              $errors | ForEach-Object { Write-Error "${file}: $($_.Message)" }
+              exit 1
+            }
+          }
+
+      - name: Check whitespace in checked-out commit
+        shell: pwsh
+        run: git diff --check HEAD^ HEAD
+
+      - name: Run targeted pilot tests
+        shell: pwsh
+        run: >-
+          python -m pytest
+          backend/tests/unit/test_core_registry.py
+          backend/tests/end_to_end/test_core_api.py
+          backend/tests/unit/test_company_shell_packaging.py
+          tests/test_manual_pilot_ci_workflow.py
+          tests/test_unified_core_smoke.py
+          tests/test_pilot_runtime_protection.py
+
+      - name: Run full backend and repository tests
+        if: ${{ inputs.suite == 'full' }}
+        shell: pwsh
+        run: python -m pytest backend/tests tests

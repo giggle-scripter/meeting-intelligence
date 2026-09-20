@@ -36,3 +36,16 @@ CLI từ chối trước khi gọi API nếu approval chưa là `true`, thiếu 
 timestamp không có timezone, hoặc task không có đúng bảy trường với `status`
 `Proposed`. Receipt được ghi atomically dưới thư mục runtime và lần chạy lại
 với cùng payload sẽ dùng receipt hiện có. Không chạy trainer tự động.
+
+## CI thủ công cho pilot
+
+Trong GitHub, mở **Actions → Manual Pilot CI → Run workflow** và chọn `targeted`
+(mặc định) hoặc `full`. Bộ `targeted` kiểm tra compile, cú pháp các wrapper
+PowerShell, whitespace của commit, cùng các test registry, core API, company
+shell, unified smoke và runtime protection. `full` chạy thêm `backend/tests`
+và `tests`.
+
+Workflow chỉ chạy khi được bấm thủ công trên `windows-latest`, chỉ cài các
+requirement đã commit. Nó không khởi động Uvicorn, tunnel hay provider/trainer,
+không đọc secret, không tạo company-shell snapshot được ủy quyền và không tải
+runtime artifact hoặc transcript lên CI.
