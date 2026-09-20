@@ -14,6 +14,11 @@ from .registry import (
     get_core,
 )
 from .v1_frozen import V1_FROZEN_CORE_ID, V1FrozenCore
+from .v2_adaptive import (
+    V2_ADAPTIVE_CORE_ID,
+    V2AdaptiveCore,
+    V2AdaptiveUnavailableError,
+)
 
 __all__ = [
     "CORE_ENVIRONMENT_VARIABLE",
@@ -24,6 +29,9 @@ __all__ = [
     "UnknownCoreError",
     "V1FrozenCore",
     "V1_FROZEN_CORE_ID",
+    "V2AdaptiveCore",
+    "V2AdaptiveUnavailableError",
+    "V2_ADAPTIVE_CORE_ID",
     "available_core_ids",
     "get_core",
 ]

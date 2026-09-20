@@ -7,6 +7,7 @@ from collections.abc import Mapping
 
 from .contracts import MeetingCore
 from .v1_frozen import V1_FROZEN_CORE_ID, V1FrozenCore
+from .v2_adaptive import V2_ADAPTIVE_CORE_ID, V2AdaptiveCore
 
 
 CORE_ENVIRONMENT_VARIABLE = "MEETING_CORE"
@@ -21,6 +22,7 @@ class UnknownCoreError(ValueError):
 # never treated as module or class paths and are never dynamically imported.
 _CORE_FACTORIES: Mapping[str, type[MeetingCore]] = {
     V1_FROZEN_CORE_ID: V1FrozenCore,
+    V2_ADAPTIVE_CORE_ID: V2AdaptiveCore,
 }
 
 
