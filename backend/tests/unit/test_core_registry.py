@@ -6,9 +6,12 @@ from backend.app.core import (
     CORE_ENVIRONMENT_VARIABLE,
     DEFAULT_CORE_ID,
     UnknownCoreError,
+    V2AdaptiveUnavailableError,
     V1FrozenCore,
+    available_core_ids,
     get_core,
 )
+from backend.app.core import registry
 from backend.app.models import MeetingInput
 from backend.app.pipeline import process_meeting
 
@@ -46,6 +49,26 @@ def test_unknown_core_fails_closed_without_dynamic_import(monkeypatch: pytest.Mo
 
     with pytest.raises(UnknownCoreError, match="Unknown meeting core"):
         get_core()
+
+
+def test_missing_optional_package_keeps_v1_available(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    real_import_module = registry.importlib.import_module
+
+    def import_without_optional_package(name: str, package: str | None = None):
+        if name == "meeting_v2_adaptive":
+            raise ModuleNotFoundError(
+                "No module named 'meeting_v2_adaptive'", name=name
+            )
+        return real_import_module(name, package)
+
+    monkeypatch.setattr(registry.importlib, "import_module", import_without_optional_package)
+
+    assert available_core_ids() == ("v1-frozen",)
+    assert get_core("v1-frozen").core_id == "v1-frozen"
+    with pytest.raises(V2AdaptiveUnavailableError, match="meeting_v2_adaptive"):
+        get_core("v2-adaptive")
 
 
 def test_v1_adapter_delegates_and_keeps_pipeline_output_shape(monkeypatch: pytest.MonkeyPatch) -> None:

@@ -36,4 +36,4 @@ pythonpath = ["."]
 addopts = "-q"
 
 [tool.setuptools.packages.find]
-include = ["backend*", "experiments*"]
+include = ["backend*", "experiments*", "meeting_v2_adaptive*"]

@@ -14,6 +14,10 @@ from ..models import MeetingInput, PipelineResult
 PipelineOutput = PipelineResult
 
 
+class V2AdaptiveUnavailableError(RuntimeError):
+    """Raised when the optional V2 adaptive core cannot be selected."""
+
+
 @dataclass(frozen=True, slots=True)
 class CoreCapabilities:
     """Capabilities advertised by a processing core.
