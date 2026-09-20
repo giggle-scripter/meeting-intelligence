@@ -1,0 +1,21 @@
+{
+  "job_id": "job-from-smoke-report",
+  "core_id": "v2-adaptive",
+  "content_hash": "content-hash-from-smoke-report",
+  "corrected_final_tasks": [
+    {
+      "task_name": "Gửi bản tóm tắt",
+      "assignee": "Lan",
+      "start_date": "2026-09-21",
+      "due_date": "2026-09-25",
+      "due_date_text": "thứ Sáu",
+      "evidence": "Lan sẽ gửi bản tóm tắt trước thứ Sáu.",
+      "status": "Proposed"
+    }
+  ],
+  "approval_metadata": {
+    "reviewer": "demo-reviewer",
+    "reviewed_at": "2026-09-21T09:00:00+07:00",
+    "approval": true
+  }
+}

@@ -1,0 +1,8 @@
+=== MEETING METADATA ===
+meeting_id: demo-meeting-001
+meeting_title: Demo core smoke
+meeting_date: 2026-09-21
+=== END MEETING METADATA ===
+=== TRANSCRIPT ===
+Lan: Tôi sẽ gửi bản tóm tắt trước thứ Sáu.
+Minh: Tôi sẽ kiểm tra các con số sau cuộc họp.
