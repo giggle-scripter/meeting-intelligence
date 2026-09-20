@@ -3,6 +3,8 @@
 from dataclasses import dataclass, field
 from enum import Enum
 
+from .note_claim import NoteClaim, NoteClaimGrounding
+
 
 class NoteLineKind(str, Enum):
     HEADER = "HEADER"
@@ -97,3 +99,5 @@ class MeetingContext:
     topics: list[TopicHint] = field(default_factory=list)
     grounded_hints: list[GroundedNoteHint] = field(default_factory=list)
     clause_relevance: dict[str, ClauseRelevance] = field(default_factory=dict)
+    note_claims: list[NoteClaim] = field(default_factory=list)
+    note_claim_groundings: list[NoteClaimGrounding] = field(default_factory=list)

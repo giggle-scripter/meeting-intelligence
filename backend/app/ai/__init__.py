@@ -8,6 +8,7 @@ from .client import (
     HttpAiClient,
     OpenAiResponsesClient,
 )
+from .schemas import MutationResolutionResponse
 from .event_extractor import (
     extract_contextual_commitment_events,
     extract_events_by_ai,
@@ -23,6 +24,7 @@ __all__ = [
     "DisabledAiClient",
     "HttpAiClient",
     "OpenAiResponsesClient",
+    "MutationResolutionResponse",
     "extract_events_by_ai",
     "extract_events_by_rule",
     "extract_events_from_human_note",

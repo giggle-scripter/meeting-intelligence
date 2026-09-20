@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 import logging
+from collections import Counter
 from dataclasses import asdict, replace
 
 import httpx
@@ -20,6 +21,7 @@ from .ai import (
 from .annotation import annotate_clauses, extract_date_mentions
 from .dates import resolve_date_mention
 from .candidate import (
+    CandidateRoute,
     batch_ai_windows,
     build_candidate_windows,
     choose_extraction_strategy,
@@ -41,6 +43,7 @@ from .reduction import (
 from .preprocessing.unicode_normalizer import normalize_for_match
 from .utils.text_similarity import similarity, token_overlap
 from .trace import write_pipeline_trace
+from .verification import validate_task_create_proposal
 
 
 POSITIVE_TASK_EVENTS = {"TASK_CREATE", "TASK_COMMITMENT", "OWNER_ASSIGN"}
@@ -107,6 +110,64 @@ LONG_CONTEXT_COMMUNICATION_RE = re.compile(
 )
 
 
+def _task_create_proposal_payload(
+    meeting: MeetingInput,
+    focus_clause_id: str,
+    clauses: list,
+    annotations: dict,
+    mentions: dict,
+    *,
+    context_radius: int = 2,
+) -> dict:
+    """Build bounded, ledger-free evidence for one uncertain create candidate."""
+
+    focus_position = next(
+        index for index, clause in enumerate(clauses)
+        if clause.clause_id == focus_clause_id
+    )
+    bounded = clauses[
+        max(0, focus_position - context_radius):
+        min(len(clauses), focus_position + context_radius + 1)
+    ]
+
+    def clause_payload(clause) -> dict:
+        return {
+            "clause_id": clause.clause_id,
+            "speaker_id": clause.speaker_id,
+            "speaker_name": clause.speaker_name,
+            "order_index": clause.order_index,
+            "text": clause.text_raw,
+            "semantic_flags": sorted(annotations[clause.clause_id].flags),
+        }
+
+    bounded_ids = {clause.clause_id for clause in bounded}
+    return {
+        "mode": "CREATE_PROPOSAL",
+        "meeting": {
+            "meeting_id": meeting.meeting_id,
+            "meeting_title": meeting.meeting_title,
+            "meeting_date": meeting.meeting_date,
+        },
+        "primary_clauses": [
+            clause_payload(clause)
+            for clause in bounded if clause.clause_id == focus_clause_id
+        ],
+        "context_clauses": [
+            clause_payload(clause)
+            for clause in bounded if clause.clause_id != focus_clause_id
+        ],
+        "known_date_mentions": [
+            {
+                "deadline_mention_id": mention.date_mention_id,
+                "clause_id": mention.clause_id,
+                "raw_text": mention.raw_text,
+            }
+            for mention in mentions.values()
+            if mention.clause_id in bounded_ids and mention.purpose != "MEETING_DATE"
+        ],
+    }
+
+
 def _ai_usage_trace(ai_client: AiClient) -> dict | None:
     """Return provider telemetry when the selected client exposes it.
 
@@ -126,6 +187,10 @@ def _event_reason(event) -> str:
 
     if event.extraction_source == "AI":
         return "AI_AMBIGUOUS"
+    if event.extraction_source == "AI_CREATE_PROPOSAL":
+        return "AI_GROUNDED_CREATE_PROPOSAL"
+    if event.extraction_source == "AI_MUTATION_ROUTER":
+        return "AI_BOUNDED_MUTATION_ROUTER"
     if event.extraction_source == "HUMAN_NOTE":
         return "TRUSTED_HUMAN_NOTE_POSITIVE"
     if event.extraction_source == "RULE_CONTEXT":
@@ -690,6 +755,10 @@ def process_meeting(
     speaker_aliases: dict[str, str] | None = None,
     summary_topic: str | None = None,
     ai_max_batch_context_clauses: int = 56,
+    ai_cost_gate_mode: str = "off",
+    ai_cost_max_provider_calls_per_meeting: int = 3,
+    ai_cost_max_payload_characters: int = 20_000,
+    ai_cost_max_estimated_usd_per_meeting: float | None = None,
     trace_enabled: bool = False,
     trace_directory: str = "evaluation/traces",
     meeting_context_mode: str = "assist",
@@ -698,8 +767,88 @@ def process_meeting(
     max_meeting_topics: int = 12,
     max_topic_keywords: int = 8,
     topic_likely_threshold: float = 0.45,
+    action_classifier_mode: str = "off",
+    action_classifier_model_path: str | None = None,
+    action_candidate_builder_mode: str = "off",
+    action_candidate_builder_version: str = "action-candidate-v2",
+    commitment_router_mode: str = "off",
+    commitment_router_version: str = "commitment-router-v2",
+    commitment_router_active_types: tuple[str, ...] = (
+        "DIRECT_ASSIGNMENT", "SELF_COMMITMENT",
+    ),
+    action_canonicalization_mode: str = "off",
+    action_canonicalization_version: str = "action-canonicalization-v2",
+    recap_reconciliation_mode: str = "off",
+    owner_grounding_mode: str = "off",
+    deadline_grounding_mode: str = "off",
+    candidate_router_mode: str = "off",
+    action_clear_threshold: float = 0.82,
+    action_ai_threshold: float = 0.45,
+    candidate_threshold_version: str = "candidate-router-thresholds-v1",
+    task_create_proposal_enabled: bool = False,
+    ai_create_proposal_enabled: bool = False,
+    ai_create_max_proposals_per_meeting: int = 3,
+    ai_quality_uplift_mode: str = "off",
+    task_semantic_linker_mode: str = "off",
+    task_link_embedding_model_name: str = (
+        "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    ),
+    task_link_embedding_device: str = "cpu",
+    task_link_embedding_fallback_enabled: bool = True,
+    task_link_embedding_fallback_dimension: int = 384,
+    task_link_semantic_weight: float = 0.55,
+    task_link_lexical_weight: float = 0.20,
+    task_link_topic_weight: float = 0.10,
+    task_link_owner_weight: float = 0.10,
+    task_link_recency_weight: float = 0.05,
+    task_link_strong_threshold: float = 0.78,
+    task_link_min_margin: float = 0.12,
+    task_link_ai_threshold: float = 0.60,
+    task_link_recency_horizon_clauses: int = 200,
+    task_link_top_k: int = 5,
+    task_link_scoring_version: str = "task-link-scoring-v1",
+    context_retrieval_mode: str = "off",
+    context_max_clauses: int = 30,
+    context_max_characters: int = 12_000,
+    context_max_tasks: int = 5,
+    context_local_before: int = 3,
+    context_local_after: int = 5,
+    context_max_topic_clauses: int = 12,
+    context_max_topics: int = 3,
+    context_max_history_events_per_task: int = 3,
+    context_topic_boundary_threshold: float = 0.42,
+    context_topic_smoothing_window: int = 3,
+    context_retrieval_version: str = "context-retriever-v1",
+    ai_mutation_router_mode: str = "off",
+    ai_mutation_prompt_version: str = "mutation-resolution-v2",
+    ai_mutation_min_confidence: float = 0.70,
+    note_dual_view_mode: str = "off",
+    note_claim_max_transcript_clauses: int = 8,
+    note_claim_max_topics: int = 3,
+    note_claim_grounding_threshold: float = 0.72,
+    note_claim_grounding_margin: float = 0.12,
+    note_dual_view_version: str = "note-dual-view-v1",
+    temporal_semantics_mode: str = "off",
+    temporal_parser_version: str = "temporal-parser-v1",
+    temporal_working_day_policy: str = "weekdays-only-v1",
+    temporal_min_confidence: float = 1.0,
 ) -> PipelineResult:
+    if ai_quality_uplift_mode not in {"off", "shadow"}:
+        raise ValueError("ai_quality_uplift_mode must be off or shadow")
+    if ai_cost_gate_mode not in {"off", "enforce"}:
+        raise ValueError("ai_cost_gate_mode must be off or enforce")
     ai_client = ai_client or DisabledAiClient()
+    if ai_cost_gate_mode == "enforce":
+        from .ai.cost_gate import AiCostBudget, BudgetedAiClient
+
+        ai_client = BudgetedAiClient(
+            ai_client,
+            AiCostBudget(
+                max_provider_calls=ai_cost_max_provider_calls_per_meeting,
+                max_payload_characters=ai_cost_max_payload_characters,
+                max_estimated_cost_usd=ai_cost_max_estimated_usd_per_meeting,
+            ),
+        )
     stages = preprocess_meeting(meeting, speaker_aliases)
     clauses = stages["clauses"]
     mentions = extract_date_mentions(clauses)
@@ -713,8 +862,102 @@ def process_meeting(
     )
     if meeting_context_mode not in {"off", "assist", "shadow"}:
         raise ValueError("meeting_context_mode must be off, assist, or shadow")
+    if action_classifier_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("action_classifier_mode must be off, shadow, or assist")
+    if action_candidate_builder_mode not in {"off", "shadow"}:
+        raise ValueError("action_candidate_builder_mode must be off or shadow")
+    if not action_candidate_builder_version:
+        raise ValueError("action_candidate_builder_version must not be empty")
+    if commitment_router_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("commitment_router_mode must be off, shadow, or assist")
+    if not commitment_router_version:
+        raise ValueError("commitment_router_version must not be empty")
+    if action_canonicalization_mode not in {"off", "shadow"}:
+        raise ValueError("action_canonicalization_mode must be off or shadow")
+    if not action_canonicalization_version:
+        raise ValueError("action_canonicalization_version must not be empty")
+    if recap_reconciliation_mode not in {"off", "shadow"}:
+        raise ValueError("recap_reconciliation_mode must be off or shadow")
+    if owner_grounding_mode not in {"off", "shadow"}:
+        raise ValueError("owner_grounding_mode must be off or shadow")
+    if deadline_grounding_mode not in {"off", "shadow"}:
+        raise ValueError("deadline_grounding_mode must be off or shadow")
+    if candidate_router_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("candidate_router_mode must be off, shadow, or assist")
+    if candidate_router_mode != "off" and action_classifier_mode != candidate_router_mode:
+        raise ValueError(
+            f"candidate_router_mode={candidate_router_mode} requires "
+            f"action_classifier_mode={candidate_router_mode}"
+        )
+    if task_create_proposal_enabled and candidate_router_mode != "assist":
+        raise ValueError(
+            "task_create_proposal_enabled requires candidate_router_mode=assist"
+        )
+    if ai_create_proposal_enabled and not task_create_proposal_enabled:
+        raise ValueError(
+            "ai_create_proposal_enabled requires task_create_proposal_enabled"
+        )
+    if ai_create_max_proposals_per_meeting <= 0:
+        raise ValueError("ai_create_max_proposals_per_meeting must be positive")
+    if task_semantic_linker_mode not in {"off", "shadow"}:
+        raise ValueError("task_semantic_linker_mode must be off or shadow")
+    if context_retrieval_mode not in {"off", "shadow"}:
+        raise ValueError("context_retrieval_mode must be off or shadow")
+    if context_retrieval_mode == "shadow" and task_semantic_linker_mode != "shadow":
+        raise ValueError(
+            "context_retrieval_mode=shadow requires task_semantic_linker_mode=shadow"
+        )
+    if ai_mutation_router_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("ai_mutation_router_mode must be off, shadow, or assist")
+    if ai_mutation_router_mode == "shadow" and (task_semantic_linker_mode != "shadow" or context_retrieval_mode != "shadow"):
+        raise ValueError("ai_mutation_router shadow requires semantic and context shadow modes")
+    if ai_mutation_router_mode == "assist" and (candidate_router_mode != "assist" or task_semantic_linker_mode != "shadow" or context_retrieval_mode != "shadow"):
+        raise ValueError("ai_mutation_router assist requires candidate, semantic, and context routing")
+    if not 0.0 <= ai_mutation_min_confidence <= 1.0:
+        raise ValueError("ai_mutation_min_confidence must be between zero and one")
+    if note_dual_view_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("note_dual_view_mode must be off, shadow, or assist")
+    if note_dual_view_mode != "off" and meeting_context_mode == "off":
+        raise ValueError("note_dual_view_mode requires meeting_context_mode")
+    if not 0 < note_claim_max_transcript_clauses <= 8 or not 0 < note_claim_max_topics <= 3:
+        raise ValueError("note dual-view limits exceed their hard caps")
+    if not 0.0 <= note_claim_grounding_threshold <= 1.0 or not 0.0 <= note_claim_grounding_margin <= 1.0:
+        raise ValueError("note dual-view thresholds must be between zero and one")
+    if not note_dual_view_version:
+        raise ValueError("note_dual_view_version must not be empty")
+    if temporal_semantics_mode not in {"off", "shadow", "assist"}:
+        raise ValueError("temporal_semantics_mode must be off, shadow, or assist")
+    if not temporal_parser_version:
+        raise ValueError("temporal_parser_version must not be empty")
+    if temporal_working_day_policy != "weekdays-only-v1":
+        raise ValueError("temporal_working_day_policy must be weekdays-only-v1")
+    if temporal_min_confidence != 1.0:
+        raise ValueError("temporal_min_confidence must be exactly 1.0")
+    temporal_summary = None
+    temporal_due_dates: dict[str, str] = {}
+    if temporal_semantics_mode != "off":
+        try:
+            from .dates.temporal import evaluate_temporal_semantics
+
+            temporal_summary, temporal_due_dates = evaluate_temporal_semantics(
+                mentions,
+                meeting_date=meeting.meeting_date,
+                parser_version=temporal_parser_version,
+                working_day_policy=temporal_working_day_policy,
+            )
+            if temporal_semantics_mode != "assist":
+                temporal_due_dates = {}
+        except (KeyError, TypeError, ValueError) as exc:
+            LOGGER.warning("Temporal semantics evaluation failed: %s", exc)
     meeting_context = None
     note_cues_by_clause = {}
+    note_dual_view_stats = {
+        "claim_count": 0, "full_count": 0, "partial_count": 0, "only_count": 0,
+        "contradicted_count": 0, "retrieval_clause_count": 0, "mean_top1_score": 0.0,
+        "mean_margin": 0.0, "human_proposal_candidate_count": 0,
+        "auto_overview_context_only_count": 0, "direct_event_suppressed_count": 0,
+        "error_count": 0, "reason_counts": {},
+    }
     if meeting_context_mode != "off":
         from .v2.context import (
             apply_note_cues_to_annotations,
@@ -731,17 +974,177 @@ def process_meeting(
             max_topics=max_meeting_topics,
             max_topic_keywords=max_topic_keywords,
             topic_likely_threshold=topic_likely_threshold,
+            note_dual_view_mode=note_dual_view_mode,
+            note_claim_max_transcript_clauses=note_claim_max_transcript_clauses,
+            note_claim_grounding_threshold=note_claim_grounding_threshold,
+            note_claim_grounding_margin=note_claim_grounding_margin,
         )
         note_cues_by_clause = build_note_cue_index(meeting_context)
+        if note_dual_view_mode != "off":
+            from .v2.context import decide_note_authority
+            from .v2.models import NoteGroundingLevel
+
+            claims_by_id = {item.note_claim_id: item for item in meeting_context.note_claims}
+            groundings = meeting_context.note_claim_groundings
+            levels = Counter(item.level.value for item in groundings)
+            reason_counts = Counter(
+                reason for item in groundings for reason in item.reasons
+            )
+            authorities = [
+                decide_note_authority(claims_by_id[item.note_claim_id], item)
+                for item in groundings if item.note_claim_id in claims_by_id
+            ]
+            note_dual_view_stats.update({
+                "claim_count": len(groundings),
+                "full_count": levels[NoteGroundingLevel.FULL_GROUNDED.value],
+                "partial_count": levels[NoteGroundingLevel.PARTIAL_GROUNDED.value],
+                "only_count": levels[NoteGroundingLevel.NOTE_ONLY.value],
+                "contradicted_count": levels[NoteGroundingLevel.CONTRADICTED.value],
+                "retrieval_clause_count": sum(len(item.transcript_clause_ids) for item in groundings),
+                "mean_top1_score": (sum(item.semantic_score for item in groundings) / len(groundings) if groundings else 0.0),
+                "mean_margin": (sum(item.margin for item in groundings) / len(groundings) if groundings else 0.0),
+                "human_proposal_candidate_count": sum(item.candidate_signal == "WEAK" for item in authorities),
+                "auto_overview_context_only_count": sum(item.candidate_signal == "CONTEXT_ONLY" for item in authorities),
+                "reason_counts": dict(sorted(reason_counts.items())),
+            })
         if meeting_context_mode == "assist":
             annotations = apply_note_cues_to_annotations(
                 annotations,
                 note_cues_by_clause,
             )
-    windows = merge_windows(build_candidate_windows(clauses, annotations))
+    action_classifier_shadow = None
+    action_predictions_by_clause = {}
+    action_classifier_error_count = 0
+    if action_classifier_mode != "off":
+        try:
+            from .ml.action_classifier import (
+                predict_clause_actions,
+                summarize_shadow_predictions,
+            )
+            from .ml.model_registry import get_action_classifier
+
+            classifier = get_action_classifier(action_classifier_model_path)
+            action_predictions_by_clause = predict_clause_actions(
+                classifier,
+                clauses,
+                annotations,
+                speaker_names={
+                    clause.speaker_name for clause in clauses if clause.speaker_name
+                },
+                note_supported_clause_ids=set(note_cues_by_clause),
+            )
+            action_classifier_shadow = summarize_shadow_predictions(
+                action_predictions_by_clause,
+                clauses,
+                annotations,
+            )
+        except (OSError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Action classifier shadow inference failed: %s", exc)
+            action_classifier_error_count = 1
+    action_candidates_shadow = []
+    evidence_seeds_shadow = []
+    proposal_relations_shadow = []
+    proposal_clusters_shadow = []
+    proposal_span_identities_shadow = []
+    proposal_rankings_shadow = []
+    proposal_semantic_scores_shadow = []
+    action_candidate_builder_error_count = 0
+    if action_candidate_builder_mode == "shadow" or commitment_router_mode != "off":
+        try:
+            from .candidate import build_action_candidates, build_action_proposals_v3
+
+            builder = (
+                build_action_proposals_v3
+                if action_candidate_builder_version == "action-proposal-v3"
+                else build_action_candidates
+            )
+            action_candidates_shadow = builder(
+                clauses, annotations, mentions,
+                builder_version=action_candidate_builder_version,
+                **({"note_supported_clause_ids": set(note_cues_by_clause)} if builder is build_action_proposals_v3 else {}),
+            )
+            if action_candidate_builder_version == "action-proposal-v3":
+                from .candidate import build_evidence_seeds
+                evidence_seeds_shadow = build_evidence_seeds(clauses, annotations, mentions)
+                from .candidate import build_proposal_relations
+                proposal_relations_shadow = build_proposal_relations(evidence_seeds_shadow)
+                from .candidate import build_proposal_clusters
+                proposal_clusters_shadow = build_proposal_clusters(evidence_seeds_shadow, proposal_relations_shadow)
+                from .candidate import build_proposal_span_identities
+                proposal_span_identities_shadow = build_proposal_span_identities(proposal_clusters_shadow, evidence_seeds_shadow, clauses, annotations)
+                from .candidate import build_ranked_proposals
+                from .candidate import build_semantic_proposal_scores
+                proposal_semantic_scores_shadow = build_semantic_proposal_scores(proposal_span_identities_shadow)
+                proposal_rankings_shadow = build_ranked_proposals(proposal_span_identities_shadow, proposal_clusters_shadow, proposal_relations_shadow, evidence_seeds_shadow, proposal_semantic_scores_shadow)
+        except (KeyError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Action candidate builder shadow failed: %s", exc)
+            action_candidate_builder_error_count = 1
     clauses_by_id = {clause.clause_id: clause for clause in clauses}
+    commitment_decisions_shadow = []
+    commitment_router_summary = {"route_counts": {}, "authority_counts": {}}
+    commitment_router_error_count = 0
+    if commitment_router_mode != "off":
+        try:
+            from .candidate import AuthorityKind, route_commitments, summarize_commitment_decisions
+
+            active_authorities = frozenset(
+                AuthorityKind(value) for value in commitment_router_active_types
+            )
+            commitment_decisions_shadow = route_commitments(
+                action_candidates_shadow,
+                clauses_by_id,
+                active_authorities=active_authorities,
+            )
+            commitment_router_summary = summarize_commitment_decisions(
+                commitment_decisions_shadow
+            )
+        except (KeyError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Commitment router failed: %s", exc)
+            commitment_router_error_count = 1
+    candidate_evidence_shadow = []
+    candidate_decisions_shadow = []
+    candidate_router_shadow = None
+    candidate_router_error_count = 0
+    if candidate_router_mode != "off":
+        if action_classifier_shadow is None:
+            candidate_router_error_count = 1
+        else:
+            try:
+                from .candidate import (
+                    CandidateRouter,
+                    CandidateRouterConfig,
+                    build_candidate_evidence,
+                    summarize_candidate_decisions,
+                )
+
+                candidate_evidence_shadow = build_candidate_evidence(
+                    clauses,
+                    annotations,
+                    predictions_by_clause=action_predictions_by_clause,
+                    note_cues_by_clause=note_cues_by_clause,
+                    meeting_context=meeting_context,
+                )
+                candidate_router = CandidateRouter(
+                    CandidateRouterConfig(
+                        action_clear_threshold=action_clear_threshold,
+                        action_ai_threshold=action_ai_threshold,
+                        threshold_version=candidate_threshold_version,
+                    )
+                )
+                candidate_decisions_shadow = candidate_router.route(
+                    candidate_evidence_shadow
+                )
+                candidate_router_shadow = summarize_candidate_decisions(
+                    candidate_router,
+                    candidate_evidence_shadow,
+                    candidate_decisions_shadow,
+                )
+            except (KeyError, RuntimeError, TypeError, ValueError) as exc:
+                LOGGER.warning("Candidate evidence router shadow failed: %s", exc)
+                candidate_router_error_count = 1
+    windows = merge_windows(build_candidate_windows(clauses, annotations))
     events = []
-    if meeting_context_mode == "assist" and meeting.meeting_note:
+    if meeting_context_mode == "assist" and meeting.meeting_note and note_dual_view_mode != "assist":
         note_events, note_clauses = extract_events_from_human_note(
             meeting.meeting_note,
             meeting_context,
@@ -751,15 +1154,136 @@ def process_meeting(
         )
         clauses_by_id.update(note_clauses)
         events.extend(note_events)
+    elif meeting_context_mode == "assist" and meeting.meeting_note and note_dual_view_mode == "assist":
+        # A parsed note is never direct ledger authority in dual-view assist.
+        note_dual_view_stats["direct_event_suppressed_count"] = len(
+            meeting_context.note_claims if meeting_context else ()
+        )
     events.extend(
         extract_provisional_task_references(clauses, start_sequence=len(events))
     )
+    proposal_rejection_reasons: Counter[str] = Counter()
+    task_create_proposal_call_count = 0
+    task_create_proposal_accepted_count = 0
+    task_create_proposal_no_action_count = 0
+    task_create_proposal_unresolved_count = 0
+    task_create_proposal_rejected_count = 0
+    ai_create_decisions = [
+        decision
+        for decision in candidate_decisions_shadow
+        if decision.route == CandidateRoute.AI_CREATE_CHECK
+    ]
+    candidate_order = {
+        item.candidate_id: clauses_by_id[item.focus_clause_id].order_index
+        for item in candidate_evidence_shadow
+    }
+    selected_create_decisions = sorted(
+        ai_create_decisions,
+        key=lambda item: (-item.confidence, candidate_order.get(item.candidate_id, 0)),
+    )[:ai_create_max_proposals_per_meeting]
+    ai_quality_create_records = []
+    ai_quality_selected_create_ids: list[str] = []
+    ai_quality_create_error_count = 0
+    if ai_quality_uplift_mode == "shadow":
+        try:
+            from .ai.quality_uplift import preflight_ai_create_checks
+
+            ai_quality_create_records, ai_quality_selected_create_ids = (
+                preflight_ai_create_checks(
+                    candidate_decisions_shadow,
+                    candidate_evidence_shadow,
+                    action_candidates_shadow,
+                    commitment_decisions_shadow,
+                    maximum=ai_create_max_proposals_per_meeting,
+                )
+            )
+        except (RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("AI quality uplift preflight failed: %s", exc)
+            ai_quality_create_error_count = 1
+    proposal_method = getattr(ai_client, "propose_task", None)
+    if (
+        task_create_proposal_enabled
+        and ai_create_proposal_enabled
+        and ai_client.enabled
+        and callable(proposal_method)
+    ):
+        evidence_by_candidate = {
+            item.candidate_id: item for item in candidate_evidence_shadow
+        }
+        for decision in selected_create_decisions:
+            evidence = evidence_by_candidate[decision.candidate_id]
+            payload = _task_create_proposal_payload(
+                meeting,
+                evidence.focus_clause_id,
+                clauses,
+                annotations,
+                mentions,
+            )
+            bounded_ids = {
+                item["clause_id"]
+                for key in ("primary_clauses", "context_clauses")
+                for item in payload[key]
+            }
+            task_create_proposal_call_count += 1
+            try:
+                response = proposal_method(payload)
+                proposal = response.to_proposal()
+                if response.decision == "NO_ACTION":
+                    task_create_proposal_no_action_count += 1
+                    continue
+                if response.decision == "UNRESOLVED" or proposal is None:
+                    task_create_proposal_unresolved_count += 1
+                    continue
+                validation = validate_task_create_proposal(
+                    proposal,
+                    clauses_by_id=clauses_by_id,
+                    annotations=annotations,
+                    mentions=mentions,
+                    start_sequence=len(events),
+                    allowed_source_clause_ids=bounded_ids,
+                    required_primary_clause_ids={evidence.focus_clause_id},
+                )
+                if validation.accepted and validation.event is not None:
+                    events.append(validation.event)
+                    task_create_proposal_accepted_count += 1
+                else:
+                    task_create_proposal_rejected_count += 1
+                    proposal_rejection_reasons.update(validation.reasons)
+            except httpx.HTTPStatusError as exc:
+                LOGGER.warning(
+                    "AI create proposal rejected candidate %s: status=%s",
+                    decision.candidate_id,
+                    exc.response.status_code,
+                )
+                task_create_proposal_unresolved_count += 1
+            except (httpx.HTTPError, RuntimeError, ValueError) as exc:
+                LOGGER.warning(
+                    "AI create proposal failed candidate %s: %s",
+                    decision.candidate_id,
+                    exc,
+                )
+                task_create_proposal_unresolved_count += 1
     unresolved: list[str] = []
     ai_window_count = 0
-    ai_provider_call_count = 0
+    ai_provider_call_count = task_create_proposal_call_count
     ai_context_clause_ids: set[str] = set()
     ai_context_clause_count_before_pruning = 0
     ai_fallback_error_count = 0
+    commitment_router_suppressed_event_count = 0
+    commitment_route_by_clause: dict[str, str] = {}
+    commitment_noncreate_flags = {
+        "ROOT_QUESTION", "SUGGESTION_ONLY", "BRAINSTORM", "HYPOTHETICAL",
+        "PAST_COMPLETED", "PROGRESS_UPDATE", "FUTURE_DISCUSSION",
+        "ADMIN_FOLLOWUP", "REJECTION", "CANCELLATION",
+    }
+    if commitment_router_mode == "assist":
+        candidates_by_id = {item.candidate_id: item for item in action_candidates_shadow}
+        for decision in commitment_decisions_shadow:
+            candidate = candidates_by_id[decision.candidate_id]
+            for clause_id in candidate.primary_clause_ids:
+                previous = commitment_route_by_clause.get(clause_id)
+                if previous != "LOCAL_CREATE":
+                    commitment_route_by_clause[clause_id] = decision.route.value
     ai_contract_diagnostics = {
         "rejection_count": 0,
         "structural_rejection_count": 0,
@@ -783,6 +1307,26 @@ def process_meeting(
                 note_cues_by_clause if meeting_context_mode == "assist" else {}
             ),
         )
+        if commitment_route_by_clause:
+            retained_rule_events = []
+            for event in rule_events:
+                route = commitment_route_by_clause.get(event.source_clause_ids[0])
+                has_noncreate_authority = any(
+                    annotations[clause_id].flags & commitment_noncreate_flags
+                    for clause_id in event.source_clause_ids
+                    if clause_id in annotations
+                )
+                if (
+                    (
+                        has_noncreate_authority
+                        or (route is not None and route != "LOCAL_CREATE")
+                    )
+                    and event.event_type in {"TASK_COMMITMENT", "OWNER_ASSIGN"}
+                ):
+                    commitment_router_suppressed_event_count += 1
+                    continue
+                retained_rule_events.append(event)
+            rule_events = retained_rule_events
         events.extend(rule_events)
         covered_clause_ids = {clause_id for event in rule_events for clause_id in event.source_clause_ids}
         ai_primary_clause_ids = [
@@ -876,12 +1420,119 @@ def process_meeting(
         recap_scope=recap_scope,
     )
 
+    # The routed path is deliberately built before legacy provider calls.  It
+    # replays only deterministic events before each anchor, so provider output
+    # can never supply its own retrieval memory.
+    ai_mutation_router_summary = None
+    ai_mutation_router_traces: list[dict] = []
+    router_owned_primary_clause_ids: set[str] = set()
+    if ai_mutation_router_mode != "off":
+        try:
+            from .ai.router import MutationRouter, MutationRouterSummary
+            from .ml.model_registry import get_model_registry
+            from .retrieval import ContextRetrievalConfig, ContextRetriever, TopicIndex
+            from .retrieval import TaskLinkScoringConfig
+
+            embedding_model = get_model_registry().get_embedding_model(
+                task_link_embedding_model_name,
+                device=task_link_embedding_device,
+                fallback_dimension=task_link_embedding_fallback_dimension,
+                allow_fallback=task_link_embedding_fallback_enabled,
+            )
+            context_retriever = ContextRetriever(
+                clauses,
+                TopicIndex(
+                    clauses, embedding_model,
+                    boundary_threshold=context_topic_boundary_threshold,
+                    smoothing_window=context_topic_smoothing_window,
+                ),
+                ContextRetrievalConfig(
+                    max_clauses=context_max_clauses,
+                    max_characters=context_max_characters,
+                    max_tasks=context_max_tasks,
+                    local_before=context_local_before,
+                    local_after=context_local_after,
+                    max_topic_clauses=context_max_topic_clauses,
+                    max_topics=context_max_topics,
+                    max_history_events_per_task=context_max_history_events_per_task,
+                    version=context_retrieval_version,
+                ),
+            )
+            scoring = TaskLinkScoringConfig(
+                semantic_weight=task_link_semantic_weight,
+                lexical_weight=task_link_lexical_weight,
+                topic_weight=task_link_topic_weight,
+                owner_weight=task_link_owner_weight,
+                recency_weight=task_link_recency_weight,
+                strong_threshold=task_link_strong_threshold,
+                minimum_margin=task_link_min_margin,
+                ai_threshold=task_link_ai_threshold,
+                recency_horizon_clauses=task_link_recency_horizon_clauses,
+                top_k=task_link_top_k,
+                version=task_link_scoring_version,
+            )
+            router = MutationRouter(
+                minimum_confidence=ai_mutation_min_confidence,
+                prompt_version=ai_mutation_prompt_version,
+            )
+            aggregate = MutationRouterSummary(
+                mode=ai_mutation_router_mode,
+                prompt_version=ai_mutation_prompt_version,
+            )
+            evidence_by_candidate = {
+                item.candidate_id: item for item in candidate_evidence_shadow
+            }
+            for decision in candidate_decisions_shadow:
+                if decision.route != CandidateRoute.AI_MUTATION_CHECK:
+                    continue
+                evidence = evidence_by_candidate[decision.candidate_id]
+                event, trace, summary = router.execute(
+                    meeting=meeting, decision=decision, evidence=evidence,
+                    deterministic_events=events, clauses_by_id=clauses_by_id,
+                    annotations=annotations, mentions=mentions,
+                    context_retriever=context_retriever, embedding_model=embedding_model,
+                    scoring=scoring, ai_client=ai_client, mode=ai_mutation_router_mode,
+                    start_sequence=len(events),
+                )
+                ai_mutation_router_traces.append(trace)
+                for name in (
+                    "candidate_count", "payload_count", "call_count", "event_count",
+                    "unresolved_count", "rejected_count", "error_count",
+                    "unknown_task_id_count", "invalid_source_count", "invalid_anchor_count",
+                    "invalid_owner_span_count", "invalid_deadline_count", "candidate_task_count",
+                    "context_clause_count", "context_character_count",
+                ):
+                    setattr(aggregate, name, getattr(aggregate, name) + getattr(summary, name))
+                aggregate.rejection_reasons.update(summary.rejection_reasons)
+                if event is not None:
+                    events.append(event)
+                if ai_mutation_router_mode == "assist":
+                    router_owned_primary_clause_ids.update(evidence.clause_ids)
+            ai_mutation_router_summary = aggregate
+        except (KeyError, OSError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("AI mutation router failed closed: %s", exc)
+            from .ai.router import MutationRouterSummary
+            ai_mutation_router_summary = MutationRouterSummary(
+                mode=ai_mutation_router_mode, prompt_version=ai_mutation_prompt_version,
+                error_count=1,
+            )
+
     ai_batches = batch_ai_windows(
         pending_ai_windows,
         ai_max_batch_context_clauses,
         group_keys=ai_group_keys,
     )
+    if ai_mutation_router_summary is not None:
+        ai_provider_call_count += ai_mutation_router_summary.call_count
     for batch in ai_batches:
+        if (
+            ai_mutation_router_mode == "assist"
+            and set(batch.window.primary_clause_ids) & router_owned_primary_clause_ids
+        ):
+            # The new router owns the candidate; never call the legacy provider
+            # path for the same anchor, including when it fail-closes.
+            unresolved.extend(batch.source_window_ids)
+            continue
         task_memory = (
             _build_ai_task_memory(events, batch.window, clauses_by_id)
             if ai_client.enabled
@@ -921,7 +1572,7 @@ def process_meeting(
             ai_fallback_error_count += 1
             unresolved.extend(batch.source_window_ids)
             continue
-        except (httpx.HTTPError, ValueError) as exc:
+        except (httpx.HTTPError, RuntimeError, ValueError) as exc:
             LOGGER.warning("AI fallback failed for batch %s: %s", batch.window.window_id, exc)
             ai_fallback_error_count += 1
             unresolved.extend(batch.source_window_ids)
@@ -939,9 +1590,175 @@ def process_meeting(
             for source_window_id in batch.source_window_ids
             if source_window_id not in resolved_window_ids
         )
+    action_canonicalization_records: list[dict] = []
+    action_canonicalization_error_count = 0
+    if action_canonicalization_mode != "off":
+        try:
+            from .candidate import build_action_frame
+
+            canonicalized_events = []
+            for event in events:
+                if (
+                    event.event_type not in POSITIVE_TASK_EVENTS
+                    or event.extraction_source != "RULE"
+                    or not event.action_text
+                ):
+                    canonicalized_events.append(event)
+                    continue
+                frame = build_action_frame(
+                    event.action_text,
+                    tuple(event.source_clause_ids),
+                )
+                changed = frame.valid and frame.canonical_action != event.action_text
+                action_canonicalization_records.append({
+                    "event_id": event.event_id,
+                    "event_type": event.event_type,
+                    "frame": frame.model_dump(mode="json"),
+                    "changed": changed,
+                })
+                canonicalized_events.append(event)
+            events = canonicalized_events
+        except (RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Action canonicalization failed: %s", exc)
+            action_canonicalization_error_count = 1
+    owner_grounding_records: list[dict] = []
+    owner_grounding_error_count = 0
+    if owner_grounding_mode == "shadow":
+        try:
+            from .candidate import build_owner_evidence
+
+            for event in events:
+                if event.event_type not in POSITIVE_TASK_EVENTS | {"OWNER_REASSIGN"} or not event.assignee:
+                    continue
+                evidence = build_owner_evidence(event, clauses_by_id)
+                owner_grounding_records.append({
+                    "event_id": event.event_id,
+                    "event_type": event.event_type,
+                    "assignee": event.assignee,
+                    "evidence": [item.model_dump(mode="json") for item in evidence],
+                })
+        except (RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Owner grounding shadow failed: %s", exc)
+            owner_grounding_error_count = 1
+    deadline_grounding_records: list[dict] = []
+    deadline_grounding_error_count = 0
+    if deadline_grounding_mode == "shadow":
+        try:
+            from .candidate import build_deadline_attachment_evidence
+
+            for event in events:
+                evidence = build_deadline_attachment_evidence(
+                    event, mentions, clauses_by_id
+                )
+                if evidence is not None:
+                    deadline_grounding_records.append(evidence.model_dump(mode="json"))
+        except (RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Deadline grounding shadow failed: %s", exc)
+            deadline_grounding_error_count = 1
     events_before_deduplication = list(events)
     events = deduplicate_events(events)
-    ledger = reduce_task_events_to_ledger(events)
+    task_semantic_linker_shadow = None
+    task_semantic_linker_results = []
+    task_semantic_linker_error_count = 0
+    task_link_embedding_model = None
+    if task_semantic_linker_mode == "shadow":
+        try:
+            from .ml.model_registry import get_model_registry
+            from .retrieval import TaskLinkScoringConfig
+            from .retrieval.shadow import evaluate_task_linker_shadow
+
+            task_link_embedding_model = get_model_registry().get_embedding_model(
+                task_link_embedding_model_name,
+                device=task_link_embedding_device,
+                fallback_dimension=task_link_embedding_fallback_dimension,
+                allow_fallback=task_link_embedding_fallback_enabled,
+            )
+            scoring_config = TaskLinkScoringConfig(
+                semantic_weight=task_link_semantic_weight,
+                lexical_weight=task_link_lexical_weight,
+                topic_weight=task_link_topic_weight,
+                owner_weight=task_link_owner_weight,
+                recency_weight=task_link_recency_weight,
+                strong_threshold=task_link_strong_threshold,
+                minimum_margin=task_link_min_margin,
+                ai_threshold=task_link_ai_threshold,
+                recency_horizon_clauses=task_link_recency_horizon_clauses,
+                top_k=task_link_top_k,
+                version=task_link_scoring_version,
+            )
+            topic_ids_by_clause = {}
+            if meeting_context:
+                topic_ids_by_clause = {
+                    clause_id: tuple(relevance.topic_ids)
+                    for clause_id, relevance in meeting_context.clause_relevance.items()
+                }
+            (
+                task_semantic_linker_shadow,
+                task_semantic_linker_results,
+            ) = evaluate_task_linker_shadow(
+                events,
+                clauses_by_id,
+                embedding_model=task_link_embedding_model,
+                config=scoring_config,
+                topic_ids_by_clause=topic_ids_by_clause,
+            )
+        except (KeyError, OSError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Task semantic linker shadow failed: %s", exc)
+            task_semantic_linker_error_count = 1
+    context_retrieval_shadow = None
+    context_retrieval_records = []
+    context_retrieval_error_count = 0
+    if context_retrieval_mode == "shadow":
+        try:
+            from .retrieval import (
+                ContextRetrievalConfig,
+                ContextRetriever,
+                TopicIndex,
+                evaluate_context_retrieval_shadow,
+            )
+
+            if task_link_embedding_model is None:
+                raise RuntimeError("task semantic embedding model is unavailable")
+            topic_index = TopicIndex(
+                clauses,
+                task_link_embedding_model,
+                boundary_threshold=context_topic_boundary_threshold,
+                smoothing_window=context_topic_smoothing_window,
+            )
+            context_retriever = ContextRetriever(
+                clauses,
+                topic_index,
+                ContextRetrievalConfig(
+                    max_clauses=context_max_clauses,
+                    max_characters=context_max_characters,
+                    max_tasks=context_max_tasks,
+                    local_before=context_local_before,
+                    local_after=context_local_after,
+                    max_topic_clauses=context_max_topic_clauses,
+                    max_topics=context_max_topics,
+                    max_history_events_per_task=(
+                        context_max_history_events_per_task
+                    ),
+                    version=context_retrieval_version,
+                ),
+            )
+            (
+                context_retrieval_shadow,
+                context_retrieval_records,
+            ) = evaluate_context_retrieval_shadow(
+                events,
+                clauses_by_id,
+                task_semantic_linker_results,
+                retriever=context_retriever,
+                note_cues_by_clause=note_cues_by_clause,
+            )
+        except (KeyError, OSError, RuntimeError, TypeError, ValueError) as exc:
+            LOGGER.warning("Context retrieval shadow failed: %s", exc)
+            context_retrieval_error_count = 1
+    ledger = reduce_task_events_to_ledger(
+        events,
+        recap_reconciliation_mode=recap_reconciliation_mode,
+    )
     reconciliation_operations = build_deterministic_reconciliation_operations(ledger)
     reconciliation = reconcile_ledger(ledger, reconciliation_operations)
     reduction_diagnostics: dict[str, int] = dict(ledger.diagnostics)
@@ -957,6 +1774,12 @@ def process_meeting(
         if any("CANCELLATION" in annotation.flags for annotation in annotations.values()):
             no_active_reason = "cancelled"
         states = []
+    cost_gate_snapshot_method = getattr(ai_client, "cost_gate_snapshot", None)
+    cost_gate_snapshot = (
+        asdict(cost_gate_snapshot_method())
+        if callable(cost_gate_snapshot_method)
+        else {}
+    )
     diagnostics = PipelineDiagnostics(
         caption_count=stages["original_caption_count"],
         deduplicated_caption_count=len(stages["captions"]),
@@ -965,7 +1788,10 @@ def process_meeting(
         rule_event_count=sum(
             event.extraction_source.startswith("RULE") for event in events
         ),
-        ai_event_count=sum(event.extraction_source == "AI" for event in events),
+        ai_event_count=sum(
+            event.extraction_source in {"AI", "AI_CREATE_PROPOSAL", "AI_MUTATION_ROUTER"}
+            for event in events
+        ),
         ai_window_count=ai_window_count,
         ai_provider_enabled=ai_client.enabled,
         ai_provider_call_count=ai_provider_call_count,
@@ -1042,9 +1868,399 @@ def process_meeting(
         ledger_unknown_task_id_rejection_count=reduction_diagnostics.get(
             "ledger_unknown_task_id_rejection_count", 0
         ),
+        recap_reconciliation_mode=recap_reconciliation_mode,
+        recap_fragment_shadow_count=reduction_diagnostics.get(
+            "recap_fragment_shadow_count", 0
+        ),
+        owner_grounding_mode=owner_grounding_mode,
+        owner_evidence_count=sum(
+            len(item["evidence"]) for item in owner_grounding_records
+        ),
+        owner_ungrounded_event_count=sum(
+            not item["evidence"] for item in owner_grounding_records
+        ),
+        owner_evidence_type_counts=dict(sorted(Counter(
+            evidence["evidence_type"]
+            for item in owner_grounding_records
+            for evidence in item["evidence"]
+        ).items())),
+        deadline_grounding_mode=deadline_grounding_mode,
+        deadline_attachment_count=len(deadline_grounding_records),
+        deadline_unresolved_attachment_count=sum(
+            item["attachment_type"] == "UNRESOLVED"
+            for item in deadline_grounding_records
+        ),
+        deadline_attachment_type_counts=dict(sorted(Counter(
+            item["attachment_type"] for item in deadline_grounding_records
+        ).items())),
         recap_scope=recap_scope,
         meeting_date_source=meeting.meeting_date_source,
         effective_meeting_date=meeting.meeting_date,
+        action_classifier_mode=action_classifier_mode,
+        action_classifier_version=(
+            action_classifier_shadow.classifier_version
+            if action_classifier_shadow
+            else ("unavailable" if action_classifier_mode != "off" else "disabled")
+        ),
+        embedding_model_version=(
+            action_classifier_shadow.embedding_model_version
+            if action_classifier_shadow
+            else ("unavailable" if action_classifier_mode != "off" else "disabled")
+        ),
+        action_classifier_clause_count=(
+            action_classifier_shadow.clause_count if action_classifier_shadow else 0
+        ),
+        action_classifier_prediction_counts=(
+            action_classifier_shadow.prediction_counts
+            if action_classifier_shadow
+            else {}
+        ),
+        action_classifier_would_create_count=(
+            action_classifier_shadow.would_create_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_would_review_count=(
+            action_classifier_shadow.would_review_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_would_update_count=(
+            action_classifier_shadow.would_update_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_rule_action_clause_count=(
+            action_classifier_shadow.rule_action_clause_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_rule_agreement_count=(
+            action_classifier_shadow.rule_agreement_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_rule_disagreement_count=(
+            action_classifier_shadow.rule_disagreement_count
+            if action_classifier_shadow
+            else 0
+        ),
+        action_classifier_error_count=action_classifier_error_count,
+        action_candidate_builder_mode=(
+            "shadow"
+            if action_candidate_builder_mode == "shadow" or commitment_router_mode != "off"
+            else "off"
+        ),
+        action_candidate_builder_version=(
+            action_candidate_builder_version
+            if action_candidate_builder_mode == "shadow" or commitment_router_mode != "off"
+            else "disabled"
+        ),
+        action_candidate_count=len(action_candidates_shadow),
+        action_candidate_action_span_count=sum(
+            len(item.action_spans) for item in action_candidates_shadow
+        ),
+        action_candidate_kind_counts=dict(sorted(Counter(
+            item.candidate_kind for item in action_candidates_shadow
+        ).items())),
+        action_candidate_state_counts=dict(sorted(Counter(
+            item.state.value for item in action_candidates_shadow
+        ).items())),
+        action_candidate_builder_error_count=action_candidate_builder_error_count,
+        commitment_router_mode=commitment_router_mode,
+        commitment_router_version=(
+            commitment_router_version if commitment_router_mode != "off" else "disabled"
+        ),
+        commitment_router_decision_count=len(commitment_decisions_shadow),
+        commitment_router_route_counts=commitment_router_summary["route_counts"],
+        commitment_router_authority_counts=commitment_router_summary["authority_counts"],
+        commitment_router_suppressed_event_count=commitment_router_suppressed_event_count,
+        commitment_router_error_count=commitment_router_error_count,
+        action_canonicalization_mode=action_canonicalization_mode,
+        action_canonicalization_version=(
+            action_canonicalization_version
+            if action_canonicalization_mode != "off" else "disabled"
+        ),
+        action_canonicalization_frame_count=len(action_canonicalization_records),
+        action_canonicalization_changed_count=sum(
+            item["changed"] for item in action_canonicalization_records
+        ),
+        action_canonicalization_rejected_count=sum(
+            not item["frame"]["valid"] for item in action_canonicalization_records
+        ),
+        action_canonicalization_error_count=action_canonicalization_error_count,
+        candidate_router_mode=candidate_router_mode,
+        candidate_router_version=(
+            candidate_router_shadow.router_version
+            if candidate_router_shadow
+            else ("unavailable" if candidate_router_mode != "off" else "disabled")
+        ),
+        candidate_threshold_version=(
+            candidate_router_shadow.threshold_version
+            if candidate_router_shadow
+            else (
+                candidate_threshold_version
+                if candidate_router_mode != "off"
+                else "disabled"
+            )
+        ),
+        candidate_evidence_count=(
+            candidate_router_shadow.evidence_count if candidate_router_shadow else 0
+        ),
+        candidate_decision_count=(
+            candidate_router_shadow.decision_count if candidate_router_shadow else 0
+        ),
+        candidate_route_counts=(
+            candidate_router_shadow.route_counts if candidate_router_shadow else {}
+        ),
+        candidate_ai_create_check_suppressed_count=(
+            max(0, len(ai_create_decisions) - task_create_proposal_call_count)
+        ),
+        candidate_router_error_count=candidate_router_error_count,
+        task_create_proposal_call_count=task_create_proposal_call_count,
+        task_create_proposal_accepted_count=task_create_proposal_accepted_count,
+        task_create_proposal_no_action_count=task_create_proposal_no_action_count,
+        task_create_proposal_unresolved_count=task_create_proposal_unresolved_count,
+        task_create_proposal_rejected_count=task_create_proposal_rejected_count,
+        task_create_proposal_rejection_reasons=dict(
+            sorted(proposal_rejection_reasons.items())
+        ),
+        ai_quality_uplift_mode=ai_quality_uplift_mode,
+        ai_quality_create_candidate_count=len(ai_quality_create_records),
+        ai_quality_create_eligible_count=sum(
+            item.eligible for item in ai_quality_create_records
+        ),
+        ai_quality_create_selected_count=len(ai_quality_selected_create_ids),
+        ai_quality_create_exclusion_reasons=dict(sorted(Counter(
+            item.reason for item in ai_quality_create_records if not item.eligible
+        ).items())),
+        ai_cost_gate_mode=ai_cost_gate_mode,
+        ai_cost_gate_provider_call_count=int(
+            cost_gate_snapshot.get("provider_call_count", 0)
+        ),
+        ai_cost_gate_blocked_call_count=int(
+            cost_gate_snapshot.get("blocked_call_count", 0)
+        ),
+        ai_cost_gate_payload_characters_sent=int(
+            cost_gate_snapshot.get("payload_characters_sent", 0)
+        ),
+        ai_cost_gate_block_reasons=cost_gate_snapshot.get("block_reasons", {}),
+        task_semantic_linker_mode=task_semantic_linker_mode,
+        task_semantic_linker_version=(
+            task_semantic_linker_shadow.linker_version
+            if task_semantic_linker_shadow
+            else (
+                "unavailable" if task_semantic_linker_mode == "shadow" else "disabled"
+            )
+        ),
+        task_semantic_index_version=(
+            task_semantic_linker_shadow.index_version
+            if task_semantic_linker_shadow
+            else (
+                "unavailable" if task_semantic_linker_mode == "shadow" else "disabled"
+            )
+        ),
+        task_semantic_scoring_version=(
+            task_semantic_linker_shadow.scoring_version
+            if task_semantic_linker_shadow
+            else (
+                task_link_scoring_version
+                if task_semantic_linker_mode == "shadow"
+                else "disabled"
+            )
+        ),
+        task_semantic_embedding_model_version=(
+            task_semantic_linker_shadow.embedding_model_version
+            if task_semantic_linker_shadow
+            else (
+                "unavailable" if task_semantic_linker_mode == "shadow" else "disabled"
+            )
+        ),
+        task_semantic_query_count=(
+            task_semantic_linker_shadow.query_count
+            if task_semantic_linker_shadow else 0
+        ),
+        task_semantic_scored_query_count=(
+            task_semantic_linker_shadow.scored_query_count
+            if task_semantic_linker_shadow else 0
+        ),
+        task_semantic_route_counts=(
+            task_semantic_linker_shadow.route_counts
+            if task_semantic_linker_shadow else {}
+        ),
+        task_semantic_reason_counts=(
+            task_semantic_linker_shadow.reason_counts
+            if task_semantic_linker_shadow else {}
+        ),
+        task_semantic_production_agreement_count=(
+            task_semantic_linker_shadow.production_agreement_count
+            if task_semantic_linker_shadow else 0
+        ),
+        task_semantic_production_disagreement_count=(
+            task_semantic_linker_shadow.production_disagreement_count
+            if task_semantic_linker_shadow else 0
+        ),
+        task_semantic_ambiguous_sibling_count=(
+            task_semantic_linker_shadow.ambiguous_sibling_count
+            if task_semantic_linker_shadow else 0
+        ),
+        task_semantic_mean_top1_score=(
+            task_semantic_linker_shadow.mean_top1_score
+            if task_semantic_linker_shadow else 0.0
+        ),
+        task_semantic_mean_margin=(
+            task_semantic_linker_shadow.mean_margin
+            if task_semantic_linker_shadow else 0.0
+        ),
+        task_semantic_linker_error_count=task_semantic_linker_error_count,
+        context_retrieval_mode=context_retrieval_mode,
+        context_retrieval_version=(
+            context_retrieval_shadow.retriever_version
+            if context_retrieval_shadow
+            else ("unavailable" if context_retrieval_mode == "shadow" else "disabled")
+        ),
+        context_topic_index_version=(
+            context_retrieval_shadow.topic_index_version
+            if context_retrieval_shadow
+            else ("unavailable" if context_retrieval_mode == "shadow" else "disabled")
+        ),
+        context_embedding_model_version=(
+            context_retrieval_shadow.embedding_model_version
+            if context_retrieval_shadow
+            else ("unavailable" if context_retrieval_mode == "shadow" else "disabled")
+        ),
+        context_bundle_count=(
+            context_retrieval_shadow.bundle_count if context_retrieval_shadow else 0
+        ),
+        context_total_clause_count=(
+            context_retrieval_shadow.total_clause_count
+            if context_retrieval_shadow else 0
+        ),
+        context_total_character_count=(
+            context_retrieval_shadow.total_character_count
+            if context_retrieval_shadow else 0
+        ),
+        context_total_task_count=(
+            context_retrieval_shadow.total_task_count
+            if context_retrieval_shadow else 0
+        ),
+        context_total_history_event_count=(
+            context_retrieval_shadow.total_history_event_count
+            if context_retrieval_shadow else 0
+        ),
+        context_total_note_cue_count=(
+            context_retrieval_shadow.total_note_cue_count
+            if context_retrieval_shadow else 0
+        ),
+        context_max_clause_count_observed=(
+            context_retrieval_shadow.max_clause_count_observed
+            if context_retrieval_shadow else 0
+        ),
+        context_max_character_count_observed=(
+            context_retrieval_shadow.max_character_count_observed
+            if context_retrieval_shadow else 0
+        ),
+        context_clause_cap_hit_count=(
+            context_retrieval_shadow.clause_cap_hit_count
+            if context_retrieval_shadow else 0
+        ),
+        context_character_cap_hit_count=(
+            context_retrieval_shadow.character_cap_hit_count
+            if context_retrieval_shadow else 0
+        ),
+        context_tier_clause_counts=(
+            context_retrieval_shadow.tier_clause_counts
+            if context_retrieval_shadow else {}
+        ),
+        context_retrieval_error_count=(
+            context_retrieval_error_count
+            + (context_retrieval_shadow.error_count if context_retrieval_shadow else 0)
+        ),
+        ai_mutation_router_mode=ai_mutation_router_mode,
+        ai_mutation_router_version=(
+            ai_mutation_router_summary.version if ai_mutation_router_summary else "disabled"
+        ),
+        ai_mutation_prompt_version=(
+            ai_mutation_router_summary.prompt_version if ai_mutation_router_summary else "disabled"
+        ),
+        ai_mutation_candidate_count=(
+            ai_mutation_router_summary.candidate_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_payload_count=(
+            ai_mutation_router_summary.payload_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_call_count=(
+            ai_mutation_router_summary.call_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_event_count=(
+            ai_mutation_router_summary.event_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_unresolved_count=(
+            ai_mutation_router_summary.unresolved_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_rejected_count=(
+            ai_mutation_router_summary.rejected_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_error_count=(
+            ai_mutation_router_summary.error_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_rejection_reasons=(
+            ai_mutation_router_summary.rejection_reasons if ai_mutation_router_summary else {}
+        ),
+        ai_mutation_candidate_task_count=(
+            ai_mutation_router_summary.candidate_task_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_context_clause_count=(
+            ai_mutation_router_summary.context_clause_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_context_character_count=(
+            ai_mutation_router_summary.context_character_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_unknown_task_id_count=(
+            ai_mutation_router_summary.unknown_task_id_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_invalid_source_count=(
+            ai_mutation_router_summary.invalid_source_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_invalid_anchor_count=(
+            ai_mutation_router_summary.invalid_anchor_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_invalid_owner_span_count=(
+            ai_mutation_router_summary.invalid_owner_span_count if ai_mutation_router_summary else 0
+        ),
+        ai_mutation_invalid_deadline_count=(
+            ai_mutation_router_summary.invalid_deadline_count if ai_mutation_router_summary else 0
+        ),
+        note_dual_view_mode=note_dual_view_mode,
+        note_dual_view_version=(note_dual_view_version if note_dual_view_mode != "off" else "disabled"),
+        note_claim_count=note_dual_view_stats["claim_count"],
+        note_full_grounded_count=note_dual_view_stats["full_count"],
+        note_partial_grounded_count=note_dual_view_stats["partial_count"],
+        note_only_count=note_dual_view_stats["only_count"],
+        note_contradicted_count=note_dual_view_stats["contradicted_count"],
+        note_claim_retrieval_clause_count=note_dual_view_stats["retrieval_clause_count"],
+        note_claim_mean_top1_score=note_dual_view_stats["mean_top1_score"],
+        note_claim_mean_margin=note_dual_view_stats["mean_margin"],
+        note_human_proposal_candidate_count=note_dual_view_stats["human_proposal_candidate_count"],
+        note_auto_overview_context_only_count=note_dual_view_stats["auto_overview_context_only_count"],
+        note_direct_event_suppressed_count=note_dual_view_stats["direct_event_suppressed_count"],
+        note_dual_view_error_count=note_dual_view_stats["error_count"],
+        note_grounding_reason_counts=note_dual_view_stats["reason_counts"],
+        temporal_semantics_mode=temporal_semantics_mode,
+        temporal_parser_version=(temporal_parser_version if temporal_semantics_mode != "off" else "disabled"),
+        temporal_working_day_policy=(temporal_working_day_policy if temporal_semantics_mode != "off" else "disabled"),
+        temporal_expression_count=(temporal_summary.expression_count if temporal_summary else 0),
+        temporal_type_counts=(temporal_summary.type_counts if temporal_summary else {}),
+        temporal_existing_resolved_count=(temporal_summary.existing_resolved_count if temporal_summary else 0),
+        temporal_ast_resolved_count=(temporal_summary.ast_resolved_count if temporal_summary else 0),
+        temporal_ast_unresolved_count=(temporal_summary.ast_unresolved_count if temporal_summary else 0),
+        temporal_unresolved_anchor_count=(temporal_summary.unresolved_anchor_count if temporal_summary else 0),
+        temporal_agreement_count=(temporal_summary.agreement_count if temporal_summary else 0),
+        temporal_disagreement_count=(temporal_summary.disagreement_count if temporal_summary else 0),
+        temporal_improve_count=(temporal_summary.improve_count if temporal_summary else 0),
+        temporal_regress_count=(temporal_summary.regress_count if temporal_summary else 0),
+        temporal_parser_error_count=(temporal_summary.parser_error_count if temporal_summary else 0),
+        temporal_resolution_status_counts=(temporal_summary.resolution_status_counts if temporal_summary else {}),
     )
     result = build_pipeline_result(
         meeting.meeting_title,
@@ -1057,6 +2273,7 @@ def process_meeting(
         summary_topic=summary_topic,
         no_active_reason=no_active_reason,
         meeting_note_present=meeting.meeting_note is not None,
+        temporal_due_dates=temporal_due_dates,
     )
     if trace_enabled:
         write_pipeline_trace(trace_directory, meeting.meeting_id, "v1", {
@@ -1075,9 +2292,154 @@ def process_meeting(
             "unresolved_window_ids": unresolved,
             "final_tasks": [asdict(item) for item in result.tasks],
             "meeting_context": asdict(meeting_context) if meeting_context else None,
+            "note_dual_view": note_dual_view_stats,
             "note_cues_by_clause": {
                 clause_id: [asdict(cue) for cue in cues]
                 for clause_id, cues in note_cues_by_clause.items()
+            },
+            "action_classifier_shadow": (
+                asdict(action_classifier_shadow) if action_classifier_shadow else None
+            ),
+            "action_candidates_v2": {
+                "mode": (
+                    "shadow"
+                    if action_candidate_builder_mode == "shadow" or commitment_router_mode != "off"
+                    else "off"
+                ),
+                "version": action_candidate_builder_version,
+                "error_count": action_candidate_builder_error_count,
+                "records": [
+                    item.model_dump(mode="json") for item in action_candidates_shadow
+                ],
+                "executed": bool(action_candidates_shadow),
+            },
+            "proposal_evidence_seeds_v3": {
+                "executed": bool(evidence_seeds_shadow),
+                "count": len(evidence_seeds_shadow),
+                "records": [item.model_dump(mode="json") for item in evidence_seeds_shadow],
+            },
+            "proposal_relations_v3": {"count": len(proposal_relations_shadow), "records": [item.model_dump(mode="json") for item in proposal_relations_shadow]},
+            "proposal_clusters_v3": {"count": len(proposal_clusters_shadow), "records": [item.model_dump(mode="json") for item in proposal_clusters_shadow]},
+            "proposal_span_identities_v3": {"count": len(proposal_span_identities_shadow), "records": [item.model_dump(mode="json") for item in proposal_span_identities_shadow]},
+            "proposal_ranking_v3": {"count": len(proposal_rankings_shadow), "records": [item.model_dump(mode="json") for item in proposal_rankings_shadow]},
+            "proposal_semantic_scores_v3": {"count": len(proposal_semantic_scores_shadow), "records": [item.model_dump(mode="json") for item in proposal_semantic_scores_shadow]},
+            "commitment_router_v2": {
+                "mode": commitment_router_mode,
+                "version": commitment_router_version,
+                "active_types": list(commitment_router_active_types),
+                "error_count": commitment_router_error_count,
+                "suppressed_event_count": commitment_router_suppressed_event_count,
+                "summary": commitment_router_summary,
+                "decisions": [
+                    {
+                        "candidate_id": item.candidate_id,
+                        "route": item.route.value,
+                        "authority_kind": item.authority_kind.value,
+                        "reasons": list(item.reasons),
+                    }
+                    for item in commitment_decisions_shadow
+                ],
+                "executed": commitment_router_mode == "assist",
+            },
+            "action_canonicalization_v2": {
+                "mode": action_canonicalization_mode,
+                "version": action_canonicalization_version,
+                "error_count": action_canonicalization_error_count,
+                "records": action_canonicalization_records,
+                "executed": False,
+            },
+            "recap_reconciliation_v2": {
+                "mode": recap_reconciliation_mode,
+                "fragment_shadow_count": reduction_diagnostics.get(
+                    "recap_fragment_shadow_count", 0
+                ),
+                "executed": False,
+            },
+            "owner_grounding_v2": {
+                "mode": owner_grounding_mode,
+                "error_count": owner_grounding_error_count,
+                "records": owner_grounding_records,
+                "executed": False,
+            },
+            "deadline_grounding_v2": {
+                "mode": deadline_grounding_mode,
+                "error_count": deadline_grounding_error_count,
+                "records": deadline_grounding_records,
+                "executed": False,
+            },
+            "candidate_router_shadow": {
+                "summary": (
+                    asdict(candidate_router_shadow) if candidate_router_shadow else None
+                ),
+                "evidence": [
+                    item.model_dump(mode="json")
+                    for item in candidate_evidence_shadow
+                ],
+                "decisions": [
+                    item.model_dump(mode="json")
+                    for item in candidate_decisions_shadow
+                ],
+                "executed": candidate_router_mode == "assist",
+            },
+            "ai_mutation_router": {
+                "summary": asdict(ai_mutation_router_summary) if ai_mutation_router_summary else None,
+                "candidates": ai_mutation_router_traces,
+            },
+            "task_create_proposals": {
+                "enabled": task_create_proposal_enabled,
+                "ai_enabled": ai_create_proposal_enabled,
+                "call_count": task_create_proposal_call_count,
+                "accepted_count": task_create_proposal_accepted_count,
+                "no_action_count": task_create_proposal_no_action_count,
+                "unresolved_count": task_create_proposal_unresolved_count,
+                "rejected_count": task_create_proposal_rejected_count,
+                "rejection_reasons": dict(sorted(proposal_rejection_reasons.items())),
+            },
+            "ai_quality_uplift_v1": {
+                "mode": ai_quality_uplift_mode,
+                "error_count": ai_quality_create_error_count,
+                "create_checks": [
+                    {
+                        "candidate_id": item.candidate_id,
+                        "focus_clause_id": item.focus_clause_id,
+                        "eligible": item.eligible,
+                        "reason": item.reason,
+                    }
+                    for item in ai_quality_create_records
+                ],
+                "selected_create_candidate_ids": ai_quality_selected_create_ids,
+                "executed": False,
+            },
+            "ai_cost_gate": {
+                "mode": ai_cost_gate_mode,
+                "budget": {
+                    "max_provider_calls": ai_cost_max_provider_calls_per_meeting,
+                    "max_payload_characters": ai_cost_max_payload_characters,
+                    "max_estimated_cost_usd": ai_cost_max_estimated_usd_per_meeting,
+                },
+                "snapshot": cost_gate_snapshot,
+            },
+            "task_semantic_linker_shadow": {
+                "summary": (
+                    asdict(task_semantic_linker_shadow)
+                    if task_semantic_linker_shadow else None
+                ),
+                "results": [
+                    item.model_dump(mode="json")
+                    for item in task_semantic_linker_results
+                ],
+                "executed": False,
+            },
+            "context_retrieval_shadow": {
+                "summary": (
+                    asdict(context_retrieval_shadow)
+                    if context_retrieval_shadow else None
+                ),
+                "bundles": [
+                    item.model_dump(mode="json")
+                    for item in context_retrieval_records
+                ],
+                "executed": False,
             },
             "context_compaction": {
                 "before_clause_count": ai_context_clause_count_before_pruning,
@@ -1110,6 +2472,10 @@ def process_meeting_by_version(
     speaker_aliases: dict[str, str] | None = None,
     summary_topic: str | None = None,
     ai_max_batch_context_clauses: int = 56,
+    ai_cost_gate_mode: str = "off",
+    ai_cost_max_provider_calls_per_meeting: int = 3,
+    ai_cost_max_payload_characters: int = 20_000,
+    ai_cost_max_estimated_usd_per_meeting: float | None = None,
     trace_enabled: bool = False,
     trace_directory: str = "evaluation/traces",
     meeting_context_mode: str = "assist",
@@ -1118,6 +2484,71 @@ def process_meeting_by_version(
     max_meeting_topics: int = 12,
     max_topic_keywords: int = 8,
     topic_likely_threshold: float = 0.45,
+    action_classifier_mode: str = "off",
+    action_classifier_model_path: str | None = None,
+    action_candidate_builder_mode: str = "off",
+    action_candidate_builder_version: str = "action-candidate-v2",
+    commitment_router_mode: str = "off",
+    commitment_router_version: str = "commitment-router-v2",
+    commitment_router_active_types: tuple[str, ...] = (
+        "DIRECT_ASSIGNMENT", "SELF_COMMITMENT",
+    ),
+    action_canonicalization_mode: str = "off",
+    action_canonicalization_version: str = "action-canonicalization-v2",
+    recap_reconciliation_mode: str = "off",
+    owner_grounding_mode: str = "off",
+    deadline_grounding_mode: str = "off",
+    candidate_router_mode: str = "off",
+    action_clear_threshold: float = 0.82,
+    action_ai_threshold: float = 0.45,
+    candidate_threshold_version: str = "candidate-router-thresholds-v1",
+    task_create_proposal_enabled: bool = False,
+    ai_create_proposal_enabled: bool = False,
+    ai_create_max_proposals_per_meeting: int = 3,
+    ai_quality_uplift_mode: str = "off",
+    task_semantic_linker_mode: str = "off",
+    task_link_embedding_model_name: str = (
+        "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    ),
+    task_link_embedding_device: str = "cpu",
+    task_link_embedding_fallback_enabled: bool = True,
+    task_link_embedding_fallback_dimension: int = 384,
+    task_link_semantic_weight: float = 0.55,
+    task_link_lexical_weight: float = 0.20,
+    task_link_topic_weight: float = 0.10,
+    task_link_owner_weight: float = 0.10,
+    task_link_recency_weight: float = 0.05,
+    task_link_strong_threshold: float = 0.78,
+    task_link_min_margin: float = 0.12,
+    task_link_ai_threshold: float = 0.60,
+    task_link_recency_horizon_clauses: int = 200,
+    task_link_top_k: int = 5,
+    task_link_scoring_version: str = "task-link-scoring-v1",
+    context_retrieval_mode: str = "off",
+    context_max_clauses: int = 30,
+    context_max_characters: int = 12_000,
+    context_max_tasks: int = 5,
+    context_local_before: int = 3,
+    context_local_after: int = 5,
+    context_max_topic_clauses: int = 12,
+    context_max_topics: int = 3,
+    context_max_history_events_per_task: int = 3,
+    context_topic_boundary_threshold: float = 0.42,
+    context_topic_smoothing_window: int = 3,
+    context_retrieval_version: str = "context-retriever-v1",
+    ai_mutation_router_mode: str = "off",
+    ai_mutation_prompt_version: str = "mutation-resolution-v2",
+    ai_mutation_min_confidence: float = 0.70,
+    note_dual_view_mode: str = "off",
+    note_claim_max_transcript_clauses: int = 8,
+    note_claim_max_topics: int = 3,
+    note_claim_grounding_threshold: float = 0.72,
+    note_claim_grounding_margin: float = 0.12,
+    note_dual_view_version: str = "note-dual-view-v1",
+    temporal_semantics_mode: str = "off",
+    temporal_parser_version: str = "temporal-parser-v1",
+    temporal_working_day_policy: str = "weekdays-only-v1",
+    temporal_min_confidence: float = 1.0,
 ) -> PipelineResult:
     """Select V1/V2 or run V2 in shadow while returning V1's public result."""
 
@@ -1126,7 +2557,10 @@ def process_meeting_by_version(
     v1_result = None
     if pipeline_version in {"v1", "shadow"}:
         v1_result = process_meeting(
-            meeting, ai_client, speaker_aliases, summary_topic, ai_max_batch_context_clauses,
+            meeting, ai_client, speaker_aliases, summary_topic,
+            ai_max_batch_context_clauses,
+            ai_cost_gate_mode, ai_cost_max_provider_calls_per_meeting,
+            ai_cost_max_payload_characters, ai_cost_max_estimated_usd_per_meeting,
             trace_enabled=trace_enabled, trace_directory=trace_directory,
             meeting_context_mode=meeting_context_mode,
             note_grounding_threshold=note_grounding_threshold,
@@ -1134,6 +2568,73 @@ def process_meeting_by_version(
             max_meeting_topics=max_meeting_topics,
             max_topic_keywords=max_topic_keywords,
             topic_likely_threshold=topic_likely_threshold,
+            action_classifier_mode=action_classifier_mode,
+            action_classifier_model_path=action_classifier_model_path,
+            action_candidate_builder_mode=action_candidate_builder_mode,
+            action_candidate_builder_version=action_candidate_builder_version,
+            commitment_router_mode=commitment_router_mode,
+            commitment_router_version=commitment_router_version,
+            commitment_router_active_types=commitment_router_active_types,
+            action_canonicalization_mode=action_canonicalization_mode,
+            action_canonicalization_version=action_canonicalization_version,
+            recap_reconciliation_mode=recap_reconciliation_mode,
+            owner_grounding_mode=owner_grounding_mode,
+            deadline_grounding_mode=deadline_grounding_mode,
+            candidate_router_mode=candidate_router_mode,
+            action_clear_threshold=action_clear_threshold,
+            action_ai_threshold=action_ai_threshold,
+            candidate_threshold_version=candidate_threshold_version,
+            task_create_proposal_enabled=task_create_proposal_enabled,
+            ai_create_proposal_enabled=ai_create_proposal_enabled,
+            ai_create_max_proposals_per_meeting=ai_create_max_proposals_per_meeting,
+            ai_quality_uplift_mode=ai_quality_uplift_mode,
+            task_semantic_linker_mode=task_semantic_linker_mode,
+            task_link_embedding_model_name=task_link_embedding_model_name,
+            task_link_embedding_device=task_link_embedding_device,
+            task_link_embedding_fallback_enabled=(
+                task_link_embedding_fallback_enabled
+            ),
+            task_link_embedding_fallback_dimension=(
+                task_link_embedding_fallback_dimension
+            ),
+            task_link_semantic_weight=task_link_semantic_weight,
+            task_link_lexical_weight=task_link_lexical_weight,
+            task_link_topic_weight=task_link_topic_weight,
+            task_link_owner_weight=task_link_owner_weight,
+            task_link_recency_weight=task_link_recency_weight,
+            task_link_strong_threshold=task_link_strong_threshold,
+            task_link_min_margin=task_link_min_margin,
+            task_link_ai_threshold=task_link_ai_threshold,
+            task_link_recency_horizon_clauses=(
+                task_link_recency_horizon_clauses
+            ),
+            task_link_top_k=task_link_top_k,
+            task_link_scoring_version=task_link_scoring_version,
+            context_retrieval_mode=context_retrieval_mode,
+            context_max_clauses=context_max_clauses,
+            context_max_characters=context_max_characters,
+            context_max_tasks=context_max_tasks,
+            context_local_before=context_local_before,
+            context_local_after=context_local_after,
+            context_max_topic_clauses=context_max_topic_clauses,
+            context_max_topics=context_max_topics,
+            context_max_history_events_per_task=context_max_history_events_per_task,
+            context_topic_boundary_threshold=context_topic_boundary_threshold,
+            context_topic_smoothing_window=context_topic_smoothing_window,
+            context_retrieval_version=context_retrieval_version,
+            ai_mutation_router_mode=ai_mutation_router_mode,
+            ai_mutation_prompt_version=ai_mutation_prompt_version,
+            ai_mutation_min_confidence=ai_mutation_min_confidence,
+            note_dual_view_mode=note_dual_view_mode,
+            note_claim_max_transcript_clauses=note_claim_max_transcript_clauses,
+            note_claim_max_topics=note_claim_max_topics,
+            note_claim_grounding_threshold=note_claim_grounding_threshold,
+            note_claim_grounding_margin=note_claim_grounding_margin,
+            note_dual_view_version=note_dual_view_version,
+            temporal_semantics_mode=temporal_semantics_mode,
+            temporal_parser_version=temporal_parser_version,
+            temporal_working_day_policy=temporal_working_day_policy,
+            temporal_min_confidence=temporal_min_confidence,
         )
     if pipeline_version == "v1":
         assert v1_result is not None

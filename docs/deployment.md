@@ -1,5 +1,10 @@
 # Deployment
 
+Azure Functions và Azure Container Apps là lựa chọn managed tùy chọn. MVP không
+cần Azure account: dùng [pilot Windows + Cloudflare named tunnel](deployment-without-azure-vi.md)
+để chạy V1; Quick Tunnel chỉ dành cho demo ngắn. Không bypass điều kiện Azure
+eligibility.
+
 ## Azure Functions
 
 Backend đã có `backend/function_app.py` và `backend/host.json`.

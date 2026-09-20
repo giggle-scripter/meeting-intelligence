@@ -17,6 +17,18 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
 azure = ["azure-functions>=1.21"]
+ml-train = [
+  "numpy>=2.0",
+  "scikit-learn>=1.5",
+  "sentence-transformers>=5.0",
+]
+ml-distill = [
+  "torch>=2.4",
+  "transformers>=4.45",
+  "sentence-transformers>=5.0",
+  "numpy>=2.0",
+  "scikit-learn>=1.5",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["backend/tests"]
@@ -24,4 +36,4 @@ pythonpath = ["."]
 addopts = "-q"
 
 [tool.setuptools.packages.find]
-include = ["backend*"]
+include = ["backend*", "experiments*", "meeting_v2_adaptive*"]

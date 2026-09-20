@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">V2 MVP vòng continual learning có human approval</title>
+  <desc id="desc">Sơ đồ V2 từ inference thử nghiệm, approval, feedback, CPU training, activation và rollback về frozen base.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#071521"/><stop offset="1" stop-color="#132e35"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-opacity=".3"/></filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#7de5cf"/></marker>
+    <style>
+      .title{font:700 40px Arial,sans-serif;fill:#f6fffc}.sub{font:400 19px Arial,sans-serif;fill:#b7d9d5}
+      .head{font:700 22px Arial,sans-serif;fill:#fff}.body{font:400 17px Arial,sans-serif;fill:#d6efeb}.small{font:400 15px Arial,sans-serif;fill:#a7cbc6}
+      .card{filter:url(#shadow);stroke-width:2}.arrow{stroke:#7de5cf;stroke-width:4;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="70" y="78" class="title">V2 MVP · CONTINUAL LEARNING CÓ KIỂM SOÁT</text>
+  <text x="70" y="116" class="sub">Runtime teacher tắt · feedback human-approved · CPU trainer · explicit activation / rollback</text>
+
+  <g class="card">
+    <rect x="70" y="220" width="270" height="190" rx="22" fill="#154753" stroke="#56c9cf"/>
+    <text x="100" y="262" class="head">1 · Inference</text>
+    <text x="100" y="300" class="body">transcript hoặc audio</text>
+    <text x="100" y="332" class="body">hash source + transcript</text>
+    <text x="100" y="370" class="small">DisabledAiClient</text>
+  </g>
+  <path d="M340 315 H395" class="arrow"/>
+  <g class="card">
+    <rect x="395" y="220" width="270" height="190" rx="22" fill="#253e68" stroke="#7eaff5"/>
+    <text x="425" y="262" class="head">2 · Frozen base</text>
+    <text x="425" y="300" class="body">candidate union V1</text>
+    <text x="425" y="332" class="body">ranker 768 + policy</text>
+    <text x="425" y="370" class="small">experimental_not_validated</text>
+  </g>
+  <path d="M665 315 H720" class="arrow"/>
+  <g class="card">
+    <rect x="720" y="220" width="270" height="190" rx="22" fill="#5a3b55" stroke="#eba2ca"/>
+    <text x="750" y="262" class="head">3 · Human approval</text>
+    <text x="750" y="300" class="body">review task / speaker</text>
+    <text x="750" y="332" class="body">Approve + metadata</text>
+    <text x="750" y="370" class="small">email chỉ sau approval</text>
+  </g>
+  <path d="M990 315 H1045" class="arrow"/>
+  <g class="card">
+    <rect x="1045" y="220" width="270" height="190" rx="22" fill="#59472a" stroke="#f3c46b"/>
+    <text x="1075" y="262" class="head">4 · Append-only</text>
+    <text x="1075" y="300" class="body">tenant feedback</text>
+    <text x="1075" y="332" class="body">job + content hash</text>
+    <text x="1075" y="370" class="small">không auto-label</text>
+  </g>
+  <path d="M1315 315 C1430 315 1480 430 1405 505" class="arrow"/>
+
+  <g class="card">
+    <rect x="1090" y="505" width="320" height="190" rx="22" fill="#285748" stroke="#77dbad"/>
+    <text x="1120" y="547" class="head">5 · CPU trainer</text>
+    <text x="1120" y="585" class="body">replay approved feedback</text>
+    <text x="1120" y="617" class="body">deterministic challenger</text>
+    <text x="1120" y="655" class="small">provider 0 · GPU 0 · network 0</text>
+  </g>
+  <path d="M1090 600 H980" class="arrow"/>
+  <g class="card">
+    <rect x="640" y="505" width="340" height="190" rx="22" fill="#3b4d31" stroke="#b0df72"/>
+    <text x="675" y="547" class="head">6 · Explicit activation</text>
+    <text x="675" y="585" class="body">operator kiểm hash + diagnostics</text>
+    <text x="675" y="617" class="body">ghi pointer atomically</text>
+    <text x="675" y="655" class="small">restart app · tenant staging</text>
+  </g>
+  <path d="M640 600 H530" class="arrow"/>
+  <g class="card">
+    <rect x="170" y="505" width="360" height="190" rx="22" fill="#403e66" stroke="#aaa4f0"/>
+    <text x="205" y="547" class="head">7 · Rollback / base</text>
+    <text x="205" y="585" class="body">rollback CLI → V2.28 frozen</text>
+    <text x="205" y="617" class="body">restart + audit smoke</text>
+    <text x="205" y="655" class="small">tamper → fail closed</text>
+  </g>
+  <path d="M350 505 C240 445 190 410 205 410" class="arrow"/>
+
+  <rect x="70" y="785" width="1460" height="55" rx="14" fill="#0d252c" stroke="#2f696a"/>
+  <text x="100" y="820" class="small">Bằng chứng: V2.27 DEV42 OOF F1 0.57049 · V2.28 serving diagnostic failed · V3.1 F1 0.60533 trên tập khác · không claim production accuracy</text>
+</svg>

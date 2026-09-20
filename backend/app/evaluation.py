@@ -273,6 +273,14 @@ def aggregate_results(comparisons: list[CaseComparison]) -> dict[str, Any]:
         "case_pass_rate": passed / len(comparisons) if comparisons else 0.0,
         "task_identity_precision": matched / actual if actual else (1.0 if expected == 0 else 0.0),
         "task_identity_recall": matched / expected if expected else (1.0 if actual == 0 else 0.0),
+        "task_identity_f1": (
+            (2 * matched / (expected + actual)) if expected + actual else 1.0
+        ),
+        "expected_task_count": expected,
+        "actual_task_count": actual,
+        "matched_task_count": matched,
+        "missing_task_count": expected - matched,
+        "unexpected_task_count": actual - matched,
         # Retain old keys for scripts that consumed V1 evaluation output.
         "task_precision": matched / actual if actual else (1.0 if expected == 0 else 0.0),
         "task_recall": matched / expected if expected else (1.0 if actual == 0 else 0.0),

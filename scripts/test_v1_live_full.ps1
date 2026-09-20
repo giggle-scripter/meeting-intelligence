@@ -55,7 +55,7 @@ param(
     [string]$PromptVersion = $(if ($env:PROMPT_VERSION) {
         $env:PROMPT_VERSION
     } else {
-        "v1-ledger-mutation-v1"
+        "v1-ledger-proposal-v1"
     })
 )
 

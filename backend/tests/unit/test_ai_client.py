@@ -118,6 +118,39 @@ def test_foundry_client_sends_strict_schema_and_parses_events(monkeypatch) -> No
     assert captured["timeout"] == 12
 
 
+def test_foundry_uses_separate_create_prompt_and_schema(monkeypatch) -> None:
+    captured = {}
+
+    def fake_post(url, *, json, headers, timeout):
+        captured.update(json)
+        proposal = {
+            "decision": "PROPOSE",
+            "source_clause_ids": ["CLAUSE-000001"],
+            "action_span": "gửi báo cáo",
+            "owner_span": "em",
+            "deadline_mention_id": None,
+            "commitment_type": "SELF_COMMITMENT",
+            "confidence": 0.8,
+        }
+        return FakeResponse(
+            {"choices": [{"message": {"content": json_module.dumps(proposal)}}]}
+        )
+
+    json_module = json
+    monkeypatch.setattr("backend.app.ai.client.httpx.post", fake_post)
+    client = AzureFoundryAiClient(
+        "https://example.services.ai.azure.com/models/chat/completions", "secret"
+    )
+
+    result = client.propose_task({"primary_clauses": []})
+
+    assert result.decision == "PROPOSE"
+    assert "must not infer a hidden action" in captured["messages"][0]["content"].lower()
+    schema_config = captured["response_format"]["json_schema"]
+    assert schema_config["name"] == "task_create_proposal"
+    assert schema_config["strict"] is True
+
+
 def test_foundry_client_rejects_missing_message_content(monkeypatch) -> None:
     monkeypatch.setattr(
         "backend.app.ai.client.httpx.post",

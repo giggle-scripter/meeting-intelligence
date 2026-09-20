@@ -32,3 +32,11 @@ self-contained package gồm `=== MEETING METADATA ===`, optional
 `=== MEETING NOTE ===` và `=== TRANSCRIPT ===`; dùng
 `scripts/prepare_power_automate_uploads.py` để sinh package thay vì sửa fixture
 thủ công.
+# Dual-view meeting-note policy
+
+When `NOTE_DUAL_VIEW_MODE` is enabled, every actionable/state note row becomes
+a stable claim and is compared with bounded transcript evidence. `NOTE_ONLY`
+and `CONTRADICTED` claims never create ledger events. In `assist`, no note row
+can take the legacy direct-event path; a human note may only be considered by a
+separate validated proposal route. Transcript chronology wins cancellation,
+reassignment and deadline conflicts.

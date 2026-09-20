@@ -2,7 +2,7 @@
 
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
 class AiEvent(BaseModel):
@@ -58,3 +58,49 @@ class AiEventResponse(BaseModel):
     model_config = ConfigDict(extra="forbid")
     events: list[AiEvent] = Field(default_factory=list)
     unresolved: list[AiUnresolved] = Field(default_factory=list)
+
+
+class MutationResolutionResponse(BaseModel):
+    """One strictly-scoped decision for one routed mutation candidate."""
+
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    decision: Literal["EVENT", "UNRESOLVED"]
+    event_type: Literal[
+        "OWNER_ASSIGN", "OWNER_REASSIGN", "DEADLINE_SET", "DEADLINE_REPLACE",
+        "TASK_CANCEL", "TASK_REJECT", "",
+    ] = ""
+    related_task_id: str = ""
+    source_clause_ids: list[str] = Field(default_factory=list)
+    anchor_clause_id: str = ""
+    owner_span: str | None = None
+    deadline_mention_id: str | None = None
+    confidence: float = Field(ge=0.0, le=1.0)
+    unresolved_reason: Literal[
+        "NO_PLAUSIBLE_TARGET", "MULTIPLE_PLAUSIBLE_TARGETS",
+        "INSUFFICIENT_EXPLICIT_EVIDENCE", "",
+    ] = ""
+
+    @field_validator("source_clause_ids")
+    @classmethod
+    def source_clause_ids_are_unique(cls, value: list[str]) -> list[str]:
+        if len(value) != len(set(value)):
+            raise ValueError("source_clause_ids must not contain duplicates")
+        return value
+
+    @model_validator(mode="after")
+    def response_shape_matches_decision(self) -> "MutationResolutionResponse":
+        event_fields_present = any((
+            self.event_type, self.related_task_id, self.source_clause_ids,
+            self.anchor_clause_id, self.owner_span, self.deadline_mention_id,
+        ))
+        if self.decision == "EVENT":
+            if not all((self.event_type, self.related_task_id, self.source_clause_ids, self.anchor_clause_id)):
+                raise ValueError("EVENT requires event type, task, source IDs, and anchor")
+            if self.unresolved_reason:
+                raise ValueError("EVENT must not contain unresolved_reason")
+        elif event_fields_present:
+            raise ValueError("UNRESOLVED must not contain event fields")
+        elif not self.unresolved_reason:
+            raise ValueError("UNRESOLVED requires unresolved_reason")
+        return self

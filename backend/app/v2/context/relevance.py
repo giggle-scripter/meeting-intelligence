@@ -8,6 +8,8 @@ from ...models import Clause, ClauseAnnotation, DateMention, MeetingInput
 from .grounding import ground_note_lines
 from .keywords import extract_keywords, keyword_overlap
 from .meeting_notes import parse_meeting_note
+from .note_claim_parser import parse_note_claims
+from .note_grounder import ground_note_claims
 from .overview import build_overview
 from ..models import ClauseRelevance, MeetingContext, RelevanceClass, TopicHint
 
@@ -75,6 +77,10 @@ def build_meeting_context(
     max_topics: int = 12,
     max_topic_keywords: int = 8,
     topic_likely_threshold: float = 0.45,
+    note_dual_view_mode: str = "off",
+    note_claim_max_transcript_clauses: int = 8,
+    note_claim_grounding_threshold: float = 0.72,
+    note_claim_grounding_margin: float = 0.12,
 ) -> MeetingContext:
     if meeting.meeting_note and meeting.meeting_note.content.strip():
         note_lines = parse_meeting_note(meeting.meeting_note)
@@ -92,6 +98,16 @@ def build_meeting_context(
         ]
         note_source = "AUTO_OVERVIEW"
     grounded = ground_note_lines(note_lines, clauses, annotations, mentions, grounding_threshold, grounding_margin)
+    note_claims = []
+    note_claim_groundings = []
+    if note_dual_view_mode != "off" and meeting.meeting_note:
+        note_claims = parse_note_claims(meeting, note_lines)
+        note_claim_groundings = ground_note_claims(
+            note_claims, clauses, annotations, mentions,
+            max_clauses=note_claim_max_transcript_clauses,
+            threshold=note_claim_grounding_threshold,
+            margin=note_claim_grounding_margin,
+        )
     return MeetingContext(
         note_present=bool(meeting.meeting_note and meeting.meeting_note.content.strip()),
         note_source=note_source,
@@ -102,4 +118,6 @@ def build_meeting_context(
             clauses, annotations, topics, grounded, mentions,
             topic_likely_threshold=topic_likely_threshold,
         ),
+        note_claims=note_claims,
+        note_claim_groundings=note_claim_groundings,
     )

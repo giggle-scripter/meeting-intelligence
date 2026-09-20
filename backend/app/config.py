@@ -16,7 +16,16 @@ class Settings:
     ai_fallback_api_key: str | None = None
     ai_timeout_seconds: float = 3600.0
     job_timeout_seconds: float = 3600.0
+    # Private, tenant-scoped feedback ledger settings.  The V227 names remain
+    # accepted so an existing offline trainer deployment can be upgraded in
+    # place.
+    meeting_feedback_tenant_id: str | None = None
+    meeting_feedback_directory: str = "evaluation/runtime/v227-feedback"
     ai_max_batch_context_clauses: int = 56
+    ai_cost_gate_mode: str = "off"
+    ai_cost_max_provider_calls_per_meeting: int = 3
+    ai_cost_max_payload_characters: int = 20_000
+    ai_cost_max_estimated_usd_per_meeting: float | None = None
     pipeline_version: str = "v1"
     pipeline_trace_enabled: bool = False
     pipeline_trace_directory: str = "evaluation/traces"
@@ -27,6 +36,71 @@ class Settings:
     topic_likely_threshold: float = 0.45
     max_meeting_topics: int = 12
     max_topic_keywords: int = 8
+    embedding_model_name: str = (
+        "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    )
+    embedding_device: str = "cpu"
+    embedding_fallback_enabled: bool = True
+    embedding_fallback_dimension: int = 384
+    action_classifier_mode: str = "off"
+    action_classifier_model_path: str | None = None
+    action_candidate_builder_mode: str = "off"
+    action_candidate_builder_version: str = "action-candidate-v2"
+    commitment_router_mode: str = "off"
+    commitment_router_version: str = "commitment-router-v2"
+    commitment_router_active_types: tuple[str, ...] = (
+        "DIRECT_ASSIGNMENT", "SELF_COMMITMENT",
+    )
+    action_canonicalization_mode: str = "off"
+    action_canonicalization_version: str = "action-canonicalization-v2"
+    recap_reconciliation_mode: str = "off"
+    owner_grounding_mode: str = "off"
+    deadline_grounding_mode: str = "off"
+    candidate_router_mode: str = "off"
+    task_create_proposal_enabled: bool = False
+    ai_create_proposal_enabled: bool = False
+    ai_create_max_proposals_per_meeting: int = 3
+    ai_quality_uplift_mode: str = "off"
+    task_semantic_linker_mode: str = "off"
+    task_link_semantic_weight: float = 0.55
+    task_link_lexical_weight: float = 0.20
+    task_link_topic_weight: float = 0.10
+    task_link_owner_weight: float = 0.10
+    task_link_recency_weight: float = 0.05
+    task_link_strong_threshold: float = 0.78
+    task_link_min_margin: float = 0.12
+    task_link_ai_threshold: float = 0.60
+    task_link_recency_horizon_clauses: int = 200
+    task_link_top_k: int = 5
+    task_link_scoring_version: str = "task-link-scoring-v1"
+    context_retrieval_mode: str = "off"
+    context_max_clauses: int = 30
+    context_max_characters: int = 12_000
+    context_max_tasks: int = 5
+    context_local_before: int = 3
+    context_local_after: int = 5
+    context_max_topic_clauses: int = 12
+    context_max_topics: int = 3
+    context_max_history_events_per_task: int = 3
+    context_topic_boundary_threshold: float = 0.42
+    context_topic_smoothing_window: int = 3
+    context_retrieval_version: str = "context-retriever-v1"
+    ai_mutation_router_mode: str = "off"
+    ai_mutation_prompt_version: str = "mutation-resolution-v2"
+    ai_mutation_min_confidence: float = 0.70
+    note_dual_view_mode: str = "off"
+    note_claim_max_transcript_clauses: int = 8
+    note_claim_max_topics: int = 3
+    note_claim_grounding_threshold: float = 0.72
+    note_claim_grounding_margin: float = 0.12
+    note_dual_view_version: str = "note-dual-view-v1"
+    temporal_semantics_mode: str = "off"
+    temporal_parser_version: str = "temporal-parser-v1"
+    temporal_working_day_policy: str = "weekdays-only-v1"
+    temporal_min_confidence: float = 1.0
+    action_clear_threshold: float = 0.82
+    action_ai_threshold: float = 0.45
+    candidate_threshold_version: str = "candidate-router-thresholds-v1"
     openai_api_key: str | None = None
     openai_model: str = "gpt-5-mini"
     openai_reasoning_effort: str = "medium"
@@ -41,6 +115,17 @@ class Settings:
 
     @classmethod
     def from_env(cls) -> "Settings":
+        def env_bool(name: str, default: bool = False) -> bool:
+            raw = os.getenv(name)
+            if raw is None or not raw.strip():
+                return default
+            normalized = raw.strip().lower()
+            if normalized in {"1", "true", "yes"}:
+                return True
+            if normalized in {"0", "false", "no"}:
+                return False
+            raise RuntimeError(f"{name} must be true or false")
+
         def optional_nonnegative_float(name: str) -> float | None:
             raw = os.getenv(name, "").strip()
             if not raw:
@@ -72,6 +157,25 @@ class Settings:
             raise RuntimeError(
                 "AI_MAX_BATCH_CONTEXT_CLAUSES must be greater than zero"
             )
+        ai_cost_gate_mode = os.getenv("AI_COST_GATE_MODE", "off").lower()
+        if ai_cost_gate_mode not in {"off", "enforce"}:
+            raise RuntimeError("AI_COST_GATE_MODE must be off or enforce")
+        try:
+            ai_cost_max_provider_calls = int(
+                os.getenv("AI_COST_MAX_PROVIDER_CALLS_PER_MEETING", "3")
+            )
+            ai_cost_max_payload_characters = int(
+                os.getenv("AI_COST_MAX_PAYLOAD_CHARACTERS", "20000")
+            )
+        except ValueError as exc:
+            raise RuntimeError("AI cost gate limits must be integers") from exc
+        if not 1 <= ai_cost_max_provider_calls <= 10:
+            raise RuntimeError("AI_COST_MAX_PROVIDER_CALLS_PER_MEETING must be between 1 and 10")
+        if not 1 <= ai_cost_max_payload_characters <= 60_000:
+            raise RuntimeError("AI_COST_MAX_PAYLOAD_CHARACTERS must be between 1 and 60000")
+        ai_cost_max_estimated_usd_per_meeting = optional_nonnegative_float(
+            "AI_COST_MAX_ESTIMATED_USD_PER_MEETING"
+        )
 
         pipeline_version = os.getenv("PIPELINE_VERSION", "v1").lower()
         if pipeline_version not in {"v1", "v2", "shadow"}:
@@ -85,6 +189,328 @@ class Settings:
                 "OPENAI_REASONING_EFFORT must be minimal, low, medium, or high"
             )
 
+        embedding_model_name = os.getenv(
+            "EMBEDDING_MODEL_NAME",
+            "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        ).strip()
+        if not embedding_model_name:
+            raise RuntimeError("EMBEDDING_MODEL_NAME must not be empty")
+        embedding_device = os.getenv("EMBEDDING_DEVICE", "cpu").strip()
+        if not embedding_device:
+            raise RuntimeError("EMBEDDING_DEVICE must not be empty")
+        raw_embedding_dimension = os.getenv("EMBEDDING_FALLBACK_DIMENSION", "384")
+        try:
+            embedding_fallback_dimension = int(raw_embedding_dimension)
+        except ValueError as exc:
+            raise RuntimeError(
+                "EMBEDDING_FALLBACK_DIMENSION must be an integer"
+            ) from exc
+        if embedding_fallback_dimension <= 0:
+            raise RuntimeError(
+                "EMBEDDING_FALLBACK_DIMENSION must be greater than zero"
+            )
+        action_classifier_mode = os.getenv(
+            "ACTION_CLASSIFIER_MODE", "off"
+        ).lower()
+        if action_classifier_mode not in {"off", "shadow", "assist"}:
+            raise RuntimeError("ACTION_CLASSIFIER_MODE must be off, shadow, or assist")
+        action_candidate_builder_mode = os.getenv(
+            "ACTION_CANDIDATE_BUILDER_MODE", "off"
+        ).lower()
+        if action_candidate_builder_mode not in {"off", "shadow"}:
+            raise RuntimeError("ACTION_CANDIDATE_BUILDER_MODE must be off or shadow")
+        action_candidate_builder_version = os.getenv(
+            "ACTION_CANDIDATE_BUILDER_VERSION", "action-candidate-v2"
+        ).strip()
+        if not action_candidate_builder_version:
+            raise RuntimeError("ACTION_CANDIDATE_BUILDER_VERSION must not be empty")
+        commitment_router_mode = os.getenv("COMMITMENT_ROUTER_MODE", "off").lower()
+        if commitment_router_mode not in {"off", "shadow", "assist"}:
+            raise RuntimeError("COMMITMENT_ROUTER_MODE must be off, shadow, or assist")
+        commitment_router_version = os.getenv(
+            "COMMITMENT_ROUTER_VERSION", "commitment-router-v2"
+        ).strip()
+        if not commitment_router_version:
+            raise RuntimeError("COMMITMENT_ROUTER_VERSION must not be empty")
+        action_canonicalization_mode = os.getenv(
+            "ACTION_CANONICALIZATION_MODE", "off"
+        ).lower()
+        if action_canonicalization_mode not in {"off", "shadow"}:
+            raise RuntimeError("ACTION_CANONICALIZATION_MODE must be off or shadow")
+        action_canonicalization_version = os.getenv(
+            "ACTION_CANONICALIZATION_VERSION", "action-canonicalization-v2"
+        ).strip()
+        if not action_canonicalization_version:
+            raise RuntimeError("ACTION_CANONICALIZATION_VERSION must not be empty")
+        recap_reconciliation_mode = os.getenv(
+            "RECAP_RECONCILIATION_MODE", "off"
+        ).lower()
+        if recap_reconciliation_mode not in {"off", "shadow"}:
+            raise RuntimeError("RECAP_RECONCILIATION_MODE must be off or shadow")
+        owner_grounding_mode = os.getenv("OWNER_GROUNDING_MODE", "off").lower()
+        if owner_grounding_mode not in {"off", "shadow"}:
+            raise RuntimeError("OWNER_GROUNDING_MODE must be off or shadow")
+        deadline_grounding_mode = os.getenv("DEADLINE_GROUNDING_MODE", "off").lower()
+        if deadline_grounding_mode not in {"off", "shadow"}:
+            raise RuntimeError("DEADLINE_GROUNDING_MODE must be off or shadow")
+        commitment_router_active_types = tuple(
+            value.strip().upper()
+            for value in os.getenv(
+                "COMMITMENT_ROUTER_ACTIVE_TYPES",
+                "DIRECT_ASSIGNMENT,SELF_COMMITMENT",
+            ).split(",")
+            if value.strip()
+        )
+        valid_commitment_types = {"DIRECT_ASSIGNMENT", "SELF_COMMITMENT", "EXPLICIT_ACCEPTANCE", "CONFIRMED_ACTION", "FINAL_RECAP_CONFIRMATION"}
+        if not commitment_router_active_types or any(
+            value not in valid_commitment_types for value in commitment_router_active_types
+        ):
+            raise RuntimeError("COMMITMENT_ROUTER_ACTIVE_TYPES must contain valid positive authority types")
+        candidate_router_mode = os.getenv("CANDIDATE_ROUTER_MODE", "off").lower()
+        if candidate_router_mode not in {"off", "shadow", "assist"}:
+            raise RuntimeError("CANDIDATE_ROUTER_MODE must be off, shadow, or assist")
+        if candidate_router_mode != "off" and action_classifier_mode != candidate_router_mode:
+            raise RuntimeError(
+                f"CANDIDATE_ROUTER_MODE={candidate_router_mode} requires "
+                f"ACTION_CLASSIFIER_MODE={candidate_router_mode}"
+            )
+        task_create_proposal_enabled = env_bool(
+            "TASK_CREATE_PROPOSAL_ENABLED", False
+        )
+        ai_create_proposal_enabled = env_bool("AI_CREATE_PROPOSAL_ENABLED", False)
+        try:
+            ai_create_max_proposals = int(
+                os.getenv("AI_CREATE_MAX_PROPOSALS_PER_MEETING", "3")
+            )
+        except ValueError as exc:
+            raise RuntimeError(
+                "AI_CREATE_MAX_PROPOSALS_PER_MEETING must be an integer"
+            ) from exc
+        if ai_create_max_proposals <= 0:
+            raise RuntimeError(
+                "AI_CREATE_MAX_PROPOSALS_PER_MEETING must be greater than zero"
+            )
+        if ai_create_proposal_enabled and not task_create_proposal_enabled:
+            raise RuntimeError(
+                "AI_CREATE_PROPOSAL_ENABLED requires TASK_CREATE_PROPOSAL_ENABLED=true"
+            )
+        if task_create_proposal_enabled and candidate_router_mode != "assist":
+            raise RuntimeError(
+                "TASK_CREATE_PROPOSAL_ENABLED requires CANDIDATE_ROUTER_MODE=assist"
+            )
+        ai_quality_uplift_mode = os.getenv("AI_QUALITY_UPLIFT_MODE", "off").lower()
+        if ai_quality_uplift_mode not in {"off", "shadow"}:
+            raise RuntimeError("AI_QUALITY_UPLIFT_MODE must be off or shadow")
+        if ai_quality_uplift_mode == "shadow" and (
+            action_classifier_mode != "shadow"
+            or candidate_router_mode != "shadow"
+            or action_candidate_builder_mode != "shadow"
+            or commitment_router_mode != "shadow"
+        ):
+            raise RuntimeError(
+                "AI_QUALITY_UPLIFT_MODE=shadow requires classifier, candidate, "
+                "action-candidate, and commitment-router shadow modes"
+            )
+        task_semantic_linker_mode = os.getenv(
+            "TASK_SEMANTIC_LINKER_MODE", "off"
+        ).lower()
+        if task_semantic_linker_mode not in {"off", "shadow"}:
+            raise RuntimeError("TASK_SEMANTIC_LINKER_MODE must be off or shadow")
+        context_retrieval_mode = os.getenv(
+            "CONTEXT_RETRIEVAL_MODE", "off"
+        ).lower()
+        if context_retrieval_mode not in {"off", "shadow"}:
+            raise RuntimeError("CONTEXT_RETRIEVAL_MODE must be off or shadow")
+        if context_retrieval_mode == "shadow" and task_semantic_linker_mode != "shadow":
+            raise RuntimeError(
+                "CONTEXT_RETRIEVAL_MODE=shadow requires TASK_SEMANTIC_LINKER_MODE=shadow"
+            )
+        ai_mutation_router_mode = os.getenv("AI_MUTATION_ROUTER_MODE", "off").lower()
+        if ai_mutation_router_mode not in {"off", "shadow", "assist"}:
+            raise RuntimeError("AI_MUTATION_ROUTER_MODE must be off, shadow, or assist")
+        if ai_mutation_router_mode == "shadow" and (task_semantic_linker_mode != "shadow" or context_retrieval_mode != "shadow"):
+            raise RuntimeError("AI_MUTATION_ROUTER_MODE=shadow requires semantic and context shadow modes")
+        if ai_mutation_router_mode == "assist" and (candidate_router_mode != "assist" or task_semantic_linker_mode != "shadow" or context_retrieval_mode != "shadow"):
+            raise RuntimeError("AI_MUTATION_ROUTER_MODE=assist requires candidate, semantic, and context routing")
+        ai_mutation_prompt_version = os.getenv("AI_MUTATION_PROMPT_VERSION", "mutation-resolution-v2").strip()
+        if not ai_mutation_prompt_version:
+            raise RuntimeError("AI_MUTATION_PROMPT_VERSION must not be empty")
+        try:
+            ai_mutation_min_confidence = float(os.getenv("AI_MUTATION_MIN_CONFIDENCE", "0.70"))
+        except ValueError as exc:
+            raise RuntimeError("AI_MUTATION_MIN_CONFIDENCE must be a number") from exc
+        if not 0.0 <= ai_mutation_min_confidence <= 1.0:
+            raise RuntimeError("AI_MUTATION_MIN_CONFIDENCE must be between zero and one")
+        note_dual_view_mode = os.getenv("NOTE_DUAL_VIEW_MODE", "off").lower()
+        if note_dual_view_mode not in {"off", "shadow", "assist"}:
+            raise RuntimeError("NOTE_DUAL_VIEW_MODE must be off, shadow, or assist")
+        try:
+            note_claim_max_transcript_clauses = int(os.getenv("NOTE_CLAIM_MAX_TRANSCRIPT_CLAUSES", "8"))
+            note_claim_max_topics = int(os.getenv("NOTE_CLAIM_MAX_TOPICS", "3"))
+            note_claim_grounding_threshold = float(os.getenv("NOTE_CLAIM_GROUNDING_THRESHOLD", "0.72"))
+            note_claim_grounding_margin = float(os.getenv("NOTE_CLAIM_GROUNDING_MARGIN", "0.12"))
+        except ValueError as exc:
+            raise RuntimeError("note dual-view limits and thresholds must be numeric") from exc
+        if note_claim_max_transcript_clauses <= 0 or note_claim_max_transcript_clauses > 8 or note_claim_max_topics <= 0 or note_claim_max_topics > 3:
+            raise RuntimeError("note dual-view limits exceed their hard caps")
+        if not 0.0 <= note_claim_grounding_threshold <= 1.0 or not 0.0 <= note_claim_grounding_margin <= 1.0:
+            raise RuntimeError("note dual-view thresholds must be between zero and one")
+        note_dual_view_version = os.getenv("NOTE_DUAL_VIEW_VERSION", "note-dual-view-v1").strip()
+        if not note_dual_view_version:
+            raise RuntimeError("NOTE_DUAL_VIEW_VERSION must not be empty")
+        temporal_semantics_mode = os.getenv("TEMPORAL_SEMANTICS_MODE", "off").lower()
+        if temporal_semantics_mode not in {"off", "shadow", "assist"}:
+            raise RuntimeError("TEMPORAL_SEMANTICS_MODE must be off, shadow, or assist")
+        temporal_parser_version = os.getenv(
+            "TEMPORAL_PARSER_VERSION", "temporal-parser-v1"
+        ).strip()
+        if not temporal_parser_version:
+            raise RuntimeError("TEMPORAL_PARSER_VERSION must not be empty")
+        temporal_working_day_policy = os.getenv(
+            "TEMPORAL_WORKING_DAY_POLICY", "weekdays-only-v1"
+        ).strip()
+        if temporal_working_day_policy != "weekdays-only-v1":
+            raise RuntimeError("TEMPORAL_WORKING_DAY_POLICY must be weekdays-only-v1")
+        try:
+            temporal_min_confidence = float(
+                os.getenv("TEMPORAL_MIN_CONFIDENCE", "1.0")
+            )
+        except ValueError as exc:
+            raise RuntimeError("TEMPORAL_MIN_CONFIDENCE must be a number") from exc
+        if temporal_min_confidence != 1.0:
+            raise RuntimeError("TEMPORAL_MIN_CONFIDENCE must be exactly 1.0")
+        task_link_weight_names = (
+            "TASK_LINK_SEMANTIC_WEIGHT",
+            "TASK_LINK_LEXICAL_WEIGHT",
+            "TASK_LINK_TOPIC_WEIGHT",
+            "TASK_LINK_OWNER_WEIGHT",
+            "TASK_LINK_RECENCY_WEIGHT",
+        )
+        task_link_weight_defaults = ("0.55", "0.20", "0.10", "0.10", "0.05")
+        try:
+            task_link_weights = tuple(
+                float(os.getenv(name, default))
+                for name, default in zip(
+                    task_link_weight_names,
+                    task_link_weight_defaults,
+                    strict=True,
+                )
+            )
+            task_link_strong_threshold = float(
+                os.getenv("TASK_LINK_STRONG_THRESHOLD", "0.78")
+            )
+            task_link_min_margin = float(
+                os.getenv("TASK_LINK_MIN_MARGIN", "0.12")
+            )
+            task_link_ai_threshold = float(
+                os.getenv("TASK_LINK_AI_THRESHOLD", "0.60")
+            )
+        except ValueError as exc:
+            raise RuntimeError("task-link weights and thresholds must be numbers") from exc
+        if any(value < 0.0 or value > 1.0 for value in task_link_weights):
+            raise RuntimeError("task-link weights must be between zero and one")
+        if abs(sum(task_link_weights) - 1.0) > 1e-6:
+            raise RuntimeError("task-link weights must sum to one")
+        if not 0.0 <= task_link_ai_threshold <= task_link_strong_threshold <= 1.0:
+            raise RuntimeError(
+                "task-link thresholds must satisfy 0 <= AI <= STRONG <= 1"
+            )
+        if not 0.0 <= task_link_min_margin <= 1.0:
+            raise RuntimeError("TASK_LINK_MIN_MARGIN must be between zero and one")
+        try:
+            task_link_recency_horizon = int(
+                os.getenv("TASK_LINK_RECENCY_HORIZON_CLAUSES", "200")
+            )
+            task_link_top_k = int(os.getenv("TASK_LINK_TOP_K", "5"))
+        except ValueError as exc:
+            raise RuntimeError("task-link horizon and top-k must be integers") from exc
+        if task_link_recency_horizon <= 0:
+            raise RuntimeError("TASK_LINK_RECENCY_HORIZON_CLAUSES must be positive")
+        if not 1 <= task_link_top_k <= 20:
+            raise RuntimeError("TASK_LINK_TOP_K must be between 1 and 20")
+        task_link_scoring_version = os.getenv(
+            "TASK_LINK_SCORING_VERSION", "task-link-scoring-v1"
+        ).strip()
+        if not task_link_scoring_version:
+            raise RuntimeError("TASK_LINK_SCORING_VERSION must not be empty")
+        context_integer_defaults = {
+            "CONTEXT_MAX_CLAUSES": 30,
+            "CONTEXT_MAX_CHARACTERS": 12_000,
+            "CONTEXT_MAX_TASKS": 5,
+            "CONTEXT_LOCAL_BEFORE": 3,
+            "CONTEXT_LOCAL_AFTER": 5,
+            "CONTEXT_MAX_TOPIC_CLAUSES": 12,
+            "CONTEXT_MAX_TOPICS": 3,
+            "CONTEXT_MAX_HISTORY_EVENTS_PER_TASK": 3,
+            "CONTEXT_TOPIC_SMOOTHING_WINDOW": 3,
+        }
+        try:
+            context_integers = {
+                name: int(os.getenv(name, str(default)))
+                for name, default in context_integer_defaults.items()
+            }
+            context_topic_boundary_threshold = float(
+                os.getenv("CONTEXT_TOPIC_BOUNDARY_THRESHOLD", "0.42")
+            )
+        except ValueError as exc:
+            raise RuntimeError("context retrieval limits must be numeric") from exc
+        if not 1 <= context_integers["CONTEXT_MAX_CLAUSES"] <= 30:
+            raise RuntimeError("CONTEXT_MAX_CLAUSES must be between 1 and 30")
+        if not 1 <= context_integers["CONTEXT_MAX_CHARACTERS"] <= 12_000:
+            raise RuntimeError(
+                "CONTEXT_MAX_CHARACTERS must be between 1 and 12000"
+            )
+        if not 1 <= context_integers["CONTEXT_MAX_TASKS"] <= 5:
+            raise RuntimeError("CONTEXT_MAX_TASKS must be between 1 and 5")
+        if any(
+            context_integers[name] < 0
+            for name in (
+                "CONTEXT_LOCAL_BEFORE",
+                "CONTEXT_LOCAL_AFTER",
+                "CONTEXT_MAX_TOPIC_CLAUSES",
+                "CONTEXT_MAX_HISTORY_EVENTS_PER_TASK",
+            )
+        ):
+            raise RuntimeError("context window limits must not be negative")
+        if context_integers["CONTEXT_MAX_TOPIC_CLAUSES"] > 30:
+            raise RuntimeError("CONTEXT_MAX_TOPIC_CLAUSES must not exceed 30")
+        if context_integers["CONTEXT_MAX_HISTORY_EVENTS_PER_TASK"] > 10:
+            raise RuntimeError(
+                "CONTEXT_MAX_HISTORY_EVENTS_PER_TASK must not exceed 10"
+            )
+        if not 1 <= context_integers["CONTEXT_MAX_TOPICS"] <= 12:
+            raise RuntimeError("CONTEXT_MAX_TOPICS must be between 1 and 12")
+        if context_integers["CONTEXT_TOPIC_SMOOTHING_WINDOW"] not in {2, 3}:
+            raise RuntimeError("CONTEXT_TOPIC_SMOOTHING_WINDOW must be 2 or 3")
+        if not 0.0 <= context_topic_boundary_threshold <= 1.0:
+            raise RuntimeError(
+                "CONTEXT_TOPIC_BOUNDARY_THRESHOLD must be between zero and one"
+            )
+        context_retrieval_version = os.getenv(
+            "CONTEXT_RETRIEVAL_VERSION", "context-retriever-v1"
+        ).strip()
+        if not context_retrieval_version:
+            raise RuntimeError("CONTEXT_RETRIEVAL_VERSION must not be empty")
+        try:
+            action_clear_threshold = float(
+                os.getenv("ACTION_CLEAR_THRESHOLD", "0.82")
+            )
+            action_ai_threshold = float(os.getenv("ACTION_AI_THRESHOLD", "0.45"))
+        except ValueError as exc:
+            raise RuntimeError(
+                "ACTION_CLEAR_THRESHOLD and ACTION_AI_THRESHOLD must be numbers"
+            ) from exc
+        if not 0.0 <= action_ai_threshold <= action_clear_threshold <= 1.0:
+            raise RuntimeError(
+                "action thresholds must satisfy 0 <= ACTION_AI_THRESHOLD <= "
+                "ACTION_CLEAR_THRESHOLD <= 1"
+            )
+        candidate_threshold_version = os.getenv(
+            "CANDIDATE_THRESHOLD_VERSION", "candidate-router-thresholds-v1"
+        ).strip()
+        if not candidate_threshold_version:
+            raise RuntimeError("CANDIDATE_THRESHOLD_VERSION must not be empty")
+
         return cls(
             power_automate_api_key=os.getenv("POWER_AUTOMATE_API_KEY") or None,
             max_transcript_characters=limit,
@@ -92,9 +518,26 @@ class Settings:
             ai_fallback_api_key=os.getenv("AI_FALLBACK_API_KEY") or None,
             ai_timeout_seconds=float(os.getenv("AI_TIMEOUT_SECONDS", "3600")),
             job_timeout_seconds=float(os.getenv("JOB_TIMEOUT_SECONDS", "3600")),
+            meeting_feedback_tenant_id=(
+                os.getenv("MEETING_FEEDBACK_TENANT_ID")
+                or os.getenv("V227_FEEDBACK_TENANT_ID")
+                or None
+            ),
+            meeting_feedback_directory=(
+                os.getenv("MEETING_FEEDBACK_DIRECTORY")
+                or os.getenv("V227_FEEDBACK_DIRECTORY")
+                or "evaluation/runtime/v227-feedback"
+            ),
             ai_max_batch_context_clauses=batch_limit,
+            ai_cost_gate_mode=ai_cost_gate_mode,
+            ai_cost_max_provider_calls_per_meeting=ai_cost_max_provider_calls,
+            ai_cost_max_payload_characters=ai_cost_max_payload_characters,
+            ai_cost_max_estimated_usd_per_meeting=(
+                ai_cost_max_estimated_usd_per_meeting
+            ),
             pipeline_version=pipeline_version,
-            pipeline_trace_enabled=os.getenv("PIPELINE_TRACE_ENABLED", "").lower() in {"1", "true", "yes"},
+            pipeline_trace_enabled=os.getenv("PIPELINE_TRACE_ENABLED", "").lower()
+            in {"1", "true", "yes"},
             pipeline_trace_directory=os.getenv("PIPELINE_TRACE_DIRECTORY", "evaluation/traces"),
             meeting_context_mode=context_mode,
             meeting_note_max_characters=int(os.getenv("MEETING_NOTE_MAX_CHARACTERS", "50000")),
@@ -103,6 +546,76 @@ class Settings:
             topic_likely_threshold=float(os.getenv("TOPIC_LIKELY_THRESHOLD", "0.45")),
             max_meeting_topics=int(os.getenv("MAX_MEETING_TOPICS", "12")),
             max_topic_keywords=int(os.getenv("MAX_TOPIC_KEYWORDS", "8")),
+            embedding_model_name=embedding_model_name,
+            embedding_device=embedding_device,
+            embedding_fallback_enabled=env_bool(
+                "EMBEDDING_FALLBACK_ENABLED", True
+            ),
+            embedding_fallback_dimension=embedding_fallback_dimension,
+            action_classifier_mode=action_classifier_mode,
+            action_classifier_model_path=(
+                os.getenv("ACTION_CLASSIFIER_MODEL_PATH") or ""
+            ).strip()
+            or None,
+            action_candidate_builder_mode=action_candidate_builder_mode,
+            action_candidate_builder_version=action_candidate_builder_version,
+            commitment_router_mode=commitment_router_mode,
+            commitment_router_version=commitment_router_version,
+            commitment_router_active_types=commitment_router_active_types,
+            action_canonicalization_mode=action_canonicalization_mode,
+            action_canonicalization_version=action_canonicalization_version,
+            recap_reconciliation_mode=recap_reconciliation_mode,
+            owner_grounding_mode=owner_grounding_mode,
+            deadline_grounding_mode=deadline_grounding_mode,
+            candidate_router_mode=candidate_router_mode,
+            task_create_proposal_enabled=task_create_proposal_enabled,
+            ai_create_proposal_enabled=ai_create_proposal_enabled,
+            ai_create_max_proposals_per_meeting=ai_create_max_proposals,
+            ai_quality_uplift_mode=ai_quality_uplift_mode,
+            task_semantic_linker_mode=task_semantic_linker_mode,
+            task_link_semantic_weight=task_link_weights[0],
+            task_link_lexical_weight=task_link_weights[1],
+            task_link_topic_weight=task_link_weights[2],
+            task_link_owner_weight=task_link_weights[3],
+            task_link_recency_weight=task_link_weights[4],
+            task_link_strong_threshold=task_link_strong_threshold,
+            task_link_min_margin=task_link_min_margin,
+            task_link_ai_threshold=task_link_ai_threshold,
+            task_link_recency_horizon_clauses=task_link_recency_horizon,
+            task_link_top_k=task_link_top_k,
+            task_link_scoring_version=task_link_scoring_version,
+            context_retrieval_mode=context_retrieval_mode,
+            context_max_clauses=context_integers["CONTEXT_MAX_CLAUSES"],
+            context_max_characters=context_integers["CONTEXT_MAX_CHARACTERS"],
+            context_max_tasks=context_integers["CONTEXT_MAX_TASKS"],
+            context_local_before=context_integers["CONTEXT_LOCAL_BEFORE"],
+            context_local_after=context_integers["CONTEXT_LOCAL_AFTER"],
+            context_max_topic_clauses=context_integers["CONTEXT_MAX_TOPIC_CLAUSES"],
+            context_max_topics=context_integers["CONTEXT_MAX_TOPICS"],
+            context_max_history_events_per_task=(
+                context_integers["CONTEXT_MAX_HISTORY_EVENTS_PER_TASK"]
+            ),
+            context_topic_boundary_threshold=context_topic_boundary_threshold,
+            context_topic_smoothing_window=(
+                context_integers["CONTEXT_TOPIC_SMOOTHING_WINDOW"]
+            ),
+            context_retrieval_version=context_retrieval_version,
+            ai_mutation_router_mode=ai_mutation_router_mode,
+            ai_mutation_prompt_version=ai_mutation_prompt_version,
+            ai_mutation_min_confidence=ai_mutation_min_confidence,
+            note_dual_view_mode=note_dual_view_mode,
+            note_claim_max_transcript_clauses=note_claim_max_transcript_clauses,
+            note_claim_max_topics=note_claim_max_topics,
+            note_claim_grounding_threshold=note_claim_grounding_threshold,
+            note_claim_grounding_margin=note_claim_grounding_margin,
+            note_dual_view_version=note_dual_view_version,
+            temporal_semantics_mode=temporal_semantics_mode,
+            temporal_parser_version=temporal_parser_version,
+            temporal_working_day_policy=temporal_working_day_policy,
+            temporal_min_confidence=temporal_min_confidence,
+            action_clear_threshold=action_clear_threshold,
+            action_ai_threshold=action_ai_threshold,
+            candidate_threshold_version=candidate_threshold_version,
             openai_api_key=(os.getenv("OPENAI_API_KEY") or "").strip() or None,
             openai_model=os.getenv("OPENAI_MODEL", "gpt-5-mini"),
             openai_reasoning_effort=reasoning_effort,

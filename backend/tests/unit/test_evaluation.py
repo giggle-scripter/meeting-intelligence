@@ -59,6 +59,10 @@ def test_aggregate_results_calculates_task_metrics() -> None:
     assert metrics["passed_case_count"] == 1
     assert metrics["task_precision"] == 0.5
     assert metrics["task_recall"] == 0.5
+    assert metrics["task_identity_f1"] == 0.5
+    assert metrics["matched_task_count"] == 1
+    assert metrics["missing_task_count"] == 1
+    assert metrics["unexpected_task_count"] == 1
 
 
 def test_compare_case_matches_semantically_equivalent_task_names() -> None:

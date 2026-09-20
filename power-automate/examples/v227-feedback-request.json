@@ -1,0 +1,29 @@
+{
+  "job_id": "job-20260918-00123",
+  "content_hash": "4a9c4db7c1f0f317c0b4c2e5d6f8a9b0c1d2e3f40516273849a0b1c2d3e4f5061",
+  "corrected_final_tasks": [
+    {
+      "task_name": "Gửi checklist triển khai",
+      "assignee": "Lan",
+      "start_date": "2026-09-19",
+      "due_date": "2026-09-23",
+      "due_date_text": "Thứ Tư 23/09",
+      "evidence": "Lan sẽ gửi checklist triển khai trước cuộc họp tiếp theo.",
+      "status": "Proposed"
+    },
+    {
+      "task_name": "Xác nhận quyền truy cập staging",
+      "assignee": "Minh",
+      "start_date": "",
+      "due_date": "",
+      "due_date_text": "",
+      "evidence": "Minh phụ trách xác nhận quyền truy cập staging.",
+      "status": "Proposed"
+    }
+  ],
+  "approval_metadata": {
+    "reviewer": "reviewer@example.invalid",
+    "reviewed_at": "2026-09-19T10:15:00+07:00",
+    "approval": true
+  }
+}

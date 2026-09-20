@@ -6,6 +6,7 @@ from hashlib import sha256
 from base64 import b64decode
 from binascii import Error as BinasciiError
 import json
+import os
 import re
 from secrets import compare_digest
 from typing import Annotated, Literal
@@ -57,7 +58,9 @@ app = FastAPI(
     version="1.0.0",
     description="Python-first transcript-to-task pipeline with selective AI fallback.",
 )
-job_store = MeetingJobStore()
+# SQLite is opt-in for the one-process local Uvicorn deployment.  Leaving the
+# variable unset preserves the existing in-memory behavior used by tests.
+job_store = MeetingJobStore(sqlite_path=os.getenv("MEETING_JOB_SQLITE_PATH") or None)
 
 
 def verify_api_key(
@@ -318,13 +321,52 @@ def _submit_job(
     job_key = versioned_idempotency_key(
         effective_content_hash,
         settings.pipeline_version,
-        "v1-ledger-mutation-v1",
+        "v1-ledger-proposal-v1",
         model_name,
         "|".join((
             f"batch={settings.ai_max_batch_context_clauses}",
+            f"ai_cost_gate={settings.ai_cost_gate_mode}",
             f"timeout={settings.ai_timeout_seconds}",
             f"job_timeout={settings.job_timeout_seconds}",
             f"context={settings.meeting_context_mode}",
+            f"action_classifier={settings.action_classifier_mode}",
+            f"action_model={settings.action_classifier_model_path or 'none'}",
+            f"action_candidates={settings.action_candidate_builder_mode}",
+            f"action_candidates_version={settings.action_candidate_builder_version}",
+            f"commitment_router={settings.commitment_router_mode}",
+            f"commitment_router_version={settings.commitment_router_version}",
+            f"commitment_router_types={','.join(settings.commitment_router_active_types)}",
+            f"action_canonicalization={settings.action_canonicalization_mode}",
+            f"action_canonicalization_version={settings.action_canonicalization_version}",
+            f"recap_reconciliation={settings.recap_reconciliation_mode}",
+            f"owner_grounding={settings.owner_grounding_mode}",
+            f"deadline_grounding={settings.deadline_grounding_mode}",
+            f"candidate_router={settings.candidate_router_mode}",
+            f"candidate_thresholds={settings.candidate_threshold_version}",
+            f"action_clear={settings.action_clear_threshold}",
+            f"action_ai={settings.action_ai_threshold}",
+            f"task_create_proposal={settings.task_create_proposal_enabled}",
+            f"ai_create_proposal={settings.ai_create_proposal_enabled}",
+            f"ai_create_max={settings.ai_create_max_proposals_per_meeting}",
+            f"ai_quality_uplift={settings.ai_quality_uplift_mode}",
+            f"task_linker={settings.task_semantic_linker_mode}",
+            f"task_link_scoring={settings.task_link_scoring_version}",
+            f"task_link_weights={settings.task_link_semantic_weight},"
+            f"{settings.task_link_lexical_weight},{settings.task_link_topic_weight},"
+            f"{settings.task_link_owner_weight},{settings.task_link_recency_weight}",
+            f"task_link_thresholds={settings.task_link_strong_threshold},"
+            f"{settings.task_link_min_margin},{settings.task_link_ai_threshold}",
+            f"task_link_top_k={settings.task_link_top_k}",
+            f"context_retrieval={settings.context_retrieval_mode}",
+            f"context_limits={settings.context_max_clauses},"
+            f"{settings.context_max_characters},{settings.context_max_tasks}",
+            f"context_local={settings.context_local_before},"
+            f"{settings.context_local_after}",
+            f"context_topic={settings.context_topic_boundary_threshold},"
+            f"{settings.context_topic_smoothing_window},"
+            f"{settings.context_max_topics},{settings.context_max_topic_clauses}",
+            f"context_history={settings.context_max_history_events_per_task}",
+            f"context_version={settings.context_retrieval_version}",
         )),
     )
     job, created = job_store.submit(
@@ -337,6 +379,16 @@ def _submit_job(
                 speaker_aliases=speaker_aliases,
                 summary_topic=summary_topic,
                 ai_max_batch_context_clauses=settings.ai_max_batch_context_clauses,
+                ai_cost_gate_mode=settings.ai_cost_gate_mode,
+                ai_cost_max_provider_calls_per_meeting=(
+                    settings.ai_cost_max_provider_calls_per_meeting
+                ),
+                ai_cost_max_payload_characters=(
+                    settings.ai_cost_max_payload_characters
+                ),
+                ai_cost_max_estimated_usd_per_meeting=(
+                    settings.ai_cost_max_estimated_usd_per_meeting
+                ),
                 trace_enabled=settings.pipeline_trace_enabled,
                 trace_directory=settings.pipeline_trace_directory,
                 meeting_context_mode=settings.meeting_context_mode,
@@ -345,10 +397,85 @@ def _submit_job(
                 max_meeting_topics=settings.max_meeting_topics,
                 max_topic_keywords=settings.max_topic_keywords,
                 topic_likely_threshold=settings.topic_likely_threshold,
+                action_classifier_mode=settings.action_classifier_mode,
+                action_classifier_model_path=settings.action_classifier_model_path,
+                action_candidate_builder_mode=settings.action_candidate_builder_mode,
+                action_candidate_builder_version=settings.action_candidate_builder_version,
+                commitment_router_mode=settings.commitment_router_mode,
+                commitment_router_version=settings.commitment_router_version,
+                commitment_router_active_types=settings.commitment_router_active_types,
+                action_canonicalization_mode=settings.action_canonicalization_mode,
+                action_canonicalization_version=settings.action_canonicalization_version,
+                recap_reconciliation_mode=settings.recap_reconciliation_mode,
+                owner_grounding_mode=settings.owner_grounding_mode,
+                deadline_grounding_mode=settings.deadline_grounding_mode,
+                candidate_router_mode=settings.candidate_router_mode,
+                action_clear_threshold=settings.action_clear_threshold,
+                action_ai_threshold=settings.action_ai_threshold,
+                candidate_threshold_version=settings.candidate_threshold_version,
+                task_create_proposal_enabled=settings.task_create_proposal_enabled,
+                ai_create_proposal_enabled=settings.ai_create_proposal_enabled,
+                ai_create_max_proposals_per_meeting=(
+                    settings.ai_create_max_proposals_per_meeting
+                ),
+                ai_quality_uplift_mode=settings.ai_quality_uplift_mode,
+                task_semantic_linker_mode=settings.task_semantic_linker_mode,
+                task_link_embedding_model_name=settings.embedding_model_name,
+                task_link_embedding_device=settings.embedding_device,
+                task_link_embedding_fallback_enabled=(
+                    settings.embedding_fallback_enabled
+                ),
+                task_link_embedding_fallback_dimension=(
+                    settings.embedding_fallback_dimension
+                ),
+                task_link_semantic_weight=settings.task_link_semantic_weight,
+                task_link_lexical_weight=settings.task_link_lexical_weight,
+                task_link_topic_weight=settings.task_link_topic_weight,
+                task_link_owner_weight=settings.task_link_owner_weight,
+                task_link_recency_weight=settings.task_link_recency_weight,
+                task_link_strong_threshold=settings.task_link_strong_threshold,
+                task_link_min_margin=settings.task_link_min_margin,
+                task_link_ai_threshold=settings.task_link_ai_threshold,
+                task_link_recency_horizon_clauses=(
+                    settings.task_link_recency_horizon_clauses
+                ),
+                task_link_top_k=settings.task_link_top_k,
+                task_link_scoring_version=settings.task_link_scoring_version,
+                context_retrieval_mode=settings.context_retrieval_mode,
+                context_max_clauses=settings.context_max_clauses,
+                context_max_characters=settings.context_max_characters,
+                context_max_tasks=settings.context_max_tasks,
+                context_local_before=settings.context_local_before,
+                context_local_after=settings.context_local_after,
+                context_max_topic_clauses=settings.context_max_topic_clauses,
+                context_max_topics=settings.context_max_topics,
+                context_max_history_events_per_task=(
+                    settings.context_max_history_events_per_task
+                ),
+                context_topic_boundary_threshold=(
+                    settings.context_topic_boundary_threshold
+                ),
+                context_topic_smoothing_window=(
+                    settings.context_topic_smoothing_window
+                ),
+                context_retrieval_version=settings.context_retrieval_version,
+                ai_mutation_router_mode=settings.ai_mutation_router_mode,
+                ai_mutation_prompt_version=settings.ai_mutation_prompt_version,
+                ai_mutation_min_confidence=settings.ai_mutation_min_confidence,
+                note_dual_view_mode=settings.note_dual_view_mode,
+                note_claim_max_transcript_clauses=settings.note_claim_max_transcript_clauses,
+                note_claim_max_topics=settings.note_claim_max_topics,
+                note_claim_grounding_threshold=settings.note_claim_grounding_threshold,
+                note_claim_grounding_margin=settings.note_claim_grounding_margin,
+                note_dual_view_version=settings.note_dual_view_version,
+                temporal_semantics_mode=settings.temporal_semantics_mode,
+                temporal_parser_version=settings.temporal_parser_version,
+                temporal_working_day_policy=settings.temporal_working_day_policy,
+                temporal_min_confidence=settings.temporal_min_confidence,
             )
         ),
         pipeline_version=settings.pipeline_version,
-        prompt_version="v1-ledger-mutation-v1",
+        prompt_version="v1-ledger-proposal-v1",
         model=model_name,
         content_hash=effective_content_hash,
         timeout_seconds=settings.job_timeout_seconds,
@@ -415,6 +542,14 @@ def process_endpoint(
             or None
         ),
         ai_max_batch_context_clauses=settings.ai_max_batch_context_clauses,
+        ai_cost_gate_mode=settings.ai_cost_gate_mode,
+        ai_cost_max_provider_calls_per_meeting=(
+            settings.ai_cost_max_provider_calls_per_meeting
+        ),
+        ai_cost_max_payload_characters=settings.ai_cost_max_payload_characters,
+        ai_cost_max_estimated_usd_per_meeting=(
+            settings.ai_cost_max_estimated_usd_per_meeting
+        ),
         trace_enabled=settings.pipeline_trace_enabled,
         trace_directory=settings.pipeline_trace_directory,
         meeting_context_mode=settings.meeting_context_mode,
@@ -423,6 +558,73 @@ def process_endpoint(
         max_meeting_topics=settings.max_meeting_topics,
         max_topic_keywords=settings.max_topic_keywords,
         topic_likely_threshold=settings.topic_likely_threshold,
+        action_classifier_mode=settings.action_classifier_mode,
+        action_classifier_model_path=settings.action_classifier_model_path,
+        action_candidate_builder_mode=settings.action_candidate_builder_mode,
+        action_candidate_builder_version=settings.action_candidate_builder_version,
+        commitment_router_mode=settings.commitment_router_mode,
+        commitment_router_version=settings.commitment_router_version,
+        commitment_router_active_types=settings.commitment_router_active_types,
+        action_canonicalization_mode=settings.action_canonicalization_mode,
+        action_canonicalization_version=settings.action_canonicalization_version,
+        recap_reconciliation_mode=settings.recap_reconciliation_mode,
+        owner_grounding_mode=settings.owner_grounding_mode,
+        deadline_grounding_mode=settings.deadline_grounding_mode,
+        candidate_router_mode=settings.candidate_router_mode,
+        action_clear_threshold=settings.action_clear_threshold,
+        action_ai_threshold=settings.action_ai_threshold,
+        candidate_threshold_version=settings.candidate_threshold_version,
+        task_create_proposal_enabled=settings.task_create_proposal_enabled,
+        ai_create_proposal_enabled=settings.ai_create_proposal_enabled,
+        ai_create_max_proposals_per_meeting=(
+            settings.ai_create_max_proposals_per_meeting
+        ),
+        ai_quality_uplift_mode=settings.ai_quality_uplift_mode,
+        task_semantic_linker_mode=settings.task_semantic_linker_mode,
+        task_link_embedding_model_name=settings.embedding_model_name,
+        task_link_embedding_device=settings.embedding_device,
+        task_link_embedding_fallback_enabled=settings.embedding_fallback_enabled,
+        task_link_embedding_fallback_dimension=settings.embedding_fallback_dimension,
+        task_link_semantic_weight=settings.task_link_semantic_weight,
+        task_link_lexical_weight=settings.task_link_lexical_weight,
+        task_link_topic_weight=settings.task_link_topic_weight,
+        task_link_owner_weight=settings.task_link_owner_weight,
+        task_link_recency_weight=settings.task_link_recency_weight,
+        task_link_strong_threshold=settings.task_link_strong_threshold,
+        task_link_min_margin=settings.task_link_min_margin,
+        task_link_ai_threshold=settings.task_link_ai_threshold,
+        task_link_recency_horizon_clauses=(
+            settings.task_link_recency_horizon_clauses
+        ),
+        task_link_top_k=settings.task_link_top_k,
+        task_link_scoring_version=settings.task_link_scoring_version,
+        context_retrieval_mode=settings.context_retrieval_mode,
+        context_max_clauses=settings.context_max_clauses,
+        context_max_characters=settings.context_max_characters,
+        context_max_tasks=settings.context_max_tasks,
+        context_local_before=settings.context_local_before,
+        context_local_after=settings.context_local_after,
+        context_max_topic_clauses=settings.context_max_topic_clauses,
+        context_max_topics=settings.context_max_topics,
+        context_max_history_events_per_task=(
+            settings.context_max_history_events_per_task
+        ),
+        context_topic_boundary_threshold=settings.context_topic_boundary_threshold,
+        context_topic_smoothing_window=settings.context_topic_smoothing_window,
+        context_retrieval_version=settings.context_retrieval_version,
+        ai_mutation_router_mode=settings.ai_mutation_router_mode,
+        ai_mutation_prompt_version=settings.ai_mutation_prompt_version,
+        ai_mutation_min_confidence=settings.ai_mutation_min_confidence,
+        note_dual_view_mode=settings.note_dual_view_mode,
+        note_claim_max_transcript_clauses=settings.note_claim_max_transcript_clauses,
+        note_claim_max_topics=settings.note_claim_max_topics,
+        note_claim_grounding_threshold=settings.note_claim_grounding_threshold,
+        note_claim_grounding_margin=settings.note_claim_grounding_margin,
+        note_dual_view_version=settings.note_dual_view_version,
+        temporal_semantics_mode=settings.temporal_semantics_mode,
+        temporal_parser_version=settings.temporal_parser_version,
+        temporal_working_day_policy=settings.temporal_working_day_policy,
+        temporal_min_confidence=settings.temporal_min_confidence,
     )
     return asdict(result)
 
@@ -529,6 +731,14 @@ async def process_file_endpoint(
         speaker_aliases={},
         summary_topic=summary_topic,
         ai_max_batch_context_clauses=settings.ai_max_batch_context_clauses,
+        ai_cost_gate_mode=settings.ai_cost_gate_mode,
+        ai_cost_max_provider_calls_per_meeting=(
+            settings.ai_cost_max_provider_calls_per_meeting
+        ),
+        ai_cost_max_payload_characters=settings.ai_cost_max_payload_characters,
+        ai_cost_max_estimated_usd_per_meeting=(
+            settings.ai_cost_max_estimated_usd_per_meeting
+        ),
         trace_enabled=settings.pipeline_trace_enabled,
         trace_directory=settings.pipeline_trace_directory,
         meeting_context_mode=settings.meeting_context_mode,
@@ -537,6 +747,73 @@ async def process_file_endpoint(
         max_meeting_topics=settings.max_meeting_topics,
         max_topic_keywords=settings.max_topic_keywords,
         topic_likely_threshold=settings.topic_likely_threshold,
+        action_classifier_mode=settings.action_classifier_mode,
+        action_classifier_model_path=settings.action_classifier_model_path,
+        action_candidate_builder_mode=settings.action_candidate_builder_mode,
+        action_candidate_builder_version=settings.action_candidate_builder_version,
+        commitment_router_mode=settings.commitment_router_mode,
+        commitment_router_version=settings.commitment_router_version,
+        commitment_router_active_types=settings.commitment_router_active_types,
+        action_canonicalization_mode=settings.action_canonicalization_mode,
+        action_canonicalization_version=settings.action_canonicalization_version,
+        recap_reconciliation_mode=settings.recap_reconciliation_mode,
+        owner_grounding_mode=settings.owner_grounding_mode,
+        deadline_grounding_mode=settings.deadline_grounding_mode,
+        candidate_router_mode=settings.candidate_router_mode,
+        action_clear_threshold=settings.action_clear_threshold,
+        action_ai_threshold=settings.action_ai_threshold,
+        candidate_threshold_version=settings.candidate_threshold_version,
+        task_create_proposal_enabled=settings.task_create_proposal_enabled,
+        ai_create_proposal_enabled=settings.ai_create_proposal_enabled,
+        ai_create_max_proposals_per_meeting=(
+            settings.ai_create_max_proposals_per_meeting
+        ),
+        ai_quality_uplift_mode=settings.ai_quality_uplift_mode,
+        task_semantic_linker_mode=settings.task_semantic_linker_mode,
+        task_link_embedding_model_name=settings.embedding_model_name,
+        task_link_embedding_device=settings.embedding_device,
+        task_link_embedding_fallback_enabled=settings.embedding_fallback_enabled,
+        task_link_embedding_fallback_dimension=settings.embedding_fallback_dimension,
+        task_link_semantic_weight=settings.task_link_semantic_weight,
+        task_link_lexical_weight=settings.task_link_lexical_weight,
+        task_link_topic_weight=settings.task_link_topic_weight,
+        task_link_owner_weight=settings.task_link_owner_weight,
+        task_link_recency_weight=settings.task_link_recency_weight,
+        task_link_strong_threshold=settings.task_link_strong_threshold,
+        task_link_min_margin=settings.task_link_min_margin,
+        task_link_ai_threshold=settings.task_link_ai_threshold,
+        task_link_recency_horizon_clauses=(
+            settings.task_link_recency_horizon_clauses
+        ),
+        task_link_top_k=settings.task_link_top_k,
+        task_link_scoring_version=settings.task_link_scoring_version,
+        context_retrieval_mode=settings.context_retrieval_mode,
+        context_max_clauses=settings.context_max_clauses,
+        context_max_characters=settings.context_max_characters,
+        context_max_tasks=settings.context_max_tasks,
+        context_local_before=settings.context_local_before,
+        context_local_after=settings.context_local_after,
+        context_max_topic_clauses=settings.context_max_topic_clauses,
+        context_max_topics=settings.context_max_topics,
+        context_max_history_events_per_task=(
+            settings.context_max_history_events_per_task
+        ),
+        context_topic_boundary_threshold=settings.context_topic_boundary_threshold,
+        context_topic_smoothing_window=settings.context_topic_smoothing_window,
+        context_retrieval_version=settings.context_retrieval_version,
+        ai_mutation_router_mode=settings.ai_mutation_router_mode,
+        ai_mutation_prompt_version=settings.ai_mutation_prompt_version,
+        ai_mutation_min_confidence=settings.ai_mutation_min_confidence,
+        note_dual_view_mode=settings.note_dual_view_mode,
+        note_claim_max_transcript_clauses=settings.note_claim_max_transcript_clauses,
+        note_claim_max_topics=settings.note_claim_max_topics,
+        note_claim_grounding_threshold=settings.note_claim_grounding_threshold,
+        note_claim_grounding_margin=settings.note_claim_grounding_margin,
+        note_dual_view_version=settings.note_dual_view_version,
+        temporal_semantics_mode=settings.temporal_semantics_mode,
+        temporal_parser_version=settings.temporal_parser_version,
+        temporal_working_day_policy=settings.temporal_working_day_policy,
+        temporal_min_confidence=settings.temporal_min_confidence,
     )
     return asdict(result)
 

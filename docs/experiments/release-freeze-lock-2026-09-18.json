@@ -1,0 +1,67 @@
+{
+  "schema_version": "release-freeze-lock-v1",
+  "freeze_date": "2026-09-18",
+  "hash_algorithm": "sha256",
+  "artifacts": {
+    "v2.27_canonical_manifest": {
+      "path": "evaluation/runtime/experimental-distillation-v2/v227-canonical-freeze/manifest.json",
+      "sha256": "480e3648141c7d0f422ffef9dbf86d5be6505b3b8dbd8ccebc0942704d1e8099",
+      "role": "promising internal research baseline; immutable private freeze"
+    },
+    "v3.1_manifest": {
+      "path": "evaluation/runtime/experimental-distillation-v2/v31-union-ranker-oof-06/manifest.json",
+      "sha256": "eb471fbfadb87a9992e6215db9dcdc15008633c1701e04d54fb6f566e490e5ef",
+      "role": "development OOF comparator; not promoted"
+    },
+    "v3.2_manifest": {
+      "path": "evaluation/runtime/experimental-distillation-v2/v32-frozen-promotion-shadow7-03/manifest.json",
+      "sha256": "80548c5693ded33b412f3953432b5670b9ba565fb3f55350ebaba3988ba2fb8b",
+      "role": "completed rerun after partial -02 label-open failure; failed gate; shadow consumed, not pristine one-shot"
+    },
+    "v4.5_manifest": {
+      "path": "evaluation/runtime/experimental-distillation-v2/v45-contextual-action-rescue-01/manifest.json",
+      "sha256": "71353a9832165ba6baeca4e79864f6dc5b9647151126b7a25ecdc8e149f8ad26",
+      "role": "candidate-oracle package; student selectors failed"
+    },
+    "v5_manifest": {
+      "path": "evaluation/runtime/experimental-distillation-v2/v50-deepseek-candidate-teacher-canary-01/manifest.json",
+      "sha256": "fb1d13e2199c7d8aab771984087840611d6d59abdc298cad40ff51c3d75e3620",
+      "role": "DeepSeek teacher canary; adjudication pending"
+    }
+  },
+  "dataset_boundaries": {
+    "DS26": {
+      "canonical_case_count": 20,
+      "canonical_cases_sha256": "5677839eee80409a16a42ce23eb19ab6903b60726b03f0904e02df937779e59b",
+      "split": "The seven-case shadow was consumed in V3.2; all 20 cases were later used as V4 development data."
+    },
+    "DS27": {
+      "canonical_case_count": 28,
+      "canonical_cases_sha256": "c2723ebb6e0288b248444931814b5ab38a7d6522e474cf2da2bb8366523094d1",
+      "split": {
+        "development": 21,
+        "closed_shadow": 7
+      }
+    }
+  },
+  "non_manifest_evidence": {
+    "v4.12_status": {
+      "path": "evaluation/runtime/experimental-distillation-v2/v412-precision-first-cascade-01/status.json",
+      "sha256": "ec6b2c4ba3e4b9d784bf4ff4ba03fdc4701d362e10580e127b2deb055fff2b55",
+      "status": "STOP",
+      "reason": "post-metric prediction NameError: oof_selected is not defined; no complete evaluation or manifest"
+    },
+    "v4.12_persisted_metrics": {
+      "path": "evaluation/runtime/experimental-distillation-v2/v412-precision-first-cascade-01/metrics.json",
+      "sha256": "80d8d017a19431f13037c15aa144025c4d2e80b514b031bdf191e95f87ca8a71",
+      "role": "diagnostic persisted metrics only; not a complete evaluation or manifest"
+    },
+    "v32_shadow_erratum": {
+      "path": "evaluation/runtime/experimental-distillation-v2/v4-deepseek-28-cases-01/v32-shadow7-audit-erratum.json",
+      "sha256": "f2abd422798f480a637be3ab41a713d50b6fdac974381d9c78f1a99dc14729f2",
+      "finding": "-02 had a partial label-open failure; -03 reopened the same seven labels and completed."
+    }
+  },
+  "private_artifacts_are_not_copied": true,
+  "production_model": "rule-first V1 backend; V2.27 is not deployed inference"
+}

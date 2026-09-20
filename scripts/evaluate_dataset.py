@@ -23,7 +23,7 @@ from backend.app.pipeline import process_meeting_by_version
 
 
 PIPELINE_VERSION = os.getenv("PIPELINE_VERSION", "v1")
-PROMPT_VERSION = os.getenv("PROMPT_VERSION", "v1-ledger-mutation-v1")
+PROMPT_VERSION = os.getenv("PROMPT_VERSION", "v1-ledger-proposal-v1")
 MODEL_VERSION = os.getenv("OPENAI_MODEL", "deterministic")
 REASONING_EFFORT_VERSION = os.getenv("OPENAI_REASONING_EFFORT", "not_applicable")
 RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
@@ -335,6 +335,128 @@ def main() -> None:
         help="Minimum task recall for the V2 quality gate.",
     )
     parser.add_argument("--context-mode", choices=("off", "assist", "shadow"), default="assist")
+    parser.add_argument("--ai-cost-gate-mode", choices=("off", "enforce"), default="off")
+    parser.add_argument("--ai-cost-max-provider-calls", type=int, default=3)
+    parser.add_argument("--ai-cost-max-payload-characters", type=int, default=20_000)
+    parser.add_argument("--ai-cost-max-estimated-usd", type=float)
+    parser.add_argument(
+        "--action-classifier-mode",
+        choices=("off", "shadow", "assist"),
+        default="off",
+        help="Local mode only; API modes use server configuration.",
+    )
+    parser.add_argument(
+        "--action-classifier-model-path",
+        type=Path,
+        default=Path("data/ml/action-classifier/model/action-clf-v1.json"),
+        help="Portable classifier artifact used by local shadow evaluation.",
+    )
+    parser.add_argument(
+        "--action-candidate-builder-mode", choices=("off", "shadow"), default="off"
+    )
+    parser.add_argument(
+        "--action-candidate-builder-version", default="action-candidate-v2"
+    )
+    parser.add_argument(
+        "--commitment-router-mode", choices=("off", "shadow", "assist"), default="off"
+    )
+    parser.add_argument(
+        "--commitment-router-version", default="commitment-router-v2"
+    )
+    parser.add_argument(
+        "--commitment-router-active-types",
+        default="DIRECT_ASSIGNMENT,SELF_COMMITMENT",
+        help="Comma-separated positive authority types for local create.",
+    )
+    parser.add_argument(
+        "--action-canonicalization-mode", choices=("off", "shadow"), default="off"
+    )
+    parser.add_argument(
+        "--action-canonicalization-version", default="action-canonicalization-v2"
+    )
+    parser.add_argument(
+        "--recap-reconciliation-mode", choices=("off", "shadow"), default="off"
+    )
+    parser.add_argument("--owner-grounding-mode", choices=("off", "shadow"), default="off")
+    parser.add_argument("--deadline-grounding-mode", choices=("off", "shadow"), default="off")
+    parser.add_argument(
+        "--candidate-router-mode",
+        choices=("off", "shadow", "assist"),
+        default="off",
+        help="Local router; its non-off mode must match the classifier mode.",
+    )
+    parser.add_argument("--task-create-proposal", action="store_true")
+    parser.add_argument("--ai-create-proposal", action="store_true")
+    parser.add_argument("--ai-create-max-proposals", type=int, default=3)
+    parser.add_argument(
+        "--ai-quality-uplift-mode", choices=("off", "shadow"), default="off"
+    )
+    parser.add_argument(
+        "--task-semantic-linker-mode",
+        choices=("off", "shadow"),
+        default="off",
+    )
+    parser.add_argument(
+        "--task-link-embedding-model-name",
+        default=os.getenv(
+            "EMBEDDING_MODEL_NAME",
+            "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        ),
+    )
+    parser.add_argument("--task-link-semantic-weight", type=float, default=0.55)
+    parser.add_argument("--task-link-lexical-weight", type=float, default=0.20)
+    parser.add_argument("--task-link-topic-weight", type=float, default=0.10)
+    parser.add_argument("--task-link-owner-weight", type=float, default=0.10)
+    parser.add_argument("--task-link-recency-weight", type=float, default=0.05)
+    parser.add_argument("--task-link-strong-threshold", type=float, default=0.78)
+    parser.add_argument("--task-link-min-margin", type=float, default=0.12)
+    parser.add_argument("--task-link-ai-threshold", type=float, default=0.60)
+    parser.add_argument("--task-link-recency-horizon", type=int, default=200)
+    parser.add_argument("--task-link-top-k", type=int, default=5)
+    parser.add_argument(
+        "--task-link-scoring-version", default="task-link-scoring-v1"
+    )
+    parser.add_argument(
+        "--context-retrieval-mode", choices=("off", "shadow"), default="off"
+    )
+    parser.add_argument("--context-max-clauses", type=int, default=30)
+    parser.add_argument("--context-max-characters", type=int, default=12_000)
+    parser.add_argument("--context-max-tasks", type=int, default=5)
+    parser.add_argument("--context-local-before", type=int, default=3)
+    parser.add_argument("--context-local-after", type=int, default=5)
+    parser.add_argument("--context-max-topic-clauses", type=int, default=12)
+    parser.add_argument("--context-max-topics", type=int, default=3)
+    parser.add_argument("--context-max-history-events", type=int, default=3)
+    parser.add_argument("--context-topic-boundary-threshold", type=float, default=0.42)
+    parser.add_argument("--context-topic-smoothing-window", type=int, default=3)
+    parser.add_argument("--context-retrieval-version", default="context-retriever-v1")
+    parser.add_argument(
+        "--ai-mutation-router-mode", choices=("off", "shadow", "assist"), default="off"
+    )
+    parser.add_argument(
+        "--ai-mutation-prompt-version", default="mutation-resolution-v2"
+    )
+    parser.add_argument("--ai-mutation-min-confidence", type=float, default=0.70)
+    parser.add_argument(
+        "--note-dual-view-mode", choices=("off", "shadow", "assist"), default="off"
+    )
+    parser.add_argument("--note-claim-max-transcript-clauses", type=int, default=8)
+    parser.add_argument("--note-claim-max-topics", type=int, default=3)
+    parser.add_argument("--note-claim-grounding-threshold", type=float, default=0.72)
+    parser.add_argument("--note-claim-grounding-margin", type=float, default=0.12)
+    parser.add_argument("--note-dual-view-version", default="note-dual-view-v1")
+    parser.add_argument(
+        "--temporal-semantics-mode", choices=("off", "shadow", "assist"), default="off"
+    )
+    parser.add_argument("--temporal-parser-version", default="temporal-parser-v1")
+    parser.add_argument("--temporal-working-day-policy", default="weekdays-only-v1")
+    parser.add_argument("--temporal-min-confidence", type=float, default=1.0)
+    parser.add_argument("--action-clear-threshold", type=float, default=0.82)
+    parser.add_argument("--action-ai-threshold", type=float, default=0.45)
+    parser.add_argument(
+        "--candidate-threshold-version",
+        default="candidate-router-thresholds-v1",
+    )
     parser.add_argument("--without-meeting-notes", action="store_true")
     parser.add_argument(
         "--reviewed-only",
@@ -353,6 +475,54 @@ def main() -> None:
         help="Run case IDs listed in a CSV column named case_id.",
     )
     args = parser.parse_args()
+    if (
+        args.candidate_router_mode != "off"
+        and args.action_classifier_mode != args.candidate_router_mode
+    ):
+        parser.error(
+            "non-off candidate router and action classifier modes must match"
+        )
+    if args.task_create_proposal and args.candidate_router_mode != "assist":
+        parser.error("--task-create-proposal requires --candidate-router-mode assist")
+    if args.ai_create_proposal and not args.task_create_proposal:
+        parser.error("--ai-create-proposal requires --task-create-proposal")
+    if args.ai_quality_uplift_mode == "shadow" and (
+        args.action_classifier_mode != "shadow"
+        or args.candidate_router_mode != "shadow"
+        or args.action_candidate_builder_mode != "shadow"
+        or args.commitment_router_mode != "shadow"
+    ):
+        parser.error(
+            "--ai-quality-uplift-mode shadow requires classifier, candidate, "
+            "action-candidate, and commitment-router shadow modes"
+        )
+    if (
+        args.context_retrieval_mode == "shadow"
+        and args.task_semantic_linker_mode != "shadow"
+    ):
+        parser.error(
+            "--context-retrieval-mode shadow requires --task-semantic-linker-mode shadow"
+        )
+    if (
+        args.ai_mutation_router_mode == "shadow"
+        and (args.task_semantic_linker_mode != "shadow" or args.context_retrieval_mode != "shadow")
+    ):
+        parser.error("--ai-mutation-router-mode shadow requires semantic/context shadow")
+    if (
+        args.ai_mutation_router_mode == "assist"
+        and (args.candidate_router_mode != "assist" or args.task_semantic_linker_mode != "shadow" or args.context_retrieval_mode != "shadow")
+    ):
+        parser.error("--ai-mutation-router-mode assist requires candidate assist and semantic/context shadow")
+    if args.note_dual_view_mode != "off" and args.context_mode == "off":
+        parser.error("--note-dual-view-mode requires --context-mode shadow or assist")
+    if args.temporal_working_day_policy != "weekdays-only-v1":
+        parser.error("--temporal-working-day-policy must be weekdays-only-v1")
+    if args.temporal_min_confidence != 1.0:
+        parser.error("--temporal-min-confidence must be exactly 1.0")
+    if args.ai_cost_max_provider_calls <= 0 or args.ai_cost_max_payload_characters <= 0:
+        parser.error("AI cost gate limits must be positive")
+    if args.ai_cost_max_estimated_usd is not None and args.ai_cost_max_estimated_usd < 0:
+        parser.error("--ai-cost-max-estimated-usd must be non-negative")
     checkpoint_path = (
         args.report.with_suffix(args.report.suffix + ".checkpoint.json")
         if args.report
@@ -454,7 +624,93 @@ def main() -> None:
                         ai_client=(
                             _local_openai_client() if args.local_openai else None
                         ),
+                        ai_cost_gate_mode=args.ai_cost_gate_mode,
+                        ai_cost_max_provider_calls_per_meeting=(
+                            args.ai_cost_max_provider_calls
+                        ),
+                        ai_cost_max_payload_characters=(
+                            args.ai_cost_max_payload_characters
+                        ),
+                        ai_cost_max_estimated_usd_per_meeting=(
+                            args.ai_cost_max_estimated_usd
+                        ),
                         meeting_context_mode=args.context_mode,
+                        action_classifier_mode=args.action_classifier_mode,
+                        action_classifier_model_path=str(
+                            args.action_classifier_model_path
+                        ),
+                        action_candidate_builder_mode=args.action_candidate_builder_mode,
+                        action_candidate_builder_version=args.action_candidate_builder_version,
+                        commitment_router_mode=args.commitment_router_mode,
+                        commitment_router_version=args.commitment_router_version,
+                        commitment_router_active_types=tuple(
+                            value.strip().upper()
+                            for value in args.commitment_router_active_types.split(",")
+                            if value.strip()
+                        ),
+                        action_canonicalization_mode=args.action_canonicalization_mode,
+                        action_canonicalization_version=args.action_canonicalization_version,
+                        recap_reconciliation_mode=args.recap_reconciliation_mode,
+                        owner_grounding_mode=args.owner_grounding_mode,
+                        deadline_grounding_mode=args.deadline_grounding_mode,
+                        candidate_router_mode=args.candidate_router_mode,
+                        action_clear_threshold=args.action_clear_threshold,
+                        action_ai_threshold=args.action_ai_threshold,
+                        candidate_threshold_version=args.candidate_threshold_version,
+                        task_create_proposal_enabled=args.task_create_proposal,
+                        ai_create_proposal_enabled=args.ai_create_proposal,
+                        ai_create_max_proposals_per_meeting=(
+                            args.ai_create_max_proposals
+                        ),
+                        ai_quality_uplift_mode=args.ai_quality_uplift_mode,
+                        task_semantic_linker_mode=args.task_semantic_linker_mode,
+                        task_link_embedding_model_name=(
+                            args.task_link_embedding_model_name
+                        ),
+                        task_link_semantic_weight=args.task_link_semantic_weight,
+                        task_link_lexical_weight=args.task_link_lexical_weight,
+                        task_link_topic_weight=args.task_link_topic_weight,
+                        task_link_owner_weight=args.task_link_owner_weight,
+                        task_link_recency_weight=args.task_link_recency_weight,
+                        task_link_strong_threshold=args.task_link_strong_threshold,
+                        task_link_min_margin=args.task_link_min_margin,
+                        task_link_ai_threshold=args.task_link_ai_threshold,
+                        task_link_recency_horizon_clauses=(
+                            args.task_link_recency_horizon
+                        ),
+                        task_link_top_k=args.task_link_top_k,
+                        task_link_scoring_version=args.task_link_scoring_version,
+                        context_retrieval_mode=args.context_retrieval_mode,
+                        context_max_clauses=args.context_max_clauses,
+                        context_max_characters=args.context_max_characters,
+                        context_max_tasks=args.context_max_tasks,
+                        context_local_before=args.context_local_before,
+                        context_local_after=args.context_local_after,
+                        context_max_topic_clauses=args.context_max_topic_clauses,
+                        context_max_topics=args.context_max_topics,
+                        context_max_history_events_per_task=(
+                            args.context_max_history_events
+                        ),
+                        context_topic_boundary_threshold=(
+                            args.context_topic_boundary_threshold
+                        ),
+                        context_topic_smoothing_window=(
+                            args.context_topic_smoothing_window
+                        ),
+                        context_retrieval_version=args.context_retrieval_version,
+                        ai_mutation_router_mode=args.ai_mutation_router_mode,
+                        ai_mutation_prompt_version=args.ai_mutation_prompt_version,
+                        ai_mutation_min_confidence=args.ai_mutation_min_confidence,
+                        note_dual_view_mode=args.note_dual_view_mode,
+                        note_claim_max_transcript_clauses=args.note_claim_max_transcript_clauses,
+                        note_claim_max_topics=args.note_claim_max_topics,
+                        note_claim_grounding_threshold=args.note_claim_grounding_threshold,
+                        note_claim_grounding_margin=args.note_claim_grounding_margin,
+                        note_dual_view_version=args.note_dual_view_version,
+                        temporal_semantics_mode=args.temporal_semantics_mode,
+                        temporal_parser_version=args.temporal_parser_version,
+                        temporal_working_day_policy=args.temporal_working_day_policy,
+                        temporal_min_confidence=args.temporal_min_confidence,
                     )
                 )
         except FatalBenchmarkError as exc:
@@ -533,6 +789,18 @@ def main() -> None:
                 "ledger_unknown_task_id_rejection_count": int(
                     diagnostics.get("ledger_unknown_task_id_rejection_count", 0)
                 ),
+                "ai_quality_create_candidate_count": int(
+                    diagnostics.get("ai_quality_create_candidate_count", 0)
+                ),
+                "ai_quality_create_eligible_count": int(
+                    diagnostics.get("ai_quality_create_eligible_count", 0)
+                ),
+                "ai_quality_create_selected_count": int(
+                    diagnostics.get("ai_quality_create_selected_count", 0)
+                ),
+                "ai_quality_create_exclusion_reasons": diagnostics.get(
+                    "ai_quality_create_exclusion_reasons", {}
+                ),
             }
         )
         if (
@@ -584,6 +852,15 @@ def main() -> None:
         diagnostics = execution_details.get(str(item.get("case_id", "")), {})
         for name in rejection_diagnostic_names:
             item[name] = int(diagnostics.get(name, 0))
+        for name in (
+            "ai_quality_create_candidate_count",
+            "ai_quality_create_eligible_count",
+            "ai_quality_create_selected_count",
+        ):
+            item[name] = int(diagnostics.get(name, 0))
+        item["ai_quality_create_exclusion_reasons"] = diagnostics.get(
+            "ai_quality_create_exclusion_reasons", {}
+        )
 
     metrics = aggregate_results(comparisons)
     reviewed_metrics = (
@@ -652,10 +929,52 @@ def main() -> None:
         "ai_fallback_error_count",
         "unauthorized_creation_blocked_count",
         "ledger_unknown_task_id_rejection_count",
+        "action_classifier_clause_count",
+        "action_classifier_would_create_count",
+        "action_classifier_would_review_count",
+        "action_classifier_would_update_count",
+        "action_classifier_rule_action_clause_count",
+        "action_classifier_rule_agreement_count",
+        "action_classifier_rule_disagreement_count",
+        "action_classifier_error_count",
+        "candidate_evidence_count",
+        "candidate_decision_count",
+        "candidate_ai_create_check_suppressed_count",
+        "candidate_router_error_count",
+        "task_create_proposal_call_count",
+        "task_create_proposal_accepted_count",
+        "task_create_proposal_no_action_count",
+        "task_create_proposal_unresolved_count",
+        "task_create_proposal_rejected_count",
+        "task_semantic_query_count",
+        "task_semantic_scored_query_count",
+        "task_semantic_production_agreement_count",
+        "task_semantic_production_disagreement_count",
+        "task_semantic_ambiguous_sibling_count",
+        "task_semantic_linker_error_count",
+        "context_bundle_count",
+        "context_total_clause_count",
+        "context_total_character_count",
+        "context_total_task_count",
+        "context_total_history_event_count",
+        "context_total_note_cue_count",
+        "context_clause_cap_hit_count",
+        "context_character_cap_hit_count",
+        "context_retrieval_error_count",
+        "ai_quality_create_candidate_count",
+        "ai_quality_create_eligible_count",
+        "ai_quality_create_selected_count",
     ):
         pipeline_diagnostics[name] = sum(
             int(item.get(name, 0)) for item in diagnostic_values
         )
+    ai_quality_exclusions: dict[str, int] = {}
+    for item in diagnostic_values:
+        for reason, count in item.get("ai_quality_create_exclusion_reasons", {}).items():
+            ai_quality_exclusions[reason] = ai_quality_exclusions.get(reason, 0) + int(count)
+    pipeline_diagnostics["ai_quality_create_exclusion_reasons"] = dict(
+        sorted(ai_quality_exclusions.items())
+    )
     candidate_count = pipeline_diagnostics["candidate_window_count"]
     pipeline_diagnostics["weighted_ai_call_rate"] = (
         sum(
@@ -670,6 +989,131 @@ def main() -> None:
     total_clause_count = sum(
         int(item.get("clause_count", 0)) for item in diagnostic_values
     )
+    prediction_counts: dict[str, int] = {}
+    for item in diagnostic_values:
+        for label, count in item.get(
+            "action_classifier_prediction_counts", {}
+        ).items():
+            prediction_counts[label] = prediction_counts.get(label, 0) + int(count)
+    pipeline_diagnostics["action_classifier_prediction_counts"] = dict(
+        sorted(prediction_counts.items())
+    )
+    pipeline_diagnostics["action_classifier_versions"] = sorted(
+        {
+            str(item.get("action_classifier_version", "disabled"))
+            for item in diagnostic_values
+        }
+    )
+    pipeline_diagnostics["embedding_model_versions"] = sorted(
+        {
+            str(item.get("embedding_model_version", "disabled"))
+            for item in diagnostic_values
+        }
+    )
+    candidate_route_counts: dict[str, int] = {}
+    for item in diagnostic_values:
+        for route, count in item.get("candidate_route_counts", {}).items():
+            candidate_route_counts[route] = candidate_route_counts.get(
+                route, 0
+            ) + int(count)
+    pipeline_diagnostics["candidate_route_counts"] = dict(
+        sorted(candidate_route_counts.items())
+    )
+    proposal_rejection_reasons: dict[str, int] = {}
+    for item in diagnostic_values:
+        for reason, count in item.get(
+            "task_create_proposal_rejection_reasons", {}
+        ).items():
+            proposal_rejection_reasons[reason] = (
+                proposal_rejection_reasons.get(reason, 0) + int(count)
+            )
+    pipeline_diagnostics["task_create_proposal_rejection_reasons"] = dict(
+        sorted(proposal_rejection_reasons.items())
+    )
+    task_semantic_route_counts: dict[str, int] = {}
+    task_semantic_reason_counts: dict[str, int] = {}
+    for item in diagnostic_values:
+        for route, count in item.get("task_semantic_route_counts", {}).items():
+            task_semantic_route_counts[route] = (
+                task_semantic_route_counts.get(route, 0) + int(count)
+            )
+        for reason, count in item.get("task_semantic_reason_counts", {}).items():
+            task_semantic_reason_counts[reason] = (
+                task_semantic_reason_counts.get(reason, 0) + int(count)
+            )
+    pipeline_diagnostics["task_semantic_route_counts"] = dict(
+        sorted(task_semantic_route_counts.items())
+    )
+    pipeline_diagnostics["task_semantic_reason_counts"] = dict(
+        sorted(task_semantic_reason_counts.items())
+    )
+    semantic_query_count = pipeline_diagnostics["task_semantic_query_count"]
+    semantic_scored_count = pipeline_diagnostics["task_semantic_scored_query_count"]
+    pipeline_diagnostics["task_semantic_mean_top1_score"] = (
+        sum(
+            float(item.get("task_semantic_mean_top1_score", 0.0))
+            * int(item.get("task_semantic_scored_query_count", 0))
+            for item in diagnostic_values
+        )
+        / semantic_scored_count
+        if semantic_scored_count else 0.0
+    )
+    pipeline_diagnostics["task_semantic_mean_margin"] = (
+        sum(
+            float(item.get("task_semantic_mean_margin", 0.0))
+            * int(item.get("task_semantic_query_count", 0))
+            for item in diagnostic_values
+        )
+        / semantic_query_count
+        if semantic_query_count else 0.0
+    )
+    pipeline_diagnostics["context_max_clause_count_observed"] = max(
+        (int(item.get("context_max_clause_count_observed", 0)) for item in diagnostic_values),
+        default=0,
+    )
+    pipeline_diagnostics["context_max_character_count_observed"] = max(
+        (
+            int(item.get("context_max_character_count_observed", 0))
+            for item in diagnostic_values
+        ),
+        default=0,
+    )
+    context_tier_clause_counts: dict[str, int] = {}
+    for item in diagnostic_values:
+        for tier, count in item.get("context_tier_clause_counts", {}).items():
+            context_tier_clause_counts[tier] = (
+                context_tier_clause_counts.get(tier, 0) + int(count)
+            )
+    pipeline_diagnostics["context_tier_clause_counts"] = dict(
+        sorted(context_tier_clause_counts.items())
+    )
+    pipeline_diagnostics["candidate_router_versions"] = sorted(
+        {
+            str(item.get("candidate_router_version", "disabled"))
+            for item in diagnostic_values
+        }
+    )
+    pipeline_diagnostics["candidate_threshold_versions"] = sorted(
+        {
+            str(item.get("candidate_threshold_version", "disabled"))
+            for item in diagnostic_values
+        }
+    )
+    for output_name, source_name in (
+        ("task_semantic_linker_versions", "task_semantic_linker_version"),
+        ("task_semantic_index_versions", "task_semantic_index_version"),
+        ("task_semantic_scoring_versions", "task_semantic_scoring_version"),
+        (
+            "task_semantic_embedding_model_versions",
+            "task_semantic_embedding_model_version",
+        ),
+        ("context_retrieval_versions", "context_retrieval_version"),
+        ("context_topic_index_versions", "context_topic_index_version"),
+        ("context_embedding_model_versions", "context_embedding_model_version"),
+    ):
+        pipeline_diagnostics[output_name] = sorted(
+            {str(item.get(source_name, "disabled")) for item in diagnostic_values}
+        )
     pipeline_diagnostics["ai_clause_coverage"] = (
         pipeline_diagnostics["ai_context_clause_count"] / total_clause_count
         if total_clause_count
@@ -701,7 +1145,7 @@ def main() -> None:
         print(f"ERROR: {len(execution_errors)} case(s) could not be evaluated.")
     print(
         "Cases: {passed_case_count}/{case_count} | "
-        "precision={task_precision:.3f} recall={task_recall:.3f} "
+        "precision={task_precision:.3f} recall={task_recall:.3f} f1={task_identity_f1:.3f} "
         "field_accuracy={field_accuracy:.3f}".format(**metrics)
     )
     print(
@@ -715,7 +1159,7 @@ def main() -> None:
     if reviewed_metrics:
         print(
             "Reviewed: {passed_case_count}/{case_count} | "
-            "precision={task_precision:.3f} recall={task_recall:.3f} "
+            "precision={task_precision:.3f} recall={task_recall:.3f} f1={task_identity_f1:.3f} "
             "field_accuracy={field_accuracy:.3f}".format(**reviewed_metrics)
         )
     else:
@@ -726,6 +1170,70 @@ def main() -> None:
         report = {
             "pipeline_version": args.pipeline_version,
             "meeting_context_mode": args.context_mode,
+            "action_classifier_mode": args.action_classifier_mode,
+            "action_classifier_model_path": str(args.action_classifier_model_path),
+            "action_candidate_builder_mode": args.action_candidate_builder_mode,
+            "action_candidate_builder_version": args.action_candidate_builder_version,
+            "commitment_router_mode": args.commitment_router_mode,
+            "commitment_router_version": args.commitment_router_version,
+            "commitment_router_active_types": args.commitment_router_active_types,
+            "action_canonicalization_mode": args.action_canonicalization_mode,
+            "action_canonicalization_version": args.action_canonicalization_version,
+            "recap_reconciliation_mode": args.recap_reconciliation_mode,
+            "owner_grounding_mode": args.owner_grounding_mode,
+            "deadline_grounding_mode": args.deadline_grounding_mode,
+            "candidate_router_mode": args.candidate_router_mode,
+            "task_create_proposal_enabled": args.task_create_proposal,
+            "ai_create_proposal_enabled": args.ai_create_proposal,
+            "ai_create_max_proposals_per_meeting": args.ai_create_max_proposals,
+            "ai_quality_uplift_mode": args.ai_quality_uplift_mode,
+            "ai_cost_gate_mode": args.ai_cost_gate_mode,
+            "ai_cost_max_provider_calls_per_meeting": args.ai_cost_max_provider_calls,
+            "ai_cost_max_payload_characters": args.ai_cost_max_payload_characters,
+            "ai_cost_max_estimated_usd_per_meeting": args.ai_cost_max_estimated_usd,
+            "task_semantic_linker_mode": args.task_semantic_linker_mode,
+            "task_link_embedding_model_name": args.task_link_embedding_model_name,
+            "task_link_scoring_version": args.task_link_scoring_version,
+            "task_link_weights": {
+                "semantic": args.task_link_semantic_weight,
+                "lexical": args.task_link_lexical_weight,
+                "topic": args.task_link_topic_weight,
+                "owner": args.task_link_owner_weight,
+                "recency": args.task_link_recency_weight,
+            },
+            "task_link_strong_threshold": args.task_link_strong_threshold,
+            "task_link_min_margin": args.task_link_min_margin,
+            "task_link_ai_threshold": args.task_link_ai_threshold,
+            "task_link_recency_horizon_clauses": args.task_link_recency_horizon,
+            "task_link_top_k": args.task_link_top_k,
+            "context_retrieval_mode": args.context_retrieval_mode,
+            "context_retrieval_version": args.context_retrieval_version,
+            "ai_mutation_router_mode": args.ai_mutation_router_mode,
+            "ai_mutation_prompt_version": args.ai_mutation_prompt_version,
+            "ai_mutation_min_confidence": args.ai_mutation_min_confidence,
+            "note_dual_view_mode": args.note_dual_view_mode,
+            "note_dual_view_version": args.note_dual_view_version,
+            "temporal_semantics_mode": args.temporal_semantics_mode,
+            "temporal_parser_version": args.temporal_parser_version,
+            "temporal_working_day_policy": args.temporal_working_day_policy,
+            "temporal_min_confidence": args.temporal_min_confidence,
+            "context_limits": {
+                "max_clauses": args.context_max_clauses,
+                "max_characters": args.context_max_characters,
+                "max_tasks": args.context_max_tasks,
+                "local_before": args.context_local_before,
+                "local_after": args.context_local_after,
+                "max_topic_clauses": args.context_max_topic_clauses,
+                "max_topics": args.context_max_topics,
+                "max_history_events": args.context_max_history_events,
+            },
+            "context_topic_boundary_threshold": (
+                args.context_topic_boundary_threshold
+            ),
+            "context_topic_smoothing_window": args.context_topic_smoothing_window,
+            "action_clear_threshold": args.action_clear_threshold,
+            "action_ai_threshold": args.action_ai_threshold,
+            "candidate_threshold_version": args.candidate_threshold_version,
             "meeting_notes": "off" if args.without_meeting_notes else "sidecar_if_present",
             "prompt_version": PROMPT_VERSION,
             "model": MODEL_VERSION,

@@ -13,7 +13,9 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import httpx
 
-from .schemas import AiEventResponse
+from backend.app.candidate.proposal import TaskCreateProposalResponse
+
+from .schemas import AiEventResponse, MutationResolutionResponse
 
 
 LOGGER = logging.getLogger(__name__)
@@ -90,6 +92,8 @@ class AiClient(Protocol):
     @property
     def enabled(self) -> bool: ...
     def extract_events(self, payload: dict) -> AiEventResponse: ...
+    def propose_task(self, payload: dict) -> TaskCreateProposalResponse: ...
+    def resolve_mutation(self, payload: dict) -> MutationResolutionResponse: ...
 
 
 @dataclass(frozen=True)
@@ -128,6 +132,23 @@ class DisabledAiClient:
     def extract_events(self, payload: dict) -> AiEventResponse:
         return AiEventResponse(events=[], unresolved=[])
 
+    def propose_task(self, payload: dict) -> TaskCreateProposalResponse:
+        return TaskCreateProposalResponse(
+            decision="UNRESOLVED",
+            source_clause_ids=[],
+            action_span="",
+            owner_span=None,
+            deadline_mention_id=None,
+            commitment_type="",
+            confidence=0.0,
+        )
+
+    def resolve_mutation(self, payload: dict) -> MutationResolutionResponse:
+        return MutationResolutionResponse(
+            decision="UNRESOLVED", confidence=0.0,
+            unresolved_reason="INSUFFICIENT_EXPLICIT_EVIDENCE",
+        )
+
 
 class HttpAiClient:
     """Call a JSON endpoint that implements the constrained AI event contract."""
@@ -150,6 +171,28 @@ class HttpAiClient:
             timeout=self.timeout_seconds,
         )
         return AiEventResponse.model_validate(response.json())
+
+    def propose_task(self, payload: dict) -> TaskCreateProposalResponse:
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["X-API-Key"] = self.api_key
+        response = _post_with_retry(
+            self.endpoint,
+            json={"mode": "CREATE_PROPOSAL", "payload": payload},
+            headers=headers,
+            timeout=self.timeout_seconds,
+        )
+        return TaskCreateProposalResponse.model_validate(response.json())
+
+    def resolve_mutation(self, payload: dict) -> MutationResolutionResponse:
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["X-API-Key"] = self.api_key
+        response = _post_with_retry(
+            self.endpoint, json={"mode": "MUTATION_RESOLUTION", "payload": payload},
+            headers=headers, timeout=self.timeout_seconds,
+        )
+        return MutationResolutionResponse.model_validate(response.json())
 
 
 class OpenAiResponsesClient:
@@ -188,15 +231,46 @@ class OpenAiResponsesClient:
         self._reasoning_output_tokens = 0
         self._total_tokens = 0
         self.system_prompt = (
-            Path(__file__).with_name("prompt.txt").read_text(encoding="utf-8").strip()
+            Path(__file__).with_name("prompts")
+            .joinpath("mutation_resolution.txt")
+            .read_text(encoding="utf-8")
+            .strip()
+        )
+        self.create_proposal_prompt = (
+            Path(__file__).with_name("prompts")
+            .joinpath("create_proposal.txt")
+            .read_text(encoding="utf-8")
+            .strip()
         )
 
     def extract_events(self, payload: dict) -> AiEventResponse:
+        return self._structured_response(
+            payload,
+            prompt=self.system_prompt,
+            schema=AiEventResponse,
+            schema_name="meeting_task_events",
+        )
+
+    def propose_task(self, payload: dict) -> TaskCreateProposalResponse:
+        return self._structured_response(
+            payload,
+            prompt=self.create_proposal_prompt,
+            schema=TaskCreateProposalResponse,
+            schema_name="task_create_proposal",
+        )
+
+    def resolve_mutation(self, payload: dict) -> MutationResolutionResponse:
+        return self._structured_response(
+            payload, prompt=self.system_prompt, schema=MutationResolutionResponse,
+            schema_name="mutation_resolution_v2",
+        )
+
+    def _structured_response(self, payload: dict, *, prompt: str, schema, schema_name: str):
         request_body = {
             "model": self.model,
             "store": False,
             "input": [
-                {"role": "system", "content": self.system_prompt},
+                {"role": "system", "content": prompt},
                 {
                     "role": "user",
                     "content": json.dumps(payload, ensure_ascii=False),
@@ -205,10 +279,10 @@ class OpenAiResponsesClient:
             "text": {
                 "format": {
                     "type": "json_schema",
-                    "name": "meeting_task_events",
+                    "name": schema_name,
                     "strict": True,
                     "schema": _strict_json_schema(
-                        AiEventResponse.model_json_schema()
+                        schema.model_json_schema()
                     ),
                 }
             },
@@ -230,7 +304,7 @@ class OpenAiResponsesClient:
         content = self._response_text(body)
         if self.debug:
             LOGGER.warning("OpenAI fallback raw event response: %s", content)
-        return AiEventResponse.model_validate_json(content)
+        return schema.model_validate_json(content)
 
     def _record_attempt(self) -> None:
         with self._usage_lock:
@@ -343,7 +417,16 @@ class AzureFoundryAiClient:
         self.model = model
         self.timeout_seconds = timeout_seconds
         self.system_prompt = (
-            Path(__file__).with_name("prompt.txt").read_text(encoding="utf-8").strip()
+            Path(__file__).with_name("prompts")
+            .joinpath("mutation_resolution.txt")
+            .read_text(encoding="utf-8")
+            .strip()
+        )
+        self.create_proposal_prompt = (
+            Path(__file__).with_name("prompts")
+            .joinpath("create_proposal.txt")
+            .read_text(encoding="utf-8")
+            .strip()
         )
 
     @staticmethod
@@ -359,9 +442,31 @@ class AzureFoundryAiClient:
         )
 
     def extract_events(self, payload: dict) -> AiEventResponse:
+        return self._structured_response(
+            payload,
+            prompt=self.system_prompt,
+            schema=AiEventResponse,
+            schema_name="meeting_task_events",
+        )
+
+    def propose_task(self, payload: dict) -> TaskCreateProposalResponse:
+        return self._structured_response(
+            payload,
+            prompt=self.create_proposal_prompt,
+            schema=TaskCreateProposalResponse,
+            schema_name="task_create_proposal",
+        )
+
+    def resolve_mutation(self, payload: dict) -> MutationResolutionResponse:
+        return self._structured_response(
+            payload, prompt=self.system_prompt, schema=MutationResolutionResponse,
+            schema_name="mutation_resolution_v2",
+        )
+
+    def _structured_response(self, payload: dict, *, prompt: str, schema, schema_name: str):
         request_body = {
             "messages": [
-                {"role": "system", "content": self.system_prompt},
+                {"role": "system", "content": prompt},
                 {
                     "role": "user",
                     "content": json.dumps(payload, ensure_ascii=False),
@@ -370,10 +475,10 @@ class AzureFoundryAiClient:
             "response_format": {
                 "type": "json_schema",
                 "json_schema": {
-                    "name": "meeting_task_events",
+                    "name": schema_name,
                     "strict": True,
                     "schema": _strict_json_schema(
-                        AiEventResponse.model_json_schema()
+                        schema.model_json_schema()
                     ),
                 },
             },
@@ -396,4 +501,4 @@ class AzureFoundryAiClient:
             raise ValueError("Foundry response does not contain message content") from exc
         if not isinstance(content, str):
             raise ValueError("Foundry message content must be a JSON string")
-        return AiEventResponse.model_validate_json(content)
+        return schema.model_validate_json(content)

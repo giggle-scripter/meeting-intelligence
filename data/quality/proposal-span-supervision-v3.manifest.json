@@ -1,0 +1,25 @@
+{
+  "schema_version": "proposal-span-supervision-manifest-v3",
+  "train_waves": [
+    "W1",
+    "W2",
+    "W3"
+  ],
+  "calibration_waves": [
+    "W4"
+  ],
+  "test_waves": [
+    "W5"
+  ],
+  "row_count": 28539,
+  "label_counts": {
+    "calibration:0": 13443,
+    "calibration:1": 44,
+    "test:0": 5829,
+    "test:1": 17,
+    "train:0": 9088,
+    "train:1": 118
+  },
+  "sha256": "f22bb5a0fa52b8b33333050be15700b62383bb712085033192988d7f36aaebef",
+  "errors": []
+}

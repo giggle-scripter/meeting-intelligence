@@ -46,7 +46,7 @@ thật cho người dùng.
 | Backend | FastAPI `backend.app.main:app` |
 | Chế độ kiểm chứng chính | Local deterministic/rule-only |
 | Corpus | 86 reviewed cases, W1-W5 |
-| Automated tests | 236 tests |
+| Automated tests | 272 tests |
 | OpenAI model mặc định khi bật | `gpt-5-mini` |
 | AI role | Optional mutation resolver |
 | Job storage | In-memory |
@@ -105,6 +105,7 @@ meeting-intelligent/
 │   │   ├── preprocessing/           Caption, speaker, turn, sentence, clause
 │   │   ├── annotation/              Cue flags và date mentions
 │   │   ├── candidate/               Candidate routing, compaction, batching
+│   │   ├── ml/                      Embedding interface/registry; chưa nối V1
 │   │   ├── ai/                      Rule extractors và provider clients
 │   │   ├── reduction/               Task ledger, linking, reducer, reconciliation
 │   │   ├── dates/                   Meeting/start/deadline resolution
@@ -119,6 +120,7 @@ meeting-intelligent/
 ├── data/
 │   ├── validation/                  Ground truth của 86 cases
 │   ├── fixtures/                    Automated-test fixtures
+│   ├── ml/action-classifier/        Generated clause dataset và grouped folds
 │   └── power_automate_uploads/      Self-contained A/B upload packages
 ├── evaluation/
 │   ├── runtime/                     Reports/traces của các lần chạy hiện tại
@@ -411,7 +413,7 @@ Provider priority:
 3. `AI_FALLBACK_ENDPOINT` → generic HTTP extractor;
 4. không có provider → `DisabledAiClient`.
 
-OpenAI và Foundry dùng `backend/app/ai/prompt.txt`.
+OpenAI và Foundry dùng prompt theo mode trong `backend/app/ai/prompts/`.
 
 AI schema chỉ cho phép:
 
@@ -690,9 +692,23 @@ lý do audit.
 .\.venv\Scripts\python.exe -m pytest backend\tests -q
 ```
 
-Trạng thái hiện tại: **236 tests passed**.
+Trạng thái hiện tại: **272 tests passed**.
 
-### 16.2 Một transcript local, rule-only
+### 16.2 Action-classifier dataset
+
+```powershell
+.\.venv\Scripts\python.exe scripts\build_action_classifier_dataset.py `
+  data\validation `
+  --output-dir data\ml\action-classifier
+```
+
+Builder không sửa `data/validation`. Positive mapping ưu tiên reviewed evidence;
+vì corpus hiện chưa lưu `tasks[*].evidence`, task-name fallback chỉ được nhận khi
+vượt threshold và unique margin cùng owner/date/cue support. Mapping chưa chắc
+chắn có `manual_review_required=true`, `label=null` và không eligible để train.
+`folds.json` group toàn bộ record theo `meeting_id` để tránh leakage.
+
+### 16.3 Một transcript local, rule-only
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\run_pipeline.py meeting.txt `
@@ -701,7 +717,7 @@ Trạng thái hiện tại: **236 tests passed**.
   --date 2026-08-17
 ```
 
-### 16.3 Inspect preprocessing và candidates
+### 16.4 Inspect preprocessing và candidates
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\preprocess_transcript.py meeting.txt `
@@ -711,7 +727,7 @@ Trạng thái hiện tại: **236 tests passed**.
   --date 2026-08-17
 ```
 
-### 16.4 Targeted case
+### 16.5 Targeted case
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\evaluate_dataset.py data\validation `
@@ -722,7 +738,7 @@ Trạng thái hiện tại: **236 tests passed**.
   --report evaluation\runtime\targeted.json
 ```
 
-### 16.5 Full rule-only A/B
+### 16.6 Full rule-only A/B
 
 ```powershell
 # Without notes
@@ -742,7 +758,7 @@ Trạng thái hiện tại: **236 tests passed**.
 Evaluator ghi report trước khi trả exit code. Exit code khác 0 là bình thường
 khi còn case mismatch; phải đọc report thay vì coi đó là execution failure.
 
-### 16.6 Local OpenAI smoke
+### 16.7 Local OpenAI smoke
 
 Không cần Uvicorn hoặc Power Automate:
 
@@ -761,7 +777,7 @@ Script chạy automated tests, sau đó A/B without/with notes bằng
 đạt expected output, dùng `-AllowQualityFailures`; provider/contract errors vẫn
 phải fail.
 
-### 16.7 File-package smoke trước Power Automate
+### 16.8 File-package smoke trước Power Automate
 
 Chỉ chạy sau khi backend local đã sẵn sàng:
 
@@ -812,6 +828,64 @@ call thành công nhưng không tạo accepted event không phải quality impro
 | `TOPIC_LIKELY_THRESHOLD` | `0.45` |
 | `MAX_MEETING_TOPICS` | `12` |
 | `MAX_TOPIC_KEYWORDS` | `8` |
+| `EMBEDDING_MODEL_NAME` | Multilingual model name; infrastructure only |
+| `EMBEDDING_DEVICE` | `cpu` |
+| `EMBEDDING_FALLBACK_ENABLED` | `true`; deterministic hashing fallback |
+| `EMBEDDING_FALLBACK_DIMENSION` | `384` |
+| `ACTION_CLASSIFIER_MODE` | `off`; `shadow` chỉ telemetry, `assist` cho proposal path |
+| `ACTION_CLASSIFIER_MODEL_PATH` | Portable JSON artifact; bắt buộc khi chạy shadow/assist |
+| `CANDIDATE_ROUTER_MODE` | `off`; phải cùng non-off mode với classifier |
+| `TASK_CREATE_PROPOSAL_ENABLED` | `false`; master gate cho create-proposal path |
+| `AI_CREATE_PROPOSAL_ENABLED` | `false`; cho phép provider xử lý `AI_CREATE_CHECK` |
+| `AI_CREATE_MAX_PROPOSALS_PER_MEETING` | `3`; chặn fan-out/cost ngoài ý muốn |
+| `TASK_SEMANTIC_LINKER_MODE` | `off`; chỉ cho phép `off` hoặc telemetry-only `shadow` |
+| `TASK_LINK_*_WEIGHT` | `0.55/0.20/0.10/0.10/0.05` cho semantic/lexical/topic/owner/recency |
+| `TASK_LINK_STRONG_THRESHOLD` | `0.78`; top-1 direct-link candidate threshold |
+| `TASK_LINK_MIN_MARGIN` | `0.12`; chặn auto-link khi top-1/top-2 gần nhau |
+| `TASK_LINK_AI_THRESHOLD` | `0.60`; uncertain candidate chuyển AI check |
+| `TASK_LINK_RECENCY_HORIZON_CLAUSES` | `200` |
+| `TASK_LINK_TOP_K` | `5`; bounded candidate list |
+| `TASK_LINK_SCORING_VERSION` | `task-link-scoring-v1` |
+| `CONTEXT_RETRIEVAL_MODE` | `off`; `shadow` yêu cầu task semantic linker cũng `shadow` |
+| `AI_MUTATION_ROUTER_MODE` | `off` (an toàn); `shadow` tạo bounded payload không gọi provider; `assist` thay legacy mutation call cùng anchor sau Python validation |
+| `AI_MUTATION_PROMPT_VERSION` | `mutation-resolution-v2` |
+| `AI_MUTATION_MIN_CONFIDENCE` | `0.70`; response thấp hơn bị reject |
+| `NOTE_DUAL_VIEW_MODE` | `off`; `shadow` chỉ audit claims/grounding; `assist` suppress note direct events |
+| `NOTE_CLAIM_MAX_TRANSCRIPT_CLAUSES` | `8` hard cap cho mỗi claim |
+| `NOTE_CLAIM_GROUNDING_THRESHOLD` / `NOTE_CLAIM_GROUNDING_MARGIN` | `0.72` / `0.12` |
+| `TEMPORAL_SEMANTICS_MODE` | `off`; `shadow` chỉ so sánh AST với legacy, `assist` chỉ fallback cho legacy-unresolved supported durations |
+| `TEMPORAL_PARSER_VERSION` | `temporal-parser-v1` |
+| `TEMPORAL_WORKING_DAY_POLICY` | `weekdays-only-v1`; không có holiday calendar |
+| `TEMPORAL_MIN_CONFIDENCE` | `1.0`; chỉ deterministic parser/resolver được phép promote |
+| `CONTEXT_MAX_CLAUSES` | `30`; hard cap, không cho cấu hình cao hơn |
+| `CONTEXT_MAX_CHARACTERS` | `12000`; hard cap, không cho cấu hình cao hơn |
+| `CONTEXT_MAX_TASKS` | `5`; top-k task memory hard cap |
+| `CONTEXT_LOCAL_BEFORE` / `CONTEXT_LOCAL_AFTER` | `3/5` clause quanh focus |
+| `CONTEXT_MAX_TOPIC_CLAUSES` / `CONTEXT_MAX_TOPICS` | `12/3` |
+| `CONTEXT_MAX_HISTORY_EVENTS_PER_TASK` | `3` mutation gần nhất mỗi task |
+| `CONTEXT_TOPIC_BOUNDARY_THRESHOLD` | `0.42` |
+| `CONTEXT_TOPIC_SMOOTHING_WINDOW` | `3`; chỉ cho phép `2` hoặc `3` turn |
+| `CONTEXT_RETRIEVAL_VERSION` | `context-retriever-v1` |
+| `ACTION_CLEAR_THRESHOLD` | `0.82`; router config, không hardcode trong logic |
+
+### Quality Track Q0 — attribution và evidence review
+
+`backend.app.quality` chỉ dùng cho evaluation. Nó tạo suggestion deterministic
+cho missing/unexpected/field-error records, liên kết tới source clause,
+candidate window, event và task-state provenance khi có. Mọi record mặc định
+`NEEDS_REVIEW`; không record nào được dùng để thay output, training data hay
+production routing trước khi reviewer xác nhận.
+
+Chạy `scripts/analyze_quality_errors.py` để tạo
+`evaluation/runtime/quality-attribution.json`, sau đó
+`scripts/build_evidence_review_queue.py` để xuất JSON/CSV review queue. Cả
+attribution report lẫn queue đều xuất JSON/CSV runtime. Report tổng hợp
+first-divergence taxonomy theo wave, source coverage của toàn bộ expected task
+và candidate/event/task-state provenance của missing task.
+`evaluate_dataset.py` báo task identity F1 cùng expected/actual/matched, missing
+và unexpected counts; F1 là primary metric cho các PR Quality Track.
+| `ACTION_AI_THRESHOLD` | `0.45`; router config, không hardcode trong logic |
+| `CANDIDATE_THRESHOLD_VERSION` | `candidate-router-thresholds-v1` |
 
 Optional pricing inputs only estimate trace cost:
 
@@ -851,7 +925,186 @@ evidence và final tasks. Dù không chứa credential, đây vẫn là dữ li�
 7. Power Automate chưa nên bật AI hoặc rollout tiếp trước khi local gates đạt.
 8. Trace có thể chứa dữ liệu cuộc họp nhạy cảm.
 
-## 21. Quy tắc khi thay đổi project
+9. `action-clf-v1` đang dùng multilingual MiniLM embedding: grouped 5-fold
+   macro-F1 `0.5671`, binary action F1 `0.3272`. Dataset còn 177 task mapping
+   chờ review, nên model chỉ được chạy shadow và chưa được tune threshold
+   production.
+
+## 21. Action classifier shadow baseline
+
+PR3 thêm Logistic Regression trên multilingual MiniLM embedding cùng 17 feature
+deterministic. Artifact nằm tại
+`data/ml/action-classifier/model/action-clf-v1.json`; linear head inference
+thuần Python, còn MiniLM dùng optional `sentence-transformers`. Registry chỉ
+load model một lần trong mỗi process.
+
+5-fold group theo meeting trên 5,854 eligible records:
+
+- mean macro-F1: `0.5671`;
+- mean binary action F1: `0.3272`;
+- production threshold tuning: `false`.
+
+Full shadow run trên 86 meeting không đổi task output so với baseline:
+
+- without note: 16/86, precision `0.4074`, recall `0.5560`, field accuracy `0.8604`;
+- with note: 15/86, precision `0.4271`, recall `0.6029`, field accuracy `0.8573`;
+- 17,706 clause được score mỗi run, classifier error count `0`.
+
+Trên máy dev hiện tại, full 86-case shadow mất khoảng 644 giây ở cold run và
+278 giây ở warm run. Đây là telemetry shadow, chưa phải latency production;
+PR router sau phải benchmark batching/cache trước khi bật rộng hơn.
+
+`ACTION_CLASSIFIER_MODE=shadow` chỉ bổ sung diagnostics gồm model/embedding
+version, label counts, would-create/review/update và disagreement với rule cues.
+Không prediction nào được phép tạo event hoặc thay đổi final task trong PR này.
+
+### 21.1 Candidate evidence router shadow baseline
+
+PR4 thêm `CandidateEvidence`, `CandidateDecision` và router version
+`candidate-evidence-router-v1`. Mỗi clause có một evidence envelope hợp nhất:
+
+- raw rule score và cue flags;
+- calibrated classifier probabilities;
+- grounded/ambiguous note score và signal kind;
+- topic ID nếu meeting context có relevance mapping.
+
+Router dùng negative guards trước creation, mutation target policy và hai threshold
+config `0.82/0.45`. Mọi decision chỉ là shadow telemetry; `executed=false`, AI
+create vẫn tắt và reducer không đọc decision này.
+
+Full 86-case shadow, không Meeting Note:
+
+- 17,706 evidence/decisions; zero classifier/router error;
+- routes: DROP 10,707; CONTEXT_ONLY 3,230; LOCAL_CREATE 615;
+  LOCAL_MUTATION 36; AI_CREATE_CHECK 544; AI_MUTATION_CHECK 2,574;
+- cả 544 AI create checks đều suppressed;
+- final metrics/pass-set khớp baseline 16/86 tuyệt đối.
+
+Full 86-case shadow, có Meeting Note:
+
+- 17,706 evidence/decisions; zero classifier/router error;
+- routes: DROP 10,431; CONTEXT_ONLY 3,531; LOCAL_CREATE 572;
+  LOCAL_MUTATION 136; AI_CREATE_CHECK 517; AI_MUTATION_CHECK 2,519;
+- cả 517 AI create checks đều suppressed;
+- final metrics/pass-set khớp baseline 15/86 tuyệt đối.
+
+Route volume còn lớn so với 92 positive training records và 177 task mapping chờ
+review. Không được dùng distribution này để bật AI create hoặc tune production
+threshold trước khi ground-truth mapping được xử lý và PR5 có proposal validator.
+
+### 21.2 Grounded task-create proposal
+
+Create AI và mutation AI dùng hai prompt/contract độc lập trong
+`backend/app/ai/prompts/`. Create path không nhận full task ledger và provider chỉ
+được trả `TaskCreateProposal`: source clause IDs, action span, owner span,
+deadline mention ID, commitment type và confidence. Contract không có task ID,
+resolved date, final status hay canonical action.
+
+Python validator kiểm tra theo thứ tự: source thuộc bounded context, action là
+span gần nguyên văn, owner xuất hiện trong source (đại từ ngôi thứ nhất resolve
+bằng speaker), deadline ID thuộc parsed mention, rồi các negative guard. Chỉ
+proposal pass toàn bộ mới được promote thành `TASK_CREATE`; chronology lấy từ
+source clause, không lấy thời điểm provider trả lời. Provider/schema/grounding
+failure đều fail-closed thành unresolved, không có heuristic promotion.
+
+Mặc định ba gate vẫn an toàn: classifier/router `off`, hai proposal flag
+`false`. Muốn targeted assist phải đặt classifier và router cùng `assist`, bật
+cả `TASK_CREATE_PROPOSAL_ENABLED` và `AI_CREATE_PROPOSAL_ENABLED`. Mỗi meeting
+chỉ gọi tối đa `AI_CREATE_MAX_PROPOSALS_PER_MEETING` candidate thuộc uncertain
+band `AI_CREATE_CHECK`. Chưa bật production hoặc chạy paid full corpus trước khi
+177 task mapping được review và paired evaluation chứng minh recall uplift.
+
+Verification tại PR này: 289 backend tests pass; targeted assist test chứng minh
+grounded proposal được promote và provider failure không tạo heuristic task.
+Full default-off 86-case giữ nguyên baseline: without note 16/86 (precision
+`0.4074`, recall `0.5560`, field accuracy `0.8604`), with note 15/86 (precision
+`0.4271`, recall `0.6029`, field accuracy `0.8573`). Chưa gọi paid provider.
+
+### 21.3 Semantic task linker shadow baseline
+
+PR6 thêm index riêng trong `backend/app/retrieval/`; ledger task không phụ thuộc
+NumPy. Task representation gồm action, identity-safe aliases, owners, topic IDs
+và entity tokens. Mutation query gồm action reference, mutation text, speaker,
+owner refs và topic. Index chỉ embed task mới/thay đổi và bỏ terminal task khỏi
+candidate set.
+
+Verification tại PR6: 300 backend tests pass, gồm exact hierarchy, embedding
+cache, threshold/margin, sibling ambiguity và pipeline output invariance.
+
+Retrieval hierarchy là exact task ID → unique exact alias → weighted
+lexical/semantic/topic/owner/recency. Semantic candidate chỉ được đánh dấu direct
+khi top-1 đạt threshold và margin; nhiều exact alias hoặc sibling gần nhau không
+được auto-link. PR này chỉ replay chronology để ghi diagnostics rồi vẫn dùng
+production linker/reducer hiện tại.
+
+Full 86-case MiniLM shadow, without Meeting Note:
+
+- 273 mutation query, 234 đi tới weighted scoring; zero linker error;
+- routes: DIRECT_LINK 22 (đều exact alias), AI_MUTATION_CHECK 23,
+  UNRESOLVED 228;
+- target/null agreement với production linker 225, disagreement 48;
+- mean top-1 trên scored queries `0.4639`, mean margin `0.1693`;
+- final output giữ nguyên baseline 16/86, precision `0.4074`, recall `0.5560`,
+  field accuracy `0.8604`.
+
+Full 86-case MiniLM shadow, with Meeting Note:
+
+- 273 mutation query, 234 đi tới weighted scoring; zero linker error;
+- routes: DIRECT_LINK 24 (đều exact alias), AI_MUTATION_CHECK 31,
+  UNRESOLVED 218;
+- target/null agreement với production linker 227, disagreement 46;
+- mean top-1 trên scored queries `0.4632`, mean margin `0.1766`;
+- final output giữ nguyên baseline 15/86, precision `0.4271`, recall `0.6029`,
+  field accuracy `0.8573`.
+
+Không tune threshold production từ distribution này: 177 task mapping vẫn chờ
+review, và default weights chưa tạo semantic direct-link trên full corpus. Đây
+là fail-closed shadow baseline, không phải bằng chứng đủ để bật assist.
+
+### 21.4 Bounded context retrieval shadow baseline
+
+PR7 thêm `TopicIndex`, `ContextBundle` và chronological context shadow trong
+`backend/app/retrieval/`. Topic boundary dùng centroid của turn, rolling smoothing
+2–3 turn và discourse markers như `chuyển sang`, `tiếp theo`, `moving on`;
+một short semantic outlier không tự tách topic. Mutation retrieval luôn tìm
+nearest topic trước rồi mới nearest clause trong topic, không lấy global nearest
+clauses tùy ý.
+
+Context được chọn đúng thứ tự: focus và local `-3/+5` → source evidence của
+top-k task candidates → same-topic semantic clauses → mutation history gần nhất
+→ grounded/ambiguous note cues gắn với các clause đã chọn. Bundle lưu task/history/
+note provenance và bị chặn cứng ở 30 clause, 12.000 raw characters, 5 task. Replay
+xây bundle trước khi apply mutation hiện tại, nên task hoặc history tương lai
+không thể lọt vào memory. Đây vẫn là shadow (`executed=false`), chưa thay payload
+AI hoặc production reducer.
+
+Verification: 313 backend tests pass, gồm explicit topic boundary, smoothed
+outlier guard, topic-first retrieval, priority under cap, note cues, chronology
+và pipeline output invariance.
+
+Full 86-case MiniLM shadow, without Meeting Note:
+
+- 273/273 mutation có bundle, zero context error;
+- tổng 6.816 selected clauses, 331.041 characters, 969 related-task references,
+  63 history-event references; không có note cue;
+- max quan sát 30 clauses và 2.068 characters; clause cap hit 36 lần,
+  character cap hit 0;
+- final output giữ nguyên baseline 16/86, precision `0.4074`, recall `0.5560`,
+  field accuracy `0.8604`.
+
+Full 86-case MiniLM shadow, with Meeting Note:
+
+- 273/273 mutation có bundle, zero context error;
+- tổng 6.830 selected clauses, 333.348 characters, 975 related-task references,
+  72 history-event references và 719 note-cue references;
+- max quan sát 30 clauses và 2.173 characters; clause cap hit 43 lần,
+  character cap hit 0;
+- final output giữ nguyên baseline 15/86, precision `0.4271`, recall `0.6029`,
+  field accuracy `0.8573`.
+
+Report runtime chỉ dùng để xác nhận PR và không commit. Chưa gọi paid provider.
+
+## 22. Quy tắc khi thay đổi project
 
 - Không hardcode case ID hoặc nguyên văn transcript vào runtime rule.
 - Chỉ thêm rule cho một semantic group có thể mô tả tổng quát.
@@ -868,7 +1121,7 @@ evidence và final tasks. Dù không chứa credential, đây vẫn là dữ li�
 - Khi báo metric, ghi pipeline, context mode, note mode, provider/model/prompt
   và local/API/job mode.
 
-## 22. Gate trước khi tiếp tục Power Automate
+## 23. Gate trước khi tiếp tục Power Automate
 
 1. `pytest backend/tests -q` pass toàn bộ.
 2. Targeted positive và negative cases pass theo mục tiêu thay đổi.
@@ -879,7 +1132,7 @@ evidence và final tasks. Dù không chứa credential, đây vẫn là dữ li�
 7. File-package smoke local pass.
 8. Sau đó mới test submit/poll/upsert trên Power Automate.
 
-## 23. Prompt cho phiên làm việc mới
+## 24. Prompt cho phiên làm việc mới
 
 ```text
 Bạn đang làm việc trong repo meeting-intelligent.

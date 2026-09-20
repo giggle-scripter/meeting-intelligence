@@ -8,8 +8,11 @@ def reduce_task_events_to_ledger(
     events: list[TaskEvent],
     *,
     ledger: TaskLedger | None = None,
+    recap_reconciliation_mode: str = "off",
 ) -> TaskLedger:
-    result = ledger or TaskLedger()
+    if recap_reconciliation_mode not in {"off", "shadow"}:
+        raise ValueError("recap_reconciliation_mode must be off or shadow")
+    result = ledger or TaskLedger(recap_reconciliation_mode=recap_reconciliation_mode)
     for event in sorted(events, key=lambda item: (item.order_index, item.event_id)):
         result.apply(event)
     return result

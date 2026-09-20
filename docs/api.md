@@ -159,5 +159,7 @@ chứa toàn bộ output `meeting_title`, `summary`, `tasks`, `diagnostics` và
 `unresolved_window_ids`.
 
 `idempotency_key` nội bộ được tạo từ file name và bytes file. Một retry cùng file
-khi backend chưa restart trả lại cùng `job_id`, không tạo thêm job. Job store là
-in-memory cho PoC local; restart backend làm mất các job đang chờ/running.
+trả lại cùng `job_id`, không tạo thêm job. Mặc định job store là in-memory; local
+Uvicorn có thể đặt `MEETING_JOB_SQLITE_PATH` để giữ các job đã hoàn tất sau
+restart. Job `queued`/`running` đang dở khi restart sẽ được đánh dấu `failed`
+với lỗi an toàn `Job interrupted by process restart` và không tự chạy lại.
