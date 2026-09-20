@@ -90,6 +90,43 @@ def test_mismatched_private_artifact_fails_closed(tmp_path: Path) -> None:
         run(_transcript(tmp_path), meeting_date="2026-09-18", artifact_directory=artifacts)
 
 
+def _declare_extra_artifact(artifacts: Path, name: str = "closeout.md") -> Path:
+    extra = artifacts / name
+    extra.write_text("frozen bundle audit", encoding="utf-8")
+    manifest_path = artifacts / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["artifact_hashes"][name] = hashlib.sha256(extra.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    return extra
+
+
+def test_frozen_bundle_validates_declared_extra_artifact(tmp_path: Path) -> None:
+    artifacts = _artifacts(tmp_path)
+    _declare_extra_artifact(artifacts)
+
+    result = run(_transcript(tmp_path), meeting_date="2026-09-18", artifact_directory=artifacts)
+
+    assert result["diagnostics"]["ai_provider_call_count"] == 0
+
+
+def test_frozen_bundle_rejects_missing_declared_extra_artifact(tmp_path: Path) -> None:
+    artifacts = _artifacts(tmp_path)
+    extra = _declare_extra_artifact(artifacts)
+    extra.unlink()
+
+    with pytest.raises(RuntimeError, match="STOP_MISSING_RUNTIME_ARTIFACT"):
+        run(_transcript(tmp_path), meeting_date="2026-09-18", artifact_directory=artifacts)
+
+
+def test_frozen_bundle_rejects_tampered_declared_extra_artifact(tmp_path: Path) -> None:
+    artifacts = _artifacts(tmp_path)
+    extra = _declare_extra_artifact(artifacts)
+    extra.write_text("tampered", encoding="utf-8")
+
+    with pytest.raises(RuntimeError, match="STOP_ARTIFACT_HASH_MISMATCH:closeout.md"):
+        run(_transcript(tmp_path), meeting_date="2026-09-18", artifact_directory=artifacts)
+
+
 def test_normal_v1_route_remains_available_without_a_key() -> None:
     meeting = MeetingInput(
         meeting_id="v1-compatibility",

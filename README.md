@@ -7,14 +7,24 @@ quy tắc xác định; AI chỉ hỗ trợ các đoạn thực sự mơ hồ.
 Tài liệu onboarding đầy đủ cho developer hoặc phiên chat mới:
 [docs/project-context.md](docs/project-context.md).
 
+Runbook vận hành và bàn giao shell V1/V2:
+[docs/operator-handoff-v1-v2-vi.md](docs/operator-handoff-v1-v2-vi.md).
+
 **Bản chốt để review/merge:** [V1, hai mốc distillation và cách chạy Power
-Automate](docs/phat-hanh-v1-va-distillation.md). API đang chạy V1; V2.27 là
-CLI/ASGI app thử nghiệm opt-in, V3.1 là kết quả so sánh trên tập development. Không
-được hiểu điểm F1 của hai mốc nghiên cứu là chất lượng API production.
+Automate](docs/phat-hanh-v1-va-distillation.md). Backend dùng app thống nhất
+`backend.app.core_api:app`, mặc định chọn `v1-frozen`; `v2-adaptive` là plugin tùy
+chọn, được chọn bằng `MEETING_CORE` (hoặc `-Core`) rồi restart backend. Các route
+API, flow Power Automate và lớp Cloudflare giữ nguyên; V2.27/V3.1 vẫn là các mốc
+nghiên cứu, không được hiểu điểm F1 của chúng là chất lượng API production.
 Lệnh PowerShell để **tự chạy** V2.27 như backend thử nghiệm nằm tại
 [hướng dẫn V2.27 API](docs/run-v227-backend-powershell.md).
 Lớp audio-to-text opt-in và giới hạn upload nằm tại
 [hướng dẫn V2.27 audio](docs/run-v227-audio-powershell.md).
+
+Feedback từ `v1-frozen` chỉ phục vụ audit và luôn có
+`adaptive_training_eligible=false`. Khi đã có ủy quyền phù hợp, snapshot
+company-shell có thể bỏ artifact và plugin V2; chi tiết kiểm tra nằm trong
+[runbook bàn giao](docs/operator-handoff-v1-v2-vi.md).
 
 Tài liệu chia sẻ bằng tiếng Việt về [V1, V2 MVP và chi phí](docs/v1-v2-mvp-vi.md)
 có kèm hai infographic SVG: [V1 end-to-end](docs/assets/v1-end-to-end.svg) và
@@ -138,7 +148,9 @@ Các lệnh trong README không tự khởi chạy dịch vụ.
 `medium`; chỉ đặt `high` khi cần ưu tiên xử lý window mơ hồ phức tạp hơn latency
 và chi phí. `OPENAI_API_KEY` chỉ đặt trong terminal, `.env` local hoặc Application Settings;
 không dán vào source code, Power Automate hay Git. Khi có key, backend gọi OpenAI
-Responses API cho window mơ hồ; không cần AI Builder capacity.
+Responses API cho window mơ hồ; không cần AI Builder capacity. Đây là khóa
+provider AI (hoặc khóa DeepSeek nếu môi trường cấu hình provider đó), khác với
+`X-API-Key` dùng để xác thực request vào backend.
 
 `AI_MAX_BATCH_CONTEXT_CLAUSES` mặc định là `56`: chỉ các window mơ hồ cách nhau
 không quá 3 clause mới được gộp khi tổng context không vượt giới hạn. Window xa

@@ -67,6 +67,22 @@ DATE_RE = re.compile(
     r"(?<!\d)(?P<year>20\d{2})[-/.](?P<month>\d{1,2})[-/.](?P<day>\d{1,2})"
     r"|(?<!\d)(?P<day2>\d{1,2})[/-](?P<month2>\d{1,2})[/-](?P<year2>20\d{2})(?!\d)"
 )
+SHA256_RE = re.compile(r"^[0-9a-fA-F]{64}$")
+
+
+def _safe_artifact_name(name: object) -> bool:
+    """Return whether a manifest artifact key is a plain local filename."""
+
+    return (
+        isinstance(name, str)
+        and bool(name)
+        and name not in {".", ".."}
+        and "/" not in name
+        and "\\" not in name
+        and ":" not in name
+        and all(ord(character) >= 32 for character in name)
+        and Path(name).name == name
+    )
 
 
 @dataclass(frozen=True)
@@ -109,6 +125,7 @@ def _artifact_bundle(
     the existing runner path while making every artifact load fail closed.
     """
 
+    directory = directory.resolve()
     paths = {name: (directory / name).resolve() for name in (MODEL_NAME, POLICY_NAME, MANIFEST_NAME)}
     if any(not path.is_file() for path in paths.values()):
         missing = [name for name, path in paths.items() if not path.is_file()]
@@ -121,7 +138,14 @@ def _artifact_bundle(
     if not isinstance(hashes, dict):
         raise RuntimeError("STOP_MISSING_V228_ARTIFACT_HASHES" if manifest.get("schema_version") == "v228-manifest-v1" else "STOP_MISSING_RUNTIME_ARTIFACT_HASHES")
     if schema == "v228-manifest-v1":
-        expected_artifacts = (MODEL_NAME, POLICY_NAME)
+        required_artifacts = {MODEL_NAME, POLICY_NAME}
+        if not required_artifacts.issubset(hashes):
+            raise RuntimeError("STOP_INVALID_RUNTIME_ARTIFACT_SET")
+        # The frozen V2.28 manifest is authoritative for the complete bundle.
+        # It includes audit and closeout files in addition to the two runtime
+        # inputs, so validate every declared entry while requiring the inputs
+        # used by inference below.
+        expected_artifacts = tuple(hashes)
     elif schema == "v227-tenant-challenger-manifest-v1":
         expected_artifacts = CHALLENGER_ARTIFACTS
         if expected_tenant is not None and manifest.get("tenant_id") != expected_tenant:
@@ -132,13 +156,24 @@ def _artifact_bundle(
             raise RuntimeError("STOP_CHALLENGER_BASE_MISMATCH")
     else:
         raise RuntimeError("STOP_INVALID_RUNTIME_MANIFEST")
-    if any(not (directory / name).is_file() for name in expected_artifacts):
-        raise RuntimeError("STOP_MISSING_RUNTIME_ARTIFACT")
-    if set(hashes) != set(expected_artifacts):
+    if schema == "v227-tenant-challenger-manifest-v1" and set(hashes) != set(expected_artifacts):
+        # Challenger package validation remains exact: no extra or missing
+        # declared artifact is accepted for that schema.
         raise RuntimeError("STOP_INVALID_RUNTIME_ARTIFACT_SET")
-    actual = {name: _sha256((directory / name).resolve()) for name in expected_artifacts}
-    for name, digest in actual.items():
-        if hashes.get(name) != digest:
+    actual: dict[str, str] = {}
+    for name in expected_artifacts:
+        if schema == "v228-manifest-v1" and not _safe_artifact_name(name):
+            raise RuntimeError("STOP_INVALID_RUNTIME_ARTIFACT_ENTRY")
+        digest = hashes.get(name)
+        if schema == "v228-manifest-v1" and (not isinstance(digest, str) or not SHA256_RE.fullmatch(digest)):
+            raise RuntimeError("STOP_INVALID_RUNTIME_ARTIFACT_HASH")
+        path = (directory / name).resolve()
+        if not path.is_relative_to(directory):
+            raise RuntimeError("STOP_INVALID_RUNTIME_ARTIFACT_ENTRY")
+        if not path.is_file():
+            raise RuntimeError("STOP_MISSING_RUNTIME_ARTIFACT")
+        actual[name] = _sha256(path)
+        if digest != actual[name]:
             raise RuntimeError(f"STOP_ARTIFACT_HASH_MISMATCH:{name}")
     model = _load_json(paths[MODEL_NAME])
     policy = _load_json(paths[POLICY_NAME])

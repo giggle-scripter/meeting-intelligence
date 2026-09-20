@@ -25,10 +25,12 @@ _V1_CORE_FACTORIES: Mapping[str, type[MeetingCore]] = {
 }
 
 
-def _core_factories() -> dict[str, type[MeetingCore]]:
-    """Return built-ins plus the fixed optional package when it is present."""
+def _core_factories(*, include_optional: bool = True) -> dict[str, type[MeetingCore]]:
+    """Return built-ins plus the fixed optional package when requested."""
 
     factories = dict(_V1_CORE_FACTORIES)
+    if not include_optional:
+        return factories
     try:
         optional_package = importlib.import_module(_OPTIONAL_V2_PACKAGE)
         optional_core = getattr(optional_package, "V2AdaptiveCore")
@@ -58,7 +60,13 @@ def get_core(core_id: str | None = None) -> MeetingCore:
     )
     if selected_id is None:
         selected_id = DEFAULT_CORE_ID
-    factory = _core_factories().get(selected_id)
+    # Selecting the default/frozen core must not even resolve the optional V2
+    # package.  This keeps V1 usable from a shell snapshot or an installation
+    # where the private package is absent, and avoids loading private code just
+    # to answer a V1 health check.
+    factory = _core_factories(include_optional=False).get(selected_id)
+    if factory is None and selected_id == _OPTIONAL_V2_CORE_ID:
+        factory = _core_factories(include_optional=True).get(selected_id)
     if factory is None:
         if selected_id == _OPTIONAL_V2_CORE_ID:
             raise V2AdaptiveUnavailableError(
