@@ -35,6 +35,21 @@ Feedback từ `v1-frozen` chỉ phục vụ audit và luôn có
 company-shell có thể bỏ artifact và plugin V2; chi tiết kiểm tra nằm trong
 [runbook bàn giao](docs/operator-handoff-v1-v2-vi.md).
 
+### Thứ tự chạy pilot an toàn
+
+Thực hiện theo thứ tự: cấu hình và **khởi động thủ công** theo
+[runbook bàn giao](docs/operator-handoff-v1-v2-vi.md) → chạy
+[unified smoke không feedback](examples/demo-unified-core/README.vi.md) → chỉ
+khi có approval rõ ràng mới chạy feedback smoke tùy chọn trong cùng hướng dẫn →
+[backup và verify](docs/run-pilot-runtime-protection-vi.md) → lập
+[retention report](docs/run-pilot-runtime-protection-vi.md) → diễn tập
+[restore sang path mới](docs/run-pilot-runtime-protection-vi.md). Các CLI này
+không tự khởi động service, không tự huấn luyện và retention report không tự
+xóa dữ liệu. [CI thủ công](docs/run-local-v227-operator-vi.md) chỉ là kiểm tra
+đã yêu cầu trong repository; nó không chạy service và không phải bằng chứng về
+deployment hoặc chất lượng. [Private V2 extraction](docs/run-private-v2-extraction-vi.md)
+là migration riêng cần ủy quyền, không phải điều kiện tiên quyết của pilot.
+
 Tài liệu chia sẻ bằng tiếng Việt về [V1, V2 MVP và chi phí](docs/v1-v2-mvp-vi.md)
 có kèm hai infographic SVG: [V1 end-to-end](docs/assets/v1-end-to-end.svg) và
 [V2 continual-learning loop](docs/assets/v2-mvp-continual-learning-loop.svg).

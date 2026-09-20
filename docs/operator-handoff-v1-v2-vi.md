@@ -2,6 +2,20 @@
 
 Tài liệu này dành cho người vận hành khi bàn giao một shell nội bộ cho công ty. Shell dùng app thống nhất `backend.app.core_api:app` và cùng hợp đồng HTTP hiện tại: Power Automate gửi `POST /api/v1/meetings/jobs/process-file`, poll `GET /api/v1/meetings/jobs/{job_id}`, và gửi feedback qua `POST /api/v1/meetings/jobs/{job_id}/feedback`. App mặc định chọn `v1-frozen`; `v2-adaptive` là plugin tùy chọn, được chọn bằng `MEETING_CORE` rồi restart backend. API key dùng header `X-API-Key`; đây là khóa xác thực backend, khác với khóa provider AI (ví dụ khóa DeepSeek nếu môi trường có cấu hình). Các flow Power Automate, route API và lớp Cloudflare (nếu tenant đã có lớp đó) giữ nguyên URL và hợp đồng.
 
+## Lối đi pilot và tài liệu liên quan
+
+Thứ tự an toàn là: cấu hình và **khởi động thủ công** →
+[unified smoke không feedback](../examples/demo-unified-core/README.vi.md) →
+chỉ khi có approval rõ ràng mới chạy feedback smoke tùy chọn →
+[backup và verify](run-pilot-runtime-protection-vi.md) →
+[retention report](run-pilot-runtime-protection-vi.md) → diễn tập
+[restore sang path mới](run-pilot-runtime-protection-vi.md). Smoke và runtime
+protection không tự khởi động service, không tự huấn luyện; retention report
+không tự xóa dữ liệu. [CI thủ công](run-local-v227-operator-vi.md) chỉ kiểm tra
+repository theo workflow đã yêu cầu, không chạy service và không phải bằng chứng
+về deployment hoặc chất lượng. [Private V2 extraction](run-private-v2-extraction-vi.md)
+là migration riêng cần ủy quyền, không phải điều kiện tiên quyết của pilot.
+
 ## Chuẩn bị V1 frozen
 
 V1 frozen là lựa chọn mặc định, chạy pipeline V1 hiện hành và không dùng adaptive training. Chuẩn bị một Python executable có các dependency trong `pyproject.toml`, một API key dùng chung, thư mục feedback riêng theo tenant và một SQLite path bền vững nằm ngoài source checkout:
