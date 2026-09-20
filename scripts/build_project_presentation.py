@@ -305,7 +305,7 @@ def build_deck(output: Path) -> None:
         [
             "Chất lượng canonical chưa đạt production; pass-case vẫn thấp.",
             "Gate C xác nhận transport/provider/replay, không chứng minh toàn bộ extraction đã đúng.",
-            "Job store chỉ ở memory; quick tunnel chỉ dành cho demo/test.",
+            "Launcher yêu cầu SQLite status store một process; quick tunnel chỉ dành cho demo/test.",
             "Power Automate cần upsert, review queue và metadata ngày/title chuẩn.",
         ],
         kicker="Executive summary",
@@ -496,7 +496,7 @@ def build_deck(output: Path) -> None:
         "Async job lifecycle",
         [
             ("SUBMIT", "202 + job_id + status_url"),
-            ("QUEUE", "In-memory job store"),
+            ("QUEUE", "SQLite status store (launcher)"),
             ("RUN", "V1 + selected provider"),
             ("POLL", "queued / running"),
             ("RESULT", "succeeded/result hoặc failed/error"),
@@ -508,14 +508,14 @@ def build_deck(output: Path) -> None:
         "Hosting và provider selection",
         "Hosting",
         [
-            "Local: Uvicorn backend.app.main:app.",
+            "Local: Uvicorn backend.app.core_api:app; mặc định v1-frozen.",
             "Docker: cùng app trên port 8000.",
             "Azure Functions: func.AsgiFunctionApp qua compatibility export.",
             "Quick Tunnel: demo/test public endpoint; URL không durable.",
         ],
         "Provider priority",
         [
-            "1. OPENAI_API_KEY → Responses API.",
+            "1. OPENAI_API_KEY ở backend → Responses API (khác X-API-Key của API).",
             "2. Azure AI Foundry chat endpoint.",
             "3. Generic AI_FALLBACK_ENDPOINT.",
             "4. DisabledAiClient → rule-only + unresolved diagnostics.",
@@ -676,8 +676,8 @@ def build_deck(output: Path) -> None:
         "Demo runbook",
         "Backend",
         [
-            "Set POWER_AUTOMATE_API_KEY, PIPELINE_VERSION=v1, CONTEXT=assist.",
-            "Start: uvicorn backend.app.main:app --port 8010.",
+            "Set POWER_AUTOMATE_API_KEY, MEETING_CORE=v1-frozen, và MEETING_JOB_SQLITE_PATH.",
+            "Start: scripts/run_local_meeting_core.ps1 -Core v1-frozen (port 8011).",
             "Health: GET /health.",
             "Nếu không có OPENAI_API_KEY: demo là rule-only và có unresolved diagnostics.",
         ],
@@ -695,7 +695,7 @@ def build_deck(output: Path) -> None:
         "Known limitations",
         "Runtime / platform",
         [
-            "Job store in-memory, chưa TTL/persistence/multi-instance.",
+            "SQLite chỉ cho một process; chưa có HA/multi-instance/backup và TTL đầy đủ.",
             "Quick tunnel URL thay đổi và không có SLA.",
             "V2 chưa parity V1; V1 còn dùng helper dưới v2.",
             "C# sample client chưa theo async job + Meeting Note.",

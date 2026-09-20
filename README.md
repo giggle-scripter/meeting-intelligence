@@ -105,15 +105,15 @@ Task do pipeline sinh ra chỉ là **proposal**. Hệ thống không tự độn
 
 | Thành phần | Trạng thái |
 | --- | --- |
-| Pipeline | `v1` |
+| Core mặc định | `v1-frozen` (pipeline V1) |
 | Meeting context | `assist` |
-| Backend | FastAPI — `backend.app.main:app` |
+| Backend | FastAPI — `backend.app.core_api:app` (mặc định `v1-frozen`) |
 | Chế độ validation chính | Local deterministic / rule-only |
 | Validation corpus | 86 reviewed cases, W1–W5 |
 | Automated tests | 236 |
 | OpenAI model mặc định khi bật | `gpt-5-mini` |
 | Vai trò AI | Optional mutation resolver |
-| Async job storage | In-memory |
+| Async job storage | SQLite status store (bắt buộc với launcher local; một process) |
 | Power Automate | Đã có contract; rollout đang tạm dừng để hoàn thiện local quality |
 
 Các rule-only report gần nhất:
@@ -283,14 +283,17 @@ python -m venv .venv
 pip install -r backend\requirements.txt
 
 $env:POWER_AUTOMATE_API_KEY="<khóa riêng đủ mạnh, giống giá trị trong flow>"
-$env:AI_FALLBACK_ENDPOINT=""
-$env:OPENAI_API_KEY="<key-nhận-từ-lead>"
-$env:OPENAI_MODEL="gpt-5-mini"
-$env:OPENAI_REASONING_EFFORT="medium"
-$env:AI_TIMEOUT_SECONDS="3600"
-$env:AI_MAX_BATCH_CONTEXT_CLAUSES="56"
-uvicorn backend.app.main:app --host 127.0.0.1 --port 8010
+$env:MEETING_FEEDBACK_TENANT_ID="pilot-tenant"
+$env:MEETING_FEEDBACK_DIRECTORY="evaluation\runtime\meeting-feedback"
+$env:MEETING_JOB_SQLITE_PATH="evaluation\runtime\meeting-jobs.sqlite3"
+$env:OPENAI_API_KEY="<key-nhận-từ-lead>" # tùy chọn, chỉ ở backend
+.\scripts\run_local_meeting_core.ps1 -Core v1-frozen
 ```
+
+Launcher luôn chạy `backend.app.core_api:app` trên `127.0.0.1:8011`, chạy
+preflight offline và yêu cầu SQLite status store. Đổi sang `-Core v2-adaptive`
+rồi restart để thử core V2; endpoint, flow Power Automate và lớp Cloudflare vẫn
+giữ nguyên.
 
 Để chạy **đúng flow Power Automate trên máy local**, cần thêm terminal thứ hai
 chạy HTTPS tunnel và cập nhật URL của phiên tunnel vào flow. Named Tunnel với
@@ -401,8 +404,8 @@ Các taxonomy/evidence trong report là gợi ý deterministic có trạng thái
 `evaluate_dataset.py` hiện report task identity F1 cùng expected/actual/matched,
 missing và unexpected task counts.
 
-- Health check: `http://127.0.0.1:8010/health`
-- Swagger UI: `http://127.0.0.1:8010/docs`
+- Health check: `http://127.0.0.1:8011/health`
+- Swagger UI: `http://127.0.0.1:8011/docs`
 - Khi dùng Cloudflare named tunnel (pilot khuyến nghị), Quick Tunnel (demo ngắn)
   hoặc Azure Function tùy chọn, Power Automate gọi endpoint công khai tương ứng
   đến `/api/v1/meetings/jobs/process-file`. Endpoint đồng bộ
@@ -425,8 +428,10 @@ missing và unexpected task counts.
 
 Main flow phải dùng job endpoint. `POST` chỉ submit file và luôn kết thúc nhanh;
 Power Automate poll mỗi 15 giây đến khi job `succeeded` hoặc `failed`, sau đó Parse
-JSON field `result` trước khi ghi Lists. Job store hiện là in-memory cho PoC local:
-nếu restart Uvicorn thì các job `queued`/`running` bị mất, cần upload lại file.
+JSON field `result` trước khi ghi Lists. Launcher local dùng SQLite để giữ status
+và idempotency qua restart; job `queued`/`running` tại thời điểm restart được
+đánh dấu `failed` vì callable Python không thể resume. Đây vẫn là store một
+process, chưa phải HA hay multi-replica.
 
 Upload endpoint cần:
 
@@ -534,7 +539,7 @@ mở trong toàn bộ thời gian OpenAI xử lý:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\evaluate_dataset.py data\validation `
-  --job-endpoint "http://127.0.0.1:8010/api/v1/meetings/jobs/process-file" `
+  --job-endpoint "http://127.0.0.1:8011/api/v1/meetings/jobs/process-file" `
   --api-key "mi-demo-secret" `
   --timeout 3600 `
   --poll-interval 15 `

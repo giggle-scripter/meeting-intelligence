@@ -12,10 +12,11 @@ Windows + Cloudflare named tunnel trong [runbook không cần Azure](deployment-
 
 - V1 là backend duy nhất nối flow production. V2.27 chỉ chạy tenant thử nghiệm
   riêng; V2.28 private serving đã trượt diagnostic gate.
-- Local files hiện có (`jobs` in-memory, feedback directory, active pointer) chưa
-  phải durable database, chưa có backup/retention/replication và chưa deploy-ready
-  cho multi-replica. Không trỏ Power Automate production vào process local hoặc
-  Quick Tunnel dài hạn.
+- Launcher local bắt buộc SQLite status store; feedback directory và active
+  pointer vẫn là file local. Các thành phần này chưa có backup/retention/
+  replication và chưa deploy-ready cho multi-replica. SQLite giữ history qua
+  restart nhưng job đang `queued`/`running` bị đánh dấu `failed`; không trỏ Power
+  Automate production vào process local hoặc Quick Tunnel dài hạn.
 - Power Automate license/connector vẫn cần được xác nhận theo tenant. Azure
   region/SKU/network egress chỉ cần quote nếu sau này chọn nhánh managed; Azure
   không phải điều kiện pass của MVP. Xem [Container Apps billing](https://learn.microsoft.com/en-us/azure/container-apps/billing)
@@ -59,7 +60,8 @@ mọi lỗi có failure branch và không có direct write vào V1 production Li
 ### Ngày 4 — sau 2026-09-20: pilot Windows + named tunnel
 
 Sau khi prototype local pass, chạy V1 trên một máy Windows luôn bật trong cửa
-sổ pilot. Uvicorn chỉ bind `127.0.0.1:8010`; Cloudflare named tunnel cung cấp
+sổ pilot. Launcher chạy `backend.app.core_api:app` với `MEETING_CORE=v1-frozen`,
+Uvicorn chỉ bind `127.0.0.1:8011`; Cloudflare named tunnel cung cấp
 hostname ổn định nếu người dùng có domain/account, còn Quick Tunnel chỉ dành
 cho demo ngắn. Dùng `X-API-Key`; có thể thêm Cloudflare Access service token.
 Bật Secure inputs/outputs cho submit, poll và Parse JSON. Không tạo service
@@ -72,15 +74,16 @@ hostname và key được kiểm tra; mọi người hiểu giới hạn uptime/
 
 ### Ngày 5 — sau pilot pass: V2 review và đường dài hạn tùy chọn
 
-V2 vẫn dùng app/hostname và storage prefix staging riêng; không ghi thẳng Lists
+V2 vẫn dùng app/hostname và storage prefix staging riêng: chọn
+`MEETING_CORE=v2-adaptive` rồi restart trước khi chạy flow; không ghi thẳng Lists
 production. Sau feedback approved, operator chạy CPU trainer one-shot bằng CLI,
 review challenger rồi mới activate/restart thủ công. Không auto-promotion,
 không GPU và không cần Azure Container Apps Job. Nếu cần chạy lâu hơn, chuyển
 API sang Windows host always-on hoặc VPS tại region người dùng đủ điều kiện;
 Azure Container Apps/Functions chỉ là lựa chọn managed về sau.
 
-Trước khi tuyên bố unattended/24/7 phải thay job store in-memory và local
-feedback/pointer bằng persistent store có lock, backup, retention và restore;
+Trước khi tuyên bố unattended/24/7 phải thay SQLite single-process và local
+feedback/pointer bằng hạ tầng persistent có lock, backup, retention và restore;
 chạy restore/restart smoke, kiểm idempotency/multi-replica và có rollback.
 
 Reviewer xem `coverage.json`, diagnostics, manifest/hash và danh sách case. Một
@@ -102,11 +105,11 @@ continual learning tự động.
 OneDrive/SharePoint
         │ trigger + file content
         ▼
-Power Automate ──HTTPS──> Windows V1 API (Uvicorn + named tunnel, pilot)
-        │                         │
-        │                         └── local files (operator-managed, not durable)
+Power Automate ──HTTPS──> backend.app.core_api:app (Uvicorn + named tunnel)
+        │                  MEETING_CORE=v1-frozen, SQLite, pilot
         │
-        └── V2 staging API ──approved feedback──> CPU trainer CLI (one-shot)
+        └── restart với MEETING_CORE=v2-adaptive (staging) ──approved feedback──>
+                                                   CPU trainer CLI (one-shot)
                                              │
                                   challenger package + diagnostics
                                              │
@@ -129,9 +132,9 @@ phí máy, điện, mạng và Power Automate license/connector theo tenant. Azu
 Container Apps, Blob, queue, Key Vault, logs, bandwidth và region chỉ quote khi
 chọn nhánh managed. Tạm thời không dành ngân sách cho GPU chạy liên tục.
 
-Các rủi ro phải giữ ở trạng thái rõ ràng: job store in-memory và feedback/pointer
-local nếu chưa thay bằng durable store, host sleep/restart làm mất job, replica
-race nếu chưa có idempotent lock, transcript nhạy cảm nếu retention chưa được
-phê duyệt, và model drift nếu activation không qua reviewer. Nếu một cổng fail,
+Các rủi ro phải giữ ở trạng thái rõ ràng: SQLite single-process và
+feedback/pointer local nếu chưa thay bằng durable store, host sleep/restart làm
+job đang chạy thất bại, replica race nếu chưa có idempotent lock, transcript
+nhạy cảm nếu retention chưa được phê duyệt, và model drift nếu activation không qua reviewer. Nếu một cổng fail,
 giữ V1 pilot ở trạng thái đã pass và dừng V2 ở staging; không bypass approval để
 “cho chạy thử”.

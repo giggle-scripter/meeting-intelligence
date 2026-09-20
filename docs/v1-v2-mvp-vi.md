@@ -57,9 +57,10 @@ tenant trước khi cam kết.
 
 ### Giới hạn vận hành hiện tại
 
-Các lệnh local trong release worktree chỉ là demo/runbook. Job store hiện tại
-ở local là in-memory: restart process làm mất job đang xử lý. File local,
-pointer và feedback directory chưa phải database bền vững có backup, lock và
+Các lệnh local trong release worktree chỉ là demo/runbook. Launcher dùng SQLite
+status store cho một process; restart giữ history/idempotency nhưng đánh dấu job
+`queued`/`running` đang thực thi là `failed` vì callable không thể resume. File
+feedback, pointer và SQLite chưa phải hạ tầng bền vững có backup, lock và
 replication; một worker local cũng chưa phải dịch vụ multi-replica. Vì vậy
 pilot Windows chỉ có operator, chưa được gọi là unattended 24/7 hay
 multi-replica. Trước khi claim vận hành liên tục phải có persistent store,
@@ -93,13 +94,18 @@ provider không chạy trong inference. Nhãn học chỉ đến từ feedback c
 người duyệt chấp thuận, không từ prediction chưa duyệt, oracle, expected output
 hay shadow đã mở.
 
+Feedback vẫn đi qua cùng route để giữ audit contract, nhưng feedback của
+`v1-frozen` luôn là audit-only và `adaptive_training_eligible=false`; chỉ
+feedback có human approval từ core V2 mới đủ điều kiện cho challenger training.
+
 ## 3. V2 MVP đã sửa: vòng feedback/training có kiểm soát
 
 ![Infographic V2 MVP continual-learning loop](assets/v2-mvp-continual-learning-loop.svg)
 
 ### Luồng inference
 
-1. Nhận transcript qua endpoint thử nghiệm V2.27; audio là opt-in riêng,
+1. Chọn `MEETING_CORE=v2-adaptive` rồi restart app thống nhất và nhận transcript
+   qua cùng job endpoint; audio là opt-in riêng,
    giới hạn 25 MB và dùng `gpt-4o-transcribe-diarize` để tạo transcript có
    speaker. Audio phải qua reviewer vì diarization có thể sai.
 2. Ghi source trong thư mục private, đặt tên theo `content_hash`. Hash này được
@@ -175,9 +181,9 @@ idempotency và audit. Không mô tả wiring đó như hành vi đã có của 
 Activation là thao tác operator chạy CLI sau review: kiểm package immutable,
 base V2.28 hash, policy, model, có ít nhất một positive match và ghi active
 pointer atomically trong `<feedback-root>/<tenant>/active-v227-pointer.json`.
-API chỉ đọc tenant từ `V227_FEEDBACK_TENANT_ID` lúc startup;
-không có HTTP admin endpoint và không hot reload. Sau activation phải restart
-ASGI app rồi smoke test tenant riêng. Rollback ghi pointer về frozen base bằng
+API đọc tenant từ `MEETING_FEEDBACK_TENANT_ID` lúc startup (launcher truyền alias
+V2 tương thích); không có HTTP admin endpoint và không hot reload. Sau activation
+phải chọn/restart core V2 rồi smoke test tenant riêng. Rollback ghi pointer về frozen base bằng
 CLI, giữ audit pointer cũ và restart lại. Nếu manifest/artifact bị sửa, startup
 hoặc job load fail closed.
 

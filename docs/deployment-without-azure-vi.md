@@ -10,8 +10,9 @@ giới hạn khu vực. **Không cần tạo Azure account và không được t
 Dùng một máy Windows đang có sẵn để chạy một worker V1 duy nhất:
 
 ```text
-Power Automate -> HTTPS Cloudflare named tunnel -> 127.0.0.1:8010 Uvicorn
-                                              -> V1 job API
+Power Automate -> HTTPS Cloudflare named tunnel -> 127.0.0.1:8011 Uvicorn
+                                               -> backend.app.core_api:app
+                                                  (MEETING_CORE=v1-frozen)
 ```
 
 Named tunnel dùng hostname ổn định của domain do người dùng sở hữu trong
@@ -54,20 +55,23 @@ API key hoặc Cloudflare credential vào transcript, URL, source hay log.
 
 ## Chạy V1 và named tunnel thủ công
 
-Terminal PowerShell 1, giữ mở trong thời gian pilot:
+Terminal PowerShell 1, giữ mở trong thời gian pilot. Launcher chạy preflight
+offline, bắt buộc SQLite status store và không tự tạo service/scheduled task:
 
 ```powershell
 Set-Location 'C:\Intern AI SPS\meeting-intelligent-release'
 $env:POWER_AUTOMATE_API_KEY = (Get-Content 'evaluation\runtime\power-automate-local\api-key.txt' -Raw).Trim()
-$env:PIPELINE_VERSION = 'v1'
+$env:MEETING_FEEDBACK_TENANT_ID = 'pilot-tenant'
+$env:MEETING_FEEDBACK_DIRECTORY = 'evaluation\runtime\meeting-feedback'
+$env:MEETING_JOB_SQLITE_PATH = 'evaluation\runtime\meeting-jobs.sqlite3'
 # Tùy chọn: $env:OPENAI_API_KEY = '<key chỉ đặt ở backend>'
-.\.venv\Scripts\uvicorn.exe backend.app.main:app --host 127.0.0.1 --port 8010
+.\scripts\run_local_meeting_core.ps1 -Core v1-frozen
 ```
 
 Kiểm tra local trước khi mở flow, trong PowerShell 2:
 
 ```powershell
-Invoke-RestMethod 'http://127.0.0.1:8010/health'
+Invoke-RestMethod 'http://127.0.0.1:8011/health'
 ```
 
 Nếu đã có domain/account Cloudflare, đăng nhập và tạo named tunnel theo tài
@@ -89,7 +93,7 @@ tunnel: <tunnel-uuid>
 credentials-file: C:\Users\<user>\.cloudflared\<tunnel-uuid>.json
 ingress:
   - hostname: api.example.com
-    service: http://127.0.0.1:8010
+    service: http://127.0.0.1:8011
   - service: http_status:404
 ```
 
@@ -130,7 +134,7 @@ Invoke-RestMethod 'https://api.example.com/health' -Headers $headers
 Khi chưa có domain hoặc Cloudflare account phù hợp, có thể dùng Quick Tunnel:
 
 ```powershell
-cloudflared tunnel --protocol http2 --url http://127.0.0.1:8010
+cloudflared tunnel --protocol http2 --url http://127.0.0.1:8011
 ```
 
 URL `trycloudflare.com` đổi sau mỗi lần tạo lại, không có hostname ổn định và
@@ -142,9 +146,10 @@ URL đó vào tài liệu như endpoint cố định.
 
 Máy Windows phải bật, có mạng ổn định và không sleep/hibernate trong cửa sổ
 pilot. Restart, Windows Update, mất mạng hoặc đóng terminal làm endpoint dừng;
-người vận hành phải mở lại Uvicorn và tunnel rồi kiểm tra `/health`. Vì job
-store hiện là **in-memory**, restart làm mất job `queued`/`running`; flow phải
-đánh dấu lỗi và upload lại, không tự submit lại mù.
+người vận hành phải mở lại launcher và tunnel rồi kiểm tra `/health`. SQLite giữ
+status và idempotency qua restart, nhưng job `queued`/`running` đang thực thi sẽ
+được đánh dấu `failed` vì callable Python không thể resume; flow phải xử lý lỗi
+và upload lại có chủ đích, không tự submit lại mù.
 
 Feedback directory và active pointer của V2 cũng là file local. Chúng chưa là
 store bền vững có lock, backup, retention, restore hay khả năng multi-replica.

@@ -1,7 +1,7 @@
 # Bản phát hành V1 và hai mốc nghiên cứu distillation
 
 Tài liệu này chốt phạm vi mã nguồn để review, push và merge. **Backend phục vụ
-Power Automate vẫn là V1** (`PIPELINE_VERSION=v1`). Hai mốc V2.27 và V3.1 là
+Power Automate mặc định là V1 frozen** (`MEETING_CORE=v1-frozen`). Hai mốc V2.27 và V3.1 là
 kết quả nghiên cứu nội bộ, không phải hai chế độ production của API.
 
 | Mốc giữ lại | Vai trò | Kết quả task identity | Quyết định |
@@ -33,10 +33,10 @@ proposal. Đoạn mơ hồ có thể đi qua OpenAI Responses API nếu backend 
 kiện. Không có key thì nhánh quy tắc vẫn hoạt động, kèm thông tin window chưa
 giải quyết. OpenAI key chỉ nằm ở backend, không đưa vào flow.
 
-V1 và distillation khác nhau: V1 là pipeline đang được API gọi; V2.27/V3.1
-đánh giá việc tạo tập ứng viên rồi chọn task bằng mô hình nhỏ. Không đặt
-`PIPELINE_VERSION=v227` hoặc `v31`: backend chỉ nhận `v1`, `v2`, `shadow`, và
-release này cố định `v1`.
+V1 và distillation khác nhau: V1 là core mặc định của API; V2.27/V3.1 đánh giá
+việc tạo tập ứng viên rồi chọn task bằng mô hình nhỏ. Không dùng
+`PIPELINE_VERSION` để chọn V2. Core V2 chỉ được bật bằng
+`MEETING_CORE=v2-adaptive` (hoặc `-Core`) rồi restart app thống nhất.
 
 ## Dữ liệu, phương pháp và ranh giới đánh giá
 
@@ -77,7 +77,7 @@ official score. Đây là lý do không chọn các bản đó làm mốc releas
 
 Manifest, model, transcript, nhãn và phản hồi provider nằm trong
 `evaluation/runtime/`, được Git ignore; **không push** các file đó. V2.27 có
-CLI và ASGI app opt-in để chạy trên transcript mới. Cả hai dùng model full-fit
+CLI và core opt-in trong app thống nhất để chạy trên transcript mới. Cả hai dùng model full-fit
 và policy trong private package V2.28. V2.28 đã trượt gate diagnostic, nên
 kết quả luôn mang cờ `experimental_not_validated`; xem
 [CLI V2.27](run-v227-experimental.md) và
@@ -106,9 +106,11 @@ thứ nhất và giữ cửa sổ này chạy:
 ```powershell
 cd 'C:\Intern AI SPS\meeting-intelligent'
 $env:POWER_AUTOMATE_API_KEY = (Get-Content 'evaluation\runtime\power-automate-local\api-key.txt' -Raw).Trim()
-$env:PIPELINE_VERSION = 'v1'
+$env:MEETING_FEEDBACK_TENANT_ID = 'pilot-tenant'
+$env:MEETING_FEEDBACK_DIRECTORY = 'evaluation\runtime\meeting-feedback'
+$env:MEETING_JOB_SQLITE_PATH = 'evaluation\runtime\meeting-jobs.sqlite3'
 # Tùy chọn: $env:OPENAI_API_KEY = '<OpenAI API key>'
-.\.venv\Scripts\uvicorn.exe backend.app.main:app --host 127.0.0.1 --port 8010
+.\scripts\run_local_meeting_core.ps1 -Core v1-frozen
 ```
 
 Mở PowerShell thứ hai và giữ cửa sổ này chạy:
@@ -116,7 +118,7 @@ Mở PowerShell thứ hai và giữ cửa sổ này chạy:
 ```powershell
 & "$env:LOCALAPPDATA\cloudflared\cloudflared.exe" tunnel `
   --protocol http2 `
-  --url http://127.0.0.1:8010
+  --url http://127.0.0.1:8011
 ```
 
 Lệnh trên là Quick Tunnel cho demo ngắn. URL `https://...trycloudflare.com`
@@ -131,8 +133,9 @@ nội dung file private. Trigger OneDrive/SharePoint → Get file content → HT
 `X-File-Name-Base64: base64(tên file)`. Lấy `status_url` từ phản hồi 202,
 poll `GET {ApiBaseUrl}{status_url}` với cùng key tới `succeeded`/`failed`.
 Chỉ ghi MI Meeting/MI Task Proposal khi `succeeded`. Bật Secure inputs/outputs
-cho action chứa khóa, transcript và kết quả. Job store local là in-memory:
-restart Uvicorn sẽ mất job đang xử lý. Chi tiết mapping trong
+cho action chứa khóa, transcript và kết quả. Launcher local dùng SQLite cho
+status/idempotency của một process; job `queued`/`running` khi restart được đánh
+dấu `failed` vì không thể resume callable. Chi tiết mapping trong
 [Power Automate README](../power-automate/README.md).
 
 ## Quy tắc merge

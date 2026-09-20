@@ -1,12 +1,16 @@
 # Tích hợp Power Automate
 
-Backend dùng trong flow phát hành là **V1** (`PIPELINE_VERSION=v1`). Lệnh
-PowerShell để tự chạy Uvicorn, HTTPS tunnel và quản lý `X-API-Key` nằm tại
+Backend dùng trong flow phát hành là **V1 frozen** (`MEETING_CORE=v1-frozen`).
+Launcher chạy app thống nhất `backend.app.core_api:app`; `v2-adaptive` là core
+opt-in, được chọn bằng `MEETING_CORE` (hoặc `-Core`) rồi restart. Lệnh
+PowerShell để tự chạy backend, HTTPS tunnel và quản lý `X-API-Key` nằm tại
 [hướng dẫn bản chốt](../docs/phat-hanh-v1-va-distillation.md#cách-chạy-v1-với-power-automate).
+Provider key (ví dụ `OPENAI_API_KEY`) chỉ nằm ở backend và khác với
+`X-API-Key`, là khóa xác thực request từ Power Automate.
 Pilot Windows không cần Azure, named tunnel và Access service token xem tại
 [runbook triển khai không cần Azure](../docs/deployment-without-azure-vi.md).
-V2.27/V3.1 không được nối vào endpoint hoặc Lists production của flow V1; nếu
-chạy thử, phải dùng app/hostname và vùng staging riêng như phần dưới.
+V2.27/V3.1 không được ghi vào Lists production của flow V1; nếu chạy thử,
+chuyển core sau khi dừng/restart process và dùng vùng staging riêng như phần dưới.
 
 Tổng quan V1/V2 MVP, ranh giới bằng chứng và kế hoạch triển khai theo tuần (Azure
 tùy chọn) xem
@@ -15,6 +19,9 @@ tùy chọn) xem
 
 Job endpoint đã qua full Gate C/replay contract. Power Automate tiếp tục là lớp
 orchestration; không port parsing, rule, date hoặc reducer vào flow.
+Launcher local yêu cầu `MEETING_JOB_SQLITE_PATH`; SQLite giữ status envelope và
+idempotency cho một process, còn `queued`/`running` sẽ thành `failed` khi process
+restart. Điều này không biến pilot thành HA hay production service.
 
 Flow dự kiến:
 
@@ -80,7 +87,9 @@ count làm transport gate. Quality vẫn được đánh giá bằng evaluator r
 
 ## Flow staging V2.27 (opt-in, không ghi V1 production Lists)
 
-Flow staging V2 phải giữ các bước theo đúng thứ tự sau:
+Flow staging V2 dùng cùng route submit/poll/feedback và cùng lớp Cloudflare như
+V1; operator chọn `MEETING_CORE=v2-adaptive` rồi restart trước khi chạy flow.
+Các bước phải giữ đúng thứ tự sau:
 
 1. Submit transcript/audio tới V2.27 staging; lưu `job_id` và `status_url` từ
    response submit.
@@ -114,11 +123,12 @@ Các nhánh lỗi bắt buộc:
 - Email lỗi sau khi feedback đã accepted: giữ bằng chứng feedback approved,
   retry email approved; không quay lại gửi output chưa duyệt.
 
-Intake chỉ bật khi service V2.27 được chạy với biến môi trường server
-`V227_FEEDBACK_TENANT_ID` (không nhận tenant từ request). Có thể đặt thư mục
-lưu riêng bằng `V227_FEEDBACK_DIRECTORY`; mặc định là
-`evaluation/runtime/v227-feedback/<tenant>`. V1 không có route này và không bị
-thay đổi. Transcript gốc được lưu trước khi submit job, theo `content_hash`
+Intake chỉ bật khi backend được chạy với biến môi trường server
+`MEETING_FEEDBACK_TENANT_ID` (không nhận tenant từ request). Có thể đặt thư mục
+lưu riêng bằng `MEETING_FEEDBACK_DIRECTORY`; launcher vẫn truyền các alias
+`V227_FEEDBACK_*` cho preflight V2. V1 có cùng route feedback nhưng record của
+V1 luôn audit-only và `adaptive_training_eligible=false`; không được dùng làm
+dữ liệu train. Transcript gốc được lưu trước khi submit job, theo `content_hash`
 ổn định; bản ghi là append-only, không commit lên Git và không ghi transcript
 vào log.
 
