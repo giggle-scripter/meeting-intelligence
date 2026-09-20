@@ -16,6 +16,11 @@ class Settings:
     ai_fallback_api_key: str | None = None
     ai_timeout_seconds: float = 3600.0
     job_timeout_seconds: float = 3600.0
+    # Private, tenant-scoped feedback ledger settings.  The V227 names remain
+    # accepted so an existing offline trainer deployment can be upgraded in
+    # place.
+    meeting_feedback_tenant_id: str | None = None
+    meeting_feedback_directory: str = "evaluation/runtime/v227-feedback"
     ai_max_batch_context_clauses: int = 56
     ai_cost_gate_mode: str = "off"
     ai_cost_max_provider_calls_per_meeting: int = 3
@@ -513,6 +518,16 @@ class Settings:
             ai_fallback_api_key=os.getenv("AI_FALLBACK_API_KEY") or None,
             ai_timeout_seconds=float(os.getenv("AI_TIMEOUT_SECONDS", "3600")),
             job_timeout_seconds=float(os.getenv("JOB_TIMEOUT_SECONDS", "3600")),
+            meeting_feedback_tenant_id=(
+                os.getenv("MEETING_FEEDBACK_TENANT_ID")
+                or os.getenv("V227_FEEDBACK_TENANT_ID")
+                or None
+            ),
+            meeting_feedback_directory=(
+                os.getenv("MEETING_FEEDBACK_DIRECTORY")
+                or os.getenv("V227_FEEDBACK_DIRECTORY")
+                or "evaluation/runtime/v227-feedback"
+            ),
             ai_max_batch_context_clauses=batch_limit,
             ai_cost_gate_mode=ai_cost_gate_mode,
             ai_cost_max_provider_calls_per_meeting=ai_cost_max_provider_calls,

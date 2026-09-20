@@ -351,6 +351,22 @@ def train(
         if feedback_path.resolve().parent != feedback_dir.resolve():
             raise ValueError("STOP_FEEDBACK_PATH_ESCAPE")
         feedback = _json(feedback_path)
+        if not isinstance(feedback, dict):
+            continue
+        # The shared core API keeps V1 feedback in the same private ledger so
+        # operators have one endpoint and retention boundary.  V1 records are
+        # retained, but must never become adaptive training labels.  Older
+        # standalone V2.27 records predate these fields and remain eligible.
+        is_legacy_v2 = (
+            feedback.get("schema_version") == "v227-feedback-correction-v1"
+            and "adaptive_training_eligible" not in feedback
+            and "core_id" not in feedback
+        )
+        if not is_legacy_v2 and (
+            feedback.get("adaptive_training_eligible") is not True
+            or feedback.get("core_id") != "v2-adaptive"
+        ):
+            continue
         if feedback.get("schema_version") != "v227-feedback-correction-v1" or feedback.get("tenant_id") != tenant_id:
             raise ValueError("STOP_INVALID_FEEDBACK_RECORD")
         if feedback_path.stem != str(feedback.get("job_id", "")):
@@ -369,6 +385,15 @@ def train(
         source = _json(source_path) if source_path.is_file() else None
         if not isinstance(source, dict) or source.get("tenant_id") != tenant_id or source.get("content_hash") != source_hash:
             raise ValueError("STOP_SOURCE_FEEDBACK_HASH_MISMATCH")
+        source_is_legacy_v2 = (
+            "adaptive_training_eligible" not in source and "core_id" not in source
+        )
+        if not source_is_legacy_v2 and (
+            source.get("adaptive_training_eligible") is not True
+            or source.get("core_id") != "v2-adaptive"
+            or source.get("meeting_note") is not None
+        ):
+            continue
         transcript = source.get("transcript")
         if not isinstance(transcript, str) or not transcript:
             raise ValueError("STOP_TRANSCRIPT_HASH_MISMATCH")
@@ -388,7 +413,16 @@ def train(
         identity = [source.get("file_name", "meeting.txt"), source.get("meeting_id", ""), source.get("meeting_title", ""), source.get("meeting_date", ""), raw_upload_sha256]
         if modality == "audio":
             identity.insert(0, modality)
-        expected_content_hash = hashlib.sha256(json.dumps(identity, ensure_ascii=False, separators=(",", ":")).encode("utf-8")).hexdigest()
+        if source.get("content_hash_algorithm") == "core-api-job-v1":
+            base = source.get("content_hash_base")
+            metadata = source.get("content_hash_metadata")
+            if not isinstance(base, str) or not isinstance(metadata, str):
+                raise ValueError("STOP_SOURCE_CONTENT_HASH_MISMATCH")
+            expected_content_hash = hashlib.sha256(
+                (base + "\0" + metadata).encode("utf-8")
+            ).hexdigest()
+        else:
+            expected_content_hash = hashlib.sha256(json.dumps(identity, ensure_ascii=False, separators=(",", ":")).encode("utf-8")).hexdigest()
         if expected_content_hash != source_hash:
             raise ValueError("STOP_SOURCE_CONTENT_HASH_MISMATCH")
         approved = _tasks(feedback.get("corrected_final_tasks"))
@@ -398,6 +432,8 @@ def train(
         record = {"job_id": str(feedback["job_id"]), "source_hash": source_hash, "feedback_hash": stored_hash, "proposals": proposals, "labels": labels, "uncovered": uncovered, "approval": approval, "reconstruction": reconstruction}
         records.append(record)
         source_hashes[str(feedback["job_id"])] = {"source_path": source_path.name, "source_sha256": _sha256(source_path), "feedback_sha256": _sha256(feedback_path), "content_hash": source_hash, "source_modality": modality, "raw_upload_sha256": raw_upload_sha256, "transcript_sha256": transcript_hash}
+    if not records:
+        raise ValueError("STOP_NO_APPROVED_FEEDBACK")
     digest_input = {"tenant_id": tenant_id, "base": base_hashes, "records": source_hashes}
     run_digest = hashlib.sha256(_canonical(digest_input).encode("utf-8")).hexdigest()
     output = (output or feedback_root / "challengers" / run_digest[:24]).resolve()
