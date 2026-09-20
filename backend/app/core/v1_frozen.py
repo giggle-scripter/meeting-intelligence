@@ -15,7 +15,12 @@ class V1FrozenCore:
     """Compatibility adapter for the release's existing deterministic V1 path."""
 
     core_id = V1_FROZEN_CORE_ID
-    capabilities = CoreCapabilities(adaptive=False)
+    capabilities = CoreCapabilities(
+        adaptive=False,
+        pipeline_version="v1",
+        runtime_model_id=V1_FROZEN_CORE_ID,
+        supports_meeting_note=True,
+    )
 
     def process(self, meeting: MeetingInput, **options: Any) -> PipelineOutput:
         """Delegate directly to V1, preserving its behavior and options."""

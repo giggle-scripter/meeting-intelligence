@@ -16,6 +16,9 @@ from .registry import (
 from .v1_frozen import V1_FROZEN_CORE_ID, V1FrozenCore
 from .v2_adaptive import (
     V2_ADAPTIVE_CORE_ID,
+    V2_BASE_RUNTIME_MODEL_ID,
+    V2_CHALLENGER_RUNTIME_MODEL_ID,
+    V2_PIPELINE_VERSION,
     V2AdaptiveCore,
     V2AdaptiveUnavailableError,
 )
@@ -32,6 +35,9 @@ __all__ = [
     "V2AdaptiveCore",
     "V2AdaptiveUnavailableError",
     "V2_ADAPTIVE_CORE_ID",
+    "V2_BASE_RUNTIME_MODEL_ID",
+    "V2_CHALLENGER_RUNTIME_MODEL_ID",
+    "V2_PIPELINE_VERSION",
     "available_core_ids",
     "get_core",
 ]

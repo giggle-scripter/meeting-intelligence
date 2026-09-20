@@ -6,6 +6,9 @@ from pathlib import Path
 import pytest
 
 from backend.app.core import (
+    V2_BASE_RUNTIME_MODEL_ID,
+    V2_CHALLENGER_RUNTIME_MODEL_ID,
+    V2_PIPELINE_VERSION,
     V2AdaptiveCore,
     V2AdaptiveUnavailableError,
     available_core_ids,
@@ -13,6 +16,7 @@ from backend.app.core import (
 )
 from backend.app.models import MeetingInput, PipelineResult
 from backend.tests.experimental.test_v227_experimental import _artifacts
+import scripts.experimental_distillation.v227_api as v227_api
 
 
 def _meeting() -> MeetingInput:
@@ -30,6 +34,35 @@ def _expected_manifest(artifacts: Path) -> str:
 
 def test_adaptive_core_is_explicitly_registered_and_advertises_adaptive() -> None:
     assert "v2-adaptive" in available_core_ids()
+
+
+@pytest.mark.parametrize(
+    ("model_kind", "runtime_model_id"),
+    (
+        ("base", V2_BASE_RUNTIME_MODEL_ID),
+        ("challenger", V2_CHALLENGER_RUNTIME_MODEL_ID),
+    ),
+)
+def test_adaptive_core_reports_active_model_audit_metadata(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    model_kind: str,
+    runtime_model_id: str,
+) -> None:
+    artifacts = _artifacts(tmp_path)
+    monkeypatch.setattr(
+        v227_api,
+        "_load_active_bundle",
+        lambda **_: (artifacts, {}, {}, {}, model_kind),
+    )
+    core = V2AdaptiveCore(
+        artifact_directory=artifacts,
+        expected_manifest_sha256=_expected_manifest(artifacts),
+    )
+
+    assert core.capabilities.pipeline_version == V2_PIPELINE_VERSION
+    assert core.capabilities.runtime_model_id == runtime_model_id
+    assert core.capabilities.supports_meeting_note is False
 
 
 def test_missing_optional_artifacts_fail_selection_without_affecting_v1(

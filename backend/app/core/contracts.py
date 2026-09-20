@@ -23,6 +23,12 @@ class CoreCapabilities:
     """
 
     adaptive: bool
+    # Keep optional defaults for compatibility with small custom cores that
+    # only advertised ``adaptive`` before the unified API exposed audit
+    # metadata.  Built-in cores always provide all three values explicitly.
+    pipeline_version: str = ""
+    runtime_model_id: str = ""
+    supports_meeting_note: bool = True
 
 
 class MeetingCore(Protocol):

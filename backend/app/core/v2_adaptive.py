@@ -18,6 +18,9 @@ from .contracts import CoreCapabilities, PipelineOutput
 
 
 V2_ADAPTIVE_CORE_ID = "v2-adaptive"
+V2_PIPELINE_VERSION = "v227_experimental"
+V2_BASE_RUNTIME_MODEL_ID = "v228-frozen-full-fit"
+V2_CHALLENGER_RUNTIME_MODEL_ID = "v227-tenant-challenger"
 V227_ARTIFACT_DIRECTORY_ENV = "V227_ARTIFACT_DIRECTORY"
 V227_FEEDBACK_DIRECTORY_ENV = "V227_FEEDBACK_DIRECTORY"
 
@@ -35,8 +38,6 @@ class V2AdaptiveCore:
     """
 
     core_id = V2_ADAPTIVE_CORE_ID
-    capabilities = CoreCapabilities(adaptive=True)
-
     def __init__(
         self,
         *,
@@ -90,6 +91,21 @@ class V2AdaptiveCore:
                 f"V2 adaptive core unavailable: {exc}"
             ) from exc
 
+        # The active bundle is immutable for this core instance.  Reflect its
+        # model kind in typed metadata so health and persisted jobs identify
+        # the exact runtime selected for the request.
+        runtime_model_id = (
+            V2_CHALLENGER_RUNTIME_MODEL_ID
+            if self._active_model_kind == "challenger"
+            else V2_BASE_RUNTIME_MODEL_ID
+        )
+        self.capabilities = CoreCapabilities(
+            adaptive=True,
+            pipeline_version=V2_PIPELINE_VERSION,
+            runtime_model_id=runtime_model_id,
+            supports_meeting_note=False,
+        )
+
     def process(self, meeting: MeetingInput, **options: Any) -> PipelineOutput:
         """Run V2 inference for one existing ``MeetingInput``.
 
@@ -100,6 +116,8 @@ class V2AdaptiveCore:
 
         if not isinstance(meeting, MeetingInput):
             raise TypeError("meeting must be a MeetingInput")
+        if meeting.meeting_note is not None:
+            raise ValueError("V2 adaptive core does not support Meeting Note")
 
         self._v227_api._verify_active_bundle(
             self._active_artifacts,
@@ -180,6 +198,9 @@ def _pipeline_result_from_payload(
 
 __all__ = [
     "V2_ADAPTIVE_CORE_ID",
+    "V2_BASE_RUNTIME_MODEL_ID",
+    "V2_CHALLENGER_RUNTIME_MODEL_ID",
+    "V2_PIPELINE_VERSION",
     "V2AdaptiveCore",
     "V2AdaptiveUnavailableError",
 ]

@@ -30,6 +30,9 @@ def test_unset_environment_selects_frozen_v1(monkeypatch: pytest.MonkeyPatch) ->
     assert isinstance(core, V1FrozenCore)
     assert core.core_id == DEFAULT_CORE_ID == "v1-frozen"
     assert core.capabilities.adaptive is False
+    assert core.capabilities.pipeline_version == "v1"
+    assert core.capabilities.runtime_model_id == "v1-frozen"
+    assert core.capabilities.supports_meeting_note is True
 
 
 def test_explicit_environment_selects_registered_core(monkeypatch: pytest.MonkeyPatch) -> None:
